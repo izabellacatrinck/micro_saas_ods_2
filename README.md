@@ -1,1 +1,7 @@
-# micro_saas_ods_2
+# Assistente RAG para análise de dados em Python com foco em debugging e documentação de bibliotecas como Pandas e NumPy.
+
+### Problema:
+Programadores iniciantes têm dificuldade em entender erros e documentação em análise de dados.
+
+### Solução:
+Um sistema que responde perguntas e explica erros com base em documentação real.
