@@ -1,0 +1,19 @@
+# Python
+__pycache__/
+*.pyc
+.pytest_cache/
+.venv/
+
+# Secrets
+.env
+
+# Data artifacts (regenerable or local-only)
+data/translations_cache.jsonl
+data/medium/raw/
+data/eval/golden.jsonl.bak
+data/chunks_with_embeddings.jsonl
+output_texts/
+
+# OS
+.DS_Store
+Thumbs.db
