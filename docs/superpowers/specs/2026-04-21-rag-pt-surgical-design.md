@@ -41,7 +41,7 @@ manter o resto.
 | Decisão | Escolha | Motivo |
 |---|---|---|
 | Abordagem | Otimização cirúrgica (não reescrita, não benchmark exaustivo) | Projeto acadêmico, evitar complexidade |
-| Hardware | CPU local 16GB RAM + Groq API para LLM | Sem GPU disponível; Groq resolve LLM sem overhead local |
+| Hardware | CPU 16GB RAM + GPU NVIDIA MX570 4GB VRAM; LLM via Groq API | GPU pequena é suficiente para embedder e reranker (< 500MB cada); LLM fica no Groq para evitar lentidão de inferência local |
 | Idioma | PT-BR em tudo (UI, prompt, corpus) | Público-alvo brasileiro |
 | Corpus | Híbrido: PDFs oficiais traduzidos + artigos Medium curados em PT | Rigor técnico + didática em PT |
 | Avaliação | Golden set sintético via LLM + métricas RAGAS, 1 rodada comparativa | Suficiente para validar mudanças |
@@ -63,6 +63,12 @@ runtime do `rag_qwen.py` (não há mais LLM local). `torch` continua presente
 como dependência transitiva de `sentence-transformers` (usado pelo embedder e
 pelo `CrossEncoder` do reranker) — porém sem carregar um modelo de 1.5B na
 memória. O pacote `groq` entra via `pip`.
+
+**Uso da GPU:** o embedder (`SentenceTransformer(..., device="cuda")`) e o
+reranker (`CrossEncoder(..., device="cuda")`) devem tentar CUDA primeiro e
+cair em CPU se indisponível. Um helper `get_device()` centraliza essa lógica
+(`"cuda" if torch.cuda.is_available() else "cpu"`). Isso também se aplica ao
+pipeline de ingestão quando gera embeddings em lote.
 
 ### 4.2 Fixes no chunker (`data/main.py`)
 
@@ -229,7 +235,8 @@ Considerados durante brainstorming e rejeitados deliberadamente:
 | Tradução estraga blocos de código | Exemplos inúteis | Placeholders `<CODE_BLOCK_N>` antes de enviar ao Groq |
 | Golden set sintético gera perguntas triviais ou ruins | RAGAS superestima qualidade | Filtros mínimos + revisão manual de amostra (10-20 perguntas) |
 | Rate limit do Groq em tradução de corpus grande | Pipeline quebra no meio | Backoff exponencial + retomar do cache |
-| Key do Groq exposta | Chave compromete-se | `.env` gitignored, `.env.example` com placeholder, chave original (já exposta no chat) precisa ser rotacionada antes de rodar |
+| Key do Groq exposta | Chave compromete-se | `.env` já configurado localmente (gitignored); `.env.example` com placeholder. A chave exposta durante o brainstorming deve ser rotacionada em console.groq.com/keys — o `.env` guarda a versão nova |
+| Groq passa a cobrar pelo uso | Custo inesperado no trabalho | Tier gratuito atende porte acadêmico; se aparecer cobrança, plano B é rodar LLM local quantizado na MX570 (Qwen 2.5 1.5B em fp16 cabe em ~3GB VRAM) |
 
 ## 10. Critérios de sucesso
 
