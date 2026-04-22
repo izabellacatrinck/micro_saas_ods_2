@@ -4,6 +4,15 @@ import re
 import unicodedata
 from typing import List, Dict
 import json
+import sys
+from pathlib import Path as _Path
+
+# Allow `from src.*` when running this file directly.
+sys.path.insert(0, str(_Path(__file__).resolve().parent.parent))
+
+from src.translator import translate_many
+from src.medium_extractor import extract_medium_article
+from src import config
 
 
 # =========================
@@ -329,13 +338,13 @@ def save_chunks(chunks, path="chunks.jsonl"):
 # =========================
 
 def run_pipeline():
-
-    base = Path(".")
+    base = Path(__file__).resolve().parent  # data/
 
     pandas_path = base / "pandas"
     seaborn_path = base / "seaborn"
     numpy_pdf = base / "numpy_docs.pdf"
     matplotlib_pdf = base / "matplotlib_tutorial.pdf"
+    medium_dir = base / "medium" / "raw"
 
     extractor = PDFExtractor()
     segmenter = ThematicSegmenter()
@@ -344,122 +353,83 @@ def run_pipeline():
     all_chunks = []
 
     print("=" * 60)
-    print("RAG PIPELINE - PRODUCTION GRADE")
+    print("RAG PIPELINE PT-BR - INGESTION")
     print("=" * 60)
 
-    # =========================
-    # PANDAS
-    # =========================
+    def process_en_pdf(pdf_file: Path, source_label: str):
+        print(f"\n[EN→PT] {pdf_file.name}")
+        raw = extractor.extract(pdf_file, save_debug_dir=f"output_texts/{source_label}")
+        if not raw.strip():
+            return []
+
+        segments = segmenter.segment(raw)
+        # translate at segment level (smaller than full doc, larger than chunk → good API granularity)
+        pt_segments = translate_many([s["content"] for s in segments])
+
+        doc_chunks = []
+        for seg, pt_content in zip(segments, pt_segments):
+            doc_chunks.extend(
+                chunker.chunk_with_metadata(
+                    text=pt_content,
+                    source=pdf_file.name,
+                    section=seg["title"],
+                    language="pt",
+                    original_lang="en",
+                    source_type="official_docs",
+                )
+            )
+        return doc_chunks
+
+    def process_pt_article(html_file: Path):
+        print(f"\n[PT ] {html_file.name}")
+        text = extract_medium_article(html_file)
+        text = TextNormalizer.normalize(text)
+        segments = segmenter.segment(text)
+
+        doc_chunks = []
+        for seg in segments:
+            doc_chunks.extend(
+                chunker.chunk_with_metadata(
+                    text=seg["content"],
+                    source=html_file.name,
+                    section=seg["title"],
+                    language="pt",
+                    original_lang="pt",
+                    source_type="medium_article",
+                )
+            )
+        return doc_chunks
+
+    # --- PDFs (EN, translated) ---
     if pandas_path.exists():
-
         for pdf_file in pandas_path.glob("*.pdf"):
+            all_chunks.extend(process_en_pdf(pdf_file, "pandas"))
 
-            print(f"\n📄 {pdf_file.name}")
-
-            text = extractor.extract(
-                pdf_file,
-                save_debug_dir="output_texts/pandas"
-            )
-
-            segments = segmenter.segment(text)
-
-            for seg in segments:
-
-                chunks = chunker.chunk_with_metadata(
-                    text=seg["content"],
-                    source=pdf_file.name,
-                    section=seg["title"]
-                )
-
-                all_chunks.extend(chunks)
-
-    # =========================
-    # SEABORN
-    # =========================
     if seaborn_path.exists():
-
         for pdf_file in seaborn_path.rglob("*.pdf"):
+            all_chunks.extend(process_en_pdf(pdf_file, "seaborn"))
 
-            print(f"\n📄 {pdf_file.name}")
-
-            text = extractor.extract(
-                pdf_file,
-                save_debug_dir="output_texts/seaborn"
-            )
-
-            segments = segmenter.segment(text)
-
-            for seg in segments:
-
-                chunks = chunker.chunk_with_metadata(
-                    text=seg["content"],
-                    source=pdf_file.name,
-                    section=seg["title"]
-                )
-
-                all_chunks.extend(chunks)
-
-    # =========================
-    # NUMPY
-    # =========================
     if numpy_pdf.exists():
+        all_chunks.extend(process_en_pdf(numpy_pdf, "numpy"))
 
-        print(f"\n📄 numpy_docs.pdf")
-
-        text = extractor.extract(
-            numpy_pdf,
-            save_debug_dir="output_texts/numpy"
-        )
-
-        segments = segmenter.segment(text)
-
-        for seg in segments:
-
-            chunks = chunker.chunk_with_metadata(
-                text=seg["content"],
-                source="numpy_docs.pdf",
-                section=seg["title"]
-            )
-
-            all_chunks.extend(chunks)
-
-    # =========================
-    # MATPLOTLIB
-    # =========================
     if matplotlib_pdf.exists():
+        all_chunks.extend(process_en_pdf(matplotlib_pdf, "matplotlib"))
 
-        print(f"\n📄 matplotlib_tutorial.pdf")
+    # --- Medium articles (native PT, no translation) ---
+    if medium_dir.exists():
+        for html_file in medium_dir.glob("*.html"):
+            all_chunks.extend(process_pt_article(html_file))
 
-        text = extractor.extract(
-            matplotlib_pdf,
-            save_debug_dir="output_texts/matplotlib"
-        )
-
-        segments = segmenter.segment(text)
-
-        for seg in segments:
-
-            chunks = chunker.chunk_with_metadata(
-                text=seg["content"],
-                source="matplotlib_tutorial.pdf",
-                section=seg["title"]
-            )
-
-            all_chunks.extend(chunks)
-
-    # =========================
-    # FINAL CLEANING
-    # =========================
+    # --- Final cleaning ---
     all_chunks = deduplicate_chunks(all_chunks)
     before = len(all_chunks)
-    all_chunks = filter_by_quality(all_chunks, threshold=0.5)
+    all_chunks = filter_by_quality(all_chunks, threshold=config.NOISE_THRESHOLD)
     print(f"[quality] dropped {before - len(all_chunks)} noisy chunks")
-    save_chunks(all_chunks)
+
+    save_chunks(all_chunks, path=str(config.CHUNKS_PATH))
 
     print("\n" + "=" * 60)
-    print("✔ PIPELINE FINALIZADO")
-    print(f"✔ Chunks finais: {len(all_chunks)}")
-    print("✔ Qualidade: alta (RAG otimizado)")
+    print(f"✔ INGESTÃO FINALIZADA — {len(all_chunks)} chunks em PT")
     print("=" * 60)
 
     return all_chunks
