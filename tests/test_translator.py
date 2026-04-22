@@ -1,6 +1,7 @@
+import json
 from unittest.mock import MagicMock, patch
 
-from src.translator import extract_code_blocks, restore_code_blocks, translate
+from src.translator import extract_code_blocks, restore_code_blocks, translate, translate_many, _cache_key
 
 
 def test_extract_code_blocks_finds_repl_lines():
@@ -74,3 +75,38 @@ def test_translate_strips_preamble(mock_client):
     )
     result = translate("Some text.")
     assert result == "Texto traduzido."
+
+
+def test_cache_key_is_stable():
+    a = _cache_key("hello world")
+    b = _cache_key("hello world")
+    c = _cache_key("different")
+    assert a == b
+    assert a != c
+
+
+@patch("src.translator.translate")
+def test_translate_many_uses_cache(mock_translate, tmp_path):
+    mock_translate.side_effect = lambda t: f"PT[{t}]"
+    cache_path = tmp_path / "cache.jsonl"
+
+    texts = ["one", "two", "one"]  # "one" repeats
+    results = translate_many(texts, cache_path=cache_path)
+
+    assert results == ["PT[one]", "PT[two]", "PT[one]"]
+    # translate() called only twice (once per unique input)
+    assert mock_translate.call_count == 2
+
+
+@patch("src.translator.translate")
+def test_translate_many_persists_cache(mock_translate, tmp_path):
+    mock_translate.side_effect = lambda t: f"PT[{t}]"
+    cache_path = tmp_path / "cache.jsonl"
+
+    translate_many(["alpha"], cache_path=cache_path)
+
+    # second call in a fresh process — mock must NOT be called again
+    mock_translate.reset_mock()
+    results = translate_many(["alpha"], cache_path=cache_path)
+    assert results == ["PT[alpha]"]
+    assert mock_translate.call_count == 0

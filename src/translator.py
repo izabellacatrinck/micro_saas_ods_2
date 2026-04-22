@@ -9,7 +9,10 @@ Public API:
 """
 from __future__ import annotations
 
+import hashlib
+import json
 import re
+from pathlib import Path
 
 from groq import Groq
 
@@ -120,3 +123,57 @@ def translate(text: str) -> str:
     pt = _strip_preamble(pt)
 
     return restore_code_blocks(pt, blocks)
+
+
+# ---------------------------------------------------------------------------
+# Disk-based translation cache + batch helper
+# ---------------------------------------------------------------------------
+
+def _cache_key(text: str) -> str:
+    return hashlib.sha256(text.encode("utf-8")).hexdigest()
+
+
+def _load_cache(path: Path) -> dict[str, str]:
+    if not path.exists():
+        return {}
+    cache: dict[str, str] = {}
+    with path.open("r", encoding="utf-8") as f:
+        for line in f:
+            if not line.strip():
+                continue
+            row = json.loads(line)
+            cache[row["key"]] = row["pt"]
+    return cache
+
+
+def _append_cache(path: Path, key: str, pt: str) -> None:
+    path.parent.mkdir(parents=True, exist_ok=True)
+    with path.open("a", encoding="utf-8") as f:
+        f.write(json.dumps({"key": key, "pt": pt}, ensure_ascii=False) + "\n")
+
+
+def translate_many(
+    texts: list[str],
+    cache_path: Path = config.TRANSLATIONS_CACHE,
+) -> list[str]:
+    """Translate a list of passages with on-disk memoization.
+
+    Duplicates within the input list are translated once. Already-cached texts
+    are never re-translated. New translations are appended to `cache_path`
+    immediately so partial progress survives crashes.
+    """
+    cache = _load_cache(cache_path)
+    results: list[str] = []
+
+    for text in texts:
+        key = _cache_key(text)
+        if key in cache:
+            results.append(cache[key])
+            continue
+
+        pt = translate(text)
+        cache[key] = pt
+        _append_cache(cache_path, key, pt)
+        results.append(pt)
+
+    return results
