@@ -133,7 +133,9 @@ class ThematicSegmenter:
             if buffer:
                 segments.append({
                     "title": current_title.strip(),
-                    "content": " ".join(buffer).strip()
+                    # Preserve line structure — downstream regexes (e.g. the
+                    # translator's ``` code fence detection) need line anchors.
+                    "content": "\n".join(buffer).strip()
                 })
 
         for line in lines:

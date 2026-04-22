@@ -136,6 +136,28 @@ def test_segment_uses_colon_heuristic_when_no_markdown():
     assert "OVERVIEW:" in titles
 
 
+def test_segment_preserves_newlines_in_content():
+    """Segment content must keep newlines so downstream regexes (e.g. ``` code
+    fence detection in the translator) can still match line-anchored patterns.
+    """
+    text = (
+        "# Heading\n"
+        "Prose line.\n"
+        "```\n"
+        "code line\n"
+        "```\n"
+        "More prose.\n"
+    )
+    segs = ThematicSegmenter.segment(text)
+    assert len(segs) == 1
+    content = segs[0]["content"]
+    # ``` fence markers must survive on their own lines
+    assert "\n```\n" in content or content.startswith("```\n") or content.endswith("\n```")
+    # basic content preserved
+    assert "Prose line." in content
+    assert "code line" in content
+
+
 from main import infer_library
 
 
