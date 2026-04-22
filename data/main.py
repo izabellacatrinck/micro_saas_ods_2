@@ -432,6 +432,13 @@ def run_pipeline():
     print(f"✔ INGESTÃO FINALIZADA — {len(all_chunks)} chunks em PT")
     print("=" * 60)
 
+    from src.indexer import index_chunks
+    index_chunks(
+        chunks_path=config.CHUNKS_PATH,
+        collection_name=config.COLLECTION_NEW_PT,
+        embedder_model=config.EMBEDDER_MODEL,
+    )
+
     return all_chunks
 
 
