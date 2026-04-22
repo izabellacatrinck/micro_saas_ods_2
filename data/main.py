@@ -274,6 +274,18 @@ def deduplicate_chunks(chunks: List[dict]):
 
 
 # =========================
+# QUALITY FILTER
+# =========================
+
+def filter_by_quality(chunks: List[dict], threshold: float = 0.5) -> List[dict]:
+    """Drop chunks whose noise_score is >= threshold."""
+    return [
+        c for c in chunks
+        if c.get("quality_flags", {}).get("noise_score", 0.0) < threshold
+    ]
+
+
+# =========================
 # SAVE
 # =========================
 
@@ -411,6 +423,9 @@ def run_pipeline():
     # FINAL CLEANING
     # =========================
     all_chunks = deduplicate_chunks(all_chunks)
+    before = len(all_chunks)
+    all_chunks = filter_by_quality(all_chunks, threshold=0.5)
+    print(f"[quality] dropped {before - len(all_chunks)} noisy chunks")
     save_chunks(all_chunks)
 
     print("\n" + "=" * 60)
