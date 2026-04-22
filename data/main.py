@@ -152,6 +152,25 @@ class ThematicSegmenter:
 
 
 # =========================
+# LIBRARY INFERENCE
+# =========================
+
+def infer_library(source: str) -> str:
+    """Return 'pandas' | 'numpy' | 'matplotlib' | 'seaborn' | 'unknown'
+    based on the source filename/path."""
+    s = source.lower()
+    if "pandas" in s:
+        return "pandas"
+    if "numpy" in s:
+        return "numpy"
+    if "matplotlib" in s:
+        return "matplotlib"
+    if "seaborn" in s:
+        return "seaborn"
+    return "unknown"
+
+
+# =========================
 # SMART CHUNKER (PRODUCTION RAG)
 # =========================
 
@@ -209,7 +228,15 @@ class SmartChunker:
 
         return final
 
-    def chunk_with_metadata(self, text: str, source: str, section: str):
+    def chunk_with_metadata(
+        self,
+        text: str,
+        source: str,
+        section: str,
+        language: str = "pt",
+        original_lang: str = "en",
+        source_type: str = "official_docs",
+    ):
 
         chunks = self.chunk(text)
 
@@ -222,13 +249,13 @@ class SmartChunker:
                 "position": i,
                 "char_count": len(c),
                 "token_estimate": len(c.split()),
-
-                # =========================
-                # QUALIDADE PARA RAG
-                # =========================
+                "language": language,
+                "original_lang": original_lang,
+                "source_type": source_type,
+                "library": infer_library(source),
                 "quality_flags": {
-                    "has_code": "In [" in c,
-                    "has_plot": any(x in c.lower() for x in ["plot", "chart", "graph"]),
+                    "has_code": "In [" in c or ">>>" in c,
+                    "has_plot": any(x in c.lower() for x in ["plot", "chart", "graph", "gráfico"]),
                     "noise_score": self.noise_score(c)
                 }
             }

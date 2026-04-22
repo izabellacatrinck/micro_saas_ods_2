@@ -66,3 +66,28 @@ def test_is_heading_rejects_short_body_text():
 
 def test_is_heading_rejects_long_line():
     assert not ThematicSegmenter.is_heading("A" * 120)
+
+
+from main import infer_library
+
+
+def test_infer_library_detects_known_libraries():
+    assert infer_library("numpy_docs.pdf") == "numpy"
+    assert infer_library("data/pandas/intro.pdf") == "pandas"
+    assert infer_library("Matplotlib_Tutorial.pdf") == "matplotlib"
+    assert infer_library("seaborn_cheatsheet.pdf") == "seaborn"
+    assert infer_library("random_doc.pdf") == "unknown"
+
+
+def test_chunk_with_metadata_includes_new_fields():
+    chunker = SmartChunker(max_tokens=50, overlap=10)
+    text = "Texto de exemplo para testar o chunker em portugues. " * 30
+    chunks = chunker.chunk_with_metadata(text, source="numpy_docs.pdf", section="intro")
+    assert chunks, "expected at least one chunk"
+    c = chunks[0]
+    assert c["library"] == "numpy"
+    assert c["language"] == "pt"
+    assert c["original_lang"] == "en"
+    assert c["source_type"] == "official_docs"
+    # quality_flags preserved
+    assert "noise_score" in c["quality_flags"]
