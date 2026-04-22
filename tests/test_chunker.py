@@ -4,6 +4,7 @@ from pathlib import Path
 sys.path.insert(0, str(Path(__file__).resolve().parent.parent / "data"))
 
 from main import SmartChunker, filter_by_quality
+from main import ThematicSegmenter
 
 
 def test_filter_by_quality_drops_noisy_chunks():
@@ -48,3 +49,20 @@ def test_chunk_no_overlap_on_first_chunk():
     chunks = chunker.chunk(text)
     # the first chunk's first word should be original text's first word
     assert chunks[0].startswith("w0.")
+
+
+def test_is_heading_accepts_uppercase_short_line():
+    assert ThematicSegmenter.is_heading("GROUP BY OPERATIONS")
+
+
+def test_is_heading_accepts_colon_terminated_short_line():
+    assert ThematicSegmenter.is_heading("Introduction:")
+
+
+def test_is_heading_rejects_short_body_text():
+    # A 4-word lowercase sentence is NOT a heading
+    assert not ThematicSegmenter.is_heading("This is a sentence.")
+
+
+def test_is_heading_rejects_long_line():
+    assert not ThematicSegmenter.is_heading("A" * 120)

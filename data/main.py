@@ -110,15 +110,15 @@ class ThematicSegmenter:
 
     @staticmethod
     def is_heading(line: str) -> bool:
+        """A heading must be short AND visually marked as one.
 
-        return (
-            len(line) < 80
-            and (
-                line.isupper()
-                or line.endswith(":")
-                or len(line.split()) <= 6
-            )
-        )
+        Marked-as-heading means either all-caps or ending with a colon. We drop the
+        bare "few words" rule — it produced too many false positives on short body
+        sentences.
+        """
+        if not line or len(line) >= 80:
+            return False
+        return line.isupper() or line.endswith(":")
 
     @staticmethod
     def segment(text: str) -> List[Dict]:
