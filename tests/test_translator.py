@@ -46,6 +46,57 @@ def test_extract_returns_text_unchanged_when_no_code():
     assert blocks == []
 
 
+def test_extract_code_blocks_finds_markdown_fenced_blocks():
+    """``` fences from trafilatura markdown output must be treated as code."""
+    text = (
+        "Some explanation.\n"
+        "```\n"
+        "import pandas as pd\n"
+        "df = pd.DataFrame({'a': [1, 2]})\n"
+        "```\n"
+        "More explanation."
+    )
+    stripped, blocks = extract_code_blocks(text)
+
+    assert "<CODE_BLOCK_0>" in stripped
+    assert len(blocks) == 1
+    assert "import pandas as pd" in blocks[0]
+    assert "pd.DataFrame" in blocks[0]
+    # fences themselves should be part of the block, not the stripped text
+    assert "```" not in stripped
+    # surrounding prose kept in stripped
+    assert "Some explanation" in stripped
+    assert "More explanation" in stripped
+
+
+def test_extract_code_blocks_finds_multiple_fenced_blocks():
+    text = (
+        "First.\n"
+        "```python\n"
+        "x = 1\n"
+        "```\n"
+        "Middle.\n"
+        "```\n"
+        "y = 2\n"
+        "```\n"
+        "End."
+    )
+    stripped, blocks = extract_code_blocks(text)
+
+    assert "<CODE_BLOCK_0>" in stripped
+    assert "<CODE_BLOCK_1>" in stripped
+    assert len(blocks) == 2
+    assert "x = 1" in blocks[0]
+    assert "y = 2" in blocks[1]
+
+
+def test_restore_roundtrip_with_fenced_blocks():
+    original = "Prose.\n```\ncode line\n```\nMore prose."
+    stripped, blocks = extract_code_blocks(original)
+    restored = restore_code_blocks(stripped, blocks)
+    assert restored == original
+
+
 @patch("src.translator.groq_client")
 def test_translate_sends_glossary_and_code_preserved(mock_client):
     mock_client.chat.completions.create.return_value = MagicMock(

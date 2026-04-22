@@ -1,4 +1,3 @@
-import pdfplumber
 from pathlib import Path
 import re
 import unicodedata
@@ -12,6 +11,7 @@ sys.path.insert(0, str(_Path(__file__).resolve().parent.parent))
 
 from src.translator import translate_many
 from src.medium_extractor import extract_medium_article
+from src.html_extractor import extract_official_html
 from src import config
 
 
@@ -76,63 +76,54 @@ class SentenceSplitter:
 
 
 # =========================
-# PDF EXTRACTOR
-# =========================
-
-class PDFExtractor:
-
-    @staticmethod
-    def extract(pdf_path, save_debug_dir=None):
-
-        full_text = []
-
-        if save_debug_dir:
-            save_debug_dir = Path(save_debug_dir)
-            save_debug_dir.mkdir(parents=True, exist_ok=True)
-
-        with pdfplumber.open(pdf_path) as pdf:
-
-            for i, page in enumerate(pdf.pages):
-
-                text = page.extract_text() or ""
-                text = TextNormalizer.normalize(text)
-
-                if len(text) < 40:
-                    continue
-
-                full_text.append(text)
-
-                if save_debug_dir:
-                    with open(save_debug_dir / f"page_{i:04d}.txt", "w", encoding="utf-8") as f:
-                        f.write(text)
-
-                print(f"[OK] {pdf_path.name} - página {i+1}/{len(pdf.pages)}")
-
-        return "\n".join(full_text)
-
-
-# =========================
 # THEME SEGMENTER
 # =========================
 
 class ThematicSegmenter:
 
+    # Markdown heading: one-or-more `#` followed by a space and content.
+    _MD_HEADING = re.compile(r"^#+\s+\S")
+    # Code-output markers that can terminate in `:` but are never headings.
+    _CODE_MARKER = re.compile(r"^(?:In \[|Out\[)\d+\]:")
+
     @staticmethod
     def is_heading(line: str) -> bool:
-        """A heading must be short AND visually marked as one.
+        """A heading must be visually marked as one.
 
-        Marked-as-heading means either all-caps or ending with a colon. We drop the
-        bare "few words" rule — it produced too many false positives on short body
-        sentences.
+        Three signals (in priority order):
+        - Markdown heading (`#`/`##`/...): recognized regardless of length.
+        - All-caps line (PDF heading convention). Length-capped at 80.
+        - Line ending with a colon. Length-capped at 80.
+
+        Code output markers (`In [N]:`, `Out[N]:`) are explicitly excluded.
         """
-        if not line or len(line) >= 80:
+        if not line:
+            return False
+        if ThematicSegmenter._MD_HEADING.match(line):
+            return True
+        if ThematicSegmenter._CODE_MARKER.match(line):
+            return False
+        if len(line) >= 80:
             return False
         return line.isupper() or line.endswith(":")
 
     @staticmethod
     def segment(text: str) -> List[Dict]:
+        """Split text into (title, content) segments on heading lines.
 
+        When the input contains markdown headings, only markdown headings are
+        treated as segment boundaries — the colon/all-caps heuristics are
+        suppressed to avoid false positives in prose that ends with `:`.
+        Otherwise (no `#` headings detected) the heuristics are used, which
+        matches the PDF-extracted and Medium-extracted text paths.
+        """
         lines = text.split("\n")
+        has_markdown = any(ThematicSegmenter._MD_HEADING.match(ln) for ln in lines)
+
+        def line_is_heading(line: str) -> bool:
+            if has_markdown:
+                return bool(ThematicSegmenter._MD_HEADING.match(line))
+            return ThematicSegmenter.is_heading(line)
 
         segments = []
         current_title = "Introduction"
@@ -146,10 +137,8 @@ class ThematicSegmenter:
                 })
 
         for line in lines:
-
             line = line.strip()
-
-            if ThematicSegmenter.is_heading(line):
+            if line_is_heading(line):
                 flush()
                 current_title = line
                 buffer = []
@@ -340,13 +329,16 @@ def save_chunks(chunks, path="chunks.jsonl"):
 def run_pipeline():
     base = Path(__file__).resolve().parent  # data/
 
-    pandas_path = base / "pandas"
-    seaborn_path = base / "seaborn"
-    numpy_pdf = base / "numpy_docs.pdf"
-    matplotlib_pdf = base / "matplotlib_tutorial.pdf"
+    # Per-library directories for official docs saved as Sphinx HTML:
+    #   data/<library>/html/*.html
+    library_html_dirs = {
+        "pandas":     base / "pandas"     / "html",
+        "numpy":      base / "numpy"      / "html",
+        "matplotlib": base / "matplotlib" / "html",
+        "seaborn":    base / "seaborn"    / "html",
+    }
     medium_dir = base / "medium" / "raw"
 
-    extractor = PDFExtractor()
     segmenter = ThematicSegmenter()
     chunker = SmartChunker()
 
@@ -356,14 +348,25 @@ def run_pipeline():
     print("RAG PIPELINE PT-BR - INGESTION")
     print("=" * 60)
 
-    def process_en_pdf(pdf_file: Path, source_label: str):
-        print(f"\n[EN→PT] {pdf_file.name}")
-        raw = extractor.extract(pdf_file, save_debug_dir=f"output_texts/{source_label}")
+    def process_en_html(html_file: Path):
+        """Extract markdown from an official-docs HTML, segment, translate, chunk.
+
+        The trafilatura output keeps markdown structure (headings, ``` fences),
+        which the segmenter and translator guardrails rely on. We deliberately
+        do NOT run TextNormalizer here — it was designed for PDF noise and
+        would flatten newlines and strip code markers.
+        """
+        print(f"\n[EN→PT] {html_file.name}")
+        try:
+            raw = extract_official_html(html_file)
+        except ValueError as e:
+            print(f"  skipped: {e}")
+            return []
         if not raw.strip():
             return []
 
         segments = segmenter.segment(raw)
-        # translate at segment level (smaller than full doc, larger than chunk → good API granularity)
+        # Translate at segment level (smaller than full doc, larger than chunk → good API granularity)
         pt_segments = translate_many([s["content"] for s in segments])
 
         doc_chunks = []
@@ -371,7 +374,7 @@ def run_pipeline():
             doc_chunks.extend(
                 chunker.chunk_with_metadata(
                     text=pt_content,
-                    source=pdf_file.name,
+                    source=html_file.name,
                     section=seg["title"],
                     language="pt",
                     original_lang="en",
@@ -400,20 +403,13 @@ def run_pipeline():
             )
         return doc_chunks
 
-    # --- PDFs (EN, translated) ---
-    if pandas_path.exists():
-        for pdf_file in pandas_path.glob("*.pdf"):
-            all_chunks.extend(process_en_pdf(pdf_file, "pandas"))
-
-    if seaborn_path.exists():
-        for pdf_file in seaborn_path.rglob("*.pdf"):
-            all_chunks.extend(process_en_pdf(pdf_file, "seaborn"))
-
-    if numpy_pdf.exists():
-        all_chunks.extend(process_en_pdf(numpy_pdf, "numpy"))
-
-    if matplotlib_pdf.exists():
-        all_chunks.extend(process_en_pdf(matplotlib_pdf, "matplotlib"))
+    # --- Official docs HTMLs (EN, translated) ---
+    for library, html_dir in library_html_dirs.items():
+        if not html_dir.exists():
+            print(f"[skip] {library}: {html_dir} not found")
+            continue
+        for html_file in sorted(html_dir.glob("*.html")):
+            all_chunks.extend(process_en_html(html_file))
 
     # --- Medium articles (native PT, no translation) ---
     if medium_dir.exists():

@@ -68,6 +68,74 @@ def test_is_heading_rejects_long_line():
     assert not ThematicSegmenter.is_heading("A" * 120)
 
 
+def test_is_heading_accepts_markdown_h1():
+    assert ThematicSegmenter.is_heading("# Introduction to pandas")
+
+
+def test_is_heading_accepts_markdown_h2_h3():
+    assert ThematicSegmenter.is_heading("## Series")
+    assert ThematicSegmenter.is_heading("### From ndarray")
+
+
+def test_is_heading_rejects_hash_without_space():
+    # a trailing `#` from Sphinx anchors on a text line is NOT a heading
+    assert not ThematicSegmenter.is_heading("This line ends with hash#")
+
+
+def test_segment_splits_on_markdown_headings():
+    text = (
+        "# Introduction\n"
+        "Pandas is a data analysis library.\n"
+        "## Series\n"
+        "A Series is a one-dimensional array.\n"
+        "## DataFrame\n"
+        "A DataFrame is a two-dimensional table.\n"
+    )
+    segs = ThematicSegmenter.segment(text)
+    titles = [s["title"] for s in segs]
+    assert "# Introduction" in titles
+    assert "## Series" in titles
+    assert "## DataFrame" in titles
+    # each section has its body text
+    intro = next(s for s in segs if s["title"] == "# Introduction")
+    assert "data analysis library" in intro["content"]
+    series = next(s for s in segs if s["title"] == "## Series")
+    assert "one-dimensional array" in series["content"]
+
+
+def test_segment_suppresses_colon_heuristic_when_markdown_present():
+    """In markdown docs, lines ending with `:` are prose, not headings."""
+    text = (
+        "# Real heading\n"
+        "First the output is:\n"       # prose ending in `:` — NOT a heading
+        "Out[4]:\n"                     # code marker — NOT a heading
+        "some result\n"
+        "## Another section\n"
+        "more content\n"
+    )
+    segs = ThematicSegmenter.segment(text)
+    titles = [s["title"] for s in segs]
+    # Only markdown headings become segment titles
+    assert titles == ["# Real heading", "## Another section"]
+    # Prose with `:` stays inside the preceding segment
+    assert "First the output is:" in segs[0]["content"]
+    assert "Out[4]:" in segs[0]["content"]
+
+
+def test_segment_uses_colon_heuristic_when_no_markdown():
+    """In plain PDF/Medium text (no `#`), the `:` heuristic still applies."""
+    text = (
+        "Introduction:\n"
+        "This is the intro body.\n"
+        "OVERVIEW:\n"
+        "Overview body.\n"
+    )
+    segs = ThematicSegmenter.segment(text)
+    titles = [s["title"] for s in segs]
+    assert "Introduction:" in titles
+    assert "OVERVIEW:" in titles
+
+
 from main import infer_library
 
 

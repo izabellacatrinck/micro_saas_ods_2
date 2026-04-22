@@ -27,11 +27,21 @@ CODE_LINE = re.compile(
     r"^(?:>>>|\.\.\.|In \[\d+\]:|Out\[\d+\]:|\s{4,}\S).*$"
 )
 
+# Markdown-style fenced code block delimiter. Matches ``` or ```python etc.
+FENCE = re.compile(r"^```\S*\s*$")
+
 
 def extract_code_blocks(text: str) -> tuple[str, list[str]]:
-    """Replace consecutive code lines with <CODE_BLOCK_N> placeholders.
+    """Replace code sections with <CODE_BLOCK_N> placeholders.
 
-    Returns (stripped_text, list_of_original_blocks).
+    Two kinds of sections are recognized:
+      - Markdown fenced code blocks (``` ... ```), typical of trafilatura
+        output on HTML docs.
+      - Runs of "code-like" lines (REPL prompts, Jupyter cells, or 4+ space
+        indentation) — the original PDF-oriented behavior.
+
+    Returns (stripped_text, list_of_original_blocks). Blocks preserve their
+    original content verbatim, including fence lines when present.
     """
     lines = text.split("\n")
     out_lines: list[str] = []
@@ -39,6 +49,20 @@ def extract_code_blocks(text: str) -> tuple[str, list[str]]:
 
     i = 0
     while i < len(lines):
+        # Markdown fenced block takes precedence.
+        if FENCE.match(lines[i]):
+            j = i + 1
+            while j < len(lines) and not FENCE.match(lines[j]):
+                j += 1
+            # Include opening and closing fences in the preserved block.
+            end = j + 1 if j < len(lines) else j
+            block_lines = lines[i:end]
+            idx = len(blocks)
+            blocks.append("\n".join(block_lines))
+            out_lines.append(f"<CODE_BLOCK_{idx}>")
+            i = end
+            continue
+
         if CODE_LINE.match(lines[i]):
             j = i
             while j < len(lines) and (CODE_LINE.match(lines[j]) or lines[j].strip() == ""):
