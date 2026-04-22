@@ -1,4 +1,6 @@
-from src.translator import extract_code_blocks, restore_code_blocks
+from unittest.mock import MagicMock, patch
+
+from src.translator import extract_code_blocks, restore_code_blocks, translate
 
 
 def test_extract_code_blocks_finds_repl_lines():
@@ -41,3 +43,34 @@ def test_extract_returns_text_unchanged_when_no_code():
 
     assert stripped == text
     assert blocks == []
+
+
+@patch("src.translator.groq_client")
+def test_translate_sends_glossary_and_code_preserved(mock_client):
+    mock_client.chat.completions.create.return_value = MagicMock(
+        choices=[MagicMock(message=MagicMock(content="Isto é um DataFrame.\n<CODE_BLOCK_0>"))]
+    )
+
+    english = "This is a DataFrame.\n>>> df.head()"
+    result = translate(english)
+
+    # result should have original code block restored
+    assert ">>> df.head()" in result
+    # DataFrame kept in English
+    assert "DataFrame" in result
+
+    # glossary should have been included in system prompt
+    call_kwargs = mock_client.chat.completions.create.call_args.kwargs
+    system_msg = call_kwargs["messages"][0]["content"]
+    assert "DataFrame" in system_msg
+    assert "NÃO traduza" in system_msg
+
+
+@patch("src.translator.groq_client")
+def test_translate_strips_preamble(mock_client):
+    """If Groq echoes preambles like 'Tradução:', they get stripped."""
+    mock_client.chat.completions.create.return_value = MagicMock(
+        choices=[MagicMock(message=MagicMock(content="Tradução:\nTexto traduzido."))]
+    )
+    result = translate("Some text.")
+    assert result == "Texto traduzido."
