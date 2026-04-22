@@ -1,0 +1,1115 @@
+<!DOCTYPE html>
+<!-- saved from url=(0060)https://pandas.pydata.org/docs/user_guide/copy_on_write.html -->
+<html lang="pt" data-content_root="../" data-mode="auto" data-theme="dark" class="fontawesome-i2svg-active fontawesome-i2svg-complete"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"><meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <title _msttexthash="4225065" _msthash="0">Copy-on-Write (CoW) — documentação do pandas 3.0.2</title>
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "";
+  </script>
+  <!--
+    this give us a css class that will be invisible only if js is disabled
+  -->
+  <noscript>
+    <style>
+      .pst-js-only { display: none !important; }
+
+    </style>
+  </noscript>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <style type="text/css">:host,:root{--fa-font-solid:normal 900 1em/1 "Font Awesome 6 Solid";--fa-font-regular:normal 400 1em/1 "Font Awesome 6 Regular";--fa-font-light:normal 300 1em/1 "Font Awesome 6 Light";--fa-font-thin:normal 100 1em/1 "Font Awesome 6 Thin";--fa-font-duotone:normal 900 1em/1 "Font Awesome 6 Duotone";--fa-font-sharp-solid:normal 900 1em/1 "Font Awesome 6 Sharp";--fa-font-sharp-regular:normal 400 1em/1 "Font Awesome 6 Sharp";--fa-font-sharp-light:normal 300 1em/1 "Font Awesome 6 Sharp";--fa-font-sharp-thin:normal 100 1em/1 "Font Awesome 6 Sharp";--fa-font-brands:normal 400 1em/1 "Font Awesome 6 Brands"}svg:not(:host).svg-inline--fa,svg:not(:root).svg-inline--fa{overflow:visible;box-sizing:content-box}.svg-inline--fa{display:var(--fa-display,inline-block);height:1em;overflow:visible;vertical-align:-.125em}.svg-inline--fa.fa-2xs{vertical-align:.1em}.svg-inline--fa.fa-xs{vertical-align:0}.svg-inline--fa.fa-sm{vertical-align:-.0714285705em}.svg-inline--fa.fa-lg{vertical-align:-.2em}.svg-inline--fa.fa-xl{vertical-align:-.25em}.svg-inline--fa.fa-2xl{vertical-align:-.3125em}.svg-inline--fa.fa-pull-left{margin-right:var(--fa-pull-margin,.3em);width:auto}.svg-inline--fa.fa-pull-right{margin-left:var(--fa-pull-margin,.3em);width:auto}.svg-inline--fa.fa-li{width:var(--fa-li-width,2em);top:.25em}.svg-inline--fa.fa-fw{width:var(--fa-fw-width,1.25em)}.fa-layers svg.svg-inline--fa{bottom:0;left:0;margin:auto;position:absolute;right:0;top:0}.fa-layers-counter,.fa-layers-text{display:inline-block;position:absolute;text-align:center}.fa-layers{display:inline-block;height:1em;position:relative;text-align:center;vertical-align:-.125em;width:1em}.fa-layers svg.svg-inline--fa{-webkit-transform-origin:center center;transform-origin:center center}.fa-layers-text{left:50%;top:50%;-webkit-transform:translate(-50%,-50%);transform:translate(-50%,-50%);-webkit-transform-origin:center center;transform-origin:center center}.fa-layers-counter{background-color:var(--fa-counter-background-color,#ff253a);border-radius:var(--fa-counter-border-radius,1em);box-sizing:border-box;color:var(--fa-inverse,#fff);line-height:var(--fa-counter-line-height,1);max-width:var(--fa-counter-max-width,5em);min-width:var(--fa-counter-min-width,1.5em);overflow:hidden;padding:var(--fa-counter-padding,.25em .5em);right:var(--fa-right,0);text-overflow:ellipsis;top:var(--fa-top,0);-webkit-transform:scale(var(--fa-counter-scale,.25));transform:scale(var(--fa-counter-scale,.25));-webkit-transform-origin:top right;transform-origin:top right}.fa-layers-bottom-right{bottom:var(--fa-bottom,0);right:var(--fa-right,0);top:auto;-webkit-transform:scale(var(--fa-layers-scale,.25));transform:scale(var(--fa-layers-scale,.25));-webkit-transform-origin:bottom right;transform-origin:bottom right}.fa-layers-bottom-left{bottom:var(--fa-bottom,0);left:var(--fa-left,0);right:auto;top:auto;-webkit-transform:scale(var(--fa-layers-scale,.25));transform:scale(var(--fa-layers-scale,.25));-webkit-transform-origin:bottom left;transform-origin:bottom left}.fa-layers-top-right{top:var(--fa-top,0);right:var(--fa-right,0);-webkit-transform:scale(var(--fa-layers-scale,.25));transform:scale(var(--fa-layers-scale,.25));-webkit-transform-origin:top right;transform-origin:top right}.fa-layers-top-left{left:var(--fa-left,0);right:auto;top:var(--fa-top,0);-webkit-transform:scale(var(--fa-layers-scale,.25));transform:scale(var(--fa-layers-scale,.25));-webkit-transform-origin:top left;transform-origin:top left}.fa-1x{font-size:1em}.fa-2x{font-size:2em}.fa-3x{font-size:3em}.fa-4x{font-size:4em}.fa-5x{font-size:5em}.fa-6x{font-size:6em}.fa-7x{font-size:7em}.fa-8x{font-size:8em}.fa-9x{font-size:9em}.fa-10x{font-size:10em}.fa-2xs{font-size:.625em;line-height:.1em;vertical-align:.225em}.fa-xs{font-size:.75em;line-height:.0833333337em;vertical-align:.125em}.fa-sm{font-size:.875em;line-height:.0714285718em;vertical-align:.0535714295em}.fa-lg{font-size:1.25em;line-height:.05em;vertical-align:-.075em}.fa-xl{font-size:1.5em;line-height:.0416666682em;vertical-align:-.125em}.fa-2xl{font-size:2em;line-height:.03125em;vertical-align:-.1875em}.fa-fw{text-align:center;width:1.25em}.fa-ul{list-style-type:none;margin-left:var(--fa-li-margin,2.5em);padding-left:0}.fa-ul>li{position:relative}.fa-li{left:calc(var(--fa-li-width,2em) * -1);position:absolute;text-align:center;width:var(--fa-li-width,2em);line-height:inherit}.fa-border{border-color:var(--fa-border-color,#eee);border-radius:var(--fa-border-radius,.1em);border-style:var(--fa-border-style,solid);border-width:var(--fa-border-width,.08em);padding:var(--fa-border-padding,.2em .25em .15em)}.fa-pull-left{float:left;margin-right:var(--fa-pull-margin,.3em)}.fa-pull-right{float:right;margin-left:var(--fa-pull-margin,.3em)}.fa-beat{-webkit-animation-name:fa-beat;animation-name:fa-beat;-webkit-animation-delay:var(--fa-animation-delay,0s);animation-delay:var(--fa-animation-delay,0s);-webkit-animation-direction:var(--fa-animation-direction,normal);animation-direction:var(--fa-animation-direction,normal);-webkit-animation-duration:var(--fa-animation-duration,1s);animation-duration:var(--fa-animation-duration,1s);-webkit-animation-iteration-count:var(--fa-animation-iteration-count,infinite);animation-iteration-count:var(--fa-animation-iteration-count,infinite);-webkit-animation-timing-function:var(--fa-animation-timing,ease-in-out);animation-timing-function:var(--fa-animation-timing,ease-in-out)}.fa-bounce{-webkit-animation-name:fa-bounce;animation-name:fa-bounce;-webkit-animation-delay:var(--fa-animation-delay,0s);animation-delay:var(--fa-animation-delay,0s);-webkit-animation-direction:var(--fa-animation-direction,normal);animation-direction:var(--fa-animation-direction,normal);-webkit-animation-duration:var(--fa-animation-duration,1s);animation-duration:var(--fa-animation-duration,1s);-webkit-animation-iteration-count:var(--fa-animation-iteration-count,infinite);animation-iteration-count:var(--fa-animation-iteration-count,infinite);-webkit-animation-timing-function:var(--fa-animation-timing,cubic-bezier(.28,.84,.42,1));animation-timing-function:var(--fa-animation-timing,cubic-bezier(.28,.84,.42,1))}.fa-fade{-webkit-animation-name:fa-fade;animation-name:fa-fade;-webkit-animation-delay:var(--fa-animation-delay,0s);animation-delay:var(--fa-animation-delay,0s);-webkit-animation-direction:var(--fa-animation-direction,normal);animation-direction:var(--fa-animation-direction,normal);-webkit-animation-duration:var(--fa-animation-duration,1s);animation-duration:var(--fa-animation-duration,1s);-webkit-animation-iteration-count:var(--fa-animation-iteration-count,infinite);animation-iteration-count:var(--fa-animation-iteration-count,infinite);-webkit-animation-timing-function:var(--fa-animation-timing,cubic-bezier(.4,0,.6,1));animation-timing-function:var(--fa-animation-timing,cubic-bezier(.4,0,.6,1))}.fa-beat-fade{-webkit-animation-name:fa-beat-fade;animation-name:fa-beat-fade;-webkit-animation-delay:var(--fa-animation-delay,0s);animation-delay:var(--fa-animation-delay,0s);-webkit-animation-direction:var(--fa-animation-direction,normal);animation-direction:var(--fa-animation-direction,normal);-webkit-animation-duration:var(--fa-animation-duration,1s);animation-duration:var(--fa-animation-duration,1s);-webkit-animation-iteration-count:var(--fa-animation-iteration-count,infinite);animation-iteration-count:var(--fa-animation-iteration-count,infinite);-webkit-animation-timing-function:var(--fa-animation-timing,cubic-bezier(.4,0,.6,1));animation-timing-function:var(--fa-animation-timing,cubic-bezier(.4,0,.6,1))}.fa-flip{-webkit-animation-name:fa-flip;animation-name:fa-flip;-webkit-animation-delay:var(--fa-animation-delay,0s);animation-delay:var(--fa-animation-delay,0s);-webkit-animation-direction:var(--fa-animation-direction,normal);animation-direction:var(--fa-animation-direction,normal);-webkit-animation-duration:var(--fa-animation-duration,1s);animation-duration:var(--fa-animation-duration,1s);-webkit-animation-iteration-count:var(--fa-animation-iteration-count,infinite);animation-iteration-count:var(--fa-animation-iteration-count,infinite);-webkit-animation-timing-function:var(--fa-animation-timing,ease-in-out);animation-timing-function:var(--fa-animation-timing,ease-in-out)}.fa-shake{-webkit-animation-name:fa-shake;animation-name:fa-shake;-webkit-animation-delay:var(--fa-animation-delay,0s);animation-delay:var(--fa-animation-delay,0s);-webkit-animation-direction:var(--fa-animation-direction,normal);animation-direction:var(--fa-animation-direction,normal);-webkit-animation-duration:var(--fa-animation-duration,1s);animation-duration:var(--fa-animation-duration,1s);-webkit-animation-iteration-count:var(--fa-animation-iteration-count,infinite);animation-iteration-count:var(--fa-animation-iteration-count,infinite);-webkit-animation-timing-function:var(--fa-animation-timing,linear);animation-timing-function:var(--fa-animation-timing,linear)}.fa-spin{-webkit-animation-name:fa-spin;animation-name:fa-spin;-webkit-animation-delay:var(--fa-animation-delay,0s);animation-delay:var(--fa-animation-delay,0s);-webkit-animation-direction:var(--fa-animation-direction,normal);animation-direction:var(--fa-animation-direction,normal);-webkit-animation-duration:var(--fa-animation-duration,2s);animation-duration:var(--fa-animation-duration,2s);-webkit-animation-iteration-count:var(--fa-animation-iteration-count,infinite);animation-iteration-count:var(--fa-animation-iteration-count,infinite);-webkit-animation-timing-function:var(--fa-animation-timing,linear);animation-timing-function:var(--fa-animation-timing,linear)}.fa-spin-reverse{--fa-animation-direction:reverse}.fa-pulse,.fa-spin-pulse{-webkit-animation-name:fa-spin;animation-name:fa-spin;-webkit-animation-direction:var(--fa-animation-direction,normal);animation-direction:var(--fa-animation-direction,normal);-webkit-animation-duration:var(--fa-animation-duration,1s);animation-duration:var(--fa-animation-duration,1s);-webkit-animation-iteration-count:var(--fa-animation-iteration-count,infinite);animation-iteration-count:var(--fa-animation-iteration-count,infinite);-webkit-animation-timing-function:var(--fa-animation-timing,steps(8));animation-timing-function:var(--fa-animation-timing,steps(8))}@media (prefers-reduced-motion:reduce){.fa-beat,.fa-beat-fade,.fa-bounce,.fa-fade,.fa-flip,.fa-pulse,.fa-shake,.fa-spin,.fa-spin-pulse{-webkit-animation-delay:-1ms;animation-delay:-1ms;-webkit-animation-duration:1ms;animation-duration:1ms;-webkit-animation-iteration-count:1;animation-iteration-count:1;-webkit-transition-delay:0s;transition-delay:0s;-webkit-transition-duration:0s;transition-duration:0s}}@-webkit-keyframes fa-beat{0%,90%{-webkit-transform:scale(1);transform:scale(1)}45%{-webkit-transform:scale(var(--fa-beat-scale,1.25));transform:scale(var(--fa-beat-scale,1.25))}}@keyframes fa-beat{0%,90%{-webkit-transform:scale(1);transform:scale(1)}45%{-webkit-transform:scale(var(--fa-beat-scale,1.25));transform:scale(var(--fa-beat-scale,1.25))}}@-webkit-keyframes fa-bounce{0%{-webkit-transform:scale(1,1) translateY(0);transform:scale(1,1) translateY(0)}10%{-webkit-transform:scale(var(--fa-bounce-start-scale-x,1.1),var(--fa-bounce-start-scale-y,.9)) translateY(0);transform:scale(var(--fa-bounce-start-scale-x,1.1),var(--fa-bounce-start-scale-y,.9)) translateY(0)}30%{-webkit-transform:scale(var(--fa-bounce-jump-scale-x,.9),var(--fa-bounce-jump-scale-y,1.1)) translateY(var(--fa-bounce-height,-.5em));transform:scale(var(--fa-bounce-jump-scale-x,.9),var(--fa-bounce-jump-scale-y,1.1)) translateY(var(--fa-bounce-height,-.5em))}50%{-webkit-transform:scale(var(--fa-bounce-land-scale-x,1.05),var(--fa-bounce-land-scale-y,.95)) translateY(0);transform:scale(var(--fa-bounce-land-scale-x,1.05),var(--fa-bounce-land-scale-y,.95)) translateY(0)}57%{-webkit-transform:scale(1,1) translateY(var(--fa-bounce-rebound,-.125em));transform:scale(1,1) translateY(var(--fa-bounce-rebound,-.125em))}64%{-webkit-transform:scale(1,1) translateY(0);transform:scale(1,1) translateY(0)}100%{-webkit-transform:scale(1,1) translateY(0);transform:scale(1,1) translateY(0)}}@keyframes fa-bounce{0%{-webkit-transform:scale(1,1) translateY(0);transform:scale(1,1) translateY(0)}10%{-webkit-transform:scale(var(--fa-bounce-start-scale-x,1.1),var(--fa-bounce-start-scale-y,.9)) translateY(0);transform:scale(var(--fa-bounce-start-scale-x,1.1),var(--fa-bounce-start-scale-y,.9)) translateY(0)}30%{-webkit-transform:scale(var(--fa-bounce-jump-scale-x,.9),var(--fa-bounce-jump-scale-y,1.1)) translateY(var(--fa-bounce-height,-.5em));transform:scale(var(--fa-bounce-jump-scale-x,.9),var(--fa-bounce-jump-scale-y,1.1)) translateY(var(--fa-bounce-height,-.5em))}50%{-webkit-transform:scale(var(--fa-bounce-land-scale-x,1.05),var(--fa-bounce-land-scale-y,.95)) translateY(0);transform:scale(var(--fa-bounce-land-scale-x,1.05),var(--fa-bounce-land-scale-y,.95)) translateY(0)}57%{-webkit-transform:scale(1,1) translateY(var(--fa-bounce-rebound,-.125em));transform:scale(1,1) translateY(var(--fa-bounce-rebound,-.125em))}64%{-webkit-transform:scale(1,1) translateY(0);transform:scale(1,1) translateY(0)}100%{-webkit-transform:scale(1,1) translateY(0);transform:scale(1,1) translateY(0)}}@-webkit-keyframes fa-fade{50%{opacity:var(--fa-fade-opacity,.4)}}@keyframes fa-fade{50%{opacity:var(--fa-fade-opacity,.4)}}@-webkit-keyframes fa-beat-fade{0%,100%{opacity:var(--fa-beat-fade-opacity,.4);-webkit-transform:scale(1);transform:scale(1)}50%{opacity:1;-webkit-transform:scale(var(--fa-beat-fade-scale,1.125));transform:scale(var(--fa-beat-fade-scale,1.125))}}@keyframes fa-beat-fade{0%,100%{opacity:var(--fa-beat-fade-opacity,.4);-webkit-transform:scale(1);transform:scale(1)}50%{opacity:1;-webkit-transform:scale(var(--fa-beat-fade-scale,1.125));transform:scale(var(--fa-beat-fade-scale,1.125))}}@-webkit-keyframes fa-flip{50%{-webkit-transform:rotate3d(var(--fa-flip-x,0),var(--fa-flip-y,1),var(--fa-flip-z,0),var(--fa-flip-angle,-180deg));transform:rotate3d(var(--fa-flip-x,0),var(--fa-flip-y,1),var(--fa-flip-z,0),var(--fa-flip-angle,-180deg))}}@keyframes fa-flip{50%{-webkit-transform:rotate3d(var(--fa-flip-x,0),var(--fa-flip-y,1),var(--fa-flip-z,0),var(--fa-flip-angle,-180deg));transform:rotate3d(var(--fa-flip-x,0),var(--fa-flip-y,1),var(--fa-flip-z,0),var(--fa-flip-angle,-180deg))}}@-webkit-keyframes fa-shake{0%{-webkit-transform:rotate(-15deg);transform:rotate(-15deg)}4%{-webkit-transform:rotate(15deg);transform:rotate(15deg)}24%,8%{-webkit-transform:rotate(-18deg);transform:rotate(-18deg)}12%,28%{-webkit-transform:rotate(18deg);transform:rotate(18deg)}16%{-webkit-transform:rotate(-22deg);transform:rotate(-22deg)}20%{-webkit-transform:rotate(22deg);transform:rotate(22deg)}32%{-webkit-transform:rotate(-12deg);transform:rotate(-12deg)}36%{-webkit-transform:rotate(12deg);transform:rotate(12deg)}100%,40%{-webkit-transform:rotate(0);transform:rotate(0)}}@keyframes fa-shake{0%{-webkit-transform:rotate(-15deg);transform:rotate(-15deg)}4%{-webkit-transform:rotate(15deg);transform:rotate(15deg)}24%,8%{-webkit-transform:rotate(-18deg);transform:rotate(-18deg)}12%,28%{-webkit-transform:rotate(18deg);transform:rotate(18deg)}16%{-webkit-transform:rotate(-22deg);transform:rotate(-22deg)}20%{-webkit-transform:rotate(22deg);transform:rotate(22deg)}32%{-webkit-transform:rotate(-12deg);transform:rotate(-12deg)}36%{-webkit-transform:rotate(12deg);transform:rotate(12deg)}100%,40%{-webkit-transform:rotate(0);transform:rotate(0)}}@-webkit-keyframes fa-spin{0%{-webkit-transform:rotate(0);transform:rotate(0)}100%{-webkit-transform:rotate(360deg);transform:rotate(360deg)}}@keyframes fa-spin{0%{-webkit-transform:rotate(0);transform:rotate(0)}100%{-webkit-transform:rotate(360deg);transform:rotate(360deg)}}.fa-rotate-90{-webkit-transform:rotate(90deg);transform:rotate(90deg)}.fa-rotate-180{-webkit-transform:rotate(180deg);transform:rotate(180deg)}.fa-rotate-270{-webkit-transform:rotate(270deg);transform:rotate(270deg)}.fa-flip-horizontal{-webkit-transform:scale(-1,1);transform:scale(-1,1)}.fa-flip-vertical{-webkit-transform:scale(1,-1);transform:scale(1,-1)}.fa-flip-both,.fa-flip-horizontal.fa-flip-vertical{-webkit-transform:scale(-1,-1);transform:scale(-1,-1)}.fa-rotate-by{-webkit-transform:rotate(var(--fa-rotate-angle,0));transform:rotate(var(--fa-rotate-angle,0))}.fa-stack{display:inline-block;vertical-align:middle;height:2em;position:relative;width:2.5em}.fa-stack-1x,.fa-stack-2x{bottom:0;left:0;margin:auto;position:absolute;right:0;top:0;z-index:var(--fa-stack-z-index,auto)}.svg-inline--fa.fa-stack-1x{height:1em;width:1.25em}.svg-inline--fa.fa-stack-2x{height:2em;width:2.5em}.fa-inverse{color:var(--fa-inverse,#fff)}.fa-sr-only,.sr-only{position:absolute;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0,0,0,0);white-space:nowrap;border-width:0}.fa-sr-only-focusable:not(:focus),.sr-only-focusable:not(:focus){position:absolute;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0,0,0,0);white-space:nowrap;border-width:0}.svg-inline--fa .fa-primary{fill:var(--fa-primary-color,currentColor);opacity:var(--fa-primary-opacity,1)}.svg-inline--fa .fa-secondary{fill:var(--fa-secondary-color,currentColor);opacity:var(--fa-secondary-opacity,.4)}.svg-inline--fa.fa-swap-opacity .fa-primary{opacity:var(--fa-secondary-opacity,.4)}.svg-inline--fa.fa-swap-opacity .fa-secondary{opacity:var(--fa-primary-opacity,1)}.svg-inline--fa mask .fa-primary,.svg-inline--fa mask .fa-secondary{fill:#000}.fa-duotone.fa-inverse,.fad.fa-inverse{color:var(--fa-inverse,#fff)}</style><link href="./Copy-on-Write (CoW) — documentação do pandas 3.0.2_files/theme.css" rel="stylesheet">
+<link href="./Copy-on-Write (CoW) — documentação do pandas 3.0.2_files/pydata-sphinx-theme.css" rel="stylesheet">
+
+    <link rel="stylesheet" type="text/css" href="./Copy-on-Write (CoW) — documentação do pandas 3.0.2_files/pygments.css">
+    <link rel="stylesheet" type="text/css" href="./Copy-on-Write (CoW) — documentação do pandas 3.0.2_files/plot_directive.css">
+    <link rel="stylesheet" type="text/css" href="./Copy-on-Write (CoW) — documentação do pandas 3.0.2_files/copybutton.css">
+    <link rel="stylesheet" type="text/css" href="./Copy-on-Write (CoW) — documentação do pandas 3.0.2_files/sphinx-design.min.css">
+    <link rel="stylesheet" type="text/css" href="./Copy-on-Write (CoW) — documentação do pandas 3.0.2_files/getting_started.css">
+    <link rel="stylesheet" type="text/css" href="./Copy-on-Write (CoW) — documentação do pandas 3.0.2_files/pandas.css">
+  
+  <!-- So that users can add custom icons -->
+  <script src="./Copy-on-Write (CoW) — documentação do pandas 3.0.2_files/fontawesome.js.baixados"></script>
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="./Copy-on-Write (CoW) — documentação do pandas 3.0.2_files/bootstrap.js.baixados">
+<link rel="preload" as="script" href="./Copy-on-Write (CoW) — documentação do pandas 3.0.2_files/pydata-sphinx-theme.js.baixados">
+
+    <script src="./Copy-on-Write (CoW) — documentação do pandas 3.0.2_files/documentation_options.js.baixados"></script>
+    <script src="./Copy-on-Write (CoW) — documentação do pandas 3.0.2_files/doctools.js.baixados"></script>
+    <script src="./Copy-on-Write (CoW) — documentação do pandas 3.0.2_files/sphinx_highlight.js.baixados"></script>
+    <script src="./Copy-on-Write (CoW) — documentação do pandas 3.0.2_files/clipboard.min.js.baixados"></script>
+    <script src="./Copy-on-Write (CoW) — documentação do pandas 3.0.2_files/copybutton.js.baixados"></script>
+    <script src="./Copy-on-Write (CoW) — documentação do pandas 3.0.2_files/design-tabs.js.baixados"></script>
+    <script data-domain="pandas.pydata.org" defer="defer" src="./Copy-on-Write (CoW) — documentação do pandas 3.0.2_files/script.js.baixados"></script>
+    <script src="./Copy-on-Write (CoW) — documentação do pandas 3.0.2_files/embed-amd.js.baixados"></script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'user_guide/copy_on_write';</script>
+    <script>
+        DOCUMENTATION_OPTIONS.theme_version = '0.16.1';
+        DOCUMENTATION_OPTIONS.theme_switcher_json_url = 'https://pandas.pydata.org/versions.json';
+        DOCUMENTATION_OPTIONS.theme_switcher_version_match = '3.0';
+        DOCUMENTATION_OPTIONS.show_version_warning_banner =
+            false;
+        </script>
+    <link rel="icon" href="https://pandas.pydata.org/docs/_static/favicon.ico">
+    <link rel="index" title="Index" href="https://pandas.pydata.org/docs/genindex.html">
+    <link rel="search" title="Search" href="https://pandas.pydata.org/docs/search.html">
+    <link rel="next" title="Merge, join, concatenate and compare" href="https://pandas.pydata.org/docs/user_guide/merging.html">
+    <link rel="prev" title="MultiIndex / advanced indexing" href="https://pandas.pydata.org/docs/user_guide/advanced.html">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="docsearch:language" content="en">
+  <meta name="docsearch:version" content="3.0.2">
+  </head>
+  
+  
+  <body data-bs-spy="scroll" data-bs-target=".bd-toc-nav" data-offset="180" data-bs-root-margin="0px 0px -60%" data-default-mode="">
+
+  
+  
+  <div id="pst-skip-link" class="skip-link d-print-none"><a href="https://pandas.pydata.org/docs/user_guide/copy_on_write.html#main-content" _msttexthash="357760" _msthash="1">Skip to main content</a></div>
+  
+  <div id="pst-scroll-pixel-helper"></div>
+  
+  <button type="button" class="btn rounded-pill" id="pst-back-to-top" _msthidden="1">
+    <svg class="svg-inline--fa fa-arrow-up" aria-hidden="true" focusable="false" data-prefix="fas" data-icon="arrow-up" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 384 512" data-fa-i2svg=""><path fill="currentColor" d="M214.6 41.4c-12.5-12.5-32.8-12.5-45.3 0l-160 160c-12.5 12.5-12.5 32.8 0 45.3s32.8 12.5 45.3 0L160 141.2V448c0 17.7 14.3 32 32 32s32-14.3 32-32V141.2L329.4 246.6c12.5 12.5 32.8 12.5 45.3 0s12.5-32.8 0-45.3l-160-160z"></path></svg><!-- <i class="fa-solid fa-arrow-up"></i> Font Awesome fontawesome.com --><font _mstmutation="1" _msttexthash="137137" _msthidden="1" _msthash="2">Back to top</font></button>
+
+  
+  <dialog id="pst-search-dialog" _msthidden="1">
+    
+<form class="bd-search d-flex align-items-center" action="https://pandas.pydata.org/docs/search.html" method="get" _msthidden="1">
+  <svg class="svg-inline--fa fa-magnifying-glass" aria-hidden="true" focusable="false" data-prefix="fas" data-icon="magnifying-glass" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" data-fa-i2svg=""><path fill="currentColor" d="M416 208c0 45.9-14.9 88.3-40 122.7L502.6 457.4c12.5 12.5 12.5 32.8 0 45.3s-32.8 12.5-45.3 0L330.7 376c-34.4 25.2-76.8 40-122.7 40C93.1 416 0 322.9 0 208S93.1 0 208 0S416 93.1 416 208zM208 352a144 144 0 1 0 0-288 144 144 0 1 0 0 288z"></path></svg><!-- <i class="fa-solid fa-magnifying-glass"></i> Font Awesome fontawesome.com -->
+  <input type="search" class="form-control" name="q" placeholder="Search the docs ..." aria-label="Search the docs ..." autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false" _msthidden="A" _mstplaceholder="267410" _msthash="3" _mstaria-label="267410">
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form>
+  </dialog>
+
+  <div class="pst-async-banner-revealer" style="height: auto;">
+  <aside id="bd-header-version-warning" class="d-none d-print-none" aria-label="Version warning" _msthidden="A" _mstaria-label="264654" _msthash="4"></aside>
+  <aside class="bd-header-announcement d-print-none" aria-label="Anúncio" data-pst-announcement-url="https://raw.githubusercontent.com/pandas-dev/pandas/main/doc/_templates/docs-announcement-banner.html" _mstaria-label="207376" _msthash="5"><div class="bd-header-announcement__content" _msttexthash="1757158" _msthash="6">Anúncio: Pandas 3.0 lançado! Leia mais <a href="https://pandas.pydata.org/community/blog/pandas-3.0.html" _istranslated="1">no post do blog</a></div><a class="ms-3 my-1 align-baseline"><svg class="svg-inline--fa fa-xmark" aria-hidden="true" focusable="false" data-prefix="fas" data-icon="xmark" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 384 512" data-fa-i2svg=""><path fill="currentColor" d="M342.6 150.6c12.5-12.5 12.5-32.8 0-45.3s-32.8-12.5-45.3 0L192 210.7 86.6 105.4c-12.5-12.5-32.8-12.5-45.3 0s-12.5 32.8 0 45.3L146.7 256 41.4 361.4c-12.5 12.5-12.5 32.8 0 45.3s32.8 12.5 45.3 0L192 301.3 297.4 406.6c12.5 12.5 32.8 12.5 45.3 0s12.5-32.8 0-45.3L237.3 256 342.6 150.6z"></path></svg><!-- <i class="fa-solid fa-xmark"></i> Font Awesome fontawesome.com --></a></aside>
+</div>
+
+  
+    <header class="bd-header navbar navbar-expand-lg bd-navbar d-print-none">
+<div class="bd-header__inner bd-page-width">
+  <button class="pst-navbar-icon sidebar-toggle primary-toggle" aria-label="Site navigation" _msthidden="A" _mstaria-label="261573" _msthash="7">
+    <svg class="svg-inline--fa fa-bars" aria-hidden="true" focusable="false" data-prefix="fas" data-icon="bars" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512" data-fa-i2svg=""><path fill="currentColor" d="M0 96C0 78.3 14.3 64 32 64H416c17.7 0 32 14.3 32 32s-14.3 32-32 32H32C14.3 128 0 113.7 0 96zM0 256c0-17.7 14.3-32 32-32H416c17.7 0 32 14.3 32 32s-14.3 32-32 32H32c-17.7 0-32-14.3-32-32zM448 416c0 17.7-14.3 32-32 32H32c-17.7 0-32-14.3-32-32s14.3-32 32-32H416c17.7 0 32 14.3 32 32z"></path></svg><!-- <span class="fa-solid fa-bars"></span> Font Awesome fontawesome.com -->
+  </button>
+  
+  
+  <div class=" navbar-header-items__start">
+    
+      <div class="navbar-item">
+
+  
+    
+  
+
+<a class="navbar-brand logo" href="https://pandas.pydata.org/docs/index.html">
+  
+  
+  
+  
+  
+    
+    
+      
+    
+    
+    <img src="./Copy-on-Write (CoW) — documentação do pandas 3.0.2_files/pandas.svg" class="logo__image only-light" alt="pandas 3.0.2 documentation - Home" _msthidden="A" _mstalt="753129" _msthash="8">
+    <img src="./Copy-on-Write (CoW) — documentação do pandas 3.0.2_files/pandas_white.svg" class="logo__image only-dark pst-js-only" alt="Documentação do pandas 3.0.2 - Início" _mstalt="753129" _msthash="9">
+  
+  
+</a></div>
+    
+  </div>
+  
+  <div class=" navbar-header-items">
+    
+    <div class="me-auto navbar-header-items__center">
+      
+        <div class="navbar-item">
+<nav>
+  <ul class="bd-navbar-elements navbar-nav">
+    
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="https://pandas.pydata.org/docs/getting_started/index.html" _msttexthash="150124" _msthash="10"> Começando </a>
+</li>
+
+
+<li class="nav-item current active">
+  <a class="nav-link nav-internal" href="https://pandas.pydata.org/docs/user_guide/index.html" _msttexthash="257231" _msthash="11"> Guia do Usuário </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="https://pandas.pydata.org/docs/reference/index.html" _msttexthash="275613" _msthash="12"> Referência de API </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="https://pandas.pydata.org/docs/development/index.html" _msttexthash="296036" _msthash="13"> Desenvolvimento </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="https://pandas.pydata.org/docs/whatsnew/index.html" _msttexthash="378716" _msthash="14"> Notas de lançamento </a>
+</li>
+
+  </ul>
+</nav></div>
+      
+    </div>
+    
+    
+    <div class="navbar-header-items__end">
+      
+        <div class="navbar-item navbar-persistent--container">
+          
+
+<button class="btn search-button-field search-button__button pst-js-only" aria-label="Busca" data-bs-placement="bottom" data-bs-toggle="tooltip" data-bs-original-title="Search" _mstaria-label="74607" _msthash="15">
+ <svg class="svg-inline--fa fa-magnifying-glass" aria-hidden="true" focusable="false" data-prefix="fas" data-icon="magnifying-glass" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" data-fa-i2svg=""><path fill="currentColor" d="M416 208c0 45.9-14.9 88.3-40 122.7L502.6 457.4c12.5 12.5 12.5 32.8 0 45.3s-32.8 12.5-45.3 0L330.7 376c-34.4 25.2-76.8 40-122.7 40C93.1 416 0 322.9 0 208S93.1 0 208 0S416 93.1 416 208zM208 352a144 144 0 1 0 0-288 144 144 0 1 0 0 288z"></path></svg><!-- <i class="fa-solid fa-magnifying-glass"></i> Font Awesome fontawesome.com -->
+ <span class="search-button__default-text" _msttexthash="58370" _msthash="16">Busca</span>
+ <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+</button>
+        </div>
+      
+      
+        <div class="navbar-item">
+<div class="version-switcher__container dropdown pst-js-only">
+  <button id="pst-version-switcher-button-2" type="button" class="version-switcher__button btn btn-sm dropdown-toggle" data-bs-toggle="dropdown" aria-haspopup="listbox" aria-controls="pst-version-switcher-list-2" aria-label="Lista de switchers de versões" data-active-version-name="3.0 (stable)" data-active-version="3.0" _mstaria-label="431249" _msthash="17" _msttexthash="190658">3.0 (estável)</button>
+  <div id="pst-version-switcher-list-2" class="version-switcher__menu dropdown-menu list-group-flush py-0 dropdown-menu-dark" role="listbox" aria-labelledby="pst-version-switcher-button-2" _msthidden="12">
+    <!-- dropdown will be populated by javascript on page load -->
+  <a class="dropdown-item list-group-item list-group-item-action py-1" href="https://pandas.pydata.org/docs/dev/user_guide/copy_on_write.html" role="option" data-version-name="dev" data-version="dev" _msthidden="1"><span _msttexthash="33410" _msthidden="1" _msthash="18">dev</span></a><a class="dropdown-item list-group-item list-group-item-action py-1 active" href="https://pandas.pydata.org/docs/user_guide/copy_on_write.html" role="option" data-version-name="3.0 (stable)" data-version="3.0" _msthidden="1"><span _msttexthash="140140" _msthidden="1" _msthash="19">3.0 (stable)</span></a><a class="dropdown-item list-group-item list-group-item-action py-1" href="https://pandas.pydata.org/pandas-docs/version/2.3/user_guide/copy_on_write.html" role="option" data-version-name="2.3" data-version="2.3" _msthidden="1"><span _msttexthash="15301" _msthidden="1" _msthash="20">2.3</span></a><a class="dropdown-item list-group-item list-group-item-action py-1" href="https://pandas.pydata.org/pandas-docs/version/2.2/user_guide/copy_on_write.html" role="option" data-version-name="2.2" data-version="2.2" _msthidden="1"><span _msttexthash="15184" _msthidden="1" _msthash="21">2.2</span></a><a class="dropdown-item list-group-item list-group-item-action py-1" href="https://pandas.pydata.org/pandas-docs/version/2.1/user_guide/copy_on_write.html" role="option" data-version-name="2.1" data-version="2.1" _msthidden="1"><span _msttexthash="15067" _msthidden="1" _msthash="22">2.1</span></a><a class="dropdown-item list-group-item list-group-item-action py-1" href="https://pandas.pydata.org/pandas-docs/version/2.0/user_guide/copy_on_write.html" role="option" data-version-name="2.0" data-version="2.0" _msthidden="1"><span _msttexthash="14950" _msthidden="1" _msthash="23">2.0</span></a><a class="dropdown-item list-group-item list-group-item-action py-1" href="https://pandas.pydata.org/pandas-docs/version/1.5/user_guide/copy_on_write.html" role="option" data-version-name="1.5" data-version="1.5" _msthidden="1"><span _msttexthash="15444" _msthidden="1" _msthash="24">1.5</span></a><a class="dropdown-item list-group-item list-group-item-action py-1" href="https://pandas.pydata.org/pandas-docs/version/1.4/user_guide/copy_on_write.html" role="option" data-version-name="1.4" data-version="1.4" _msthidden="1"><span _msttexthash="15327" _msthidden="1" _msthash="25">1.4</span></a><a class="dropdown-item list-group-item list-group-item-action py-1" href="https://pandas.pydata.org/pandas-docs/version/1.3/user_guide/copy_on_write.html" role="option" data-version-name="1.3" data-version="1.3" _msthidden="1"><span _msttexthash="15210" _msthidden="1" _msthash="26">1.3</span></a><a class="dropdown-item list-group-item list-group-item-action py-1" href="https://pandas.pydata.org/pandas-docs/version/1.2/user_guide/copy_on_write.html" role="option" data-version-name="1.2" data-version="1.2" _msthidden="1"><span _msttexthash="15093" _msthidden="1" _msthash="27">1.2</span></a><a class="dropdown-item list-group-item list-group-item-action py-1" href="https://pandas.pydata.org/pandas-docs/version/1.1/user_guide/copy_on_write.html" role="option" data-version-name="1.1" data-version="1.1" _msthidden="1"><span _msttexthash="14976" _msthidden="1" _msthash="28">1.1</span></a><a class="dropdown-item list-group-item list-group-item-action py-1" href="https://pandas.pydata.org/pandas-docs/version/1.0/user_guide/copy_on_write.html" role="option" data-version-name="1.0" data-version="1.0" _msthidden="1"><span _msttexthash="14859" _msthidden="1" _msthash="29">1.0</span></a></div>
+</div></div>
+      
+        <div class="navbar-item">
+
+<button class="btn btn-sm nav-link pst-navbar-icon theme-switch-button pst-js-only" aria-label="Modo de cor" data-bs-title="Color mode" data-bs-placement="bottom" data-bs-toggle="tooltip" _mstaria-label="134667" _msthash="30">
+  <svg class="svg-inline--fa fa-sun theme-switch fa-lg" data-mode="light" aria-labelledby="svg-inline--fa-title-IjDXlLAkynSH" data-prefix="fas" data-icon="sun" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" data-fa-i2svg=""><title id="svg-inline--fa-title-IjDXlLAkynSH" _mstTextHash="33358" _mstHash="31">Luz</title><path fill="currentColor" d="M361.5 1.2c5 2.1 8.6 6.6 9.6 11.9L391 121l107.9 19.8c5.3 1 9.8 4.6 11.9 9.6s1.5 10.7-1.6 15.2L446.9 256l62.3 90.3c3.1 4.5 3.7 10.2 1.6 15.2s-6.6 8.6-11.9 9.6L391 391 371.1 498.9c-1 5.3-4.6 9.8-9.6 11.9s-10.7 1.5-15.2-1.6L256 446.9l-90.3 62.3c-4.5 3.1-10.2 3.7-15.2 1.6s-8.6-6.6-9.6-11.9L121 391 13.1 371.1c-5.3-1-9.8-4.6-11.9-9.6s-1.5-10.7 1.6-15.2L65.1 256 2.8 165.7c-3.1-4.5-3.7-10.2-1.6-15.2s6.6-8.6 11.9-9.6L121 121 140.9 13.1c1-5.3 4.6-9.8 9.6-11.9s10.7-1.5 15.2 1.6L256 65.1 346.3 2.8c4.5-3.1 10.2-3.7 15.2-1.6zM160 256a96 96 0 1 1 192 0 96 96 0 1 1 -192 0zm224 0a128 128 0 1 0 -256 0 128 128 0 1 0 256 0z"></path></svg><!-- <i class="theme-switch fa-solid fa-sun                fa-lg" data-mode="light" title="Light"></i> Font Awesome fontawesome.com -->
+  <svg class="svg-inline--fa fa-moon theme-switch fa-lg" data-mode="dark" aria-labelledby="svg-inline--fa-title-b7ctORTIsbVM" data-prefix="fas" data-icon="moon" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 384 512" data-fa-i2svg=""><title id="svg-inline--fa-title-b7ctORTIsbVM" _mstTextHash="78650" _mstHash="32">Escuro</title><path fill="currentColor" d="M223.5 32C100 32 0 132.3 0 256S100 480 223.5 480c60.6 0 115.5-24.2 155.8-63.4c5-4.9 6.3-12.5 3.1-18.7s-10.1-9.7-17-8.5c-9.8 1.7-19.8 2.6-30.1 2.6c-96.9 0-175.5-78.8-175.5-176c0-65.8 36-123.1 89.3-153.3c6.1-3.5 9.2-10.5 7.7-17.3s-7.3-11.9-14.3-12.5c-6.3-.5-12.6-.8-19-.8z"></path></svg><!-- <i class="theme-switch fa-solid fa-moon               fa-lg" data-mode="dark" title="Dark"></i> Font Awesome fontawesome.com -->
+  <svg class="svg-inline--fa fa-circle-half-stroke theme-switch fa-lg" data-mode="auto" aria-labelledby="svg-inline--fa-title-SS762FntvVUn" data-prefix="fas" data-icon="circle-half-stroke" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" data-fa-i2svg=""><title id="svg-inline--fa-title-SS762FntvVUn" _mstTextHash="581243" _mstHash="33">Configurações do Sistema</title><path fill="currentColor" d="M448 256c0-106-86-192-192-192V448c106 0 192-86 192-192zM0 256a256 256 0 1 1 512 0A256 256 0 1 1 0 256z"></path></svg><!-- <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg" data-mode="auto" title="System Settings"></i> Font Awesome fontawesome.com -->
+</button></div>
+      
+        <div class="navbar-item"><ul class="navbar-icon-links" aria-label="Links de Ícones" _mstaria-label="131963" _msthash="34">
+        <li class="nav-item">
+          
+          
+          
+          
+          
+          
+          
+          
+          <a href="https://github.com/pandas-dev/pandas" class="nav-link pst-navbar-icon" rel="noopener" target="_blank" data-bs-toggle="tooltip" data-bs-placement="bottom" data-bs-original-title="GitHub"><svg class="svg-inline--fa fa-square-github fa-lg" aria-hidden="true" focusable="false" data-prefix="fab" data-icon="square-github" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512" data-fa-i2svg=""><path fill="currentColor" d="M448 96c0-35.3-28.7-64-64-64H64C28.7 32 0 60.7 0 96V416c0 35.3 28.7 64 64 64H384c35.3 0 64-28.7 64-64V96zM265.8 407.7c0-1.8 0-6 .1-11.6c.1-11.4 .1-28.8 .1-43.7c0-15.6-5.2-25.5-11.3-30.7c37-4.1 76-9.2 76-73.1c0-18.2-6.5-27.3-17.1-39c1.7-4.3 7.4-22-1.7-45c-13.9-4.3-45.7 17.9-45.7 17.9c-13.2-3.7-27.5-5.6-41.6-5.6s-28.4 1.9-41.6 5.6c0 0-31.8-22.2-45.7-17.9c-9.1 22.9-3.5 40.6-1.7 45c-10.6 11.7-15.6 20.8-15.6 39c0 63.6 37.3 69 74.3 73.1c-4.8 4.3-9.1 11.7-10.6 22.3c-9.5 4.3-33.8 11.7-48.3-13.9c-9.1-15.8-25.5-17.1-25.5-17.1c-16.2-.2-1.1 10.2-1.1 10.2c10.8 5 18.4 24.2 18.4 24.2c9.7 29.7 56.1 19.7 56.1 19.7c0 9 .1 21.7 .1 30.6c0 4.8 .1 8.6 .1 10c0 4.3-3 9.5-11.5 8C106 393.6 59.8 330.8 59.8 257.4c0-91.8 70.2-161.5 162-161.5s166.2 69.7 166.2 161.5c.1 73.4-44.7 136.3-110.7 158.3c-8.4 1.5-11.5-3.7-11.5-8zm-90.5-54.8c-.2-1.5 1.1-2.8 3-3.2c1.9-.2 3.7 .6 3.9 1.9c.3 1.3-1 2.6-3 3c-1.9 .4-3.7-.4-3.9-1.7zm-9.1 3.2c-2.2 .2-3.7-.9-3.7-2.4c0-1.3 1.5-2.4 3.5-2.4c1.9-.2 3.7 .9 3.7 2.4c0 1.3-1.5 2.4-3.5 2.4zm-14.3-2.2c-1.9-.4-3.2-1.9-2.8-3.2s2.4-1.9 4.1-1.5c2 .6 3.3 2.1 2.8 3.4c-.4 1.3-2.4 1.9-4.1 1.3zm-12.5-7.3c-1.5-1.3-1.9-3.2-.9-4.1c.9-1.1 2.8-.9 4.3 .6c1.3 1.3 1.8 3.3 .9 4.1c-.9 1.1-2.8 .9-4.3-.6zm-8.5-10c-1.1-1.5-1.1-3.2 0-3.9c1.1-.9 2.8-.2 3.7 1.3c1.1 1.5 1.1 3.3 0 4.1c-.9 .6-2.6 0-3.7-1.5zm-6.3-8.8c-1.1-1.3-1.3-2.8-.4-3.5c.9-.9 2.4-.4 3.5 .6c1.1 1.3 1.3 2.8 .4 3.5c-.9 .9-2.4 .4-3.5-.6zm-6-6.4c-1.3-.6-1.9-1.7-1.5-2.6c.4-.6 1.5-.9 2.8-.4c1.3 .7 1.9 1.8 1.5 2.6c-.4 .9-1.7 1.1-2.8 .4z"></path></svg><!-- <i class="fa-brands fa-square-github fa-lg" aria-hidden="true"></i> Font Awesome fontawesome.com -->
+            <span class="sr-only" _msttexthash="72332" _msthash="35">GitHub</span></a>
+        </li>
+        <li class="nav-item">
+          
+          
+          
+          
+          
+          
+          
+          
+          <a href="https://x.com/pandas_dev" class="nav-link pst-navbar-icon" rel="noopener" target="_blank" data-bs-toggle="tooltip" data-bs-placement="bottom" data-bs-original-title="X"><svg class="svg-inline--fa fa-square-x-twitter fa-lg" aria-hidden="true" focusable="false" data-prefix="fab" data-icon="square-x-twitter" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512" data-fa-i2svg=""><path fill="currentColor" d="M64 32C28.7 32 0 60.7 0 96V416c0 35.3 28.7 64 64 64H384c35.3 0 64-28.7 64-64V96c0-35.3-28.7-64-64-64H64zm297.1 84L257.3 234.6 379.4 396H283.8L209 298.1 123.3 396H75.8l111-126.9L69.7 116h98l67.7 89.5L313.6 116h47.5zM323.3 367.6L153.4 142.9H125.1L296.9 367.6h26.3z"></path></svg><!-- <i class="fa-brands fa-square-x-twitter fa-lg" aria-hidden="true"></i> Font Awesome fontawesome.com -->
+            <span class="sr-only" _msttexthash="8008" _msthash="36">X</span></a>
+        </li>
+        <li class="nav-item">
+          
+          
+          
+          
+          
+          
+          
+          
+          <a href="https://fosstodon.org/@pandas_dev" class="nav-link pst-navbar-icon" rel="noopener" target="_blank" data-bs-toggle="tooltip" data-bs-placement="bottom" data-bs-original-title="Mastodon"><svg class="svg-inline--fa fa-mastodon fa-lg" aria-hidden="true" focusable="false" data-prefix="fab" data-icon="mastodon" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512" data-fa-i2svg=""><path fill="currentColor" d="M433 179.11c0-97.2-63.71-125.7-63.71-125.7-62.52-28.7-228.56-28.4-290.48 0 0 0-63.72 28.5-63.72 125.7 0 115.7-6.6 259.4 105.63 289.1 40.51 10.7 75.32 13 103.33 11.4 50.81-2.8 79.32-18.1 79.32-18.1l-1.7-36.9s-36.31 11.4-77.12 10.1c-40.41-1.4-83-4.4-89.63-54a102.54 102.54 0 0 1-.9-13.9c85.63 20.9 158.65 9.1 178.75 6.7 56.12-6.7 105-41.3 111.23-72.9 9.8-49.8 9-121.5 9-121.5zm-75.12 125.2h-46.63v-114.2c0-49.7-64-51.6-64 6.9v62.5h-46.33V197c0-58.5-64-56.6-64-6.9v114.2H90.19c0-122.1-5.2-147.9 18.41-175 25.9-28.9 79.82-30.8 103.83 6.1l11.6 19.5 11.6-19.5c24.11-37.1 78.12-34.8 103.83-6.1 23.71 27.3 18.4 53 18.4 175z"></path></svg><!-- <i class="fa-brands fa-mastodon fa-lg" aria-hidden="true"></i> Font Awesome fontawesome.com -->
+            <span class="sr-only" _msttexthash="159510" _msthash="37">Mastodonte</span></a>
+        </li>
+</ul></div>
+      
+    </div>
+    
+  </div>
+  
+  
+    <div class="navbar-persistent--mobile" _msthidden="2">
+
+<button class="btn search-button-field search-button__button pst-js-only" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip" data-bs-original-title="Search" _msthidden="1" _mstaria-label="74607" _msthash="38">
+ <svg class="svg-inline--fa fa-magnifying-glass" aria-hidden="true" focusable="false" data-prefix="fas" data-icon="magnifying-glass" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" data-fa-i2svg=""><path fill="currentColor" d="M416 208c0 45.9-14.9 88.3-40 122.7L502.6 457.4c12.5 12.5 12.5 32.8 0 45.3s-32.8 12.5-45.3 0L330.7 376c-34.4 25.2-76.8 40-122.7 40C93.1 416 0 322.9 0 208S93.1 0 208 0S416 93.1 416 208zM208 352a144 144 0 1 0 0-288 144 144 0 1 0 0 288z"></path></svg><!-- <i class="fa-solid fa-magnifying-glass"></i> Font Awesome fontawesome.com -->
+ <span class="search-button__default-text" _msttexthash="74607" _msthidden="1" _msthash="39">Search</span>
+ <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+</button>
+    </div>
+  
+
+  
+    <button class="pst-navbar-icon sidebar-toggle secondary-toggle" aria-label="On this page" _msthidden="A" _mstaria-label="156351" _msthash="40">
+      <svg class="svg-inline--fa fa-outdent" aria-hidden="true" focusable="false" data-prefix="fas" data-icon="outdent" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512" data-fa-i2svg=""><path fill="currentColor" d="M0 64C0 46.3 14.3 32 32 32H416c17.7 0 32 14.3 32 32s-14.3 32-32 32H32C14.3 96 0 81.7 0 64zM192 192c0-17.7 14.3-32 32-32H416c17.7 0 32 14.3 32 32s-14.3 32-32 32H224c-17.7 0-32-14.3-32-32zm32 96H416c17.7 0 32 14.3 32 32s-14.3 32-32 32H224c-17.7 0-32-14.3-32-32s14.3-32 32-32zM0 448c0-17.7 14.3-32 32-32H416c17.7 0 32 14.3 32 32s-14.3 32-32 32H32c-17.7 0-32-14.3-32-32zM.2 268.6c-8.2-6.4-8.2-18.9 0-25.3l101.9-79.3c10.5-8.2 25.8-.7 25.8 12.6V335.3c0 13.3-15.3 20.8-25.8 12.6L.2 268.6z"></path></svg><!-- <span class="fa-solid fa-outdent"></span> Font Awesome fontawesome.com -->
+    </button>
+  
+</div>
+
+    </header>
+  
+
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      
+      
+      <dialog id="pst-primary-sidebar-modal"></dialog>
+      <div id="pst-primary-sidebar" class="bd-sidebar-primary bd-sidebar">
+        
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+      <div class="sidebar-header-items__center" _msthidden="5">
+        
+          
+          
+            <div class="navbar-item" _msthidden="5">
+<nav _msthidden="5">
+  <ul class="bd-navbar-elements navbar-nav" _msthidden="5">
+    
+<li class="nav-item " _msthidden="1">
+  <a class="nav-link nav-internal" href="https://pandas.pydata.org/docs/getting_started/index.html" _msttexthash="262210" _msthidden="1" _msthash="41">
+    Getting started
+  </a>
+</li>
+
+
+<li class="nav-item current active" _msthidden="1">
+  <a class="nav-link nav-internal" href="https://pandas.pydata.org/docs/user_guide/index.html" _msttexthash="130377" _msthidden="1" _msthash="42">
+    User Guide
+  </a>
+</li>
+
+
+<li class="nav-item " _msthidden="1">
+  <a class="nav-link nav-internal" href="https://pandas.pydata.org/docs/reference/index.html" _msttexthash="193856" _msthidden="1" _msthash="43">
+    API reference
+  </a>
+</li>
+
+
+<li class="nav-item " _msthidden="1">
+  <a class="nav-link nav-internal" href="https://pandas.pydata.org/docs/development/index.html" _msttexthash="183365" _msthidden="1" _msthash="44">
+    Development
+  </a>
+</li>
+
+
+<li class="nav-item " _msthidden="1">
+  <a class="nav-link nav-internal" href="https://pandas.pydata.org/docs/whatsnew/index.html" _msttexthash="207636" _msthidden="1" _msthash="45">
+    Release notes
+  </a>
+</li>
+
+  </ul>
+</nav></div>
+          
+        
+      </div>
+    
+    
+    
+      <div class="sidebar-header-items__end">
+        
+          <div class="navbar-item" _msthidden="14">
+<div class="version-switcher__container dropdown pst-js-only" _msthidden="14">
+  <button id="pst-version-switcher-button-3" type="button" class="version-switcher__button btn btn-sm dropdown-toggle" data-bs-toggle="dropdown" aria-haspopup="listbox" aria-controls="pst-version-switcher-list-3" aria-label="Version switcher list" data-active-version-name="3.0 (stable)" data-active-version="3.0" _msthidden="1" _mstaria-label="431249" _msthash="46" _msttexthash="140140">3.0 (stable)</button>
+  <div id="pst-version-switcher-list-3" class="version-switcher__menu dropdown-menu list-group-flush py-0 dropdown-menu-dark" role="listbox" aria-labelledby="pst-version-switcher-button-3" _msthidden="12">
+    <!-- dropdown will be populated by javascript on page load -->
+  <a class="dropdown-item list-group-item list-group-item-action py-1" href="https://pandas.pydata.org/docs/dev/user_guide/copy_on_write.html" role="option" data-version-name="dev" data-version="dev" _msthidden="1"><span _msttexthash="33410" _msthidden="1" _msthash="47">dev</span></a><a class="dropdown-item list-group-item list-group-item-action py-1 active" href="https://pandas.pydata.org/docs/user_guide/copy_on_write.html" role="option" data-version-name="3.0 (stable)" data-version="3.0" _msthidden="1"><span _msttexthash="140140" _msthidden="1" _msthash="48">3.0 (stable)</span></a><a class="dropdown-item list-group-item list-group-item-action py-1" href="https://pandas.pydata.org/pandas-docs/version/2.3/user_guide/copy_on_write.html" role="option" data-version-name="2.3" data-version="2.3" _msthidden="1"><span _msttexthash="15301" _msthidden="1" _msthash="49">2.3</span></a><a class="dropdown-item list-group-item list-group-item-action py-1" href="https://pandas.pydata.org/pandas-docs/version/2.2/user_guide/copy_on_write.html" role="option" data-version-name="2.2" data-version="2.2" _msthidden="1"><span _msttexthash="15184" _msthidden="1" _msthash="50">2.2</span></a><a class="dropdown-item list-group-item list-group-item-action py-1" href="https://pandas.pydata.org/pandas-docs/version/2.1/user_guide/copy_on_write.html" role="option" data-version-name="2.1" data-version="2.1" _msthidden="1"><span _msttexthash="15067" _msthidden="1" _msthash="51">2.1</span></a><a class="dropdown-item list-group-item list-group-item-action py-1" href="https://pandas.pydata.org/pandas-docs/version/2.0/user_guide/copy_on_write.html" role="option" data-version-name="2.0" data-version="2.0" _msthidden="1"><span _msttexthash="14950" _msthidden="1" _msthash="52">2.0</span></a><a class="dropdown-item list-group-item list-group-item-action py-1" href="https://pandas.pydata.org/pandas-docs/version/1.5/user_guide/copy_on_write.html" role="option" data-version-name="1.5" data-version="1.5" _msthidden="1"><span _msttexthash="15444" _msthidden="1" _msthash="53">1.5</span></a><a class="dropdown-item list-group-item list-group-item-action py-1" href="https://pandas.pydata.org/pandas-docs/version/1.4/user_guide/copy_on_write.html" role="option" data-version-name="1.4" data-version="1.4" _msthidden="1"><span _msttexthash="15327" _msthidden="1" _msthash="54">1.4</span></a><a class="dropdown-item list-group-item list-group-item-action py-1" href="https://pandas.pydata.org/pandas-docs/version/1.3/user_guide/copy_on_write.html" role="option" data-version-name="1.3" data-version="1.3" _msthidden="1"><span _msttexthash="15210" _msthidden="1" _msthash="55">1.3</span></a><a class="dropdown-item list-group-item list-group-item-action py-1" href="https://pandas.pydata.org/pandas-docs/version/1.2/user_guide/copy_on_write.html" role="option" data-version-name="1.2" data-version="1.2" _msthidden="1"><span _msttexthash="15093" _msthidden="1" _msthash="56">1.2</span></a><a class="dropdown-item list-group-item list-group-item-action py-1" href="https://pandas.pydata.org/pandas-docs/version/1.1/user_guide/copy_on_write.html" role="option" data-version-name="1.1" data-version="1.1" _msthidden="1"><span _msttexthash="14976" _msthidden="1" _msthash="57">1.1</span></a><a class="dropdown-item list-group-item list-group-item-action py-1" href="https://pandas.pydata.org/pandas-docs/version/1.0/user_guide/copy_on_write.html" role="option" data-version-name="1.0" data-version="1.0" _msthidden="1"><span _msttexthash="14859" _msthidden="1" _msthash="58">1.0</span></a></div>
+</div></div>
+        
+          <div class="navbar-item">
+
+<button class="btn btn-sm nav-link pst-navbar-icon theme-switch-button pst-js-only" aria-label="Color mode" data-bs-title="Color mode" data-bs-placement="bottom" data-bs-toggle="tooltip" _msthidden="A" _mstaria-label="134667" _msthash="59">
+  <svg class="svg-inline--fa fa-sun theme-switch fa-lg" data-mode="light" aria-labelledby="svg-inline--fa-title-JFO04n6kYHmu" data-prefix="fas" data-icon="sun" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" data-fa-i2svg=""><title id="svg-inline--fa-title-JFO04n6kYHmu" _mstTextHash="33358" _mstHash="60">Luz</title><path fill="currentColor" d="M361.5 1.2c5 2.1 8.6 6.6 9.6 11.9L391 121l107.9 19.8c5.3 1 9.8 4.6 11.9 9.6s1.5 10.7-1.6 15.2L446.9 256l62.3 90.3c3.1 4.5 3.7 10.2 1.6 15.2s-6.6 8.6-11.9 9.6L391 391 371.1 498.9c-1 5.3-4.6 9.8-9.6 11.9s-10.7 1.5-15.2-1.6L256 446.9l-90.3 62.3c-4.5 3.1-10.2 3.7-15.2 1.6s-8.6-6.6-9.6-11.9L121 391 13.1 371.1c-5.3-1-9.8-4.6-11.9-9.6s-1.5-10.7 1.6-15.2L65.1 256 2.8 165.7c-3.1-4.5-3.7-10.2-1.6-15.2s6.6-8.6 11.9-9.6L121 121 140.9 13.1c1-5.3 4.6-9.8 9.6-11.9s10.7-1.5 15.2 1.6L256 65.1 346.3 2.8c4.5-3.1 10.2-3.7 15.2-1.6zM160 256a96 96 0 1 1 192 0 96 96 0 1 1 -192 0zm224 0a128 128 0 1 0 -256 0 128 128 0 1 0 256 0z"></path></svg><!-- <i class="theme-switch fa-solid fa-sun                fa-lg" data-mode="light" title="Light"></i> Font Awesome fontawesome.com -->
+  <svg class="svg-inline--fa fa-moon theme-switch fa-lg" data-mode="dark" aria-labelledby="svg-inline--fa-title-0OrjBcBHiZ8b" data-prefix="fas" data-icon="moon" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 384 512" data-fa-i2svg=""><title id="svg-inline--fa-title-0OrjBcBHiZ8b" _mstTextHash="78650" _mstHash="61">Escuro</title><path fill="currentColor" d="M223.5 32C100 32 0 132.3 0 256S100 480 223.5 480c60.6 0 115.5-24.2 155.8-63.4c5-4.9 6.3-12.5 3.1-18.7s-10.1-9.7-17-8.5c-9.8 1.7-19.8 2.6-30.1 2.6c-96.9 0-175.5-78.8-175.5-176c0-65.8 36-123.1 89.3-153.3c6.1-3.5 9.2-10.5 7.7-17.3s-7.3-11.9-14.3-12.5c-6.3-.5-12.6-.8-19-.8z"></path></svg><!-- <i class="theme-switch fa-solid fa-moon               fa-lg" data-mode="dark" title="Dark"></i> Font Awesome fontawesome.com -->
+  <svg class="svg-inline--fa fa-circle-half-stroke theme-switch fa-lg" data-mode="auto" aria-labelledby="svg-inline--fa-title-5mAi97va3dah" data-prefix="fas" data-icon="circle-half-stroke" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" data-fa-i2svg=""><title id="svg-inline--fa-title-5mAi97va3dah" _mstTextHash="581243" _mstHash="62">Configurações do Sistema</title><path fill="currentColor" d="M448 256c0-106-86-192-192-192V448c106 0 192-86 192-192zM0 256a256 256 0 1 1 512 0A256 256 0 1 1 0 256z"></path></svg><!-- <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg" data-mode="auto" title="System Settings"></i> Font Awesome fontawesome.com -->
+</button></div>
+        
+          <div class="navbar-item" _msthidden="4"><ul class="navbar-icon-links" aria-label="Icon Links" _msthidden="3" _mstaria-label="131963" _msthash="63">
+        <li class="nav-item" _msthidden="1">
+          
+          
+          
+          
+          
+          
+          
+          
+          <a href="https://github.com/pandas-dev/pandas" class="nav-link pst-navbar-icon" rel="noopener" target="_blank" data-bs-toggle="tooltip" data-bs-placement="bottom" data-bs-original-title="GitHub" _msthidden="1"><svg class="svg-inline--fa fa-square-github fa-lg" aria-hidden="true" focusable="false" data-prefix="fab" data-icon="square-github" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512" data-fa-i2svg=""><path fill="currentColor" d="M448 96c0-35.3-28.7-64-64-64H64C28.7 32 0 60.7 0 96V416c0 35.3 28.7 64 64 64H384c35.3 0 64-28.7 64-64V96zM265.8 407.7c0-1.8 0-6 .1-11.6c.1-11.4 .1-28.8 .1-43.7c0-15.6-5.2-25.5-11.3-30.7c37-4.1 76-9.2 76-73.1c0-18.2-6.5-27.3-17.1-39c1.7-4.3 7.4-22-1.7-45c-13.9-4.3-45.7 17.9-45.7 17.9c-13.2-3.7-27.5-5.6-41.6-5.6s-28.4 1.9-41.6 5.6c0 0-31.8-22.2-45.7-17.9c-9.1 22.9-3.5 40.6-1.7 45c-10.6 11.7-15.6 20.8-15.6 39c0 63.6 37.3 69 74.3 73.1c-4.8 4.3-9.1 11.7-10.6 22.3c-9.5 4.3-33.8 11.7-48.3-13.9c-9.1-15.8-25.5-17.1-25.5-17.1c-16.2-.2-1.1 10.2-1.1 10.2c10.8 5 18.4 24.2 18.4 24.2c9.7 29.7 56.1 19.7 56.1 19.7c0 9 .1 21.7 .1 30.6c0 4.8 .1 8.6 .1 10c0 4.3-3 9.5-11.5 8C106 393.6 59.8 330.8 59.8 257.4c0-91.8 70.2-161.5 162-161.5s166.2 69.7 166.2 161.5c.1 73.4-44.7 136.3-110.7 158.3c-8.4 1.5-11.5-3.7-11.5-8zm-90.5-54.8c-.2-1.5 1.1-2.8 3-3.2c1.9-.2 3.7 .6 3.9 1.9c.3 1.3-1 2.6-3 3c-1.9 .4-3.7-.4-3.9-1.7zm-9.1 3.2c-2.2 .2-3.7-.9-3.7-2.4c0-1.3 1.5-2.4 3.5-2.4c1.9-.2 3.7 .9 3.7 2.4c0 1.3-1.5 2.4-3.5 2.4zm-14.3-2.2c-1.9-.4-3.2-1.9-2.8-3.2s2.4-1.9 4.1-1.5c2 .6 3.3 2.1 2.8 3.4c-.4 1.3-2.4 1.9-4.1 1.3zm-12.5-7.3c-1.5-1.3-1.9-3.2-.9-4.1c.9-1.1 2.8-.9 4.3 .6c1.3 1.3 1.8 3.3 .9 4.1c-.9 1.1-2.8 .9-4.3-.6zm-8.5-10c-1.1-1.5-1.1-3.2 0-3.9c1.1-.9 2.8-.2 3.7 1.3c1.1 1.5 1.1 3.3 0 4.1c-.9 .6-2.6 0-3.7-1.5zm-6.3-8.8c-1.1-1.3-1.3-2.8-.4-3.5c.9-.9 2.4-.4 3.5 .6c1.1 1.3 1.3 2.8 .4 3.5c-.9 .9-2.4 .4-3.5-.6zm-6-6.4c-1.3-.6-1.9-1.7-1.5-2.6c.4-.6 1.5-.9 2.8-.4c1.3 .7 1.9 1.8 1.5 2.6c-.4 .9-1.7 1.1-2.8 .4z"></path></svg><!-- <i class="fa-brands fa-square-github fa-lg" aria-hidden="true"></i> Font Awesome fontawesome.com -->
+            <span class="sr-only" _msttexthash="72332" _msthidden="1" _msthash="64">GitHub</span></a>
+        </li>
+        <li class="nav-item" _msthidden="1">
+          
+          
+          
+          
+          
+          
+          
+          
+          <a href="https://x.com/pandas_dev" class="nav-link pst-navbar-icon" rel="noopener" target="_blank" data-bs-toggle="tooltip" data-bs-placement="bottom" data-bs-original-title="X" _msthidden="1"><svg class="svg-inline--fa fa-square-x-twitter fa-lg" aria-hidden="true" focusable="false" data-prefix="fab" data-icon="square-x-twitter" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512" data-fa-i2svg=""><path fill="currentColor" d="M64 32C28.7 32 0 60.7 0 96V416c0 35.3 28.7 64 64 64H384c35.3 0 64-28.7 64-64V96c0-35.3-28.7-64-64-64H64zm297.1 84L257.3 234.6 379.4 396H283.8L209 298.1 123.3 396H75.8l111-126.9L69.7 116h98l67.7 89.5L313.6 116h47.5zM323.3 367.6L153.4 142.9H125.1L296.9 367.6h26.3z"></path></svg><!-- <i class="fa-brands fa-square-x-twitter fa-lg" aria-hidden="true"></i> Font Awesome fontawesome.com -->
+            <span class="sr-only" _msttexthash="8008" _msthidden="1" _msthash="65">X</span></a>
+        </li>
+        <li class="nav-item" _msthidden="1">
+          
+          
+          
+          
+          
+          
+          
+          
+          <a href="https://fosstodon.org/@pandas_dev" class="nav-link pst-navbar-icon" rel="noopener" target="_blank" data-bs-toggle="tooltip" data-bs-placement="bottom" data-bs-original-title="Mastodon" _msthidden="1"><svg class="svg-inline--fa fa-mastodon fa-lg" aria-hidden="true" focusable="false" data-prefix="fab" data-icon="mastodon" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512" data-fa-i2svg=""><path fill="currentColor" d="M433 179.11c0-97.2-63.71-125.7-63.71-125.7-62.52-28.7-228.56-28.4-290.48 0 0 0-63.72 28.5-63.72 125.7 0 115.7-6.6 259.4 105.63 289.1 40.51 10.7 75.32 13 103.33 11.4 50.81-2.8 79.32-18.1 79.32-18.1l-1.7-36.9s-36.31 11.4-77.12 10.1c-40.41-1.4-83-4.4-89.63-54a102.54 102.54 0 0 1-.9-13.9c85.63 20.9 158.65 9.1 178.75 6.7 56.12-6.7 105-41.3 111.23-72.9 9.8-49.8 9-121.5 9-121.5zm-75.12 125.2h-46.63v-114.2c0-49.7-64-51.6-64 6.9v62.5h-46.33V197c0-58.5-64-56.6-64-6.9v114.2H90.19c0-122.1-5.2-147.9 18.41-175 25.9-28.9 79.82-30.8 103.83 6.1l11.6 19.5 11.6-19.5c24.11-37.1 78.12-34.8 103.83-6.1 23.71 27.3 18.4 53 18.4 175z"></path></svg><!-- <i class="fa-brands fa-mastodon fa-lg" aria-hidden="true"></i> Font Awesome fontawesome.com -->
+            <span class="sr-only" _msttexthash="115882" _msthidden="1" _msthash="66">Mastodon</span></a>
+        </li>
+</ul></div>
+        
+      </div>
+    
+  </div>
+  
+    <div class="sidebar-primary-items__start sidebar-primary__section">
+        <div class="sidebar-primary-item"><nav class="bd-links" id="bd-docs-nav" aria-label="Navegação principal" _mstaria-label="260078" _msthash="67">
+  <div class="bd-toc-item navbar-nav">
+    
+    <ul class="current nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="https://pandas.pydata.org/docs/user_guide/10min.html" _msttexthash="403715" _msthash="68">10 minutos para Pandas</a></li>
+<li class="toctree-l1"><a class="reference internal" href="https://pandas.pydata.org/docs/user_guide/dsintro.html" _msttexthash="928317" _msthash="69">Introdução às estruturas de dados</a></li>
+<li class="toctree-l1"><a class="reference internal" href="https://pandas.pydata.org/docs/user_guide/basics.html" _msttexthash="857350" _msthash="70">Funcionalidade básica essencial</a></li>
+<li class="toctree-l1"><a class="reference internal" href="https://pandas.pydata.org/docs/user_guide/io.html" _msttexthash="822094" _msthash="71">Ferramentas de IO (texto, CSV, HDF5, ...)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="https://pandas.pydata.org/docs/user_guide/pyarrow.html" _msttexthash="557167" _msthash="72">Funcionalidade do PyArrow</a></li>
+<li class="toctree-l1"><a class="reference internal" href="https://pandas.pydata.org/docs/user_guide/indexing.html" _msttexthash="716339" _msthash="73">Indexação e seleção de dados</a></li>
+<li class="toctree-l1"><a class="reference internal" href="https://pandas.pydata.org/docs/user_guide/advanced.html" _msttexthash="892814" _msthash="74">MultiIndex / indexação avançada</a></li>
+<li class="toctree-l1 current active"><a class="current reference internal" href="https://pandas.pydata.org/docs/user_guide/copy_on_write.html#" _msttexthash="392288" _msthash="75">Copiar e Escrever (CoW)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="https://pandas.pydata.org/docs/user_guide/merging.html" _msttexthash="763607" _msthash="76">Fuja, junta, concatene e compare</a></li>
+<li class="toctree-l1"><a class="reference internal" href="https://pandas.pydata.org/docs/user_guide/reshaping.html" _msttexthash="875329" _msthash="77">Remodelação e tabelas dinâmicas</a></li>
+<li class="toctree-l1"><a class="reference internal" href="https://pandas.pydata.org/docs/user_guide/text.html" _msttexthash="701467" _msthash="78">Trabalhando com dados de texto</a></li>
+<li class="toctree-l1"><a class="reference internal" href="https://pandas.pydata.org/docs/user_guide/missing_data.html" _msttexthash="746980" _msthash="79">Trabalhando com dados ausentes</a></li>
+<li class="toctree-l1"><a class="reference internal" href="https://pandas.pydata.org/docs/user_guide/duplicates.html" _msttexthash="363740" _msthash="80">Rótulos Duplicados</a></li>
+<li class="toctree-l1"><a class="reference internal" href="https://pandas.pydata.org/docs/user_guide/categorical.html" _msttexthash="348166" _msthash="81">Dados categóricos</a></li>
+<li class="toctree-l1"><a class="reference internal" href="https://pandas.pydata.org/docs/user_guide/integer_na.html" _msttexthash="499421" _msthash="82">Tipo de dado inteiro nulo</a></li>
+<li class="toctree-l1"><a class="reference internal" href="https://pandas.pydata.org/docs/user_guide/boolean.html" _msttexthash="744822" _msthash="83">Tipo de dado booleano anulável</a></li>
+<li class="toctree-l1"><a class="reference internal" href="https://pandas.pydata.org/docs/user_guide/visualization.html" _msttexthash="620373" _msthash="84">Visualização de gráficos</a></li>
+<li class="toctree-l1"><a class="reference internal" href="https://pandas.pydata.org/docs/user_guide/style.html" _msttexthash="491517" _msthash="85">Visualização de Tabela</a></li>
+<li class="toctree-l1"><a class="reference internal" href="https://pandas.pydata.org/docs/user_guide/user_defined_functions.html" _msttexthash="1023061" _msthash="86">Funções Definidas pelo Usuário (UDFs)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="https://pandas.pydata.org/docs/user_guide/groupby.html" _msttexthash="1044563" _msthash="87">Agrupe por: dividir-aplicar-combinar</a></li>
+<li class="toctree-l1"><a class="reference internal" href="https://pandas.pydata.org/docs/user_guide/window.html" _msttexthash="421421" _msthash="88">Operações de janelas</a></li>
+<li class="toctree-l1"><a class="reference internal" href="https://pandas.pydata.org/docs/user_guide/timeseries.html" _msttexthash="1288300" _msthash="89">Funcionalidade de séries temporais / datas</a></li>
+<li class="toctree-l1"><a class="reference internal" href="https://pandas.pydata.org/docs/user_guide/timedeltas.html" _msttexthash="292617" _msthash="90">Deltas temporais</a></li>
+<li class="toctree-l1"><a class="reference internal" href="https://pandas.pydata.org/docs/user_guide/options.html" _msttexthash="568750" _msthash="91">Opções e configurações</a></li>
+<li class="toctree-l1"><a class="reference internal" href="https://pandas.pydata.org/docs/user_guide/enhancingperf.html" _msttexthash="658996" _msthash="92">Aprimoramento do desempenho</a></li>
+<li class="toctree-l1"><a class="reference internal" href="https://pandas.pydata.org/docs/user_guide/scale.html" _msttexthash="1469013" _msthash="93">Escalonamento para grandes conjuntos de dados</a></li>
+<li class="toctree-l1"><a class="reference internal" href="https://pandas.pydata.org/docs/user_guide/sparse.html" _msttexthash="663715" _msthash="94">Estruturas de dados esparsas</a></li>
+<li class="toctree-l1"><a class="reference internal" href="https://pandas.pydata.org/docs/user_guide/migration-3-strings.html" _msttexthash="2178761" _msthash="95">Guia de migração para o novo tipo de dado de string (pandas 3.0)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="https://pandas.pydata.org/docs/user_guide/gotchas.html" _msttexthash="530686" _msthash="96">Perguntas Frequentes (FAQ)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="https://pandas.pydata.org/docs/user_guide/cookbook.html" _msttexthash="288197" _msthash="97">Livro de receitas</a></li>
+</ul>
+
+    
+  </div>
+</nav></div>
+    </div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+      <div class="sidebar-primary-item">
+<div id="ethical-ad-placement" class="flat" data-ea-publisher="readthedocs" data-ea-type="readthedocs-sidebar" data-ea-manual="true">
+</div></div>
+  </div>
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main" role="main">
+        
+        
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article d-print-none">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item">
+
+<nav aria-label="Breadcrumb" class="d-print-none" _mstaria-label="154232" _msthash="98">
+  <ul class="bd-breadcrumbs">
+    
+    <li class="breadcrumb-item breadcrumb-home">
+      <a href="https://pandas.pydata.org/docs/index.html" class="nav-link" aria-label="Casa" _mstaria-label="43979" _msthash="99">
+        <svg class="svg-inline--fa fa-house" aria-hidden="true" focusable="false" data-prefix="fas" data-icon="house" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 576 512" data-fa-i2svg=""><path fill="currentColor" d="M575.8 255.5c0 18-15 32.1-32 32.1h-32l.7 160.2c0 2.7-.2 5.4-.5 8.1V472c0 22.1-17.9 40-40 40H456c-1.1 0-2.2 0-3.3-.1c-1.4 .1-2.8 .1-4.2 .1H416 392c-22.1 0-40-17.9-40-40V448 384c0-17.7-14.3-32-32-32H256c-17.7 0-32 14.3-32 32v64 24c0 22.1-17.9 40-40 40H160 128.1c-1.5 0-3-.1-4.5-.2c-1.2 .1-2.4 .2-3.6 .2H104c-22.1 0-40-17.9-40-40V360c0-.9 0-1.9 .1-2.8V287.6H32c-18 0-32-14-32-32.1c0-9 3-17 10-24L266.4 8c7-7 15-8 22-8s15 2 21 7L564.8 231.5c8 7 12 15 11 24z"></path></svg><!-- <i class="fa-solid fa-home"></i> Font Awesome fontawesome.com -->
+      </a>
+    </li>
+    
+    <li class="breadcrumb-item"><a href="https://pandas.pydata.org/docs/user_guide/index.html" class="nav-link" _msttexthash="257231" _msthash="100">Guia do Usuário</a></li>
+    
+    <li class="breadcrumb-item active" aria-current="page"><span class="ellipsis" _msttexthash="392288" _msthash="101">Copiar e Escrever (CoW)</span></li>
+  </ul>
+</nav>
+</div>
+      
+    </div>
+  
+  
+</div>
+</div>
+              
+              
+              
+                
+<div id="searchbox"></div>
+                <article class="bd-article">
+                  
+  <section id="copy-on-write-cow">
+<span id="copy-on-write"></span><h1><font _mstmutation="1" _msttexthash="392288" _msthash="102">Copiar e Escrever (CoW)</font><a class="headerlink" href="https://pandas.pydata.org/docs/user_guide/copy_on_write.html#copy-on-write-cow" title="Link to this heading">#</a></h1>
+<div class="admonition note">
+<p class="admonition-title" _msttexthash="44824" _msthash="103">Nota</p>
+<p _msttexthash="1617551" _msthash="104">Copiar ao escrever agora é o padrão com o pandas 3.0.</p>
+</div>
+<p _msttexthash="34366254" _msthash="105">O Copy-on-Write foi introduzido pela primeira vez na versão 1.5.0. A partir da versão 2.0, a maioria dos
+otimizações que se tornam possíveis por meio do CoW são implementadas e suportadas. Tudo possível
+Otimizações são suportadas a partir do Pandas 2.1.</p>
+<p _msttexthash="54756091" _msthash="106">O CoW levará a comportamentos mais previsíveis, já que não é possível atualizar mais do que
+Um objeto com uma única instrução, por exemplo, operações ou métodos de indexação, não terá efeitos colaterais. Além disso, através de
+Atrasando cópias o máximo possível, o desempenho médio e o uso de memória melhorarão.</p>
+<section id="previous-behavior">
+<h2><font _mstmutation="1" _msttexthash="502853" _msthash="107">Comportamento anterior</font><a class="headerlink" href="https://pandas.pydata.org/docs/user_guide/copy_on_write.html#previous-behavior" title="Link to this heading">#</a></h2>
+<p _msttexthash="27085162" _msthash="108">O comportamento de indexação do Pandas é difícil de entender. Algumas operações retornam vistas enquanto
+outras cópias de retorno. Dependendo do resultado da operação, mutando um objeto
+pode acidentalmente mutar outro:</p>
+<div class="highlight-ipython notranslate"><div class="highlight"><pre id="codecell0" tabindex="-1"><span></span><span class="gp">In [1]: </span><span class="n">df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">({</span><span class="s2">"foo"</span><span class="p">:</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">],</span> <span class="s2">"bar"</span><span class="p">:</span> <span class="p">[</span><span class="mi">4</span><span class="p">,</span> <span class="mi">5</span><span class="p">,</span> <span class="mi">6</span><span class="p">]})</span>
+<span class="gp">In [2]: </span><span class="n">subset</span> <span class="o">=</span> <span class="n">df</span><span class="p">[</span><span class="s2">"foo"</span><span class="p">]</span>
+<span class="gp">In [3]: </span><span class="n">subset</span><span class="o">.</span><span class="n">iloc</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">=</span> <span class="mi">100</span>
+<span class="gp">In [4]: </span><span class="n">df</span>
+<span class="gh">Out[4]:</span>
+<span class="go">   foo  bar</span>
+<span class="go">0  100    4</span>
+<span class="go">1    2    5</span>
+<span class="go">2    3    6</span>
+</pre><button class="copybtn o-tooltip--left" data-tooltip="Copy" data-clipboard-target="#codecell0">
+      <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-copy" width="44" height="44" viewBox="0 0 24 24" stroke-width="1.5" stroke="#000000" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <title>Copy to clipboard</title>
+  <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
+  <rect x="8" y="8" width="12" height="12" rx="2"></rect>
+  <path d="M16 8v-2a2 2 0 0 0 -2 -2h-8a2 2 0 0 0 -2 2v8a2 2 0 0 0 2 2h2"></path>
+</svg>
+    </button></div>
+</div>
+<p><font _mstmutation="1" _msttexthash="29987386" _msthash="109">Mutando , por exemplo, atualizando seus valores, também atualizado . O comportamento exato era
+Difícil de prever. Copy-on-Write resolve modificar acidentalmente mais de um objeto,
+Isso é explicitamente proibido.  permanece inalterado:</font><code class="docutils literal notranslate"><span class="pre">subset</span></code><code class="docutils literal notranslate"><span class="pre">df</span></code><code class="docutils literal notranslate"><span class="pre">df</span></code></p>
+<div class="highlight-ipython notranslate"><div class="highlight"><pre id="codecell1" tabindex="-1"><span></span><span class="gp">In [1]: </span><span class="n">df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">({</span><span class="s2">"foo"</span><span class="p">:</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">],</span> <span class="s2">"bar"</span><span class="p">:</span> <span class="p">[</span><span class="mi">4</span><span class="p">,</span> <span class="mi">5</span><span class="p">,</span> <span class="mi">6</span><span class="p">]})</span>
+
+<span class="gp">In [2]: </span><span class="n">subset</span> <span class="o">=</span> <span class="n">df</span><span class="p">[</span><span class="s2">"foo"</span><span class="p">]</span>
+
+<span class="gp">In [3]: </span><span class="n">subset</span><span class="o">.</span><span class="n">iloc</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">=</span> <span class="mi">100</span>
+
+<span class="gp">In [4]: </span><span class="n">df</span>
+<span class="gh">Out[4]: </span>
+<span class="go">   foo  bar</span>
+<span class="go">0    1    4</span>
+<span class="go">1    2    5</span>
+<span class="go">2    3    6</span>
+</pre><button class="copybtn o-tooltip--left" data-tooltip="Copy" data-clipboard-target="#codecell1">
+      <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-copy" width="44" height="44" viewBox="0 0 24 24" stroke-width="1.5" stroke="#000000" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <title>Copy to clipboard</title>
+  <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
+  <rect x="8" y="8" width="12" height="12" rx="2"></rect>
+  <path d="M16 8v-2a2 2 0 0 0 -2 -2h-8a2 2 0 0 0 -2 2v8a2 2 0 0 0 2 2h2"></path>
+</svg>
+    </button></div>
+</div>
+<p _msttexthash="5203536" _msthash="110">As seções a seguir explicarão o que isso significa e como impacta o que já existe
+aplicações.</p>
+</section>
+<section id="migrating-to-copy-on-write">
+<span id="copy-on-write-migration-guide"></span><h2><font _mstmutation="1" _msttexthash="610038" _msthash="111">Migrando para Copy-on-Write</font><a class="headerlink" href="https://pandas.pydata.org/docs/user_guide/copy_on_write.html#migrating-to-copy-on-write" title="Link to this heading">#</a></h2>
+<p _msttexthash="14496950" _msthash="112">Copiar ao escrever é o modo padrão e único no pandas 3.0. Isso significa que os usuários
+precisam migrar o código deles para estar em conformidade com as regras do CoW.</p>
+<p _msttexthash="13464685" _msthash="113">O modo padrão no pandas &lt; 3.0 gera avisos para certos casos que vão ativamente
+mudar o comportamento e, assim, mudar o comportamento pretendido pelo usuário.</p>
+<p _msttexthash="629655" _msthash="114">Pandas 2.2 tem um modo de aviso</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre id="codecell2" tabindex="-1"><span></span><span class="n">pd</span><span class="o">.</span><span class="n">options</span><span class="o">.</span><span class="n">mode</span><span class="o">.</span><span class="n">copy_on_write</span> <span class="o">=</span> <span class="s2">"warn"</span>
+</pre><button class="copybtn o-tooltip--left" data-tooltip="Copy" data-clipboard-target="#codecell2">
+      <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-copy" width="44" height="44" viewBox="0 0 24 24" stroke-width="1.5" stroke="#000000" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <title>Copy to clipboard</title>
+  <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
+  <rect x="8" y="8" width="12" height="12" rx="2"></rect>
+  <path d="M16 8v-2a2 2 0 0 0 -2 -2h-8a2 2 0 0 0 -2 2v8a2 2 0 0 0 2 2h2"></path>
+</svg>
+    </button></div>
+</div>
+<p _msttexthash="107654469" _msthash="115">que alertará para cada operação que mudará o comportamento com a CoW. Esperamos esse modo
+Ser muito barulhento, já que muitos casos que não esperamos que eles influenciem os usuários vão
+Também emita um aviso. Recomendamos verificar esse modo e analisar os avisos, mas ele é
+Não é necessário abordar todos esses avisos. Os dois primeiros itens das listas a seguir
+são os únicos casos que precisam ser tratados para que o código existente funcione com o CoW.</p>
+<p _msttexthash="2145780" _msthash="116">The following few items describe the user visible changes:</p>
+<p><strong _msttexthash="910819" _msthash="117">Chained assignment will never work</strong></p>
+<p><code class="docutils literal notranslate"><span class="pre">loc</span></code><font _mstmutation="1" _msttexthash="4473066" _msthash="118"> should be used as an alternative. Check the
+<a class="reference internal" href="https://pandas.pydata.org/docs/user_guide/copy_on_write.html#copy-on-write-chained-assignment" _mstmutation="1"><span class="std std-ref">chained assignment section</span></a> for more details.</font></p>
+<p><strong _msttexthash="3603613" _msthash="119">Accessing the underlying array of a pandas object will return a read-only view</strong></p>
+<div class="highlight-ipython notranslate"><div class="highlight"><pre id="codecell3" tabindex="-1"><span></span><span class="gp">In [5]: </span><span class="n">ser</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">Series</span><span class="p">([</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">])</span>
+
+<span class="gp">In [6]: </span><span class="n">ser</span><span class="o">.</span><span class="n">to_numpy</span><span class="p">()</span>
+<span class="gh">Out[6]: </span><span class="go">array([1, 2, 3])</span>
+</pre><button class="copybtn o-tooltip--left" data-tooltip="Copy" data-clipboard-target="#codecell3">
+      <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-copy" width="44" height="44" viewBox="0 0 24 24" stroke-width="1.5" stroke="#000000" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <title>Copy to clipboard</title>
+  <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
+  <rect x="8" y="8" width="12" height="12" rx="2"></rect>
+  <path d="M16 8v-2a2 2 0 0 0 -2 -2h-8a2 2 0 0 0 -2 2v8a2 2 0 0 0 2 2h2"></path>
+</svg>
+    </button></div>
+</div>
+<p _msttexthash="108908358" _msthash="120">This example returns a NumPy array that is a view of the Series object. This view can
+be modified and thus also modify the pandas object. This is not compliant with CoW
+rules. The returned array is set to non-writeable to protect against this behavior.
+Creating a copy of this array allows modification. You can also make the array
+writeable again if you don’t care about the pandas object anymore.</p>
+<p _msttexthash="2365636" _msthash="121">See the section about <a class="reference internal" href="https://pandas.pydata.org/docs/user_guide/copy_on_write.html#copy-on-write-read-only-na"><span class="std std-ref">read-only NumPy arrays</span></a>
+for more details.</p>
+<p><strong _msttexthash="1100606" _msthash="122">Only one pandas object is updated at once</strong></p>
+<p><font _mstmutation="1" _msttexthash="1980407" _msthash="123">The following code snippet updated both  and  without CoW:</font><code class="docutils literal notranslate"><span class="pre">df</span></code><code class="docutils literal notranslate"><span class="pre">subset</span></code></p>
+<div class="highlight-ipython notranslate"><div class="highlight"><pre id="codecell4" tabindex="-1"><span></span><span class="gp">In [1]: </span><span class="n">df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">({</span><span class="s2">"foo"</span><span class="p">:</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">],</span> <span class="s2">"bar"</span><span class="p">:</span> <span class="p">[</span><span class="mi">4</span><span class="p">,</span> <span class="mi">5</span><span class="p">,</span> <span class="mi">6</span><span class="p">]})</span>
+<span class="gp">In [2]: </span><span class="n">subset</span> <span class="o">=</span> <span class="n">df</span><span class="p">[</span><span class="s2">"foo"</span><span class="p">]</span>
+<span class="gp">In [3]: </span><span class="n">subset</span><span class="o">.</span><span class="n">iloc</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">=</span> <span class="mi">100</span>
+<span class="gp">In [4]: </span><span class="n">df</span>
+<span class="gh">Out[4]:</span>
+<span class="go">   foo  bar</span>
+<span class="go">0  100    4</span>
+<span class="go">1    2    5</span>
+<span class="go">2    3    6</span>
+</pre><button class="copybtn o-tooltip--left" data-tooltip="Copy" data-clipboard-target="#codecell4">
+      <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-copy" width="44" height="44" viewBox="0 0 24 24" stroke-width="1.5" stroke="#000000" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <title>Copy to clipboard</title>
+  <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
+  <rect x="8" y="8" width="12" height="12" rx="2"></rect>
+  <path d="M16 8v-2a2 2 0 0 0 -2 -2h-8a2 2 0 0 0 -2 2v8a2 2 0 0 0 2 2h2"></path>
+</svg>
+    </button></div>
+</div>
+<p><font _mstmutation="1" _msttexthash="65308451" _msthash="124">This is not possible anymore with CoW, since the CoW rules explicitly forbid this.
+This includes updating a single column as a <a class="reference internal" href="https://pandas.pydata.org/docs/reference/api/pandas.Series.html#pandas.Series" title="pandas.Series" _mstmutation="1"><code class="xref py py-class docutils literal notranslate"><span class="pre">Series</span></code></a> and relying on the change
+propagating back to the parent <a class="reference internal" href="https://pandas.pydata.org/docs/reference/api/pandas.DataFrame.html#pandas.DataFrame" title="pandas.DataFrame" _mstmutation="1"><code class="xref py py-class docutils literal notranslate"><span class="pre">DataFrame</span></code></a>.
+This statement can be rewritten into a single statement with  or  if
+this behavior is necessary. <a class="reference internal" href="https://pandas.pydata.org/docs/reference/api/pandas.DataFrame.where.html#pandas.DataFrame.where" title="pandas.DataFrame.where" _mstmutation="1"><code class="xref py py-meth docutils literal notranslate"><span class="pre">DataFrame.where()</span></code></a> is another suitable alternative
+for this case.</font><code class="docutils literal notranslate"><span class="pre">loc</span></code><code class="docutils literal notranslate"><span class="pre">iloc</span></code></p>
+<p _msttexthash="4990427" _msthash="125">Updating a column selected from a <a class="reference internal" href="https://pandas.pydata.org/docs/reference/api/pandas.DataFrame.html#pandas.DataFrame" title="pandas.DataFrame"><code class="xref py py-class docutils literal notranslate"><span class="pre">DataFrame</span></code></a> with an inplace method will
+also not work anymore.</p>
+<div class="highlight-ipython notranslate"><div class="highlight"><pre id="codecell5" tabindex="-1"><span></span><span class="gp">In [7]: </span><span class="n">df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">({</span><span class="s2">"foo"</span><span class="p">:</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">],</span> <span class="s2">"bar"</span><span class="p">:</span> <span class="p">[</span><span class="mi">4</span><span class="p">,</span> <span class="mi">5</span><span class="p">,</span> <span class="mi">6</span><span class="p">]})</span>
+
+<span class="gp">In [8]: </span><span class="n">df</span><span class="p">[</span><span class="s2">"foo"</span><span class="p">]</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">5</span><span class="p">,</span> <span class="n">inplace</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+<span class="gh">Out[8]: </span>
+<span class="go">0    5</span>
+<span class="go">1    2</span>
+<span class="go">2    3</span>
+<span class="go">Name: foo, dtype: int64</span>
+
+<span class="gp">In [9]: </span><span class="n">df</span>
+<span class="gh">Out[9]: </span>
+<span class="go">   foo  bar</span>
+<span class="go">0    1    4</span>
+<span class="go">1    2    5</span>
+<span class="go">2    3    6</span>
+</pre><button class="copybtn o-tooltip--left" data-tooltip="Copy" data-clipboard-target="#codecell5">
+      <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-copy" width="44" height="44" viewBox="0 0 24 24" stroke-width="1.5" stroke="#000000" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <title>Copy to clipboard</title>
+  <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
+  <rect x="8" y="8" width="12" height="12" rx="2"></rect>
+  <path d="M16 8v-2a2 2 0 0 0 -2 -2h-8a2 2 0 0 0 -2 2v8a2 2 0 0 0 2 2h2"></path>
+</svg>
+    </button></div>
+</div>
+<p _msttexthash="5274542" _msthash="126">This is another form of chained assignment. This can generally be rewritten in 2
+different forms:</p>
+<div class="highlight-ipython notranslate"><div class="highlight"><pre id="codecell6" tabindex="-1"><span></span><span class="gp">In [10]: </span><span class="n">df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">({</span><span class="s2">"foo"</span><span class="p">:</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">],</span> <span class="s2">"bar"</span><span class="p">:</span> <span class="p">[</span><span class="mi">4</span><span class="p">,</span> <span class="mi">5</span><span class="p">,</span> <span class="mi">6</span><span class="p">]})</span>
+
+<span class="gp">In [11]: </span><span class="n">df</span><span class="o">.</span><span class="n">replace</span><span class="p">({</span><span class="s2">"foo"</span><span class="p">:</span> <span class="p">{</span><span class="mi">1</span><span class="p">:</span> <span class="mi">5</span><span class="p">}},</span> <span class="n">inplace</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+<span class="gh">Out[11]: </span>
+<span class="go">   foo  bar</span>
+<span class="go">0    5    4</span>
+<span class="go">1    2    5</span>
+<span class="go">2    3    6</span>
+
+<span class="gp">In [12]: </span><span class="n">df</span>
+<span class="gh">Out[12]: </span>
+<span class="go">   foo  bar</span>
+<span class="go">0    5    4</span>
+<span class="go">1    2    5</span>
+<span class="go">2    3    6</span>
+</pre><button class="copybtn o-tooltip--left" data-tooltip="Copy" data-clipboard-target="#codecell6">
+      <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-copy" width="44" height="44" viewBox="0 0 24 24" stroke-width="1.5" stroke="#000000" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <title>Copy to clipboard</title>
+  <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
+  <rect x="8" y="8" width="12" height="12" rx="2"></rect>
+  <path d="M16 8v-2a2 2 0 0 0 -2 -2h-8a2 2 0 0 0 -2 2v8a2 2 0 0 0 2 2h2"></path>
+</svg>
+    </button></div>
+</div>
+<p><font _mstmutation="1" _msttexthash="1277874" _msthash="127">A different alternative would be to not use :</font><code class="docutils literal notranslate"><span class="pre">inplace</span></code></p>
+<div class="highlight-ipython notranslate"><div class="highlight"><pre id="codecell7" tabindex="-1"><span></span><span class="gp">In [13]: </span><span class="n">df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">({</span><span class="s2">"foo"</span><span class="p">:</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">],</span> <span class="s2">"bar"</span><span class="p">:</span> <span class="p">[</span><span class="mi">4</span><span class="p">,</span> <span class="mi">5</span><span class="p">,</span> <span class="mi">6</span><span class="p">]})</span>
+
+<span class="gp">In [14]: </span><span class="n">df</span><span class="p">[</span><span class="s2">"foo"</span><span class="p">]</span> <span class="o">=</span> <span class="n">df</span><span class="p">[</span><span class="s2">"foo"</span><span class="p">]</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">5</span><span class="p">)</span>
+
+<span class="gp">In [15]: </span><span class="n">df</span>
+<span class="gh">Out[15]: </span>
+<span class="go">   foo  bar</span>
+<span class="go">0    5    4</span>
+<span class="go">1    2    5</span>
+<span class="go">2    3    6</span>
+</pre><button class="copybtn o-tooltip--left" data-tooltip="Copy" data-clipboard-target="#codecell7">
+      <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-copy" width="44" height="44" viewBox="0 0 24 24" stroke-width="1.5" stroke="#000000" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <title>Copy to clipboard</title>
+  <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
+  <rect x="8" y="8" width="12" height="12" rx="2"></rect>
+  <path d="M16 8v-2a2 2 0 0 0 -2 -2h-8a2 2 0 0 0 -2 2v8a2 2 0 0 0 2 2h2"></path>
+</svg>
+    </button></div>
+</div>
+<p><strong _msttexthash="1423851" _msthash="128">Constructors now copy NumPy arrays by default</strong></p>
+<p><font _mstmutation="1" _msttexthash="30277910" _msthash="129">The Series and DataFrame constructors now copies a NumPy array by default when not
+otherwise specified. This was changed to avoid mutating a pandas object when the
+NumPy array is changed inplace outside of pandas. You can set  to
+avoid this copy.</font><code class="docutils literal notranslate"><span class="pre">copy=False</span></code></p>
+</section>
+<section id="description">
+<h2><font _mstmutation="1" _msttexthash="183612" _msthash="130">Description</font><a class="headerlink" href="https://pandas.pydata.org/docs/user_guide/copy_on_write.html#description" title="Link to this heading">#</a></h2>
+<p _msttexthash="46202338" _msthash="131">CoW means that any DataFrame or Series derived from another in any way always
+behaves as a copy. As a consequence, we can only change the values of an object
+through modifying the object itself. CoW disallows updating a DataFrame or a Series
+that shares data with another DataFrame or Series object inplace.</p>
+<p _msttexthash="11693721" _msthash="132">This avoids side-effects when modifying values and hence, most methods can avoid
+actually copying the data and only trigger a copy when necessary.</p>
+<p _msttexthash="1314534" _msthash="133">The following example will operate inplace:</p>
+<div class="highlight-ipython notranslate"><div class="highlight"><pre id="codecell8" tabindex="-1"><span></span><span class="gp">In [16]: </span><span class="n">df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">({</span><span class="s2">"foo"</span><span class="p">:</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">],</span> <span class="s2">"bar"</span><span class="p">:</span> <span class="p">[</span><span class="mi">4</span><span class="p">,</span> <span class="mi">5</span><span class="p">,</span> <span class="mi">6</span><span class="p">]})</span>
+
+<span class="gp">In [17]: </span><span class="n">df</span><span class="o">.</span><span class="n">iloc</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">]</span> <span class="o">=</span> <span class="mi">100</span>
+
+<span class="gp">In [18]: </span><span class="n">df</span>
+<span class="gh">Out[18]: </span>
+<span class="go">   foo  bar</span>
+<span class="go">0  100    4</span>
+<span class="go">1    2    5</span>
+<span class="go">2    3    6</span>
+</pre><button class="copybtn o-tooltip--left" data-tooltip="Copy" data-clipboard-target="#codecell8">
+      <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-copy" width="44" height="44" viewBox="0 0 24 24" stroke-width="1.5" stroke="#000000" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <title>Copy to clipboard</title>
+  <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
+  <rect x="8" y="8" width="12" height="12" rx="2"></rect>
+  <path d="M16 8v-2a2 2 0 0 0 -2 -2h-8a2 2 0 0 0 -2 2v8a2 2 0 0 0 2 2h2"></path>
+</svg>
+    </button></div>
+</div>
+<p><font _mstmutation="1" _msttexthash="18019495" _msthash="134">The object  does not share any data with any other object and hence no
+copy is triggered when updating the values. In contrast, the following operation
+triggers a copy of the data under CoW:</font><code class="docutils literal notranslate"><span class="pre">df</span></code></p>
+<div class="highlight-ipython notranslate"><div class="highlight"><pre id="codecell9" tabindex="-1"><span></span><span class="gp">In [19]: </span><span class="n">df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">({</span><span class="s2">"foo"</span><span class="p">:</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">],</span> <span class="s2">"bar"</span><span class="p">:</span> <span class="p">[</span><span class="mi">4</span><span class="p">,</span> <span class="mi">5</span><span class="p">,</span> <span class="mi">6</span><span class="p">]})</span>
+
+<span class="gp">In [20]: </span><span class="n">df2</span> <span class="o">=</span> <span class="n">df</span><span class="o">.</span><span class="n">reset_index</span><span class="p">(</span><span class="n">drop</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+
+<span class="gp">In [21]: </span><span class="n">df2</span><span class="o">.</span><span class="n">iloc</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">]</span> <span class="o">=</span> <span class="mi">100</span>
+
+<span class="gp">In [22]: </span><span class="n">df</span>
+<span class="gh">Out[22]: </span>
+<span class="go">   foo  bar</span>
+<span class="go">0    1    4</span>
+<span class="go">1    2    5</span>
+<span class="go">2    3    6</span>
+
+<span class="gp">In [23]: </span><span class="n">df2</span>
+<span class="gh">Out[23]: </span>
+<span class="go">   foo  bar</span>
+<span class="go">0  100    4</span>
+<span class="go">1    2    5</span>
+<span class="go">2    3    6</span>
+</pre><button class="copybtn o-tooltip--left" data-tooltip="Copy" data-clipboard-target="#codecell9">
+      <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-copy" width="44" height="44" viewBox="0 0 24 24" stroke-width="1.5" stroke="#000000" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <title>Copy to clipboard</title>
+  <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
+  <rect x="8" y="8" width="12" height="12" rx="2"></rect>
+  <path d="M16 8v-2a2 2 0 0 0 -2 -2h-8a2 2 0 0 0 -2 2v8a2 2 0 0 0 2 2h2"></path>
+</svg>
+    </button></div>
+</div>
+<p><code class="docutils literal notranslate"><span class="pre">reset_index</span></code><font _mstmutation="1" _msttexthash="23340044" _msthash="135"> returns a lazy copy with CoW while it copies the data without CoW.
+Since both objects,  and  share the same data, a copy is triggered
+when modifying . The object  still has the same values as initially
+while  was modified.</font><code class="docutils literal notranslate"><span class="pre">df</span></code><code class="docutils literal notranslate"><span class="pre">df2</span></code><code class="docutils literal notranslate"><span class="pre">df2</span></code><code class="docutils literal notranslate"><span class="pre">df</span></code><code class="docutils literal notranslate"><span class="pre">df2</span></code></p>
+<p><font _mstmutation="1" _msttexthash="16573830" _msthash="136">If the object  isn’t needed anymore after performing the  operation,
+you can emulate an inplace-like operation through assigning the output of 
+to the same variable:</font><code class="docutils literal notranslate"><span class="pre">df</span></code><code class="docutils literal notranslate"><span class="pre">reset_index</span></code><code class="docutils literal notranslate"><span class="pre">reset_index</span></code></p>
+<div class="highlight-ipython notranslate"><div class="highlight"><pre id="codecell10" tabindex="-1"><span></span><span class="gp">In [24]: </span><span class="n">df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">({</span><span class="s2">"foo"</span><span class="p">:</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">],</span> <span class="s2">"bar"</span><span class="p">:</span> <span class="p">[</span><span class="mi">4</span><span class="p">,</span> <span class="mi">5</span><span class="p">,</span> <span class="mi">6</span><span class="p">]})</span>
+
+<span class="gp">In [25]: </span><span class="n">df</span> <span class="o">=</span> <span class="n">df</span><span class="o">.</span><span class="n">reset_index</span><span class="p">(</span><span class="n">drop</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+
+<span class="gp">In [26]: </span><span class="n">df</span><span class="o">.</span><span class="n">iloc</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">]</span> <span class="o">=</span> <span class="mi">100</span>
+
+<span class="gp">In [27]: </span><span class="n">df</span>
+<span class="gh">Out[27]: </span>
+<span class="go">   foo  bar</span>
+<span class="go">0  100    4</span>
+<span class="go">1    2    5</span>
+<span class="go">2    3    6</span>
+</pre><button class="copybtn o-tooltip--left" data-tooltip="Copy" data-clipboard-target="#codecell10">
+      <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-copy" width="44" height="44" viewBox="0 0 24 24" stroke-width="1.5" stroke="#000000" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <title>Copy to clipboard</title>
+  <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
+  <rect x="8" y="8" width="12" height="12" rx="2"></rect>
+  <path d="M16 8v-2a2 2 0 0 0 -2 -2h-8a2 2 0 0 0 -2 2v8a2 2 0 0 0 2 2h2"></path>
+</svg>
+    </button></div>
+</div>
+<p><font _mstmutation="1" _msttexthash="32300801" _msthash="137">The initial object gets out of scope as soon as the result of  is
+reassigned and hence  does not share data with any other object. No copy
+is necessary when modifying the object. This is generally true for all methods
+listed in <a class="reference internal" href="https://pandas.pydata.org/docs/user_guide/copy_on_write.html#copy-on-write-optimizations" _mstmutation="1"><span class="std std-ref">Copy-on-Write optimizations</span></a>.</font><code class="docutils literal notranslate"><span class="pre">reset_index</span></code><code class="docutils literal notranslate"><span class="pre">df</span></code></p>
+<p _msttexthash="3848026" _msthash="138">Previously, when operating on views, the view and the parent object was modified:</p>
+<div class="highlight-ipython notranslate"><div class="highlight"><pre id="codecell11" tabindex="-1"><span></span><span class="gp">In [1]: </span><span class="n">df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">({</span><span class="s2">"foo"</span><span class="p">:</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">],</span> <span class="s2">"bar"</span><span class="p">:</span> <span class="p">[</span><span class="mi">4</span><span class="p">,</span> <span class="mi">5</span><span class="p">,</span> <span class="mi">6</span><span class="p">]})</span>
+<span class="gp">In [2]: </span><span class="n">subset</span> <span class="o">=</span> <span class="n">df</span><span class="p">[</span><span class="s2">"foo"</span><span class="p">]</span>
+<span class="gp">In [3]: </span><span class="n">subset</span><span class="o">.</span><span class="n">iloc</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">=</span> <span class="mi">100</span>
+<span class="gp">In [4]: </span><span class="n">df</span>
+<span class="gh">Out[4]:</span>
+<span class="go">   foo  bar</span>
+<span class="go">0  100    4</span>
+<span class="go">1    2    5</span>
+<span class="go">2    3    6</span>
+</pre><button class="copybtn o-tooltip--left" data-tooltip="Copy" data-clipboard-target="#codecell11">
+      <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-copy" width="44" height="44" viewBox="0 0 24 24" stroke-width="1.5" stroke="#000000" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <title>Copy to clipboard</title>
+  <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
+  <rect x="8" y="8" width="12" height="12" rx="2"></rect>
+  <path d="M16 8v-2a2 2 0 0 0 -2 -2h-8a2 2 0 0 0 -2 2v8a2 2 0 0 0 2 2h2"></path>
+</svg>
+    </button></div>
+</div>
+<p><font _mstmutation="1" _msttexthash="2240173" _msthash="139">CoW triggers a copy when  is changed to avoid mutating  as well:</font><code class="docutils literal notranslate"><span class="pre">df</span></code><code class="docutils literal notranslate"><span class="pre">view</span></code></p>
+<div class="highlight-ipython notranslate"><div class="highlight"><pre id="codecell12" tabindex="-1"><span></span><span class="gp">In [28]: </span><span class="n">df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">({</span><span class="s2">"foo"</span><span class="p">:</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">],</span> <span class="s2">"bar"</span><span class="p">:</span> <span class="p">[</span><span class="mi">4</span><span class="p">,</span> <span class="mi">5</span><span class="p">,</span> <span class="mi">6</span><span class="p">]})</span>
+
+<span class="gp">In [29]: </span><span class="n">view</span> <span class="o">=</span> <span class="n">df</span><span class="p">[:]</span>
+
+<span class="gp">In [30]: </span><span class="n">df</span><span class="o">.</span><span class="n">iloc</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">]</span> <span class="o">=</span> <span class="mi">100</span>
+
+<span class="gp">In [31]: </span><span class="n">df</span>
+<span class="gh">Out[31]: </span>
+<span class="go">   foo  bar</span>
+<span class="go">0  100    4</span>
+<span class="go">1    2    5</span>
+<span class="go">2    3    6</span>
+
+<span class="gp">In [32]: </span><span class="n">view</span>
+<span class="gh">Out[32]: </span>
+<span class="go">   foo  bar</span>
+<span class="go">0    1    4</span>
+<span class="go">1    2    5</span>
+<span class="go">2    3    6</span>
+</pre><button class="copybtn o-tooltip--left" data-tooltip="Copy" data-clipboard-target="#codecell12">
+      <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-copy" width="44" height="44" viewBox="0 0 24 24" stroke-width="1.5" stroke="#000000" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <title>Copy to clipboard</title>
+  <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
+  <rect x="8" y="8" width="12" height="12" rx="2"></rect>
+  <path d="M16 8v-2a2 2 0 0 0 -2 -2h-8a2 2 0 0 0 -2 2v8a2 2 0 0 0 2 2h2"></path>
+</svg>
+    </button></div>
+</div>
+</section>
+<section id="chained-assignment">
+<span id="copy-on-write-chained-assignment"></span><h2><font _mstmutation="1" _msttexthash="345007" _msthash="140">Chained Assignment</font><a class="headerlink" href="https://pandas.pydata.org/docs/user_guide/copy_on_write.html#chained-assignment" title="Link to this heading">#</a></h2>
+<p _msttexthash="7970092" _msthash="141">Chained assignment references a technique where an object is updated through
+two subsequent indexing operations, e.g.</p>
+<div class="highlight-ipython notranslate"><div class="highlight"><pre id="codecell13" tabindex="-1"><span></span><span class="gp">In [1]: </span><span class="n">df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">({</span><span class="s2">"foo"</span><span class="p">:</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">],</span> <span class="s2">"bar"</span><span class="p">:</span> <span class="p">[</span><span class="mi">4</span><span class="p">,</span> <span class="mi">5</span><span class="p">,</span> <span class="mi">6</span><span class="p">]})</span>
+<span class="gp">In [2]: </span><span class="n">df</span><span class="p">[</span><span class="s2">"foo"</span><span class="p">][</span><span class="n">df</span><span class="p">[</span><span class="s2">"bar"</span><span class="p">]</span> <span class="o">&gt;</span> <span class="mi">5</span><span class="p">]</span> <span class="o">=</span> <span class="mi">100</span>
+<span class="gp">In [3]: </span><span class="n">df</span>
+<span class="gh">Out[3]:</span>
+<span class="go">   foo  bar</span>
+<span class="go">0    1    4</span>
+<span class="go">1    2    5</span>
+<span class="go">2  100    6</span>
+</pre><button class="copybtn o-tooltip--left" data-tooltip="Copy" data-clipboard-target="#codecell13">
+      <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-copy" width="44" height="44" viewBox="0 0 24 24" stroke-width="1.5" stroke="#000000" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <title>Copy to clipboard</title>
+  <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
+  <rect x="8" y="8" width="12" height="12" rx="2"></rect>
+  <path d="M16 8v-2a2 2 0 0 0 -2 -2h-8a2 2 0 0 0 -2 2v8a2 2 0 0 0 2 2h2"></path>
+</svg>
+    </button></div>
+</div>
+<p><font _mstmutation="1" _msttexthash="31301374" _msthash="142">The column  was updated where the column  is greater than 5.
+This violated the CoW principles though, because it would have to modify the
+view  and  in one step. Hence, chained assignment will
+consistently never work and raise a  warning
+with CoW enabled:</font><code class="docutils literal notranslate"><span class="pre">foo</span></code><code class="docutils literal notranslate"><span class="pre">bar</span></code><code class="docutils literal notranslate"><span class="pre">df["foo"]</span></code><code class="docutils literal notranslate"><span class="pre">df</span></code><code class="docutils literal notranslate"><span class="pre">ChainedAssignmentError</span></code></p>
+<div class="highlight-ipython notranslate"><div class="highlight"><pre id="codecell14" tabindex="-1"><span></span><span class="gp">In [33]: </span><span class="n">df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">({</span><span class="s2">"foo"</span><span class="p">:</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">],</span> <span class="s2">"bar"</span><span class="p">:</span> <span class="p">[</span><span class="mi">4</span><span class="p">,</span> <span class="mi">5</span><span class="p">,</span> <span class="mi">6</span><span class="p">]})</span>
+
+<span class="gp">In [34]: </span><span class="n">df</span><span class="p">[</span><span class="s2">"foo"</span><span class="p">][</span><span class="n">df</span><span class="p">[</span><span class="s2">"bar"</span><span class="p">]</span> <span class="o">&gt;</span> <span class="mi">5</span><span class="p">]</span> <span class="o">=</span> <span class="mi">100</span>
+</pre><button class="copybtn o-tooltip--left" data-tooltip="Copy" data-clipboard-target="#codecell14">
+      <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-copy" width="44" height="44" viewBox="0 0 24 24" stroke-width="1.5" stroke="#000000" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <title>Copy to clipboard</title>
+  <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
+  <rect x="8" y="8" width="12" height="12" rx="2"></rect>
+  <path d="M16 8v-2a2 2 0 0 0 -2 -2h-8a2 2 0 0 0 -2 2v8a2 2 0 0 0 2 2h2"></path>
+</svg>
+    </button></div>
+</div>
+<p><font _mstmutation="1" _msttexthash="1200875" _msthash="143">With copy on write this can be done by using .</font><code class="docutils literal notranslate"><span class="pre">loc</span></code></p>
+<div class="highlight-ipython notranslate"><div class="highlight"><pre id="codecell15" tabindex="-1"><span></span><span class="gp">In [35]: </span><span class="n">df</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="n">df</span><span class="p">[</span><span class="s2">"bar"</span><span class="p">]</span> <span class="o">&gt;</span> <span class="mi">5</span><span class="p">,</span> <span class="s2">"foo"</span><span class="p">]</span> <span class="o">=</span> <span class="mi">100</span>
+</pre><button class="copybtn o-tooltip--left" data-tooltip="Copy" data-clipboard-target="#codecell15">
+      <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-copy" width="44" height="44" viewBox="0 0 24 24" stroke-width="1.5" stroke="#000000" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <title>Copy to clipboard</title>
+  <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
+  <rect x="8" y="8" width="12" height="12" rx="2"></rect>
+  <path d="M16 8v-2a2 2 0 0 0 -2 -2h-8a2 2 0 0 0 -2 2v8a2 2 0 0 0 2 2h2"></path>
+</svg>
+    </button></div>
+</div>
+</section>
+<section id="read-only-numpy-arrays">
+<span id="copy-on-write-read-only-na"></span><h2><font _mstmutation="1" _msttexthash="448344" _msthash="144">Read-only NumPy arrays</font><a class="headerlink" href="https://pandas.pydata.org/docs/user_guide/copy_on_write.html#read-only-numpy-arrays" title="Link to this heading">#</a></h2>
+<p _msttexthash="9606467" _msthash="145">Accessing the underlying NumPy array of a DataFrame will return a read-only array if the array
+shares data with the initial DataFrame:</p>
+<p _msttexthash="3269942" _msthash="146">The array is a copy if the initial DataFrame consists of more than one array:</p>
+<div class="highlight-ipython notranslate"><div class="highlight"><pre id="codecell16" tabindex="-1"><span></span><span class="gp">In [36]: </span><span class="n">df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">({</span><span class="s2">"a"</span><span class="p">:</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">],</span> <span class="s2">"b"</span><span class="p">:</span> <span class="p">[</span><span class="mf">1.5</span><span class="p">,</span> <span class="mf">2.5</span><span class="p">]})</span>
+
+<span class="gp">In [37]: </span><span class="n">df</span><span class="o">.</span><span class="n">to_numpy</span><span class="p">()</span>
+<span class="gh">Out[37]: </span>
+<span class="go">array([[1. , 1.5],</span>
+<span class="go">       [2. , 2.5]])</span>
+</pre><button class="copybtn o-tooltip--left" data-tooltip="Copy" data-clipboard-target="#codecell16">
+      <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-copy" width="44" height="44" viewBox="0 0 24 24" stroke-width="1.5" stroke="#000000" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <title>Copy to clipboard</title>
+  <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
+  <rect x="8" y="8" width="12" height="12" rx="2"></rect>
+  <path d="M16 8v-2a2 2 0 0 0 -2 -2h-8a2 2 0 0 0 -2 2v8a2 2 0 0 0 2 2h2"></path>
+</svg>
+    </button></div>
+</div>
+<p _msttexthash="4569500" _msthash="147">The array shares data with the DataFrame if the DataFrame consists of only one NumPy array:</p>
+<div class="highlight-ipython notranslate"><div class="highlight"><pre id="codecell17" tabindex="-1"><span></span><span class="gp">In [38]: </span><span class="n">df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">({</span><span class="s2">"a"</span><span class="p">:</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">],</span> <span class="s2">"b"</span><span class="p">:</span> <span class="p">[</span><span class="mi">3</span><span class="p">,</span> <span class="mi">4</span><span class="p">]})</span>
+
+<span class="gp">In [39]: </span><span class="n">df</span><span class="o">.</span><span class="n">to_numpy</span><span class="p">()</span>
+<span class="gh">Out[39]: </span>
+<span class="go">array([[1, 3],</span>
+<span class="go">       [2, 4]])</span>
+</pre><button class="copybtn o-tooltip--left" data-tooltip="Copy" data-clipboard-target="#codecell17">
+      <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-copy" width="44" height="44" viewBox="0 0 24 24" stroke-width="1.5" stroke="#000000" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <title>Copy to clipboard</title>
+  <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
+  <rect x="8" y="8" width="12" height="12" rx="2"></rect>
+  <path d="M16 8v-2a2 2 0 0 0 -2 -2h-8a2 2 0 0 0 -2 2v8a2 2 0 0 0 2 2h2"></path>
+</svg>
+    </button></div>
+</div>
+<p _msttexthash="7883369" _msthash="148">This array is read-only, which means that it can’t be modified inplace:</p>
+<div class="highlight-ipython notranslate"><div class="highlight"><pre id="codecell18" tabindex="-1"><span></span><span class="gp">In [40]: </span><span class="n">arr</span> <span class="o">=</span> <span class="n">df</span><span class="o">.</span><span class="n">to_numpy</span><span class="p">()</span>
+
+<span class="gp">In [41]: </span><span class="n">arr</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">]</span> <span class="o">=</span> <span class="mi">100</span>
+<span class="gt">---------------------------------------------------------------------------</span>
+<span class="ne">ValueError</span><span class="g g-Whitespace">                                </span>Traceback (most recent call last)
+<span class="n">Cell</span> <span class="n">In</span><span class="p">[</span><span class="mi">41</span><span class="p">],</span> <span class="n">line</span> <span class="mi">1</span>
+<span class="ne">----&gt; </span><span class="mi">1</span> <span class="n">arr</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">]</span> <span class="o">=</span> <span class="mi">100</span>
+
+<span class="ne">ValueError</span>: assignment destination is read-only
+</pre><button class="copybtn o-tooltip--left" data-tooltip="Copy" data-clipboard-target="#codecell18">
+      <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-copy" width="44" height="44" viewBox="0 0 24 24" stroke-width="1.5" stroke="#000000" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <title>Copy to clipboard</title>
+  <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
+  <rect x="8" y="8" width="12" height="12" rx="2"></rect>
+  <path d="M16 8v-2a2 2 0 0 0 -2 -2h-8a2 2 0 0 0 -2 2v8a2 2 0 0 0 2 2h2"></path>
+</svg>
+    </button></div>
+</div>
+<p _msttexthash="3749122" _msthash="149">The same holds true for a Series, since a Series always consists of a single array.</p>
+<p _msttexthash="1233895" _msthash="150">There are two potential solutions to this:</p>
+<ul class="simple">
+<li><p _msttexthash="5520684" _msthash="151">Trigger a copy manually if you want to avoid updating DataFrames that share memory with your array.</p></li>
+<li><p _msttexthash="9537177" _msthash="152">Make the array writeable. This is a more performant solution but circumvents Copy-on-Write rules, so
+it should be used with caution.</p></li>
+</ul>
+<div class="highlight-ipython notranslate"><div class="highlight"><pre id="codecell19" tabindex="-1"><span></span><span class="gp">In [42]: </span><span class="n">arr</span> <span class="o">=</span> <span class="n">df</span><span class="o">.</span><span class="n">to_numpy</span><span class="p">()</span>
+
+<span class="gp">In [43]: </span><span class="n">arr</span><span class="o">.</span><span class="n">flags</span><span class="o">.</span><span class="n">writeable</span> <span class="o">=</span> <span class="kc">True</span>
+
+<span class="gp">In [44]: </span><span class="n">arr</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">]</span> <span class="o">=</span> <span class="mi">100</span>
+
+<span class="gp">In [45]: </span><span class="n">arr</span>
+<span class="gh">Out[45]: </span>
+<span class="go">array([[100,   3],</span>
+<span class="go">       [  2,   4]])</span>
+</pre><button class="copybtn o-tooltip--left" data-tooltip="Copy" data-clipboard-target="#codecell19">
+      <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-copy" width="44" height="44" viewBox="0 0 24 24" stroke-width="1.5" stroke="#000000" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <title>Copy to clipboard</title>
+  <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
+  <rect x="8" y="8" width="12" height="12" rx="2"></rect>
+  <path d="M16 8v-2a2 2 0 0 0 -2 -2h-8a2 2 0 0 0 -2 2v8a2 2 0 0 0 2 2h2"></path>
+</svg>
+    </button></div>
+</div>
+</section>
+<section id="patterns-to-avoid">
+<h2><font _mstmutation="1" _msttexthash="294541" _msthash="153">Patterns to avoid</font><a class="headerlink" href="https://pandas.pydata.org/docs/user_guide/copy_on_write.html#patterns-to-avoid" title="Link to this heading">#</a></h2>
+<p _msttexthash="7028801" _msthash="154">No defensive copy will be performed if two objects share the same data while
+you are modifying one object inplace.</p>
+<div class="highlight-ipython notranslate"><div class="highlight"><pre id="codecell20" tabindex="-1"><span></span><span class="gp">In [46]: </span><span class="n">df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">({</span><span class="s2">"a"</span><span class="p">:</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">],</span> <span class="s2">"b"</span><span class="p">:</span> <span class="p">[</span><span class="mi">4</span><span class="p">,</span> <span class="mi">5</span><span class="p">,</span> <span class="mi">6</span><span class="p">]})</span>
+
+<span class="gp">In [47]: </span><span class="n">df2</span> <span class="o">=</span> <span class="n">df</span><span class="o">.</span><span class="n">reset_index</span><span class="p">(</span><span class="n">drop</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+
+<span class="gp">In [48]: </span><span class="n">df2</span><span class="o">.</span><span class="n">iloc</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">]</span> <span class="o">=</span> <span class="mi">100</span>
+</pre><button class="copybtn o-tooltip--left" data-tooltip="Copy" data-clipboard-target="#codecell20">
+      <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-copy" width="44" height="44" viewBox="0 0 24 24" stroke-width="1.5" stroke="#000000" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <title>Copy to clipboard</title>
+  <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
+  <rect x="8" y="8" width="12" height="12" rx="2"></rect>
+  <path d="M16 8v-2a2 2 0 0 0 -2 -2h-8a2 2 0 0 0 -2 2v8a2 2 0 0 0 2 2h2"></path>
+</svg>
+    </button></div>
+</div>
+<p><font _mstmutation="1" _msttexthash="46325994" _msthash="155">This creates two objects that share data and thus the setitem operation will trigger a
+copy. This is not necessary if the initial object  isn’t needed anymore.
+Simply reassigning to the same variable will invalidate the reference that is
+held by the object.</font><code class="docutils literal notranslate"><span class="pre">df</span></code></p>
+<div class="highlight-ipython notranslate"><div class="highlight"><pre id="codecell21" tabindex="-1"><span></span><span class="gp">In [49]: </span><span class="n">df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">({</span><span class="s2">"a"</span><span class="p">:</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">],</span> <span class="s2">"b"</span><span class="p">:</span> <span class="p">[</span><span class="mi">4</span><span class="p">,</span> <span class="mi">5</span><span class="p">,</span> <span class="mi">6</span><span class="p">]})</span>
+
+<span class="gp">In [50]: </span><span class="n">df</span> <span class="o">=</span> <span class="n">df</span><span class="o">.</span><span class="n">reset_index</span><span class="p">(</span><span class="n">drop</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+
+<span class="gp">In [51]: </span><span class="n">df</span><span class="o">.</span><span class="n">iloc</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">]</span> <span class="o">=</span> <span class="mi">100</span>
+</pre><button class="copybtn o-tooltip--left" data-tooltip="Copy" data-clipboard-target="#codecell21">
+      <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-copy" width="44" height="44" viewBox="0 0 24 24" stroke-width="1.5" stroke="#000000" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <title>Copy to clipboard</title>
+  <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
+  <rect x="8" y="8" width="12" height="12" rx="2"></rect>
+  <path d="M16 8v-2a2 2 0 0 0 -2 -2h-8a2 2 0 0 0 -2 2v8a2 2 0 0 0 2 2h2"></path>
+</svg>
+    </button></div>
+</div>
+<p _msttexthash="12997270" _msthash="156">No copy is necessary in this example.
+Creating multiple references keeps unnecessary references alive
+and thus will hurt performance with Copy-on-Write.</p>
+</section>
+<section id="copy-on-write-optimizations">
+<span id="id1"></span><h2><font _mstmutation="1" _msttexthash="697671" _msthash="157">Copy-on-Write optimizations</font><a class="headerlink" href="https://pandas.pydata.org/docs/user_guide/copy_on_write.html#copy-on-write-optimizations" title="Link to this heading">#</a></h2>
+<p><font _mstmutation="1" _msttexthash="60297237" _msthash="158">A new lazy copy mechanism that defers the copy until the object in question is modified
+and only if this object shares data with another object. This mechanism was added to
+methods that don’t require a copy of the underlying data. Popular examples are <a class="reference internal" href="https://pandas.pydata.org/docs/reference/api/pandas.DataFrame.drop.html#pandas.DataFrame.drop" title="pandas.DataFrame.drop" _mstmutation="1"><code class="xref py py-meth docutils literal notranslate"><span class="pre">DataFrame.drop()</span></code></a> for 
+and <a class="reference internal" href="https://pandas.pydata.org/docs/reference/api/pandas.DataFrame.rename.html#pandas.DataFrame.rename" title="pandas.DataFrame.rename" _mstmutation="1"><code class="xref py py-meth docutils literal notranslate"><span class="pre">DataFrame.rename()</span></code></a>.</font><code class="docutils literal notranslate"><span class="pre">axis=1</span></code></p>
+<p _msttexthash="12198056" _msthash="159">These methods return views when Copy-on-Write is enabled, which provides a significant
+performance improvement compared to the regular execution.</p>
+</section>
+</section>
+
+
+                </article>
+              
+              
+              
+              
+              
+                <footer class="prev-next-footer d-print-none">
+                  
+<div class="prev-next-area">
+    <a class="left-prev" href="https://pandas.pydata.org/docs/user_guide/advanced.html" title="previous page">
+      <svg class="svg-inline--fa fa-angle-left" aria-hidden="true" focusable="false" data-prefix="fas" data-icon="angle-left" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 512" data-fa-i2svg=""><path fill="currentColor" d="M41.4 233.4c-12.5 12.5-12.5 32.8 0 45.3l160 160c12.5 12.5 32.8 12.5 45.3 0s12.5-32.8 0-45.3L109.3 256 246.6 118.6c12.5-12.5 12.5-32.8 0-45.3s-32.8-12.5-45.3 0l-160 160z"></path></svg><!-- <i class="fa-solid fa-angle-left"></i> Font Awesome fontawesome.com -->
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle" _msttexthash="122239" _msthash="160">previous</p>
+        <p class="prev-next-title" _msttexthash="722397" _msthash="161">MultiIndex / advanced indexing</p>
+      </div>
+    </a>
+    <a class="right-next" href="https://pandas.pydata.org/docs/user_guide/merging.html" title="next page">
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle" _msttexthash="49634" _msthash="162">next</p>
+        <p class="prev-next-title" _msttexthash="960739" _msthash="163">Merge, join, concatenate and compare</p>
+      </div>
+      <svg class="svg-inline--fa fa-angle-right" aria-hidden="true" focusable="false" data-prefix="fas" data-icon="angle-right" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 512" data-fa-i2svg=""><path fill="currentColor" d="M278.6 233.4c12.5 12.5 12.5 32.8 0 45.3l-160 160c-12.5 12.5-32.8 12.5-45.3 0s-12.5-32.8 0-45.3L210.7 256 73.4 118.6c-12.5-12.5-12.5-32.8 0-45.3s32.8-12.5 45.3 0l160 160z"></path></svg><!-- <i class="fa-solid fa-angle-right"></i> Font Awesome fontawesome.com -->
+    </a>
+</div>
+                </footer>
+              
+            </div>
+            
+            
+              
+                <dialog id="pst-secondary-sidebar-modal"></dialog>
+                <div id="pst-secondary-sidebar" class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+
+  <div class="sidebar-secondary-item">
+<div id="pst-page-navigation-heading-2" class="page-toc tocsection onthispage">
+    <svg class="svg-inline--fa fa-list" aria-hidden="true" focusable="false" data-prefix="fas" data-icon="list" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" data-fa-i2svg=""><path fill="currentColor" d="M40 48C26.7 48 16 58.7 16 72v48c0 13.3 10.7 24 24 24H88c13.3 0 24-10.7 24-24V72c0-13.3-10.7-24-24-24H40zM192 64c-17.7 0-32 14.3-32 32s14.3 32 32 32H480c17.7 0 32-14.3 32-32s-14.3-32-32-32H192zm0 160c-17.7 0-32 14.3-32 32s14.3 32 32 32H480c17.7 0 32-14.3 32-32s-14.3-32-32-32H192zm0 160c-17.7 0-32 14.3-32 32s14.3 32 32 32H480c17.7 0 32-14.3 32-32s-14.3-32-32-32H192zM16 232v48c0 13.3 10.7 24 24 24H88c13.3 0 24-10.7 24-24V232c0-13.3-10.7-24-24-24H40c-13.3 0-24 10.7-24 24zM40 368c-13.3 0-24 10.7-24 24v48c0 13.3 10.7 24 24 24H88c13.3 0 24-10.7 24-24V392c0-13.3-10.7-24-24-24H40z"></path></svg><!-- <i class="fa-solid fa-list"></i> Font Awesome fontawesome.com --><font _mstmutation="1" _msttexthash="199043" _msthash="164"> Nesta página </font></div>
+  <nav class="bd-toc-nav page-toc" aria-labelledby="pst-page-navigation-heading-2">
+    <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="https://pandas.pydata.org/docs/user_guide/copy_on_write.html#previous-behavior" _msttexthash="502853" _msthash="165">Comportamento anterior</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="https://pandas.pydata.org/docs/user_guide/copy_on_write.html#migrating-to-copy-on-write" _msttexthash="610038" _msthash="166">Migrando para Copy-on-Write</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="https://pandas.pydata.org/docs/user_guide/copy_on_write.html#description" _msttexthash="177697" _msthash="167">Descrição</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="https://pandas.pydata.org/docs/user_guide/copy_on_write.html#chained-assignment" _msttexthash="442949" _msthash="168">Atribuição Encadeada</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="https://pandas.pydata.org/docs/user_guide/copy_on_write.html#read-only-numpy-arrays" _msttexthash="844766" _msthash="169">Matrizes NumPy somente de leitura</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="https://pandas.pydata.org/docs/user_guide/copy_on_write.html#patterns-to-avoid" _msttexthash="279955" _msthash="170">Padrões a evitar</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="https://pandas.pydata.org/docs/user_guide/copy_on_write.html#copy-on-write-optimizations" _msttexthash="641706" _msthash="171">Otimizações copy-on-write</a></li>
+</ul>
+  </nav></div>
+
+</div></div>
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+          </footer>
+        
+      </main>
+    </div>
+  </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script defer="" src="./Copy-on-Write (CoW) — documentação do pandas 3.0.2_files/bootstrap.js.baixados"></script>
+<script defer="" src="./Copy-on-Write (CoW) — documentação do pandas 3.0.2_files/pydata-sphinx-theme.js.baixados"></script>
+
+  <footer class="bd-footer">
+<div class="bd-footer__inner bd-page-width">
+  
+    <div class="footer-items__start">
+      
+        <div class="footer-item"><p class="copyright" _msttexthash="1557816" _msthash="172">
+    © 2026, pandas via <a href="https://numfocus.org/">NumFOCUS, Inc.</a> Hosted by <a href="https://www.ovhcloud.com/">OVHcloud</a>.
+</p></div>
+      
+        <div class="footer-item">
+
+  <p class="sphinx-version"><font _mstmutation="1" _msttexthash="489177" _msthash="173">
+    Created using <a href="https://www.sphinx-doc.org/" _mstmutation="1">Sphinx</a> 9.0.4.
+    </font><br>
+  </p>
+</div>
+      
+    </div>
+  
+  
+  
+    <div class="footer-items__end">
+      
+        <div class="footer-item">
+<p class="theme-version">
+  <!-- # L10n: Setting the PST URL as an argument as this does not need to be localized --><font _mstmutation="1" _msttexthash="985738" _msthash="174">
+  Built with the <a href="https://pydata-sphinx-theme.readthedocs.io/en/stable/index.html" _mstmutation="1">PyData Sphinx Theme</a> 0.16.1.
+</font></p></div>
+      
+    </div>
+  
+</div>
+
+  </footer>
+  
+</body></html>

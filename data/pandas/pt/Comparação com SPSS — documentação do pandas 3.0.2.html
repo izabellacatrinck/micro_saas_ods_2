@@ -1,0 +1,1173 @@
+<!DOCTYPE html>
+<!-- saved from url=(0083)https://pandas.pydata.org/docs/getting_started/comparison/comparison_with_spss.html -->
+<html lang="pt" data-content_root="../../" data-mode="auto" data-theme="dark" class="fontawesome-i2svg-active fontawesome-i2svg-complete"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"><meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <title _msttexthash="4141280" _msthash="0">Comparação com SPSS — documentação do pandas 3.0.2</title>
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "";
+  </script>
+  <!--
+    this give us a css class that will be invisible only if js is disabled
+  -->
+  <noscript>
+    <style>
+      .pst-js-only { display: none !important; }
+
+    </style>
+  </noscript>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <style type="text/css">:host,:root{--fa-font-solid:normal 900 1em/1 "Font Awesome 6 Solid";--fa-font-regular:normal 400 1em/1 "Font Awesome 6 Regular";--fa-font-light:normal 300 1em/1 "Font Awesome 6 Light";--fa-font-thin:normal 100 1em/1 "Font Awesome 6 Thin";--fa-font-duotone:normal 900 1em/1 "Font Awesome 6 Duotone";--fa-font-sharp-solid:normal 900 1em/1 "Font Awesome 6 Sharp";--fa-font-sharp-regular:normal 400 1em/1 "Font Awesome 6 Sharp";--fa-font-sharp-light:normal 300 1em/1 "Font Awesome 6 Sharp";--fa-font-sharp-thin:normal 100 1em/1 "Font Awesome 6 Sharp";--fa-font-brands:normal 400 1em/1 "Font Awesome 6 Brands"}svg:not(:host).svg-inline--fa,svg:not(:root).svg-inline--fa{overflow:visible;box-sizing:content-box}.svg-inline--fa{display:var(--fa-display,inline-block);height:1em;overflow:visible;vertical-align:-.125em}.svg-inline--fa.fa-2xs{vertical-align:.1em}.svg-inline--fa.fa-xs{vertical-align:0}.svg-inline--fa.fa-sm{vertical-align:-.0714285705em}.svg-inline--fa.fa-lg{vertical-align:-.2em}.svg-inline--fa.fa-xl{vertical-align:-.25em}.svg-inline--fa.fa-2xl{vertical-align:-.3125em}.svg-inline--fa.fa-pull-left{margin-right:var(--fa-pull-margin,.3em);width:auto}.svg-inline--fa.fa-pull-right{margin-left:var(--fa-pull-margin,.3em);width:auto}.svg-inline--fa.fa-li{width:var(--fa-li-width,2em);top:.25em}.svg-inline--fa.fa-fw{width:var(--fa-fw-width,1.25em)}.fa-layers svg.svg-inline--fa{bottom:0;left:0;margin:auto;position:absolute;right:0;top:0}.fa-layers-counter,.fa-layers-text{display:inline-block;position:absolute;text-align:center}.fa-layers{display:inline-block;height:1em;position:relative;text-align:center;vertical-align:-.125em;width:1em}.fa-layers svg.svg-inline--fa{-webkit-transform-origin:center center;transform-origin:center center}.fa-layers-text{left:50%;top:50%;-webkit-transform:translate(-50%,-50%);transform:translate(-50%,-50%);-webkit-transform-origin:center center;transform-origin:center center}.fa-layers-counter{background-color:var(--fa-counter-background-color,#ff253a);border-radius:var(--fa-counter-border-radius,1em);box-sizing:border-box;color:var(--fa-inverse,#fff);line-height:var(--fa-counter-line-height,1);max-width:var(--fa-counter-max-width,5em);min-width:var(--fa-counter-min-width,1.5em);overflow:hidden;padding:var(--fa-counter-padding,.25em .5em);right:var(--fa-right,0);text-overflow:ellipsis;top:var(--fa-top,0);-webkit-transform:scale(var(--fa-counter-scale,.25));transform:scale(var(--fa-counter-scale,.25));-webkit-transform-origin:top right;transform-origin:top right}.fa-layers-bottom-right{bottom:var(--fa-bottom,0);right:var(--fa-right,0);top:auto;-webkit-transform:scale(var(--fa-layers-scale,.25));transform:scale(var(--fa-layers-scale,.25));-webkit-transform-origin:bottom right;transform-origin:bottom right}.fa-layers-bottom-left{bottom:var(--fa-bottom,0);left:var(--fa-left,0);right:auto;top:auto;-webkit-transform:scale(var(--fa-layers-scale,.25));transform:scale(var(--fa-layers-scale,.25));-webkit-transform-origin:bottom left;transform-origin:bottom left}.fa-layers-top-right{top:var(--fa-top,0);right:var(--fa-right,0);-webkit-transform:scale(var(--fa-layers-scale,.25));transform:scale(var(--fa-layers-scale,.25));-webkit-transform-origin:top right;transform-origin:top right}.fa-layers-top-left{left:var(--fa-left,0);right:auto;top:var(--fa-top,0);-webkit-transform:scale(var(--fa-layers-scale,.25));transform:scale(var(--fa-layers-scale,.25));-webkit-transform-origin:top left;transform-origin:top left}.fa-1x{font-size:1em}.fa-2x{font-size:2em}.fa-3x{font-size:3em}.fa-4x{font-size:4em}.fa-5x{font-size:5em}.fa-6x{font-size:6em}.fa-7x{font-size:7em}.fa-8x{font-size:8em}.fa-9x{font-size:9em}.fa-10x{font-size:10em}.fa-2xs{font-size:.625em;line-height:.1em;vertical-align:.225em}.fa-xs{font-size:.75em;line-height:.0833333337em;vertical-align:.125em}.fa-sm{font-size:.875em;line-height:.0714285718em;vertical-align:.0535714295em}.fa-lg{font-size:1.25em;line-height:.05em;vertical-align:-.075em}.fa-xl{font-size:1.5em;line-height:.0416666682em;vertical-align:-.125em}.fa-2xl{font-size:2em;line-height:.03125em;vertical-align:-.1875em}.fa-fw{text-align:center;width:1.25em}.fa-ul{list-style-type:none;margin-left:var(--fa-li-margin,2.5em);padding-left:0}.fa-ul>li{position:relative}.fa-li{left:calc(var(--fa-li-width,2em) * -1);position:absolute;text-align:center;width:var(--fa-li-width,2em);line-height:inherit}.fa-border{border-color:var(--fa-border-color,#eee);border-radius:var(--fa-border-radius,.1em);border-style:var(--fa-border-style,solid);border-width:var(--fa-border-width,.08em);padding:var(--fa-border-padding,.2em .25em .15em)}.fa-pull-left{float:left;margin-right:var(--fa-pull-margin,.3em)}.fa-pull-right{float:right;margin-left:var(--fa-pull-margin,.3em)}.fa-beat{-webkit-animation-name:fa-beat;animation-name:fa-beat;-webkit-animation-delay:var(--fa-animation-delay,0s);animation-delay:var(--fa-animation-delay,0s);-webkit-animation-direction:var(--fa-animation-direction,normal);animation-direction:var(--fa-animation-direction,normal);-webkit-animation-duration:var(--fa-animation-duration,1s);animation-duration:var(--fa-animation-duration,1s);-webkit-animation-iteration-count:var(--fa-animation-iteration-count,infinite);animation-iteration-count:var(--fa-animation-iteration-count,infinite);-webkit-animation-timing-function:var(--fa-animation-timing,ease-in-out);animation-timing-function:var(--fa-animation-timing,ease-in-out)}.fa-bounce{-webkit-animation-name:fa-bounce;animation-name:fa-bounce;-webkit-animation-delay:var(--fa-animation-delay,0s);animation-delay:var(--fa-animation-delay,0s);-webkit-animation-direction:var(--fa-animation-direction,normal);animation-direction:var(--fa-animation-direction,normal);-webkit-animation-duration:var(--fa-animation-duration,1s);animation-duration:var(--fa-animation-duration,1s);-webkit-animation-iteration-count:var(--fa-animation-iteration-count,infinite);animation-iteration-count:var(--fa-animation-iteration-count,infinite);-webkit-animation-timing-function:var(--fa-animation-timing,cubic-bezier(.28,.84,.42,1));animation-timing-function:var(--fa-animation-timing,cubic-bezier(.28,.84,.42,1))}.fa-fade{-webkit-animation-name:fa-fade;animation-name:fa-fade;-webkit-animation-delay:var(--fa-animation-delay,0s);animation-delay:var(--fa-animation-delay,0s);-webkit-animation-direction:var(--fa-animation-direction,normal);animation-direction:var(--fa-animation-direction,normal);-webkit-animation-duration:var(--fa-animation-duration,1s);animation-duration:var(--fa-animation-duration,1s);-webkit-animation-iteration-count:var(--fa-animation-iteration-count,infinite);animation-iteration-count:var(--fa-animation-iteration-count,infinite);-webkit-animation-timing-function:var(--fa-animation-timing,cubic-bezier(.4,0,.6,1));animation-timing-function:var(--fa-animation-timing,cubic-bezier(.4,0,.6,1))}.fa-beat-fade{-webkit-animation-name:fa-beat-fade;animation-name:fa-beat-fade;-webkit-animation-delay:var(--fa-animation-delay,0s);animation-delay:var(--fa-animation-delay,0s);-webkit-animation-direction:var(--fa-animation-direction,normal);animation-direction:var(--fa-animation-direction,normal);-webkit-animation-duration:var(--fa-animation-duration,1s);animation-duration:var(--fa-animation-duration,1s);-webkit-animation-iteration-count:var(--fa-animation-iteration-count,infinite);animation-iteration-count:var(--fa-animation-iteration-count,infinite);-webkit-animation-timing-function:var(--fa-animation-timing,cubic-bezier(.4,0,.6,1));animation-timing-function:var(--fa-animation-timing,cubic-bezier(.4,0,.6,1))}.fa-flip{-webkit-animation-name:fa-flip;animation-name:fa-flip;-webkit-animation-delay:var(--fa-animation-delay,0s);animation-delay:var(--fa-animation-delay,0s);-webkit-animation-direction:var(--fa-animation-direction,normal);animation-direction:var(--fa-animation-direction,normal);-webkit-animation-duration:var(--fa-animation-duration,1s);animation-duration:var(--fa-animation-duration,1s);-webkit-animation-iteration-count:var(--fa-animation-iteration-count,infinite);animation-iteration-count:var(--fa-animation-iteration-count,infinite);-webkit-animation-timing-function:var(--fa-animation-timing,ease-in-out);animation-timing-function:var(--fa-animation-timing,ease-in-out)}.fa-shake{-webkit-animation-name:fa-shake;animation-name:fa-shake;-webkit-animation-delay:var(--fa-animation-delay,0s);animation-delay:var(--fa-animation-delay,0s);-webkit-animation-direction:var(--fa-animation-direction,normal);animation-direction:var(--fa-animation-direction,normal);-webkit-animation-duration:var(--fa-animation-duration,1s);animation-duration:var(--fa-animation-duration,1s);-webkit-animation-iteration-count:var(--fa-animation-iteration-count,infinite);animation-iteration-count:var(--fa-animation-iteration-count,infinite);-webkit-animation-timing-function:var(--fa-animation-timing,linear);animation-timing-function:var(--fa-animation-timing,linear)}.fa-spin{-webkit-animation-name:fa-spin;animation-name:fa-spin;-webkit-animation-delay:var(--fa-animation-delay,0s);animation-delay:var(--fa-animation-delay,0s);-webkit-animation-direction:var(--fa-animation-direction,normal);animation-direction:var(--fa-animation-direction,normal);-webkit-animation-duration:var(--fa-animation-duration,2s);animation-duration:var(--fa-animation-duration,2s);-webkit-animation-iteration-count:var(--fa-animation-iteration-count,infinite);animation-iteration-count:var(--fa-animation-iteration-count,infinite);-webkit-animation-timing-function:var(--fa-animation-timing,linear);animation-timing-function:var(--fa-animation-timing,linear)}.fa-spin-reverse{--fa-animation-direction:reverse}.fa-pulse,.fa-spin-pulse{-webkit-animation-name:fa-spin;animation-name:fa-spin;-webkit-animation-direction:var(--fa-animation-direction,normal);animation-direction:var(--fa-animation-direction,normal);-webkit-animation-duration:var(--fa-animation-duration,1s);animation-duration:var(--fa-animation-duration,1s);-webkit-animation-iteration-count:var(--fa-animation-iteration-count,infinite);animation-iteration-count:var(--fa-animation-iteration-count,infinite);-webkit-animation-timing-function:var(--fa-animation-timing,steps(8));animation-timing-function:var(--fa-animation-timing,steps(8))}@media (prefers-reduced-motion:reduce){.fa-beat,.fa-beat-fade,.fa-bounce,.fa-fade,.fa-flip,.fa-pulse,.fa-shake,.fa-spin,.fa-spin-pulse{-webkit-animation-delay:-1ms;animation-delay:-1ms;-webkit-animation-duration:1ms;animation-duration:1ms;-webkit-animation-iteration-count:1;animation-iteration-count:1;-webkit-transition-delay:0s;transition-delay:0s;-webkit-transition-duration:0s;transition-duration:0s}}@-webkit-keyframes fa-beat{0%,90%{-webkit-transform:scale(1);transform:scale(1)}45%{-webkit-transform:scale(var(--fa-beat-scale,1.25));transform:scale(var(--fa-beat-scale,1.25))}}@keyframes fa-beat{0%,90%{-webkit-transform:scale(1);transform:scale(1)}45%{-webkit-transform:scale(var(--fa-beat-scale,1.25));transform:scale(var(--fa-beat-scale,1.25))}}@-webkit-keyframes fa-bounce{0%{-webkit-transform:scale(1,1) translateY(0);transform:scale(1,1) translateY(0)}10%{-webkit-transform:scale(var(--fa-bounce-start-scale-x,1.1),var(--fa-bounce-start-scale-y,.9)) translateY(0);transform:scale(var(--fa-bounce-start-scale-x,1.1),var(--fa-bounce-start-scale-y,.9)) translateY(0)}30%{-webkit-transform:scale(var(--fa-bounce-jump-scale-x,.9),var(--fa-bounce-jump-scale-y,1.1)) translateY(var(--fa-bounce-height,-.5em));transform:scale(var(--fa-bounce-jump-scale-x,.9),var(--fa-bounce-jump-scale-y,1.1)) translateY(var(--fa-bounce-height,-.5em))}50%{-webkit-transform:scale(var(--fa-bounce-land-scale-x,1.05),var(--fa-bounce-land-scale-y,.95)) translateY(0);transform:scale(var(--fa-bounce-land-scale-x,1.05),var(--fa-bounce-land-scale-y,.95)) translateY(0)}57%{-webkit-transform:scale(1,1) translateY(var(--fa-bounce-rebound,-.125em));transform:scale(1,1) translateY(var(--fa-bounce-rebound,-.125em))}64%{-webkit-transform:scale(1,1) translateY(0);transform:scale(1,1) translateY(0)}100%{-webkit-transform:scale(1,1) translateY(0);transform:scale(1,1) translateY(0)}}@keyframes fa-bounce{0%{-webkit-transform:scale(1,1) translateY(0);transform:scale(1,1) translateY(0)}10%{-webkit-transform:scale(var(--fa-bounce-start-scale-x,1.1),var(--fa-bounce-start-scale-y,.9)) translateY(0);transform:scale(var(--fa-bounce-start-scale-x,1.1),var(--fa-bounce-start-scale-y,.9)) translateY(0)}30%{-webkit-transform:scale(var(--fa-bounce-jump-scale-x,.9),var(--fa-bounce-jump-scale-y,1.1)) translateY(var(--fa-bounce-height,-.5em));transform:scale(var(--fa-bounce-jump-scale-x,.9),var(--fa-bounce-jump-scale-y,1.1)) translateY(var(--fa-bounce-height,-.5em))}50%{-webkit-transform:scale(var(--fa-bounce-land-scale-x,1.05),var(--fa-bounce-land-scale-y,.95)) translateY(0);transform:scale(var(--fa-bounce-land-scale-x,1.05),var(--fa-bounce-land-scale-y,.95)) translateY(0)}57%{-webkit-transform:scale(1,1) translateY(var(--fa-bounce-rebound,-.125em));transform:scale(1,1) translateY(var(--fa-bounce-rebound,-.125em))}64%{-webkit-transform:scale(1,1) translateY(0);transform:scale(1,1) translateY(0)}100%{-webkit-transform:scale(1,1) translateY(0);transform:scale(1,1) translateY(0)}}@-webkit-keyframes fa-fade{50%{opacity:var(--fa-fade-opacity,.4)}}@keyframes fa-fade{50%{opacity:var(--fa-fade-opacity,.4)}}@-webkit-keyframes fa-beat-fade{0%,100%{opacity:var(--fa-beat-fade-opacity,.4);-webkit-transform:scale(1);transform:scale(1)}50%{opacity:1;-webkit-transform:scale(var(--fa-beat-fade-scale,1.125));transform:scale(var(--fa-beat-fade-scale,1.125))}}@keyframes fa-beat-fade{0%,100%{opacity:var(--fa-beat-fade-opacity,.4);-webkit-transform:scale(1);transform:scale(1)}50%{opacity:1;-webkit-transform:scale(var(--fa-beat-fade-scale,1.125));transform:scale(var(--fa-beat-fade-scale,1.125))}}@-webkit-keyframes fa-flip{50%{-webkit-transform:rotate3d(var(--fa-flip-x,0),var(--fa-flip-y,1),var(--fa-flip-z,0),var(--fa-flip-angle,-180deg));transform:rotate3d(var(--fa-flip-x,0),var(--fa-flip-y,1),var(--fa-flip-z,0),var(--fa-flip-angle,-180deg))}}@keyframes fa-flip{50%{-webkit-transform:rotate3d(var(--fa-flip-x,0),var(--fa-flip-y,1),var(--fa-flip-z,0),var(--fa-flip-angle,-180deg));transform:rotate3d(var(--fa-flip-x,0),var(--fa-flip-y,1),var(--fa-flip-z,0),var(--fa-flip-angle,-180deg))}}@-webkit-keyframes fa-shake{0%{-webkit-transform:rotate(-15deg);transform:rotate(-15deg)}4%{-webkit-transform:rotate(15deg);transform:rotate(15deg)}24%,8%{-webkit-transform:rotate(-18deg);transform:rotate(-18deg)}12%,28%{-webkit-transform:rotate(18deg);transform:rotate(18deg)}16%{-webkit-transform:rotate(-22deg);transform:rotate(-22deg)}20%{-webkit-transform:rotate(22deg);transform:rotate(22deg)}32%{-webkit-transform:rotate(-12deg);transform:rotate(-12deg)}36%{-webkit-transform:rotate(12deg);transform:rotate(12deg)}100%,40%{-webkit-transform:rotate(0);transform:rotate(0)}}@keyframes fa-shake{0%{-webkit-transform:rotate(-15deg);transform:rotate(-15deg)}4%{-webkit-transform:rotate(15deg);transform:rotate(15deg)}24%,8%{-webkit-transform:rotate(-18deg);transform:rotate(-18deg)}12%,28%{-webkit-transform:rotate(18deg);transform:rotate(18deg)}16%{-webkit-transform:rotate(-22deg);transform:rotate(-22deg)}20%{-webkit-transform:rotate(22deg);transform:rotate(22deg)}32%{-webkit-transform:rotate(-12deg);transform:rotate(-12deg)}36%{-webkit-transform:rotate(12deg);transform:rotate(12deg)}100%,40%{-webkit-transform:rotate(0);transform:rotate(0)}}@-webkit-keyframes fa-spin{0%{-webkit-transform:rotate(0);transform:rotate(0)}100%{-webkit-transform:rotate(360deg);transform:rotate(360deg)}}@keyframes fa-spin{0%{-webkit-transform:rotate(0);transform:rotate(0)}100%{-webkit-transform:rotate(360deg);transform:rotate(360deg)}}.fa-rotate-90{-webkit-transform:rotate(90deg);transform:rotate(90deg)}.fa-rotate-180{-webkit-transform:rotate(180deg);transform:rotate(180deg)}.fa-rotate-270{-webkit-transform:rotate(270deg);transform:rotate(270deg)}.fa-flip-horizontal{-webkit-transform:scale(-1,1);transform:scale(-1,1)}.fa-flip-vertical{-webkit-transform:scale(1,-1);transform:scale(1,-1)}.fa-flip-both,.fa-flip-horizontal.fa-flip-vertical{-webkit-transform:scale(-1,-1);transform:scale(-1,-1)}.fa-rotate-by{-webkit-transform:rotate(var(--fa-rotate-angle,0));transform:rotate(var(--fa-rotate-angle,0))}.fa-stack{display:inline-block;vertical-align:middle;height:2em;position:relative;width:2.5em}.fa-stack-1x,.fa-stack-2x{bottom:0;left:0;margin:auto;position:absolute;right:0;top:0;z-index:var(--fa-stack-z-index,auto)}.svg-inline--fa.fa-stack-1x{height:1em;width:1.25em}.svg-inline--fa.fa-stack-2x{height:2em;width:2.5em}.fa-inverse{color:var(--fa-inverse,#fff)}.fa-sr-only,.sr-only{position:absolute;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0,0,0,0);white-space:nowrap;border-width:0}.fa-sr-only-focusable:not(:focus),.sr-only-focusable:not(:focus){position:absolute;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0,0,0,0);white-space:nowrap;border-width:0}.svg-inline--fa .fa-primary{fill:var(--fa-primary-color,currentColor);opacity:var(--fa-primary-opacity,1)}.svg-inline--fa .fa-secondary{fill:var(--fa-secondary-color,currentColor);opacity:var(--fa-secondary-opacity,.4)}.svg-inline--fa.fa-swap-opacity .fa-primary{opacity:var(--fa-secondary-opacity,.4)}.svg-inline--fa.fa-swap-opacity .fa-secondary{opacity:var(--fa-primary-opacity,1)}.svg-inline--fa mask .fa-primary,.svg-inline--fa mask .fa-secondary{fill:#000}.fa-duotone.fa-inverse,.fad.fa-inverse{color:var(--fa-inverse,#fff)}</style><link href="./Comparação com SPSS — documentação do pandas 3.0.2_files/theme.css" rel="stylesheet">
+<link href="./Comparação com SPSS — documentação do pandas 3.0.2_files/pydata-sphinx-theme.css" rel="stylesheet">
+
+    <link rel="stylesheet" type="text/css" href="./Comparação com SPSS — documentação do pandas 3.0.2_files/pygments.css">
+    <link rel="stylesheet" type="text/css" href="./Comparação com SPSS — documentação do pandas 3.0.2_files/plot_directive.css">
+    <link rel="stylesheet" type="text/css" href="./Comparação com SPSS — documentação do pandas 3.0.2_files/copybutton.css">
+    <link rel="stylesheet" type="text/css" href="./Comparação com SPSS — documentação do pandas 3.0.2_files/sphinx-design.min.css">
+    <link rel="stylesheet" type="text/css" href="./Comparação com SPSS — documentação do pandas 3.0.2_files/getting_started.css">
+    <link rel="stylesheet" type="text/css" href="./Comparação com SPSS — documentação do pandas 3.0.2_files/pandas.css">
+  
+  <!-- So that users can add custom icons -->
+  <script src="./Comparação com SPSS — documentação do pandas 3.0.2_files/fontawesome.js.baixados"></script>
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="./Comparação com SPSS — documentação do pandas 3.0.2_files/bootstrap.js.baixados">
+<link rel="preload" as="script" href="./Comparação com SPSS — documentação do pandas 3.0.2_files/pydata-sphinx-theme.js.baixados">
+
+    <script src="./Comparação com SPSS — documentação do pandas 3.0.2_files/documentation_options.js.baixados"></script>
+    <script src="./Comparação com SPSS — documentação do pandas 3.0.2_files/doctools.js.baixados"></script>
+    <script src="./Comparação com SPSS — documentação do pandas 3.0.2_files/sphinx_highlight.js.baixados"></script>
+    <script src="./Comparação com SPSS — documentação do pandas 3.0.2_files/clipboard.min.js.baixados"></script>
+    <script src="./Comparação com SPSS — documentação do pandas 3.0.2_files/copybutton.js.baixados"></script>
+    <script src="./Comparação com SPSS — documentação do pandas 3.0.2_files/design-tabs.js.baixados"></script>
+    <script data-domain="pandas.pydata.org" defer="defer" src="./Comparação com SPSS — documentação do pandas 3.0.2_files/script.js.baixados"></script>
+    <script src="./Comparação com SPSS — documentação do pandas 3.0.2_files/embed-amd.js.baixados"></script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'getting_started/comparison/comparison_with_spss';</script>
+    <script>
+        DOCUMENTATION_OPTIONS.theme_version = '0.16.1';
+        DOCUMENTATION_OPTIONS.theme_switcher_json_url = 'https://pandas.pydata.org/versions.json';
+        DOCUMENTATION_OPTIONS.theme_switcher_version_match = '3.0';
+        DOCUMENTATION_OPTIONS.show_version_warning_banner =
+            false;
+        </script>
+    <link rel="icon" href="https://pandas.pydata.org/docs/_static/favicon.ico">
+    <link rel="index" title="Index" href="https://pandas.pydata.org/docs/genindex.html">
+    <link rel="search" title="Search" href="https://pandas.pydata.org/docs/search.html">
+    <link rel="next" title="Community tutorials" href="https://pandas.pydata.org/docs/getting_started/tutorials.html">
+    <link rel="prev" title="Comparison with Stata" href="https://pandas.pydata.org/docs/getting_started/comparison/comparison_with_stata.html">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="docsearch:language" content="en">
+  <meta name="docsearch:version" content="3.0.2">
+  </head>
+  
+  
+  <body data-bs-spy="scroll" data-bs-target=".bd-toc-nav" data-offset="180" data-bs-root-margin="0px 0px -60%" data-default-mode="">
+
+  
+  
+  <div id="pst-skip-link" class="skip-link d-print-none"><a href="https://pandas.pydata.org/docs/getting_started/comparison/comparison_with_spss.html#main-content" _msttexthash="357760" _msthash="1">Skip to main content</a></div>
+  
+  <div id="pst-scroll-pixel-helper"></div>
+  
+  <button type="button" class="btn rounded-pill" id="pst-back-to-top" _msthidden="1">
+    <svg class="svg-inline--fa fa-arrow-up" aria-hidden="true" focusable="false" data-prefix="fas" data-icon="arrow-up" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 384 512" data-fa-i2svg=""><path fill="currentColor" d="M214.6 41.4c-12.5-12.5-32.8-12.5-45.3 0l-160 160c-12.5 12.5-12.5 32.8 0 45.3s32.8 12.5 45.3 0L160 141.2V448c0 17.7 14.3 32 32 32s32-14.3 32-32V141.2L329.4 246.6c12.5 12.5 32.8 12.5 45.3 0s12.5-32.8 0-45.3l-160-160z"></path></svg><!-- <i class="fa-solid fa-arrow-up"></i> Font Awesome fontawesome.com --><font _mstmutation="1" _msttexthash="137137" _msthidden="1" _msthash="2">Back to top</font></button>
+
+  
+  <dialog id="pst-search-dialog" _msthidden="1">
+    
+<form class="bd-search d-flex align-items-center" action="https://pandas.pydata.org/docs/search.html" method="get" _msthidden="1">
+  <svg class="svg-inline--fa fa-magnifying-glass" aria-hidden="true" focusable="false" data-prefix="fas" data-icon="magnifying-glass" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" data-fa-i2svg=""><path fill="currentColor" d="M416 208c0 45.9-14.9 88.3-40 122.7L502.6 457.4c12.5 12.5 12.5 32.8 0 45.3s-32.8 12.5-45.3 0L330.7 376c-34.4 25.2-76.8 40-122.7 40C93.1 416 0 322.9 0 208S93.1 0 208 0S416 93.1 416 208zM208 352a144 144 0 1 0 0-288 144 144 0 1 0 0 288z"></path></svg><!-- <i class="fa-solid fa-magnifying-glass"></i> Font Awesome fontawesome.com -->
+  <input type="search" class="form-control" name="q" placeholder="Search the docs ..." aria-label="Search the docs ..." autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false" _msthidden="A" _mstplaceholder="267410" _msthash="3" _mstaria-label="267410">
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form>
+  </dialog>
+
+  <div class="pst-async-banner-revealer" style="height: auto;">
+  <aside id="bd-header-version-warning" class="d-none d-print-none" aria-label="Version warning" _msthidden="A" _mstaria-label="264654" _msthash="4"></aside>
+  <aside class="bd-header-announcement d-print-none" aria-label="Anúncio" data-pst-announcement-url="https://raw.githubusercontent.com/pandas-dev/pandas/main/doc/_templates/docs-announcement-banner.html" _mstaria-label="207376" _msthash="5"><div class="bd-header-announcement__content" _msttexthash="1757158" _msthash="6">Anúncio: Pandas 3.0 lançado! Leia mais <a href="https://pandas.pydata.org/community/blog/pandas-3.0.html" _istranslated="1">no post do blog</a></div><a class="ms-3 my-1 align-baseline"><svg class="svg-inline--fa fa-xmark" aria-hidden="true" focusable="false" data-prefix="fas" data-icon="xmark" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 384 512" data-fa-i2svg=""><path fill="currentColor" d="M342.6 150.6c12.5-12.5 12.5-32.8 0-45.3s-32.8-12.5-45.3 0L192 210.7 86.6 105.4c-12.5-12.5-32.8-12.5-45.3 0s-12.5 32.8 0 45.3L146.7 256 41.4 361.4c-12.5 12.5-12.5 32.8 0 45.3s32.8 12.5 45.3 0L192 301.3 297.4 406.6c12.5 12.5 32.8 12.5 45.3 0s12.5-32.8 0-45.3L237.3 256 342.6 150.6z"></path></svg><!-- <i class="fa-solid fa-xmark"></i> Font Awesome fontawesome.com --></a></aside>
+</div>
+
+  
+    <header class="bd-header navbar navbar-expand-lg bd-navbar d-print-none">
+<div class="bd-header__inner bd-page-width">
+  <button class="pst-navbar-icon sidebar-toggle primary-toggle" aria-label="Site navigation" _msthidden="A" _mstaria-label="261573" _msthash="7">
+    <svg class="svg-inline--fa fa-bars" aria-hidden="true" focusable="false" data-prefix="fas" data-icon="bars" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512" data-fa-i2svg=""><path fill="currentColor" d="M0 96C0 78.3 14.3 64 32 64H416c17.7 0 32 14.3 32 32s-14.3 32-32 32H32C14.3 128 0 113.7 0 96zM0 256c0-17.7 14.3-32 32-32H416c17.7 0 32 14.3 32 32s-14.3 32-32 32H32c-17.7 0-32-14.3-32-32zM448 416c0 17.7-14.3 32-32 32H32c-17.7 0-32-14.3-32-32s14.3-32 32-32H416c17.7 0 32 14.3 32 32z"></path></svg><!-- <span class="fa-solid fa-bars"></span> Font Awesome fontawesome.com -->
+  </button>
+  
+  
+  <div class=" navbar-header-items__start">
+    
+      <div class="navbar-item">
+
+  
+    
+  
+
+<a class="navbar-brand logo" href="https://pandas.pydata.org/docs/index.html">
+  
+  
+  
+  
+  
+    
+    
+      
+    
+    
+    <img src="./Comparação com SPSS — documentação do pandas 3.0.2_files/pandas.svg" class="logo__image only-light" alt="pandas 3.0.2 documentation - Home" _msthidden="A" _mstalt="753129" _msthash="8">
+    <img src="./Comparação com SPSS — documentação do pandas 3.0.2_files/pandas_white.svg" class="logo__image only-dark pst-js-only" alt="Documentação do pandas 3.0.2 - Início" _mstalt="753129" _msthash="9">
+  
+  
+</a></div>
+    
+  </div>
+  
+  <div class=" navbar-header-items">
+    
+    <div class="me-auto navbar-header-items__center">
+      
+        <div class="navbar-item">
+<nav>
+  <ul class="bd-navbar-elements navbar-nav">
+    
+<li class="nav-item current active">
+  <a class="nav-link nav-internal" href="https://pandas.pydata.org/docs/getting_started/index.html" _msttexthash="150124" _msthash="10"> Começando </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="https://pandas.pydata.org/docs/user_guide/index.html" _msttexthash="257231" _msthash="11"> Guia do Usuário </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="https://pandas.pydata.org/docs/reference/index.html" _msttexthash="275613" _msthash="12"> Referência de API </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="https://pandas.pydata.org/docs/development/index.html" _msttexthash="296036" _msthash="13"> Desenvolvimento </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="https://pandas.pydata.org/docs/whatsnew/index.html" _msttexthash="378716" _msthash="14"> Notas de lançamento </a>
+</li>
+
+  </ul>
+</nav></div>
+      
+    </div>
+    
+    
+    <div class="navbar-header-items__end">
+      
+        <div class="navbar-item navbar-persistent--container">
+          
+
+<button class="btn search-button-field search-button__button pst-js-only" aria-label="Busca" data-bs-placement="bottom" data-bs-toggle="tooltip" data-bs-original-title="Search" _mstaria-label="74607" _msthash="15">
+ <svg class="svg-inline--fa fa-magnifying-glass" aria-hidden="true" focusable="false" data-prefix="fas" data-icon="magnifying-glass" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" data-fa-i2svg=""><path fill="currentColor" d="M416 208c0 45.9-14.9 88.3-40 122.7L502.6 457.4c12.5 12.5 12.5 32.8 0 45.3s-32.8 12.5-45.3 0L330.7 376c-34.4 25.2-76.8 40-122.7 40C93.1 416 0 322.9 0 208S93.1 0 208 0S416 93.1 416 208zM208 352a144 144 0 1 0 0-288 144 144 0 1 0 0 288z"></path></svg><!-- <i class="fa-solid fa-magnifying-glass"></i> Font Awesome fontawesome.com -->
+ <span class="search-button__default-text" _msttexthash="58370" _msthash="16">Busca</span>
+ <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+</button>
+        </div>
+      
+      
+        <div class="navbar-item">
+<div class="version-switcher__container dropdown pst-js-only">
+  <button id="pst-version-switcher-button-2" type="button" class="version-switcher__button btn btn-sm dropdown-toggle" data-bs-toggle="dropdown" aria-haspopup="listbox" aria-controls="pst-version-switcher-list-2" aria-label="Lista de switchers de versões" data-active-version-name="3.0 (stable)" data-active-version="3.0" _mstaria-label="431249" _msthash="17" _msttexthash="190658">3.0 (estável)</button>
+  <div id="pst-version-switcher-list-2" class="version-switcher__menu dropdown-menu list-group-flush py-0 dropdown-menu-dark" role="listbox" aria-labelledby="pst-version-switcher-button-2" _msthidden="12">
+    <!-- dropdown will be populated by javascript on page load -->
+  <a class="dropdown-item list-group-item list-group-item-action py-1" href="https://pandas.pydata.org/docs/dev/getting_started/comparison/comparison_with_spss.html" role="option" data-version-name="dev" data-version="dev" _msthidden="1"><span _msttexthash="33410" _msthidden="1" _msthash="18">dev</span></a><a class="dropdown-item list-group-item list-group-item-action py-1 active" href="https://pandas.pydata.org/docs/getting_started/comparison/comparison_with_spss.html" role="option" data-version-name="3.0 (stable)" data-version="3.0" _msthidden="1"><span _msttexthash="140140" _msthidden="1" _msthash="19">3.0 (stable)</span></a><a class="dropdown-item list-group-item list-group-item-action py-1" href="https://pandas.pydata.org/pandas-docs/version/2.3/getting_started/comparison/comparison_with_spss.html" role="option" data-version-name="2.3" data-version="2.3" _msthidden="1"><span _msttexthash="15301" _msthidden="1" _msthash="20">2.3</span></a><a class="dropdown-item list-group-item list-group-item-action py-1" href="https://pandas.pydata.org/pandas-docs/version/2.2/getting_started/comparison/comparison_with_spss.html" role="option" data-version-name="2.2" data-version="2.2" _msthidden="1"><span _msttexthash="15184" _msthidden="1" _msthash="21">2.2</span></a><a class="dropdown-item list-group-item list-group-item-action py-1" href="https://pandas.pydata.org/pandas-docs/version/2.1/getting_started/comparison/comparison_with_spss.html" role="option" data-version-name="2.1" data-version="2.1" _msthidden="1"><span _msttexthash="15067" _msthidden="1" _msthash="22">2.1</span></a><a class="dropdown-item list-group-item list-group-item-action py-1" href="https://pandas.pydata.org/pandas-docs/version/2.0/getting_started/comparison/comparison_with_spss.html" role="option" data-version-name="2.0" data-version="2.0" _msthidden="1"><span _msttexthash="14950" _msthidden="1" _msthash="23">2.0</span></a><a class="dropdown-item list-group-item list-group-item-action py-1" href="https://pandas.pydata.org/pandas-docs/version/1.5/getting_started/comparison/comparison_with_spss.html" role="option" data-version-name="1.5" data-version="1.5" _msthidden="1"><span _msttexthash="15444" _msthidden="1" _msthash="24">1.5</span></a><a class="dropdown-item list-group-item list-group-item-action py-1" href="https://pandas.pydata.org/pandas-docs/version/1.4/getting_started/comparison/comparison_with_spss.html" role="option" data-version-name="1.4" data-version="1.4" _msthidden="1"><span _msttexthash="15327" _msthidden="1" _msthash="25">1.4</span></a><a class="dropdown-item list-group-item list-group-item-action py-1" href="https://pandas.pydata.org/pandas-docs/version/1.3/getting_started/comparison/comparison_with_spss.html" role="option" data-version-name="1.3" data-version="1.3" _msthidden="1"><span _msttexthash="15210" _msthidden="1" _msthash="26">1.3</span></a><a class="dropdown-item list-group-item list-group-item-action py-1" href="https://pandas.pydata.org/pandas-docs/version/1.2/getting_started/comparison/comparison_with_spss.html" role="option" data-version-name="1.2" data-version="1.2" _msthidden="1"><span _msttexthash="15093" _msthidden="1" _msthash="27">1.2</span></a><a class="dropdown-item list-group-item list-group-item-action py-1" href="https://pandas.pydata.org/pandas-docs/version/1.1/getting_started/comparison/comparison_with_spss.html" role="option" data-version-name="1.1" data-version="1.1" _msthidden="1"><span _msttexthash="14976" _msthidden="1" _msthash="28">1.1</span></a><a class="dropdown-item list-group-item list-group-item-action py-1" href="https://pandas.pydata.org/pandas-docs/version/1.0/getting_started/comparison/comparison_with_spss.html" role="option" data-version-name="1.0" data-version="1.0" _msthidden="1"><span _msttexthash="14859" _msthidden="1" _msthash="29">1.0</span></a></div>
+</div></div>
+      
+        <div class="navbar-item">
+
+<button class="btn btn-sm nav-link pst-navbar-icon theme-switch-button pst-js-only" aria-label="Modo de cor" data-bs-title="Color mode" data-bs-placement="bottom" data-bs-toggle="tooltip" _mstaria-label="134667" _msthash="30">
+  <svg class="svg-inline--fa fa-sun theme-switch fa-lg" data-mode="light" aria-labelledby="svg-inline--fa-title-zlZGpe8XNwOg" data-prefix="fas" data-icon="sun" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" data-fa-i2svg=""><title id="svg-inline--fa-title-zlZGpe8XNwOg" _mstTextHash="33358" _mstHash="31">Luz</title><path fill="currentColor" d="M361.5 1.2c5 2.1 8.6 6.6 9.6 11.9L391 121l107.9 19.8c5.3 1 9.8 4.6 11.9 9.6s1.5 10.7-1.6 15.2L446.9 256l62.3 90.3c3.1 4.5 3.7 10.2 1.6 15.2s-6.6 8.6-11.9 9.6L391 391 371.1 498.9c-1 5.3-4.6 9.8-9.6 11.9s-10.7 1.5-15.2-1.6L256 446.9l-90.3 62.3c-4.5 3.1-10.2 3.7-15.2 1.6s-8.6-6.6-9.6-11.9L121 391 13.1 371.1c-5.3-1-9.8-4.6-11.9-9.6s-1.5-10.7 1.6-15.2L65.1 256 2.8 165.7c-3.1-4.5-3.7-10.2-1.6-15.2s6.6-8.6 11.9-9.6L121 121 140.9 13.1c1-5.3 4.6-9.8 9.6-11.9s10.7-1.5 15.2 1.6L256 65.1 346.3 2.8c4.5-3.1 10.2-3.7 15.2-1.6zM160 256a96 96 0 1 1 192 0 96 96 0 1 1 -192 0zm224 0a128 128 0 1 0 -256 0 128 128 0 1 0 256 0z"></path></svg><!-- <i class="theme-switch fa-solid fa-sun                fa-lg" data-mode="light" title="Light"></i> Font Awesome fontawesome.com -->
+  <svg class="svg-inline--fa fa-moon theme-switch fa-lg" data-mode="dark" aria-labelledby="svg-inline--fa-title-dyl00a1FMAfy" data-prefix="fas" data-icon="moon" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 384 512" data-fa-i2svg=""><title id="svg-inline--fa-title-dyl00a1FMAfy" _mstTextHash="78650" _mstHash="32">Escuro</title><path fill="currentColor" d="M223.5 32C100 32 0 132.3 0 256S100 480 223.5 480c60.6 0 115.5-24.2 155.8-63.4c5-4.9 6.3-12.5 3.1-18.7s-10.1-9.7-17-8.5c-9.8 1.7-19.8 2.6-30.1 2.6c-96.9 0-175.5-78.8-175.5-176c0-65.8 36-123.1 89.3-153.3c6.1-3.5 9.2-10.5 7.7-17.3s-7.3-11.9-14.3-12.5c-6.3-.5-12.6-.8-19-.8z"></path></svg><!-- <i class="theme-switch fa-solid fa-moon               fa-lg" data-mode="dark" title="Dark"></i> Font Awesome fontawesome.com -->
+  <svg class="svg-inline--fa fa-circle-half-stroke theme-switch fa-lg" data-mode="auto" aria-labelledby="svg-inline--fa-title-OYHTnOnArkvJ" data-prefix="fas" data-icon="circle-half-stroke" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" data-fa-i2svg=""><title id="svg-inline--fa-title-OYHTnOnArkvJ" _mstTextHash="581243" _mstHash="33">Configurações do Sistema</title><path fill="currentColor" d="M448 256c0-106-86-192-192-192V448c106 0 192-86 192-192zM0 256a256 256 0 1 1 512 0A256 256 0 1 1 0 256z"></path></svg><!-- <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg" data-mode="auto" title="System Settings"></i> Font Awesome fontawesome.com -->
+</button></div>
+      
+        <div class="navbar-item"><ul class="navbar-icon-links" aria-label="Links de Ícones" _mstaria-label="131963" _msthash="34">
+        <li class="nav-item">
+          
+          
+          
+          
+          
+          
+          
+          
+          <a href="https://github.com/pandas-dev/pandas" class="nav-link pst-navbar-icon" rel="noopener" target="_blank" data-bs-toggle="tooltip" data-bs-placement="bottom" data-bs-original-title="GitHub"><svg class="svg-inline--fa fa-square-github fa-lg" aria-hidden="true" focusable="false" data-prefix="fab" data-icon="square-github" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512" data-fa-i2svg=""><path fill="currentColor" d="M448 96c0-35.3-28.7-64-64-64H64C28.7 32 0 60.7 0 96V416c0 35.3 28.7 64 64 64H384c35.3 0 64-28.7 64-64V96zM265.8 407.7c0-1.8 0-6 .1-11.6c.1-11.4 .1-28.8 .1-43.7c0-15.6-5.2-25.5-11.3-30.7c37-4.1 76-9.2 76-73.1c0-18.2-6.5-27.3-17.1-39c1.7-4.3 7.4-22-1.7-45c-13.9-4.3-45.7 17.9-45.7 17.9c-13.2-3.7-27.5-5.6-41.6-5.6s-28.4 1.9-41.6 5.6c0 0-31.8-22.2-45.7-17.9c-9.1 22.9-3.5 40.6-1.7 45c-10.6 11.7-15.6 20.8-15.6 39c0 63.6 37.3 69 74.3 73.1c-4.8 4.3-9.1 11.7-10.6 22.3c-9.5 4.3-33.8 11.7-48.3-13.9c-9.1-15.8-25.5-17.1-25.5-17.1c-16.2-.2-1.1 10.2-1.1 10.2c10.8 5 18.4 24.2 18.4 24.2c9.7 29.7 56.1 19.7 56.1 19.7c0 9 .1 21.7 .1 30.6c0 4.8 .1 8.6 .1 10c0 4.3-3 9.5-11.5 8C106 393.6 59.8 330.8 59.8 257.4c0-91.8 70.2-161.5 162-161.5s166.2 69.7 166.2 161.5c.1 73.4-44.7 136.3-110.7 158.3c-8.4 1.5-11.5-3.7-11.5-8zm-90.5-54.8c-.2-1.5 1.1-2.8 3-3.2c1.9-.2 3.7 .6 3.9 1.9c.3 1.3-1 2.6-3 3c-1.9 .4-3.7-.4-3.9-1.7zm-9.1 3.2c-2.2 .2-3.7-.9-3.7-2.4c0-1.3 1.5-2.4 3.5-2.4c1.9-.2 3.7 .9 3.7 2.4c0 1.3-1.5 2.4-3.5 2.4zm-14.3-2.2c-1.9-.4-3.2-1.9-2.8-3.2s2.4-1.9 4.1-1.5c2 .6 3.3 2.1 2.8 3.4c-.4 1.3-2.4 1.9-4.1 1.3zm-12.5-7.3c-1.5-1.3-1.9-3.2-.9-4.1c.9-1.1 2.8-.9 4.3 .6c1.3 1.3 1.8 3.3 .9 4.1c-.9 1.1-2.8 .9-4.3-.6zm-8.5-10c-1.1-1.5-1.1-3.2 0-3.9c1.1-.9 2.8-.2 3.7 1.3c1.1 1.5 1.1 3.3 0 4.1c-.9 .6-2.6 0-3.7-1.5zm-6.3-8.8c-1.1-1.3-1.3-2.8-.4-3.5c.9-.9 2.4-.4 3.5 .6c1.1 1.3 1.3 2.8 .4 3.5c-.9 .9-2.4 .4-3.5-.6zm-6-6.4c-1.3-.6-1.9-1.7-1.5-2.6c.4-.6 1.5-.9 2.8-.4c1.3 .7 1.9 1.8 1.5 2.6c-.4 .9-1.7 1.1-2.8 .4z"></path></svg><!-- <i class="fa-brands fa-square-github fa-lg" aria-hidden="true"></i> Font Awesome fontawesome.com -->
+            <span class="sr-only" _msttexthash="72332" _msthash="35">GitHub</span></a>
+        </li>
+        <li class="nav-item">
+          
+          
+          
+          
+          
+          
+          
+          
+          <a href="https://x.com/pandas_dev" class="nav-link pst-navbar-icon" rel="noopener" target="_blank" data-bs-toggle="tooltip" data-bs-placement="bottom" data-bs-original-title="X"><svg class="svg-inline--fa fa-square-x-twitter fa-lg" aria-hidden="true" focusable="false" data-prefix="fab" data-icon="square-x-twitter" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512" data-fa-i2svg=""><path fill="currentColor" d="M64 32C28.7 32 0 60.7 0 96V416c0 35.3 28.7 64 64 64H384c35.3 0 64-28.7 64-64V96c0-35.3-28.7-64-64-64H64zm297.1 84L257.3 234.6 379.4 396H283.8L209 298.1 123.3 396H75.8l111-126.9L69.7 116h98l67.7 89.5L313.6 116h47.5zM323.3 367.6L153.4 142.9H125.1L296.9 367.6h26.3z"></path></svg><!-- <i class="fa-brands fa-square-x-twitter fa-lg" aria-hidden="true"></i> Font Awesome fontawesome.com -->
+            <span class="sr-only" _msttexthash="8008" _msthash="36">X</span></a>
+        </li>
+        <li class="nav-item">
+          
+          
+          
+          
+          
+          
+          
+          
+          <a href="https://fosstodon.org/@pandas_dev" class="nav-link pst-navbar-icon" rel="noopener" target="_blank" data-bs-toggle="tooltip" data-bs-placement="bottom" data-bs-original-title="Mastodon"><svg class="svg-inline--fa fa-mastodon fa-lg" aria-hidden="true" focusable="false" data-prefix="fab" data-icon="mastodon" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512" data-fa-i2svg=""><path fill="currentColor" d="M433 179.11c0-97.2-63.71-125.7-63.71-125.7-62.52-28.7-228.56-28.4-290.48 0 0 0-63.72 28.5-63.72 125.7 0 115.7-6.6 259.4 105.63 289.1 40.51 10.7 75.32 13 103.33 11.4 50.81-2.8 79.32-18.1 79.32-18.1l-1.7-36.9s-36.31 11.4-77.12 10.1c-40.41-1.4-83-4.4-89.63-54a102.54 102.54 0 0 1-.9-13.9c85.63 20.9 158.65 9.1 178.75 6.7 56.12-6.7 105-41.3 111.23-72.9 9.8-49.8 9-121.5 9-121.5zm-75.12 125.2h-46.63v-114.2c0-49.7-64-51.6-64 6.9v62.5h-46.33V197c0-58.5-64-56.6-64-6.9v114.2H90.19c0-122.1-5.2-147.9 18.41-175 25.9-28.9 79.82-30.8 103.83 6.1l11.6 19.5 11.6-19.5c24.11-37.1 78.12-34.8 103.83-6.1 23.71 27.3 18.4 53 18.4 175z"></path></svg><!-- <i class="fa-brands fa-mastodon fa-lg" aria-hidden="true"></i> Font Awesome fontawesome.com -->
+            <span class="sr-only" _msttexthash="159510" _msthash="37">Mastodonte</span></a>
+        </li>
+</ul></div>
+      
+    </div>
+    
+  </div>
+  
+  
+    <div class="navbar-persistent--mobile" _msthidden="2">
+
+<button class="btn search-button-field search-button__button pst-js-only" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip" data-bs-original-title="Search" _msthidden="1" _mstaria-label="74607" _msthash="38">
+ <svg class="svg-inline--fa fa-magnifying-glass" aria-hidden="true" focusable="false" data-prefix="fas" data-icon="magnifying-glass" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" data-fa-i2svg=""><path fill="currentColor" d="M416 208c0 45.9-14.9 88.3-40 122.7L502.6 457.4c12.5 12.5 12.5 32.8 0 45.3s-32.8 12.5-45.3 0L330.7 376c-34.4 25.2-76.8 40-122.7 40C93.1 416 0 322.9 0 208S93.1 0 208 0S416 93.1 416 208zM208 352a144 144 0 1 0 0-288 144 144 0 1 0 0 288z"></path></svg><!-- <i class="fa-solid fa-magnifying-glass"></i> Font Awesome fontawesome.com -->
+ <span class="search-button__default-text" _msttexthash="74607" _msthidden="1" _msthash="39">Search</span>
+ <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+</button>
+    </div>
+  
+
+  
+    <button class="pst-navbar-icon sidebar-toggle secondary-toggle" aria-label="On this page" _msthidden="A" _mstaria-label="156351" _msthash="40">
+      <svg class="svg-inline--fa fa-outdent" aria-hidden="true" focusable="false" data-prefix="fas" data-icon="outdent" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512" data-fa-i2svg=""><path fill="currentColor" d="M0 64C0 46.3 14.3 32 32 32H416c17.7 0 32 14.3 32 32s-14.3 32-32 32H32C14.3 96 0 81.7 0 64zM192 192c0-17.7 14.3-32 32-32H416c17.7 0 32 14.3 32 32s-14.3 32-32 32H224c-17.7 0-32-14.3-32-32zm32 96H416c17.7 0 32 14.3 32 32s-14.3 32-32 32H224c-17.7 0-32-14.3-32-32s14.3-32 32-32zM0 448c0-17.7 14.3-32 32-32H416c17.7 0 32 14.3 32 32s-14.3 32-32 32H32c-17.7 0-32-14.3-32-32zM.2 268.6c-8.2-6.4-8.2-18.9 0-25.3l101.9-79.3c10.5-8.2 25.8-.7 25.8 12.6V335.3c0 13.3-15.3 20.8-25.8 12.6L.2 268.6z"></path></svg><!-- <span class="fa-solid fa-outdent"></span> Font Awesome fontawesome.com -->
+    </button>
+  
+</div>
+
+    </header>
+  
+
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      
+      
+      <dialog id="pst-primary-sidebar-modal"></dialog>
+      <div id="pst-primary-sidebar" class="bd-sidebar-primary bd-sidebar">
+        
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+      <div class="sidebar-header-items__center" _msthidden="5">
+        
+          
+          
+            <div class="navbar-item" _msthidden="5">
+<nav _msthidden="5">
+  <ul class="bd-navbar-elements navbar-nav" _msthidden="5">
+    
+<li class="nav-item current active" _msthidden="1">
+  <a class="nav-link nav-internal" href="https://pandas.pydata.org/docs/getting_started/index.html" _msttexthash="262210" _msthidden="1" _msthash="41">
+    Getting started
+  </a>
+</li>
+
+
+<li class="nav-item " _msthidden="1">
+  <a class="nav-link nav-internal" href="https://pandas.pydata.org/docs/user_guide/index.html" _msttexthash="130377" _msthidden="1" _msthash="42">
+    User Guide
+  </a>
+</li>
+
+
+<li class="nav-item " _msthidden="1">
+  <a class="nav-link nav-internal" href="https://pandas.pydata.org/docs/reference/index.html" _msttexthash="193856" _msthidden="1" _msthash="43">
+    API reference
+  </a>
+</li>
+
+
+<li class="nav-item " _msthidden="1">
+  <a class="nav-link nav-internal" href="https://pandas.pydata.org/docs/development/index.html" _msttexthash="183365" _msthidden="1" _msthash="44">
+    Development
+  </a>
+</li>
+
+
+<li class="nav-item " _msthidden="1">
+  <a class="nav-link nav-internal" href="https://pandas.pydata.org/docs/whatsnew/index.html" _msttexthash="207636" _msthidden="1" _msthash="45">
+    Release notes
+  </a>
+</li>
+
+  </ul>
+</nav></div>
+          
+        
+      </div>
+    
+    
+    
+      <div class="sidebar-header-items__end">
+        
+          <div class="navbar-item" _msthidden="14">
+<div class="version-switcher__container dropdown pst-js-only" _msthidden="14">
+  <button id="pst-version-switcher-button-3" type="button" class="version-switcher__button btn btn-sm dropdown-toggle" data-bs-toggle="dropdown" aria-haspopup="listbox" aria-controls="pst-version-switcher-list-3" aria-label="Version switcher list" data-active-version-name="3.0 (stable)" data-active-version="3.0" _msthidden="1" _mstaria-label="431249" _msthash="46" _msttexthash="140140">3.0 (stable)</button>
+  <div id="pst-version-switcher-list-3" class="version-switcher__menu dropdown-menu list-group-flush py-0 dropdown-menu-dark" role="listbox" aria-labelledby="pst-version-switcher-button-3" _msthidden="12">
+    <!-- dropdown will be populated by javascript on page load -->
+  <a class="dropdown-item list-group-item list-group-item-action py-1" href="https://pandas.pydata.org/docs/dev/getting_started/comparison/comparison_with_spss.html" role="option" data-version-name="dev" data-version="dev" _msthidden="1"><span _msttexthash="33410" _msthidden="1" _msthash="47">dev</span></a><a class="dropdown-item list-group-item list-group-item-action py-1 active" href="https://pandas.pydata.org/docs/getting_started/comparison/comparison_with_spss.html" role="option" data-version-name="3.0 (stable)" data-version="3.0" _msthidden="1"><span _msttexthash="140140" _msthidden="1" _msthash="48">3.0 (stable)</span></a><a class="dropdown-item list-group-item list-group-item-action py-1" href="https://pandas.pydata.org/pandas-docs/version/2.3/getting_started/comparison/comparison_with_spss.html" role="option" data-version-name="2.3" data-version="2.3" _msthidden="1"><span _msttexthash="15301" _msthidden="1" _msthash="49">2.3</span></a><a class="dropdown-item list-group-item list-group-item-action py-1" href="https://pandas.pydata.org/pandas-docs/version/2.2/getting_started/comparison/comparison_with_spss.html" role="option" data-version-name="2.2" data-version="2.2" _msthidden="1"><span _msttexthash="15184" _msthidden="1" _msthash="50">2.2</span></a><a class="dropdown-item list-group-item list-group-item-action py-1" href="https://pandas.pydata.org/pandas-docs/version/2.1/getting_started/comparison/comparison_with_spss.html" role="option" data-version-name="2.1" data-version="2.1" _msthidden="1"><span _msttexthash="15067" _msthidden="1" _msthash="51">2.1</span></a><a class="dropdown-item list-group-item list-group-item-action py-1" href="https://pandas.pydata.org/pandas-docs/version/2.0/getting_started/comparison/comparison_with_spss.html" role="option" data-version-name="2.0" data-version="2.0" _msthidden="1"><span _msttexthash="14950" _msthidden="1" _msthash="52">2.0</span></a><a class="dropdown-item list-group-item list-group-item-action py-1" href="https://pandas.pydata.org/pandas-docs/version/1.5/getting_started/comparison/comparison_with_spss.html" role="option" data-version-name="1.5" data-version="1.5" _msthidden="1"><span _msttexthash="15444" _msthidden="1" _msthash="53">1.5</span></a><a class="dropdown-item list-group-item list-group-item-action py-1" href="https://pandas.pydata.org/pandas-docs/version/1.4/getting_started/comparison/comparison_with_spss.html" role="option" data-version-name="1.4" data-version="1.4" _msthidden="1"><span _msttexthash="15327" _msthidden="1" _msthash="54">1.4</span></a><a class="dropdown-item list-group-item list-group-item-action py-1" href="https://pandas.pydata.org/pandas-docs/version/1.3/getting_started/comparison/comparison_with_spss.html" role="option" data-version-name="1.3" data-version="1.3" _msthidden="1"><span _msttexthash="15210" _msthidden="1" _msthash="55">1.3</span></a><a class="dropdown-item list-group-item list-group-item-action py-1" href="https://pandas.pydata.org/pandas-docs/version/1.2/getting_started/comparison/comparison_with_spss.html" role="option" data-version-name="1.2" data-version="1.2" _msthidden="1"><span _msttexthash="15093" _msthidden="1" _msthash="56">1.2</span></a><a class="dropdown-item list-group-item list-group-item-action py-1" href="https://pandas.pydata.org/pandas-docs/version/1.1/getting_started/comparison/comparison_with_spss.html" role="option" data-version-name="1.1" data-version="1.1" _msthidden="1"><span _msttexthash="14976" _msthidden="1" _msthash="57">1.1</span></a><a class="dropdown-item list-group-item list-group-item-action py-1" href="https://pandas.pydata.org/pandas-docs/version/1.0/getting_started/comparison/comparison_with_spss.html" role="option" data-version-name="1.0" data-version="1.0" _msthidden="1"><span _msttexthash="14859" _msthidden="1" _msthash="58">1.0</span></a></div>
+</div></div>
+        
+          <div class="navbar-item">
+
+<button class="btn btn-sm nav-link pst-navbar-icon theme-switch-button pst-js-only" aria-label="Color mode" data-bs-title="Color mode" data-bs-placement="bottom" data-bs-toggle="tooltip" _msthidden="A" _mstaria-label="134667" _msthash="59">
+  <svg class="svg-inline--fa fa-sun theme-switch fa-lg" data-mode="light" aria-labelledby="svg-inline--fa-title-6kWB6uH1fa4v" data-prefix="fas" data-icon="sun" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" data-fa-i2svg=""><title id="svg-inline--fa-title-6kWB6uH1fa4v" _mstTextHash="33358" _mstHash="60">Luz</title><path fill="currentColor" d="M361.5 1.2c5 2.1 8.6 6.6 9.6 11.9L391 121l107.9 19.8c5.3 1 9.8 4.6 11.9 9.6s1.5 10.7-1.6 15.2L446.9 256l62.3 90.3c3.1 4.5 3.7 10.2 1.6 15.2s-6.6 8.6-11.9 9.6L391 391 371.1 498.9c-1 5.3-4.6 9.8-9.6 11.9s-10.7 1.5-15.2-1.6L256 446.9l-90.3 62.3c-4.5 3.1-10.2 3.7-15.2 1.6s-8.6-6.6-9.6-11.9L121 391 13.1 371.1c-5.3-1-9.8-4.6-11.9-9.6s-1.5-10.7 1.6-15.2L65.1 256 2.8 165.7c-3.1-4.5-3.7-10.2-1.6-15.2s6.6-8.6 11.9-9.6L121 121 140.9 13.1c1-5.3 4.6-9.8 9.6-11.9s10.7-1.5 15.2 1.6L256 65.1 346.3 2.8c4.5-3.1 10.2-3.7 15.2-1.6zM160 256a96 96 0 1 1 192 0 96 96 0 1 1 -192 0zm224 0a128 128 0 1 0 -256 0 128 128 0 1 0 256 0z"></path></svg><!-- <i class="theme-switch fa-solid fa-sun                fa-lg" data-mode="light" title="Light"></i> Font Awesome fontawesome.com -->
+  <svg class="svg-inline--fa fa-moon theme-switch fa-lg" data-mode="dark" aria-labelledby="svg-inline--fa-title-IeDbJBCTyMZb" data-prefix="fas" data-icon="moon" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 384 512" data-fa-i2svg=""><title id="svg-inline--fa-title-IeDbJBCTyMZb" _mstTextHash="78650" _mstHash="61">Escuro</title><path fill="currentColor" d="M223.5 32C100 32 0 132.3 0 256S100 480 223.5 480c60.6 0 115.5-24.2 155.8-63.4c5-4.9 6.3-12.5 3.1-18.7s-10.1-9.7-17-8.5c-9.8 1.7-19.8 2.6-30.1 2.6c-96.9 0-175.5-78.8-175.5-176c0-65.8 36-123.1 89.3-153.3c6.1-3.5 9.2-10.5 7.7-17.3s-7.3-11.9-14.3-12.5c-6.3-.5-12.6-.8-19-.8z"></path></svg><!-- <i class="theme-switch fa-solid fa-moon               fa-lg" data-mode="dark" title="Dark"></i> Font Awesome fontawesome.com -->
+  <svg class="svg-inline--fa fa-circle-half-stroke theme-switch fa-lg" data-mode="auto" aria-labelledby="svg-inline--fa-title-S09fvHWYWEzC" data-prefix="fas" data-icon="circle-half-stroke" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" data-fa-i2svg=""><title id="svg-inline--fa-title-S09fvHWYWEzC" _mstTextHash="581243" _mstHash="62">Configurações do Sistema</title><path fill="currentColor" d="M448 256c0-106-86-192-192-192V448c106 0 192-86 192-192zM0 256a256 256 0 1 1 512 0A256 256 0 1 1 0 256z"></path></svg><!-- <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg" data-mode="auto" title="System Settings"></i> Font Awesome fontawesome.com -->
+</button></div>
+        
+          <div class="navbar-item" _msthidden="4"><ul class="navbar-icon-links" aria-label="Icon Links" _msthidden="3" _mstaria-label="131963" _msthash="63">
+        <li class="nav-item" _msthidden="1">
+          
+          
+          
+          
+          
+          
+          
+          
+          <a href="https://github.com/pandas-dev/pandas" class="nav-link pst-navbar-icon" rel="noopener" target="_blank" data-bs-toggle="tooltip" data-bs-placement="bottom" data-bs-original-title="GitHub" _msthidden="1"><svg class="svg-inline--fa fa-square-github fa-lg" aria-hidden="true" focusable="false" data-prefix="fab" data-icon="square-github" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512" data-fa-i2svg=""><path fill="currentColor" d="M448 96c0-35.3-28.7-64-64-64H64C28.7 32 0 60.7 0 96V416c0 35.3 28.7 64 64 64H384c35.3 0 64-28.7 64-64V96zM265.8 407.7c0-1.8 0-6 .1-11.6c.1-11.4 .1-28.8 .1-43.7c0-15.6-5.2-25.5-11.3-30.7c37-4.1 76-9.2 76-73.1c0-18.2-6.5-27.3-17.1-39c1.7-4.3 7.4-22-1.7-45c-13.9-4.3-45.7 17.9-45.7 17.9c-13.2-3.7-27.5-5.6-41.6-5.6s-28.4 1.9-41.6 5.6c0 0-31.8-22.2-45.7-17.9c-9.1 22.9-3.5 40.6-1.7 45c-10.6 11.7-15.6 20.8-15.6 39c0 63.6 37.3 69 74.3 73.1c-4.8 4.3-9.1 11.7-10.6 22.3c-9.5 4.3-33.8 11.7-48.3-13.9c-9.1-15.8-25.5-17.1-25.5-17.1c-16.2-.2-1.1 10.2-1.1 10.2c10.8 5 18.4 24.2 18.4 24.2c9.7 29.7 56.1 19.7 56.1 19.7c0 9 .1 21.7 .1 30.6c0 4.8 .1 8.6 .1 10c0 4.3-3 9.5-11.5 8C106 393.6 59.8 330.8 59.8 257.4c0-91.8 70.2-161.5 162-161.5s166.2 69.7 166.2 161.5c.1 73.4-44.7 136.3-110.7 158.3c-8.4 1.5-11.5-3.7-11.5-8zm-90.5-54.8c-.2-1.5 1.1-2.8 3-3.2c1.9-.2 3.7 .6 3.9 1.9c.3 1.3-1 2.6-3 3c-1.9 .4-3.7-.4-3.9-1.7zm-9.1 3.2c-2.2 .2-3.7-.9-3.7-2.4c0-1.3 1.5-2.4 3.5-2.4c1.9-.2 3.7 .9 3.7 2.4c0 1.3-1.5 2.4-3.5 2.4zm-14.3-2.2c-1.9-.4-3.2-1.9-2.8-3.2s2.4-1.9 4.1-1.5c2 .6 3.3 2.1 2.8 3.4c-.4 1.3-2.4 1.9-4.1 1.3zm-12.5-7.3c-1.5-1.3-1.9-3.2-.9-4.1c.9-1.1 2.8-.9 4.3 .6c1.3 1.3 1.8 3.3 .9 4.1c-.9 1.1-2.8 .9-4.3-.6zm-8.5-10c-1.1-1.5-1.1-3.2 0-3.9c1.1-.9 2.8-.2 3.7 1.3c1.1 1.5 1.1 3.3 0 4.1c-.9 .6-2.6 0-3.7-1.5zm-6.3-8.8c-1.1-1.3-1.3-2.8-.4-3.5c.9-.9 2.4-.4 3.5 .6c1.1 1.3 1.3 2.8 .4 3.5c-.9 .9-2.4 .4-3.5-.6zm-6-6.4c-1.3-.6-1.9-1.7-1.5-2.6c.4-.6 1.5-.9 2.8-.4c1.3 .7 1.9 1.8 1.5 2.6c-.4 .9-1.7 1.1-2.8 .4z"></path></svg><!-- <i class="fa-brands fa-square-github fa-lg" aria-hidden="true"></i> Font Awesome fontawesome.com -->
+            <span class="sr-only" _msttexthash="72332" _msthidden="1" _msthash="64">GitHub</span></a>
+        </li>
+        <li class="nav-item" _msthidden="1">
+          
+          
+          
+          
+          
+          
+          
+          
+          <a href="https://x.com/pandas_dev" class="nav-link pst-navbar-icon" rel="noopener" target="_blank" data-bs-toggle="tooltip" data-bs-placement="bottom" data-bs-original-title="X" _msthidden="1"><svg class="svg-inline--fa fa-square-x-twitter fa-lg" aria-hidden="true" focusable="false" data-prefix="fab" data-icon="square-x-twitter" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512" data-fa-i2svg=""><path fill="currentColor" d="M64 32C28.7 32 0 60.7 0 96V416c0 35.3 28.7 64 64 64H384c35.3 0 64-28.7 64-64V96c0-35.3-28.7-64-64-64H64zm297.1 84L257.3 234.6 379.4 396H283.8L209 298.1 123.3 396H75.8l111-126.9L69.7 116h98l67.7 89.5L313.6 116h47.5zM323.3 367.6L153.4 142.9H125.1L296.9 367.6h26.3z"></path></svg><!-- <i class="fa-brands fa-square-x-twitter fa-lg" aria-hidden="true"></i> Font Awesome fontawesome.com -->
+            <span class="sr-only" _msttexthash="8008" _msthidden="1" _msthash="65">X</span></a>
+        </li>
+        <li class="nav-item" _msthidden="1">
+          
+          
+          
+          
+          
+          
+          
+          
+          <a href="https://fosstodon.org/@pandas_dev" class="nav-link pst-navbar-icon" rel="noopener" target="_blank" data-bs-toggle="tooltip" data-bs-placement="bottom" data-bs-original-title="Mastodon" _msthidden="1"><svg class="svg-inline--fa fa-mastodon fa-lg" aria-hidden="true" focusable="false" data-prefix="fab" data-icon="mastodon" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512" data-fa-i2svg=""><path fill="currentColor" d="M433 179.11c0-97.2-63.71-125.7-63.71-125.7-62.52-28.7-228.56-28.4-290.48 0 0 0-63.72 28.5-63.72 125.7 0 115.7-6.6 259.4 105.63 289.1 40.51 10.7 75.32 13 103.33 11.4 50.81-2.8 79.32-18.1 79.32-18.1l-1.7-36.9s-36.31 11.4-77.12 10.1c-40.41-1.4-83-4.4-89.63-54a102.54 102.54 0 0 1-.9-13.9c85.63 20.9 158.65 9.1 178.75 6.7 56.12-6.7 105-41.3 111.23-72.9 9.8-49.8 9-121.5 9-121.5zm-75.12 125.2h-46.63v-114.2c0-49.7-64-51.6-64 6.9v62.5h-46.33V197c0-58.5-64-56.6-64-6.9v114.2H90.19c0-122.1-5.2-147.9 18.41-175 25.9-28.9 79.82-30.8 103.83 6.1l11.6 19.5 11.6-19.5c24.11-37.1 78.12-34.8 103.83-6.1 23.71 27.3 18.4 53 18.4 175z"></path></svg><!-- <i class="fa-brands fa-mastodon fa-lg" aria-hidden="true"></i> Font Awesome fontawesome.com -->
+            <span class="sr-only" _msttexthash="115882" _msthidden="1" _msthash="66">Mastodon</span></a>
+        </li>
+</ul></div>
+        
+      </div>
+    
+  </div>
+  
+    <div class="sidebar-primary-items__start sidebar-primary__section">
+        <div class="sidebar-primary-item"><nav class="bd-links" id="bd-docs-nav" aria-label="Navegação principal" _mstaria-label="260078" _msthash="67">
+  <div class="bd-toc-item navbar-nav">
+    
+    <ul class="current nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="https://pandas.pydata.org/docs/getting_started/install.html" _msttexthash="203125" _msthash="68">Instalação</a></li>
+<li class="toctree-l1"><a class="reference internal" href="https://pandas.pydata.org/docs/getting_started/overview.html" _msttexthash="398775" _msthash="69">Visão geral do pacote</a></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="https://pandas.pydata.org/docs/getting_started/intro_tutorials/index.html" _msttexthash="351793" _msthash="70">Tutoriais iniciais</a><details><summary><span class="toctree-toggle" role="presentation"><svg class="svg-inline--fa fa-chevron-down" aria-hidden="true" focusable="false" data-prefix="fas" data-icon="chevron-down" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" data-fa-i2svg=""><path fill="currentColor" d="M233.4 406.6c12.5 12.5 32.8 12.5 45.3 0l192-192c12.5-12.5 12.5-32.8 0-45.3s-32.8-12.5-45.3 0L256 338.7 86.6 169.4c-12.5-12.5-32.8-12.5-45.3 0s-12.5 32.8 0 45.3l192 192z"></path></svg><!-- <i class="fa-solid fa-chevron-down"></i> Font Awesome fontawesome.com --></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="https://pandas.pydata.org/docs/getting_started/intro_tutorials/01_table_oriented.html" _msttexthash="663884" _msthash="71">Que tipo de dados o Pandas lida?</a></li>
+<li class="toctree-l2"><a class="reference internal" href="https://pandas.pydata.org/docs/getting_started/intro_tutorials/02_read_write.html" _msttexthash="1029730" _msthash="72">Como eu leio e escrevo dados tabulares?</a></li>
+<li class="toctree-l2"><a class="reference internal" href="https://pandas.pydata.org/docs/getting_started/intro_tutorials/03_subset_data.html"><font _mstmutation="1" _msttexthash="1480765" _msthash="73">Como faço para selecionar um subconjunto de um ?</font><code class="docutils literal notranslate"><span class="pre">DataFrame</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="https://pandas.pydata.org/docs/getting_started/intro_tutorials/04_plotting.html" _msttexthash="944138" _msthash="74">Como faço para criar plots em pandas?</a></li>
+<li class="toctree-l2"><a class="reference internal" href="https://pandas.pydata.org/docs/getting_started/intro_tutorials/05_add_columns.html" _msttexthash="2127723" _msthash="75">Como criar novas colunas derivadas de colunas existentes</a></li>
+<li class="toctree-l2"><a class="reference internal" href="https://pandas.pydata.org/docs/getting_started/intro_tutorials/06_calculate_statistics.html" _msttexthash="1099618" _msthash="76">Como calcular estatísticas resumidas</a></li>
+<li class="toctree-l2"><a class="reference internal" href="https://pandas.pydata.org/docs/getting_started/intro_tutorials/07_reshape_table_layout.html" _msttexthash="802126" _msthash="77">Como remodelar o layout das mesas</a></li>
+<li class="toctree-l2"><a class="reference internal" href="https://pandas.pydata.org/docs/getting_started/intro_tutorials/08_combine_dataframes.html" _msttexthash="1204190" _msthash="78">Como combinar dados de múltiplas tabelas</a></li>
+<li class="toctree-l2"><a class="reference internal" href="https://pandas.pydata.org/docs/getting_started/intro_tutorials/09_timeseries.html" _msttexthash="1970891" _msthash="79">Como lidar com dados de séries temporais com facilidade</a></li>
+<li class="toctree-l2"><a class="reference internal" href="https://pandas.pydata.org/docs/getting_started/intro_tutorials/10_text_data.html" _msttexthash="712569" _msthash="80">Como manipular dados textuais</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1 current active has-children"><a class="reference internal" href="https://pandas.pydata.org/docs/getting_started/comparison/index.html" _msttexthash="947466" _msthash="81">Comparação com outras ferramentas</a><details open="open"><summary><span class="toctree-toggle" role="presentation"><svg class="svg-inline--fa fa-chevron-down" aria-hidden="true" focusable="false" data-prefix="fas" data-icon="chevron-down" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" data-fa-i2svg=""><path fill="currentColor" d="M233.4 406.6c12.5 12.5 32.8 12.5 45.3 0l192-192c12.5-12.5 12.5-32.8 0-45.3s-32.8-12.5-45.3 0L256 338.7 86.6 169.4c-12.5-12.5-32.8-12.5-45.3 0s-12.5 32.8 0 45.3l192 192z"></path></svg><!-- <i class="fa-solid fa-chevron-down"></i> Font Awesome fontawesome.com --></span></summary><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="https://pandas.pydata.org/docs/getting_started/comparison/comparison_with_r.html" _msttexthash="740363" _msthash="82">Comparação com bibliotecas R / R</a></li>
+<li class="toctree-l2"><a class="reference internal" href="https://pandas.pydata.org/docs/getting_started/comparison/comparison_with_sql.html" _msttexthash="342602" _msthash="83">Comparação com SQL</a></li>
+<li class="toctree-l2"><a class="reference internal" href="https://pandas.pydata.org/docs/getting_started/comparison/comparison_with_spreadsheets.html" _msttexthash="575328" _msthash="84">Comparação com planilhas</a></li>
+<li class="toctree-l2"><a class="reference internal" href="https://pandas.pydata.org/docs/getting_started/comparison/comparison_with_sas.html" _msttexthash="340236" _msthash="85">Comparação com SAS</a></li>
+<li class="toctree-l2"><a class="reference internal" href="https://pandas.pydata.org/docs/getting_started/comparison/comparison_with_stata.html" _msttexthash="454948" _msthash="86">Comparação com a Stata</a></li>
+<li class="toctree-l2 current active"><a class="current reference internal" href="https://pandas.pydata.org/docs/getting_started/comparison/comparison_with_spss.html#" _msttexthash="402285" _msthash="87">Comparação com o SPSS</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1"><a class="reference internal" href="https://pandas.pydata.org/docs/getting_started/tutorials.html" _msttexthash="543244" _msthash="88">Tutoriais comunitários</a></li>
+</ul>
+
+    
+  </div>
+</nav></div>
+    </div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+      <div class="sidebar-primary-item">
+<div id="ethical-ad-placement" class="flat" data-ea-publisher="readthedocs" data-ea-type="readthedocs-sidebar" data-ea-manual="true">
+</div></div>
+  </div>
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main" role="main">
+        
+        
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article d-print-none">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item">
+
+<nav aria-label="Breadcrumb" class="d-print-none" _mstaria-label="154232" _msthash="89">
+  <ul class="bd-breadcrumbs">
+    
+    <li class="breadcrumb-item breadcrumb-home">
+      <a href="https://pandas.pydata.org/docs/index.html" class="nav-link" aria-label="Casa" _mstaria-label="43979" _msthash="90">
+        <svg class="svg-inline--fa fa-house" aria-hidden="true" focusable="false" data-prefix="fas" data-icon="house" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 576 512" data-fa-i2svg=""><path fill="currentColor" d="M575.8 255.5c0 18-15 32.1-32 32.1h-32l.7 160.2c0 2.7-.2 5.4-.5 8.1V472c0 22.1-17.9 40-40 40H456c-1.1 0-2.2 0-3.3-.1c-1.4 .1-2.8 .1-4.2 .1H416 392c-22.1 0-40-17.9-40-40V448 384c0-17.7-14.3-32-32-32H256c-17.7 0-32 14.3-32 32v64 24c0 22.1-17.9 40-40 40H160 128.1c-1.5 0-3-.1-4.5-.2c-1.2 .1-2.4 .2-3.6 .2H104c-22.1 0-40-17.9-40-40V360c0-.9 0-1.9 .1-2.8V287.6H32c-18 0-32-14-32-32.1c0-9 3-17 10-24L266.4 8c7-7 15-8 22-8s15 2 21 7L564.8 231.5c8 7 12 15 11 24z"></path></svg><!-- <i class="fa-solid fa-home"></i> Font Awesome fontawesome.com -->
+      </a>
+    </li>
+    
+    <li class="breadcrumb-item"><a href="https://pandas.pydata.org/docs/getting_started/index.html" class="nav-link" _msttexthash="150124" _msthash="91">Começando</a></li>
+    
+    
+    <li class="breadcrumb-item"><a href="https://pandas.pydata.org/docs/getting_started/comparison/index.html" class="nav-link" _msttexthash="947466" _msthash="92">Comparação com outras ferramentas</a></li>
+    
+    <li class="breadcrumb-item active" aria-current="page"><span class="ellipsis" _msttexthash="402285" _msthash="93">Comparação com o SPSS</span></li>
+  </ul>
+</nav>
+</div>
+      
+    </div>
+  
+  
+</div>
+</div>
+              
+              
+              
+                
+<div id="searchbox"></div>
+                <article class="bd-article">
+                  
+  <section id="comparison-with-spss">
+<span id="compare-with-spss"></span><h1><font _mstmutation="1" _msttexthash="402285" _msthash="94">Comparação com o SPSS</font><a class="headerlink" href="https://pandas.pydata.org/docs/getting_started/comparison/comparison_with_spss.html#comparison-with-spss" title="Link to this heading">#</a></h1>
+<p _msttexthash="12090858" _msthash="95">Para potenciais usuários vindos do <a class="reference external" href="https://www.ibm.com/spss" _istranslated="1">SPSS</a>, esta página tem como objetivo demonstrar
+como as várias operações SPSS seriam realizadas usando pandas.</p>
+<p _msttexthash="6646510" _msthash="96">Se você é novo no pandas, talvez queira primeiro ler <a class="reference internal" href="https://pandas.pydata.org/docs/user_guide/10min.html#min" _istranslated="1"><span class="std std-ref" _istranslated="1">10 Minutes to Pandas</span></a> para se familiarizar com a biblioteca.</p>
+<p _msttexthash="2280642" _msthash="97">Como de costume, importamos pandas e NumPy da seguinte forma:</p>
+<div class="highlight-ipython notranslate"><div class="highlight"><pre id="codecell0" tabindex="-1"><span></span><span class="gp">In [1]: </span><span class="kn">import</span><span class="w"> </span><span class="nn">pandas</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">pd</span>
+
+<span class="gp">In [2]: </span><span class="kn">import</span><span class="w"> </span><span class="nn">numpy</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">np</span>
+</pre><button class="copybtn o-tooltip--left" data-tooltip="Copy" data-clipboard-target="#codecell0">
+      <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-copy" width="44" height="44" viewBox="0 0 24 24" stroke-width="1.5" stroke="#000000" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <title>Copy to clipboard</title>
+  <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
+  <rect x="8" y="8" width="12" height="12" rx="2"></rect>
+  <path d="M16 8v-2a2 2 0 0 0 -2 -2h-8a2 2 0 0 0 -2 2v8a2 2 0 0 0 2 2h2"></path>
+</svg>
+    </button></div>
+</div>
+<section id="data-structures">
+<h2><font _mstmutation="1" _msttexthash="353899" _msthash="98">Estruturas de dados</font><a class="headerlink" href="https://pandas.pydata.org/docs/getting_started/comparison/comparison_with_spss.html#data-structures" title="Link to this heading">#</a></h2>
+<section id="general-terminology-translation">
+<h3><font _mstmutation="1" _msttexthash="782366" _msthash="99">Tradução de terminologia geral</font><a class="headerlink" href="https://pandas.pydata.org/docs/getting_started/comparison/comparison_with_spss.html#general-terminology-translation" title="Link to this heading">#</a></h3>
+<div class="pst-scrollable-table-container" tabindex="-1"><table class="table">
+<colgroup>
+<col style="width: 50.0%">
+<col style="width: 50.0%">
+</colgroup>
+<thead>
+<tr class="row-odd"><th class="head"><p _msttexthash="75049" _msthash="100">Pandas</p></th>
+<th class="head"><p _msttexthash="36374" _msthash="101">SPSS</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p><a class="reference internal" href="https://pandas.pydata.org/docs/reference/api/pandas.DataFrame.html#pandas.DataFrame" title="pandas.DataFrame"><code class="xref py py-class docutils literal notranslate"><span class="pre" _msttexthash="126178" _msthash="102">DataFrame</span></code></a></p></td>
+<td><p _msttexthash="262145" _msthash="103">arquivo de dados</p></td>
+</tr>
+<tr class="row-odd"><td><p _msttexthash="79261" _msthash="104">coluna</p></td>
+<td><p _msttexthash="135122" _msthash="105">variável</p></td>
+</tr>
+<tr class="row-even"><td><p _msttexthash="58097" _msthash="106">Linha</p></td>
+<td><p _msttexthash="44070" _msthash="107">Caso</p></td>
+</tr>
+<tr class="row-odd"><td><p _msttexthash="101179" _msthash="108">groupby</p></td>
+<td><p _msttexthash="290446" _msthash="109">Arquivo dividido</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="xref py py-class docutils literal notranslate"><span class="pre">NaN</span></code></p></td>
+<td><p _msttexthash="262210" _msthash="110">Sistema ausente</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+</section>
+<section id="dataframe">
+<h3><a class="reference internal" href="https://pandas.pydata.org/docs/reference/api/pandas.DataFrame.html#pandas.DataFrame" title="pandas.DataFrame"><code class="xref py py-class docutils literal notranslate"><span class="pre" _msttexthash="126178" _msthash="111">DataFrame</span></code></a><a class="headerlink" href="https://pandas.pydata.org/docs/getting_started/comparison/comparison_with_spss.html#dataframe" title="Link to this heading">#</a></h3>
+<p _msttexthash="41059798" _msthash="112">A <a class="reference internal" href="https://pandas.pydata.org/docs/reference/api/pandas.DataFrame.html#pandas.DataFrame" title="pandas.DataFrame" _istranslated="1"><code class="xref py py-class docutils literal notranslate" _istranslated="1"></code></a> in pandas é análogo a um arquivo de dados SPSS - um arquivo bidimensional
+fonte de dados com colunas rotuladas que podem ser de diferentes tipos. Como será mostrado neste texto
+documento, quase qualquer operação que possa ser realizada em SPSS também pode ser realizada em pandas.</p>
+</section>
+<section id="series">
+<h3><a class="reference internal" href="https://pandas.pydata.org/docs/reference/api/pandas.Series.html#pandas.Series" title="pandas.Series"><code class="xref py py-class docutils literal notranslate"><span class="pre" _msttexthash="91156" _msthash="113">Séries</span></code></a><a class="headerlink" href="https://pandas.pydata.org/docs/getting_started/comparison/comparison_with_spss.html#series" title="Link to this heading">#</a></h3>
+<p _msttexthash="22911512" _msthash="114">A <a class="reference internal" href="https://pandas.pydata.org/docs/reference/api/pandas.Series.html#pandas.Series" title="pandas.Series" _istranslated="1"><code class="xref py py-class docutils literal notranslate" _istranslated="1"></code></a> é a estrutura de dados que representa uma coluna de um <a class="reference internal" href="https://pandas.pydata.org/docs/reference/api/pandas.DataFrame.html#pandas.DataFrame" title="pandas.DataFrame" _istranslated="1"><code class="xref py py-class docutils literal notranslate" _istranslated="1"></code></a>. O SPSS não possui um
+Estrutura de dados separada para uma única variável, mas, em geral, trabalhar com a <a class="reference internal" href="https://pandas.pydata.org/docs/reference/api/pandas.Series.html#pandas.Series" title="pandas.Series" _istranslated="1"><code class="xref py py-class docutils literal notranslate" _istranslated="1"></code></a> é análogo
+até trabalhar com uma variável no SPSS.</p>
+</section>
+<section id="index">
+<h3><a class="reference internal" href="https://pandas.pydata.org/docs/reference/api/pandas.Index.html#pandas.Index" title="pandas.Index"><code class="xref py py-class docutils literal notranslate"><span class="pre" _msttexthash="85358" _msthash="115">Índice</span></code></a><a class="headerlink" href="https://pandas.pydata.org/docs/getting_started/comparison/comparison_with_spss.html#index" title="Link to this heading">#</a></h3>
+<p _msttexthash="37434397" _msthash="116">Cada <a class="reference internal" href="https://pandas.pydata.org/docs/reference/api/pandas.DataFrame.html#pandas.DataFrame" title="pandas.DataFrame" _istranslated="1"><code class="xref py py-class docutils literal notranslate" _istranslated="1"></code></a> e <a class="reference internal" href="https://pandas.pydata.org/docs/reference/api/pandas.Series.html#pandas.Series" title="pandas.Series" _istranslated="1"><code class="xref py py-class docutils literal notranslate" _istranslated="1"></code></a> tem rótulos <a class="reference internal" href="https://pandas.pydata.org/docs/reference/api/pandas.Index.html#pandas.Index" title="pandas.Index" _istranslated="1"><code class="xref py py-class docutils literal notranslate" _istranslated="1"></code></a> nas <em _istranslated="1">linhas</em> dos dados. O SPSS não
+possuem um análogo exato, pois os casos são simplesmente numerados sequencialmente a partir de 1. Em pandas, se não houver índice
+especificado, a <a class="reference internal" href="https://pandas.pydata.org/docs/reference/api/pandas.RangeIndex.html#pandas.RangeIndex" title="pandas.RangeIndex" _istranslated="1"><code class="xref py py-class docutils literal notranslate" _istranslated="1"></code></a> é usado por padrão (primeira linha = 0, segunda linha = 1, e assim por diante).</p>
+<p _msttexthash="58690788" _msthash="117">Enquanto o uso de um rotulado <a class="reference internal" href="https://pandas.pydata.org/docs/reference/api/pandas.Index.html#pandas.Index" title="pandas.Index" _istranslated="1"><code class="xref py py-class docutils literal notranslate" _istranslated="1"></code></a> ou <a class="reference internal" href="https://pandas.pydata.org/docs/reference/api/pandas.MultiIndex.html#pandas.MultiIndex" title="pandas.MultiIndex" _istranslated="1"><code class="xref py py-class docutils literal notranslate" _istranslated="1"></code></a> pode permitir análises sofisticadas e, em última análise, é um
+parte importante do pandas para entender, para esta comparação vamos essencialmente ignorar o <a class="reference internal" href="https://pandas.pydata.org/docs/reference/api/pandas.Index.html#pandas.Index" title="pandas.Index" _istranslated="1"><code class="xref py py-class docutils literal notranslate" _istranslated="1"></code></a> e
+Apenas trate como <a class="reference internal" href="https://pandas.pydata.org/docs/reference/api/pandas.DataFrame.html#pandas.DataFrame" title="pandas.DataFrame" _istranslated="1"><code class="xref py py-class docutils literal notranslate" _istranslated="1"></code></a> uma coleção de colunas. Por favor, consulte a <a class="reference internal" href="https://pandas.pydata.org/docs/user_guide/indexing.html#indexing" _istranslated="1"><span class="std std-ref" _istranslated="1">documentação de indexação</span></a> para saber mais sobre como usar um <a class="reference internal" href="https://pandas.pydata.org/docs/reference/api/pandas.Index.html#pandas.Index" title="pandas.Index" _istranslated="1"><code class="xref py py-class docutils literal notranslate" _istranslated="1"></code></a> de forma eficaz.</p>
+</section>
+</section>
+<section id="copies-vs-in-place-operations">
+<h2><font _mstmutation="1" _msttexthash="734097" _msthash="118">Cópias vs. operações no local</font><a class="headerlink" href="https://pandas.pydata.org/docs/getting_started/comparison/comparison_with_spss.html#copies-vs-in-place-operations" title="Link to this heading">#</a></h2>
+<p><font _mstmutation="1" _msttexthash="9250917" _msthash="119">A maioria das operações pandas retorna cópias do /. Para que as mudanças "fiquem",
+Você precisará atribuir a uma nova variável:</font><code class="docutils literal notranslate"><span class="pre">Series</span></code><code class="docutils literal notranslate"><span class="pre">DataFrame</span></code></p>
+<blockquote>
+<div><div class="highlight-python notranslate"><div class="highlight"><pre id="codecell1" tabindex="-1"><span></span><span class="n">sorted_df</span> <span class="o">=</span> <span class="n">df</span><span class="o">.</span><span class="n">sort_values</span><span class="p">(</span><span class="s2">"col1"</span><span class="p">)</span>
+</pre><button class="copybtn o-tooltip--left" data-tooltip="Copy" data-clipboard-target="#codecell1">
+      <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-copy" width="44" height="44" viewBox="0 0 24 24" stroke-width="1.5" stroke="#000000" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <title>Copy to clipboard</title>
+  <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
+  <rect x="8" y="8" width="12" height="12" rx="2"></rect>
+  <path d="M16 8v-2a2 2 0 0 0 -2 -2h-8a2 2 0 0 0 -2 2v8a2 2 0 0 0 2 2h2"></path>
+</svg>
+    </button></div>
+</div>
+</div></blockquote>
+<p _msttexthash="690066" _msthash="120">or overwrite the original one:</p>
+<blockquote>
+<div><div class="highlight-python notranslate"><div class="highlight"><pre id="codecell2" tabindex="-1"><span></span><span class="n">df</span> <span class="o">=</span> <span class="n">df</span><span class="o">.</span><span class="n">sort_values</span><span class="p">(</span><span class="s2">"col1"</span><span class="p">)</span>
+</pre><button class="copybtn o-tooltip--left" data-tooltip="Copy" data-clipboard-target="#codecell2">
+      <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-copy" width="44" height="44" viewBox="0 0 24 24" stroke-width="1.5" stroke="#000000" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <title>Copy to clipboard</title>
+  <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
+  <rect x="8" y="8" width="12" height="12" rx="2"></rect>
+  <path d="M16 8v-2a2 2 0 0 0 -2 -2h-8a2 2 0 0 0 -2 2v8a2 2 0 0 0 2 2h2"></path>
+</svg>
+    </button></div>
+</div>
+</div></blockquote>
+<div class="admonition note">
+<p class="admonition-title" _msttexthash="45344" _msthash="121">Note</p>
+<p><font _mstmutation="1" _msttexthash="2405546" _msthash="122">You will see an  or  keyword argument available for
+some methods:</font><code class="docutils literal notranslate"><span class="pre">inplace=True</span></code><code class="docutils literal notranslate"><span class="pre">copy=False</span></code></p>
+<div class="highlight-python notranslate"><div class="highlight"><pre id="codecell3" tabindex="-1"><span></span><span class="n">df</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="mi">5</span><span class="p">,</span> <span class="n">inplace</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+</pre><button class="copybtn o-tooltip--left" data-tooltip="Copy" data-clipboard-target="#codecell3">
+      <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-copy" width="44" height="44" viewBox="0 0 24 24" stroke-width="1.5" stroke="#000000" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <title>Copy to clipboard</title>
+  <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
+  <rect x="8" y="8" width="12" height="12" rx="2"></rect>
+  <path d="M16 8v-2a2 2 0 0 0 -2 -2h-8a2 2 0 0 0 -2 2v8a2 2 0 0 0 2 2h2"></path>
+</svg>
+    </button></div>
+</div>
+<p><font _mstmutation="1" _msttexthash="46506837" _msthash="123">There is an active discussion about deprecating and removing  and  for
+most methods (e.g. ) except for a very small subset of methods
+(including ). Both keywords won’t be
+necessary anymore in the context of Copy-on-Write. The proposal can be found
+<a class="reference external" href="https://github.com/pandas-dev/pandas/pull/51466" _mstmutation="1">here</a>.</font><code class="docutils literal notranslate"><span class="pre">inplace</span></code><code class="docutils literal notranslate"><span class="pre">copy</span></code><code class="docutils literal notranslate"><span class="pre">dropna</span></code><code class="docutils literal notranslate"><span class="pre">replace</span></code></p>
+</div>
+</section>
+<section id="data-input-output">
+<h2><font _mstmutation="1" _msttexthash="322049" _msthash="124">Data input / output</font><a class="headerlink" href="https://pandas.pydata.org/docs/getting_started/comparison/comparison_with_spss.html#data-input-output" title="Link to this heading">#</a></h2>
+<section id="reading-external-data">
+<h3><font _mstmutation="1" _msttexthash="413998" _msthash="125">Reading external data</font><a class="headerlink" href="https://pandas.pydata.org/docs/getting_started/comparison/comparison_with_spss.html#reading-external-data" title="Link to this heading">#</a></h3>
+<p><font _mstmutation="1" _msttexthash="15367326" _msthash="126">Like SPSS, pandas provides utilities for reading in data from many formats. The  dataset, found within
+the pandas tests (<a class="reference external" href="https://raw.githubusercontent.com/pandas-dev/pandas/main/pandas/tests/io/data/csv/tips.csv" _mstmutation="1">csv</a>)
+will be used in many of the following examples.</font><code class="docutils literal notranslate"><span class="pre">tips</span></code></p>
+<p _msttexthash="1932658" _msthash="127">In SPSS, you would use File &gt; Open &gt; Data to import a CSV file:</p>
+<div class="highlight-text notranslate"><div class="highlight"><pre id="codecell4" tabindex="-1"><span></span>FILE &gt; OPEN &gt; DATA
+/TYPE=CSV
+/FILE='tips.csv'
+/DELIMITERS=","
+/FIRSTCASE=2
+/VARIABLES=col1 col2 col3.
+</pre><button class="copybtn o-tooltip--left" data-tooltip="Copy" data-clipboard-target="#codecell4">
+      <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-copy" width="44" height="44" viewBox="0 0 24 24" stroke-width="1.5" stroke="#000000" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <title>Copy to clipboard</title>
+  <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
+  <rect x="8" y="8" width="12" height="12" rx="2"></rect>
+  <path d="M16 8v-2a2 2 0 0 0 -2 -2h-8a2 2 0 0 0 -2 2v8a2 2 0 0 0 2 2h2"></path>
+</svg>
+    </button></div>
+</div>
+<p _msttexthash="1249807" _msthash="128">The pandas equivalent would use <a class="reference internal" href="https://pandas.pydata.org/docs/reference/api/pandas.read_csv.html#pandas.read_csv" title="pandas.read_csv"><code class="xref py py-func docutils literal notranslate"><span class="pre">read_csv()</span></code></a>:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre id="codecell5" tabindex="-1"><span></span><span class="n">url</span> <span class="o">=</span> <span class="p">(</span>
+    <span class="s2">"https://raw.githubusercontent.com/pandas-dev"</span>
+    <span class="s2">"/pandas/main/pandas/tests/io/data/csv/tips.csv"</span>
+<span class="p">)</span>
+<span class="n">tips</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="n">url</span><span class="p">)</span>
+<span class="n">tips</span>
+</pre><button class="copybtn o-tooltip--left" data-tooltip="Copy" data-clipboard-target="#codecell5">
+      <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-copy" width="44" height="44" viewBox="0 0 24 24" stroke-width="1.5" stroke="#000000" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <title>Copy to clipboard</title>
+  <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
+  <rect x="8" y="8" width="12" height="12" rx="2"></rect>
+  <path d="M16 8v-2a2 2 0 0 0 -2 -2h-8a2 2 0 0 0 -2 2v8a2 2 0 0 0 2 2h2"></path>
+</svg>
+    </button></div>
+</div>
+<p><font _mstmutation="1" _msttexthash="24746592" _msthash="129">Like SPSS’s data import wizard,  can take a number of parameters to specify how the data should be parsed.
+For example, if the data was instead tab delimited, and did not have column names, the pandas command would be:</font><code class="docutils literal notranslate"><span class="pre">read_csv</span></code></p>
+<div class="highlight-python notranslate"><div class="highlight"><pre id="codecell6" tabindex="-1"><span></span><span class="n">tips</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="s2">"tips.csv"</span><span class="p">,</span> <span class="n">sep</span><span class="o">=</span><span class="s2">"</span><span class="se">\t</span><span class="s2">"</span><span class="p">,</span> <span class="n">header</span><span class="o">=</span><span class="kc">None</span><span class="p">)</span>
+
+<span class="c1"># alternatively, read_table is an alias to read_csv with tab delimiter</span>
+<span class="n">tips</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_table</span><span class="p">(</span><span class="s2">"tips.csv"</span><span class="p">,</span> <span class="n">header</span><span class="o">=</span><span class="kc">None</span><span class="p">)</span>
+</pre><button class="copybtn o-tooltip--left" data-tooltip="Copy" data-clipboard-target="#codecell6">
+      <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-copy" width="44" height="44" viewBox="0 0 24 24" stroke-width="1.5" stroke="#000000" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <title>Copy to clipboard</title>
+  <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
+  <rect x="8" y="8" width="12" height="12" rx="2"></rect>
+  <path d="M16 8v-2a2 2 0 0 0 -2 -2h-8a2 2 0 0 0 -2 2v8a2 2 0 0 0 2 2h2"></path>
+</svg>
+    </button></div>
+</div>
+</section>
+</section>
+<section id="data-operations">
+<h2><font _mstmutation="1" _msttexthash="262912" _msthash="130">Data operations</font><a class="headerlink" href="https://pandas.pydata.org/docs/getting_started/comparison/comparison_with_spss.html#data-operations" title="Link to this heading">#</a></h2>
+<section id="filtering">
+<h3><font _mstmutation="1" _msttexthash="135083" _msthash="131">Filtering</font><a class="headerlink" href="https://pandas.pydata.org/docs/getting_started/comparison/comparison_with_spss.html#filtering" title="Link to this heading">#</a></h3>
+<p _msttexthash="1746121" _msthash="132">In SPSS, filtering is done through Data &gt; Select Cases:</p>
+<div class="highlight-text notranslate"><div class="highlight"><pre id="codecell7" tabindex="-1"><span></span>SELECT IF (total_bill &gt; 10).
+EXECUTE.
+</pre><button class="copybtn o-tooltip--left" data-tooltip="Copy" data-clipboard-target="#codecell7">
+      <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-copy" width="44" height="44" viewBox="0 0 24 24" stroke-width="1.5" stroke="#000000" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <title>Copy to clipboard</title>
+  <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
+  <rect x="8" y="8" width="12" height="12" rx="2"></rect>
+  <path d="M16 8v-2a2 2 0 0 0 -2 -2h-8a2 2 0 0 0 -2 2v8a2 2 0 0 0 2 2h2"></path>
+</svg>
+    </button></div>
+</div>
+<p _msttexthash="1054664" _msthash="133">In pandas, boolean indexing can be used:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre id="codecell8" tabindex="-1"><span></span><span class="n">tips</span><span class="p">[</span><span class="n">tips</span><span class="p">[</span><span class="s2">"total_bill"</span><span class="p">]</span> <span class="o">&gt;</span> <span class="mi">10</span><span class="p">]</span>
+</pre><button class="copybtn o-tooltip--left" data-tooltip="Copy" data-clipboard-target="#codecell8">
+      <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-copy" width="44" height="44" viewBox="0 0 24 24" stroke-width="1.5" stroke="#000000" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <title>Copy to clipboard</title>
+  <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
+  <rect x="8" y="8" width="12" height="12" rx="2"></rect>
+  <path d="M16 8v-2a2 2 0 0 0 -2 -2h-8a2 2 0 0 0 -2 2v8a2 2 0 0 0 2 2h2"></path>
+</svg>
+    </button></div>
+</div>
+</section>
+<section id="sorting">
+<h3><font _mstmutation="1" _msttexthash="97097" _msthash="134">Sorting</font><a class="headerlink" href="https://pandas.pydata.org/docs/getting_started/comparison/comparison_with_spss.html#sorting" title="Link to this heading">#</a></h3>
+<p _msttexthash="1493050" _msthash="135">In SPSS, sorting is done through Data &gt; Sort Cases:</p>
+<div class="highlight-text notranslate"><div class="highlight"><pre id="codecell9" tabindex="-1"><span></span>SORT CASES BY sex total_bill.
+EXECUTE.
+</pre><button class="copybtn o-tooltip--left" data-tooltip="Copy" data-clipboard-target="#codecell9">
+      <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-copy" width="44" height="44" viewBox="0 0 24 24" stroke-width="1.5" stroke="#000000" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <title>Copy to clipboard</title>
+  <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
+  <rect x="8" y="8" width="12" height="12" rx="2"></rect>
+  <path d="M16 8v-2a2 2 0 0 0 -2 -2h-8a2 2 0 0 0 -2 2v8a2 2 0 0 0 2 2h2"></path>
+</svg>
+    </button></div>
+</div>
+<p _msttexthash="871689" _msthash="136">In pandas, this would be written as:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre id="codecell10" tabindex="-1"><span></span><span class="n">tips</span><span class="o">.</span><span class="n">sort_values</span><span class="p">([</span><span class="s2">"sex"</span><span class="p">,</span> <span class="s2">"total_bill"</span><span class="p">])</span>
+</pre><button class="copybtn o-tooltip--left" data-tooltip="Copy" data-clipboard-target="#codecell10">
+      <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-copy" width="44" height="44" viewBox="0 0 24 24" stroke-width="1.5" stroke="#000000" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <title>Copy to clipboard</title>
+  <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
+  <rect x="8" y="8" width="12" height="12" rx="2"></rect>
+  <path d="M16 8v-2a2 2 0 0 0 -2 -2h-8a2 2 0 0 0 -2 2v8a2 2 0 0 0 2 2h2"></path>
+</svg>
+    </button></div>
+</div>
+</section>
+</section>
+<section id="string-processing">
+<h2><font _mstmutation="1" _msttexthash="324740" _msthash="137">String processing</font><a class="headerlink" href="https://pandas.pydata.org/docs/getting_started/comparison/comparison_with_spss.html#string-processing" title="Link to this heading">#</a></h2>
+<section id="finding-length-of-string">
+<h3><font _mstmutation="1" _msttexthash="497874" _msthash="138">Finding length of string</font><a class="headerlink" href="https://pandas.pydata.org/docs/getting_started/comparison/comparison_with_spss.html#finding-length-of-string" title="Link to this heading">#</a></h3>
+<p _msttexthash="72813" _msthash="139">In SPSS:</p>
+<div class="highlight-text notranslate"><div class="highlight"><pre id="codecell11" tabindex="-1"><span></span>COMPUTE length = LENGTH(time).
+EXECUTE.
+</pre><button class="copybtn o-tooltip--left" data-tooltip="Copy" data-clipboard-target="#codecell11">
+      <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-copy" width="44" height="44" viewBox="0 0 24 24" stroke-width="1.5" stroke="#000000" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <title>Copy to clipboard</title>
+  <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
+  <rect x="8" y="8" width="12" height="12" rx="2"></rect>
+  <path d="M16 8v-2a2 2 0 0 0 -2 -2h-8a2 2 0 0 0 -2 2v8a2 2 0 0 0 2 2h2"></path>
+</svg>
+    </button></div>
+</div>
+<p><font _mstmutation="1" _msttexthash="16048643" _msthash="140">You can find the length of a character string with <a class="reference internal" href="https://pandas.pydata.org/docs/reference/api/pandas.Series.str.len.html#pandas.Series.str.len" title="pandas.Series.str.len" _mstmutation="1"><code class="xref py py-meth docutils literal notranslate"><span class="pre">Series.str.len()</span></code></a>.
+In Python 3, all strings are Unicode strings.  includes trailing blanks.
+Use  and  to exclude trailing blanks.</font><code class="docutils literal notranslate"><span class="pre">len</span></code><code class="docutils literal notranslate"><span class="pre">len</span></code><code class="docutils literal notranslate"><span class="pre">rstrip</span></code></p>
+<div class="highlight-ipython notranslate"><div class="highlight"><pre id="codecell12" tabindex="-1"><span></span><span class="gp">In [3]: </span><span class="n">tips</span><span class="p">[</span><span class="s2">"time"</span><span class="p">]</span><span class="o">.</span><span class="n">str</span><span class="o">.</span><span class="n">len</span><span class="p">()</span>
+<span class="gh">Out[3]: </span>
+<span class="go">67     6</span>
+<span class="go">92     6</span>
+<span class="go">111    6</span>
+<span class="go">145    5</span>
+<span class="go">135    5</span>
+<span class="go">      ..</span>
+<span class="go">182    6</span>
+<span class="go">156    6</span>
+<span class="go">59     6</span>
+<span class="go">212    6</span>
+<span class="go">170    6</span>
+<span class="go">Name: time, Length: 244, dtype: int64</span>
+
+<span class="gp">In [4]: </span><span class="n">tips</span><span class="p">[</span><span class="s2">"time"</span><span class="p">]</span><span class="o">.</span><span class="n">str</span><span class="o">.</span><span class="n">rstrip</span><span class="p">()</span><span class="o">.</span><span class="n">str</span><span class="o">.</span><span class="n">len</span><span class="p">()</span>
+<span class="gh">Out[4]: </span>
+<span class="go">67     6</span>
+<span class="go">92     6</span>
+<span class="go">111    6</span>
+<span class="go">145    5</span>
+<span class="go">135    5</span>
+<span class="go">      ..</span>
+<span class="go">182    6</span>
+<span class="go">156    6</span>
+<span class="go">59     6</span>
+<span class="go">212    6</span>
+<span class="go">170    6</span>
+<span class="go">Name: time, Length: 244, dtype: int64</span>
+</pre><button class="copybtn o-tooltip--left" data-tooltip="Copy" data-clipboard-target="#codecell12">
+      <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-copy" width="44" height="44" viewBox="0 0 24 24" stroke-width="1.5" stroke="#000000" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <title>Copy to clipboard</title>
+  <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
+  <rect x="8" y="8" width="12" height="12" rx="2"></rect>
+  <path d="M16 8v-2a2 2 0 0 0 -2 -2h-8a2 2 0 0 0 -2 2v8a2 2 0 0 0 2 2h2"></path>
+</svg>
+    </button></div>
+</div>
+</section>
+<section id="changing-case">
+<h3><font _mstmutation="1" _msttexthash="199537" _msthash="141">Changing case</font><a class="headerlink" href="https://pandas.pydata.org/docs/getting_started/comparison/comparison_with_spss.html#changing-case" title="Link to this heading">#</a></h3>
+<p _msttexthash="72813" _msthash="142">In SPSS:</p>
+<div class="highlight-text notranslate"><div class="highlight"><pre id="codecell13" tabindex="-1"><span></span>COMPUTE upper = UPCASE(time).
+COMPUTE lower = LOWER(time).
+EXECUTE.
+</pre><button class="copybtn o-tooltip--left" data-tooltip="Copy" data-clipboard-target="#codecell13">
+      <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-copy" width="44" height="44" viewBox="0 0 24 24" stroke-width="1.5" stroke="#000000" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <title>Copy to clipboard</title>
+  <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
+  <rect x="8" y="8" width="12" height="12" rx="2"></rect>
+  <path d="M16 8v-2a2 2 0 0 0 -2 -2h-8a2 2 0 0 0 -2 2v8a2 2 0 0 0 2 2h2"></path>
+</svg>
+    </button></div>
+</div>
+<p _msttexthash="5487911" _msthash="143">The equivalent pandas methods are <a class="reference internal" href="https://pandas.pydata.org/docs/reference/api/pandas.Series.str.upper.html#pandas.Series.str.upper" title="pandas.Series.str.upper"><code class="xref py py-meth docutils literal notranslate"><span class="pre">Series.str.upper()</span></code></a>, <a class="reference internal" href="https://pandas.pydata.org/docs/reference/api/pandas.Series.str.lower.html#pandas.Series.str.lower" title="pandas.Series.str.lower"><code class="xref py py-meth docutils literal notranslate"><span class="pre">Series.str.lower()</span></code></a>, and
+<a class="reference internal" href="https://pandas.pydata.org/docs/reference/api/pandas.Series.str.title.html#pandas.Series.str.title" title="pandas.Series.str.title"><code class="xref py py-meth docutils literal notranslate"><span class="pre">Series.str.title()</span></code></a>.</p>
+<div class="highlight-ipython notranslate"><div class="highlight"><pre id="codecell14" tabindex="-1"><span></span><span class="gp">In [5]: </span><span class="n">firstlast</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">({</span><span class="s2">"string"</span><span class="p">:</span> <span class="p">[</span><span class="s2">"John Smith"</span><span class="p">,</span> <span class="s2">"Jane Cook"</span><span class="p">]})</span>
+
+<span class="gp">In [6]: </span><span class="n">firstlast</span><span class="p">[</span><span class="s2">"upper"</span><span class="p">]</span> <span class="o">=</span> <span class="n">firstlast</span><span class="p">[</span><span class="s2">"string"</span><span class="p">]</span><span class="o">.</span><span class="n">str</span><span class="o">.</span><span class="n">upper</span><span class="p">()</span>
+
+<span class="gp">In [7]: </span><span class="n">firstlast</span><span class="p">[</span><span class="s2">"lower"</span><span class="p">]</span> <span class="o">=</span> <span class="n">firstlast</span><span class="p">[</span><span class="s2">"string"</span><span class="p">]</span><span class="o">.</span><span class="n">str</span><span class="o">.</span><span class="n">lower</span><span class="p">()</span>
+
+<span class="gp">In [8]: </span><span class="n">firstlast</span><span class="p">[</span><span class="s2">"title"</span><span class="p">]</span> <span class="o">=</span> <span class="n">firstlast</span><span class="p">[</span><span class="s2">"string"</span><span class="p">]</span><span class="o">.</span><span class="n">str</span><span class="o">.</span><span class="n">title</span><span class="p">()</span>
+
+<span class="gp">In [9]: </span><span class="n">firstlast</span>
+<span class="gh">Out[9]: </span>
+<span class="go">       string       upper       lower       title</span>
+<span class="go">0  John Smith  JOHN SMITH  john smith  John Smith</span>
+<span class="go">1   Jane Cook   JANE COOK   jane cook   Jane Cook</span>
+</pre><button class="copybtn o-tooltip--left" data-tooltip="Copy" data-clipboard-target="#codecell14">
+      <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-copy" width="44" height="44" viewBox="0 0 24 24" stroke-width="1.5" stroke="#000000" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <title>Copy to clipboard</title>
+  <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
+  <rect x="8" y="8" width="12" height="12" rx="2"></rect>
+  <path d="M16 8v-2a2 2 0 0 0 -2 -2h-8a2 2 0 0 0 -2 2v8a2 2 0 0 0 2 2h2"></path>
+</svg>
+    </button></div>
+</div>
+</section>
+</section>
+<section id="merging">
+<h2><font _mstmutation="1" _msttexthash="93821" _msthash="144">Merging</font><a class="headerlink" href="https://pandas.pydata.org/docs/getting_started/comparison/comparison_with_spss.html#merging" title="Link to this heading">#</a></h2>
+<p _msttexthash="2175030" _msthash="145">In SPSS, merging data files is done through Data &gt; Merge Files.</p>
+<p _msttexthash="1926080" _msthash="146">The following tables will be used in the merge examples:</p>
+<div class="highlight-ipython notranslate"><div class="highlight"><pre id="codecell15" tabindex="-1"><span></span><span class="gp">In [10]: </span><span class="n">df1</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">({</span><span class="s2">"key"</span><span class="p">:</span> <span class="p">[</span><span class="s2">"A"</span><span class="p">,</span> <span class="s2">"B"</span><span class="p">,</span> <span class="s2">"C"</span><span class="p">,</span> <span class="s2">"D"</span><span class="p">],</span> <span class="s2">"value"</span><span class="p">:</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">randn</span><span class="p">(</span><span class="mi">4</span><span class="p">)})</span>
+
+<span class="gp">In [11]: </span><span class="n">df1</span>
+<span class="gh">Out[11]: </span>
+<span class="go">  key     value</span>
+<span class="go">0   A  0.469112</span>
+<span class="go">1   B -0.282863</span>
+<span class="go">2   C -1.509059</span>
+<span class="go">3   D -1.135632</span>
+
+<span class="gp">In [12]: </span><span class="n">df2</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">({</span><span class="s2">"key"</span><span class="p">:</span> <span class="p">[</span><span class="s2">"B"</span><span class="p">,</span> <span class="s2">"D"</span><span class="p">,</span> <span class="s2">"D"</span><span class="p">,</span> <span class="s2">"E"</span><span class="p">],</span> <span class="s2">"value"</span><span class="p">:</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">randn</span><span class="p">(</span><span class="mi">4</span><span class="p">)})</span>
+
+<span class="gp">In [13]: </span><span class="n">df2</span>
+<span class="gh">Out[13]: </span>
+<span class="go">  key     value</span>
+<span class="go">0   B  1.212112</span>
+<span class="go">1   D -0.173215</span>
+<span class="go">2   D  0.119209</span>
+<span class="go">3   E -1.044236</span>
+</pre><button class="copybtn o-tooltip--left" data-tooltip="Copy" data-clipboard-target="#codecell15">
+      <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-copy" width="44" height="44" viewBox="0 0 24 24" stroke-width="1.5" stroke="#000000" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <title>Copy to clipboard</title>
+  <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
+  <rect x="8" y="8" width="12" height="12" rx="2"></rect>
+  <path d="M16 8v-2a2 2 0 0 0 -2 -2h-8a2 2 0 0 0 -2 2v8a2 2 0 0 0 2 2h2"></path>
+</svg>
+    </button></div>
+</div>
+<p><font _mstmutation="1" _msttexthash="18586542" _msthash="147">pandas DataFrames have a <a class="reference internal" href="https://pandas.pydata.org/docs/reference/api/pandas.DataFrame.merge.html#pandas.DataFrame.merge" title="pandas.DataFrame.merge" _mstmutation="1"><code class="xref py py-meth docutils literal notranslate"><span class="pre">merge()</span></code></a> method, which provides similar functionality. The
+data does not have to be sorted ahead of time, and different join types are accomplished via the
+ keyword.</font><code class="docutils literal notranslate"><span class="pre">how</span></code></p>
+<div class="highlight-ipython notranslate"><div class="highlight"><pre id="codecell16" tabindex="-1"><span></span><span class="gp">In [14]: </span><span class="n">inner_join</span> <span class="o">=</span> <span class="n">df1</span><span class="o">.</span><span class="n">merge</span><span class="p">(</span><span class="n">df2</span><span class="p">,</span> <span class="n">on</span><span class="o">=</span><span class="p">[</span><span class="s2">"key"</span><span class="p">],</span> <span class="n">how</span><span class="o">=</span><span class="s2">"inner"</span><span class="p">)</span>
+
+<span class="gp">In [15]: </span><span class="n">inner_join</span>
+<span class="gh">Out[15]: </span>
+<span class="go">  key   value_x   value_y</span>
+<span class="go">0   B -0.282863  1.212112</span>
+<span class="go">1   D -1.135632 -0.173215</span>
+<span class="go">2   D -1.135632  0.119209</span>
+
+<span class="gp">In [16]: </span><span class="n">left_join</span> <span class="o">=</span> <span class="n">df1</span><span class="o">.</span><span class="n">merge</span><span class="p">(</span><span class="n">df2</span><span class="p">,</span> <span class="n">on</span><span class="o">=</span><span class="p">[</span><span class="s2">"key"</span><span class="p">],</span> <span class="n">how</span><span class="o">=</span><span class="s2">"left"</span><span class="p">)</span>
+
+<span class="gp">In [17]: </span><span class="n">left_join</span>
+<span class="gh">Out[17]: </span>
+<span class="go">  key   value_x   value_y</span>
+<span class="go">0   A  0.469112       NaN</span>
+<span class="go">1   B -0.282863  1.212112</span>
+<span class="go">2   C -1.509059       NaN</span>
+<span class="go">3   D -1.135632 -0.173215</span>
+<span class="go">4   D -1.135632  0.119209</span>
+
+<span class="gp">In [18]: </span><span class="n">right_join</span> <span class="o">=</span> <span class="n">df1</span><span class="o">.</span><span class="n">merge</span><span class="p">(</span><span class="n">df2</span><span class="p">,</span> <span class="n">on</span><span class="o">=</span><span class="p">[</span><span class="s2">"key"</span><span class="p">],</span> <span class="n">how</span><span class="o">=</span><span class="s2">"right"</span><span class="p">)</span>
+
+<span class="gp">In [19]: </span><span class="n">right_join</span>
+<span class="gh">Out[19]: </span>
+<span class="go">  key   value_x   value_y</span>
+<span class="go">0   B -0.282863  1.212112</span>
+<span class="go">1   D -1.135632 -0.173215</span>
+<span class="go">2   D -1.135632  0.119209</span>
+<span class="go">3   E       NaN -1.044236</span>
+
+<span class="gp">In [20]: </span><span class="n">outer_join</span> <span class="o">=</span> <span class="n">df1</span><span class="o">.</span><span class="n">merge</span><span class="p">(</span><span class="n">df2</span><span class="p">,</span> <span class="n">on</span><span class="o">=</span><span class="p">[</span><span class="s2">"key"</span><span class="p">],</span> <span class="n">how</span><span class="o">=</span><span class="s2">"outer"</span><span class="p">)</span>
+
+<span class="gp">In [21]: </span><span class="n">outer_join</span>
+<span class="gh">Out[21]: </span>
+<span class="go">  key   value_x   value_y</span>
+<span class="go">0   A  0.469112       NaN</span>
+<span class="go">1   B -0.282863  1.212112</span>
+<span class="go">2   C -1.509059       NaN</span>
+<span class="go">3   D -1.135632 -0.173215</span>
+<span class="go">4   D -1.135632  0.119209</span>
+<span class="go">5   E       NaN -1.044236</span>
+</pre><button class="copybtn o-tooltip--left" data-tooltip="Copy" data-clipboard-target="#codecell16">
+      <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-copy" width="44" height="44" viewBox="0 0 24 24" stroke-width="1.5" stroke="#000000" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <title>Copy to clipboard</title>
+  <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
+  <rect x="8" y="8" width="12" height="12" rx="2"></rect>
+  <path d="M16 8v-2a2 2 0 0 0 -2 -2h-8a2 2 0 0 0 -2 2v8a2 2 0 0 0 2 2h2"></path>
+</svg>
+    </button></div>
+</div>
+</section>
+<section id="groupby-operations">
+<h2><font _mstmutation="1" _msttexthash="356317" _msthash="148">GroupBy operations</font><a class="headerlink" href="https://pandas.pydata.org/docs/getting_started/comparison/comparison_with_spss.html#groupby-operations" title="Link to this heading">#</a></h2>
+<section id="split-file-processing">
+<h3><font _mstmutation="1" _msttexthash="450268" _msthash="149">Split-file processing</font><a class="headerlink" href="https://pandas.pydata.org/docs/getting_started/comparison/comparison_with_spss.html#split-file-processing" title="Link to this heading">#</a></h3>
+<p _msttexthash="2272855" _msthash="150">In SPSS, split-file analysis is done through Data &gt; Split File:</p>
+<div class="highlight-text notranslate"><div class="highlight"><pre id="codecell17" tabindex="-1"><span></span>SORT CASES BY sex.
+SPLIT FILE BY sex.
+DESCRIPTIVES VARIABLES=total_bill tip
+  /STATISTICS=MEAN STDDEV MIN MAX.
+</pre><button class="copybtn o-tooltip--left" data-tooltip="Copy" data-clipboard-target="#codecell17">
+      <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-copy" width="44" height="44" viewBox="0 0 24 24" stroke-width="1.5" stroke="#000000" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <title>Copy to clipboard</title>
+  <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
+  <rect x="8" y="8" width="12" height="12" rx="2"></rect>
+  <path d="M16 8v-2a2 2 0 0 0 -2 -2h-8a2 2 0 0 0 -2 2v8a2 2 0 0 0 2 2h2"></path>
+</svg>
+    </button></div>
+</div>
+<p _msttexthash="730288" _msthash="151">The pandas equivalent would be:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre id="codecell18" tabindex="-1"><span></span><span class="n">tips</span><span class="o">.</span><span class="n">groupby</span><span class="p">(</span><span class="s2">"sex"</span><span class="p">)[[</span><span class="s2">"total_bill"</span><span class="p">,</span> <span class="s2">"tip"</span><span class="p">]]</span><span class="o">.</span><span class="n">agg</span><span class="p">([</span><span class="s2">"mean"</span><span class="p">,</span> <span class="s2">"std"</span><span class="p">,</span> <span class="s2">"min"</span><span class="p">,</span> <span class="s2">"max"</span><span class="p">])</span>
+</pre><button class="copybtn o-tooltip--left" data-tooltip="Copy" data-clipboard-target="#codecell18">
+      <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-copy" width="44" height="44" viewBox="0 0 24 24" stroke-width="1.5" stroke="#000000" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <title>Copy to clipboard</title>
+  <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
+  <rect x="8" y="8" width="12" height="12" rx="2"></rect>
+  <path d="M16 8v-2a2 2 0 0 0 -2 -2h-8a2 2 0 0 0 -2 2v8a2 2 0 0 0 2 2h2"></path>
+</svg>
+    </button></div>
+</div>
+</section>
+</section>
+<section id="missing-data">
+<h2><font _mstmutation="1" _msttexthash="178594" _msthash="152">Missing data</font><a class="headerlink" href="https://pandas.pydata.org/docs/getting_started/comparison/comparison_with_spss.html#missing-data" title="Link to this heading">#</a></h2>
+<p><font _mstmutation="1" _msttexthash="17175444" _msthash="153">SPSS uses the period () for numeric missing values and blank spaces for string missing values.
+pandas uses  (Not a Number) for numeric missing values and  or  for string
+missing values.</font><code class="docutils literal notranslate"><span class="pre">.</span></code><code class="docutils literal notranslate"><span class="pre">NaN</span></code><code class="docutils literal notranslate"><span class="pre">None</span></code><code class="docutils literal notranslate"><span class="pre">NaN</span></code></p>
+<p _msttexthash="3192033" _msthash="154">In pandas, <a class="reference internal" href="https://pandas.pydata.org/docs/reference/api/pandas.Series.isna.html#pandas.Series.isna" title="pandas.Series.isna"><code class="xref py py-meth docutils literal notranslate"><span class="pre">Series.isna()</span></code></a> and <a class="reference internal" href="https://pandas.pydata.org/docs/reference/api/pandas.Series.notna.html#pandas.Series.notna" title="pandas.Series.notna"><code class="xref py py-meth docutils literal notranslate"><span class="pre">Series.notna()</span></code></a> can be used to filter the rows.</p>
+<div class="highlight-ipython notranslate"><div class="highlight"><pre id="codecell19" tabindex="-1"><span></span><span class="gp">In [22]: </span><span class="n">outer_join</span><span class="p">[</span><span class="n">outer_join</span><span class="p">[</span><span class="s2">"value_x"</span><span class="p">]</span><span class="o">.</span><span class="n">isna</span><span class="p">()]</span>
+<span class="gh">Out[22]: </span>
+<span class="go">  key  value_x   value_y</span>
+<span class="go">5   E      NaN -1.044236</span>
+
+<span class="gp">In [23]: </span><span class="n">outer_join</span><span class="p">[</span><span class="n">outer_join</span><span class="p">[</span><span class="s2">"value_x"</span><span class="p">]</span><span class="o">.</span><span class="n">notna</span><span class="p">()]</span>
+<span class="gh">Out[23]: </span>
+<span class="go">  key   value_x   value_y</span>
+<span class="go">0   A  0.469112       NaN</span>
+<span class="go">1   B -0.282863  1.212112</span>
+<span class="go">2   C -1.509059       NaN</span>
+<span class="go">3   D -1.135632 -0.173215</span>
+<span class="go">4   D -1.135632  0.119209</span>
+</pre><button class="copybtn o-tooltip--left" data-tooltip="Copy" data-clipboard-target="#codecell19">
+      <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-copy" width="44" height="44" viewBox="0 0 24 24" stroke-width="1.5" stroke="#000000" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <title>Copy to clipboard</title>
+  <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
+  <rect x="8" y="8" width="12" height="12" rx="2"></rect>
+  <path d="M16 8v-2a2 2 0 0 0 -2 -2h-8a2 2 0 0 0 -2 2v8a2 2 0 0 0 2 2h2"></path>
+</svg>
+    </button></div>
+</div>
+<p _msttexthash="4277728" _msthash="155">pandas provides <a class="reference internal" href="https://pandas.pydata.org/docs/user_guide/missing_data.html#missing-data"><span class="std std-ref">a variety of methods to work with missing data</span></a>. Here are some examples:</p>
+<section id="drop-rows-with-missing-values">
+<h3><font _mstmutation="1" _msttexthash="676052" _msthash="156">Drop rows with missing values</font><a class="headerlink" href="https://pandas.pydata.org/docs/getting_started/comparison/comparison_with_spss.html#drop-rows-with-missing-values" title="Link to this heading">#</a></h3>
+<div class="highlight-ipython notranslate"><div class="highlight"><pre id="codecell20" tabindex="-1"><span></span><span class="gp">In [24]: </span><span class="n">outer_join</span><span class="o">.</span><span class="n">dropna</span><span class="p">()</span>
+<span class="gh">Out[24]: </span>
+<span class="go">  key   value_x   value_y</span>
+<span class="go">1   B -0.282863  1.212112</span>
+<span class="go">3   D -1.135632 -0.173215</span>
+<span class="go">4   D -1.135632  0.119209</span>
+</pre><button class="copybtn o-tooltip--left" data-tooltip="Copy" data-clipboard-target="#codecell20">
+      <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-copy" width="44" height="44" viewBox="0 0 24 24" stroke-width="1.5" stroke="#000000" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <title>Copy to clipboard</title>
+  <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
+  <rect x="8" y="8" width="12" height="12" rx="2"></rect>
+  <path d="M16 8v-2a2 2 0 0 0 -2 -2h-8a2 2 0 0 0 -2 2v8a2 2 0 0 0 2 2h2"></path>
+</svg>
+    </button></div>
+</div>
+</section>
+<section id="forward-fill-from-previous-rows">
+<h3><font _mstmutation="1" _msttexthash="775697" _msthash="157">Forward fill from previous rows</font><a class="headerlink" href="https://pandas.pydata.org/docs/getting_started/comparison/comparison_with_spss.html#forward-fill-from-previous-rows" title="Link to this heading">#</a></h3>
+<div class="highlight-ipython notranslate"><div class="highlight"><pre id="codecell21" tabindex="-1"><span></span><span class="gp">In [25]: </span><span class="n">outer_join</span><span class="o">.</span><span class="n">ffill</span><span class="p">()</span>
+<span class="gh">Out[25]: </span>
+<span class="go">  key   value_x   value_y</span>
+<span class="go">0   A  0.469112       NaN</span>
+<span class="go">1   B -0.282863  1.212112</span>
+<span class="go">2   C -1.509059  1.212112</span>
+<span class="go">3   D -1.135632 -0.173215</span>
+<span class="go">4   D -1.135632  0.119209</span>
+<span class="go">5   E -1.135632 -1.044236</span>
+</pre><button class="copybtn o-tooltip--left" data-tooltip="Copy" data-clipboard-target="#codecell21">
+      <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-copy" width="44" height="44" viewBox="0 0 24 24" stroke-width="1.5" stroke="#000000" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <title>Copy to clipboard</title>
+  <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
+  <rect x="8" y="8" width="12" height="12" rx="2"></rect>
+  <path d="M16 8v-2a2 2 0 0 0 -2 -2h-8a2 2 0 0 0 -2 2v8a2 2 0 0 0 2 2h2"></path>
+</svg>
+    </button></div>
+</div>
+</section>
+<section id="replace-missing-values-with-a-specified-value">
+<h3><font _mstmutation="1" _msttexthash="1404572" _msthash="158">Replace missing values with a specified value</font><a class="headerlink" href="https://pandas.pydata.org/docs/getting_started/comparison/comparison_with_spss.html#replace-missing-values-with-a-specified-value" title="Link to this heading">#</a></h3>
+<p _msttexthash="218829" _msthash="159">Using the mean:</p>
+<div class="highlight-ipython notranslate"><div class="highlight"><pre id="codecell22" tabindex="-1"><span></span><span class="gp">In [26]: </span><span class="n">outer_join</span><span class="p">[</span><span class="s2">"value_x"</span><span class="p">]</span><span class="o">.</span><span class="n">fillna</span><span class="p">(</span><span class="n">outer_join</span><span class="p">[</span><span class="s2">"value_x"</span><span class="p">]</span><span class="o">.</span><span class="n">mean</span><span class="p">())</span>
+<span class="gh">Out[26]: </span>
+<span class="go">0    0.469112</span>
+<span class="go">1   -0.282863</span>
+<span class="go">2   -1.509059</span>
+<span class="go">3   -1.135632</span>
+<span class="go">4   -1.135632</span>
+<span class="go">5   -0.718815</span>
+<span class="go">Name: value_x, dtype: float64</span>
+</pre><button class="copybtn o-tooltip--left" data-tooltip="Copy" data-clipboard-target="#codecell22">
+      <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-copy" width="44" height="44" viewBox="0 0 24 24" stroke-width="1.5" stroke="#000000" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <title>Copy to clipboard</title>
+  <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
+  <rect x="8" y="8" width="12" height="12" rx="2"></rect>
+  <path d="M16 8v-2a2 2 0 0 0 -2 -2h-8a2 2 0 0 0 -2 2v8a2 2 0 0 0 2 2h2"></path>
+</svg>
+    </button></div>
+</div>
+</section>
+</section>
+<section id="other-considerations">
+<h2><font _mstmutation="1" _msttexthash="425035" _msthash="160">Other considerations</font><a class="headerlink" href="https://pandas.pydata.org/docs/getting_started/comparison/comparison_with_spss.html#other-considerations" title="Link to this heading">#</a></h2>
+</section>
+<section id="output-management">
+<h2><font _mstmutation="1" _msttexthash="322803" _msthash="161">Output management</font><a class="headerlink" href="https://pandas.pydata.org/docs/getting_started/comparison/comparison_with_spss.html#output-management" title="Link to this heading">#</a></h2>
+<p _msttexthash="15977169" _msthash="162">While pandas does not have a direct equivalent to SPSS’s Output Management System (OMS), you can
+capture and export results in various ways:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre id="codecell23" tabindex="-1"><span></span><span class="c1"># Save summary statistics to CSV</span>
+<span class="n">tips</span><span class="o">.</span><span class="n">groupby</span><span class="p">(</span><span class="s1">'sex'</span><span class="p">)[[</span><span class="s1">'total_bill'</span><span class="p">,</span> <span class="s1">'tip'</span><span class="p">]]</span><span class="o">.</span><span class="n">mean</span><span class="p">()</span><span class="o">.</span><span class="n">to_csv</span><span class="p">(</span><span class="s1">'summary.csv'</span><span class="p">)</span>
+
+<span class="c1"># Save multiple results to Excel sheets</span>
+<span class="k">with</span> <span class="n">pd</span><span class="o">.</span><span class="n">ExcelWriter</span><span class="p">(</span><span class="s1">'results.xlsx'</span><span class="p">)</span> <span class="k">as</span> <span class="n">writer</span><span class="p">:</span>
+    <span class="n">tips</span><span class="o">.</span><span class="n">describe</span><span class="p">()</span><span class="o">.</span><span class="n">to_excel</span><span class="p">(</span><span class="n">writer</span><span class="p">,</span> <span class="n">sheet_name</span><span class="o">=</span><span class="s1">'Descriptives'</span><span class="p">)</span>
+    <span class="n">tips</span><span class="o">.</span><span class="n">groupby</span><span class="p">(</span><span class="s1">'sex'</span><span class="p">)</span><span class="o">.</span><span class="n">mean</span><span class="p">()</span><span class="o">.</span><span class="n">to_excel</span><span class="p">(</span><span class="n">writer</span><span class="p">,</span> <span class="n">sheet_name</span><span class="o">=</span><span class="s1">'Means by Gender'</span><span class="p">)</span>
+</pre><button class="copybtn o-tooltip--left" data-tooltip="Copy" data-clipboard-target="#codecell23">
+      <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-copy" width="44" height="44" viewBox="0 0 24 24" stroke-width="1.5" stroke="#000000" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <title>Copy to clipboard</title>
+  <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
+  <rect x="8" y="8" width="12" height="12" rx="2"></rect>
+  <path d="M16 8v-2a2 2 0 0 0 -2 -2h-8a2 2 0 0 0 -2 2v8a2 2 0 0 0 2 2h2"></path>
+</svg>
+    </button></div>
+</div>
+</section>
+</section>
+
+
+                </article>
+              
+              
+              
+              
+              
+                <footer class="prev-next-footer d-print-none">
+                  
+<div class="prev-next-area">
+    <a class="left-prev" href="https://pandas.pydata.org/docs/getting_started/comparison/comparison_with_stata.html" title="previous page">
+      <svg class="svg-inline--fa fa-angle-left" aria-hidden="true" focusable="false" data-prefix="fas" data-icon="angle-left" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 512" data-fa-i2svg=""><path fill="currentColor" d="M41.4 233.4c-12.5 12.5-12.5 32.8 0 45.3l160 160c12.5 12.5 32.8 12.5 45.3 0s12.5-32.8 0-45.3L109.3 256 246.6 118.6c12.5-12.5 12.5-32.8 0-45.3s-32.8-12.5-45.3 0l-160 160z"></path></svg><!-- <i class="fa-solid fa-angle-left"></i> Font Awesome fontawesome.com -->
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle" _msttexthash="122239" _msthash="163">previous</p>
+        <p class="prev-next-title" _msttexthash="418925" _msthash="164">Comparison with Stata</p>
+      </div>
+    </a>
+    <a class="right-next" href="https://pandas.pydata.org/docs/getting_started/tutorials.html" title="next page">
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle" _msttexthash="49634" _msthash="165">next</p>
+        <p class="prev-next-title" _msttexthash="399672" _msthash="166">Community tutorials</p>
+      </div>
+      <svg class="svg-inline--fa fa-angle-right" aria-hidden="true" focusable="false" data-prefix="fas" data-icon="angle-right" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 512" data-fa-i2svg=""><path fill="currentColor" d="M278.6 233.4c12.5 12.5 12.5 32.8 0 45.3l-160 160c-12.5 12.5-32.8 12.5-45.3 0s-12.5-32.8 0-45.3L210.7 256 73.4 118.6c-12.5-12.5-12.5-32.8 0-45.3s32.8-12.5 45.3 0l160 160z"></path></svg><!-- <i class="fa-solid fa-angle-right"></i> Font Awesome fontawesome.com -->
+    </a>
+</div>
+                </footer>
+              
+            </div>
+            
+            
+              
+                <dialog id="pst-secondary-sidebar-modal"></dialog>
+                <div id="pst-secondary-sidebar" class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+
+  <div class="sidebar-secondary-item">
+<div id="pst-page-navigation-heading-2" class="page-toc tocsection onthispage">
+    <svg class="svg-inline--fa fa-list" aria-hidden="true" focusable="false" data-prefix="fas" data-icon="list" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" data-fa-i2svg=""><path fill="currentColor" d="M40 48C26.7 48 16 58.7 16 72v48c0 13.3 10.7 24 24 24H88c13.3 0 24-10.7 24-24V72c0-13.3-10.7-24-24-24H40zM192 64c-17.7 0-32 14.3-32 32s14.3 32 32 32H480c17.7 0 32-14.3 32-32s-14.3-32-32-32H192zm0 160c-17.7 0-32 14.3-32 32s14.3 32 32 32H480c17.7 0 32-14.3 32-32s-14.3-32-32-32H192zm0 160c-17.7 0-32 14.3-32 32s14.3 32 32 32H480c17.7 0 32-14.3 32-32s-14.3-32-32-32H192zM16 232v48c0 13.3 10.7 24 24 24H88c13.3 0 24-10.7 24-24V232c0-13.3-10.7-24-24-24H40c-13.3 0-24 10.7-24 24zM40 368c-13.3 0-24 10.7-24 24v48c0 13.3 10.7 24 24 24H88c13.3 0 24-10.7 24-24V392c0-13.3-10.7-24-24-24H40z"></path></svg><!-- <i class="fa-solid fa-list"></i> Font Awesome fontawesome.com --><font _mstmutation="1" _msttexthash="199043" _msthash="167"> Nesta página </font></div>
+  <nav class="bd-toc-nav page-toc" aria-labelledby="pst-page-navigation-heading-2">
+    <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="https://pandas.pydata.org/docs/getting_started/comparison/comparison_with_spss.html#data-structures" _msttexthash="353899" _msthash="168">Estruturas de dados</a><ul class="nav section-nav flex-column" _msthidden="1">
+<li class="toc-h3 nav-item toc-entry" _msthidden="1"><a class="reference internal nav-link" href="https://pandas.pydata.org/docs/getting_started/comparison/comparison_with_spss.html#general-terminology-translation" _msttexthash="858936" _msthidden="1" _msthash="169">General terminology translation</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="https://pandas.pydata.org/docs/getting_started/comparison/comparison_with_spss.html#dataframe"><code class="xref py py-class docutils literal notranslate"><span class="pre">DataFrame</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="https://pandas.pydata.org/docs/getting_started/comparison/comparison_with_spss.html#series"><code class="xref py py-class docutils literal notranslate"><span class="pre">Series</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="https://pandas.pydata.org/docs/getting_started/comparison/comparison_with_spss.html#index"><code class="xref py py-class docutils literal notranslate"><span class="pre">Index</span></code></a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="https://pandas.pydata.org/docs/getting_started/comparison/comparison_with_spss.html#copies-vs-in-place-operations" _msttexthash="734097" _msthash="170">Cópias vs. operações no local</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="https://pandas.pydata.org/docs/getting_started/comparison/comparison_with_spss.html#data-input-output" _msttexthash="460187" _msthash="171">Entrada/saída de dados</a><ul class="nav section-nav flex-column" _msthidden="1">
+<li class="toc-h3 nav-item toc-entry" _msthidden="1"><a class="reference internal nav-link" href="https://pandas.pydata.org/docs/getting_started/comparison/comparison_with_spss.html#reading-external-data" _msttexthash="413998" _msthidden="1" _msthash="172">Reading external data</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="https://pandas.pydata.org/docs/getting_started/comparison/comparison_with_spss.html#data-operations" _msttexthash="357266" _msthash="173">Operações de dados</a><ul class="nav section-nav flex-column" _msthidden="2">
+<li class="toc-h3 nav-item toc-entry" _msthidden="1"><a class="reference internal nav-link" href="https://pandas.pydata.org/docs/getting_started/comparison/comparison_with_spss.html#filtering" _msttexthash="135083" _msthidden="1" _msthash="174">Filtering</a></li>
+<li class="toc-h3 nav-item toc-entry" _msthidden="1"><a class="reference internal nav-link" href="https://pandas.pydata.org/docs/getting_started/comparison/comparison_with_spss.html#sorting" _msttexthash="97097" _msthidden="1" _msthash="175">Sorting</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="https://pandas.pydata.org/docs/getting_started/comparison/comparison_with_spss.html#string-processing" _msttexthash="541632" _msthash="176">Processamento de strings</a><ul class="nav section-nav flex-column" _msthidden="2">
+<li class="toc-h3 nav-item toc-entry" _msthidden="1"><a class="reference internal nav-link" href="https://pandas.pydata.org/docs/getting_started/comparison/comparison_with_spss.html#finding-length-of-string" _msttexthash="497874" _msthidden="1" _msthash="177">Finding length of string</a></li>
+<li class="toc-h3 nav-item toc-entry" _msthidden="1"><a class="reference internal nav-link" href="https://pandas.pydata.org/docs/getting_started/comparison/comparison_with_spss.html#changing-case" _msttexthash="199537" _msthidden="1" _msthash="178">Changing case</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="https://pandas.pydata.org/docs/getting_started/comparison/comparison_with_spss.html#merging" _msttexthash="77376" _msthash="179">Fusão</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="https://pandas.pydata.org/docs/getting_started/comparison/comparison_with_spss.html#groupby-operations" _msttexthash="354172" _msthash="180">Operações GroupBy</a><ul class="nav section-nav flex-column" _msthidden="1">
+<li class="toc-h3 nav-item toc-entry" _msthidden="1"><a class="reference internal nav-link" href="https://pandas.pydata.org/docs/getting_started/comparison/comparison_with_spss.html#split-file-processing" _msttexthash="450268" _msthidden="1" _msthash="181">Split-file processing</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="https://pandas.pydata.org/docs/getting_started/comparison/comparison_with_spss.html#missing-data" _msttexthash="259909" _msthash="182">Dados faltantes</a><ul class="nav section-nav flex-column" _msthidden="3">
+<li class="toc-h3 nav-item toc-entry" _msthidden="1"><a class="reference internal nav-link" href="https://pandas.pydata.org/docs/getting_started/comparison/comparison_with_spss.html#drop-rows-with-missing-values" _msttexthash="676052" _msthidden="1" _msthash="183">Drop rows with missing values</a></li>
+<li class="toc-h3 nav-item toc-entry" _msthidden="1"><a class="reference internal nav-link" href="https://pandas.pydata.org/docs/getting_started/comparison/comparison_with_spss.html#forward-fill-from-previous-rows" _msttexthash="775697" _msthidden="1" _msthash="184">Forward fill from previous rows</a></li>
+<li class="toc-h3 nav-item toc-entry" _msthidden="1"><a class="reference internal nav-link" href="https://pandas.pydata.org/docs/getting_started/comparison/comparison_with_spss.html#replace-missing-values-with-a-specified-value" _msttexthash="1404572" _msthidden="1" _msthash="185">Replace missing values with a specified value</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="https://pandas.pydata.org/docs/getting_started/comparison/comparison_with_spss.html#other-considerations" _msttexthash="497744" _msthash="186">Outras considerações</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="https://pandas.pydata.org/docs/getting_started/comparison/comparison_with_spss.html#output-management" _msttexthash="663065" _msthash="187">Gerenciamento de produção</a></li>
+</ul>
+  </nav></div>
+
+</div></div>
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+          </footer>
+        
+      </main>
+    </div>
+  </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script defer="" src="./Comparação com SPSS — documentação do pandas 3.0.2_files/bootstrap.js.baixados"></script>
+<script defer="" src="./Comparação com SPSS — documentação do pandas 3.0.2_files/pydata-sphinx-theme.js.baixados"></script>
+
+  <footer class="bd-footer">
+<div class="bd-footer__inner bd-page-width">
+  
+    <div class="footer-items__start">
+      
+        <div class="footer-item"><p class="copyright" _msttexthash="1557816" _msthash="188">
+    © 2026, pandas via <a href="https://numfocus.org/">NumFOCUS, Inc.</a> Hosted by <a href="https://www.ovhcloud.com/">OVHcloud</a>.
+</p></div>
+      
+        <div class="footer-item">
+
+  <p class="sphinx-version"><font _mstmutation="1" _msttexthash="489177" _msthash="189">
+    Created using <a href="https://www.sphinx-doc.org/" _mstmutation="1">Sphinx</a> 9.0.4.
+    </font><br>
+  </p>
+</div>
+      
+    </div>
+  
+  
+  
+    <div class="footer-items__end">
+      
+        <div class="footer-item">
+<p class="theme-version">
+  <!-- # L10n: Setting the PST URL as an argument as this does not need to be localized --><font _mstmutation="1" _msttexthash="985738" _msthash="190">
+  Built with the <a href="https://pydata-sphinx-theme.readthedocs.io/en/stable/index.html" _mstmutation="1">PyData Sphinx Theme</a> 0.16.1.
+</font></p></div>
+      
+    </div>
+  
+</div>
+
+  </footer>
+  
+</body></html>

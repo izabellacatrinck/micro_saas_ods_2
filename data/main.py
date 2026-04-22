@@ -236,7 +236,17 @@ class SmartChunker:
         language: str = "pt",
         original_lang: str = "en",
         source_type: str = "official_docs",
+        translation_source: str = "groq",
     ):
+        """Split text into chunks with metadata.
+
+        ``translation_source`` records how the PT text was obtained:
+          - ``"groq"``: translated from EN by our glossary-aware Groq pipeline.
+          - ``"google_translate"``: page was saved from Google Translate —
+            lower MT quality, may have empty inline-code artifacts.
+          - ``"native"``: content was originally authored in PT (e.g. Medium
+            articles). No translation step at all.
+        """
 
         chunks = self.chunk(text)
 
@@ -252,6 +262,7 @@ class SmartChunker:
                 "language": language,
                 "original_lang": original_lang,
                 "source_type": source_type,
+                "translation_source": translation_source,
                 "library": infer_library(source),
                 "quality_flags": {
                     "has_code": "In [" in c or ">>>" in c,
@@ -325,20 +336,137 @@ def save_chunks(chunks, path="chunks.jsonl"):
 
 
 # =========================
+# DOCUMENT PROCESSORS
+# =========================
+
+def process_en_official_html(
+    html_file: Path,
+    segmenter: "ThematicSegmenter",
+    chunker: "SmartChunker",
+) -> List[dict]:
+    """Extract markdown from an EN official-docs HTML, segment, translate, chunk.
+
+    The trafilatura output keeps markdown structure (headings, ``` fences),
+    which the segmenter and translator guardrails rely on. We deliberately
+    do NOT run TextNormalizer here — it was designed for PDF noise and
+    would flatten newlines and strip code markers.
+    """
+    print(f"\n[EN→PT via groq] {html_file.name}")
+    try:
+        raw = extract_official_html(html_file)
+    except ValueError as e:
+        print(f"  skipped: {e}")
+        return []
+    if not raw.strip():
+        return []
+
+    segments = segmenter.segment(raw)
+    # Translate at segment level (smaller than full doc, larger than chunk → good API granularity)
+    pt_segments = translate_many([s["content"] for s in segments])
+
+    doc_chunks = []
+    for seg, pt_content in zip(segments, pt_segments):
+        doc_chunks.extend(
+            chunker.chunk_with_metadata(
+                text=pt_content,
+                source=html_file.name,
+                section=seg["title"],
+                language="pt",
+                original_lang="en",
+                source_type="official_docs",
+                translation_source="groq",
+            )
+        )
+    return doc_chunks
+
+
+def process_pt_official_html(
+    html_file: Path,
+    segmenter: "ThematicSegmenter",
+    chunker: "SmartChunker",
+) -> List[dict]:
+    """Extract markdown from a PT official-docs HTML (Google-translated), chunk.
+
+    These pages were saved from Google Translate in the browser — the
+    structural HTML (headings, ``` pre blocks, REPL cells) is preserved,
+    but the MT quality is lower than Groq's and a small fraction of inline
+    ``<code>`` tags may be empty. We tag ``translation_source="google_translate"``
+    so downstream evaluation can weight them accordingly.
+
+    Like ``process_en_official_html``, we skip TextNormalizer to keep the
+    markdown line structure intact for code-fence detection.
+    """
+    print(f"\n[PT native-MT] {html_file.name}")
+    try:
+        raw = extract_official_html(html_file)
+    except ValueError as e:
+        print(f"  skipped: {e}")
+        return []
+    if not raw.strip():
+        return []
+
+    segments = segmenter.segment(raw)
+
+    doc_chunks = []
+    for seg in segments:
+        doc_chunks.extend(
+            chunker.chunk_with_metadata(
+                text=seg["content"],
+                source=html_file.name,
+                section=seg["title"],
+                language="pt",
+                original_lang="pt",
+                source_type="official_docs",
+                translation_source="google_translate",
+            )
+        )
+    return doc_chunks
+
+
+def process_pt_medium_article(
+    html_file: Path,
+    segmenter: "ThematicSegmenter",
+    chunker: "SmartChunker",
+) -> List[dict]:
+    """Extract a PT Medium article (native PT, author-written) and chunk.
+
+    Unlike official docs, Medium HTML has a lot of boilerplate that
+    TextNormalizer was designed to strip, so we keep that step here.
+    """
+    print(f"\n[PT medium] {html_file.name}")
+    text = extract_medium_article(html_file)
+    text = TextNormalizer.normalize(text)
+    segments = segmenter.segment(text)
+
+    doc_chunks = []
+    for seg in segments:
+        doc_chunks.extend(
+            chunker.chunk_with_metadata(
+                text=seg["content"],
+                source=html_file.name,
+                section=seg["title"],
+                language="pt",
+                original_lang="pt",
+                source_type="medium_article",
+                translation_source="native",
+            )
+        )
+    return doc_chunks
+
+
+# =========================
 # PIPELINE
 # =========================
+
+# Per-library directory layout for official docs:
+#   data/<library>/en/*.html  →  process_en_official_html (Groq translation)
+#   data/<library>/pt/*.html  →  process_pt_official_html (Google Translate, no retranslation)
+LIBRARY_DIRS = ["pandas", "numpy", "matplotlib", "seaborn"]
+
 
 def run_pipeline():
     base = Path(__file__).resolve().parent  # data/
 
-    # Per-library directories for official docs saved as Sphinx HTML:
-    #   data/<library>/html/*.html
-    library_html_dirs = {
-        "pandas":     base / "pandas"     / "html",
-        "numpy":      base / "numpy"      / "html",
-        "matplotlib": base / "matplotlib" / "html",
-        "seaborn":    base / "seaborn"    / "html",
-    }
     medium_dir = base / "medium" / "raw"
 
     segmenter = ThematicSegmenter()
@@ -350,73 +478,27 @@ def run_pipeline():
     print("RAG PIPELINE PT-BR - INGESTION")
     print("=" * 60)
 
-    def process_en_html(html_file: Path):
-        """Extract markdown from an official-docs HTML, segment, translate, chunk.
-
-        The trafilatura output keeps markdown structure (headings, ``` fences),
-        which the segmenter and translator guardrails rely on. We deliberately
-        do NOT run TextNormalizer here — it was designed for PDF noise and
-        would flatten newlines and strip code markers.
-        """
-        print(f"\n[EN→PT] {html_file.name}")
-        try:
-            raw = extract_official_html(html_file)
-        except ValueError as e:
-            print(f"  skipped: {e}")
-            return []
-        if not raw.strip():
-            return []
-
-        segments = segmenter.segment(raw)
-        # Translate at segment level (smaller than full doc, larger than chunk → good API granularity)
-        pt_segments = translate_many([s["content"] for s in segments])
-
-        doc_chunks = []
-        for seg, pt_content in zip(segments, pt_segments):
-            doc_chunks.extend(
-                chunker.chunk_with_metadata(
-                    text=pt_content,
-                    source=html_file.name,
-                    section=seg["title"],
-                    language="pt",
-                    original_lang="en",
-                    source_type="official_docs",
-                )
-            )
-        return doc_chunks
-
-    def process_pt_article(html_file: Path):
-        print(f"\n[PT ] {html_file.name}")
-        text = extract_medium_article(html_file)
-        text = TextNormalizer.normalize(text)
-        segments = segmenter.segment(text)
-
-        doc_chunks = []
-        for seg in segments:
-            doc_chunks.extend(
-                chunker.chunk_with_metadata(
-                    text=seg["content"],
-                    source=html_file.name,
-                    section=seg["title"],
-                    language="pt",
-                    original_lang="pt",
-                    source_type="medium_article",
-                )
-            )
-        return doc_chunks
-
-    # --- Official docs HTMLs (EN, translated) ---
-    for library, html_dir in library_html_dirs.items():
-        if not html_dir.exists():
-            print(f"[skip] {library}: {html_dir} not found")
+    # --- Official docs: EN (translated via Groq) ---
+    for library in LIBRARY_DIRS:
+        en_dir = base / library / "en"
+        if not en_dir.exists():
+            print(f"[skip] {library}/en: not found")
             continue
-        for html_file in sorted(html_dir.glob("*.html")):
-            all_chunks.extend(process_en_html(html_file))
+        for html_file in sorted(en_dir.glob("*.html")):
+            all_chunks.extend(process_en_official_html(html_file, segmenter, chunker))
+
+    # --- Official docs: PT (Google-translated, no retranslation) ---
+    for library in LIBRARY_DIRS:
+        pt_dir = base / library / "pt"
+        if not pt_dir.exists():
+            continue
+        for html_file in sorted(pt_dir.glob("*.html")):
+            all_chunks.extend(process_pt_official_html(html_file, segmenter, chunker))
 
     # --- Medium articles (native PT, no translation) ---
     if medium_dir.exists():
-        for html_file in medium_dir.glob("*.html"):
-            all_chunks.extend(process_pt_article(html_file))
+        for html_file in sorted(medium_dir.glob("*.html")):
+            all_chunks.extend(process_pt_medium_article(html_file, segmenter, chunker))
 
     # --- Final cleaning ---
     all_chunks = deduplicate_chunks(all_chunks)

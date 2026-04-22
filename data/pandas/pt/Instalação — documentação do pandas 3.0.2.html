@@ -1,0 +1,1200 @@
+<!DOCTYPE html>
+<!-- saved from url=(0059)https://pandas.pydata.org/docs/getting_started/install.html -->
+<html lang="pt" data-content_root="../" data-mode="auto" data-theme="dark" class="fontawesome-i2svg-active fontawesome-i2svg-complete"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"><meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <title _msttexthash="2990273" _msthash="0">Instalação — documentação do pandas 3.0.2</title>
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "";
+  </script>
+  <!--
+    this give us a css class that will be invisible only if js is disabled
+  -->
+  <noscript>
+    <style>
+      .pst-js-only { display: none !important; }
+
+    </style>
+  </noscript>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <style type="text/css">:host,:root{--fa-font-solid:normal 900 1em/1 "Font Awesome 6 Solid";--fa-font-regular:normal 400 1em/1 "Font Awesome 6 Regular";--fa-font-light:normal 300 1em/1 "Font Awesome 6 Light";--fa-font-thin:normal 100 1em/1 "Font Awesome 6 Thin";--fa-font-duotone:normal 900 1em/1 "Font Awesome 6 Duotone";--fa-font-sharp-solid:normal 900 1em/1 "Font Awesome 6 Sharp";--fa-font-sharp-regular:normal 400 1em/1 "Font Awesome 6 Sharp";--fa-font-sharp-light:normal 300 1em/1 "Font Awesome 6 Sharp";--fa-font-sharp-thin:normal 100 1em/1 "Font Awesome 6 Sharp";--fa-font-brands:normal 400 1em/1 "Font Awesome 6 Brands"}svg:not(:host).svg-inline--fa,svg:not(:root).svg-inline--fa{overflow:visible;box-sizing:content-box}.svg-inline--fa{display:var(--fa-display,inline-block);height:1em;overflow:visible;vertical-align:-.125em}.svg-inline--fa.fa-2xs{vertical-align:.1em}.svg-inline--fa.fa-xs{vertical-align:0}.svg-inline--fa.fa-sm{vertical-align:-.0714285705em}.svg-inline--fa.fa-lg{vertical-align:-.2em}.svg-inline--fa.fa-xl{vertical-align:-.25em}.svg-inline--fa.fa-2xl{vertical-align:-.3125em}.svg-inline--fa.fa-pull-left{margin-right:var(--fa-pull-margin,.3em);width:auto}.svg-inline--fa.fa-pull-right{margin-left:var(--fa-pull-margin,.3em);width:auto}.svg-inline--fa.fa-li{width:var(--fa-li-width,2em);top:.25em}.svg-inline--fa.fa-fw{width:var(--fa-fw-width,1.25em)}.fa-layers svg.svg-inline--fa{bottom:0;left:0;margin:auto;position:absolute;right:0;top:0}.fa-layers-counter,.fa-layers-text{display:inline-block;position:absolute;text-align:center}.fa-layers{display:inline-block;height:1em;position:relative;text-align:center;vertical-align:-.125em;width:1em}.fa-layers svg.svg-inline--fa{-webkit-transform-origin:center center;transform-origin:center center}.fa-layers-text{left:50%;top:50%;-webkit-transform:translate(-50%,-50%);transform:translate(-50%,-50%);-webkit-transform-origin:center center;transform-origin:center center}.fa-layers-counter{background-color:var(--fa-counter-background-color,#ff253a);border-radius:var(--fa-counter-border-radius,1em);box-sizing:border-box;color:var(--fa-inverse,#fff);line-height:var(--fa-counter-line-height,1);max-width:var(--fa-counter-max-width,5em);min-width:var(--fa-counter-min-width,1.5em);overflow:hidden;padding:var(--fa-counter-padding,.25em .5em);right:var(--fa-right,0);text-overflow:ellipsis;top:var(--fa-top,0);-webkit-transform:scale(var(--fa-counter-scale,.25));transform:scale(var(--fa-counter-scale,.25));-webkit-transform-origin:top right;transform-origin:top right}.fa-layers-bottom-right{bottom:var(--fa-bottom,0);right:var(--fa-right,0);top:auto;-webkit-transform:scale(var(--fa-layers-scale,.25));transform:scale(var(--fa-layers-scale,.25));-webkit-transform-origin:bottom right;transform-origin:bottom right}.fa-layers-bottom-left{bottom:var(--fa-bottom,0);left:var(--fa-left,0);right:auto;top:auto;-webkit-transform:scale(var(--fa-layers-scale,.25));transform:scale(var(--fa-layers-scale,.25));-webkit-transform-origin:bottom left;transform-origin:bottom left}.fa-layers-top-right{top:var(--fa-top,0);right:var(--fa-right,0);-webkit-transform:scale(var(--fa-layers-scale,.25));transform:scale(var(--fa-layers-scale,.25));-webkit-transform-origin:top right;transform-origin:top right}.fa-layers-top-left{left:var(--fa-left,0);right:auto;top:var(--fa-top,0);-webkit-transform:scale(var(--fa-layers-scale,.25));transform:scale(var(--fa-layers-scale,.25));-webkit-transform-origin:top left;transform-origin:top left}.fa-1x{font-size:1em}.fa-2x{font-size:2em}.fa-3x{font-size:3em}.fa-4x{font-size:4em}.fa-5x{font-size:5em}.fa-6x{font-size:6em}.fa-7x{font-size:7em}.fa-8x{font-size:8em}.fa-9x{font-size:9em}.fa-10x{font-size:10em}.fa-2xs{font-size:.625em;line-height:.1em;vertical-align:.225em}.fa-xs{font-size:.75em;line-height:.0833333337em;vertical-align:.125em}.fa-sm{font-size:.875em;line-height:.0714285718em;vertical-align:.0535714295em}.fa-lg{font-size:1.25em;line-height:.05em;vertical-align:-.075em}.fa-xl{font-size:1.5em;line-height:.0416666682em;vertical-align:-.125em}.fa-2xl{font-size:2em;line-height:.03125em;vertical-align:-.1875em}.fa-fw{text-align:center;width:1.25em}.fa-ul{list-style-type:none;margin-left:var(--fa-li-margin,2.5em);padding-left:0}.fa-ul>li{position:relative}.fa-li{left:calc(var(--fa-li-width,2em) * -1);position:absolute;text-align:center;width:var(--fa-li-width,2em);line-height:inherit}.fa-border{border-color:var(--fa-border-color,#eee);border-radius:var(--fa-border-radius,.1em);border-style:var(--fa-border-style,solid);border-width:var(--fa-border-width,.08em);padding:var(--fa-border-padding,.2em .25em .15em)}.fa-pull-left{float:left;margin-right:var(--fa-pull-margin,.3em)}.fa-pull-right{float:right;margin-left:var(--fa-pull-margin,.3em)}.fa-beat{-webkit-animation-name:fa-beat;animation-name:fa-beat;-webkit-animation-delay:var(--fa-animation-delay,0s);animation-delay:var(--fa-animation-delay,0s);-webkit-animation-direction:var(--fa-animation-direction,normal);animation-direction:var(--fa-animation-direction,normal);-webkit-animation-duration:var(--fa-animation-duration,1s);animation-duration:var(--fa-animation-duration,1s);-webkit-animation-iteration-count:var(--fa-animation-iteration-count,infinite);animation-iteration-count:var(--fa-animation-iteration-count,infinite);-webkit-animation-timing-function:var(--fa-animation-timing,ease-in-out);animation-timing-function:var(--fa-animation-timing,ease-in-out)}.fa-bounce{-webkit-animation-name:fa-bounce;animation-name:fa-bounce;-webkit-animation-delay:var(--fa-animation-delay,0s);animation-delay:var(--fa-animation-delay,0s);-webkit-animation-direction:var(--fa-animation-direction,normal);animation-direction:var(--fa-animation-direction,normal);-webkit-animation-duration:var(--fa-animation-duration,1s);animation-duration:var(--fa-animation-duration,1s);-webkit-animation-iteration-count:var(--fa-animation-iteration-count,infinite);animation-iteration-count:var(--fa-animation-iteration-count,infinite);-webkit-animation-timing-function:var(--fa-animation-timing,cubic-bezier(.28,.84,.42,1));animation-timing-function:var(--fa-animation-timing,cubic-bezier(.28,.84,.42,1))}.fa-fade{-webkit-animation-name:fa-fade;animation-name:fa-fade;-webkit-animation-delay:var(--fa-animation-delay,0s);animation-delay:var(--fa-animation-delay,0s);-webkit-animation-direction:var(--fa-animation-direction,normal);animation-direction:var(--fa-animation-direction,normal);-webkit-animation-duration:var(--fa-animation-duration,1s);animation-duration:var(--fa-animation-duration,1s);-webkit-animation-iteration-count:var(--fa-animation-iteration-count,infinite);animation-iteration-count:var(--fa-animation-iteration-count,infinite);-webkit-animation-timing-function:var(--fa-animation-timing,cubic-bezier(.4,0,.6,1));animation-timing-function:var(--fa-animation-timing,cubic-bezier(.4,0,.6,1))}.fa-beat-fade{-webkit-animation-name:fa-beat-fade;animation-name:fa-beat-fade;-webkit-animation-delay:var(--fa-animation-delay,0s);animation-delay:var(--fa-animation-delay,0s);-webkit-animation-direction:var(--fa-animation-direction,normal);animation-direction:var(--fa-animation-direction,normal);-webkit-animation-duration:var(--fa-animation-duration,1s);animation-duration:var(--fa-animation-duration,1s);-webkit-animation-iteration-count:var(--fa-animation-iteration-count,infinite);animation-iteration-count:var(--fa-animation-iteration-count,infinite);-webkit-animation-timing-function:var(--fa-animation-timing,cubic-bezier(.4,0,.6,1));animation-timing-function:var(--fa-animation-timing,cubic-bezier(.4,0,.6,1))}.fa-flip{-webkit-animation-name:fa-flip;animation-name:fa-flip;-webkit-animation-delay:var(--fa-animation-delay,0s);animation-delay:var(--fa-animation-delay,0s);-webkit-animation-direction:var(--fa-animation-direction,normal);animation-direction:var(--fa-animation-direction,normal);-webkit-animation-duration:var(--fa-animation-duration,1s);animation-duration:var(--fa-animation-duration,1s);-webkit-animation-iteration-count:var(--fa-animation-iteration-count,infinite);animation-iteration-count:var(--fa-animation-iteration-count,infinite);-webkit-animation-timing-function:var(--fa-animation-timing,ease-in-out);animation-timing-function:var(--fa-animation-timing,ease-in-out)}.fa-shake{-webkit-animation-name:fa-shake;animation-name:fa-shake;-webkit-animation-delay:var(--fa-animation-delay,0s);animation-delay:var(--fa-animation-delay,0s);-webkit-animation-direction:var(--fa-animation-direction,normal);animation-direction:var(--fa-animation-direction,normal);-webkit-animation-duration:var(--fa-animation-duration,1s);animation-duration:var(--fa-animation-duration,1s);-webkit-animation-iteration-count:var(--fa-animation-iteration-count,infinite);animation-iteration-count:var(--fa-animation-iteration-count,infinite);-webkit-animation-timing-function:var(--fa-animation-timing,linear);animation-timing-function:var(--fa-animation-timing,linear)}.fa-spin{-webkit-animation-name:fa-spin;animation-name:fa-spin;-webkit-animation-delay:var(--fa-animation-delay,0s);animation-delay:var(--fa-animation-delay,0s);-webkit-animation-direction:var(--fa-animation-direction,normal);animation-direction:var(--fa-animation-direction,normal);-webkit-animation-duration:var(--fa-animation-duration,2s);animation-duration:var(--fa-animation-duration,2s);-webkit-animation-iteration-count:var(--fa-animation-iteration-count,infinite);animation-iteration-count:var(--fa-animation-iteration-count,infinite);-webkit-animation-timing-function:var(--fa-animation-timing,linear);animation-timing-function:var(--fa-animation-timing,linear)}.fa-spin-reverse{--fa-animation-direction:reverse}.fa-pulse,.fa-spin-pulse{-webkit-animation-name:fa-spin;animation-name:fa-spin;-webkit-animation-direction:var(--fa-animation-direction,normal);animation-direction:var(--fa-animation-direction,normal);-webkit-animation-duration:var(--fa-animation-duration,1s);animation-duration:var(--fa-animation-duration,1s);-webkit-animation-iteration-count:var(--fa-animation-iteration-count,infinite);animation-iteration-count:var(--fa-animation-iteration-count,infinite);-webkit-animation-timing-function:var(--fa-animation-timing,steps(8));animation-timing-function:var(--fa-animation-timing,steps(8))}@media (prefers-reduced-motion:reduce){.fa-beat,.fa-beat-fade,.fa-bounce,.fa-fade,.fa-flip,.fa-pulse,.fa-shake,.fa-spin,.fa-spin-pulse{-webkit-animation-delay:-1ms;animation-delay:-1ms;-webkit-animation-duration:1ms;animation-duration:1ms;-webkit-animation-iteration-count:1;animation-iteration-count:1;-webkit-transition-delay:0s;transition-delay:0s;-webkit-transition-duration:0s;transition-duration:0s}}@-webkit-keyframes fa-beat{0%,90%{-webkit-transform:scale(1);transform:scale(1)}45%{-webkit-transform:scale(var(--fa-beat-scale,1.25));transform:scale(var(--fa-beat-scale,1.25))}}@keyframes fa-beat{0%,90%{-webkit-transform:scale(1);transform:scale(1)}45%{-webkit-transform:scale(var(--fa-beat-scale,1.25));transform:scale(var(--fa-beat-scale,1.25))}}@-webkit-keyframes fa-bounce{0%{-webkit-transform:scale(1,1) translateY(0);transform:scale(1,1) translateY(0)}10%{-webkit-transform:scale(var(--fa-bounce-start-scale-x,1.1),var(--fa-bounce-start-scale-y,.9)) translateY(0);transform:scale(var(--fa-bounce-start-scale-x,1.1),var(--fa-bounce-start-scale-y,.9)) translateY(0)}30%{-webkit-transform:scale(var(--fa-bounce-jump-scale-x,.9),var(--fa-bounce-jump-scale-y,1.1)) translateY(var(--fa-bounce-height,-.5em));transform:scale(var(--fa-bounce-jump-scale-x,.9),var(--fa-bounce-jump-scale-y,1.1)) translateY(var(--fa-bounce-height,-.5em))}50%{-webkit-transform:scale(var(--fa-bounce-land-scale-x,1.05),var(--fa-bounce-land-scale-y,.95)) translateY(0);transform:scale(var(--fa-bounce-land-scale-x,1.05),var(--fa-bounce-land-scale-y,.95)) translateY(0)}57%{-webkit-transform:scale(1,1) translateY(var(--fa-bounce-rebound,-.125em));transform:scale(1,1) translateY(var(--fa-bounce-rebound,-.125em))}64%{-webkit-transform:scale(1,1) translateY(0);transform:scale(1,1) translateY(0)}100%{-webkit-transform:scale(1,1) translateY(0);transform:scale(1,1) translateY(0)}}@keyframes fa-bounce{0%{-webkit-transform:scale(1,1) translateY(0);transform:scale(1,1) translateY(0)}10%{-webkit-transform:scale(var(--fa-bounce-start-scale-x,1.1),var(--fa-bounce-start-scale-y,.9)) translateY(0);transform:scale(var(--fa-bounce-start-scale-x,1.1),var(--fa-bounce-start-scale-y,.9)) translateY(0)}30%{-webkit-transform:scale(var(--fa-bounce-jump-scale-x,.9),var(--fa-bounce-jump-scale-y,1.1)) translateY(var(--fa-bounce-height,-.5em));transform:scale(var(--fa-bounce-jump-scale-x,.9),var(--fa-bounce-jump-scale-y,1.1)) translateY(var(--fa-bounce-height,-.5em))}50%{-webkit-transform:scale(var(--fa-bounce-land-scale-x,1.05),var(--fa-bounce-land-scale-y,.95)) translateY(0);transform:scale(var(--fa-bounce-land-scale-x,1.05),var(--fa-bounce-land-scale-y,.95)) translateY(0)}57%{-webkit-transform:scale(1,1) translateY(var(--fa-bounce-rebound,-.125em));transform:scale(1,1) translateY(var(--fa-bounce-rebound,-.125em))}64%{-webkit-transform:scale(1,1) translateY(0);transform:scale(1,1) translateY(0)}100%{-webkit-transform:scale(1,1) translateY(0);transform:scale(1,1) translateY(0)}}@-webkit-keyframes fa-fade{50%{opacity:var(--fa-fade-opacity,.4)}}@keyframes fa-fade{50%{opacity:var(--fa-fade-opacity,.4)}}@-webkit-keyframes fa-beat-fade{0%,100%{opacity:var(--fa-beat-fade-opacity,.4);-webkit-transform:scale(1);transform:scale(1)}50%{opacity:1;-webkit-transform:scale(var(--fa-beat-fade-scale,1.125));transform:scale(var(--fa-beat-fade-scale,1.125))}}@keyframes fa-beat-fade{0%,100%{opacity:var(--fa-beat-fade-opacity,.4);-webkit-transform:scale(1);transform:scale(1)}50%{opacity:1;-webkit-transform:scale(var(--fa-beat-fade-scale,1.125));transform:scale(var(--fa-beat-fade-scale,1.125))}}@-webkit-keyframes fa-flip{50%{-webkit-transform:rotate3d(var(--fa-flip-x,0),var(--fa-flip-y,1),var(--fa-flip-z,0),var(--fa-flip-angle,-180deg));transform:rotate3d(var(--fa-flip-x,0),var(--fa-flip-y,1),var(--fa-flip-z,0),var(--fa-flip-angle,-180deg))}}@keyframes fa-flip{50%{-webkit-transform:rotate3d(var(--fa-flip-x,0),var(--fa-flip-y,1),var(--fa-flip-z,0),var(--fa-flip-angle,-180deg));transform:rotate3d(var(--fa-flip-x,0),var(--fa-flip-y,1),var(--fa-flip-z,0),var(--fa-flip-angle,-180deg))}}@-webkit-keyframes fa-shake{0%{-webkit-transform:rotate(-15deg);transform:rotate(-15deg)}4%{-webkit-transform:rotate(15deg);transform:rotate(15deg)}24%,8%{-webkit-transform:rotate(-18deg);transform:rotate(-18deg)}12%,28%{-webkit-transform:rotate(18deg);transform:rotate(18deg)}16%{-webkit-transform:rotate(-22deg);transform:rotate(-22deg)}20%{-webkit-transform:rotate(22deg);transform:rotate(22deg)}32%{-webkit-transform:rotate(-12deg);transform:rotate(-12deg)}36%{-webkit-transform:rotate(12deg);transform:rotate(12deg)}100%,40%{-webkit-transform:rotate(0);transform:rotate(0)}}@keyframes fa-shake{0%{-webkit-transform:rotate(-15deg);transform:rotate(-15deg)}4%{-webkit-transform:rotate(15deg);transform:rotate(15deg)}24%,8%{-webkit-transform:rotate(-18deg);transform:rotate(-18deg)}12%,28%{-webkit-transform:rotate(18deg);transform:rotate(18deg)}16%{-webkit-transform:rotate(-22deg);transform:rotate(-22deg)}20%{-webkit-transform:rotate(22deg);transform:rotate(22deg)}32%{-webkit-transform:rotate(-12deg);transform:rotate(-12deg)}36%{-webkit-transform:rotate(12deg);transform:rotate(12deg)}100%,40%{-webkit-transform:rotate(0);transform:rotate(0)}}@-webkit-keyframes fa-spin{0%{-webkit-transform:rotate(0);transform:rotate(0)}100%{-webkit-transform:rotate(360deg);transform:rotate(360deg)}}@keyframes fa-spin{0%{-webkit-transform:rotate(0);transform:rotate(0)}100%{-webkit-transform:rotate(360deg);transform:rotate(360deg)}}.fa-rotate-90{-webkit-transform:rotate(90deg);transform:rotate(90deg)}.fa-rotate-180{-webkit-transform:rotate(180deg);transform:rotate(180deg)}.fa-rotate-270{-webkit-transform:rotate(270deg);transform:rotate(270deg)}.fa-flip-horizontal{-webkit-transform:scale(-1,1);transform:scale(-1,1)}.fa-flip-vertical{-webkit-transform:scale(1,-1);transform:scale(1,-1)}.fa-flip-both,.fa-flip-horizontal.fa-flip-vertical{-webkit-transform:scale(-1,-1);transform:scale(-1,-1)}.fa-rotate-by{-webkit-transform:rotate(var(--fa-rotate-angle,0));transform:rotate(var(--fa-rotate-angle,0))}.fa-stack{display:inline-block;vertical-align:middle;height:2em;position:relative;width:2.5em}.fa-stack-1x,.fa-stack-2x{bottom:0;left:0;margin:auto;position:absolute;right:0;top:0;z-index:var(--fa-stack-z-index,auto)}.svg-inline--fa.fa-stack-1x{height:1em;width:1.25em}.svg-inline--fa.fa-stack-2x{height:2em;width:2.5em}.fa-inverse{color:var(--fa-inverse,#fff)}.fa-sr-only,.sr-only{position:absolute;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0,0,0,0);white-space:nowrap;border-width:0}.fa-sr-only-focusable:not(:focus),.sr-only-focusable:not(:focus){position:absolute;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0,0,0,0);white-space:nowrap;border-width:0}.svg-inline--fa .fa-primary{fill:var(--fa-primary-color,currentColor);opacity:var(--fa-primary-opacity,1)}.svg-inline--fa .fa-secondary{fill:var(--fa-secondary-color,currentColor);opacity:var(--fa-secondary-opacity,.4)}.svg-inline--fa.fa-swap-opacity .fa-primary{opacity:var(--fa-secondary-opacity,.4)}.svg-inline--fa.fa-swap-opacity .fa-secondary{opacity:var(--fa-primary-opacity,1)}.svg-inline--fa mask .fa-primary,.svg-inline--fa mask .fa-secondary{fill:#000}.fa-duotone.fa-inverse,.fad.fa-inverse{color:var(--fa-inverse,#fff)}</style><link href="./Instalação — documentação do pandas 3.0.2_files/theme.css" rel="stylesheet">
+<link href="./Instalação — documentação do pandas 3.0.2_files/pydata-sphinx-theme.css" rel="stylesheet">
+
+    <link rel="stylesheet" type="text/css" href="./Instalação — documentação do pandas 3.0.2_files/pygments.css">
+    <link rel="stylesheet" type="text/css" href="./Instalação — documentação do pandas 3.0.2_files/plot_directive.css">
+    <link rel="stylesheet" type="text/css" href="./Instalação — documentação do pandas 3.0.2_files/copybutton.css">
+    <link rel="stylesheet" type="text/css" href="./Instalação — documentação do pandas 3.0.2_files/sphinx-design.min.css">
+    <link rel="stylesheet" type="text/css" href="./Instalação — documentação do pandas 3.0.2_files/getting_started.css">
+    <link rel="stylesheet" type="text/css" href="./Instalação — documentação do pandas 3.0.2_files/pandas.css">
+  
+  <!-- So that users can add custom icons -->
+  <script src="./Instalação — documentação do pandas 3.0.2_files/fontawesome.js.baixados"></script>
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="./Instalação — documentação do pandas 3.0.2_files/bootstrap.js.baixados">
+<link rel="preload" as="script" href="./Instalação — documentação do pandas 3.0.2_files/pydata-sphinx-theme.js.baixados">
+
+    <script src="./Instalação — documentação do pandas 3.0.2_files/documentation_options.js.baixados"></script>
+    <script src="./Instalação — documentação do pandas 3.0.2_files/doctools.js.baixados"></script>
+    <script src="./Instalação — documentação do pandas 3.0.2_files/sphinx_highlight.js.baixados"></script>
+    <script src="./Instalação — documentação do pandas 3.0.2_files/clipboard.min.js.baixados"></script>
+    <script src="./Instalação — documentação do pandas 3.0.2_files/copybutton.js.baixados"></script>
+    <script src="./Instalação — documentação do pandas 3.0.2_files/design-tabs.js.baixados"></script>
+    <script data-domain="pandas.pydata.org" defer="defer" src="./Instalação — documentação do pandas 3.0.2_files/script.js.baixados"></script>
+    <script src="./Instalação — documentação do pandas 3.0.2_files/embed-amd.js.baixados"></script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'getting_started/install';</script>
+    <script>
+        DOCUMENTATION_OPTIONS.theme_version = '0.16.1';
+        DOCUMENTATION_OPTIONS.theme_switcher_json_url = 'https://pandas.pydata.org/versions.json';
+        DOCUMENTATION_OPTIONS.theme_switcher_version_match = '3.0';
+        DOCUMENTATION_OPTIONS.show_version_warning_banner =
+            false;
+        </script>
+    <link rel="icon" href="https://pandas.pydata.org/docs/_static/favicon.ico">
+    <link rel="index" title="Index" href="https://pandas.pydata.org/docs/genindex.html">
+    <link rel="search" title="Search" href="https://pandas.pydata.org/docs/search.html">
+    <link rel="next" title="Package overview" href="https://pandas.pydata.org/docs/getting_started/overview.html">
+    <link rel="prev" title="Getting started" href="https://pandas.pydata.org/docs/getting_started/index.html">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="docsearch:language" content="en">
+  <meta name="docsearch:version" content="3.0.2">
+  </head>
+  
+  
+  <body data-bs-spy="scroll" data-bs-target=".bd-toc-nav" data-offset="180" data-bs-root-margin="0px 0px -60%" data-default-mode="">
+
+  
+  
+  <div id="pst-skip-link" class="skip-link d-print-none"><a href="https://pandas.pydata.org/docs/getting_started/install.html#main-content" _msttexthash="357760" _msthash="1">Skip to main content</a></div>
+  
+  <div id="pst-scroll-pixel-helper"></div>
+  
+  <button type="button" class="btn rounded-pill" id="pst-back-to-top" style="display: none;" _mstvisible="0">
+    <svg class="svg-inline--fa fa-arrow-up" aria-hidden="true" focusable="false" data-prefix="fas" data-icon="arrow-up" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 384 512" data-fa-i2svg="" _mstVisible="1"><path fill="currentColor" d="M214.6 41.4c-12.5-12.5-32.8-12.5-45.3 0l-160 160c-12.5 12.5-12.5 32.8 0 45.3s32.8 12.5 45.3 0L160 141.2V448c0 17.7 14.3 32 32 32s32-14.3 32-32V141.2L329.4 246.6c12.5 12.5 32.8 12.5 45.3 0s12.5-32.8 0-45.3l-160-160z" _mstVisible="2"></path></svg><!-- <i class="fa-solid fa-arrow-up"></i> Font Awesome fontawesome.com --><font _mstmutation="1" _msttexthash="211770" _msthash="2" _mstvisible="1">Voltar ao topo</font></button>
+
+  
+  <dialog id="pst-search-dialog" _msthidden="1">
+    
+<form class="bd-search d-flex align-items-center" action="https://pandas.pydata.org/docs/search.html" method="get" _msthidden="1">
+  <svg class="svg-inline--fa fa-magnifying-glass" aria-hidden="true" focusable="false" data-prefix="fas" data-icon="magnifying-glass" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" data-fa-i2svg=""><path fill="currentColor" d="M416 208c0 45.9-14.9 88.3-40 122.7L502.6 457.4c12.5 12.5 12.5 32.8 0 45.3s-32.8 12.5-45.3 0L330.7 376c-34.4 25.2-76.8 40-122.7 40C93.1 416 0 322.9 0 208S93.1 0 208 0S416 93.1 416 208zM208 352a144 144 0 1 0 0-288 144 144 0 1 0 0 288z"></path></svg><!-- <i class="fa-solid fa-magnifying-glass"></i> Font Awesome fontawesome.com -->
+  <input type="search" class="form-control" name="q" placeholder="Search the docs ..." aria-label="Search the docs ..." autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false" _msthidden="A" _mstplaceholder="267410" _msthash="3" _mstaria-label="267410">
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form>
+  </dialog>
+
+  <div class="pst-async-banner-revealer" style="height: auto;" _mstvisible="0">
+  <aside id="bd-header-version-warning" class="d-none d-print-none" aria-label="Aviso de versão" _mstaria-label="264654" _msthash="4" _mstvisible="1"></aside>
+  <aside class="bd-header-announcement d-print-none" aria-label="Anúncio" data-pst-announcement-url="https://raw.githubusercontent.com/pandas-dev/pandas/main/doc/_templates/docs-announcement-banner.html" _mstaria-label="207376" _msthash="5" _mstvisible="1"><div class="bd-header-announcement__content" _msttexthash="1757158" _msthash="408" _mstvisible="2">Anúncio: Pandas 3.0 lançado! Leia mais <a href="https://pandas.pydata.org/community/blog/pandas-3.0.html" _istranslated="1" _mstvisible="3">no post do blog</a></div><a class="ms-3 my-1 align-baseline" _mstvisible="2"><svg class="svg-inline--fa fa-xmark" aria-hidden="true" focusable="false" data-prefix="fas" data-icon="xmark" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 384 512" data-fa-i2svg="" _mstVisible="3"><path fill="currentColor" d="M342.6 150.6c12.5-12.5 12.5-32.8 0-45.3s-32.8-12.5-45.3 0L192 210.7 86.6 105.4c-12.5-12.5-32.8-12.5-45.3 0s-12.5 32.8 0 45.3L146.7 256 41.4 361.4c-12.5 12.5-12.5 32.8 0 45.3s32.8 12.5 45.3 0L192 301.3 297.4 406.6c12.5 12.5 32.8 12.5 45.3 0s12.5-32.8 0-45.3L237.3 256 342.6 150.6z" _mstVisible="4"></path></svg><!-- <i class="fa-solid fa-xmark"></i> Font Awesome fontawesome.com --></a></aside>
+</div>
+
+  
+    <header class="bd-header navbar navbar-expand-lg bd-navbar d-print-none">
+<div class="bd-header__inner bd-page-width">
+  <button class="pst-navbar-icon sidebar-toggle primary-toggle" aria-label="Site navigation" _msthidden="A" _mstaria-label="261573" _msthash="6">
+    <svg class="svg-inline--fa fa-bars" aria-hidden="true" focusable="false" data-prefix="fas" data-icon="bars" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512" data-fa-i2svg=""><path fill="currentColor" d="M0 96C0 78.3 14.3 64 32 64H416c17.7 0 32 14.3 32 32s-14.3 32-32 32H32C14.3 128 0 113.7 0 96zM0 256c0-17.7 14.3-32 32-32H416c17.7 0 32 14.3 32 32s-14.3 32-32 32H32c-17.7 0-32-14.3-32-32zM448 416c0 17.7-14.3 32-32 32H32c-17.7 0-32-14.3-32-32s14.3-32 32-32H416c17.7 0 32 14.3 32 32z"></path></svg><!-- <span class="fa-solid fa-bars"></span> Font Awesome fontawesome.com -->
+  </button>
+  
+  
+  <div class=" navbar-header-items__start">
+    
+      <div class="navbar-item">
+
+  
+    
+  
+
+<a class="navbar-brand logo" href="https://pandas.pydata.org/docs/index.html">
+  
+  
+  
+  
+  
+    
+    
+      
+    
+    
+    <img src="./Instalação — documentação do pandas 3.0.2_files/pandas.svg" class="logo__image only-light" alt="pandas 3.0.2 documentation - Home" _msthidden="A" _mstalt="753129" _msthash="7">
+    <img src="./Instalação — documentação do pandas 3.0.2_files/pandas_white.svg" class="logo__image only-dark pst-js-only" alt="Documentação do pandas 3.0.2 - Início" _mstalt="753129" _msthash="8">
+  
+  
+</a></div>
+    
+  </div>
+  
+  <div class=" navbar-header-items">
+    
+    <div class="me-auto navbar-header-items__center">
+      
+        <div class="navbar-item">
+<nav>
+  <ul class="bd-navbar-elements navbar-nav">
+    
+<li class="nav-item current active">
+  <a class="nav-link nav-internal" href="https://pandas.pydata.org/docs/getting_started/index.html" _msttexthash="150124" _msthash="9"> Começando </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="https://pandas.pydata.org/docs/user_guide/index.html" _msttexthash="257231" _msthash="10"> Guia do Usuário </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="https://pandas.pydata.org/docs/reference/index.html" _msttexthash="275613" _msthash="11"> Referência de API </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="https://pandas.pydata.org/docs/development/index.html" _msttexthash="296036" _msthash="12"> Desenvolvimento </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="https://pandas.pydata.org/docs/whatsnew/index.html" _msttexthash="378716" _msthash="13"> Notas de lançamento </a>
+</li>
+
+  </ul>
+</nav></div>
+      
+    </div>
+    
+    
+    <div class="navbar-header-items__end">
+      
+        <div class="navbar-item navbar-persistent--container">
+          
+
+<button class="btn search-button-field search-button__button pst-js-only" aria-label="Busca" data-bs-placement="bottom" data-bs-toggle="tooltip" data-bs-original-title="Search" _mstaria-label="74607" _msthash="14">
+ <svg class="svg-inline--fa fa-magnifying-glass" aria-hidden="true" focusable="false" data-prefix="fas" data-icon="magnifying-glass" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" data-fa-i2svg=""><path fill="currentColor" d="M416 208c0 45.9-14.9 88.3-40 122.7L502.6 457.4c12.5 12.5 12.5 32.8 0 45.3s-32.8 12.5-45.3 0L330.7 376c-34.4 25.2-76.8 40-122.7 40C93.1 416 0 322.9 0 208S93.1 0 208 0S416 93.1 416 208zM208 352a144 144 0 1 0 0-288 144 144 0 1 0 0 288z"></path></svg><!-- <i class="fa-solid fa-magnifying-glass"></i> Font Awesome fontawesome.com -->
+ <span class="search-button__default-text" _msttexthash="58370" _msthash="15">Busca</span>
+ <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+</button>
+        </div>
+      
+      
+        <div class="navbar-item">
+<div class="version-switcher__container dropdown pst-js-only">
+  <button id="pst-version-switcher-button-2" type="button" class="version-switcher__button btn btn-sm dropdown-toggle" data-bs-toggle="dropdown" aria-haspopup="listbox" aria-controls="pst-version-switcher-list-2" aria-label="Lista de switchers de versões" _mstaria-label="431249" _msthash="16" data-active-version-name="3.0 (stable)" data-active-version="3.0" _msttexthash="190658">3.0 (estável)</button>
+  <div id="pst-version-switcher-list-2" class="version-switcher__menu dropdown-menu list-group-flush py-0 dropdown-menu-dark" role="listbox" aria-labelledby="pst-version-switcher-button-2">
+    <!-- dropdown will be populated by javascript on page load -->
+  <a class="dropdown-item list-group-item list-group-item-action py-1" href="https://pandas.pydata.org/docs/dev/getting_started/install.html" role="option" data-version-name="dev" data-version="dev" _msthidden="1"><span _msttexthash="33410" _msthidden="1" _msthash="407">dev</span></a><a class="dropdown-item list-group-item list-group-item-action py-1 active" href="https://pandas.pydata.org/docs/getting_started/install.html" role="option" data-version-name="3.0 (stable)" data-version="3.0" _msthidden="1"><span _msttexthash="140140" _msthidden="1" _msthash="405">3.0 (stable)</span></a><a class="dropdown-item list-group-item list-group-item-action py-1" href="https://pandas.pydata.org/pandas-docs/version/2.3/getting_started/install.html" role="option" data-version-name="2.3" data-version="2.3" _msthidden="1"><span _msttexthash="15301" _msthidden="1" _msthash="403">2.3</span></a><a class="dropdown-item list-group-item list-group-item-action py-1" href="https://pandas.pydata.org/pandas-docs/version/2.2/getting_started/install.html" role="option" data-version-name="2.2" data-version="2.2" _msthidden="1"><span _msttexthash="15184" _msthidden="1" _msthash="401">2.2</span></a><a class="dropdown-item list-group-item list-group-item-action py-1" href="https://pandas.pydata.org/pandas-docs/version/2.1/getting_started/install.html" role="option" data-version-name="2.1" data-version="2.1" _msthidden="1"><span _msttexthash="15067" _msthidden="1" _msthash="399">2.1</span></a><a class="dropdown-item list-group-item list-group-item-action py-1" href="https://pandas.pydata.org/pandas-docs/version/2.0/getting_started/install.html" role="option" data-version-name="2.0" data-version="2.0" _msthidden="1"><span _msttexthash="14950" _msthidden="1" _msthash="397">2.0</span></a><a class="dropdown-item list-group-item list-group-item-action py-1" href="https://pandas.pydata.org/pandas-docs/version/1.5/getting_started/install.html" role="option" data-version-name="1.5" data-version="1.5" _msthidden="1"><span _msttexthash="15444" _msthidden="1" _msthash="395">1.5</span></a><a class="dropdown-item list-group-item list-group-item-action py-1" href="https://pandas.pydata.org/pandas-docs/version/1.4/getting_started/install.html" role="option" data-version-name="1.4" data-version="1.4" _msthidden="1"><span _msttexthash="15327" _msthidden="1" _msthash="393">1.4</span></a><a class="dropdown-item list-group-item list-group-item-action py-1" href="https://pandas.pydata.org/pandas-docs/version/1.3/getting_started/install.html" role="option" data-version-name="1.3" data-version="1.3" _msthidden="1"><span _msttexthash="15210" _msthidden="1" _msthash="391">1.3</span></a><a class="dropdown-item list-group-item list-group-item-action py-1" href="https://pandas.pydata.org/pandas-docs/version/1.2/getting_started/install.html" role="option" data-version-name="1.2" data-version="1.2" _msthidden="1"><span _msttexthash="15093" _msthidden="1" _msthash="389">1.2</span></a><a class="dropdown-item list-group-item list-group-item-action py-1" href="https://pandas.pydata.org/pandas-docs/version/1.1/getting_started/install.html" role="option" data-version-name="1.1" data-version="1.1" _msthidden="1"><span _msttexthash="14976" _msthidden="1" _msthash="387">1.1</span></a><a class="dropdown-item list-group-item list-group-item-action py-1" href="https://pandas.pydata.org/pandas-docs/version/1.0/getting_started/install.html" role="option" data-version-name="1.0" data-version="1.0" _msthidden="1"><span _msttexthash="14859" _msthidden="1" _msthash="385">1.0</span></a></div>
+</div></div>
+      
+        <div class="navbar-item">
+
+<button class="btn btn-sm nav-link pst-navbar-icon theme-switch-button pst-js-only" aria-label="Modo de cor" data-bs-title="Color mode" data-bs-placement="bottom" data-bs-toggle="tooltip" _mstaria-label="134667" _msthash="18">
+  <svg class="svg-inline--fa fa-sun theme-switch fa-lg" data-mode="light" aria-labelledby="svg-inline--fa-title-8Ik2KteWHqDr" data-prefix="fas" data-icon="sun" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" data-fa-i2svg=""><title id="svg-inline--fa-title-8Ik2KteWHqDr" _mstTextHash="33358" _mstHash="19">Luz</title><path fill="currentColor" d="M361.5 1.2c5 2.1 8.6 6.6 9.6 11.9L391 121l107.9 19.8c5.3 1 9.8 4.6 11.9 9.6s1.5 10.7-1.6 15.2L446.9 256l62.3 90.3c3.1 4.5 3.7 10.2 1.6 15.2s-6.6 8.6-11.9 9.6L391 391 371.1 498.9c-1 5.3-4.6 9.8-9.6 11.9s-10.7 1.5-15.2-1.6L256 446.9l-90.3 62.3c-4.5 3.1-10.2 3.7-15.2 1.6s-8.6-6.6-9.6-11.9L121 391 13.1 371.1c-5.3-1-9.8-4.6-11.9-9.6s-1.5-10.7 1.6-15.2L65.1 256 2.8 165.7c-3.1-4.5-3.7-10.2-1.6-15.2s6.6-8.6 11.9-9.6L121 121 140.9 13.1c1-5.3 4.6-9.8 9.6-11.9s10.7-1.5 15.2 1.6L256 65.1 346.3 2.8c4.5-3.1 10.2-3.7 15.2-1.6zM160 256a96 96 0 1 1 192 0 96 96 0 1 1 -192 0zm224 0a128 128 0 1 0 -256 0 128 128 0 1 0 256 0z"></path></svg><!-- <i class="theme-switch fa-solid fa-sun                fa-lg" data-mode="light" title="Light"></i> Font Awesome fontawesome.com -->
+  <svg class="svg-inline--fa fa-moon theme-switch fa-lg" data-mode="dark" aria-labelledby="svg-inline--fa-title-OKyL283rxZiU" data-prefix="fas" data-icon="moon" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 384 512" data-fa-i2svg=""><title id="svg-inline--fa-title-OKyL283rxZiU" _mstTextHash="78650" _mstHash="20">Escuro</title><path fill="currentColor" d="M223.5 32C100 32 0 132.3 0 256S100 480 223.5 480c60.6 0 115.5-24.2 155.8-63.4c5-4.9 6.3-12.5 3.1-18.7s-10.1-9.7-17-8.5c-9.8 1.7-19.8 2.6-30.1 2.6c-96.9 0-175.5-78.8-175.5-176c0-65.8 36-123.1 89.3-153.3c6.1-3.5 9.2-10.5 7.7-17.3s-7.3-11.9-14.3-12.5c-6.3-.5-12.6-.8-19-.8z"></path></svg><!-- <i class="theme-switch fa-solid fa-moon               fa-lg" data-mode="dark" title="Dark"></i> Font Awesome fontawesome.com -->
+  <svg class="svg-inline--fa fa-circle-half-stroke theme-switch fa-lg" data-mode="auto" aria-labelledby="svg-inline--fa-title-UsOvPhj8QtNg" data-prefix="fas" data-icon="circle-half-stroke" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" data-fa-i2svg=""><title id="svg-inline--fa-title-UsOvPhj8QtNg" _mstTextHash="581243" _mstHash="21">Configurações do Sistema</title><path fill="currentColor" d="M448 256c0-106-86-192-192-192V448c106 0 192-86 192-192zM0 256a256 256 0 1 1 512 0A256 256 0 1 1 0 256z"></path></svg><!-- <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg" data-mode="auto" title="System Settings"></i> Font Awesome fontawesome.com -->
+</button></div>
+      
+        <div class="navbar-item"><ul class="navbar-icon-links" aria-label="Links de Ícones" _mstaria-label="131963" _msthash="22">
+        <li class="nav-item">
+          
+          
+          
+          
+          
+          
+          
+          
+          <a href="https://github.com/pandas-dev/pandas" class="nav-link pst-navbar-icon" rel="noopener" target="_blank" data-bs-toggle="tooltip" data-bs-placement="bottom" data-bs-original-title="GitHub"><svg class="svg-inline--fa fa-square-github fa-lg" aria-hidden="true" focusable="false" data-prefix="fab" data-icon="square-github" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512" data-fa-i2svg=""><path fill="currentColor" d="M448 96c0-35.3-28.7-64-64-64H64C28.7 32 0 60.7 0 96V416c0 35.3 28.7 64 64 64H384c35.3 0 64-28.7 64-64V96zM265.8 407.7c0-1.8 0-6 .1-11.6c.1-11.4 .1-28.8 .1-43.7c0-15.6-5.2-25.5-11.3-30.7c37-4.1 76-9.2 76-73.1c0-18.2-6.5-27.3-17.1-39c1.7-4.3 7.4-22-1.7-45c-13.9-4.3-45.7 17.9-45.7 17.9c-13.2-3.7-27.5-5.6-41.6-5.6s-28.4 1.9-41.6 5.6c0 0-31.8-22.2-45.7-17.9c-9.1 22.9-3.5 40.6-1.7 45c-10.6 11.7-15.6 20.8-15.6 39c0 63.6 37.3 69 74.3 73.1c-4.8 4.3-9.1 11.7-10.6 22.3c-9.5 4.3-33.8 11.7-48.3-13.9c-9.1-15.8-25.5-17.1-25.5-17.1c-16.2-.2-1.1 10.2-1.1 10.2c10.8 5 18.4 24.2 18.4 24.2c9.7 29.7 56.1 19.7 56.1 19.7c0 9 .1 21.7 .1 30.6c0 4.8 .1 8.6 .1 10c0 4.3-3 9.5-11.5 8C106 393.6 59.8 330.8 59.8 257.4c0-91.8 70.2-161.5 162-161.5s166.2 69.7 166.2 161.5c.1 73.4-44.7 136.3-110.7 158.3c-8.4 1.5-11.5-3.7-11.5-8zm-90.5-54.8c-.2-1.5 1.1-2.8 3-3.2c1.9-.2 3.7 .6 3.9 1.9c.3 1.3-1 2.6-3 3c-1.9 .4-3.7-.4-3.9-1.7zm-9.1 3.2c-2.2 .2-3.7-.9-3.7-2.4c0-1.3 1.5-2.4 3.5-2.4c1.9-.2 3.7 .9 3.7 2.4c0 1.3-1.5 2.4-3.5 2.4zm-14.3-2.2c-1.9-.4-3.2-1.9-2.8-3.2s2.4-1.9 4.1-1.5c2 .6 3.3 2.1 2.8 3.4c-.4 1.3-2.4 1.9-4.1 1.3zm-12.5-7.3c-1.5-1.3-1.9-3.2-.9-4.1c.9-1.1 2.8-.9 4.3 .6c1.3 1.3 1.8 3.3 .9 4.1c-.9 1.1-2.8 .9-4.3-.6zm-8.5-10c-1.1-1.5-1.1-3.2 0-3.9c1.1-.9 2.8-.2 3.7 1.3c1.1 1.5 1.1 3.3 0 4.1c-.9 .6-2.6 0-3.7-1.5zm-6.3-8.8c-1.1-1.3-1.3-2.8-.4-3.5c.9-.9 2.4-.4 3.5 .6c1.1 1.3 1.3 2.8 .4 3.5c-.9 .9-2.4 .4-3.5-.6zm-6-6.4c-1.3-.6-1.9-1.7-1.5-2.6c.4-.6 1.5-.9 2.8-.4c1.3 .7 1.9 1.8 1.5 2.6c-.4 .9-1.7 1.1-2.8 .4z"></path></svg><!-- <i class="fa-brands fa-square-github fa-lg" aria-hidden="true"></i> Font Awesome fontawesome.com -->
+            <span class="sr-only" _msttexthash="72332" _msthash="23">GitHub</span></a>
+        </li>
+        <li class="nav-item">
+          
+          
+          
+          
+          
+          
+          
+          
+          <a href="https://x.com/pandas_dev" class="nav-link pst-navbar-icon" rel="noopener" target="_blank" data-bs-toggle="tooltip" data-bs-placement="bottom" data-bs-original-title="X"><svg class="svg-inline--fa fa-square-x-twitter fa-lg" aria-hidden="true" focusable="false" data-prefix="fab" data-icon="square-x-twitter" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512" data-fa-i2svg=""><path fill="currentColor" d="M64 32C28.7 32 0 60.7 0 96V416c0 35.3 28.7 64 64 64H384c35.3 0 64-28.7 64-64V96c0-35.3-28.7-64-64-64H64zm297.1 84L257.3 234.6 379.4 396H283.8L209 298.1 123.3 396H75.8l111-126.9L69.7 116h98l67.7 89.5L313.6 116h47.5zM323.3 367.6L153.4 142.9H125.1L296.9 367.6h26.3z"></path></svg><!-- <i class="fa-brands fa-square-x-twitter fa-lg" aria-hidden="true"></i> Font Awesome fontawesome.com -->
+            <span class="sr-only" _msttexthash="8008" _msthash="24">X</span></a>
+        </li>
+        <li class="nav-item">
+          
+          
+          
+          
+          
+          
+          
+          
+          <a href="https://fosstodon.org/@pandas_dev" class="nav-link pst-navbar-icon" rel="noopener" target="_blank" data-bs-toggle="tooltip" data-bs-placement="bottom" data-bs-original-title="Mastodon"><svg class="svg-inline--fa fa-mastodon fa-lg" aria-hidden="true" focusable="false" data-prefix="fab" data-icon="mastodon" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512" data-fa-i2svg=""><path fill="currentColor" d="M433 179.11c0-97.2-63.71-125.7-63.71-125.7-62.52-28.7-228.56-28.4-290.48 0 0 0-63.72 28.5-63.72 125.7 0 115.7-6.6 259.4 105.63 289.1 40.51 10.7 75.32 13 103.33 11.4 50.81-2.8 79.32-18.1 79.32-18.1l-1.7-36.9s-36.31 11.4-77.12 10.1c-40.41-1.4-83-4.4-89.63-54a102.54 102.54 0 0 1-.9-13.9c85.63 20.9 158.65 9.1 178.75 6.7 56.12-6.7 105-41.3 111.23-72.9 9.8-49.8 9-121.5 9-121.5zm-75.12 125.2h-46.63v-114.2c0-49.7-64-51.6-64 6.9v62.5h-46.33V197c0-58.5-64-56.6-64-6.9v114.2H90.19c0-122.1-5.2-147.9 18.41-175 25.9-28.9 79.82-30.8 103.83 6.1l11.6 19.5 11.6-19.5c24.11-37.1 78.12-34.8 103.83-6.1 23.71 27.3 18.4 53 18.4 175z"></path></svg><!-- <i class="fa-brands fa-mastodon fa-lg" aria-hidden="true"></i> Font Awesome fontawesome.com -->
+            <span class="sr-only" _msttexthash="159510" _msthash="25">Mastodonte</span></a>
+        </li>
+</ul></div>
+      
+    </div>
+    
+  </div>
+  
+  
+    <div class="navbar-persistent--mobile" _msthidden="2">
+
+<button class="btn search-button-field search-button__button pst-js-only" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip" data-bs-original-title="Search" _msthidden="1" _mstaria-label="74607" _msthash="26">
+ <svg class="svg-inline--fa fa-magnifying-glass" aria-hidden="true" focusable="false" data-prefix="fas" data-icon="magnifying-glass" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" data-fa-i2svg=""><path fill="currentColor" d="M416 208c0 45.9-14.9 88.3-40 122.7L502.6 457.4c12.5 12.5 12.5 32.8 0 45.3s-32.8 12.5-45.3 0L330.7 376c-34.4 25.2-76.8 40-122.7 40C93.1 416 0 322.9 0 208S93.1 0 208 0S416 93.1 416 208zM208 352a144 144 0 1 0 0-288 144 144 0 1 0 0 288z"></path></svg><!-- <i class="fa-solid fa-magnifying-glass"></i> Font Awesome fontawesome.com -->
+ <span class="search-button__default-text" _msttexthash="74607" _msthidden="1" _msthash="27">Search</span>
+ <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+</button>
+    </div>
+  
+
+  
+    <button class="pst-navbar-icon sidebar-toggle secondary-toggle" aria-label="On this page" _msthidden="A" _mstaria-label="156351" _msthash="28">
+      <svg class="svg-inline--fa fa-outdent" aria-hidden="true" focusable="false" data-prefix="fas" data-icon="outdent" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512" data-fa-i2svg=""><path fill="currentColor" d="M0 64C0 46.3 14.3 32 32 32H416c17.7 0 32 14.3 32 32s-14.3 32-32 32H32C14.3 96 0 81.7 0 64zM192 192c0-17.7 14.3-32 32-32H416c17.7 0 32 14.3 32 32s-14.3 32-32 32H224c-17.7 0-32-14.3-32-32zm32 96H416c17.7 0 32 14.3 32 32s-14.3 32-32 32H224c-17.7 0-32-14.3-32-32s14.3-32 32-32zM0 448c0-17.7 14.3-32 32-32H416c17.7 0 32 14.3 32 32s-14.3 32-32 32H32c-17.7 0-32-14.3-32-32zM.2 268.6c-8.2-6.4-8.2-18.9 0-25.3l101.9-79.3c10.5-8.2 25.8-.7 25.8 12.6V335.3c0 13.3-15.3 20.8-25.8 12.6L.2 268.6z"></path></svg><!-- <span class="fa-solid fa-outdent"></span> Font Awesome fontawesome.com -->
+    </button>
+  
+</div>
+
+    </header>
+  
+
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      
+      
+      <dialog id="pst-primary-sidebar-modal"></dialog>
+      <div id="pst-primary-sidebar" class="bd-sidebar-primary bd-sidebar">
+        
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+      <div class="sidebar-header-items__center" _msthidden="5">
+        
+          
+          
+            <div class="navbar-item" _msthidden="5">
+<nav _msthidden="5">
+  <ul class="bd-navbar-elements navbar-nav" _msthidden="5">
+    
+<li class="nav-item current active" _msthidden="1">
+  <a class="nav-link nav-internal" href="https://pandas.pydata.org/docs/getting_started/index.html" _msttexthash="262210" _msthidden="1" _msthash="29">
+    Getting started
+  </a>
+</li>
+
+
+<li class="nav-item " _msthidden="1">
+  <a class="nav-link nav-internal" href="https://pandas.pydata.org/docs/user_guide/index.html" _msttexthash="130377" _msthidden="1" _msthash="30">
+    User Guide
+  </a>
+</li>
+
+
+<li class="nav-item " _msthidden="1">
+  <a class="nav-link nav-internal" href="https://pandas.pydata.org/docs/reference/index.html" _msttexthash="193856" _msthidden="1" _msthash="31">
+    API reference
+  </a>
+</li>
+
+
+<li class="nav-item " _msthidden="1">
+  <a class="nav-link nav-internal" href="https://pandas.pydata.org/docs/development/index.html" _msttexthash="183365" _msthidden="1" _msthash="32">
+    Development
+  </a>
+</li>
+
+
+<li class="nav-item " _msthidden="1">
+  <a class="nav-link nav-internal" href="https://pandas.pydata.org/docs/whatsnew/index.html" _msttexthash="207636" _msthidden="1" _msthash="33">
+    Release notes
+  </a>
+</li>
+
+  </ul>
+</nav></div>
+          
+        
+      </div>
+    
+    
+    
+      <div class="sidebar-header-items__end">
+        
+          <div class="navbar-item" _msthidden="2">
+<div class="version-switcher__container dropdown pst-js-only" _msthidden="2">
+  <button id="pst-version-switcher-button-3" type="button" class="version-switcher__button btn btn-sm dropdown-toggle" data-bs-toggle="dropdown" aria-haspopup="listbox" aria-controls="pst-version-switcher-list-3" aria-label="Version switcher list" _msthidden="1" _mstaria-label="431249" _msthash="34" data-active-version-name="3.0 (stable)" data-active-version="3.0" _msttexthash="140140">3.0 (stable)</button>
+  <div id="pst-version-switcher-list-3" class="version-switcher__menu dropdown-menu list-group-flush py-0 dropdown-menu-dark" role="listbox" aria-labelledby="pst-version-switcher-button-3">
+    <!-- dropdown will be populated by javascript on page load -->
+  <a class="dropdown-item list-group-item list-group-item-action py-1" href="https://pandas.pydata.org/docs/dev/getting_started/install.html" role="option" data-version-name="dev" data-version="dev" _msthidden="1"><span _msttexthash="33410" _msthidden="1" _msthash="406">dev</span></a><a class="dropdown-item list-group-item list-group-item-action py-1 active" href="https://pandas.pydata.org/docs/getting_started/install.html" role="option" data-version-name="3.0 (stable)" data-version="3.0" _msthidden="1"><span _msttexthash="140140" _msthidden="1" _msthash="404">3.0 (stable)</span></a><a class="dropdown-item list-group-item list-group-item-action py-1" href="https://pandas.pydata.org/pandas-docs/version/2.3/getting_started/install.html" role="option" data-version-name="2.3" data-version="2.3" _msthidden="1"><span _msttexthash="15301" _msthidden="1" _msthash="402">2.3</span></a><a class="dropdown-item list-group-item list-group-item-action py-1" href="https://pandas.pydata.org/pandas-docs/version/2.2/getting_started/install.html" role="option" data-version-name="2.2" data-version="2.2" _msthidden="1"><span _msttexthash="15184" _msthidden="1" _msthash="400">2.2</span></a><a class="dropdown-item list-group-item list-group-item-action py-1" href="https://pandas.pydata.org/pandas-docs/version/2.1/getting_started/install.html" role="option" data-version-name="2.1" data-version="2.1" _msthidden="1"><span _msttexthash="15067" _msthidden="1" _msthash="398">2.1</span></a><a class="dropdown-item list-group-item list-group-item-action py-1" href="https://pandas.pydata.org/pandas-docs/version/2.0/getting_started/install.html" role="option" data-version-name="2.0" data-version="2.0" _msthidden="1"><span _msttexthash="14950" _msthidden="1" _msthash="396">2.0</span></a><a class="dropdown-item list-group-item list-group-item-action py-1" href="https://pandas.pydata.org/pandas-docs/version/1.5/getting_started/install.html" role="option" data-version-name="1.5" data-version="1.5" _msthidden="1"><span _msttexthash="15444" _msthidden="1" _msthash="394">1.5</span></a><a class="dropdown-item list-group-item list-group-item-action py-1" href="https://pandas.pydata.org/pandas-docs/version/1.4/getting_started/install.html" role="option" data-version-name="1.4" data-version="1.4" _msthidden="1"><span _msttexthash="15327" _msthidden="1" _msthash="392">1.4</span></a><a class="dropdown-item list-group-item list-group-item-action py-1" href="https://pandas.pydata.org/pandas-docs/version/1.3/getting_started/install.html" role="option" data-version-name="1.3" data-version="1.3" _msthidden="1"><span _msttexthash="15210" _msthidden="1" _msthash="390">1.3</span></a><a class="dropdown-item list-group-item list-group-item-action py-1" href="https://pandas.pydata.org/pandas-docs/version/1.2/getting_started/install.html" role="option" data-version-name="1.2" data-version="1.2" _msthidden="1"><span _msttexthash="15093" _msthidden="1" _msthash="388">1.2</span></a><a class="dropdown-item list-group-item list-group-item-action py-1" href="https://pandas.pydata.org/pandas-docs/version/1.1/getting_started/install.html" role="option" data-version-name="1.1" data-version="1.1" _msthidden="1"><span _msttexthash="14976" _msthidden="1" _msthash="386">1.1</span></a><a class="dropdown-item list-group-item list-group-item-action py-1" href="https://pandas.pydata.org/pandas-docs/version/1.0/getting_started/install.html" role="option" data-version-name="1.0" data-version="1.0" _msthidden="1"><span _msttexthash="14859" _msthidden="1" _msthash="384">1.0</span></a></div>
+</div></div>
+        
+          <div class="navbar-item">
+
+<button class="btn btn-sm nav-link pst-navbar-icon theme-switch-button pst-js-only" aria-label="Color mode" data-bs-title="Color mode" data-bs-placement="bottom" data-bs-toggle="tooltip" _msthidden="A" _mstaria-label="134667" _msthash="36">
+  <svg class="svg-inline--fa fa-sun theme-switch fa-lg" data-mode="light" aria-labelledby="svg-inline--fa-title-LsiyQ9ZfPvU7" data-prefix="fas" data-icon="sun" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" data-fa-i2svg=""><title id="svg-inline--fa-title-LsiyQ9ZfPvU7" _mstTextHash="33358" _mstHash="37">Luz</title><path fill="currentColor" d="M361.5 1.2c5 2.1 8.6 6.6 9.6 11.9L391 121l107.9 19.8c5.3 1 9.8 4.6 11.9 9.6s1.5 10.7-1.6 15.2L446.9 256l62.3 90.3c3.1 4.5 3.7 10.2 1.6 15.2s-6.6 8.6-11.9 9.6L391 391 371.1 498.9c-1 5.3-4.6 9.8-9.6 11.9s-10.7 1.5-15.2-1.6L256 446.9l-90.3 62.3c-4.5 3.1-10.2 3.7-15.2 1.6s-8.6-6.6-9.6-11.9L121 391 13.1 371.1c-5.3-1-9.8-4.6-11.9-9.6s-1.5-10.7 1.6-15.2L65.1 256 2.8 165.7c-3.1-4.5-3.7-10.2-1.6-15.2s6.6-8.6 11.9-9.6L121 121 140.9 13.1c1-5.3 4.6-9.8 9.6-11.9s10.7-1.5 15.2 1.6L256 65.1 346.3 2.8c4.5-3.1 10.2-3.7 15.2-1.6zM160 256a96 96 0 1 1 192 0 96 96 0 1 1 -192 0zm224 0a128 128 0 1 0 -256 0 128 128 0 1 0 256 0z"></path></svg><!-- <i class="theme-switch fa-solid fa-sun                fa-lg" data-mode="light" title="Light"></i> Font Awesome fontawesome.com -->
+  <svg class="svg-inline--fa fa-moon theme-switch fa-lg" data-mode="dark" aria-labelledby="svg-inline--fa-title-RoXo1LY3iD7y" data-prefix="fas" data-icon="moon" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 384 512" data-fa-i2svg=""><title id="svg-inline--fa-title-RoXo1LY3iD7y" _mstTextHash="78650" _mstHash="38">Escuro</title><path fill="currentColor" d="M223.5 32C100 32 0 132.3 0 256S100 480 223.5 480c60.6 0 115.5-24.2 155.8-63.4c5-4.9 6.3-12.5 3.1-18.7s-10.1-9.7-17-8.5c-9.8 1.7-19.8 2.6-30.1 2.6c-96.9 0-175.5-78.8-175.5-176c0-65.8 36-123.1 89.3-153.3c6.1-3.5 9.2-10.5 7.7-17.3s-7.3-11.9-14.3-12.5c-6.3-.5-12.6-.8-19-.8z"></path></svg><!-- <i class="theme-switch fa-solid fa-moon               fa-lg" data-mode="dark" title="Dark"></i> Font Awesome fontawesome.com -->
+  <svg class="svg-inline--fa fa-circle-half-stroke theme-switch fa-lg" data-mode="auto" aria-labelledby="svg-inline--fa-title-ZO2YijSR0t4H" data-prefix="fas" data-icon="circle-half-stroke" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" data-fa-i2svg=""><title id="svg-inline--fa-title-ZO2YijSR0t4H" _mstTextHash="581243" _mstHash="39">Configurações do Sistema</title><path fill="currentColor" d="M448 256c0-106-86-192-192-192V448c106 0 192-86 192-192zM0 256a256 256 0 1 1 512 0A256 256 0 1 1 0 256z"></path></svg><!-- <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg" data-mode="auto" title="System Settings"></i> Font Awesome fontawesome.com -->
+</button></div>
+        
+          <div class="navbar-item" _msthidden="4"><ul class="navbar-icon-links" aria-label="Icon Links" _msthidden="3" _mstaria-label="131963" _msthash="40">
+        <li class="nav-item" _msthidden="1">
+          
+          
+          
+          
+          
+          
+          
+          
+          <a href="https://github.com/pandas-dev/pandas" class="nav-link pst-navbar-icon" rel="noopener" target="_blank" data-bs-toggle="tooltip" data-bs-placement="bottom" data-bs-original-title="GitHub" _msthidden="1"><svg class="svg-inline--fa fa-square-github fa-lg" aria-hidden="true" focusable="false" data-prefix="fab" data-icon="square-github" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512" data-fa-i2svg=""><path fill="currentColor" d="M448 96c0-35.3-28.7-64-64-64H64C28.7 32 0 60.7 0 96V416c0 35.3 28.7 64 64 64H384c35.3 0 64-28.7 64-64V96zM265.8 407.7c0-1.8 0-6 .1-11.6c.1-11.4 .1-28.8 .1-43.7c0-15.6-5.2-25.5-11.3-30.7c37-4.1 76-9.2 76-73.1c0-18.2-6.5-27.3-17.1-39c1.7-4.3 7.4-22-1.7-45c-13.9-4.3-45.7 17.9-45.7 17.9c-13.2-3.7-27.5-5.6-41.6-5.6s-28.4 1.9-41.6 5.6c0 0-31.8-22.2-45.7-17.9c-9.1 22.9-3.5 40.6-1.7 45c-10.6 11.7-15.6 20.8-15.6 39c0 63.6 37.3 69 74.3 73.1c-4.8 4.3-9.1 11.7-10.6 22.3c-9.5 4.3-33.8 11.7-48.3-13.9c-9.1-15.8-25.5-17.1-25.5-17.1c-16.2-.2-1.1 10.2-1.1 10.2c10.8 5 18.4 24.2 18.4 24.2c9.7 29.7 56.1 19.7 56.1 19.7c0 9 .1 21.7 .1 30.6c0 4.8 .1 8.6 .1 10c0 4.3-3 9.5-11.5 8C106 393.6 59.8 330.8 59.8 257.4c0-91.8 70.2-161.5 162-161.5s166.2 69.7 166.2 161.5c.1 73.4-44.7 136.3-110.7 158.3c-8.4 1.5-11.5-3.7-11.5-8zm-90.5-54.8c-.2-1.5 1.1-2.8 3-3.2c1.9-.2 3.7 .6 3.9 1.9c.3 1.3-1 2.6-3 3c-1.9 .4-3.7-.4-3.9-1.7zm-9.1 3.2c-2.2 .2-3.7-.9-3.7-2.4c0-1.3 1.5-2.4 3.5-2.4c1.9-.2 3.7 .9 3.7 2.4c0 1.3-1.5 2.4-3.5 2.4zm-14.3-2.2c-1.9-.4-3.2-1.9-2.8-3.2s2.4-1.9 4.1-1.5c2 .6 3.3 2.1 2.8 3.4c-.4 1.3-2.4 1.9-4.1 1.3zm-12.5-7.3c-1.5-1.3-1.9-3.2-.9-4.1c.9-1.1 2.8-.9 4.3 .6c1.3 1.3 1.8 3.3 .9 4.1c-.9 1.1-2.8 .9-4.3-.6zm-8.5-10c-1.1-1.5-1.1-3.2 0-3.9c1.1-.9 2.8-.2 3.7 1.3c1.1 1.5 1.1 3.3 0 4.1c-.9 .6-2.6 0-3.7-1.5zm-6.3-8.8c-1.1-1.3-1.3-2.8-.4-3.5c.9-.9 2.4-.4 3.5 .6c1.1 1.3 1.3 2.8 .4 3.5c-.9 .9-2.4 .4-3.5-.6zm-6-6.4c-1.3-.6-1.9-1.7-1.5-2.6c.4-.6 1.5-.9 2.8-.4c1.3 .7 1.9 1.8 1.5 2.6c-.4 .9-1.7 1.1-2.8 .4z"></path></svg><!-- <i class="fa-brands fa-square-github fa-lg" aria-hidden="true"></i> Font Awesome fontawesome.com -->
+            <span class="sr-only" _msttexthash="72332" _msthidden="1" _msthash="41">GitHub</span></a>
+        </li>
+        <li class="nav-item" _msthidden="1">
+          
+          
+          
+          
+          
+          
+          
+          
+          <a href="https://x.com/pandas_dev" class="nav-link pst-navbar-icon" rel="noopener" target="_blank" data-bs-toggle="tooltip" data-bs-placement="bottom" data-bs-original-title="X" _msthidden="1"><svg class="svg-inline--fa fa-square-x-twitter fa-lg" aria-hidden="true" focusable="false" data-prefix="fab" data-icon="square-x-twitter" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512" data-fa-i2svg=""><path fill="currentColor" d="M64 32C28.7 32 0 60.7 0 96V416c0 35.3 28.7 64 64 64H384c35.3 0 64-28.7 64-64V96c0-35.3-28.7-64-64-64H64zm297.1 84L257.3 234.6 379.4 396H283.8L209 298.1 123.3 396H75.8l111-126.9L69.7 116h98l67.7 89.5L313.6 116h47.5zM323.3 367.6L153.4 142.9H125.1L296.9 367.6h26.3z"></path></svg><!-- <i class="fa-brands fa-square-x-twitter fa-lg" aria-hidden="true"></i> Font Awesome fontawesome.com -->
+            <span class="sr-only" _msttexthash="8008" _msthidden="1" _msthash="42">X</span></a>
+        </li>
+        <li class="nav-item" _msthidden="1">
+          
+          
+          
+          
+          
+          
+          
+          
+          <a href="https://fosstodon.org/@pandas_dev" class="nav-link pst-navbar-icon" rel="noopener" target="_blank" data-bs-toggle="tooltip" data-bs-placement="bottom" data-bs-original-title="Mastodon" _msthidden="1"><svg class="svg-inline--fa fa-mastodon fa-lg" aria-hidden="true" focusable="false" data-prefix="fab" data-icon="mastodon" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512" data-fa-i2svg=""><path fill="currentColor" d="M433 179.11c0-97.2-63.71-125.7-63.71-125.7-62.52-28.7-228.56-28.4-290.48 0 0 0-63.72 28.5-63.72 125.7 0 115.7-6.6 259.4 105.63 289.1 40.51 10.7 75.32 13 103.33 11.4 50.81-2.8 79.32-18.1 79.32-18.1l-1.7-36.9s-36.31 11.4-77.12 10.1c-40.41-1.4-83-4.4-89.63-54a102.54 102.54 0 0 1-.9-13.9c85.63 20.9 158.65 9.1 178.75 6.7 56.12-6.7 105-41.3 111.23-72.9 9.8-49.8 9-121.5 9-121.5zm-75.12 125.2h-46.63v-114.2c0-49.7-64-51.6-64 6.9v62.5h-46.33V197c0-58.5-64-56.6-64-6.9v114.2H90.19c0-122.1-5.2-147.9 18.41-175 25.9-28.9 79.82-30.8 103.83 6.1l11.6 19.5 11.6-19.5c24.11-37.1 78.12-34.8 103.83-6.1 23.71 27.3 18.4 53 18.4 175z"></path></svg><!-- <i class="fa-brands fa-mastodon fa-lg" aria-hidden="true"></i> Font Awesome fontawesome.com -->
+            <span class="sr-only" _msttexthash="115882" _msthidden="1" _msthash="43">Mastodon</span></a>
+        </li>
+</ul></div>
+        
+      </div>
+    
+  </div>
+  
+    <div class="sidebar-primary-items__start sidebar-primary__section">
+        <div class="sidebar-primary-item"><nav class="bd-links" id="bd-docs-nav" aria-label="Navegação principal" _mstaria-label="260078" _msthash="44">
+  <div class="bd-toc-item navbar-nav">
+    
+    <ul class="current nav bd-sidenav">
+<li class="toctree-l1 current active"><a class="current reference internal" href="https://pandas.pydata.org/docs/getting_started/install.html#" _msttexthash="203125" _msthash="45">Instalação</a></li>
+<li class="toctree-l1"><a class="reference internal" href="https://pandas.pydata.org/docs/getting_started/overview.html" _msttexthash="398775" _msthash="46">Visão geral do pacote</a></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="https://pandas.pydata.org/docs/getting_started/intro_tutorials/index.html" _msttexthash="351793" _msthash="47">Tutoriais iniciais</a><details><summary><span class="toctree-toggle" role="presentation"><svg class="svg-inline--fa fa-chevron-down" aria-hidden="true" focusable="false" data-prefix="fas" data-icon="chevron-down" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" data-fa-i2svg=""><path fill="currentColor" d="M233.4 406.6c12.5 12.5 32.8 12.5 45.3 0l192-192c12.5-12.5 12.5-32.8 0-45.3s-32.8-12.5-45.3 0L256 338.7 86.6 169.4c-12.5-12.5-32.8-12.5-45.3 0s-12.5 32.8 0 45.3l192 192z"></path></svg><!-- <i class="fa-solid fa-chevron-down"></i> Font Awesome fontawesome.com --></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="https://pandas.pydata.org/docs/getting_started/intro_tutorials/01_table_oriented.html" _msttexthash="663884" _msthash="48">Que tipo de dados o Pandas lida?</a></li>
+<li class="toctree-l2"><a class="reference internal" href="https://pandas.pydata.org/docs/getting_started/intro_tutorials/02_read_write.html" _msttexthash="1029730" _msthash="49">Como eu leio e escrevo dados tabulares?</a></li>
+<li class="toctree-l2"><a class="reference internal" href="https://pandas.pydata.org/docs/getting_started/intro_tutorials/03_subset_data.html"><font _mstmutation="1" _msttexthash="1480765" _msthash="50">Como faço para selecionar um subconjunto de um ?</font><code class="docutils literal notranslate"><span class="pre">DataFrame</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="https://pandas.pydata.org/docs/getting_started/intro_tutorials/04_plotting.html" _msttexthash="944138" _msthash="51">Como faço para criar plots em pandas?</a></li>
+<li class="toctree-l2"><a class="reference internal" href="https://pandas.pydata.org/docs/getting_started/intro_tutorials/05_add_columns.html" _msttexthash="2127723" _msthash="52">Como criar novas colunas derivadas de colunas existentes</a></li>
+<li class="toctree-l2"><a class="reference internal" href="https://pandas.pydata.org/docs/getting_started/intro_tutorials/06_calculate_statistics.html" _msttexthash="1099618" _msthash="53">Como calcular estatísticas resumidas</a></li>
+<li class="toctree-l2"><a class="reference internal" href="https://pandas.pydata.org/docs/getting_started/intro_tutorials/07_reshape_table_layout.html" _msttexthash="802126" _msthash="54">Como remodelar o layout das mesas</a></li>
+<li class="toctree-l2"><a class="reference internal" href="https://pandas.pydata.org/docs/getting_started/intro_tutorials/08_combine_dataframes.html" _msttexthash="1204190" _msthash="55">Como combinar dados de múltiplas tabelas</a></li>
+<li class="toctree-l2"><a class="reference internal" href="https://pandas.pydata.org/docs/getting_started/intro_tutorials/09_timeseries.html" _msttexthash="1970891" _msthash="56">Como lidar com dados de séries temporais com facilidade</a></li>
+<li class="toctree-l2"><a class="reference internal" href="https://pandas.pydata.org/docs/getting_started/intro_tutorials/10_text_data.html" _msttexthash="712569" _msthash="57">Como manipular dados textuais</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="https://pandas.pydata.org/docs/getting_started/comparison/index.html" _msttexthash="947466" _msthash="58">Comparação com outras ferramentas</a><details><summary><span class="toctree-toggle" role="presentation"><svg class="svg-inline--fa fa-chevron-down" aria-hidden="true" focusable="false" data-prefix="fas" data-icon="chevron-down" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" data-fa-i2svg=""><path fill="currentColor" d="M233.4 406.6c12.5 12.5 32.8 12.5 45.3 0l192-192c12.5-12.5 12.5-32.8 0-45.3s-32.8-12.5-45.3 0L256 338.7 86.6 169.4c-12.5-12.5-32.8-12.5-45.3 0s-12.5 32.8 0 45.3l192 192z"></path></svg><!-- <i class="fa-solid fa-chevron-down"></i> Font Awesome fontawesome.com --></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="https://pandas.pydata.org/docs/getting_started/comparison/comparison_with_r.html" _msttexthash="740363" _msthash="59">Comparação com bibliotecas R / R</a></li>
+<li class="toctree-l2"><a class="reference internal" href="https://pandas.pydata.org/docs/getting_started/comparison/comparison_with_sql.html" _msttexthash="342602" _msthash="60">Comparação com SQL</a></li>
+<li class="toctree-l2"><a class="reference internal" href="https://pandas.pydata.org/docs/getting_started/comparison/comparison_with_spreadsheets.html" _msttexthash="575328" _msthash="61">Comparação com planilhas</a></li>
+<li class="toctree-l2"><a class="reference internal" href="https://pandas.pydata.org/docs/getting_started/comparison/comparison_with_sas.html" _msttexthash="340236" _msthash="62">Comparação com SAS</a></li>
+<li class="toctree-l2"><a class="reference internal" href="https://pandas.pydata.org/docs/getting_started/comparison/comparison_with_stata.html" _msttexthash="454948" _msthash="63">Comparação com a Stata</a></li>
+<li class="toctree-l2"><a class="reference internal" href="https://pandas.pydata.org/docs/getting_started/comparison/comparison_with_spss.html" _msttexthash="402285" _msthash="64">Comparação com o SPSS</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1"><a class="reference internal" href="https://pandas.pydata.org/docs/getting_started/tutorials.html" _msttexthash="543244" _msthash="65">Tutoriais comunitários</a></li>
+</ul>
+
+    
+  </div>
+</nav></div>
+    </div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+      <div class="sidebar-primary-item">
+<div id="ethical-ad-placement" class="flat" data-ea-publisher="readthedocs" data-ea-type="readthedocs-sidebar" data-ea-manual="true">
+</div></div>
+  </div>
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main" role="main">
+        
+        
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article d-print-none">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item">
+
+<nav aria-label="Breadcrumb" class="d-print-none" _mstaria-label="154232" _msthash="66">
+  <ul class="bd-breadcrumbs">
+    
+    <li class="breadcrumb-item breadcrumb-home">
+      <a href="https://pandas.pydata.org/docs/index.html" class="nav-link" aria-label="Casa" _mstaria-label="43979" _msthash="67">
+        <svg class="svg-inline--fa fa-house" aria-hidden="true" focusable="false" data-prefix="fas" data-icon="house" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 576 512" data-fa-i2svg=""><path fill="currentColor" d="M575.8 255.5c0 18-15 32.1-32 32.1h-32l.7 160.2c0 2.7-.2 5.4-.5 8.1V472c0 22.1-17.9 40-40 40H456c-1.1 0-2.2 0-3.3-.1c-1.4 .1-2.8 .1-4.2 .1H416 392c-22.1 0-40-17.9-40-40V448 384c0-17.7-14.3-32-32-32H256c-17.7 0-32 14.3-32 32v64 24c0 22.1-17.9 40-40 40H160 128.1c-1.5 0-3-.1-4.5-.2c-1.2 .1-2.4 .2-3.6 .2H104c-22.1 0-40-17.9-40-40V360c0-.9 0-1.9 .1-2.8V287.6H32c-18 0-32-14-32-32.1c0-9 3-17 10-24L266.4 8c7-7 15-8 22-8s15 2 21 7L564.8 231.5c8 7 12 15 11 24z"></path></svg><!-- <i class="fa-solid fa-home"></i> Font Awesome fontawesome.com -->
+      </a>
+    </li>
+    
+    <li class="breadcrumb-item"><a href="https://pandas.pydata.org/docs/getting_started/index.html" class="nav-link" _msttexthash="150124" _msthash="68">Começando</a></li>
+    
+    <li class="breadcrumb-item active" aria-current="page"><span class="ellipsis" _msttexthash="203125" _msthash="69">Instalação</span></li>
+  </ul>
+</nav>
+</div>
+      
+    </div>
+  
+  
+</div>
+</div>
+              
+              
+              
+                
+<div id="searchbox"></div>
+                <article class="bd-article">
+                  
+  <section id="installation">
+<span id="install"></span><h1><font _mstmutation="1" _msttexthash="203125" _msthash="70">Instalação</font><a class="headerlink" href="https://pandas.pydata.org/docs/getting_started/install.html#installation" title="Link to this heading">#</a></h1>
+<p _msttexthash="7590050" _msthash="71">A equipe de desenvolvimento do Pandas distribui oficialmente o Pandas para instalação
+Pelos seguintes métodos:</p>
+<ul class="simple">
+<li><p _msttexthash="3759041" _msthash="72">Disponível no <a class="reference external" href="https://anaconda.org/conda-forge/pandas" _istranslated="1">conda-forge</a> para instalação com o gerenciador de pacotes conda.</p></li>
+<li><p _msttexthash="1366898" _msthash="73">Disponível no <a class="reference external" href="https://pypi.org/project/pandas/" _istranslated="1">PyPI</a> para instalação com pip.</p></li>
+<li><p _msttexthash="2045901" _msthash="74">Disponível no <a class="reference external" href="https://github.com/pandas-dev/pandas" _istranslated="1">Github</a> para instalação a partir da fonte.</p></li>
+</ul>
+<div class="admonition note">
+<p class="admonition-title" _msttexthash="44824" _msthash="75">Nota</p>
+<p _msttexthash="11338054" _msthash="76">Os pandas podem ser instalados de outras fontes além das listadas acima,
+Mas <strong _istranslated="1">eles não</strong> são gerenciados pela equipe de desenvolvimento do Pandas.</p>
+</div>
+<section id="python-version-support">
+<span id="install-version"></span><h2><font _mstmutation="1" _msttexthash="749489" _msthash="77">Suporte para versões em Python</font><a class="headerlink" href="https://pandas.pydata.org/docs/getting_started/install.html#python-version-support" title="Link to this heading">#</a></h2>
+<p _msttexthash="944528" _msthash="78">Veja <a class="reference internal" href="https://pandas.pydata.org/docs/development/policies.html#policies-python-support" _istranslated="1"><span class="std std-ref" _istranslated="1">a política de suporte ao Python</span></a>.</p>
+</section>
+<section id="installing-pandas">
+<h2><font _mstmutation="1" _msttexthash="425256" _msthash="79">Instalação de pandas</font><a class="headerlink" href="https://pandas.pydata.org/docs/getting_started/install.html#installing-pandas" title="Link to this heading">#</a></h2>
+<section id="installing-with-conda">
+<span id="install-conda"></span><h3><font _mstmutation="1" _msttexthash="417248" _msthash="80">Instalação com Conda</font><a class="headerlink" href="https://pandas.pydata.org/docs/getting_started/install.html#installing-with-conda" title="Link to this heading">#</a></h3>
+<p><font _mstmutation="1" _msttexthash="6646185" _msthash="81">Para usuários que trabalham com o gerenciador <a class="reference external" href="https://conda.io/en/latest/" _mstmutation="1" _istranslated="1">de pacotes Conda</a>,
+Pandas podem ser instalados a partir do canal.</font><code class="docutils literal notranslate"><span class="pre">conda-forge</span></code></p>
+<div class="highlight-shell notranslate"><div class="highlight"><pre id="codecell0" tabindex="-1"><span></span>conda<span class="w"> </span>install<span class="w"> </span>-c<span class="w"> </span>conda-forge<span class="w"> </span>pandas
+</pre><button class="copybtn o-tooltip--left" data-tooltip="Copy" data-clipboard-target="#codecell0">
+      <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-copy" width="44" height="44" viewBox="0 0 24 24" stroke-width="1.5" stroke="#000000" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <title>Copy to clipboard</title>
+  <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
+  <rect x="8" y="8" width="12" height="12" rx="2"></rect>
+  <path d="M16 8v-2a2 2 0 0 0 -2 -2h-8a2 2 0 0 0 -2 2v8a2 2 0 0 0 2 2h2"></path>
+</svg>
+    </button></div>
+</div>
+<p _msttexthash="6188091" _msthash="82">Para instalar o gerenciador de pacotes Conda no seu sistema, recomenda-se a <a class="reference external" href="https://github.com/conda-forge/miniforge?tab=readme-ov-file#install" _istranslated="1">distribuição do Miniforge</a>.</p>
+<p _msttexthash="3855215" _msthash="83">Além disso, recomenda-se instalar e rodar pandas a partir de um ambiente virtual.</p>
+<div class="highlight-shell notranslate"><div class="highlight"><pre id="codecell1" tabindex="-1"><span></span>conda<span class="w"> </span>create<span class="w"> </span>-c<span class="w"> </span>conda-forge<span class="w"> </span>-n<span class="w"> </span>name_of_my_env<span class="w"> </span>python<span class="w"> </span>pandas
+<span class="c1"># On Linux or MacOS</span>
+<span class="nb">source</span><span class="w"> </span>activate<span class="w"> </span>name_of_my_env
+<span class="c1"># On Windows</span>
+activate<span class="w"> </span>name_of_my_env
+</pre><button class="copybtn o-tooltip--left" data-tooltip="Copy" data-clipboard-target="#codecell1">
+      <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-copy" width="44" height="44" viewBox="0 0 24 24" stroke-width="1.5" stroke="#000000" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <title>Copy to clipboard</title>
+  <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
+  <rect x="8" y="8" width="12" height="12" rx="2"></rect>
+  <path d="M16 8v-2a2 2 0 0 0 -2 -2h-8a2 2 0 0 0 -2 2v8a2 2 0 0 0 2 2h2"></path>
+</svg>
+    </button></div>
+</div>
+<div class="admonition tip">
+<p class="admonition-title" _msttexthash="41301" _msthash="84">Dica</p>
+<p _msttexthash="48512035" _msthash="85">Para usuários que são novos em Python, a maneira mais fácil de instalar Python, pandas e o
+pacotes que compõem a pilha <a class="reference external" href="https://pydata.org/" _istranslated="1">PyData</a>, como <a class="reference external" href="https://scipy.org/" _istranslated="1">SciPy</a>, <a class="reference external" href="https://numpy.org/" _istranslated="1">NumPy</a> e <a class="reference external" href="https://matplotlib.org/" _istranslated="1">Matplotlib</a>, são com <a class="reference external" href="https://docs.anaconda.com/anaconda/install/" _istranslated="1">o Anaconda</a>, uma plataforma multiplataforma
+(Linux, macOS, Windows) Distribuição em Python para análise de dados e
+computação científica.</p>
+<p _msttexthash="6282770" _msthash="86">No entanto, o pandas de Anaconda <strong _istranslated="1">não</strong> é oficialmente gerenciado pela equipe de desenvolvimento do pandas.</p>
+</div>
+</section>
+<section id="installing-with-pip">
+<span id="install-pip"></span><h3><font _mstmutation="1" _msttexthash="367718" _msthash="87">Instalação com pip</font><a class="headerlink" href="https://pandas.pydata.org/docs/getting_started/install.html#installing-with-pip" title="Link to this heading">#</a></h3>
+<p _msttexthash="6178263" _msthash="88">Para usuários que trabalham com o gerenciador <a class="reference external" href="https://pip.pypa.io/en/stable/" _istranslated="1">de pacotes PIP</a>,
+pandas podem ser instalados a <a class="reference external" href="https://pypi.org/project/pandas/" _istranslated="1">partir do PyPI</a>.</p>
+<div class="highlight-shell notranslate"><div class="highlight"><pre id="codecell2" tabindex="-1"><span></span>pip<span class="w"> </span>install<span class="w"> </span>pandas
+</pre><button class="copybtn o-tooltip--left" data-tooltip="Copy" data-clipboard-target="#codecell2">
+      <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-copy" width="44" height="44" viewBox="0 0 24 24" stroke-width="1.5" stroke="#000000" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <title>Copy to clipboard</title>
+  <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
+  <rect x="8" y="8" width="12" height="12" rx="2"></rect>
+  <path d="M16 8v-2a2 2 0 0 0 -2 -2h-8a2 2 0 0 0 -2 2v8a2 2 0 0 0 2 2h2"></path>
+</svg>
+    </button></div>
+</div>
+<p _msttexthash="22243195" _msthash="89">O Pandas também pode ser instalado com conjuntos de dependências opcionais para habilitar certas funcionalidades. Por exemplo,
+para instalar pandas com dependências opcionais para ler arquivos Excel.</p>
+<div class="highlight-shell notranslate"><div class="highlight"><pre id="codecell3" tabindex="-1"><span></span>pip<span class="w"> </span>install<span class="w"> </span><span class="s2">"pandas[excel]"</span>
+</pre><button class="copybtn o-tooltip--left" data-tooltip="Copy" data-clipboard-target="#codecell3">
+      <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-copy" width="44" height="44" viewBox="0 0 24 24" stroke-width="1.5" stroke="#000000" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <title>Copy to clipboard</title>
+  <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
+  <rect x="8" y="8" width="12" height="12" rx="2"></rect>
+  <path d="M16 8v-2a2 2 0 0 0 -2 -2h-8a2 2 0 0 0 -2 2v8a2 2 0 0 0 2 2h2"></path>
+</svg>
+    </button></div>
+</div>
+<p _msttexthash="5668351" _msthash="90">A lista completa de extras que podem ser instalados pode ser encontrada na <a class="reference internal" href="https://pandas.pydata.org/docs/getting_started/install.html#install-optional-dependencies" _istranslated="1"><span class="std std-ref" _istranslated="1">seção de dependências.</span></a></p>
+<p _msttexthash="10264995" _msthash="91">Além disso, recomenda-se instalar e rodar pandas a partir de um ambiente virtual, por exemplo,
+usando o <a class="reference external" href="https://docs.python.org/3/library/venv.html" _istranslated="1">venv</a> da biblioteca padrão Python</p>
+</section>
+<section id="installing-from-source">
+<span id="install-source"></span><h3><font _mstmutation="1" _msttexthash="659477" _msthash="92">Instalação a partir da fonte</font><a class="headerlink" href="https://pandas.pydata.org/docs/getting_started/install.html#installing-from-source" title="Link to this heading">#</a></h3>
+<p _msttexthash="26571961" _msthash="93">Veja o <a class="reference internal" href="https://pandas.pydata.org/docs/development/contributing.html#contributing" _istranslated="1"><span class="std std-ref" _istranslated="1">guia de contribuição</span></a> para instruções completas sobre construção a partir da árvore de origem git.
+Além disso, veja <a class="reference internal" href="https://pandas.pydata.org/docs/development/contributing_environment.html#contributing-environment" _istranslated="1"><span class="std std-ref" _istranslated="1">a criação de um ambiente de desenvolvimento</span></a> se desejar criar
+Um ambiente de desenvolvimento Pandas.</p>
+</section>
+<section id="installing-the-development-version-of-pandas">
+<span id="install-dev"></span><h3><font _mstmutation="1" _msttexthash="1416519" _msthash="94">Installing the development version of pandas</font><a class="headerlink" href="https://pandas.pydata.org/docs/getting_started/install.html#installing-the-development-version-of-pandas" title="Link to this heading">#</a></h3>
+<p _msttexthash="2201017" _msthash="95">Installing the development version is the quickest way to:</p>
+<ul class="simple">
+<li><p _msttexthash="10428639" _msthash="96">Try a new feature that will be shipped in the next release (that is, a feature from a pull-request that was recently merged to the main branch).</p></li>
+<li><p _msttexthash="3158662" _msthash="97">Check whether a bug you encountered has been fixed since the last release.</p></li>
+</ul>
+<p _msttexthash="15264184" _msthash="98">The development version is usually uploaded daily to the scientific-python-nightly-wheels
+index from the PyPI registry of anaconda.org. You can install it by running.</p>
+<div class="highlight-shell notranslate"><div class="highlight"><pre id="codecell4" tabindex="0"><span></span>pip<span class="w"> </span>install<span class="w"> </span>--pre<span class="w"> </span>--extra-index-url<span class="w"> </span>https://pypi.anaconda.org/scientific-python-nightly-wheels/simple<span class="w"> </span>pandas
+</pre><button class="copybtn o-tooltip--left" data-tooltip="Copy" data-clipboard-target="#codecell4">
+      <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-copy" width="44" height="44" viewBox="0 0 24 24" stroke-width="1.5" stroke="#000000" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <title>Copy to clipboard</title>
+  <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
+  <rect x="8" y="8" width="12" height="12" rx="2"></rect>
+  <path d="M16 8v-2a2 2 0 0 0 -2 -2h-8a2 2 0 0 0 -2 2v8a2 2 0 0 0 2 2h2"></path>
+</svg>
+    </button></div>
+</div>
+<div class="admonition note">
+<p class="admonition-title" _msttexthash="45344" _msthash="99">Note</p>
+<p _msttexthash="5804877" _msthash="100">You might be required to uninstall an existing version of pandas to install the development version.</p>
+<div class="highlight-shell notranslate"><div class="highlight"><pre id="codecell5" tabindex="-1"><span></span>pip<span class="w"> </span>uninstall<span class="w"> </span>pandas<span class="w"> </span>-y
+</pre><button class="copybtn o-tooltip--left" data-tooltip="Copy" data-clipboard-target="#codecell5">
+      <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-copy" width="44" height="44" viewBox="0 0 24 24" stroke-width="1.5" stroke="#000000" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <title>Copy to clipboard</title>
+  <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
+  <rect x="8" y="8" width="12" height="12" rx="2"></rect>
+  <path d="M16 8v-2a2 2 0 0 0 -2 -2h-8a2 2 0 0 0 -2 2v8a2 2 0 0 0 2 2h2"></path>
+</svg>
+    </button></div>
+</div>
+</div>
+</section>
+</section>
+<section id="running-the-test-suite">
+<h2><font _mstmutation="1" _msttexthash="431886" _msthash="101">Running the test suite</font><a class="headerlink" href="https://pandas.pydata.org/docs/getting_started/install.html#running-the-test-suite" title="Link to this heading">#</a></h2>
+<p><font _mstmutation="1" _msttexthash="4006275" _msthash="102">If pandas has been installed <a class="reference internal" href="https://pandas.pydata.org/docs/getting_started/install.html#install-source" _mstmutation="1"><span class="std std-ref">from source</span></a>, running  will run all of pandas unit tests.</font><code class="docutils literal notranslate"><span class="pre">pytest</span> <span class="pre">pandas</span></code></p>
+<p><font _mstmutation="1" _msttexthash="11234210" _msthash="103">The unit tests can also be run from the pandas module itself with the <a class="reference internal" href="https://pandas.pydata.org/docs/reference/api/pandas.test.html#pandas.test" title="pandas.test" _mstmutation="1"><code class="xref py py-func docutils literal notranslate"><span class="pre">test()</span></code></a> function. The packages required to run the tests
+can be installed with .</font><code class="docutils literal notranslate"><span class="pre">pip</span> <span class="pre">install</span> <span class="pre">"pandas[test]"</span></code></p>
+<div class="admonition note">
+<p class="admonition-title" _msttexthash="45344" _msthash="104">Note</p>
+<p _msttexthash="3667937" _msthash="105">Test failures are not necessarily indicative of a broken pandas installation.</p>
+</div>
+</section>
+<section id="dependencies">
+<span id="install-dependencies"></span><h2><font _mstmutation="1" _msttexthash="201721" _msthash="106">Dependencies</font><a class="headerlink" href="https://pandas.pydata.org/docs/getting_started/install.html#dependencies" title="Link to this heading">#</a></h2>
+<section id="required-dependencies">
+<span id="install-required-dependencies"></span><h3><font _mstmutation="1" _msttexthash="449618" _msthash="107">Required dependencies</font><a class="headerlink" href="https://pandas.pydata.org/docs/getting_started/install.html#required-dependencies" title="Link to this heading">#</a></h3>
+<p _msttexthash="1369758" _msthash="108">pandas requires the following dependencies.</p>
+<div class="pst-scrollable-table-container" tabindex="-1"><table class="table">
+<thead>
+<tr class="row-odd"><th class="head"><p _msttexthash="89869" _msthash="109">Package</p></th>
+<th class="head"><p _msttexthash="590408" _msthash="110">Minimum supported version</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p><a class="reference external" href="https://numpy.org/" _msttexthash="59722" _msthash="111">NumPy</a></p></td>
+<td><p _msttexthash="36179" _msthash="112">1.26.0</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference external" href="https://dateutil.readthedocs.io/en/stable/" _msttexthash="286884" _msthash="113">python-dateutil</a></p></td>
+<td><p _msttexthash="29016" _msthash="114">2.8.2</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference external" href="https://pypi.org/project/tzdata/" _msttexthash="79274" _msthash="115">tzdata</a> *</p></td>
+<td><p>/</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<p>* <code class="docutils literal notranslate"><span class="pre">tzdata</span></code><font _mstmutation="1" _msttexthash="1746082" _msthash="116"> is only required on Windows and Pyodide (Emscripten).</font></p>
+<p _msttexthash="7078071" _msthash="117">Generally, the minimum supported version is ~2 years old from the release date of a major or minor pandas version.</p>
+</section>
+<section id="optional-dependencies">
+<span id="install-optional-dependencies"></span><h3><font _mstmutation="1" _msttexthash="450294" _msthash="118">Optional dependencies</font><a class="headerlink" href="https://pandas.pydata.org/docs/getting_started/install.html#optional-dependencies" title="Link to this heading">#</a></h3>
+<p><font _mstmutation="1" _msttexthash="48024483" _msthash="119">pandas has many optional dependencies that are only used for specific methods.
+For example, <a class="reference internal" href="https://pandas.pydata.org/docs/reference/api/pandas.read_hdf.html#pandas.read_hdf" title="pandas.read_hdf" _mstmutation="1"><code class="xref py py-func docutils literal notranslate"><span class="pre">pandas.read_hdf()</span></code></a> requires the  package, while
+<a class="reference internal" href="https://pandas.pydata.org/docs/reference/api/pandas.DataFrame.to_markdown.html#pandas.DataFrame.to_markdown" title="pandas.DataFrame.to_markdown" _mstmutation="1"><code class="xref py py-meth docutils literal notranslate"><span class="pre">DataFrame.to_markdown()</span></code></a> requires the  package. If the
+optional dependency is not installed, pandas will raise an  when
+the method requiring that dependency is called.</font><code class="docutils literal notranslate"><span class="pre">pytables</span></code><code class="docutils literal notranslate"><span class="pre">tabulate</span></code><code class="docutils literal notranslate"><span class="pre">ImportError</span></code></p>
+<p><font _mstmutation="1" _msttexthash="35536059" _msthash="120">With pip, optional pandas dependencies can be installed or managed in a file (e.g. requirements.txt or pyproject.toml)
+as optional extras (e.g. ). All optional dependencies can be installed with ,
+and specific sets of dependencies are listed in the sections below.</font><code class="docutils literal notranslate"><span class="pre">pandas[performance,</span> <span class="pre">aws]</span></code><code class="docutils literal notranslate"><span class="pre">pandas[all]</span></code></p>
+<p _msttexthash="25092223" _msthash="121">Generally, the minimum supported version is ~1 years old from the release date of a major or minor pandas version.
+Older versions of optional dependencies may still work, but they are not tested or considered supported.</p>
+<section id="performance-dependencies-recommended">
+<span id="install-recommended-dependencies"></span><h4><font _mstmutation="1" _msttexthash="1140100" _msthash="122">Performance dependencies (recommended)</font><a class="headerlink" href="https://pandas.pydata.org/docs/getting_started/install.html#performance-dependencies-recommended" title="Link to this heading">#</a></h4>
+<div class="admonition note">
+<p class="admonition-title" _msttexthash="45344" _msthash="123">Note</p>
+<p _msttexthash="10287433" _msthash="124">You are highly encouraged to install these libraries, as they provide speed improvements, especially
+when working with large data sets.</p>
+</div>
+<p><font _mstmutation="1" _msttexthash="289471" _msthash="125">Installable with </font><code class="docutils literal notranslate"><span class="pre">pip</span> <span class="pre">install</span> <span class="pre">"pandas[performance]"</span></code></p>
+<div class="pst-scrollable-table-container" tabindex="-1"><table class="table">
+<thead>
+<tr class="row-odd"><th class="head"><p _msttexthash="155818" _msthash="126">Dependency</p></th>
+<th class="head"><p _msttexthash="261768" _msthash="127">Minimum Version</p></th>
+<th class="head"><p _msttexthash="119522" _msthash="128">pip extra</p></th>
+<th class="head"><p _msttexthash="61789" _msthash="129">Notes</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p><a class="reference external" href="https://github.com/pydata/numexpr" _msttexthash="101959" _msthash="130">numexpr</a></p></td>
+<td><p _msttexthash="35685" _msthash="131">2.10.2</p></td>
+<td><p _msttexthash="181389" _msthash="132">performance</p></td>
+<td><p _msttexthash="9401223" _msthash="133">Accelerates certain numerical operations by using multiple cores as well as smart chunking and caching to achieve large speedups</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference external" href="https://github.com/pydata/bottleneck" _msttexthash="158847" _msthash="134">bottleneck</a></p></td>
+<td><p _msttexthash="28457" _msthash="135">1.4.2</p></td>
+<td><p _msttexthash="181389" _msthash="136">performance</p></td>
+<td><p><font _mstmutation="1" _msttexthash="5017324" _msthash="137">Accelerates certain types of  by using specialized cython routines to achieve large speedup.</font><code class="docutils literal notranslate"><span class="pre">nan</span></code></p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference external" href="https://github.com/numba/numba" _msttexthash="61542" _msthash="138">numba</a></p></td>
+<td><p _msttexthash="35776" _msthash="139">0.60.0</p></td>
+<td><p _msttexthash="181389" _msthash="140">performance</p></td>
+<td><p><font _mstmutation="1" _msttexthash="14182623" _msthash="141">Alternative execution engine for operations that accept  using a JIT compiler that translates Python functions to optimized machine code using the LLVM compiler.</font><code class="docutils literal notranslate"><span class="pre">engine="numba"</span></code></p></td>
+</tr>
+</tbody>
+</table>
+</div>
+</section>
+<section id="visualization">
+<h4><font _mstmutation="1" _msttexthash="237471" _msthash="142">Visualization</font><a class="headerlink" href="https://pandas.pydata.org/docs/getting_started/install.html#visualization" title="Link to this heading">#</a></h4>
+<p><font _mstmutation="1" _msttexthash="302627" _msthash="143">Installable with .</font><code class="docutils literal notranslate"><span class="pre">pip</span> <span class="pre">install</span> <span class="pre">"pandas[plot,</span> <span class="pre">output-formatting]"</span></code></p>
+<div class="pst-scrollable-table-container" tabindex="-1"><table class="table">
+<thead>
+<tr class="row-odd"><th class="head"><p _msttexthash="155818" _msthash="144">Dependency</p></th>
+<th class="head"><p _msttexthash="261768" _msthash="145">Minimum Version</p></th>
+<th class="head"><p _msttexthash="119522" _msthash="146">pip extra</p></th>
+<th class="head"><p _msttexthash="61789" _msthash="147">Notes</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p><a class="reference external" href="https://github.com/matplotlib/matplotlib" _msttexthash="161018" _msthash="148">matplotlib</a></p></td>
+<td><p _msttexthash="29250" _msthash="149">3.8.3</p></td>
+<td><p _msttexthash="49491" _msthash="150">plot</p></td>
+<td><p _msttexthash="294749" _msthash="151">Plotting library</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference external" href="https://github.com/pallets/jinja" _msttexthash="65975" _msthash="152">Jinja2</a></p></td>
+<td><p _msttexthash="28431" _msthash="153">3.1.3</p></td>
+<td><p _msttexthash="353275" _msthash="154">output-formatting</p></td>
+<td><p _msttexthash="1420419" _msthash="155">Conditional formatting with DataFrame.style</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference external" href="https://github.com/astanin/python-tabulate" _msttexthash="115882" _msthash="156">tabulate</a></p></td>
+<td><p _msttexthash="28665" _msthash="157">0.9.0</p></td>
+<td><p _msttexthash="353275" _msthash="158">output-formatting</p></td>
+<td><p><font _mstmutation="1" _msttexthash="1756001" _msthash="159">Printing in Markdown-friendly format (see <a class="reference external" href="https://github.com/astanin/python-tabulate" _mstmutation="1">tabulate</a></font>)</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+</section>
+<section id="computation">
+<h4><font _mstmutation="1" _msttexthash="185159" _msthash="160">Computation</font><a class="headerlink" href="https://pandas.pydata.org/docs/getting_started/install.html#computation" title="Link to this heading">#</a></h4>
+<p><font _mstmutation="1" _msttexthash="302627" _msthash="161">Installable with .</font><code class="docutils literal notranslate"><span class="pre">pip</span> <span class="pre">install</span> <span class="pre">"pandas[computation]"</span></code></p>
+<div class="pst-scrollable-table-container" tabindex="-1"><table class="table">
+<thead>
+<tr class="row-odd"><th class="head"><p _msttexthash="155818" _msthash="162">Dependency</p></th>
+<th class="head"><p _msttexthash="261768" _msthash="163">Minimum Version</p></th>
+<th class="head"><p _msttexthash="119522" _msthash="164">pip extra</p></th>
+<th class="head"><p _msttexthash="61789" _msthash="165">Notes</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p><a class="reference external" href="https://github.com/scipy/scipy" _msttexthash="57837" _msthash="166">SciPy</a></p></td>
+<td><p _msttexthash="35958" _msthash="167">1.14.1</p></td>
+<td><p _msttexthash="188071" _msthash="168">computation</p></td>
+<td><p _msttexthash="1067820" _msthash="169">Miscellaneous statistical functions</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference external" href="https://github.com/pydata/xarray" _msttexthash="81913" _msthash="170">xarray</a></p></td>
+<td><p _msttexthash="62218" _msthash="171">2024.10.0</p></td>
+<td><p _msttexthash="188071" _msthash="172">computation</p></td>
+<td><p _msttexthash="1034384" _msthash="173">pandas-like API for N-dimensional data</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+</section>
+<section id="excel-files">
+<span id="install-excel-dependencies"></span><h4><font _mstmutation="1" _msttexthash="155844" _msthash="174">Excel files</font><a class="headerlink" href="https://pandas.pydata.org/docs/getting_started/install.html#excel-files" title="Link to this heading">#</a></h4>
+<p><font _mstmutation="1" _msttexthash="302627" _msthash="175">Installable with .</font><code class="docutils literal notranslate"><span class="pre">pip</span> <span class="pre">install</span> <span class="pre">"pandas[excel]"</span></code></p>
+<div class="pst-scrollable-table-container" tabindex="-1"><table class="table">
+<thead>
+<tr class="row-odd"><th class="head"><p _msttexthash="155818" _msthash="176">Dependency</p></th>
+<th class="head"><p _msttexthash="261768" _msthash="177">Minimum Version</p></th>
+<th class="head"><p _msttexthash="119522" _msthash="178">pip extra</p></th>
+<th class="head"><p _msttexthash="61789" _msthash="179">Notes</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p><a class="reference external" href="https://github.com/python-excel/xlrd" _msttexthash="48490" _msthash="180">xlrd</a></p></td>
+<td><p _msttexthash="27937" _msthash="181">2.0.1</p></td>
+<td><p _msttexthash="61828" _msthash="182">excel</p></td>
+<td><p _msttexthash="388167" _msthash="183">Reading for xls files</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference external" href="https://github.com/jmcnamara/XlsxWriter" _msttexthash="168272" _msthash="184">xlsxwriter</a></p></td>
+<td><p _msttexthash="28119" _msthash="185">3.2.0</p></td>
+<td><p _msttexthash="61828" _msthash="186">excel</p></td>
+<td><p _msttexthash="431093" _msthash="187">Writing for xlsx files</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference external" href="https://github.com/theorchard/openpyxl" _msttexthash="122694" _msthash="188">openpyxl</a></p></td>
+<td><p _msttexthash="28717" _msthash="189">3.1.5</p></td>
+<td><p _msttexthash="61828" _msthash="190">excel</p></td>
+<td><p _msttexthash="2115373" _msthash="191">Reading / writing for Excel 2010 xlsx/xlsm/xltx/xltm files</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference external" href="https://github.com/willtrnr/pyxlsb" _msttexthash="82589" _msthash="192">pyxlsb</a></p></td>
+<td><p _msttexthash="35334" _msthash="193">1.0.10</p></td>
+<td><p _msttexthash="61828" _msthash="194">excel</p></td>
+<td><p _msttexthash="420550" _msthash="195">Reading for xlsb files</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference external" href="https://github.com/dimastbk/python-calamine" _msttexthash="278954" _msthash="196">python-calamine</a></p></td>
+<td><p _msttexthash="27963" _msthash="197">0.3.0</p></td>
+<td><p _msttexthash="61828" _msthash="198">excel</p></td>
+<td><p _msttexthash="1767090" _msthash="199">Reading for xls/xlsx/xlsm/xlsb/xla/xlam/ods files</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference external" href="https://github.com/eea/odfpy" _msttexthash="64298" _msthash="200">odfpy</a></p></td>
+<td><p _msttexthash="28314" _msthash="201">1.4.1</p></td>
+<td><p _msttexthash="61828" _msthash="202">excel</p></td>
+<td><p _msttexthash="1232413" _msthash="203">Reading / writing for OpenDocument 1.2 files</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+</section>
+<section id="html">
+<h4><font _mstmutation="1" _msttexthash="34177" _msthash="204">HTML</font><a class="headerlink" href="https://pandas.pydata.org/docs/getting_started/install.html#html" title="Link to this heading">#</a></h4>
+<p><font _mstmutation="1" _msttexthash="302627" _msthash="205">Installable with .</font><code class="docutils literal notranslate"><span class="pre">pip</span> <span class="pre">install</span> <span class="pre">"pandas[html]"</span></code></p>
+<div class="pst-scrollable-table-container" tabindex="-1"><table class="table">
+<thead>
+<tr class="row-odd"><th class="head"><p _msttexthash="155818" _msthash="206">Dependency</p></th>
+<th class="head"><p _msttexthash="261768" _msthash="207">Minimum Version</p></th>
+<th class="head"><p _msttexthash="119522" _msthash="208">pip extra</p></th>
+<th class="head"><p _msttexthash="61789" _msthash="209">Notes</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p><a class="reference external" href="https://github.com/wention/BeautifulSoup4" _msttexthash="245986" _msthash="210">BeautifulSoup4</a></p></td>
+<td><p _msttexthash="36283" _msthash="211">4.12.3</p></td>
+<td><p _msttexthash="48321" _msthash="212">html</p></td>
+<td><p _msttexthash="520676" _msthash="213">HTML parser for read_html</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference external" href="https://github.com/html5lib/html5lib-python" _msttexthash="108329" _msthash="214">html5lib</a></p></td>
+<td><p _msttexthash="14976" _msthash="215">1.1</p></td>
+<td><p _msttexthash="48321" _msthash="216">html</p></td>
+<td><p _msttexthash="520676" _msthash="217">HTML parser for read_html</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference external" href="https://github.com/lxml/lxml" _msttexthash="49101" _msthash="218">lxml</a></p></td>
+<td><p _msttexthash="29315" _msthash="219">4.9.2</p></td>
+<td><p _msttexthash="48321" _msthash="220">html</p></td>
+<td><p _msttexthash="520676" _msthash="221">HTML parser for read_html</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<p _msttexthash="5556070" _msthash="222">One of the following combinations of libraries is needed to use the
+top-level <a class="reference internal" href="https://pandas.pydata.org/docs/reference/api/pandas.read_html.html#pandas.read_html" title="pandas.read_html"><code class="xref py py-func docutils literal notranslate"><span class="pre">read_html()</span></code></a> function:</p>
+<ul class="simple">
+<li><p _msttexthash="619177" _msthash="223"><a class="reference external" href="https://www.crummy.com/software/BeautifulSoup">BeautifulSoup4</a> and <a class="reference external" href="https://github.com/html5lib/html5lib-python">html5lib</a></p></li>
+<li><p _msttexthash="481273" _msthash="224"><a class="reference external" href="https://www.crummy.com/software/BeautifulSoup">BeautifulSoup4</a> and <a class="reference external" href="https://lxml.de/">lxml</a></p></li>
+<li><p _msttexthash="962000" _msthash="225"><a class="reference external" href="https://www.crummy.com/software/BeautifulSoup">BeautifulSoup4</a> and <a class="reference external" href="https://github.com/html5lib/html5lib-python">html5lib</a> and <a class="reference external" href="https://lxml.de/">lxml</a></p></li>
+<li><p _msttexthash="6369532" _msthash="226">Only <a class="reference external" href="https://lxml.de/">lxml</a>, although see <a class="reference internal" href="https://pandas.pydata.org/docs/user_guide/io.html#io-html-gotchas"><span class="std std-ref">HTML Table Parsing</span></a>
+for reasons as to why you should probably <strong>not</strong> take this approach.</p></li>
+</ul>
+<div class="admonition warning">
+<p class="admonition-title" _msttexthash="95225" _msthash="227">Warning</p>
+<ul class="simple">
+<li><p _msttexthash="10913136" _msthash="228">if you install <a class="reference external" href="https://www.crummy.com/software/BeautifulSoup">BeautifulSoup4</a> you must install either
+<a class="reference external" href="https://lxml.de/">lxml</a> or <a class="reference external" href="https://github.com/html5lib/html5lib-python">html5lib</a> or both.
+<a class="reference internal" href="https://pandas.pydata.org/docs/reference/api/pandas.read_html.html#pandas.read_html" title="pandas.read_html"><code class="xref py py-func docutils literal notranslate"><span class="pre">read_html()</span></code></a> will <strong>not</strong> work with <em>only</em>
+<a class="reference external" href="https://www.crummy.com/software/BeautifulSoup">BeautifulSoup4</a> installed.</p></li>
+<li><p _msttexthash="12132913" _msthash="229">You are highly encouraged to read <a class="reference internal" href="https://pandas.pydata.org/docs/user_guide/io.html#io-html-gotchas"><span class="std std-ref">HTML Table Parsing gotchas</span></a>.
+It explains issues surrounding the installation and
+usage of the above three libraries.</p></li>
+</ul>
+</div>
+</section>
+<section id="xml">
+<h4><font _mstmutation="1" _msttexthash="24908" _msthash="230">XML</font><a class="headerlink" href="https://pandas.pydata.org/docs/getting_started/install.html#xml" title="Link to this heading">#</a></h4>
+<p><font _mstmutation="1" _msttexthash="302627" _msthash="231">Installable with .</font><code class="docutils literal notranslate"><span class="pre">pip</span> <span class="pre">install</span> <span class="pre">"pandas[xml]"</span></code></p>
+<div class="pst-scrollable-table-container" tabindex="-1"><table class="table">
+<thead>
+<tr class="row-odd"><th class="head"><p _msttexthash="155818" _msthash="232">Dependency</p></th>
+<th class="head"><p _msttexthash="261768" _msthash="233">Minimum Version</p></th>
+<th class="head"><p _msttexthash="119522" _msthash="234">pip extra</p></th>
+<th class="head"><p _msttexthash="61789" _msthash="235">Notes</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p><a class="reference external" href="https://github.com/lxml/lxml" _msttexthash="49101" _msthash="236">lxml</a></p></td>
+<td><p _msttexthash="28418" _msthash="237">5.3.0</p></td>
+<td><p _msttexthash="34892" _msthash="238">xml</p></td>
+<td><p _msttexthash="1673633" _msthash="239">XML parser for read_xml and tree builder for to_xml</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+</section>
+<section id="sql-databases">
+<h4><font _mstmutation="1" _msttexthash="196131" _msthash="240">SQL databases</font><a class="headerlink" href="https://pandas.pydata.org/docs/getting_started/install.html#sql-databases" title="Link to this heading">#</a></h4>
+<p><font _mstmutation="1" _msttexthash="1226927" _msthash="241">Traditional drivers are installable with </font><code class="docutils literal notranslate"><span class="pre">pip</span> <span class="pre">install</span> <span class="pre">"pandas[postgresql,</span> <span class="pre">mysql,</span> <span class="pre">sql-other]"</span></code></p>
+<div class="pst-scrollable-table-container" tabindex="-1"><table class="table">
+<thead>
+<tr class="row-odd"><th class="head"><p _msttexthash="155818" _msthash="242">Dependency</p></th>
+<th class="head"><p _msttexthash="261768" _msthash="243">Minimum Version</p></th>
+<th class="head"><p _msttexthash="119522" _msthash="244">pip extra</p></th>
+<th class="head"><p _msttexthash="61789" _msthash="245">Notes</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p><a class="reference external" href="https://github.com/sqlalchemy/sqlalchemy" _msttexthash="146588" _msthash="246">SQLAlchemy</a></p></td>
+<td><p _msttexthash="36647" _msthash="247">2.0.36</p></td>
+<td><p _msttexthash="672919" _msthash="248">postgresql,
+mysql,
+sql-other</p></td>
+<td><p _msttexthash="1291966" _msthash="249">SQL support for databases other than sqlite</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference external" href="https://github.com/psycopg/psycopg2" _msttexthash="109031" _msthash="250">psycopg2</a></p></td>
+<td><p _msttexthash="36478" _msthash="251">2.9.10</p></td>
+<td><p _msttexthash="165282" _msthash="252">postgresql</p></td>
+<td><p _msttexthash="831805" _msthash="253">PostgreSQL engine for sqlalchemy</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference external" href="https://github.com/PyMySQL/PyMySQL" _msttexthash="103584" _msthash="254">pymysql</a></p></td>
+<td><p _msttexthash="27963" _msthash="255">1.1.1</p></td>
+<td><p _msttexthash="66092" _msthash="256">mysql</p></td>
+<td><p _msttexthash="606775" _msthash="257">MySQL engine for sqlalchemy</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference external" href="https://github.com/apache/arrow-adbc" _msttexthash="521846" _msthash="258">adbc-driver-postgresql</a></p></td>
+<td><p _msttexthash="27937" _msthash="259">1.2.0</p></td>
+<td><p _msttexthash="165282" _msthash="260">postgresql</p></td>
+<td><p _msttexthash="525499" _msthash="261">ADBC Driver for PostgreSQL</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference external" href="https://github.com/apache/arrow-adbc" _msttexthash="367211" _msthash="262">adbc-driver-sqlite</a></p></td>
+<td><p _msttexthash="27937" _msthash="263">1.2.0</p></td>
+<td><p _msttexthash="132860" _msthash="264">sql-other</p></td>
+<td><p _msttexthash="382070" _msthash="265">ADBC Driver for SQLite</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+</section>
+<section id="other-data-sources">
+<h4><font _mstmutation="1" _msttexthash="323063" _msthash="266">Other data sources</font><a class="headerlink" href="https://pandas.pydata.org/docs/getting_started/install.html#other-data-sources" title="Link to this heading">#</a></h4>
+<p><font _mstmutation="1" _msttexthash="289471" _msthash="267">Installable with </font><code class="docutils literal notranslate"><span class="pre">pip</span> <span class="pre">install</span> <span class="pre">"pandas[hdf5,</span> <span class="pre">parquet,</span> <span class="pre">iceberg,</span> <span class="pre">feather,</span> <span class="pre">spss,</span> <span class="pre">excel]"</span></code></p>
+<div class="pst-scrollable-table-container" tabindex="-1"><table class="table">
+<thead>
+<tr class="row-odd"><th class="head"><p _msttexthash="155818" _msthash="268">Dependency</p></th>
+<th class="head"><p _msttexthash="261768" _msthash="269">Minimum Version</p></th>
+<th class="head"><p _msttexthash="119522" _msthash="270">pip extra</p></th>
+<th class="head"><p _msttexthash="61789" _msthash="271">Notes</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p><a class="reference external" href="https://github.com/PyTables/PyTables" _msttexthash="111163" _msthash="272">PyTables</a></p></td>
+<td><p _msttexthash="35620" _msthash="273">3.10.1</p></td>
+<td><p _msttexthash="38688" _msthash="274">hdf5</p></td>
+<td><p _msttexthash="612898" _msthash="275">HDF5-based reading / writing</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference external" href="https://github.com/madler/zlib" _msttexthash="47359" _msthash="276">zlib</a></p></td>
+<td></td>
+<td><p _msttexthash="38688" _msthash="277">hdf5</p></td>
+<td><p _msttexthash="342745" _msthash="278">Compression for HDF5</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference external" href="https://github.com/dask/fastparquet" _msttexthash="188344" _msthash="279">fastparquet</a></p></td>
+<td><p _msttexthash="62387" _msthash="280">2024.11.0</p></td>
+<td><ul class="simple">
+<li></li>
+</ul>
+</td>
+<td><p _msttexthash="1412515" _msthash="281">Parquet reading / writing (pyarrow is default)</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference external" href="https://github.com/apache/arrow" _msttexthash="102674" _msthash="282">pyarrow</a></p></td>
+<td><p _msttexthash="35451" _msthash="283">13.0.0</p></td>
+<td><p _msttexthash="280956" _msthash="284">parquet, feather</p></td>
+<td><p _msttexthash="1208649" _msthash="285">Parquet, ORC, and feather reading / writing</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference external" href="https://py.iceberg.apache.org/" _msttexthash="128908" _msthash="286">PyIceberg</a></p></td>
+<td><p _msttexthash="28691" _msthash="287">0.8.1</p></td>
+<td><p _msttexthash="94042" _msthash="288">iceberg</p></td>
+<td><p _msttexthash="762346" _msthash="289">Apache Iceberg reading / writing</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference external" href="https://github.com/Roche/pyreadstat" _msttexthash="162305" _msthash="290">pyreadstat</a></p></td>
+<td><p _msttexthash="29081" _msthash="291">1.2.8</p></td>
+<td><p _msttexthash="50518" _msthash="292">spss</p></td>
+<td><p _msttexthash="474786" _msthash="293">SPSS files (.sav) reading</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference external" href="https://github.com/eea/odfpy" _msttexthash="64298" _msthash="294">odfpy</a></p></td>
+<td><p _msttexthash="28314" _msthash="295">1.4.1</p></td>
+<td><p _msttexthash="61828" _msthash="296">excel</p></td>
+<td><p _msttexthash="1900236" _msthash="297">Open document format (.odf, .ods, .odt) reading / writing</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="admonition warning" id="install-warn-orc">
+<p class="admonition-title" _msttexthash="95225" _msthash="298">Warning</p>
+<ul class="simple">
+<li><p _msttexthash="18911490" _msthash="299">If you want to use <a class="reference internal" href="https://pandas.pydata.org/docs/reference/api/pandas.read_orc.html#pandas.read_orc" title="pandas.read_orc"><code class="xref py py-func docutils literal notranslate"><span class="pre">read_orc()</span></code></a>, it is highly recommended to install pyarrow using conda.
+<a class="reference internal" href="https://pandas.pydata.org/docs/reference/api/pandas.read_orc.html#pandas.read_orc" title="pandas.read_orc"><code class="xref py py-func docutils literal notranslate"><span class="pre">read_orc()</span></code></a> may fail if pyarrow was installed from pypi, and <a class="reference internal" href="https://pandas.pydata.org/docs/reference/api/pandas.read_orc.html#pandas.read_orc" title="pandas.read_orc"><code class="xref py py-func docutils literal notranslate"><span class="pre">read_orc()</span></code></a> is
+not compatible with Windows OS.</p></li>
+</ul>
+</div>
+</section>
+<section id="access-data-in-the-cloud">
+<h4><font _mstmutation="1" _msttexthash="451932" _msthash="300">Access data in the cloud</font><a class="headerlink" href="https://pandas.pydata.org/docs/getting_started/install.html#access-data-in-the-cloud" title="Link to this heading">#</a></h4>
+<p><font _mstmutation="1" _msttexthash="289471" _msthash="301">Installable with </font><code class="docutils literal notranslate"><span class="pre">pip</span> <span class="pre">install</span> <span class="pre">"pandas[fss,</span> <span class="pre">aws,</span> <span class="pre">gcp]"</span></code></p>
+<div class="pst-scrollable-table-container" tabindex="-1"><table class="table">
+<thead>
+<tr class="row-odd"><th class="head"><p _msttexthash="155818" _msthash="302">Dependency</p></th>
+<th class="head"><p _msttexthash="261768" _msthash="303">Minimum Version</p></th>
+<th class="head"><p _msttexthash="119522" _msthash="304">pip extra</p></th>
+<th class="head"><p _msttexthash="61789" _msthash="305">Notes</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p><a class="reference external" href="https://github.com/fsspec" _msttexthash="79144" _msthash="306">fsspec</a></p></td>
+<td><p _msttexthash="62218" _msthash="307">2024.10.0</p></td>
+<td><p _msttexthash="166608" _msthash="308">fss, gcp, aws</p></td>
+<td><p _msttexthash="4008888" _msthash="309">Handling files aside from simple local and HTTP (required
+dependency of s3fs, gcsfs).</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference external" href="https://github.com/fsspec/gcsfs" _msttexthash="62829" _msthash="310">gcsfs</a></p></td>
+<td><p _msttexthash="62218" _msthash="311">2024.10.0</p></td>
+<td><p _msttexthash="32773" _msthash="312">gcp</p></td>
+<td><p _msttexthash="597454" _msthash="313">Google Cloud Storage access</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference external" href="https://github.com/fsspec/s3fs" _msttexthash="42653" _msthash="314">s3fs</a></p></td>
+<td><p _msttexthash="62218" _msthash="315">2024.10.0</p></td>
+<td><p _msttexthash="34658" _msthash="316">aws</p></td>
+<td><p _msttexthash="244127" _msthash="317">Amazon S3 access</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+</section>
+<section id="clipboard">
+<h4><font _mstmutation="1" _msttexthash="132145" _msthash="318">Clipboard</font><a class="headerlink" href="https://pandas.pydata.org/docs/getting_started/install.html#clipboard" title="Link to this heading">#</a></h4>
+<p><font _mstmutation="1" _msttexthash="302627" _msthash="319">Installable with .</font><code class="docutils literal notranslate"><span class="pre">pip</span> <span class="pre">install</span> <span class="pre">"pandas[clipboard]"</span></code></p>
+<div class="pst-scrollable-table-container" tabindex="-1"><table class="table">
+<thead>
+<tr class="row-odd"><th class="head"><p _msttexthash="155818" _msthash="320">Dependency</p></th>
+<th class="head"><p _msttexthash="261768" _msthash="321">Minimum Version</p></th>
+<th class="head"><p _msttexthash="119522" _msthash="322">pip extra</p></th>
+<th class="head"><p _msttexthash="61789" _msthash="323">Notes</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p _msttexthash="146367" _msthash="324"><a class="reference external" href="https://pypi.org/project/PyQt4/">PyQt4</a>/<a class="reference external" href="https://pypi.org/project/PyQt5/">PyQt5</a></p></td>
+<td><p _msttexthash="37700" _msthash="325">5.15.9</p></td>
+<td><p _msttexthash="135057" _msthash="326">clipboard</p></td>
+<td><p _msttexthash="176202" _msthash="327">Clipboard I/O</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference external" href="https://github.com/spyder-ide/qtpy" _msttexthash="51181" _msthash="328">qtpy</a></p></td>
+<td><p _msttexthash="28548" _msthash="329">2.4.2</p></td>
+<td><p _msttexthash="135057" _msthash="330">clipboard</p></td>
+<td><p _msttexthash="176202" _msthash="331">Clipboard I/O</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="admonition note">
+<p class="admonition-title" _msttexthash="45344" _msthash="332">Note</p>
+<p><font _mstmutation="1" _msttexthash="14709019" _msthash="333">Depending on operating system, system-level packages may need to installed.
+For clipboard to operate on Linux one of the CLI tools  or  must be installed on your system.</font><code class="docutils literal notranslate"><span class="pre">xclip</span></code><code class="docutils literal notranslate"><span class="pre">xsel</span></code></p>
+</div>
+</section>
+<section id="compression">
+<h4><font _mstmutation="1" _msttexthash="185250" _msthash="334">Compression</font><a class="headerlink" href="https://pandas.pydata.org/docs/getting_started/install.html#compression" title="Link to this heading">#</a></h4>
+<p><font _mstmutation="1" _msttexthash="289471" _msthash="335">Installable with </font><code class="docutils literal notranslate"><span class="pre">pip</span> <span class="pre">install</span> <span class="pre">"pandas[compression]"</span></code></p>
+<div class="pst-scrollable-table-container" tabindex="-1"><table class="table">
+<thead>
+<tr class="row-odd"><th class="head"><p _msttexthash="155818" _msthash="336">Dependency</p></th>
+<th class="head"><p _msttexthash="261768" _msthash="337">Minimum Version</p></th>
+<th class="head"><p _msttexthash="119522" _msthash="338">pip extra</p></th>
+<th class="head"><p _msttexthash="61789" _msthash="339">Notes</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p><a class="reference external" href="https://github.com/facebook/zstd" _msttexthash="134303" _msthash="340">Zstandard</a></p></td>
+<td><p _msttexthash="36361" _msthash="341">0.19.0</p></td>
+<td><p _msttexthash="188162" _msthash="342">compression</p></td>
+<td><p _msttexthash="463099" _msthash="343">Zstandard compression</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+</section>
+<section id="timezone">
+<h4><font _mstmutation="1" _msttexthash="116181" _msthash="344">Timezone</font><a class="headerlink" href="https://pandas.pydata.org/docs/getting_started/install.html#timezone" title="Link to this heading">#</a></h4>
+<p><font _mstmutation="1" _msttexthash="289471" _msthash="345">Installable with </font><code class="docutils literal notranslate"><span class="pre">pip</span> <span class="pre">install</span> <span class="pre">"pandas[timezone]"</span></code></p>
+<div class="pst-scrollable-table-container" tabindex="-1"><table class="table">
+<thead>
+<tr class="row-odd"><th class="head"><p _msttexthash="155818" _msthash="346">Dependency</p></th>
+<th class="head"><p _msttexthash="261768" _msthash="347">Minimum Version</p></th>
+<th class="head"><p _msttexthash="119522" _msthash="348">pip extra</p></th>
+<th class="head"><p _msttexthash="61789" _msthash="349">Notes</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p><a class="reference external" href="https://github.com/stub42/pytz" _msttexthash="52208" _msthash="350">pytz</a></p></td>
+<td><p _msttexthash="36530" _msthash="351">2024.2</p></td>
+<td><p _msttexthash="119093" _msthash="352">timezone</p></td>
+<td><p><font _mstmutation="1" _msttexthash="832247" _msthash="353">Alternative timezone library to .</font><code class="docutils literal notranslate"><span class="pre">zoneinfo</span></code></p></td>
+</tr>
+</tbody>
+</table>
+</div>
+</section>
+</section>
+</section>
+</section>
+
+
+                </article>
+              
+              
+              
+              
+              
+                <footer class="prev-next-footer d-print-none">
+                  
+<div class="prev-next-area">
+    <a class="left-prev" href="https://pandas.pydata.org/docs/getting_started/index.html" title="previous page">
+      <svg class="svg-inline--fa fa-angle-left" aria-hidden="true" focusable="false" data-prefix="fas" data-icon="angle-left" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 512" data-fa-i2svg=""><path fill="currentColor" d="M41.4 233.4c-12.5 12.5-12.5 32.8 0 45.3l160 160c12.5 12.5 32.8 12.5 45.3 0s12.5-32.8 0-45.3L109.3 256 246.6 118.6c12.5-12.5 12.5-32.8 0-45.3s-32.8-12.5-45.3 0l-160 160z"></path></svg><!-- <i class="fa-solid fa-angle-left"></i> Font Awesome fontawesome.com -->
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle" _msttexthash="122239" _msthash="354">previous</p>
+        <p class="prev-next-title" _msttexthash="262210" _msthash="355">Getting started</p>
+      </div>
+    </a>
+    <a class="right-next" href="https://pandas.pydata.org/docs/getting_started/overview.html" title="next page">
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle" _msttexthash="49634" _msthash="356">next</p>
+        <p class="prev-next-title" _msttexthash="291577" _msthash="357">Package overview</p>
+      </div>
+      <svg class="svg-inline--fa fa-angle-right" aria-hidden="true" focusable="false" data-prefix="fas" data-icon="angle-right" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 512" data-fa-i2svg=""><path fill="currentColor" d="M278.6 233.4c12.5 12.5 12.5 32.8 0 45.3l-160 160c-12.5 12.5-32.8 12.5-45.3 0s-12.5-32.8 0-45.3L210.7 256 73.4 118.6c-12.5-12.5-12.5-32.8 0-45.3s32.8-12.5 45.3 0l160 160z"></path></svg><!-- <i class="fa-solid fa-angle-right"></i> Font Awesome fontawesome.com -->
+    </a>
+</div>
+                </footer>
+              
+            </div>
+            
+            
+              
+                <dialog id="pst-secondary-sidebar-modal"></dialog>
+                <div id="pst-secondary-sidebar" class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+
+  <div class="sidebar-secondary-item">
+<div id="pst-page-navigation-heading-2" class="page-toc tocsection onthispage">
+    <svg class="svg-inline--fa fa-list" aria-hidden="true" focusable="false" data-prefix="fas" data-icon="list" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" data-fa-i2svg=""><path fill="currentColor" d="M40 48C26.7 48 16 58.7 16 72v48c0 13.3 10.7 24 24 24H88c13.3 0 24-10.7 24-24V72c0-13.3-10.7-24-24-24H40zM192 64c-17.7 0-32 14.3-32 32s14.3 32 32 32H480c17.7 0 32-14.3 32-32s-14.3-32-32-32H192zm0 160c-17.7 0-32 14.3-32 32s14.3 32 32 32H480c17.7 0 32-14.3 32-32s-14.3-32-32-32H192zm0 160c-17.7 0-32 14.3-32 32s14.3 32 32 32H480c17.7 0 32-14.3 32-32s-14.3-32-32-32H192zM16 232v48c0 13.3 10.7 24 24 24H88c13.3 0 24-10.7 24-24V232c0-13.3-10.7-24-24-24H40c-13.3 0-24 10.7-24 24zM40 368c-13.3 0-24 10.7-24 24v48c0 13.3 10.7 24 24 24H88c13.3 0 24-10.7 24-24V392c0-13.3-10.7-24-24-24H40z"></path></svg><!-- <i class="fa-solid fa-list"></i> Font Awesome fontawesome.com --><font _mstmutation="1" _msttexthash="199043" _msthash="358"> Nesta página </font></div>
+  <nav class="bd-toc-nav page-toc" aria-labelledby="pst-page-navigation-heading-2">
+    <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry active"><a class="reference internal nav-link" href="https://pandas.pydata.org/docs/getting_started/install.html#python-version-support" _msttexthash="749489" _msthash="359">Suporte para versões em Python</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="https://pandas.pydata.org/docs/getting_started/install.html#installing-pandas" _msttexthash="425256" _msthash="360">Instalação de pandas</a><ul class="nav section-nav flex-column" _msthidden="4">
+<li class="toc-h3 nav-item toc-entry" _msthidden="1"><a class="reference internal nav-link" href="https://pandas.pydata.org/docs/getting_started/install.html#installing-with-conda" _msttexthash="409786" _msthidden="1" _msthash="361">Installing with Conda</a></li>
+<li class="toc-h3 nav-item toc-entry" _msthidden="1"><a class="reference internal nav-link" href="https://pandas.pydata.org/docs/getting_started/install.html#installing-with-pip" _msttexthash="358228" _msthidden="1" _msthash="362">Installing with pip</a></li>
+<li class="toc-h3 nav-item toc-entry" _msthidden="1"><a class="reference internal nav-link" href="https://pandas.pydata.org/docs/getting_started/install.html#installing-from-source" _msttexthash="462553" _msthidden="1" _msthash="363">Installing from source</a></li>
+<li class="toc-h3 nav-item toc-entry" _msthidden="1"><a class="reference internal nav-link" href="https://pandas.pydata.org/docs/getting_started/install.html#installing-the-development-version-of-pandas" _msttexthash="1416519" _msthidden="1" _msthash="364">Installing the development version of pandas</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="https://pandas.pydata.org/docs/getting_started/install.html#running-the-test-suite" _msttexthash="624793" _msthash="365">Rodando o conjunto de testes</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="https://pandas.pydata.org/docs/getting_started/install.html#dependencies" _msttexthash="223314" _msthash="366">Dependências</a><ul class="nav section-nav flex-column" _msthidden="14">
+<li class="toc-h3 nav-item toc-entry" _msthidden="1"><a class="reference internal nav-link" href="https://pandas.pydata.org/docs/getting_started/install.html#required-dependencies" _msttexthash="449618" _msthidden="1" _msthash="367">Required dependencies</a></li>
+<li class="toc-h3 nav-item toc-entry" _msthidden="13"><a class="reference internal nav-link" href="https://pandas.pydata.org/docs/getting_started/install.html#optional-dependencies" _msttexthash="450294" _msthidden="1" _msthash="368">Optional dependencies</a><ul class="nav section-nav flex-column" _msthidden="12">
+<li class="toc-h4 nav-item toc-entry" _msthidden="1"><a class="reference internal nav-link" href="https://pandas.pydata.org/docs/getting_started/install.html#performance-dependencies-recommended" _msttexthash="1140100" _msthidden="1" _msthash="369">Performance dependencies (recommended)</a></li>
+<li class="toc-h4 nav-item toc-entry" _msthidden="1"><a class="reference internal nav-link" href="https://pandas.pydata.org/docs/getting_started/install.html#visualization" _msttexthash="237471" _msthidden="1" _msthash="370">Visualization</a></li>
+<li class="toc-h4 nav-item toc-entry" _msthidden="1"><a class="reference internal nav-link" href="https://pandas.pydata.org/docs/getting_started/install.html#computation" _msttexthash="185159" _msthidden="1" _msthash="371">Computation</a></li>
+<li class="toc-h4 nav-item toc-entry" _msthidden="1"><a class="reference internal nav-link" href="https://pandas.pydata.org/docs/getting_started/install.html#excel-files" _msttexthash="155844" _msthidden="1" _msthash="372">Excel files</a></li>
+<li class="toc-h4 nav-item toc-entry" _msthidden="1"><a class="reference internal nav-link" href="https://pandas.pydata.org/docs/getting_started/install.html#html" _msttexthash="34177" _msthidden="1" _msthash="373">HTML</a></li>
+<li class="toc-h4 nav-item toc-entry" _msthidden="1"><a class="reference internal nav-link" href="https://pandas.pydata.org/docs/getting_started/install.html#xml" _msttexthash="24908" _msthidden="1" _msthash="374">XML</a></li>
+<li class="toc-h4 nav-item toc-entry" _msthidden="1"><a class="reference internal nav-link" href="https://pandas.pydata.org/docs/getting_started/install.html#sql-databases" _msttexthash="196131" _msthidden="1" _msthash="375">SQL databases</a></li>
+<li class="toc-h4 nav-item toc-entry" _msthidden="1"><a class="reference internal nav-link" href="https://pandas.pydata.org/docs/getting_started/install.html#other-data-sources" _msttexthash="323063" _msthidden="1" _msthash="376">Other data sources</a></li>
+<li class="toc-h4 nav-item toc-entry" _msthidden="1"><a class="reference internal nav-link" href="https://pandas.pydata.org/docs/getting_started/install.html#access-data-in-the-cloud" _msttexthash="451932" _msthidden="1" _msthash="377">Access data in the cloud</a></li>
+<li class="toc-h4 nav-item toc-entry" _msthidden="1"><a class="reference internal nav-link" href="https://pandas.pydata.org/docs/getting_started/install.html#clipboard" _msttexthash="132145" _msthidden="1" _msthash="378">Clipboard</a></li>
+<li class="toc-h4 nav-item toc-entry" _msthidden="1"><a class="reference internal nav-link" href="https://pandas.pydata.org/docs/getting_started/install.html#compression" _msttexthash="185250" _msthidden="1" _msthash="379">Compression</a></li>
+<li class="toc-h4 nav-item toc-entry" _msthidden="1"><a class="reference internal nav-link" href="https://pandas.pydata.org/docs/getting_started/install.html#timezone" _msttexthash="116181" _msthidden="1" _msthash="380">Timezone</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+  </nav></div>
+
+</div></div>
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+          </footer>
+        
+      </main>
+    </div>
+  </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script defer="" src="./Instalação — documentação do pandas 3.0.2_files/bootstrap.js.baixados"></script>
+<script defer="" src="./Instalação — documentação do pandas 3.0.2_files/pydata-sphinx-theme.js.baixados"></script>
+
+  <footer class="bd-footer">
+<div class="bd-footer__inner bd-page-width">
+  
+    <div class="footer-items__start">
+      
+        <div class="footer-item"><p class="copyright" _msttexthash="1557816" _msthash="381">
+    © 2026, pandas via <a href="https://numfocus.org/">NumFOCUS, Inc.</a> Hosted by <a href="https://www.ovhcloud.com/">OVHcloud</a>.
+</p></div>
+      
+        <div class="footer-item">
+
+  <p class="sphinx-version"><font _mstmutation="1" _msttexthash="489177" _msthash="382">
+    Created using <a href="https://www.sphinx-doc.org/" _mstmutation="1">Sphinx</a> 9.0.4.
+    </font><br>
+  </p>
+</div>
+      
+    </div>
+  
+  
+  
+    <div class="footer-items__end">
+      
+        <div class="footer-item">
+<p class="theme-version">
+  <!-- # L10n: Setting the PST URL as an argument as this does not need to be localized --><font _mstmutation="1" _msttexthash="985738" _msthash="383">
+  Built with the <a href="https://pydata-sphinx-theme.readthedocs.io/en/stable/index.html" _mstmutation="1">PyData Sphinx Theme</a> 0.16.1.
+</font></p></div>
+      
+    </div>
+  
+</div>
+
+  </footer>
+  
+</body></html>

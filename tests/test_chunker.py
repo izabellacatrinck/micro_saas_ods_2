@@ -172,12 +172,38 @@ def test_infer_library_detects_known_libraries():
 def test_chunk_with_metadata_includes_new_fields():
     chunker = SmartChunker(max_tokens=50, overlap=10)
     text = "Texto de exemplo para testar o chunker em portugues. " * 30
-    chunks = chunker.chunk_with_metadata(text, source="numpy_docs.pdf", section="intro")
+    chunks = chunker.chunk_with_metadata(text, source="numpy_docs.html", section="intro")
     assert chunks, "expected at least one chunk"
     c = chunks[0]
     assert c["library"] == "numpy"
     assert c["language"] == "pt"
     assert c["original_lang"] == "en"
     assert c["source_type"] == "official_docs"
+    # default translation_source is "groq" (EN→PT via glossary-aware translation)
+    assert c["translation_source"] == "groq"
     # quality_flags preserved
     assert "noise_score" in c["quality_flags"]
+
+
+def test_chunk_with_metadata_accepts_translation_source():
+    """PT official docs saved from Google Translate must be flagged as such
+    so the evaluation can distinguish high-quality Groq translations from
+    MT-based ones."""
+    chunker = SmartChunker(max_tokens=50, overlap=10)
+    text = "Texto em portugues nativo. " * 30
+    chunks = chunker.chunk_with_metadata(
+        text,
+        source="10 minutos para Pandas.html",
+        section="Intro",
+        language="pt",
+        original_lang="pt",
+        source_type="official_docs",
+        translation_source="google_translate",
+    )
+    assert chunks, "expected at least one chunk"
+    c = chunks[0]
+    assert c["library"] == "pandas"
+    assert c["language"] == "pt"
+    assert c["original_lang"] == "pt"
+    assert c["source_type"] == "official_docs"
+    assert c["translation_source"] == "google_translate"

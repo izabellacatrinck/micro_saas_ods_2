@@ -8,11 +8,13 @@ __pycache__/
 .env
 
 # Data artifacts (regenerable or local-only)
+data/chroma_db/
+data/chunks.jsonl
+data/chunks_with_embeddings.jsonl
+data/chunks_medium_smoke.jsonl
 data/translations_cache.jsonl
 data/medium/raw/
 data/eval/golden.jsonl.bak
-data/chunks_with_embeddings.jsonl
-data/chunks_medium_smoke.jsonl
 .claude/
 output_texts/
 
