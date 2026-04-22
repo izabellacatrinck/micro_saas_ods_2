@@ -162,49 +162,50 @@ class SmartChunker:
         self.overlap = overlap
 
     def chunk(self, text: str) -> List[str]:
-
         sentences = SentenceSplitter.split(text)
 
-        chunks = []
+        # First pass: pack sentences into base chunks without overlap.
+        # Sentences that exceed max_tokens on their own are split by word count.
+        base_chunks = []
         current = []
         current_len = 0
 
-        def flush():
-            nonlocal current, current_len
-            if current:
-                chunks.append(" ".join(current).strip())
-                current = []
-                current_len = 0
+        def flush(buffer):
+            if buffer:
+                base_chunks.append(" ".join(buffer).strip())
 
         for sent in sentences:
+            words = sent.split()
+            sent_len = len(words)
 
-            sent_len = len(sent.split())
-
-            if current_len + sent_len <= self.max_tokens:
+            # If a single sentence is too long, split it into word-level sub-chunks.
+            if sent_len > self.max_tokens:
+                flush(current)
+                current = []
+                current_len = 0
+                for j in range(0, sent_len, self.max_tokens):
+                    sub = " ".join(words[j: j + self.max_tokens])
+                    base_chunks.append(sub)
+            elif current_len + sent_len <= self.max_tokens:
                 current.append(sent)
                 current_len += sent_len
             else:
-                flush()
+                flush(current)
                 current = [sent]
                 current_len = sent_len
 
-        flush()
+        flush(current)
 
-        # =========================
-        # OVERLAP SEMÂNTICO REAL
-        # =========================
-        final = []
+        # Second pass: apply sliding-window overlap (last `overlap` words of prev
+        # chunk prepended to next). Deterministic and free of duplication risk.
+        if self.overlap <= 0 or len(base_chunks) <= 1:
+            return base_chunks
 
-        for i, chunk in enumerate(chunks):
-
-            if i == 0:
-                final.append(chunk)
-                continue
-
-            prev_sentences = SentenceSplitter.split(chunks[i - 1])
-            context = " ".join(prev_sentences[-2:]) if prev_sentences else ""
-
-            final.append((context + " " + chunk).strip())
+        final = [base_chunks[0]]
+        for i in range(1, len(base_chunks)):
+            prev_words = base_chunks[i - 1].split()
+            overlap_prefix = " ".join(prev_words[-self.overlap:])
+            final.append(f"{overlap_prefix} {base_chunks[i]}".strip())
 
         return final
 

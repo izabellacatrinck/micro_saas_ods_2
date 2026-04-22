@@ -22,3 +22,29 @@ def test_filter_by_quality_drops_noisy_chunks():
 def test_filter_by_quality_keeps_all_if_threshold_high():
     chunks = [{"content": "x", "quality_flags": {"noise_score": 0.9}}]
     assert len(filter_by_quality(chunks, threshold=1.0)) == 1
+
+
+def test_chunk_overlap_uses_sliding_window():
+    """Each chunk after the first should begin with the last N words of the prev chunk."""
+    text = " ".join([f"word{i}." for i in range(1000)])  # long text, many sentences
+    chunker = SmartChunker(max_tokens=100, overlap=20)
+
+    chunks = chunker.chunk(text)
+
+    assert len(chunks) >= 2
+    for i in range(1, len(chunks)):
+        prev_words = chunks[i - 1].split()
+        current_words = chunks[i].split()
+        overlap_words = prev_words[-20:]
+        # the first 20 words of the current chunk should equal the last 20 of previous
+        assert current_words[:20] == overlap_words, (
+            f"Chunk {i} does not start with sliding-window overlap of prev chunk"
+        )
+
+
+def test_chunk_no_overlap_on_first_chunk():
+    text = " ".join([f"w{i}." for i in range(200)])
+    chunker = SmartChunker(max_tokens=50, overlap=10)
+    chunks = chunker.chunk(text)
+    # the first chunk's first word should be original text's first word
+    assert chunks[0].startswith("w0.")
