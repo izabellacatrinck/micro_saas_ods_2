@@ -135,7 +135,7 @@ def translate(text: str) -> str:
     stripped, blocks = extract_code_blocks(text)
 
     response = groq_client.chat.completions.create(
-        model=config.GROQ_LLM_MODEL,
+        model=config.GROQ_TRANSLATION_MODEL,
         messages=[
             {"role": "system", "content": SYSTEM_PROMPT},
             {"role": "user", "content": stripped},

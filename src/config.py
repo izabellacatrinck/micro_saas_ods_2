@@ -33,6 +33,19 @@ BASELINE_RERANKER = "cross-encoder/ms-marco-MiniLM-L-6-v2"
 GROQ_API_KEY = os.environ.get("GROQ_API_KEY")
 GROQ_LLM_MODEL = os.environ.get("GROQ_LLM_MODEL", "llama-3.3-70b-versatile")
 GROQ_LLM_FAST = "llama-3.1-8b-instant"
+# Translation uses the fast/cheap model — Groq free tier has ~5x more TPD on
+# 8b-instant vs 70b, and translation on a glossary-constrained task is already
+# very high with 8b. The 70b stays as the default for RAG answer generation.
+GROQ_TRANSLATION_MODEL = os.environ.get("GROQ_TRANSLATION_MODEL", GROQ_LLM_FAST)
+
+# --- Ingestion: libraries that skip the EN→PT path ---
+# pandas has 47 Google-translated PT docs (full topical coverage); translating
+# its 10 EN docs would duplicate content and burn the daily token budget.
+SKIP_EN_FOR_LIBRARIES = tuple(
+    x.strip()
+    for x in os.environ.get("RAG_SKIP_EN_LIBS", "pandas").split(",")
+    if x.strip()
+)
 
 # --- Retrieval ---
 TOP_K_RETRIEVE = 15

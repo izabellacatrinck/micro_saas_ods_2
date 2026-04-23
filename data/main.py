@@ -9,6 +9,15 @@ from pathlib import Path as _Path
 # Allow `from src.*` when running this file directly.
 sys.path.insert(0, str(_Path(__file__).resolve().parent.parent))
 
+# Windows consoles default to cp1252 and can't encode the unicode arrows /
+# checkmarks we print below. Reconfigure stdout/stderr to UTF-8 so the
+# pipeline log is readable regardless of OS locale.
+try:
+    sys.stdout.reconfigure(encoding="utf-8")
+    sys.stderr.reconfigure(encoding="utf-8")
+except (AttributeError, OSError):
+    pass
+
 from src.translator import translate_many
 from src.medium_extractor import extract_medium_article
 from src.html_extractor import extract_official_html
@@ -480,6 +489,10 @@ def run_pipeline():
 
     # --- Official docs: EN (translated via Groq) ---
     for library in LIBRARY_DIRS:
+        if library in config.SKIP_EN_FOR_LIBRARIES:
+            print(f"[skip] {library}/en: skipped per config.SKIP_EN_FOR_LIBRARIES "
+                  f"(PT coverage is the source of truth for this library)")
+            continue
         en_dir = base / library / "en"
         if not en_dir.exists():
             print(f"[skip] {library}/en: not found")
