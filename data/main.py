@@ -21,6 +21,7 @@ except (AttributeError, OSError):
 from src.translator import translate_many
 from src.medium_extractor import extract_medium_article
 from src.html_extractor import extract_official_html
+from src.glossary_repair import repair_pt_text
 from src import config
 
 
@@ -413,6 +414,11 @@ def process_pt_official_html(
         return []
     if not raw.strip():
         return []
+
+    # Repair Google Translate's over-translation of Python API terms
+    # (matriz→array, transmissão→broadcasting, série→Series, etc.). This
+    # is deterministic and idempotent — safe to run unconditionally.
+    raw = repair_pt_text(raw)
 
     segments = segmenter.segment(raw)
 

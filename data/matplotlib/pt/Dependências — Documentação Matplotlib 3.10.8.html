@@ -1,0 +1,1184 @@
+<!DOCTYPE html>
+<!-- saved from url=(0055)https://matplotlib.org/stable/install/dependencies.html -->
+<html lang="pt" data-content_root="../" data-mode="auto" data-theme="dark" class="fontawesome-i2svg-active fontawesome-i2svg-complete"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"><meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <title _msttexthash="3433443" _msthash="0">Dependências — Documentação Matplotlib 3.10.8</title>
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "";
+  </script>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <style type="text/css">:host,:root{--fa-font-solid:normal 900 1em/1 "Font Awesome 6 Solid";--fa-font-regular:normal 400 1em/1 "Font Awesome 6 Regular";--fa-font-light:normal 300 1em/1 "Font Awesome 6 Light";--fa-font-thin:normal 100 1em/1 "Font Awesome 6 Thin";--fa-font-duotone:normal 900 1em/1 "Font Awesome 6 Duotone";--fa-font-sharp-solid:normal 900 1em/1 "Font Awesome 6 Sharp";--fa-font-sharp-regular:normal 400 1em/1 "Font Awesome 6 Sharp";--fa-font-sharp-light:normal 300 1em/1 "Font Awesome 6 Sharp";--fa-font-sharp-thin:normal 100 1em/1 "Font Awesome 6 Sharp";--fa-font-brands:normal 400 1em/1 "Font Awesome 6 Brands"}svg:not(:host).svg-inline--fa,svg:not(:root).svg-inline--fa{overflow:visible;box-sizing:content-box}.svg-inline--fa{display:var(--fa-display,inline-block);height:1em;overflow:visible;vertical-align:-.125em}.svg-inline--fa.fa-2xs{vertical-align:.1em}.svg-inline--fa.fa-xs{vertical-align:0}.svg-inline--fa.fa-sm{vertical-align:-.0714285705em}.svg-inline--fa.fa-lg{vertical-align:-.2em}.svg-inline--fa.fa-xl{vertical-align:-.25em}.svg-inline--fa.fa-2xl{vertical-align:-.3125em}.svg-inline--fa.fa-pull-left{margin-right:var(--fa-pull-margin,.3em);width:auto}.svg-inline--fa.fa-pull-right{margin-left:var(--fa-pull-margin,.3em);width:auto}.svg-inline--fa.fa-li{width:var(--fa-li-width,2em);top:.25em}.svg-inline--fa.fa-fw{width:var(--fa-fw-width,1.25em)}.fa-layers svg.svg-inline--fa{bottom:0;left:0;margin:auto;position:absolute;right:0;top:0}.fa-layers-counter,.fa-layers-text{display:inline-block;position:absolute;text-align:center}.fa-layers{display:inline-block;height:1em;position:relative;text-align:center;vertical-align:-.125em;width:1em}.fa-layers svg.svg-inline--fa{-webkit-transform-origin:center center;transform-origin:center center}.fa-layers-text{left:50%;top:50%;-webkit-transform:translate(-50%,-50%);transform:translate(-50%,-50%);-webkit-transform-origin:center center;transform-origin:center center}.fa-layers-counter{background-color:var(--fa-counter-background-color,#ff253a);border-radius:var(--fa-counter-border-radius,1em);box-sizing:border-box;color:var(--fa-inverse,#fff);line-height:var(--fa-counter-line-height,1);max-width:var(--fa-counter-max-width,5em);min-width:var(--fa-counter-min-width,1.5em);overflow:hidden;padding:var(--fa-counter-padding,.25em .5em);right:var(--fa-right,0);text-overflow:ellipsis;top:var(--fa-top,0);-webkit-transform:scale(var(--fa-counter-scale,.25));transform:scale(var(--fa-counter-scale,.25));-webkit-transform-origin:top right;transform-origin:top right}.fa-layers-bottom-right{bottom:var(--fa-bottom,0);right:var(--fa-right,0);top:auto;-webkit-transform:scale(var(--fa-layers-scale,.25));transform:scale(var(--fa-layers-scale,.25));-webkit-transform-origin:bottom right;transform-origin:bottom right}.fa-layers-bottom-left{bottom:var(--fa-bottom,0);left:var(--fa-left,0);right:auto;top:auto;-webkit-transform:scale(var(--fa-layers-scale,.25));transform:scale(var(--fa-layers-scale,.25));-webkit-transform-origin:bottom left;transform-origin:bottom left}.fa-layers-top-right{top:var(--fa-top,0);right:var(--fa-right,0);-webkit-transform:scale(var(--fa-layers-scale,.25));transform:scale(var(--fa-layers-scale,.25));-webkit-transform-origin:top right;transform-origin:top right}.fa-layers-top-left{left:var(--fa-left,0);right:auto;top:var(--fa-top,0);-webkit-transform:scale(var(--fa-layers-scale,.25));transform:scale(var(--fa-layers-scale,.25));-webkit-transform-origin:top left;transform-origin:top left}.fa-1x{font-size:1em}.fa-2x{font-size:2em}.fa-3x{font-size:3em}.fa-4x{font-size:4em}.fa-5x{font-size:5em}.fa-6x{font-size:6em}.fa-7x{font-size:7em}.fa-8x{font-size:8em}.fa-9x{font-size:9em}.fa-10x{font-size:10em}.fa-2xs{font-size:.625em;line-height:.1em;vertical-align:.225em}.fa-xs{font-size:.75em;line-height:.0833333337em;vertical-align:.125em}.fa-sm{font-size:.875em;line-height:.0714285718em;vertical-align:.0535714295em}.fa-lg{font-size:1.25em;line-height:.05em;vertical-align:-.075em}.fa-xl{font-size:1.5em;line-height:.0416666682em;vertical-align:-.125em}.fa-2xl{font-size:2em;line-height:.03125em;vertical-align:-.1875em}.fa-fw{text-align:center;width:1.25em}.fa-ul{list-style-type:none;margin-left:var(--fa-li-margin,2.5em);padding-left:0}.fa-ul>li{position:relative}.fa-li{left:calc(var(--fa-li-width,2em) * -1);position:absolute;text-align:center;width:var(--fa-li-width,2em);line-height:inherit}.fa-border{border-color:var(--fa-border-color,#eee);border-radius:var(--fa-border-radius,.1em);border-style:var(--fa-border-style,solid);border-width:var(--fa-border-width,.08em);padding:var(--fa-border-padding,.2em .25em .15em)}.fa-pull-left{float:left;margin-right:var(--fa-pull-margin,.3em)}.fa-pull-right{float:right;margin-left:var(--fa-pull-margin,.3em)}.fa-beat{-webkit-animation-name:fa-beat;animation-name:fa-beat;-webkit-animation-delay:var(--fa-animation-delay,0s);animation-delay:var(--fa-animation-delay,0s);-webkit-animation-direction:var(--fa-animation-direction,normal);animation-direction:var(--fa-animation-direction,normal);-webkit-animation-duration:var(--fa-animation-duration,1s);animation-duration:var(--fa-animation-duration,1s);-webkit-animation-iteration-count:var(--fa-animation-iteration-count,infinite);animation-iteration-count:var(--fa-animation-iteration-count,infinite);-webkit-animation-timing-function:var(--fa-animation-timing,ease-in-out);animation-timing-function:var(--fa-animation-timing,ease-in-out)}.fa-bounce{-webkit-animation-name:fa-bounce;animation-name:fa-bounce;-webkit-animation-delay:var(--fa-animation-delay,0s);animation-delay:var(--fa-animation-delay,0s);-webkit-animation-direction:var(--fa-animation-direction,normal);animation-direction:var(--fa-animation-direction,normal);-webkit-animation-duration:var(--fa-animation-duration,1s);animation-duration:var(--fa-animation-duration,1s);-webkit-animation-iteration-count:var(--fa-animation-iteration-count,infinite);animation-iteration-count:var(--fa-animation-iteration-count,infinite);-webkit-animation-timing-function:var(--fa-animation-timing,cubic-bezier(.28,.84,.42,1));animation-timing-function:var(--fa-animation-timing,cubic-bezier(.28,.84,.42,1))}.fa-fade{-webkit-animation-name:fa-fade;animation-name:fa-fade;-webkit-animation-delay:var(--fa-animation-delay,0s);animation-delay:var(--fa-animation-delay,0s);-webkit-animation-direction:var(--fa-animation-direction,normal);animation-direction:var(--fa-animation-direction,normal);-webkit-animation-duration:var(--fa-animation-duration,1s);animation-duration:var(--fa-animation-duration,1s);-webkit-animation-iteration-count:var(--fa-animation-iteration-count,infinite);animation-iteration-count:var(--fa-animation-iteration-count,infinite);-webkit-animation-timing-function:var(--fa-animation-timing,cubic-bezier(.4,0,.6,1));animation-timing-function:var(--fa-animation-timing,cubic-bezier(.4,0,.6,1))}.fa-beat-fade{-webkit-animation-name:fa-beat-fade;animation-name:fa-beat-fade;-webkit-animation-delay:var(--fa-animation-delay,0s);animation-delay:var(--fa-animation-delay,0s);-webkit-animation-direction:var(--fa-animation-direction,normal);animation-direction:var(--fa-animation-direction,normal);-webkit-animation-duration:var(--fa-animation-duration,1s);animation-duration:var(--fa-animation-duration,1s);-webkit-animation-iteration-count:var(--fa-animation-iteration-count,infinite);animation-iteration-count:var(--fa-animation-iteration-count,infinite);-webkit-animation-timing-function:var(--fa-animation-timing,cubic-bezier(.4,0,.6,1));animation-timing-function:var(--fa-animation-timing,cubic-bezier(.4,0,.6,1))}.fa-flip{-webkit-animation-name:fa-flip;animation-name:fa-flip;-webkit-animation-delay:var(--fa-animation-delay,0s);animation-delay:var(--fa-animation-delay,0s);-webkit-animation-direction:var(--fa-animation-direction,normal);animation-direction:var(--fa-animation-direction,normal);-webkit-animation-duration:var(--fa-animation-duration,1s);animation-duration:var(--fa-animation-duration,1s);-webkit-animation-iteration-count:var(--fa-animation-iteration-count,infinite);animation-iteration-count:var(--fa-animation-iteration-count,infinite);-webkit-animation-timing-function:var(--fa-animation-timing,ease-in-out);animation-timing-function:var(--fa-animation-timing,ease-in-out)}.fa-shake{-webkit-animation-name:fa-shake;animation-name:fa-shake;-webkit-animation-delay:var(--fa-animation-delay,0s);animation-delay:var(--fa-animation-delay,0s);-webkit-animation-direction:var(--fa-animation-direction,normal);animation-direction:var(--fa-animation-direction,normal);-webkit-animation-duration:var(--fa-animation-duration,1s);animation-duration:var(--fa-animation-duration,1s);-webkit-animation-iteration-count:var(--fa-animation-iteration-count,infinite);animation-iteration-count:var(--fa-animation-iteration-count,infinite);-webkit-animation-timing-function:var(--fa-animation-timing,linear);animation-timing-function:var(--fa-animation-timing,linear)}.fa-spin{-webkit-animation-name:fa-spin;animation-name:fa-spin;-webkit-animation-delay:var(--fa-animation-delay,0s);animation-delay:var(--fa-animation-delay,0s);-webkit-animation-direction:var(--fa-animation-direction,normal);animation-direction:var(--fa-animation-direction,normal);-webkit-animation-duration:var(--fa-animation-duration,2s);animation-duration:var(--fa-animation-duration,2s);-webkit-animation-iteration-count:var(--fa-animation-iteration-count,infinite);animation-iteration-count:var(--fa-animation-iteration-count,infinite);-webkit-animation-timing-function:var(--fa-animation-timing,linear);animation-timing-function:var(--fa-animation-timing,linear)}.fa-spin-reverse{--fa-animation-direction:reverse}.fa-pulse,.fa-spin-pulse{-webkit-animation-name:fa-spin;animation-name:fa-spin;-webkit-animation-direction:var(--fa-animation-direction,normal);animation-direction:var(--fa-animation-direction,normal);-webkit-animation-duration:var(--fa-animation-duration,1s);animation-duration:var(--fa-animation-duration,1s);-webkit-animation-iteration-count:var(--fa-animation-iteration-count,infinite);animation-iteration-count:var(--fa-animation-iteration-count,infinite);-webkit-animation-timing-function:var(--fa-animation-timing,steps(8));animation-timing-function:var(--fa-animation-timing,steps(8))}@media (prefers-reduced-motion:reduce){.fa-beat,.fa-beat-fade,.fa-bounce,.fa-fade,.fa-flip,.fa-pulse,.fa-shake,.fa-spin,.fa-spin-pulse{-webkit-animation-delay:-1ms;animation-delay:-1ms;-webkit-animation-duration:1ms;animation-duration:1ms;-webkit-animation-iteration-count:1;animation-iteration-count:1;-webkit-transition-delay:0s;transition-delay:0s;-webkit-transition-duration:0s;transition-duration:0s}}@-webkit-keyframes fa-beat{0%,90%{-webkit-transform:scale(1);transform:scale(1)}45%{-webkit-transform:scale(var(--fa-beat-scale,1.25));transform:scale(var(--fa-beat-scale,1.25))}}@keyframes fa-beat{0%,90%{-webkit-transform:scale(1);transform:scale(1)}45%{-webkit-transform:scale(var(--fa-beat-scale,1.25));transform:scale(var(--fa-beat-scale,1.25))}}@-webkit-keyframes fa-bounce{0%{-webkit-transform:scale(1,1) translateY(0);transform:scale(1,1) translateY(0)}10%{-webkit-transform:scale(var(--fa-bounce-start-scale-x,1.1),var(--fa-bounce-start-scale-y,.9)) translateY(0);transform:scale(var(--fa-bounce-start-scale-x,1.1),var(--fa-bounce-start-scale-y,.9)) translateY(0)}30%{-webkit-transform:scale(var(--fa-bounce-jump-scale-x,.9),var(--fa-bounce-jump-scale-y,1.1)) translateY(var(--fa-bounce-height,-.5em));transform:scale(var(--fa-bounce-jump-scale-x,.9),var(--fa-bounce-jump-scale-y,1.1)) translateY(var(--fa-bounce-height,-.5em))}50%{-webkit-transform:scale(var(--fa-bounce-land-scale-x,1.05),var(--fa-bounce-land-scale-y,.95)) translateY(0);transform:scale(var(--fa-bounce-land-scale-x,1.05),var(--fa-bounce-land-scale-y,.95)) translateY(0)}57%{-webkit-transform:scale(1,1) translateY(var(--fa-bounce-rebound,-.125em));transform:scale(1,1) translateY(var(--fa-bounce-rebound,-.125em))}64%{-webkit-transform:scale(1,1) translateY(0);transform:scale(1,1) translateY(0)}100%{-webkit-transform:scale(1,1) translateY(0);transform:scale(1,1) translateY(0)}}@keyframes fa-bounce{0%{-webkit-transform:scale(1,1) translateY(0);transform:scale(1,1) translateY(0)}10%{-webkit-transform:scale(var(--fa-bounce-start-scale-x,1.1),var(--fa-bounce-start-scale-y,.9)) translateY(0);transform:scale(var(--fa-bounce-start-scale-x,1.1),var(--fa-bounce-start-scale-y,.9)) translateY(0)}30%{-webkit-transform:scale(var(--fa-bounce-jump-scale-x,.9),var(--fa-bounce-jump-scale-y,1.1)) translateY(var(--fa-bounce-height,-.5em));transform:scale(var(--fa-bounce-jump-scale-x,.9),var(--fa-bounce-jump-scale-y,1.1)) translateY(var(--fa-bounce-height,-.5em))}50%{-webkit-transform:scale(var(--fa-bounce-land-scale-x,1.05),var(--fa-bounce-land-scale-y,.95)) translateY(0);transform:scale(var(--fa-bounce-land-scale-x,1.05),var(--fa-bounce-land-scale-y,.95)) translateY(0)}57%{-webkit-transform:scale(1,1) translateY(var(--fa-bounce-rebound,-.125em));transform:scale(1,1) translateY(var(--fa-bounce-rebound,-.125em))}64%{-webkit-transform:scale(1,1) translateY(0);transform:scale(1,1) translateY(0)}100%{-webkit-transform:scale(1,1) translateY(0);transform:scale(1,1) translateY(0)}}@-webkit-keyframes fa-fade{50%{opacity:var(--fa-fade-opacity,.4)}}@keyframes fa-fade{50%{opacity:var(--fa-fade-opacity,.4)}}@-webkit-keyframes fa-beat-fade{0%,100%{opacity:var(--fa-beat-fade-opacity,.4);-webkit-transform:scale(1);transform:scale(1)}50%{opacity:1;-webkit-transform:scale(var(--fa-beat-fade-scale,1.125));transform:scale(var(--fa-beat-fade-scale,1.125))}}@keyframes fa-beat-fade{0%,100%{opacity:var(--fa-beat-fade-opacity,.4);-webkit-transform:scale(1);transform:scale(1)}50%{opacity:1;-webkit-transform:scale(var(--fa-beat-fade-scale,1.125));transform:scale(var(--fa-beat-fade-scale,1.125))}}@-webkit-keyframes fa-flip{50%{-webkit-transform:rotate3d(var(--fa-flip-x,0),var(--fa-flip-y,1),var(--fa-flip-z,0),var(--fa-flip-angle,-180deg));transform:rotate3d(var(--fa-flip-x,0),var(--fa-flip-y,1),var(--fa-flip-z,0),var(--fa-flip-angle,-180deg))}}@keyframes fa-flip{50%{-webkit-transform:rotate3d(var(--fa-flip-x,0),var(--fa-flip-y,1),var(--fa-flip-z,0),var(--fa-flip-angle,-180deg));transform:rotate3d(var(--fa-flip-x,0),var(--fa-flip-y,1),var(--fa-flip-z,0),var(--fa-flip-angle,-180deg))}}@-webkit-keyframes fa-shake{0%{-webkit-transform:rotate(-15deg);transform:rotate(-15deg)}4%{-webkit-transform:rotate(15deg);transform:rotate(15deg)}24%,8%{-webkit-transform:rotate(-18deg);transform:rotate(-18deg)}12%,28%{-webkit-transform:rotate(18deg);transform:rotate(18deg)}16%{-webkit-transform:rotate(-22deg);transform:rotate(-22deg)}20%{-webkit-transform:rotate(22deg);transform:rotate(22deg)}32%{-webkit-transform:rotate(-12deg);transform:rotate(-12deg)}36%{-webkit-transform:rotate(12deg);transform:rotate(12deg)}100%,40%{-webkit-transform:rotate(0);transform:rotate(0)}}@keyframes fa-shake{0%{-webkit-transform:rotate(-15deg);transform:rotate(-15deg)}4%{-webkit-transform:rotate(15deg);transform:rotate(15deg)}24%,8%{-webkit-transform:rotate(-18deg);transform:rotate(-18deg)}12%,28%{-webkit-transform:rotate(18deg);transform:rotate(18deg)}16%{-webkit-transform:rotate(-22deg);transform:rotate(-22deg)}20%{-webkit-transform:rotate(22deg);transform:rotate(22deg)}32%{-webkit-transform:rotate(-12deg);transform:rotate(-12deg)}36%{-webkit-transform:rotate(12deg);transform:rotate(12deg)}100%,40%{-webkit-transform:rotate(0);transform:rotate(0)}}@-webkit-keyframes fa-spin{0%{-webkit-transform:rotate(0);transform:rotate(0)}100%{-webkit-transform:rotate(360deg);transform:rotate(360deg)}}@keyframes fa-spin{0%{-webkit-transform:rotate(0);transform:rotate(0)}100%{-webkit-transform:rotate(360deg);transform:rotate(360deg)}}.fa-rotate-90{-webkit-transform:rotate(90deg);transform:rotate(90deg)}.fa-rotate-180{-webkit-transform:rotate(180deg);transform:rotate(180deg)}.fa-rotate-270{-webkit-transform:rotate(270deg);transform:rotate(270deg)}.fa-flip-horizontal{-webkit-transform:scale(-1,1);transform:scale(-1,1)}.fa-flip-vertical{-webkit-transform:scale(1,-1);transform:scale(1,-1)}.fa-flip-both,.fa-flip-horizontal.fa-flip-vertical{-webkit-transform:scale(-1,-1);transform:scale(-1,-1)}.fa-rotate-by{-webkit-transform:rotate(var(--fa-rotate-angle,0));transform:rotate(var(--fa-rotate-angle,0))}.fa-stack{display:inline-block;vertical-align:middle;height:2em;position:relative;width:2.5em}.fa-stack-1x,.fa-stack-2x{bottom:0;left:0;margin:auto;position:absolute;right:0;top:0;z-index:var(--fa-stack-z-index,auto)}.svg-inline--fa.fa-stack-1x{height:1em;width:1.25em}.svg-inline--fa.fa-stack-2x{height:2em;width:2.5em}.fa-inverse{color:var(--fa-inverse,#fff)}.fa-sr-only,.sr-only{position:absolute;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0,0,0,0);white-space:nowrap;border-width:0}.fa-sr-only-focusable:not(:focus),.sr-only-focusable:not(:focus){position:absolute;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0,0,0,0);white-space:nowrap;border-width:0}.svg-inline--fa .fa-primary{fill:var(--fa-primary-color,currentColor);opacity:var(--fa-primary-opacity,1)}.svg-inline--fa .fa-secondary{fill:var(--fa-secondary-color,currentColor);opacity:var(--fa-secondary-opacity,.4)}.svg-inline--fa.fa-swap-opacity .fa-primary{opacity:var(--fa-secondary-opacity,.4)}.svg-inline--fa.fa-swap-opacity .fa-secondary{opacity:var(--fa-primary-opacity,1)}.svg-inline--fa mask .fa-primary,.svg-inline--fa mask .fa-secondary{fill:#000}.fa-duotone.fa-inverse,.fad.fa-inverse{color:var(--fa-inverse,#fff)}</style><link href="./Dependências — Documentação Matplotlib 3.10.8_files/theme.css" rel="stylesheet">
+<link href="./Dependências — Documentação Matplotlib 3.10.8_files/bootstrap.css" rel="stylesheet">
+<link href="./Dependências — Documentação Matplotlib 3.10.8_files/pydata-sphinx-theme.css" rel="stylesheet">
+
+  
+  <link href="./Dependências — Documentação Matplotlib 3.10.8_files/all.min.css" rel="stylesheet">
+  <link rel="preload" as="font" type="font/woff2" crossorigin="" href="https://matplotlib.org/stable/_static/vendor/fontawesome/6.5.2/webfonts/fa-solid-900.woff2">
+<link rel="preload" as="font" type="font/woff2" crossorigin="" href="https://matplotlib.org/stable/_static/vendor/fontawesome/6.5.2/webfonts/fa-brands-400.woff2">
+<link rel="preload" as="font" type="font/woff2" crossorigin="" href="https://matplotlib.org/stable/_static/vendor/fontawesome/6.5.2/webfonts/fa-regular-400.woff2">
+
+    <link rel="stylesheet" type="text/css" href="./Dependências — Documentação Matplotlib 3.10.8_files/pygments.css">
+    <link rel="stylesheet" type="text/css" href="./Dependências — Documentação Matplotlib 3.10.8_files/style.css">
+    <link rel="stylesheet" type="text/css" href="./Dependências — Documentação Matplotlib 3.10.8_files/graphviz.css">
+    <link rel="stylesheet" type="text/css" href="./Dependências — Documentação Matplotlib 3.10.8_files/plot_directive.css">
+    <link rel="stylesheet" type="text/css" href="./Dependências — Documentação Matplotlib 3.10.8_files/copybutton.css">
+    <link rel="stylesheet" type="text/css" href="./Dependências — Documentação Matplotlib 3.10.8_files/sg_gallery.css">
+    <link rel="stylesheet" type="text/css" href="./Dependências — Documentação Matplotlib 3.10.8_files/sg_gallery-binder.css">
+    <link rel="stylesheet" type="text/css" href="./Dependências — Documentação Matplotlib 3.10.8_files/sg_gallery-dataframe.css">
+    <link rel="stylesheet" type="text/css" href="./Dependências — Documentação Matplotlib 3.10.8_files/sg_gallery-rendered-html.css">
+    <link rel="stylesheet" type="text/css" href="./Dependências — Documentação Matplotlib 3.10.8_files/sphinx-design.min.css">
+    <link rel="stylesheet" type="text/css" href="./Dependências — Documentação Matplotlib 3.10.8_files/mpl.css">
+  
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="./Dependências — Documentação Matplotlib 3.10.8_files/bootstrap.js.baixados">
+<link rel="preload" as="script" href="./Dependências — Documentação Matplotlib 3.10.8_files/pydata-sphinx-theme.js.baixados">
+  <script src="./Dependências — Documentação Matplotlib 3.10.8_files/all.min.js.baixados" type="text/javascript"></script>
+
+    <script src="./Dependências — Documentação Matplotlib 3.10.8_files/documentation_options.js.baixados" type="text/javascript"></script>
+    <script src="./Dependências — Documentação Matplotlib 3.10.8_files/doctools.js.baixados" type="text/javascript"></script>
+    <script src="./Dependências — Documentação Matplotlib 3.10.8_files/sphinx_highlight.js.baixados" type="text/javascript"></script>
+    <script src="./Dependências — Documentação Matplotlib 3.10.8_files/clipboard.min.js.baixados" type="text/javascript"></script>
+    <script src="./Dependências — Documentação Matplotlib 3.10.8_files/copybutton.js.baixados" type="text/javascript"></script>
+    <script src="./Dependências — Documentação Matplotlib 3.10.8_files/design-tabs.js.baixados" type="text/javascript"></script>
+    <script data-domain="matplotlib.org" defer="defer" src="./Dependências — Documentação Matplotlib 3.10.8_files/script.js.baixados" type="text/javascript"></script>
+    <script type="text/javascript">DOCUMENTATION_OPTIONS.pagename = 'install/dependencies';</script>
+    <script type="text/javascript">
+        DOCUMENTATION_OPTIONS.theme_version = '0.15.4';
+        DOCUMENTATION_OPTIONS.theme_switcher_json_url = 'https://matplotlib.org/devdocs/_static/switcher.json?v3.10.8-7-g1957ba3918';
+        DOCUMENTATION_OPTIONS.theme_switcher_version_match = '3.10.8';
+        DOCUMENTATION_OPTIONS.show_version_warning_banner = true;
+        </script>
+    <link rel="canonical" href="https://matplotlib.org/stable/install/dependencies.html">
+    <link rel="search" type="application/opensearchdescription+xml" title="Search within Matplotlib 3.10.8 documentation" href="https://matplotlib.org/stable/_static/opensearch.xml">
+    <link rel="icon" href="https://matplotlib.org/stable/_static/favicon.ico">
+    <link rel="search" title="Search" href="https://matplotlib.org/stable/search.html">
+    <link rel="next" title="Quick start guide" href="https://matplotlib.org/stable/users/explain/quick_start.html">
+    <link rel="prev" title="Environment variables" href="https://matplotlib.org/stable/install/environment_variables_faq.html">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="docsearch:language" content="en">
+    <meta name="docbuild:last-update" content="Dec 12, 2025">
+  </head>
+  
+  
+  <body data-bs-spy="scroll" data-bs-target=".bd-toc-nav" data-offset="180" data-bs-root-margin="0px 0px -60%" data-default-mode="">
+
+  
+  
+  <div id="pst-skip-link" class="skip-link d-print-none"><a href="https://matplotlib.org/stable/install/dependencies.html#main-content" _msttexthash="357760" _msthash="1">Skip to main content</a></div>
+  
+  <div id="pst-scroll-pixel-helper"></div>
+  
+  <button type="button" class="btn rounded-pill" id="pst-back-to-top" _msthidden="1">
+    <svg class="svg-inline--fa fa-arrow-up" aria-hidden="true" focusable="false" data-prefix="fas" data-icon="arrow-up" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 384 512" data-fa-i2svg=""><path fill="currentColor" d="M214.6 41.4c-12.5-12.5-32.8-12.5-45.3 0l-160 160c-12.5 12.5-12.5 32.8 0 45.3s32.8 12.5 45.3 0L160 141.2V448c0 17.7 14.3 32 32 32s32-14.3 32-32V141.2L329.4 246.6c12.5 12.5 32.8 12.5 45.3 0s12.5-32.8 0-45.3l-160-160z"></path></svg><!-- <i class="fa-solid fa-arrow-up"></i> Font Awesome fontawesome.com --><font _mstmutation="1" _msttexthash="137137" _msthidden="1" _msthash="2">Back to top</font></button>
+
+  
+  <input type="checkbox" class="sidebar-toggle" id="pst-primary-sidebar-checkbox">
+  <label class="overlay overlay-primary" for="pst-primary-sidebar-checkbox"></label>
+  
+  <input type="checkbox" class="sidebar-toggle" id="pst-secondary-sidebar-checkbox">
+  <label class="overlay overlay-secondary" for="pst-secondary-sidebar-checkbox"></label>
+  
+  <div class="search-button__wrapper" _msthidden="1">
+    <div class="search-button__overlay"></div>
+    <div class="search-button__search-container" _msthidden="1">
+<form class="bd-search d-flex align-items-center" action="https://matplotlib.org/stable/search.html" method="get" _msthidden="1">
+  <svg class="svg-inline--fa fa-magnifying-glass" aria-hidden="true" focusable="false" data-prefix="fas" data-icon="magnifying-glass" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" data-fa-i2svg=""><path fill="currentColor" d="M416 208c0 45.9-14.9 88.3-40 122.7L502.6 457.4c12.5 12.5 12.5 32.8 0 45.3s-32.8 12.5-45.3 0L330.7 376c-34.4 25.2-76.8 40-122.7 40C93.1 416 0 322.9 0 208S93.1 0 208 0S416 93.1 416 208zM208 352a144 144 0 1 0 0-288 144 144 0 1 0 0 288z"></path></svg><!-- <i class="fa-solid fa-magnifying-glass"></i> Font Awesome fontawesome.com -->
+  <input type="search" class="form-control" name="q" id="search-input" placeholder="Search the docs ..." aria-label="Search the docs ..." autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false" _msthidden="A" _mstplaceholder="267410" _msthash="3" _mstaria-label="267410">
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form></div>
+  </div>
+
+  <div class="pst-async-banner-revealer" _msthidden="1" style="height: auto;">
+  <aside id="bd-header-version-warning" class="d-none d-print-none" aria-label="Version warning" _msthidden="A" _mstaria-label="264654" _msthash="4"></aside>
+</div>
+
+  
+    <header class="bd-header navbar navbar-expand-lg bd-navbar d-print-none">
+<div class="bd-header__inner bd-page-width">
+  <button class="pst-navbar-icon sidebar-toggle primary-toggle" aria-label="Site navigation" _msthidden="A" _mstaria-label="261573" _msthash="5">
+    <svg class="svg-inline--fa fa-bars" aria-hidden="true" focusable="false" data-prefix="fas" data-icon="bars" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512" data-fa-i2svg=""><path fill="currentColor" d="M0 96C0 78.3 14.3 64 32 64H416c17.7 0 32 14.3 32 32s-14.3 32-32 32H32C14.3 128 0 113.7 0 96zM0 256c0-17.7 14.3-32 32-32H416c17.7 0 32 14.3 32 32s-14.3 32-32 32H32c-17.7 0-32-14.3-32-32zM448 416c0 17.7-14.3 32-32 32H32c-17.7 0-32-14.3-32-32s14.3-32 32-32H416c17.7 0 32 14.3 32 32z"></path></svg><!-- <span class="fa-solid fa-bars"></span> Font Awesome fontawesome.com -->
+  </button>
+  
+  
+  <div class="col-lg-3 navbar-header-items__start" _msthidden="1">
+    
+      <div class="navbar-item" _msthidden="1">
+
+  
+     
+  
+
+<a class="navbar-brand logo" href="https://matplotlib.org/stable/" _msthidden="1">
+  
+  
+  
+  
+  
+    
+    
+      
+    
+    
+    <img src="./Dependências — Documentação Matplotlib 3.10.8_files/logo_light.svg" class="logo__image only-light" alt="Matplotlib 3.10.8 documentation - Home" _msthidden="A" _mstalt="981097" _msthash="6">
+    <script type="text/javascript">document.write(`<img src="../_static/logo_dark.svg" class="logo__image only-dark" alt="Matplotlib 3.10.8 documentation - Home"/>`);</script><img src="./Dependências — Documentação Matplotlib 3.10.8_files/logo_dark.svg" class="logo__image only-dark" alt="Documentação Matplotlib 3.10.8 - Início" _mstalt="981097" _msthash="125">
+  
+  
+</a></div>
+    
+  </div>
+  
+  <div class="col-lg-9 navbar-header-items">
+    
+    <div class="me-auto navbar-header-items__center">
+      
+        <div class="navbar-item"><ul id="navbar-main-elements" class="navbar-nav">
+  <li class="nav-item">
+    <a class="reference internal nav-link" href="https://matplotlib.org/stable/plot_types/index.html" _msttexthash="261794" _msthash="7">Tipos de enredos</a>
+  </li>
+  <li class="nav-item">
+    <a class="reference internal nav-link" href="https://matplotlib.org/stable/users/index.html" _msttexthash="262639" _msthash="8">Guia do usuário</a>
+  </li>
+  <li class="nav-item">
+    <a class="reference internal nav-link" href="https://matplotlib.org/stable/tutorials/index.html" _msttexthash="138424" _msthash="9">Tutoriais</a>
+  </li>
+  <li class="nav-item">
+    <a class="reference internal nav-link" href="https://matplotlib.org/stable/gallery/index.html" _msttexthash="117299" _msthash="10">Exemplos</a>
+  </li>
+  <li class="nav-item">
+    <a class="reference internal nav-link" href="https://matplotlib.org/stable/api/index.html" _msttexthash="173095" _msthash="11">Referência</a>
+  </li>
+  <li class="nav-item">
+    <a class="reference internal nav-link" href="https://matplotlib.org/stable/devel/index.html" _msttexthash="160316" _msthash="12">Contribuir</a>
+  </li>
+  <li class="nav-item">
+    <a class="reference internal nav-link" href="https://matplotlib.org/stable/users/release_notes.html" _msttexthash="198991" _msthash="13">Lançamentos</a>
+  </li>
+</ul></div>
+      
+    </div>
+    
+    
+    <div class="navbar-header-items__end">
+      
+        <div class="navbar-item navbar-persistent--container">
+          
+
+<script type="text/javascript">
+document.write(`
+  <button class="btn btn-sm pst-navbar-icon search-button search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass fa-lg"></i>
+  </button>
+`);
+</script>
+  <button class="btn btn-sm pst-navbar-icon search-button search-button__button" aria-label="Busca" data-bs-placement="bottom" data-bs-toggle="tooltip" _mstaria-label="74607" _msthash="126" data-bs-original-title="Search">
+    <svg class="svg-inline--fa fa-magnifying-glass fa-lg" aria-hidden="true" focusable="false" data-prefix="fas" data-icon="magnifying-glass" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" data-fa-i2svg=""><path fill="currentColor" d="M416 208c0 45.9-14.9 88.3-40 122.7L502.6 457.4c12.5 12.5 12.5 32.8 0 45.3s-32.8 12.5-45.3 0L330.7 376c-34.4 25.2-76.8 40-122.7 40C93.1 416 0 322.9 0 208S93.1 0 208 0S416 93.1 416 208zM208 352a144 144 0 1 0 0-288 144 144 0 1 0 0 288z"></path></svg><!-- <i class="fa-solid fa-magnifying-glass fa-lg"></i> Font Awesome fontawesome.com -->
+  </button>
+
+        </div>
+      
+      
+        <div class="navbar-item">
+
+<script type="text/javascript">
+document.write(`
+  <button class="btn btn-sm nav-link pst-navbar-icon theme-switch-button" title="light/dark" aria-label="light/dark" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="theme-switch fa-solid fa-sun fa-lg" data-mode="light"></i>
+    <i class="theme-switch fa-solid fa-moon fa-lg" data-mode="dark"></i>
+    <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg" data-mode="auto"></i>
+  </button>
+`);
+</script>
+  <button class="btn btn-sm nav-link pst-navbar-icon theme-switch-button" aria-label="Luz/Escuro" data-bs-placement="bottom" data-bs-toggle="tooltip" _mstaria-label="149279" _msthash="127" data-bs-original-title="light/dark">
+    <svg class="svg-inline--fa fa-sun theme-switch fa-lg" data-mode="light" aria-hidden="true" focusable="false" data-prefix="fas" data-icon="sun" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" data-fa-i2svg=""><path fill="currentColor" d="M361.5 1.2c5 2.1 8.6 6.6 9.6 11.9L391 121l107.9 19.8c5.3 1 9.8 4.6 11.9 9.6s1.5 10.7-1.6 15.2L446.9 256l62.3 90.3c3.1 4.5 3.7 10.2 1.6 15.2s-6.6 8.6-11.9 9.6L391 391 371.1 498.9c-1 5.3-4.6 9.8-9.6 11.9s-10.7 1.5-15.2-1.6L256 446.9l-90.3 62.3c-4.5 3.1-10.2 3.7-15.2 1.6s-8.6-6.6-9.6-11.9L121 391 13.1 371.1c-5.3-1-9.8-4.6-11.9-9.6s-1.5-10.7 1.6-15.2L65.1 256 2.8 165.7c-3.1-4.5-3.7-10.2-1.6-15.2s6.6-8.6 11.9-9.6L121 121 140.9 13.1c1-5.3 4.6-9.8 9.6-11.9s10.7-1.5 15.2 1.6L256 65.1 346.3 2.8c4.5-3.1 10.2-3.7 15.2-1.6zM160 256a96 96 0 1 1 192 0 96 96 0 1 1 -192 0zm224 0a128 128 0 1 0 -256 0 128 128 0 1 0 256 0z"></path></svg><!-- <i class="theme-switch fa-solid fa-sun fa-lg" data-mode="light"></i> Font Awesome fontawesome.com -->
+    <svg class="svg-inline--fa fa-moon theme-switch fa-lg" data-mode="dark" aria-hidden="true" focusable="false" data-prefix="fas" data-icon="moon" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 384 512" data-fa-i2svg=""><path fill="currentColor" d="M223.5 32C100 32 0 132.3 0 256S100 480 223.5 480c60.6 0 115.5-24.2 155.8-63.4c5-4.9 6.3-12.5 3.1-18.7s-10.1-9.7-17-8.5c-9.8 1.7-19.8 2.6-30.1 2.6c-96.9 0-175.5-78.8-175.5-176c0-65.8 36-123.1 89.3-153.3c6.1-3.5 9.2-10.5 7.7-17.3s-7.3-11.9-14.3-12.5c-6.3-.5-12.6-.8-19-.8z"></path></svg><!-- <i class="theme-switch fa-solid fa-moon fa-lg" data-mode="dark"></i> Font Awesome fontawesome.com -->
+    <svg class="svg-inline--fa fa-circle-half-stroke theme-switch fa-lg" data-mode="auto" aria-hidden="true" focusable="false" data-prefix="fas" data-icon="circle-half-stroke" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" data-fa-i2svg=""><path fill="currentColor" d="M448 256c0-106-86-192-192-192V448c106 0 192-86 192-192zM0 256a256 256 0 1 1 512 0A256 256 0 1 1 0 256z"></path></svg><!-- <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg" data-mode="auto"></i> Font Awesome fontawesome.com -->
+  </button>
+</div>
+      
+        <div class="navbar-item">
+<script type="text/javascript">
+document.write(`
+  <div class="version-switcher__container dropdown">
+    <button id="pst-version-switcher-button-2"
+      type="button"
+      class="version-switcher__button btn btn-sm dropdown-toggle"
+      data-bs-toggle="dropdown"
+      aria-haspopup="listbox"
+      aria-controls="pst-version-switcher-list-2"
+      aria-label="Version switcher list"
+    >
+      Choose version  <!-- this text may get changed later by javascript -->
+      <span class="caret"></span>
+    </button>
+    <div id="pst-version-switcher-list-2"
+      class="version-switcher__menu dropdown-menu list-group-flush py-0"
+      role="listbox" aria-labelledby="pst-version-switcher-button-2">
+      <!-- dropdown will be populated by javascript on page load -->
+    </div>
+  </div>
+`);
+</script>
+  <div class="version-switcher__container dropdown" _msthidden="2">
+    <button id="pst-version-switcher-button-2" type="button" class="version-switcher__button btn btn-sm dropdown-toggle" data-bs-toggle="dropdown" aria-haspopup="listbox" aria-controls="pst-version-switcher-list-2" aria-label="Lista de switchers de versões" _mstaria-label="431249" _msthash="132" data-active-version-name="3.10 (stable)" data-active-version="3.10.8" _msttexthash="209560">3.10 (estável)</button>
+    <div id="pst-version-switcher-list-2" class="version-switcher__menu dropdown-menu list-group-flush py-0 dropdown-menu-dark" role="listbox" aria-labelledby="pst-version-switcher-button-2">
+      <!-- dropdown will be populated by javascript on page load -->
+    <a class="dropdown-item list-group-item list-group-item-action py-1 active" href="https://matplotlib.org/stable/install/dependencies.html" role="option" data-version-name="3.10 (stable)" data-version="3.10.8" _msthidden="1"><span _msttexthash="155805" _msthidden="1" _msthash="161">3.10 (stable)</span></a><a class="dropdown-item list-group-item list-group-item-action py-1" href="https://matplotlib.org/devdocs/install/dependencies.html" role="option" data-version-name="3.11 (dev)" data-version="dev" _msthidden="1"><span _msttexthash="89388" _msthidden="1" _msthash="159">3.11 (dev)</span></a><a class="dropdown-item list-group-item list-group-item-action py-1" href="https://matplotlib.org/3.9.3/install/dependencies.html" role="option" data-version-name="3.9" data-version="3.9.3" _msthidden="1"><span _msttexthash="16094" _msthidden="1" _msthash="157">3.9</span></a><a class="dropdown-item list-group-item list-group-item-action py-1" href="https://matplotlib.org/3.8.4/install/dependencies.html" role="option" data-version-name="3.8" data-version="3.8.4" _msthidden="1"><span _msttexthash="15977" _msthidden="1" _msthash="155">3.8</span></a><a class="dropdown-item list-group-item list-group-item-action py-1" href="https://matplotlib.org/3.7.5/install/dependencies.html" role="option" data-version-name="3.7" data-version="3.7.5" _msthidden="1"><span _msttexthash="15860" _msthidden="1" _msthash="153">3.7</span></a><a class="dropdown-item list-group-item list-group-item-action py-1" href="https://matplotlib.org/3.6.3/install/dependencies.html" role="option" data-version-name="3.6" data-version="3.6.3" _msthidden="1"><span _msttexthash="15743" _msthidden="1" _msthash="151">3.6</span></a><a class="dropdown-item list-group-item list-group-item-action py-1" href="https://matplotlib.org/3.5.3/install/dependencies.html" role="option" data-version-name="3.5" data-version="3.5.3" _msthidden="1"><span _msttexthash="15626" _msthidden="1" _msthash="149">3.5</span></a><a class="dropdown-item list-group-item list-group-item-action py-1" href="https://matplotlib.org/3.4.3/install/dependencies.html" role="option" data-version-name="3.4" data-version="3.4.3" _msthidden="1"><span _msttexthash="15509" _msthidden="1" _msthash="147">3.4</span></a><a class="dropdown-item list-group-item list-group-item-action py-1" href="https://matplotlib.org/3.3.4/install/dependencies.html" role="option" data-version-name="3.3" data-version="3.3.4" _msthidden="1"><span _msttexthash="15392" _msthidden="1" _msthash="145">3.3</span></a><a class="dropdown-item list-group-item list-group-item-action py-1" href="https://matplotlib.org/2.2.4/install/dependencies.html" role="option" data-version-name="2.2" data-version="2.2.4" _msthidden="1"><span _msttexthash="15184" _msthidden="1" _msthash="143">2.2</span></a></div>
+  </div>
+</div>
+      
+        <div class="navbar-item"><ul class="navbar-icon-links" aria-label="Links de Ícones" _mstaria-label="131963" _msthash="14">
+        <li class="nav-item">
+          
+          
+          
+          
+          
+          
+          
+          
+          <a href="https://gitter.im/matplotlib/matplotlib" class="nav-link pst-navbar-icon" rel="noopener" target="_blank" data-bs-toggle="tooltip" data-bs-placement="bottom" data-bs-original-title="Gitter"><svg class="svg-inline--fa fa-gitter fa-lg" aria-hidden="true" focusable="false" data-prefix="fab" data-icon="gitter" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 384 512" data-fa-i2svg=""><path fill="currentColor" d="M66.4 322.5H16V0h50.4v322.5zM166.9 76.1h-50.4V512h50.4V76.1zm100.6 0h-50.4V512h50.4V76.1zM368 76h-50.4v247H368V76z"></path></svg><!-- <i class="fa-brands fa-gitter fa-lg" aria-hidden="true"></i> Font Awesome fontawesome.com -->
+            <span class="sr-only" _msttexthash="78260" _msthash="15">Gitter</span></a>
+        </li>
+        <li class="nav-item">
+          
+          
+          
+          
+          
+          
+          
+          
+          <a href="https://discourse.matplotlib.org/" class="nav-link pst-navbar-icon" rel="noopener" target="_blank" data-bs-toggle="tooltip" data-bs-placement="bottom" data-bs-original-title="Discourse"><svg class="svg-inline--fa fa-discourse fa-lg" aria-hidden="true" focusable="false" data-prefix="fab" data-icon="discourse" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512" data-fa-i2svg=""><path fill="currentColor" d="M225.9 32C103.3 32 0 130.5 0 252.1 0 256 .1 480 .1 480l225.8-.2c122.7 0 222.1-102.3 222.1-223.9C448 134.3 348.6 32 225.9 32zM224 384c-19.4 0-37.9-4.3-54.4-12.1L88.5 392l22.9-75c-9.8-18.1-15.4-38.9-15.4-61 0-70.7 57.3-128 128-128s128 57.3 128 128-57.3 128-128 128z"></path></svg><!-- <i class="fa-brands fa-discourse fa-lg" aria-hidden="true"></i> Font Awesome fontawesome.com -->
+            <span class="sr-only" _msttexthash="117585" _msthash="16">Discurso</span></a>
+        </li>
+        <li class="nav-item">
+          
+          
+          
+          
+          
+          
+          
+          
+          <a href="https://github.com/matplotlib/matplotlib" class="nav-link pst-navbar-icon" rel="noopener" target="_blank" data-bs-toggle="tooltip" data-bs-placement="bottom" data-bs-original-title="GitHub"><svg class="svg-inline--fa fa-github fa-lg" aria-hidden="true" focusable="false" data-prefix="fab" data-icon="github" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 496 512" data-fa-i2svg=""><path fill="currentColor" d="M165.9 397.4c0 2-2.3 3.6-5.2 3.6-3.3.3-5.6-1.3-5.6-3.6 0-2 2.3-3.6 5.2-3.6 3-.3 5.6 1.3 5.6 3.6zm-31.1-4.5c-.7 2 1.3 4.3 4.3 4.9 2.6 1 5.6 0 6.2-2s-1.3-4.3-4.3-5.2c-2.6-.7-5.5.3-6.2 2.3zm44.2-1.7c-2.9.7-4.9 2.6-4.6 4.9.3 2 2.9 3.3 5.9 2.6 2.9-.7 4.9-2.6 4.6-4.6-.3-1.9-3-3.2-5.9-2.9zM244.8 8C106.1 8 0 113.3 0 252c0 110.9 69.8 205.8 169.5 239.2 12.8 2.3 17.3-5.6 17.3-12.1 0-6.2-.3-40.4-.3-61.4 0 0-70 15-84.7-29.8 0 0-11.4-29.1-27.8-36.6 0 0-22.9-15.7 1.6-15.4 0 0 24.9 2 38.6 25.8 21.9 38.6 58.6 27.5 72.9 20.9 2.3-16 8.8-27.1 16-33.7-55.9-6.2-112.3-14.3-112.3-110.5 0-27.5 7.6-41.3 23.6-58.9-2.6-6.5-11.1-33.3 2.6-67.9 20.9-6.5 69 27 69 27 20-5.6 41.5-8.5 62.8-8.5s42.8 2.9 62.8 8.5c0 0 48.1-33.6 69-27 13.7 34.7 5.2 61.4 2.6 67.9 16 17.7 25.8 31.5 25.8 58.9 0 96.5-58.9 104.2-114.8 110.5 9.2 7.9 17 22.9 17 46.4 0 33.7-.3 75.4-.3 83.6 0 6.5 4.6 14.4 17.3 12.1C428.2 457.8 496 362.9 496 252 496 113.3 383.5 8 244.8 8zM97.2 352.9c-1.3 1-1 3.3.7 5.2 1.6 1.6 3.9 2.3 5.2 1 1.3-1 1-3.3-.7-5.2-1.6-1.6-3.9-2.3-5.2-1zm-10.8-8.1c-.7 1.3.3 2.9 2.3 3.9 1.6 1 3.6.7 4.3-.7.7-1.3-.3-2.9-2.3-3.9-2-.6-3.6-.3-4.3.7zm32.4 35.6c-1.6 1.3-1 4.3 1.3 6.2 2.3 2.3 5.2 2.6 6.5 1 1.3-1.3.7-4.3-1.3-6.2-2.2-2.3-5.2-2.6-6.5-1zm-11.4-14.7c-1.6 1-1.6 3.6 0 5.9 1.6 2.3 4.3 3.3 5.6 2.3 1.6-1.3 1.6-3.9 0-6.2-1.4-2.3-4-3.3-5.6-2z"></path></svg><!-- <i class="fa-brands fa-github fa-lg" aria-hidden="true"></i> Font Awesome fontawesome.com -->
+            <span class="sr-only" _msttexthash="72332" _msthash="17">GitHub</span></a>
+        </li>
+        <li class="nav-item">
+          
+          
+          
+          
+          
+          
+          
+          
+          <a href="https://twitter.com/matplotlib/" class="nav-link pst-navbar-icon" rel="noopener" target="_blank" data-bs-toggle="tooltip" data-bs-placement="bottom" data-bs-original-title="Twitter"><svg class="svg-inline--fa fa-twitter fa-lg" aria-hidden="true" focusable="false" data-prefix="fab" data-icon="twitter" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" data-fa-i2svg=""><path fill="currentColor" d="M459.37 151.716c.325 4.548.325 9.097.325 13.645 0 138.72-105.583 298.558-298.558 298.558-59.452 0-114.68-17.219-161.137-47.106 8.447.974 16.568 1.299 25.34 1.299 49.055 0 94.213-16.568 130.274-44.832-46.132-.975-84.792-31.188-98.112-72.772 6.498.974 12.995 1.624 19.818 1.624 9.421 0 18.843-1.3 27.614-3.573-48.081-9.747-84.143-51.98-84.143-102.985v-1.299c13.969 7.797 30.214 12.67 47.431 13.319-28.264-18.843-46.781-51.005-46.781-87.391 0-19.492 5.197-37.36 14.294-52.954 51.655 63.675 129.3 105.258 216.365 109.807-1.624-7.797-2.599-15.918-2.599-24.04 0-57.828 46.782-104.934 104.934-104.934 30.213 0 57.502 12.67 76.67 33.137 23.715-4.548 46.456-13.32 66.599-25.34-7.798 24.366-24.366 44.833-46.132 57.827 21.117-2.273 41.584-8.122 60.426-16.243-14.292 20.791-32.161 39.308-52.628 54.253z"></path></svg><!-- <i class="fa-brands fa-twitter fa-lg" aria-hidden="true"></i> Font Awesome fontawesome.com -->
+            <span class="sr-only" _msttexthash="98995" _msthash="18">Twitter</span></a>
+        </li>
+</ul></div>
+      
+    </div>
+    
+  </div>
+  
+  
+    <div class="navbar-persistent--mobile" _msthidden="1">
+
+<script type="text/javascript" _msthidden="2">
+document.write(`
+  <button class="btn btn-sm pst-navbar-icon search-button search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass fa-lg"></i>
+  </button>
+`);
+</script>
+  <button class="btn btn-sm pst-navbar-icon search-button search-button__button" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip" _msthidden="A" _mstaria-label="74607" _msthash="128" data-bs-original-title="Search">
+    <svg class="svg-inline--fa fa-magnifying-glass fa-lg" aria-hidden="true" focusable="false" data-prefix="fas" data-icon="magnifying-glass" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" data-fa-i2svg=""><path fill="currentColor" d="M416 208c0 45.9-14.9 88.3-40 122.7L502.6 457.4c12.5 12.5 12.5 32.8 0 45.3s-32.8 12.5-45.3 0L330.7 376c-34.4 25.2-76.8 40-122.7 40C93.1 416 0 322.9 0 208S93.1 0 208 0S416 93.1 416 208zM208 352a144 144 0 1 0 0-288 144 144 0 1 0 0 288z"></path></svg><!-- <i class="fa-solid fa-magnifying-glass fa-lg"></i> Font Awesome fontawesome.com -->
+  </button>
+
+    </div>
+  
+
+  
+    <button class="pst-navbar-icon sidebar-toggle secondary-toggle" aria-label="On this page" _msthidden="A" _mstaria-label="156351" _msthash="19">
+      <svg class="svg-inline--fa fa-outdent" aria-hidden="true" focusable="false" data-prefix="fas" data-icon="outdent" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512" data-fa-i2svg=""><path fill="currentColor" d="M0 64C0 46.3 14.3 32 32 32H416c17.7 0 32 14.3 32 32s-14.3 32-32 32H32C14.3 96 0 81.7 0 64zM192 192c0-17.7 14.3-32 32-32H416c17.7 0 32 14.3 32 32s-14.3 32-32 32H224c-17.7 0-32-14.3-32-32zm32 96H416c17.7 0 32 14.3 32 32s-14.3 32-32 32H224c-17.7 0-32-14.3-32-32s14.3-32 32-32zM0 448c0-17.7 14.3-32 32-32H416c17.7 0 32 14.3 32 32s-14.3 32-32 32H32c-17.7 0-32-14.3-32-32zM.2 268.6c-8.2-6.4-8.2-18.9 0-25.3l101.9-79.3c10.5-8.2 25.8-.7 25.8 12.6V335.3c0 13.3-15.3 20.8-25.8 12.6L.2 268.6z"></path></svg><!-- <span class="fa-solid fa-outdent"></span> Font Awesome fontawesome.com -->
+    </button>
+  
+</div>
+
+    </header>
+  
+
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      
+      
+      <div class="bd-sidebar-primary bd-sidebar">
+        
+
+  
+  <div class="sidebar-header-items sidebar-primary__section" _msthidden="12">
+    
+    
+      <div class="sidebar-header-items__center" _msthidden="7">
+        
+          
+          
+            <div class="navbar-item" _msthidden="7"><ul id="navbar-main-elements" class="navbar-nav" _msthidden="7">
+  <li class="nav-item" _msthidden="1">
+    <a class="reference internal nav-link" href="https://matplotlib.org/stable/plot_types/index.html" _msttexthash="141778" _msthidden="1" _msthash="20">Plot types</a>
+  </li>
+  <li class="nav-item" _msthidden="1">
+    <a class="reference internal nav-link" href="https://matplotlib.org/stable/users/index.html" _msttexthash="134953" _msthidden="1" _msthash="21">User guide</a>
+  </li>
+  <li class="nav-item" _msthidden="1">
+    <a class="reference internal nav-link" href="https://matplotlib.org/stable/tutorials/index.html" _msttexthash="138970" _msthidden="1" _msthash="22">Tutorials</a>
+  </li>
+  <li class="nav-item" _msthidden="1">
+    <a class="reference internal nav-link" href="https://matplotlib.org/stable/gallery/index.html" _msttexthash="115141" _msthidden="1" _msthash="23">Examples</a>
+  </li>
+  <li class="nav-item" _msthidden="1">
+    <a class="reference internal nav-link" href="https://matplotlib.org/stable/api/index.html" _msttexthash="131391" _msthidden="1" _msthash="24">Reference</a>
+  </li>
+  <li class="nav-item" _msthidden="1">
+    <a class="reference internal nav-link" href="https://matplotlib.org/stable/devel/index.html" _msttexthash="159757" _msthidden="1" _msthash="25">Contribute</a>
+  </li>
+  <li class="nav-item" _msthidden="1">
+    <a class="reference internal nav-link" href="https://matplotlib.org/stable/users/release_notes.html" _msttexthash="113542" _msthidden="1" _msthash="26">Releases</a>
+  </li>
+</ul></div>
+          
+        
+      </div>
+    
+    
+    
+      <div class="sidebar-header-items__end" _msthidden="5">
+        
+          <div class="navbar-item" _msthidden="1">
+
+<script type="text/javascript" _msthidden="2">
+document.write(`
+  <button class="btn btn-sm nav-link pst-navbar-icon theme-switch-button" title="light/dark" aria-label="light/dark" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="theme-switch fa-solid fa-sun fa-lg" data-mode="light"></i>
+    <i class="theme-switch fa-solid fa-moon fa-lg" data-mode="dark"></i>
+    <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg" data-mode="auto"></i>
+  </button>
+`);
+</script>
+  <button class="btn btn-sm nav-link pst-navbar-icon theme-switch-button" aria-label="light/dark" data-bs-placement="bottom" data-bs-toggle="tooltip" _msthidden="A" _mstaria-label="149279" _msthash="129" data-bs-original-title="light/dark">
+    <svg class="svg-inline--fa fa-sun theme-switch fa-lg" data-mode="light" aria-hidden="true" focusable="false" data-prefix="fas" data-icon="sun" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" data-fa-i2svg=""><path fill="currentColor" d="M361.5 1.2c5 2.1 8.6 6.6 9.6 11.9L391 121l107.9 19.8c5.3 1 9.8 4.6 11.9 9.6s1.5 10.7-1.6 15.2L446.9 256l62.3 90.3c3.1 4.5 3.7 10.2 1.6 15.2s-6.6 8.6-11.9 9.6L391 391 371.1 498.9c-1 5.3-4.6 9.8-9.6 11.9s-10.7 1.5-15.2-1.6L256 446.9l-90.3 62.3c-4.5 3.1-10.2 3.7-15.2 1.6s-8.6-6.6-9.6-11.9L121 391 13.1 371.1c-5.3-1-9.8-4.6-11.9-9.6s-1.5-10.7 1.6-15.2L65.1 256 2.8 165.7c-3.1-4.5-3.7-10.2-1.6-15.2s6.6-8.6 11.9-9.6L121 121 140.9 13.1c1-5.3 4.6-9.8 9.6-11.9s10.7-1.5 15.2 1.6L256 65.1 346.3 2.8c4.5-3.1 10.2-3.7 15.2-1.6zM160 256a96 96 0 1 1 192 0 96 96 0 1 1 -192 0zm224 0a128 128 0 1 0 -256 0 128 128 0 1 0 256 0z"></path></svg><!-- <i class="theme-switch fa-solid fa-sun fa-lg" data-mode="light"></i> Font Awesome fontawesome.com -->
+    <svg class="svg-inline--fa fa-moon theme-switch fa-lg" data-mode="dark" aria-hidden="true" focusable="false" data-prefix="fas" data-icon="moon" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 384 512" data-fa-i2svg=""><path fill="currentColor" d="M223.5 32C100 32 0 132.3 0 256S100 480 223.5 480c60.6 0 115.5-24.2 155.8-63.4c5-4.9 6.3-12.5 3.1-18.7s-10.1-9.7-17-8.5c-9.8 1.7-19.8 2.6-30.1 2.6c-96.9 0-175.5-78.8-175.5-176c0-65.8 36-123.1 89.3-153.3c6.1-3.5 9.2-10.5 7.7-17.3s-7.3-11.9-14.3-12.5c-6.3-.5-12.6-.8-19-.8z"></path></svg><!-- <i class="theme-switch fa-solid fa-moon fa-lg" data-mode="dark"></i> Font Awesome fontawesome.com -->
+    <svg class="svg-inline--fa fa-circle-half-stroke theme-switch fa-lg" data-mode="auto" aria-hidden="true" focusable="false" data-prefix="fas" data-icon="circle-half-stroke" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" data-fa-i2svg=""><path fill="currentColor" d="M448 256c0-106-86-192-192-192V448c106 0 192-86 192-192zM0 256a256 256 0 1 1 512 0A256 256 0 1 1 0 256z"></path></svg><!-- <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg" data-mode="auto"></i> Font Awesome fontawesome.com -->
+  </button>
+</div>
+        
+          <div class="navbar-item">
+<script type="text/javascript" _msthidden="2">
+document.write(`
+  <div class="version-switcher__container dropdown">
+    <button id="pst-version-switcher-button-3"
+      type="button"
+      class="version-switcher__button btn btn-sm dropdown-toggle"
+      data-bs-toggle="dropdown"
+      aria-haspopup="listbox"
+      aria-controls="pst-version-switcher-list-3"
+      aria-label="Version switcher list"
+    >
+      Choose version  <!-- this text may get changed later by javascript -->
+      <span class="caret"></span>
+    </button>
+    <div id="pst-version-switcher-list-3"
+      class="version-switcher__menu dropdown-menu list-group-flush py-0"
+      role="listbox" aria-labelledby="pst-version-switcher-button-3">
+      <!-- dropdown will be populated by javascript on page load -->
+    </div>
+  </div>
+`);
+</script>
+  <div class="version-switcher__container dropdown" _msthidden="2">
+    <button id="pst-version-switcher-button-3" type="button" class="version-switcher__button btn btn-sm dropdown-toggle" data-bs-toggle="dropdown" aria-haspopup="listbox" aria-controls="pst-version-switcher-list-3" aria-label="Version switcher list" _msthidden="1" _mstaria-label="431249" _msthash="130" data-active-version-name="3.10 (stable)" data-active-version="3.10.8" _msttexthash="155805">3.10 (stable)</button>
+    <div id="pst-version-switcher-list-3" class="version-switcher__menu dropdown-menu list-group-flush py-0 dropdown-menu-dark" role="listbox" aria-labelledby="pst-version-switcher-button-3">
+      <!-- dropdown will be populated by javascript on page load -->
+    <a class="dropdown-item list-group-item list-group-item-action py-1 active" href="https://matplotlib.org/stable/install/dependencies.html" role="option" data-version-name="3.10 (stable)" data-version="3.10.8" _msthidden="1"><span _msttexthash="155805" _msthidden="1" _msthash="160">3.10 (stable)</span></a><a class="dropdown-item list-group-item list-group-item-action py-1" href="https://matplotlib.org/devdocs/install/dependencies.html" role="option" data-version-name="3.11 (dev)" data-version="dev" _msthidden="1"><span _msttexthash="89388" _msthidden="1" _msthash="158">3.11 (dev)</span></a><a class="dropdown-item list-group-item list-group-item-action py-1" href="https://matplotlib.org/3.9.3/install/dependencies.html" role="option" data-version-name="3.9" data-version="3.9.3" _msthidden="1"><span _msttexthash="16094" _msthidden="1" _msthash="156">3.9</span></a><a class="dropdown-item list-group-item list-group-item-action py-1" href="https://matplotlib.org/3.8.4/install/dependencies.html" role="option" data-version-name="3.8" data-version="3.8.4" _msthidden="1"><span _msttexthash="15977" _msthidden="1" _msthash="154">3.8</span></a><a class="dropdown-item list-group-item list-group-item-action py-1" href="https://matplotlib.org/3.7.5/install/dependencies.html" role="option" data-version-name="3.7" data-version="3.7.5" _msthidden="1"><span _msttexthash="15860" _msthidden="1" _msthash="152">3.7</span></a><a class="dropdown-item list-group-item list-group-item-action py-1" href="https://matplotlib.org/3.6.3/install/dependencies.html" role="option" data-version-name="3.6" data-version="3.6.3" _msthidden="1"><span _msttexthash="15743" _msthidden="1" _msthash="150">3.6</span></a><a class="dropdown-item list-group-item list-group-item-action py-1" href="https://matplotlib.org/3.5.3/install/dependencies.html" role="option" data-version-name="3.5" data-version="3.5.3" _msthidden="1"><span _msttexthash="15626" _msthidden="1" _msthash="148">3.5</span></a><a class="dropdown-item list-group-item list-group-item-action py-1" href="https://matplotlib.org/3.4.3/install/dependencies.html" role="option" data-version-name="3.4" data-version="3.4.3" _msthidden="1"><span _msttexthash="15509" _msthidden="1" _msthash="146">3.4</span></a><a class="dropdown-item list-group-item list-group-item-action py-1" href="https://matplotlib.org/3.3.4/install/dependencies.html" role="option" data-version-name="3.3" data-version="3.3.4" _msthidden="1"><span _msttexthash="15392" _msthidden="1" _msthash="144">3.3</span></a><a class="dropdown-item list-group-item list-group-item-action py-1" href="https://matplotlib.org/2.2.4/install/dependencies.html" role="option" data-version-name="2.2" data-version="2.2.4" _msthidden="1"><span _msttexthash="15184" _msthidden="1" _msthash="142">2.2</span></a></div>
+  </div>
+</div>
+        
+          <div class="navbar-item" _msthidden="5"><ul class="navbar-icon-links" aria-label="Icon Links" _msthidden="4" _mstaria-label="131963" _msthash="27">
+        <li class="nav-item" _msthidden="1">
+          
+          
+          
+          
+          
+          
+          
+          
+          <a href="https://gitter.im/matplotlib/matplotlib" class="nav-link pst-navbar-icon" rel="noopener" target="_blank" data-bs-toggle="tooltip" data-bs-placement="bottom" _msthidden="1" data-bs-original-title="Gitter"><svg class="svg-inline--fa fa-gitter fa-lg" aria-hidden="true" focusable="false" data-prefix="fab" data-icon="gitter" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 384 512" data-fa-i2svg=""><path fill="currentColor" d="M66.4 322.5H16V0h50.4v322.5zM166.9 76.1h-50.4V512h50.4V76.1zm100.6 0h-50.4V512h50.4V76.1zM368 76h-50.4v247H368V76z"></path></svg><!-- <i class="fa-brands fa-gitter fa-lg" aria-hidden="true"></i> Font Awesome fontawesome.com -->
+            <span class="sr-only" _msttexthash="78260" _msthidden="1" _msthash="28">Gitter</span></a>
+        </li>
+        <li class="nav-item" _msthidden="1">
+          
+          
+          
+          
+          
+          
+          
+          
+          <a href="https://discourse.matplotlib.org/" class="nav-link pst-navbar-icon" rel="noopener" target="_blank" data-bs-toggle="tooltip" data-bs-placement="bottom" _msthidden="1" data-bs-original-title="Discourse"><svg class="svg-inline--fa fa-discourse fa-lg" aria-hidden="true" focusable="false" data-prefix="fab" data-icon="discourse" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512" data-fa-i2svg=""><path fill="currentColor" d="M225.9 32C103.3 32 0 130.5 0 252.1 0 256 .1 480 .1 480l225.8-.2c122.7 0 222.1-102.3 222.1-223.9C448 134.3 348.6 32 225.9 32zM224 384c-19.4 0-37.9-4.3-54.4-12.1L88.5 392l22.9-75c-9.8-18.1-15.4-38.9-15.4-61 0-70.7 57.3-128 128-128s128 57.3 128 128-57.3 128-128 128z"></path></svg><!-- <i class="fa-brands fa-discourse fa-lg" aria-hidden="true"></i> Font Awesome fontawesome.com -->
+            <span class="sr-only" _msttexthash="137449" _msthidden="1" _msthash="29">Discourse</span></a>
+        </li>
+        <li class="nav-item" _msthidden="1">
+          
+          
+          
+          
+          
+          
+          
+          
+          <a href="https://github.com/matplotlib/matplotlib" class="nav-link pst-navbar-icon" rel="noopener" target="_blank" data-bs-toggle="tooltip" data-bs-placement="bottom" _msthidden="1" data-bs-original-title="GitHub"><svg class="svg-inline--fa fa-github fa-lg" aria-hidden="true" focusable="false" data-prefix="fab" data-icon="github" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 496 512" data-fa-i2svg=""><path fill="currentColor" d="M165.9 397.4c0 2-2.3 3.6-5.2 3.6-3.3.3-5.6-1.3-5.6-3.6 0-2 2.3-3.6 5.2-3.6 3-.3 5.6 1.3 5.6 3.6zm-31.1-4.5c-.7 2 1.3 4.3 4.3 4.9 2.6 1 5.6 0 6.2-2s-1.3-4.3-4.3-5.2c-2.6-.7-5.5.3-6.2 2.3zm44.2-1.7c-2.9.7-4.9 2.6-4.6 4.9.3 2 2.9 3.3 5.9 2.6 2.9-.7 4.9-2.6 4.6-4.6-.3-1.9-3-3.2-5.9-2.9zM244.8 8C106.1 8 0 113.3 0 252c0 110.9 69.8 205.8 169.5 239.2 12.8 2.3 17.3-5.6 17.3-12.1 0-6.2-.3-40.4-.3-61.4 0 0-70 15-84.7-29.8 0 0-11.4-29.1-27.8-36.6 0 0-22.9-15.7 1.6-15.4 0 0 24.9 2 38.6 25.8 21.9 38.6 58.6 27.5 72.9 20.9 2.3-16 8.8-27.1 16-33.7-55.9-6.2-112.3-14.3-112.3-110.5 0-27.5 7.6-41.3 23.6-58.9-2.6-6.5-11.1-33.3 2.6-67.9 20.9-6.5 69 27 69 27 20-5.6 41.5-8.5 62.8-8.5s42.8 2.9 62.8 8.5c0 0 48.1-33.6 69-27 13.7 34.7 5.2 61.4 2.6 67.9 16 17.7 25.8 31.5 25.8 58.9 0 96.5-58.9 104.2-114.8 110.5 9.2 7.9 17 22.9 17 46.4 0 33.7-.3 75.4-.3 83.6 0 6.5 4.6 14.4 17.3 12.1C428.2 457.8 496 362.9 496 252 496 113.3 383.5 8 244.8 8zM97.2 352.9c-1.3 1-1 3.3.7 5.2 1.6 1.6 3.9 2.3 5.2 1 1.3-1 1-3.3-.7-5.2-1.6-1.6-3.9-2.3-5.2-1zm-10.8-8.1c-.7 1.3.3 2.9 2.3 3.9 1.6 1 3.6.7 4.3-.7.7-1.3-.3-2.9-2.3-3.9-2-.6-3.6-.3-4.3.7zm32.4 35.6c-1.6 1.3-1 4.3 1.3 6.2 2.3 2.3 5.2 2.6 6.5 1 1.3-1.3.7-4.3-1.3-6.2-2.2-2.3-5.2-2.6-6.5-1zm-11.4-14.7c-1.6 1-1.6 3.6 0 5.9 1.6 2.3 4.3 3.3 5.6 2.3 1.6-1.3 1.6-3.9 0-6.2-1.4-2.3-4-3.3-5.6-2z"></path></svg><!-- <i class="fa-brands fa-github fa-lg" aria-hidden="true"></i> Font Awesome fontawesome.com -->
+            <span class="sr-only" _msttexthash="72332" _msthidden="1" _msthash="30">GitHub</span></a>
+        </li>
+        <li class="nav-item" _msthidden="1">
+          
+          
+          
+          
+          
+          
+          
+          
+          <a href="https://twitter.com/matplotlib/" class="nav-link pst-navbar-icon" rel="noopener" target="_blank" data-bs-toggle="tooltip" data-bs-placement="bottom" _msthidden="1" data-bs-original-title="Twitter"><svg class="svg-inline--fa fa-twitter fa-lg" aria-hidden="true" focusable="false" data-prefix="fab" data-icon="twitter" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" data-fa-i2svg=""><path fill="currentColor" d="M459.37 151.716c.325 4.548.325 9.097.325 13.645 0 138.72-105.583 298.558-298.558 298.558-59.452 0-114.68-17.219-161.137-47.106 8.447.974 16.568 1.299 25.34 1.299 49.055 0 94.213-16.568 130.274-44.832-46.132-.975-84.792-31.188-98.112-72.772 6.498.974 12.995 1.624 19.818 1.624 9.421 0 18.843-1.3 27.614-3.573-48.081-9.747-84.143-51.98-84.143-102.985v-1.299c13.969 7.797 30.214 12.67 47.431 13.319-28.264-18.843-46.781-51.005-46.781-87.391 0-19.492 5.197-37.36 14.294-52.954 51.655 63.675 129.3 105.258 216.365 109.807-1.624-7.797-2.599-15.918-2.599-24.04 0-57.828 46.782-104.934 104.934-104.934 30.213 0 57.502 12.67 76.67 33.137 23.715-4.548 46.456-13.32 66.599-25.34-7.798 24.366-24.366 44.833-46.132 57.827 21.117-2.273 41.584-8.122 60.426-16.243-14.292 20.791-32.161 39.308-52.628 54.253z"></path></svg><!-- <i class="fa-brands fa-twitter fa-lg" aria-hidden="true"></i> Font Awesome fontawesome.com -->
+            <span class="sr-only" _msttexthash="98995" _msthidden="1" _msthash="31">Twitter</span></a>
+        </li>
+</ul></div>
+        
+      </div>
+    
+  </div>
+  
+    <div class="sidebar-primary-items__start sidebar-primary__section">
+        <div class="sidebar-primary-item">
+<nav class="bd-docs-nav bd-links" aria-label="Navegação por Seção" _mstaria-label="348023" _msthash="32">
+  <p class="bd-links__title" role="heading" aria-level="1" _msttexthash="458419" _msthash="33">Navegação por Seção</p>
+  <div class="bd-toc-item navbar-nav"><ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="https://matplotlib.org/stable/users/explain/quick_start.html" _msttexthash="434863" _msthash="34">Guia rápido de início</a></li>
+</ul>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="https://matplotlib.org/stable/users/faq.html" _msttexthash="422409" _msthash="35">Perguntas Frequentes</a></li>
+</ul>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1 has-children"><a class="reference internal" href="https://matplotlib.org/stable/users/explain/figure/index.html" _msttexthash="313742" _msthash="36">Figuras e backends</a><details><summary><span class="toctree-toggle" role="presentation"><svg class="svg-inline--fa fa-chevron-down" aria-hidden="true" focusable="false" data-prefix="fas" data-icon="chevron-down" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" data-fa-i2svg=""><path fill="currentColor" d="M233.4 406.6c12.5 12.5 32.8 12.5 45.3 0l192-192c12.5-12.5 12.5-32.8 0-45.3s-32.8-12.5-45.3 0L256 338.7 86.6 169.4c-12.5-12.5-32.8-12.5-45.3 0s-12.5 32.8 0 45.3l192 192z"></path></svg><!-- <i class="fa-solid fa-chevron-down"></i> Font Awesome fontawesome.com --></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="https://matplotlib.org/stable/users/explain/figure/figure_intro.html" _msttexthash="499330" _msthash="37">Introdução às figuras</a></li>
+<li class="toctree-l2"><a class="reference internal" href="https://matplotlib.org/stable/users/explain/figure/backends.html" _msttexthash="310661" _msthash="38">Backends de saída</a></li>
+<li class="toctree-l2"><a class="reference internal" href="https://matplotlib.org/stable/users/explain/figure/api_interfaces.html" _msttexthash="1219218" _msthash="39">Interfaces de Aplicação Matplotlib (APIs)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="https://matplotlib.org/stable/users/explain/figure/interactive.html" _msttexthash="493818" _msthash="40">Interagindo com figuras</a></li>
+<li class="toctree-l2"><a class="reference internal" href="https://matplotlib.org/stable/users/explain/figure/interactive_guide.html" _msttexthash="1655563" _msthash="41">Figuras interativas e programação assíncrona</a></li>
+<li class="toctree-l2"><a class="reference internal" href="https://matplotlib.org/stable/users/explain/figure/event_handling.html" _msttexthash="292058" _msthash="42">Manejo de eventos</a></li>
+<li class="toctree-l2"><a class="reference internal" href="https://matplotlib.org/stable/users/explain/figure/writing_a_backend_pyplot_interface.html" _msttexthash="3963401" _msthash="43">Escrevendo um backend — a interface pyplot</a></li>
+</ul>
+</details></li>
+</ul>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1 has-children"><a class="reference internal" href="https://matplotlib.org/stable/users/explain/axes/index.html" _msttexthash="323843" _msthash="44">Eixos e subenredos</a><details><summary><span class="toctree-toggle" role="presentation"><svg class="svg-inline--fa fa-chevron-down" aria-hidden="true" focusable="false" data-prefix="fas" data-icon="chevron-down" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" data-fa-i2svg=""><path fill="currentColor" d="M233.4 406.6c12.5 12.5 32.8 12.5 45.3 0l192-192c12.5-12.5 12.5-32.8 0-45.3s-32.8-12.5-45.3 0L256 338.7 86.6 169.4c-12.5-12.5-32.8-12.5-45.3 0s-12.5 32.8 0 45.3l192 192z"></path></svg><!-- <i class="fa-solid fa-chevron-down"></i> Font Awesome fontawesome.com --></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="https://matplotlib.org/stable/users/explain/axes/axes_intro.html" _msttexthash="990080" _msthash="45">Introdução aos Eixos (ou Subenredos)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="https://matplotlib.org/stable/users/explain/axes/arranging_axes.html" _msttexthash="1271777" _msthash="46">Organizando múltiplos eixos em uma figura</a></li>
+<li class="toctree-l2"><a class="reference internal" href="https://matplotlib.org/stable/users/explain/axes/colorbar_placement.html" _msttexthash="449995" _msthash="47">Colocando barras de cor</a></li>
+<li class="toctree-l2"><a class="reference internal" href="https://matplotlib.org/stable/users/explain/axes/autoscale.html" _msttexthash="617448" _msthash="48">Eixos de autoescalonamento</a></li>
+<li class="toctree-l2"><a class="reference internal" href="https://matplotlib.org/stable/users/explain/axes/axes_scales.html" _msttexthash="230048" _msthash="49">Escalas de eixo</a></li>
+<li class="toctree-l2"><a class="reference internal" href="https://matplotlib.org/stable/users/explain/axes/axes_ticks.html" _msttexthash="346775" _msthash="50">Tique-tacos do eixo</a></li>
+<li class="toctree-l2"><a class="reference internal" href="https://matplotlib.org/stable/users/explain/axes/axes_units.html" _msttexthash="426751" _msthash="51">Plotar datas e strings</a></li>
+<li class="toctree-l2"><a class="reference internal" href="https://matplotlib.org/stable/users/explain/axes/legend_guide.html" _msttexthash="75101" _msthash="52">Lendas</a></li>
+<li class="toctree-l2"><a class="reference internal" href="https://matplotlib.org/stable/users/explain/axes/mosaic.html" _msttexthash="419900" _msthash="53">Mosaico de subenredos</a></li>
+<li class="toctree-l2"><a class="reference internal" href="https://matplotlib.org/stable/users/explain/axes/constrainedlayout_guide.html" _msttexthash="470223" _msthash="54">Guia de layout restrito</a></li>
+<li class="toctree-l2"><a class="reference internal" href="https://matplotlib.org/stable/users/explain/axes/tight_layout_guide.html" _msttexthash="1660802" _msthash="55">Guia de layout apertado (levemente desencorajado)</a></li>
+</ul>
+</details></li>
+</ul>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1 has-children"><a class="reference internal" href="https://matplotlib.org/stable/users/explain/artists/index.html" _msttexthash="116857" _msthash="56">Artistas</a><details><summary><span class="toctree-toggle" role="presentation"><svg class="svg-inline--fa fa-chevron-down" aria-hidden="true" focusable="false" data-prefix="fas" data-icon="chevron-down" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" data-fa-i2svg=""><path fill="currentColor" d="M233.4 406.6c12.5 12.5 32.8 12.5 45.3 0l192-192c12.5-12.5 12.5-32.8 0-45.3s-32.8-12.5-45.3 0L256 338.7 86.6 169.4c-12.5-12.5-32.8-12.5-45.3 0s-12.5 32.8 0 45.3l192 192z"></path></svg><!-- <i class="fa-solid fa-chevron-down"></i> Font Awesome fontawesome.com --></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="https://matplotlib.org/stable/users/explain/artists/artist_intro.html" _msttexthash="542256" _msthash="57">Introdução aos Artistas</a></li>
+<li class="toctree-l2"><a class="reference internal" href="https://matplotlib.org/stable/users/explain/artists/color_cycle.html" _msttexthash="531297" _msthash="58">Ciclo automatizado de cor</a></li>
+<li class="toctree-l2"><a class="reference internal" href="https://matplotlib.org/stable/users/explain/artists/performance.html" _msttexthash="1033656" _msthash="59">Otimizando Artistas para Performance</a></li>
+<li class="toctree-l2"><a class="reference internal" href="https://matplotlib.org/stable/users/explain/artists/paths.html" _msttexthash="114231" _msthash="60">Caminhos</a></li>
+<li class="toctree-l2"><a class="reference internal" href="https://matplotlib.org/stable/users/explain/artists/patheffects_guide.html" _msttexthash="702637" _msthash="61">Guia de efeitos de trajetória</a></li>
+<li class="toctree-l2"><a class="reference internal" href="https://matplotlib.org/stable/users/explain/artists/imshow_extent.html" _msttexthash="2425020" _msthash="62">Entendendo a extensão do argumento da palavra-chave de imshow</a></li>
+<li class="toctree-l2"><a class="reference internal" href="https://matplotlib.org/stable/users/explain/artists/transforms_tutorial.html" _msttexthash="705575" _msthash="63">Tutorial de Transformações</a></li>
+</ul>
+</details></li>
+</ul>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="https://matplotlib.org/stable/users/explain/customizing.html" _msttexthash="2237677" _msthash="64">Personalizando o Matplotlib com folhas de estilo e rcParams</a></li>
+</ul>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1 has-children"><a class="reference internal" href="https://matplotlib.org/stable/users/explain/colors/index.html" _msttexthash="60554" _msthash="65">Cores</a><details><summary><span class="toctree-toggle" role="presentation"><svg class="svg-inline--fa fa-chevron-down" aria-hidden="true" focusable="false" data-prefix="fas" data-icon="chevron-down" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" data-fa-i2svg=""><path fill="currentColor" d="M233.4 406.6c12.5 12.5 32.8 12.5 45.3 0l192-192c12.5-12.5 12.5-32.8 0-45.3s-32.8-12.5-45.3 0L256 338.7 86.6 169.4c-12.5-12.5-32.8-12.5-45.3 0s-12.5 32.8 0 45.3l192 192z"></path></svg><!-- <i class="fa-solid fa-chevron-down"></i> Font Awesome fontawesome.com --></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="https://matplotlib.org/stable/users/explain/colors/colors.html" _msttexthash="504764" _msthash="66">Especificação de cores</a></li>
+<li class="toctree-l2"><a class="reference internal" href="https://matplotlib.org/stable/users/explain/colors/colorbar_only.html" _msttexthash="1067261" _msthash="67">Tutorial Personalizado de Barras de Cor</a></li>
+<li class="toctree-l2"><a class="reference internal" href="https://matplotlib.org/stable/users/explain/colors/colormap-manipulation.html" _msttexthash="936390" _msthash="68">Criando mapas de cores no Matplotlib</a></li>
+<li class="toctree-l2"><a class="reference internal" href="https://matplotlib.org/stable/users/explain/colors/colormapnorms.html" _msttexthash="754351" _msthash="69">Normalização por mapa de cores</a></li>
+<li class="toctree-l2"><a class="reference internal" href="https://matplotlib.org/stable/users/explain/colors/colormaps.html" _msttexthash="1098110" _msthash="70">Escolhendo mapas de cores no Matplotlib</a></li>
+</ul>
+</details></li>
+</ul>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1 has-children"><a class="reference internal" href="https://matplotlib.org/stable/users/explain/text/index.html" _msttexthash="63141" _msthash="71">Texto</a><details><summary><span class="toctree-toggle" role="presentation"><svg class="svg-inline--fa fa-chevron-down" aria-hidden="true" focusable="false" data-prefix="fas" data-icon="chevron-down" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" data-fa-i2svg=""><path fill="currentColor" d="M233.4 406.6c12.5 12.5 32.8 12.5 45.3 0l192-192c12.5-12.5 12.5-32.8 0-45.3s-32.8-12.5-45.3 0L256 338.7 86.6 169.4c-12.5-12.5-32.8-12.5-45.3 0s-12.5 32.8 0 45.3l192 192z"></path></svg><!-- <i class="fa-solid fa-chevron-down"></i> Font Awesome fontawesome.com --></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="https://matplotlib.org/stable/users/explain/text/text_intro.html" _msttexthash="350792" _msthash="72">Texto em Matplotlib</a></li>
+<li class="toctree-l2"><a class="reference internal" href="https://matplotlib.org/stable/users/explain/text/text_props.html" _msttexthash="717873" _msthash="73">Propriedades e layout do texto</a></li>
+
+<li class="toctree-l2"><a class="reference internal" href="https://matplotlib.org/stable/users/explain/text/annotations.html" _msttexthash="177541" _msthash="74">Anotações</a></li>
+<li class="toctree-l2"><a class="reference internal" href="https://matplotlib.org/stable/users/explain/text/fonts.html" _msttexthash="382252" _msthash="75">Fontes em Matplotlib</a></li>
+<li class="toctree-l2"><a class="reference internal" href="https://matplotlib.org/stable/users/explain/text/mathtext.html" _msttexthash="1044004" _msthash="76">Escrevendo expressões matemáticas</a></li>
+<li class="toctree-l2"><a class="reference internal" href="https://matplotlib.org/stable/users/explain/text/pgf.html"><font _mstmutation="1" _msttexthash="1928134" _msthash="77">Renderização de texto com XeLaTeX/LuaLaTeX via backend</font><code class="docutils literal notranslate"><span class="pre">pgf</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="https://matplotlib.org/stable/users/explain/text/usetex.html" _msttexthash="770978" _msthash="78">Renderização de texto com LaTeX</a></li>
+</ul>
+</details></li>
+</ul>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1 has-children"><a class="reference internal" href="https://matplotlib.org/stable/users/explain/animations/index.html" _msttexthash="694317" _msthash="79">Animações usando Matplotlib</a><details><summary><span class="toctree-toggle" role="presentation"><svg class="svg-inline--fa fa-chevron-down" aria-hidden="true" focusable="false" data-prefix="fas" data-icon="chevron-down" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" data-fa-i2svg=""><path fill="currentColor" d="M233.4 406.6c12.5 12.5 32.8 12.5 45.3 0l192-192c12.5-12.5 12.5-32.8 0-45.3s-32.8-12.5-45.3 0L256 338.7 86.6 169.4c-12.5-12.5-32.8-12.5-45.3 0s-12.5 32.8 0 45.3l192 192z"></path></svg><!-- <i class="fa-solid fa-chevron-down"></i> Font Awesome fontawesome.com --></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="https://matplotlib.org/stable/users/explain/animations/animations.html" _msttexthash="694317" _msthash="80">Animações usando Matplotlib</a></li>
+<li class="toctree-l2"><a class="reference internal" href="https://matplotlib.org/stable/users/explain/animations/blitting.html" _msttexthash="1316393" _msthash="81">Renderização mais rápida usando blitting</a></li>
+</ul>
+</details></li>
+</ul>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1 has-children"><a class="reference internal" href="https://matplotlib.org/stable/users/explain/toolkits/index.html" _msttexthash="743496" _msthash="82">Kits de Ferramentas do Usuário</a><details><summary><span class="toctree-toggle" role="presentation"><svg class="svg-inline--fa fa-chevron-down" aria-hidden="true" focusable="false" data-prefix="fas" data-icon="chevron-down" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" data-fa-i2svg=""><path fill="currentColor" d="M233.4 406.6c12.5 12.5 32.8 12.5 45.3 0l192-192c12.5-12.5 12.5-32.8 0-45.3s-32.8-12.5-45.3 0L256 338.7 86.6 169.4c-12.5-12.5-32.8-12.5-45.3 0s-12.5 32.8 0 45.3l192 192z"></path></svg><!-- <i class="fa-solid fa-chevron-down"></i> Font Awesome fontawesome.com --></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="https://matplotlib.org/stable/users/explain/toolkits/axisartist.html" _msttexthash="760149" _msthash="83">O kit de ferramentas axisartist</a></li>
+<li class="toctree-l2"><a class="reference internal" href="https://matplotlib.org/stable/users/explain/toolkits/axes_grid.html" _msttexthash="718159" _msthash="84">O kit de ferramentas axes_grid1</a></li>
+<li class="toctree-l2"><a class="reference internal" href="https://matplotlib.org/stable/users/explain/toolkits/mplot3d.html" _msttexthash="597909" _msthash="85">O kit de ferramentas mplot3d</a></li>
+</ul>
+</details></li>
+</ul>
+<ul class="current nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="https://matplotlib.org/stable/users/getting_started/index.html" _msttexthash="150124" _msthash="86">Começando</a></li>
+<li class="toctree-l1 current active has-children"><a class="reference internal" href="https://matplotlib.org/stable/install/index.html" _msttexthash="203125" _msthash="87">Instalação</a><details open="open"><summary><span class="toctree-toggle" role="presentation"><svg class="svg-inline--fa fa-chevron-down" aria-hidden="true" focusable="false" data-prefix="fas" data-icon="chevron-down" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" data-fa-i2svg=""><path fill="currentColor" d="M233.4 406.6c12.5 12.5 32.8 12.5 45.3 0l192-192c12.5-12.5 12.5-32.8 0-45.3s-32.8-12.5-45.3 0L256 338.7 86.6 169.4c-12.5-12.5-32.8-12.5-45.3 0s-12.5 32.8 0 45.3l192 192z"></path></svg><!-- <i class="fa-solid fa-chevron-down"></i> Font Awesome fontawesome.com --></span></summary><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="https://matplotlib.org/stable/install/environment_variables_faq.html" _msttexthash="433979" _msthash="88">Variáveis do ambiente</a></li>
+<li class="toctree-l2 current active"><a class="current reference internal" href="https://matplotlib.org/stable/install/dependencies.html#" _msttexthash="223314" _msthash="89">Dependências</a></li>
+</ul>
+</details></li>
+</ul>
+</div>
+</nav></div>
+    </div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+  </div>
+  
+  <div id="rtd-footer-container"></div>
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main" role="main">
+        
+        
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article d-print-none">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item">
+
+
+
+<nav aria-label="Breadcrumb" class="d-print-none" _mstaria-label="154232" _msthash="90">
+  <ul class="bd-breadcrumbs">
+    
+    <li class="breadcrumb-item breadcrumb-home">
+      <a href="https://matplotlib.org/stable/index.html" class="nav-link" aria-label="Casa" _mstaria-label="43979" _msthash="91">
+        <svg class="svg-inline--fa fa-house" aria-hidden="true" focusable="false" data-prefix="fas" data-icon="house" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 576 512" data-fa-i2svg=""><path fill="currentColor" d="M575.8 255.5c0 18-15 32.1-32 32.1h-32l.7 160.2c0 2.7-.2 5.4-.5 8.1V472c0 22.1-17.9 40-40 40H456c-1.1 0-2.2 0-3.3-.1c-1.4 .1-2.8 .1-4.2 .1H416 392c-22.1 0-40-17.9-40-40V448 384c0-17.7-14.3-32-32-32H256c-17.7 0-32 14.3-32 32v64 24c0 22.1-17.9 40-40 40H160 128.1c-1.5 0-3-.1-4.5-.2c-1.2 .1-2.4 .2-3.6 .2H104c-22.1 0-40-17.9-40-40V360c0-.9 0-1.9 .1-2.8V287.6H32c-18 0-32-14-32-32.1c0-9 3-17 10-24L266.4 8c7-7 15-8 22-8s15 2 21 7L564.8 231.5c8 7 12 15 11 24z"></path></svg><!-- <i class="fa-solid fa-home"></i> Font Awesome fontawesome.com -->
+      </a>
+    </li>
+    
+    <li class="breadcrumb-item"><a href="https://matplotlib.org/stable/install/index.html" class="nav-link" _msttexthash="203125" _msthash="92">Instalação</a></li>
+    
+    <li class="breadcrumb-item active" aria-current="page" _msttexthash="223314" _msthash="93">Dependências</li>
+  </ul>
+</nav>
+</div>
+      
+    </div>
+  
+  
+</div>
+</div>
+              
+              
+              
+                
+<div id="searchbox"></div>
+                <article class="bd-article">
+                  
+  <section id="dependencies">
+<span id="id1"></span><h1><font _mstmutation="1" _msttexthash="223314" _msthash="94">Dependências</font><a class="headerlink" href="https://matplotlib.org/stable/install/dependencies.html#dependencies" title="Link to this heading">#</a></h1>
+<section id="runtime-dependencies">
+<span id="id2"></span><h2><font _mstmutation="1" _msttexthash="969917" _msthash="95">Dependências em tempo de execução</font><a class="headerlink" href="https://matplotlib.org/stable/install/dependencies.html#runtime-dependencies" title="Link to this heading">#</a></h2>
+<section id="required">
+<h3><font _mstmutation="1" _msttexthash="206661" _msthash="96">Obrigatório</font><a class="headerlink" href="https://matplotlib.org/stable/install/dependencies.html#required" title="Link to this heading">#</a></h3>
+<p><font _mstmutation="1" _msttexthash="15507687" _msthash="97">Ao instalar por meio de um gerenciador de pacotes como ou , o
+Dependências obrigatórias são instaladas automaticamente. Esta lista é principalmente para
+referência.</font><code class="docutils literal notranslate"><span class="pre">pip</span></code><code class="docutils literal notranslate"><span class="pre">conda</span></code></p>
+<ul class="simple">
+<li><p _msttexthash="164242" _msthash="98"><a class="reference external" href="https://www.python.org/downloads/" _istranslated="1">Python</a> (&gt;= 3,10)</p></li>
+<li><p _msttexthash="226356" _msthash="99"><a class="reference external" href="https://pypi.org/project/contourpy/" _istranslated="1">Contorno</a> (&gt;= 1.0.1)</p></li>
+<li><p _msttexthash="237445" _msthash="100"><a class="reference external" href="https://matplotlib.org/cycler/" _istranslated="1">ciclador</a> (&gt;= 0.10.0)</p></li>
+<li><p _msttexthash="200356" _msthash="101"><a class="reference external" href="https://pypi.org/project/python-dateutil/" _istranslated="1">dateutil</a> (&gt;= 2,7)</p></li>
+<li><p _msttexthash="270049" _msthash="102"><a class="reference external" href="https://fonttools.readthedocs.io/en/latest/">fontTools</a> (&gt;= 4.22.0)</p></li>
+<li><p _msttexthash="285792" _msthash="103"><a class="reference external" href="https://github.com/nucleic/kiwi">kiwisolver</a> (&gt;= 1.3.1)</p></li>
+<li><p _msttexthash="139360" _msthash="104"><a class="reference external" href="https://numpy.org/" _istranslated="1">NumPy</a> (&gt;= 1,23)</p></li>
+<li><p _msttexthash="228436" _msthash="105"><a class="reference external" href="https://pypi.org/project/packaging/" _istranslated="1">Embalagem</a> (&gt;= 20,0)</p></li>
+<li><p _msttexthash="280657" _msthash="106"><a class="reference external" href="https://pillow.readthedocs.io/en/latest/" _istranslated="1">Travesseiro</a> (&gt;= 8,0)</p></li>
+<li><p _msttexthash="197223" _msthash="107"><a class="reference external" href="https://pypi.org/project/pyparsing/" _istranslated="1">Pyparsing</a> (&gt;= 3)</p></li>
+</ul>
+</section>
+<section id="optional">
+<span id="optional-dependencies"></span><h3><font _mstmutation="1" _msttexthash="113152" _msthash="108">Opcional</font><a class="headerlink" href="https://matplotlib.org/stable/install/dependencies.html#optional" title="Link to this heading">#</a></h3>
+<p _msttexthash="5674422" _msthash="109">Os seguintes pacotes e ferramentas não são necessários, mas ampliam as capacidades
+de Matplotlib.</p>
+<section id="backends">
+<span id="backend-dependencies"></span><h4><font _mstmutation="1" _msttexthash="111020" _msthash="110">Backends</font><a class="headerlink" href="https://matplotlib.org/stable/install/dependencies.html#backends" title="Link to this heading">#</a></h4>
+<p _msttexthash="21964761" _msthash="111">Figuras Matplotlib podem ser renderizadas para várias interfaces de usuário. <a class="reference internal" href="https://matplotlib.org/stable/users/explain/figure/backends.html#what-is-a-backend" _istranslated="1"><span class="std std-ref" _istranslated="1">Veja O que é um backend?</span></a> para mais detalhes sobre os backends opcionais do Matplotlib
+e as capacidades que eles proporcionam.</p>
+<ul class="simple">
+<li><p _msttexthash="22841130" _msthash="112"><a class="reference external" href="https://docs.python.org/3/library/tk.html" _istranslated="1">Tk</a> (&gt;= 8,5, != 8,6,0 ou 8,6,1): para os backends baseados em Tk. Tk faz parte de
+a maioria das instalações padrão de Python, mas não faz parte do próprio Python e
+portanto, pode não estar presente em casos raros.</p></li>
+<li><p _msttexthash="3346876" _msthash="113"><a class="reference external" href="https://pypi.org/project/PyQt6/" _istranslated="1">PyQt6</a> (&gt;= 6,1), <a class="reference external" href="https://pypi.org/project/PySide6/" _istranslated="1">PySide6</a>, <a class="reference external" href="https://pypi.org/project/PyQt5/" _istranslated="1">PyQt5</a> (&gt;= 5,12), ou <a class="reference external" href="https://pypi.org/project/PySide2/" _istranslated="1">PySide2</a>: para o baseado em Qt
+Backends.</p></li>
+<li><p _msttexthash="26429793" _msthash="114"><a class="reference external" href="https://pygobject.readthedocs.io/en/latest/" _istranslated="1">PyGObject</a> e <a class="reference external" href="https://pycairo.readthedocs.io/en/latest/" _istranslated="1">pycairo</a> (&gt;= 1.14.0): para os backends baseados em GTK. Se estiver usando pip
+(mas não conda nem gerenciador de pacotes de sistema) PyGObject deve ser construído a partir de
+fonte; Veja <a class="reference external" href="https://pygobject.readthedocs.io/en/latest/devguide/dev_environ.html" _istranslated="1">a documentação do pygobject</a>.</p></li>
+<li><p _msttexthash="2836665" _msthash="115"><a class="reference external" href="https://pycairo.readthedocs.io/en/latest/" _istranslated="1">Pycairo</a> (&gt;= 1.14.0) ou <a class="reference external" href="https://doc.courtbouillon.org/cairocffi/stable/" _istranslated="1">Cairoffi</a> (&gt;= 0,8): para backends baseados no Cairo.</p></li>
+<li><p _msttexthash="24911159" _msthash="116"><a class="reference external" href="https://www.wxpython.org/" _istranslated="1">wxPython</a> (&gt;= 4): para os backends baseados em wx. Se estiver usando pip (mas não conda ou
+gerenciador de pacotes system) no Linux wxPython rodas devem ser baixadas manualmente
+De <a class="reference external" href="https://wxpython.org/pages/downloads/" _istranslated="1">https://wxpython.org/pages/downloads/</a>.</p></li>
+<li><p _msttexthash="847080" _msthash="117"><a class="reference external" href="https://pypi.org/project/tornado/" _istranslated="1">Tornado</a> (&gt;= 5): para o backend WebAgg.</p></li>
+<li><p _msttexthash="760474" _msthash="118"><a class="reference external" href="https://pypi.org/project/ipykernel/" _istranslated="1">ipykernel</a>: Para o backend do NBAGG.</p></li>
+<li><p _msttexthash="877370" _msthash="119">macOS (&gt;= 10.12): para o backend MacOSX.</p></li>
+</ul>
+</section>
+<section id="animations">
+<h4><font _mstmutation="1" _msttexthash="175929" _msthash="120">Animações</font><a class="headerlink" href="https://matplotlib.org/stable/install/dependencies.html#animations" title="Link to this heading">#</a></h4>
+<ul class="simple">
+<li><p _msttexthash="518128" _msthash="121"><a class="reference external" href="https://www.ffmpeg.org/" _istranslated="1">FFMPEG</a>: Por salvar filmes.</p></li>
+<li><p _msttexthash="1066481" _msthash="122"><a class="reference external" href="https://www.imagemagick.org/script/index.php" _istranslated="1">ImageMagick</a>: para salvar
+GIFs animados.</p></li>
+</ul>
+</section>
+<section id="font-handling-and-rendering">
+<h4><font _mstmutation="1" _msttexthash="927888" _msthash="123">Manuseio e renderização de fontes</font><a class="headerlink" href="https://matplotlib.org/stable/install/dependencies.html#font-handling-and-rendering" title="Link to this heading">#</a></h4>
+<ul class="simple">
+<li><p _msttexthash="4984317" _msthash="124"><a class="reference external" href="https://www.latex-project.org/" _istranslated="1">LaTeX</a> (com <a class="reference external" href="https://ctan.org/pkg/cm-super" _istranslated="1">cm-super</a> e <a class="reference external" href="https://ctan.org/pkg/underscore" _istranslated="1">sublinhado</a>) e <a class="reference external" href="https://ghostscript.com/releases/" _istranslated="1">GhostScript (&gt;= 9.0):</a> para renderização de texto com LaTeX.</p></li>
+<li><p _msttexthash="2138266" _msthash="162"><a class="reference external" href="https://www.fontconfig.org/">fontconfig</a> (&gt;= 2.7): for detection of system
+fonts on Linux.</p></li>
+</ul>
+</section>
+</section>
+<section id="c-libraries">
+<h3><font _mstmutation="1" _msttexthash="155779" _msthash="163">C libraries</font><a class="headerlink" href="https://matplotlib.org/stable/install/dependencies.html#c-libraries" title="Link to this heading">#</a></h3>
+<p _msttexthash="2328898" _msthash="164">Matplotlib brings its own copies of the following libraries:</p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">Agg</span></code><font _mstmutation="1" _msttexthash="1369147" _msthash="165">: the Anti-Grain Geometry C++ rendering engine</font></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">ttconv</span></code><font _mstmutation="1" _msttexthash="503425" _msthash="166">: a TrueType font utility</font></p></li>
+</ul>
+<p _msttexthash="1007760" _msthash="167">Additionally, Matplotlib depends on:</p>
+<ul class="simple">
+<li><p _msttexthash="1177176" _msthash="168"><a class="reference external" href="https://www.freetype.org/">FreeType</a> (&gt;= 2.3): a font rendering library</p></li>
+<li><p _msttexthash="5747274" _msthash="169"><a class="reference external" href="http://www.qhull.org/">QHull</a> (&gt;= 8.0.2): a library for computing triangulations (note that this version is
+also known as 2020.2)</p></li>
+</ul>
+<section id="download-during-install">
+<h4><font _mstmutation="1" _msttexthash="497497" _msthash="170">Download during install</font><a class="headerlink" href="https://matplotlib.org/stable/install/dependencies.html#download-during-install" title="Link to this heading">#</a></h4>
+<p _msttexthash="26694187" _msthash="171">By default, Matplotlib downloads and builds its own copies of Qhull and FreeType.
+The vendored version of FreeType is necessary to run the test suite, because
+different versions of FreeType rasterize characters differently.</p>
+</section>
+<section id="use-system-libraries">
+<h4><font _mstmutation="1" _msttexthash="390156" _msthash="172">Use system libraries</font><a class="headerlink" href="https://matplotlib.org/stable/install/dependencies.html#use-system-libraries" title="Link to this heading">#</a></h4>
+<p _msttexthash="12510888" _msthash="173">To force Matplotlib to use a copy of FreeType or Qhull already installed in your system,
+you must <a class="reference external" href="https://meson-python.readthedocs.io/en/stable/how-to-guides/config-settings.html">pass configuration settings to Meson via meson-python</a>:</p>
+<div class="highlight-sh notranslate"><div class="highlight"><pre id="codecell0" tabindex="-1"><span></span>python<span class="w"> </span>-m<span class="w"> </span>pip<span class="w"> </span>install<span class="w"> </span><span class="se">\</span>
+<span class="w">  </span>--config-settings<span class="o">=</span>setup-args<span class="o">=</span><span class="s2">"-Dsystem-freetype=true"</span><span class="w"> </span><span class="se">\</span>
+<span class="w">  </span>--config-settings<span class="o">=</span>setup-args<span class="o">=</span><span class="s2">"-Dsystem-qhull=true"</span><span class="w"> </span><span class="se">\</span>
+<span class="w">  </span>.
+</pre><button class="copybtn o-tooltip--left" data-tooltip="Copy" data-clipboard-target="#codecell0">
+      <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-copy" width="44" height="44" viewBox="0 0 24 24" stroke-width="1.5" stroke="#000000" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <title _mstTextHash="424372" _mstHash="141">Cópia para a prancheta</title>
+  <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
+  <rect x="8" y="8" width="12" height="12" rx="2"></rect>
+  <path d="M16 8v-2a2 2 0 0 0 -2 -2h-8a2 2 0 0 0 -2 2v8a2 2 0 0 0 2 2h2"></path>
+</svg>
+    </button></div>
+</div>
+<p _msttexthash="10054447" _msthash="174">In this case, you need to install the FreeType and Qhull library and headers.
+This can be achieved using a package manager, e.g. for FreeType:</p>
+<div class="highlight-sh notranslate"><div class="highlight"><pre id="codecell1" tabindex="-1"><span></span><span class="c1"># Pick ONE of the following:</span>
+sudo<span class="w"> </span>apt<span class="w"> </span>install<span class="w"> </span>libfreetype6-dev<span class="w">  </span><span class="c1"># Debian/Ubuntu</span>
+sudo<span class="w"> </span>dnf<span class="w"> </span>install<span class="w"> </span>freetype-devel<span class="w">    </span><span class="c1"># Fedora</span>
+brew<span class="w"> </span>install<span class="w"> </span>freetype<span class="w">              </span><span class="c1"># macOS with Homebrew</span>
+conda<span class="w"> </span>install<span class="w"> </span>freetype<span class="w">             </span><span class="c1"># conda, any OS</span>
+</pre><button class="copybtn o-tooltip--left" data-tooltip="Copy" data-clipboard-target="#codecell1">
+      <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-copy" width="44" height="44" viewBox="0 0 24 24" stroke-width="1.5" stroke="#000000" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <title _mstTextHash="424372" _mstHash="140">Cópia para a prancheta</title>
+  <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
+  <rect x="8" y="8" width="12" height="12" rx="2"></rect>
+  <path d="M16 8v-2a2 2 0 0 0 -2 -2h-8a2 2 0 0 0 -2 2v8a2 2 0 0 0 2 2h2"></path>
+</svg>
+    </button></div>
+</div>
+<p _msttexthash="686530" _msthash="175">(adapt accordingly for Qhull).</p>
+<p _msttexthash="5676164" _msthash="176">On Linux and macOS, it is also recommended to install <a class="reference external" href="https://www.freedesktop.org/wiki/Software/pkg-config/">pkg-config</a>, a helper
+tool for locating FreeType:</p>
+<div class="highlight-sh notranslate"><div class="highlight"><pre id="codecell2" tabindex="-1"><span></span><span class="c1"># Pick ONE of the following:</span>
+sudo<span class="w"> </span>apt<span class="w"> </span>install<span class="w"> </span>pkg-config<span class="w">  </span><span class="c1"># Debian/Ubuntu</span>
+sudo<span class="w"> </span>dnf<span class="w"> </span>install<span class="w"> </span>pkgconf<span class="w">     </span><span class="c1"># Fedora</span>
+brew<span class="w"> </span>install<span class="w"> </span>pkg-config<span class="w">      </span><span class="c1"># macOS with Homebrew</span>
+conda<span class="w"> </span>install<span class="w"> </span>pkg-config<span class="w">     </span><span class="c1"># conda</span>
+<span class="c1"># Or point the PKG_CONFIG environment variable to the path to pkg-config:</span>
+<span class="nb">export</span><span class="w"> </span><span class="nv">PKG_CONFIG</span><span class="o">=</span>...
+</pre><button class="copybtn o-tooltip--left" data-tooltip="Copy" data-clipboard-target="#codecell2">
+      <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-copy" width="44" height="44" viewBox="0 0 24 24" stroke-width="1.5" stroke="#000000" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <title _mstTextHash="424372" _mstHash="139">Cópia para a prancheta</title>
+  <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
+  <rect x="8" y="8" width="12" height="12" rx="2"></rect>
+  <path d="M16 8v-2a2 2 0 0 0 -2 -2h-8a2 2 0 0 0 -2 2v8a2 2 0 0 0 2 2h2"></path>
+</svg>
+    </button></div>
+</div>
+<p _msttexthash="36779912" _msthash="177">If not using pkg-config (in particular on Windows), you may need to set the
+include path (to the library headers) and link path (to the libraries)
+explicitly, if they are not in standard locations.  This can be done using
+standard environment variables -- on Linux and macOS:</p>
+<div class="highlight-sh notranslate"><div class="highlight"><pre id="codecell3" tabindex="-1"><span></span><span class="nb">export</span><span class="w"> </span><span class="nv">CFLAGS</span><span class="o">=</span><span class="s1">'-I/directory/containing/ft2build.h'</span>
+<span class="nb">export</span><span class="w"> </span><span class="nv">LDFLAGS</span><span class="o">=</span><span class="s1">'-L/directory/containing/libfreetype.so'</span>
+</pre><button class="copybtn o-tooltip--left" data-tooltip="Copy" data-clipboard-target="#codecell3">
+      <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-copy" width="44" height="44" viewBox="0 0 24 24" stroke-width="1.5" stroke="#000000" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <title _mstTextHash="424372" _mstHash="138">Cópia para a prancheta</title>
+  <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
+  <rect x="8" y="8" width="12" height="12" rx="2"></rect>
+  <path d="M16 8v-2a2 2 0 0 0 -2 -2h-8a2 2 0 0 0 -2 2v8a2 2 0 0 0 2 2h2"></path>
+</svg>
+    </button></div>
+</div>
+<p _msttexthash="223587" _msthash="178">and on Windows:</p>
+<div class="highlight-bat notranslate"><div class="highlight"><pre id="codecell4" tabindex="-1"><span></span><span class="k">set</span> <span class="nv">CL</span><span class="p">=</span>/IC:\directory\containing\ft2build.h
+<span class="k">set</span> <span class="nv">LINK</span><span class="p">=</span>/LIBPATH:C:\directory\containing\freetype.lib
+</pre><button class="copybtn o-tooltip--left" data-tooltip="Copy" data-clipboard-target="#codecell4">
+      <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-copy" width="44" height="44" viewBox="0 0 24 24" stroke-width="1.5" stroke="#000000" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <title _mstTextHash="424372" _mstHash="137">Cópia para a prancheta</title>
+  <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
+  <rect x="8" y="8" width="12" height="12" rx="2"></rect>
+  <path d="M16 8v-2a2 2 0 0 0 -2 -2h-8a2 2 0 0 0 -2 2v8a2 2 0 0 0 2 2h2"></path>
+</svg>
+    </button></div>
+</div>
+<p _msttexthash="8753251" _msthash="179">If you go this route but need to reset and rebuild to change your settings,
+remember to clear your artifacts before re-building:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre id="codecell5" tabindex="-1"><span></span><span class="n">git</span> <span class="n">clean</span> <span class="o">-</span><span class="n">xfd</span>
+</pre><button class="copybtn o-tooltip--left" data-tooltip="Copy" data-clipboard-target="#codecell5">
+      <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-copy" width="44" height="44" viewBox="0 0 24 24" stroke-width="1.5" stroke="#000000" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <title _mstTextHash="424372" _mstHash="136">Cópia para a prancheta</title>
+  <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
+  <rect x="8" y="8" width="12" height="12" rx="2"></rect>
+  <path d="M16 8v-2a2 2 0 0 0 -2 -2h-8a2 2 0 0 0 -2 2v8a2 2 0 0 0 2 2h2"></path>
+</svg>
+    </button></div>
+</div>
+</section>
+<section id="from-source-files">
+<h4><font _mstmutation="1" _msttexthash="291421" _msthash="180">From source files</font><a class="headerlink" href="https://matplotlib.org/stable/install/dependencies.html#from-source-files" title="Link to this heading">#</a></h4>
+<p><font _mstmutation="1" _msttexthash="71462144" _msthash="181">If the automatic download does not work (for example, on air-gapped systems) it is
+preferable to instead use system libraries. However you can manually download the
+tarballs into  at the top level of the checkout
+repository. The expected SHA256 hashes of the downloaded tarballs are in
+ if you wish to verify them, but they will also be checked by
+the build system before unpacking.</font><code class="file docutils literal notranslate"><span class="pre">subprojects/packagecache</span></code><code class="file docutils literal notranslate"><span class="pre">subprojects/*.wrap</span></code></p>
+</section>
+</section>
+<section id="minimum-pip-manylinux-support-linux">
+<h3><font _mstmutation="1" _msttexthash="1077141" _msthash="182">Minimum pip / manylinux support (linux)</font><a class="headerlink" href="https://matplotlib.org/stable/install/dependencies.html#minimum-pip-manylinux-support-linux" title="Link to this heading">#</a></h3>
+<p _msttexthash="6506461" _msthash="183">Matplotlib publishes <a class="reference external" href="https://github.com/pypa/manylinux">manylinux wheels</a>
+which have a minimum version of pip which will recognize the wheels</p>
+<ul class="simple">
+<li><p><font _mstmutation="1" _msttexthash="329628" _msthash="184">Python 3.9+:  / pip &gt;= 19.3</font><code class="docutils literal notranslate"><span class="pre">manylinux2014</span></code></p></li>
+</ul>
+<p _msttexthash="3150888" _msthash="185">In all cases the required version of pip is embedded in the CPython source.</p>
+</section>
+</section>
+<section id="build-dependencies">
+<span id="development-dependencies"></span><h2><font _mstmutation="1" _msttexthash="345007" _msthash="186">Build dependencies</font><a class="headerlink" href="https://matplotlib.org/stable/install/dependencies.html#build-dependencies" title="Link to this heading">#</a></h2>
+<section id="setup-dependencies">
+<span id="id3"></span><h3><font _mstmutation="1" _msttexthash="79989" _msthash="187">Python</font><a class="headerlink" href="https://matplotlib.org/stable/install/dependencies.html#setup-dependencies" title="Link to this heading">#</a></h3>
+<p><code class="docutils literal notranslate"><span class="pre">pip</span></code><font _mstmutation="1" _msttexthash="97202560" _msthash="188"> normally builds packages using <a class="reference external" href="https://pip.pypa.io/en/stable/reference/build-system/" title="(in pip v25.3)" _mstmutation="1"><span class="xref std std-doc">build isolation</span></a>,
+which means that  installs the dependencies listed here for the
+duration of the build process. However, build isolation is disabled via the the
+<a class="reference external" href="https://pip.pypa.io/en/stable/cli/pip_install/#install-no-build-isolation" title="(in pip v25.3)" _mstmutation="1"><span class="xref std std-ref">--no-build-isolation</span></a> flag
+when <a class="reference internal" href="https://matplotlib.org/stable/devel/development_setup.html#development-install" _mstmutation="1"><span class="std std-ref">installing Matplotlib for development</span></a>, which
+means that the dependencies must be explicitly installed, either by <a class="reference internal" href="https://matplotlib.org/stable/devel/development_setup.html#dev-environment" _mstmutation="1"><span class="std std-ref">creating a virtual environment</span></a>
+(recommended) or by manually installing the following packages:</font><code class="docutils literal notranslate"><span class="pre">pip</span></code></p>
+<ul class="simple">
+<li><p _msttexthash="373542" _msthash="189"><a class="reference external" href="https://meson-python.readthedocs.io/">meson-python</a> (&gt;= 0.13.1).</p></li>
+<li><p><font _mstmutation="1" _msttexthash="10061597" _msthash="190"><a class="reference external" href="https://ninja-build.org/" _mstmutation="1">ninja</a> (&gt;= 1.8.2). This may be available in your package
+manager or bundled with Meson, but may be installed via  if otherwise not
+available.</font><code class="docutils literal notranslate"><span class="pre">pip</span></code></p></li>
+<li><p _msttexthash="1963156" _msthash="191"><a class="reference external" href="https://pypi.org/project/pybind11/">PyBind11</a> (&gt;= 2.13.2). Used to connect C/C++ code
+with Python.</p></li>
+<li><p><font _mstmutation="1" _msttexthash="9466639" _msthash="192"><a class="reference external" href="https://pypi.org/project/setuptools-scm/" _mstmutation="1">setuptools_scm</a> (&gt;= 7).  Used to
+update the reported  based on the current git commit.
+Also a runtime dependency for editable installs.</font><code class="docutils literal notranslate"><span class="pre">mpl.__version__</span></code></p></li>
+<li><p _msttexthash="1131975" _msthash="193"><a class="reference external" href="https://numpy.org/">NumPy</a> (&gt;= 1.22).  Also a runtime dependency.</p></li>
+</ul>
+</section>
+<section id="compiled-extensions">
+<span id="compile-dependencies"></span><h3><font _mstmutation="1" _msttexthash="392262" _msthash="194">Compiled extensions</font><a class="headerlink" href="https://matplotlib.org/stable/install/dependencies.html#compiled-extensions" title="Link to this heading">#</a></h3>
+<p _msttexthash="36779093" _msthash="195">Matplotlib requires a C++ compiler that supports C++17, and each platform has a
+development environment that must be installed before a compiler can be installed.
+You may also need to install headers for various libraries used in the compiled extension
+source files.</p>
+<div class="sd-tab-set docutils" id="dev-compiler">
+<input checked="checked" id="sd-tab-item-0" name="sd-tab-set-0" type="radio">
+<label class="sd-tab-label" for="sd-tab-item-0" _msttexthash="63076" _msthash="196">
+Linux</label><div class="sd-tab-content docutils">
+<p><font _mstmutation="1" _msttexthash="6606522" _msthash="197">On some Linux systems, you can install a meta-build package. For example,
+on  Ubuntu  with elevated privileges.</font><code class="docutils literal notranslate"><span class="pre">apt</span> <span class="pre">install</span> <span class="pre">build-essential</span></code></p>
+<p _msttexthash="3224923" _msthash="198">Otherwise, use the system distribution's package manager to install
+<a class="reference internal" href="https://matplotlib.org/stable/install/dependencies.html#compiler-table"><span class="std std-ref">gcc</span></a>.</p>
+</div>
+<input id="sd-tab-item-1" name="sd-tab-set-0" type="radio">
+<label class="sd-tab-label" for="sd-tab-item-1" _msttexthash="53729" _msthash="199">
+macOS</label><div class="sd-tab-content docutils" _msthidden="1">
+<p _msttexthash="1431820" _msthidden="1" _msthash="200">Install <a class="reference external" href="https://developer.apple.com/xcode/">Xcode</a> for Apple platform development.</p>
+</div>
+<input id="sd-tab-item-2" name="sd-tab-set-0" type="radio">
+<label class="sd-tab-label" for="sd-tab-item-2" _msttexthash="98579" _msthash="201">
+Windows</label><div class="sd-tab-content docutils" _msthidden="3">
+<p _msttexthash="825331" _msthidden="1" _msthash="202">Install <a class="reference external" href="https://visualstudio.microsoft.com/downloads/?q=build+tools">Visual Studio Build Tools</a></p>
+<p _msttexthash="49210889" _msthidden="1" _msthash="203">Make sure "Desktop development with C++" is selected, and that the latest MSVC,
+"C++ CMake tools for Windows," and a Windows SDK compatible with your version
+of Windows are selected and installed. They should be selected by default under
+the "Optional" subheading, but are required to build Matplotlib from source.</p>
+<p _msthidden="1"><font _mstmutation="1" _msttexthash="10548005" _msthidden="1" _msthash="204">Alternatively, you can install a Linux-like environment such as <a class="reference external" href="https://www.cygwin.com/" _mstmutation="1">CygWin</a>
+or <a class="reference external" href="https://learn.microsoft.com/en-us/windows/wsl/install" _mstmutation="1">Windows Subsystem for Linux</a>.
+If using <a class="reference external" href="https://www.mingw-w64.org/" _mstmutation="1">MinGW-64</a>, we require <strong _mstmutation="1">v6</strong> of the
+.</font><code class="docutils literal notranslate"><span class="pre">`Mingw-w64-x86_64-headers</span></code></p>
+</div>
+</div>
+<p _msttexthash="12543219" _msthash="205">We highly recommend that you install a compiler using your platform tool, i.e., Xcode,
+VS Code or Linux package manager. Choose <strong>one</strong> compiler from this list:</p>
+<div class="pst-scrollable-table-container"><table class="table" id="compiler-table">
+<colgroup>
+<col style="width: 20.0%">
+<col style="width: 20.0%">
+<col style="width: 20.0%">
+<col style="width: 40.0%">
+</colgroup>
+<thead>
+<tr class="row-odd"><th class="head"><p _msttexthash="117546" _msthash="206">compiler</p></th>
+<th class="head"><p _msttexthash="270504" _msthash="207">minimum version</p></th>
+<th class="head"><p _msttexthash="141284" _msthash="208">platforms</p></th>
+<th class="head"><p _msttexthash="64701" _msthash="209">notes</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p _msttexthash="21268" _msthash="210">GCC</p></td>
+<td><p><strong _msttexthash="15639" _msthash="211">7.2</strong></p></td>
+<td><p _msttexthash="385502" _msthash="212">Linux, macOS, Windows</p></td>
+<td><p _msttexthash="357175" _msthash="213"><a class="reference external" href="https://gcc.gnu.org/projects/cxx-status.html#cxx17">gcc 7.2</a>,
+<a class="reference external" href="https://gcc.gnu.org/install/binaries.html">GCC: Binaries</a>,</p></td>
+</tr>
+<tr class="row-odd"><td><p _msttexthash="132470" _msthash="214">Clang (LLVM)</p></td>
+<td><p><strong _msttexthash="4823" _msthash="215">5</strong></p></td>
+<td><p _msttexthash="160095" _msthash="216">Linux, macOS</p></td>
+<td><p _msttexthash="139880" _msthash="217"><a class="reference external" href="https://clang.llvm.org/cxx_status.html">clang 5</a>, <a class="reference external" href="https://releases.llvm.org/download.html">LLVM</a></p></td>
+</tr>
+<tr class="row-even"><td><p _msttexthash="47268" _msthash="218">MSVC++</p></td>
+<td><p><strong _msttexthash="21697" _msthash="219">16.0</strong></p></td>
+<td><p _msttexthash="98579" _msthash="220">Windows</p></td>
+<td><p><a class="reference external" href="https://docs.microsoft.com/en-us/cpp/overview/visual-cpp-language-conformance?view=msvc-160" _msttexthash="307996" _msthash="221">Visual Studio 2019 C++</a></p></td>
+</tr>
+</tbody>
+</table>
+</div>
+</section>
+</section>
+<section id="test-dependencies">
+<span id="id5"></span><h2><font _mstmutation="1" _msttexthash="316576" _msthash="222">Test dependencies</font><a class="headerlink" href="https://matplotlib.org/stable/install/dependencies.html#test-dependencies" title="Link to this heading">#</a></h2>
+<p _msttexthash="3427892" _msthash="223">This section lists the additional software required for
+<a class="reference internal" href="https://matplotlib.org/stable/devel/testing.html#testing"><span class="std std-ref">running the tests</span></a>.</p>
+<section id="id6">
+<h3><font _mstmutation="1" _msttexthash="114465" _msthash="224">Required</font><a class="headerlink" href="https://matplotlib.org/stable/install/dependencies.html#id6" title="Link to this heading">#</a></h3>
+<ul class="simple">
+<li><p _msttexthash="181831" _msthash="225"><a class="reference external" href="http://doc.pytest.org/en/latest/">pytest</a> (&gt;= 7.0.0)</p></li>
+</ul>
+</section>
+<section id="id7">
+<h3><font _mstmutation="1" _msttexthash="115141" _msthash="226">Optional</font><a class="headerlink" href="https://matplotlib.org/stable/install/dependencies.html#id7" title="Link to this heading">#</a></h3>
+<p _msttexthash="8968726" _msthash="227">In addition to all of the optional dependencies on the main library, for
+testing the following will be used if they are installed.</p>
+<section id="id8">
+<h4><font _mstmutation="1" _msttexthash="79989" _msthash="228">Python</font><a class="headerlink" href="https://matplotlib.org/stable/install/dependencies.html#id8" title="Link to this heading">#</a></h4>
+<p _msttexthash="6953700" _msthash="229">These packages are installed when <a class="reference internal" href="https://matplotlib.org/stable/devel/development_setup.html#dev-environment"><span class="std std-ref">creating a virtual environment</span></a>,
+otherwise they must be installed manually:</p>
+<ul class="simple">
+<li><p _msttexthash="2035501" _msthash="230"><a class="reference external" href="https://pypi.org/project/nbformat/">nbformat</a> and <a class="reference external" href="https://pypi.org/project/nbconvert/">nbconvert</a> used to test the notebook backend</p></li>
+<li><p _msttexthash="1408706" _msthash="231"><a class="reference external" href="https://pypi.org/project/pandas/">pandas</a> used to test compatibility with Pandas</p></li>
+<li><p _msttexthash="1798368" _msthash="232"><a class="reference external" href="https://pypi.org/project/pikepdf/">pikepdf</a> used in some tests for the pgf and pdf backends</p></li>
+<li><p _msttexthash="1535157" _msthash="233"><a class="reference external" href="https://pypi.org/project/psutil/">psutil</a> used in testing the interactive backends</p></li>
+<li><p _msttexthash="1819103" _msthash="234"><a class="reference external" href="https://pytest-cov.readthedocs.io/en/latest/">pytest-cov</a> (&gt;= 2.3.1) to collect coverage information</p></li>
+<li><p _msttexthash="1759043" _msthash="235"><a class="reference external" href="https://pypi.org/project/pytest-flake8/">pytest-flake8</a> to test coding standards using <a class="reference external" href="https://pypi.org/project/flake8/">flake8</a></p></li>
+<li><p _msttexthash="1923922" _msthash="236"><a class="reference external" href="https://pypi.org/project/pytest-timeout/">pytest-timeout</a> to limit runtime in case of stuck tests</p></li>
+<li><p _msttexthash="1014182" _msthash="237"><a class="reference external" href="https://pypi.org/project/pytest-xdist/">pytest-xdist</a> to run tests in parallel</p></li>
+<li><p _msttexthash="2236078" _msthash="238"><a class="reference external" href="https://pypi.org/project/pytest-xvfb/">pytest-xvfb</a> to run tests without windows popping up (Linux)</p></li>
+<li><p _msttexthash="525642" _msthash="239"><a class="reference external" href="https://pypi.org/project/pytz/">pytz</a> used to test pytz int</p></li>
+<li><p _msttexthash="1212458" _msthash="240"><a class="reference external" href="https://pypi.org/project/Sphinx/">sphinx</a> used to test our sphinx extensions</p></li>
+<li><p _msttexthash="1446978" _msthash="241"><a class="reference external" href="https://pypi.org/project/xarray/">xarray</a> used to test compatibility with xarray</p></li>
+</ul>
+</section>
+<section id="external-tools">
+<h4><font _mstmutation="1" _msttexthash="238888" _msthash="242">External tools</font><a class="headerlink" href="https://matplotlib.org/stable/install/dependencies.html#external-tools" title="Link to this heading">#</a></h4>
+<ul class="simple">
+<li><p _msttexthash="985231" _msthash="243"><a class="reference external" href="https://ghostscript.com/">Ghostscript</a> (&gt;= 9.0, to render PDF files)</p></li>
+<li><p _msttexthash="634478" _msthash="244"><a class="reference external" href="https://inkscape.org/">Inkscape</a> (to render SVG files)</p></li>
+<li><p _msttexthash="4462588" _msthash="245"><a class="reference external" href="http://wenq.org/en/">WenQuanYi Zen Hei</a> and <a class="reference external" href="https://fonts.google.com/noto/use">Noto Sans CJK</a> fonts for testing font fallback and
+non-Western fonts</p></li>
+</ul>
+<p _msttexthash="6288464" _msthash="246">If any of these dependencies are not discovered, then the tests that rely on
+them will be skipped by pytest.</p>
+<div class="admonition note">
+<p class="admonition-title" _msttexthash="45344" _msthash="247">Note</p>
+<p _msttexthash="28634489" _msthash="248">When installing Inkscape on Windows, make sure that you select “Add
+Inkscape to system PATH”, either for all users or current user, or the
+tests will not find it.</p>
+</div>
+</section>
+</section>
+</section>
+<section id="documentation-dependencies">
+<span id="doc-dependencies"></span><h2><font _mstmutation="1" _msttexthash="651690" _msthash="249">Documentation dependencies</font><a class="headerlink" href="https://matplotlib.org/stable/install/dependencies.html#documentation-dependencies" title="Link to this heading">#</a></h2>
+<section id="id9">
+<h3><font _mstmutation="1" _msttexthash="79989" _msthash="250">Python</font><a class="headerlink" href="https://matplotlib.org/stable/install/dependencies.html#id9" title="Link to this heading">#</a></h3>
+<p><font _mstmutation="1" _msttexthash="6547060" _msthash="251">The additional Python packages required to build the
+<a class="reference internal" href="https://matplotlib.org/stable/devel/document.html#documenting-matplotlib" _mstmutation="1"><span class="std std-ref">documentation</span></a> are listed in
+ and can be installed using</font><code class="file docutils literal notranslate"><span class="pre">doc-requirements.txt</span></code></p>
+<div class="highlight-default notranslate"><div class="highlight"><pre id="codecell6" tabindex="-1"><span></span><span class="n">pip</span> <span class="n">install</span> <span class="o">-</span><span class="n">r</span> <span class="n">requirements</span><span class="o">/</span><span class="n">doc</span><span class="o">/</span><span class="n">doc</span><span class="o">-</span><span class="n">requirements</span><span class="o">.</span><span class="n">txt</span>
+</pre><button class="copybtn o-tooltip--left" data-tooltip="Copy" data-clipboard-target="#codecell6">
+      <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-copy" width="44" height="44" viewBox="0 0 24 24" stroke-width="1.5" stroke="#000000" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <title _mstTextHash="424372" _mstHash="135">Cópia para a prancheta</title>
+  <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
+  <rect x="8" y="8" width="12" height="12" rx="2"></rect>
+  <path d="M16 8v-2a2 2 0 0 0 -2 -2h-8a2 2 0 0 0 -2 2v8a2 2 0 0 0 2 2h2"></path>
+</svg>
+    </button></div>
+</div>
+<p><font _mstmutation="1" _msttexthash="837096" _msthash="252">The content of  is also shown below:</font><code class="file docutils literal notranslate"><span class="pre">doc-requirements.txt</span></code></p>
+<div class="highlight-default notranslate"><div class="highlight"><pre id="codecell7" tabindex="-1"><span></span><span class="c1"># Requirements for building docs</span>
+<span class="c1">#</span>
+<span class="c1"># You will first need a matching Matplotlib installation</span>
+<span class="c1"># e.g (from the Matplotlib root directory)</span>
+<span class="c1">#     pip install --no-build-isolation --editable .[dev]</span>
+<span class="c1">#</span>
+<span class="c1"># Install the documentation requirements with:</span>
+<span class="c1">#     pip install -r requirements/doc/doc-requirements.txt</span>
+<span class="c1">#</span>
+<span class="n">sphinx</span><span class="o">&gt;=</span><span class="mf">5.1.0</span><span class="p">,</span><span class="o">!=</span><span class="mf">6.1.2</span>
+<span class="n">colorspacious</span>
+<span class="n">ipython</span>
+<span class="n">ipywidgets</span>
+<span class="n">ipykernel</span>
+<span class="n">numpydoc</span><span class="o">&gt;=</span><span class="mf">1.0</span>
+<span class="n">packaging</span><span class="o">&gt;=</span><span class="mi">20</span>
+<span class="n">pydata</span><span class="o">-</span><span class="n">sphinx</span><span class="o">-</span><span class="n">theme</span><span class="o">~=</span><span class="mf">0.15.0</span>
+<span class="n">mpl</span><span class="o">-</span><span class="n">sphinx</span><span class="o">-</span><span class="n">theme</span><span class="o">~=</span><span class="mf">3.9.0</span>
+<span class="n">pyyaml</span>
+<span class="n">PyStemmer</span>
+<span class="n">sphinxcontrib</span><span class="o">-</span><span class="n">svg2pdfconverter</span><span class="o">&gt;=</span><span class="mf">1.1.0</span>
+<span class="n">sphinxcontrib</span><span class="o">-</span><span class="n">video</span><span class="o">&gt;=</span><span class="mf">0.2.1</span>
+<span class="n">sphinx</span><span class="o">-</span><span class="n">copybutton</span>
+<span class="n">sphinx</span><span class="o">-</span><span class="n">design</span>
+<span class="n">sphinx</span><span class="o">-</span><span class="n">gallery</span><span class="p">[</span><span class="n">parallel</span><span class="p">]</span><span class="o">&gt;=</span><span class="mf">0.12.0</span>
+<span class="n">sphinx</span><span class="o">-</span><span class="n">tags</span><span class="o">&gt;=</span><span class="mf">0.4.0</span>
+</pre><button class="copybtn o-tooltip--left" data-tooltip="Copy" data-clipboard-target="#codecell7">
+      <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-copy" width="44" height="44" viewBox="0 0 24 24" stroke-width="1.5" stroke="#000000" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <title _mstTextHash="424372" _mstHash="134">Cópia para a prancheta</title>
+  <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
+  <rect x="8" y="8" width="12" height="12" rx="2"></rect>
+  <path d="M16 8v-2a2 2 0 0 0 -2 -2h-8a2 2 0 0 0 -2 2v8a2 2 0 0 0 2 2h2"></path>
+</svg>
+    </button></div>
+</div>
+</section>
+<section id="doc-dependencies-external">
+<span id="id10"></span><h3><font _mstmutation="1" _msttexthash="238888" _msthash="253">External tools</font><a class="headerlink" href="https://matplotlib.org/stable/install/dependencies.html#doc-dependencies-external" title="Link to this heading">#</a></h3>
+<section id="id11">
+<h4><font _mstmutation="1" _msttexthash="114465" _msthash="254">Required</font><a class="headerlink" href="https://matplotlib.org/stable/install/dependencies.html#id11" title="Link to this heading">#</a></h4>
+<p _msttexthash="6954454" _msthash="255">The documentation requires LaTeX and Graphviz.  These are not
+Python packages and must be installed separately.</p>
+<ul class="simple">
+<li><p><a class="reference external" href="http://www.graphviz.org/download" _msttexthash="117455" _msthash="256">Graphviz</a></p></li>
+<li><p _msttexthash="2138552" _msthash="257">a minimal working LaTeX distribution, e.g. <a class="reference external" href="https://www.tug.org/texlive/">TeX Live</a> or
+<a class="reference external" href="https://miktex.org/">MikTeX</a></p></li>
+</ul>
+<p _msttexthash="651781" _msthash="258">The following LaTeX packages:</p>
+<ul class="simple">
+<li><p><a class="reference external" href="https://ctan.org/pkg/dvipng" _msttexthash="80015" _msthash="259">dvipng</a></p></li>
+<li><p><a class="reference external" href="https://ctan.org/pkg/underscore" _msttexthash="161330" _msthash="260">underscore</a></p></li>
+<li><p><a class="reference external" href="https://ctan.org/pkg/cm-super" _msttexthash="112580" _msthash="261">cm-super</a></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">collection-fontsrecommended</span></code></p></li>
+</ul>
+<p _msttexthash="12026950" _msthash="262">The complete version of many LaTex distribution installers, e.g.
+"texlive-full" or "texlive-all", will often automatically include these packages.</p>
+</section>
+<section id="id12">
+<h4><font _mstmutation="1" _msttexthash="115141" _msthash="263">Optional</font><a class="headerlink" href="https://matplotlib.org/stable/install/dependencies.html#id12" title="Link to this heading">#</a></h4>
+<p _msttexthash="7084415" _msthash="264">The documentation can be built without Inkscape and optipng, but the build
+process will raise various warnings.</p>
+<ul class="simple">
+<li><p><a class="reference external" href="https://inkscape.org/" _msttexthash="112151" _msthash="265">Inkscape</a></p></li>
+<li><p><a class="reference external" href="http://optipng.sourceforge.net/" _msttexthash="99554" _msthash="266">optipng</a></p></li>
+<li><p _msttexthash="780312" _msthash="267">the font <a class="reference external" href="https://github.com/ipython/xkcd-font/">xkcd script</a> or <a class="reference external" href="https://github.com/crozynski/comicneue">Comic Neue</a></p></li>
+<li><p _msttexthash="479856" _msthash="268">the font "Times New Roman"</p></li>
+</ul>
+</section>
+</section>
+</section>
+</section>
+
+
+                </article>
+              
+              
+              
+              
+              
+            </div>
+            
+            
+              
+                <div class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+
+  <div class="sidebar-secondary-item">
+<div id="pst-page-navigation-heading-2" class="page-toc tocsection onthispage">
+    <svg class="svg-inline--fa fa-list" aria-hidden="true" focusable="false" data-prefix="fas" data-icon="list" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" data-fa-i2svg=""><path fill="currentColor" d="M40 48C26.7 48 16 58.7 16 72v48c0 13.3 10.7 24 24 24H88c13.3 0 24-10.7 24-24V72c0-13.3-10.7-24-24-24H40zM192 64c-17.7 0-32 14.3-32 32s14.3 32 32 32H480c17.7 0 32-14.3 32-32s-14.3-32-32-32H192zm0 160c-17.7 0-32 14.3-32 32s14.3 32 32 32H480c17.7 0 32-14.3 32-32s-14.3-32-32-32H192zm0 160c-17.7 0-32 14.3-32 32s14.3 32 32 32H480c17.7 0 32-14.3 32-32s-14.3-32-32-32H192zM16 232v48c0 13.3 10.7 24 24 24H88c13.3 0 24-10.7 24-24V232c0-13.3-10.7-24-24-24H40c-13.3 0-24 10.7-24 24zM40 368c-13.3 0-24 10.7-24 24v48c0 13.3 10.7 24 24 24H88c13.3 0 24-10.7 24-24V392c0-13.3-10.7-24-24-24H40z"></path></svg><!-- <i class="fa-solid fa-list"></i> Font Awesome fontawesome.com --><font _mstmutation="1" _msttexthash="199043" _msthash="269"> Nesta página </font></div>
+  <nav class="bd-toc-nav page-toc" aria-labelledby="pst-page-navigation-heading-2">
+    <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="https://matplotlib.org/stable/install/dependencies.html#runtime-dependencies" _msttexthash="969917" _msthash="270">Dependências em tempo de execução</a><ul class="nav section-nav flex-column" _msthidden="10">
+<li class="toc-h3 nav-item toc-entry" _msthidden="1"><a class="reference internal nav-link" href="https://matplotlib.org/stable/install/dependencies.html#required" _msttexthash="114465" _msthidden="1" _msthash="271">Required</a></li>
+<li class="toc-h3 nav-item toc-entry" _msthidden="4"><a class="reference internal nav-link" href="https://matplotlib.org/stable/install/dependencies.html#optional" _msttexthash="115141" _msthidden="1" _msthash="272">Optional</a><ul class="nav section-nav flex-column" _msthidden="3">
+<li class="toc-h4 nav-item toc-entry" _msthidden="1"><a class="reference internal nav-link" href="https://matplotlib.org/stable/install/dependencies.html#backends" _msttexthash="111020" _msthidden="1" _msthash="273">Backends</a></li>
+<li class="toc-h4 nav-item toc-entry" _msthidden="1"><a class="reference internal nav-link" href="https://matplotlib.org/stable/install/dependencies.html#animations" _msttexthash="159094" _msthidden="1" _msthash="274">Animations</a></li>
+<li class="toc-h4 nav-item toc-entry" _msthidden="1"><a class="reference internal nav-link" href="https://matplotlib.org/stable/install/dependencies.html#font-handling-and-rendering" _msttexthash="607464" _msthidden="1" _msthash="275">Font handling and rendering</a></li>
+</ul>
+</li>
+<li class="toc-h3 nav-item toc-entry" _msthidden="4"><a class="reference internal nav-link" href="https://matplotlib.org/stable/install/dependencies.html#c-libraries" _msttexthash="155779" _msthidden="1" _msthash="276">C libraries</a><ul class="nav section-nav flex-column" _msthidden="3">
+<li class="toc-h4 nav-item toc-entry" _msthidden="1"><a class="reference internal nav-link" href="https://matplotlib.org/stable/install/dependencies.html#download-during-install" _msttexthash="497497" _msthidden="1" _msthash="277">Download during install</a></li>
+<li class="toc-h4 nav-item toc-entry" _msthidden="1"><a class="reference internal nav-link" href="https://matplotlib.org/stable/install/dependencies.html#use-system-libraries" _msttexthash="390156" _msthidden="1" _msthash="278">Use system libraries</a></li>
+<li class="toc-h4 nav-item toc-entry" _msthidden="1"><a class="reference internal nav-link" href="https://matplotlib.org/stable/install/dependencies.html#from-source-files" _msttexthash="291421" _msthidden="1" _msthash="279">From source files</a></li>
+</ul>
+</li>
+<li class="toc-h3 nav-item toc-entry" _msthidden="1"><a class="reference internal nav-link" href="https://matplotlib.org/stable/install/dependencies.html#minimum-pip-manylinux-support-linux" _msttexthash="1077141" _msthidden="1" _msthash="280">Minimum pip / manylinux support (linux)</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="https://matplotlib.org/stable/install/dependencies.html#build-dependencies" _msttexthash="432081" _msthash="281">Dependências de build</a><ul class="nav section-nav flex-column" _msthidden="2">
+<li class="toc-h3 nav-item toc-entry" _msthidden="1"><a class="reference internal nav-link" href="https://matplotlib.org/stable/install/dependencies.html#setup-dependencies" _msttexthash="79989" _msthidden="1" _msthash="282">Python</a></li>
+<li class="toc-h3 nav-item toc-entry" _msthidden="1"><a class="reference internal nav-link" href="https://matplotlib.org/stable/install/dependencies.html#compiled-extensions" _msttexthash="392262" _msthidden="1" _msthash="283">Compiled extensions</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="https://matplotlib.org/stable/install/dependencies.html#test-dependencies" _msttexthash="438230" _msthash="284">Dependências de teste</a><ul class="nav section-nav flex-column" _msthidden="4">
+<li class="toc-h3 nav-item toc-entry" _msthidden="1"><a class="reference internal nav-link" href="https://matplotlib.org/stable/install/dependencies.html#id6" _msttexthash="114465" _msthidden="1" _msthash="285">Required</a></li>
+<li class="toc-h3 nav-item toc-entry" _msthidden="3"><a class="reference internal nav-link" href="https://matplotlib.org/stable/install/dependencies.html#id7" _msttexthash="115141" _msthidden="1" _msthash="286">Optional</a><ul class="nav section-nav flex-column" _msthidden="2">
+<li class="toc-h4 nav-item toc-entry" _msthidden="1"><a class="reference internal nav-link" href="https://matplotlib.org/stable/install/dependencies.html#id8" _msttexthash="79989" _msthidden="1" _msthash="287">Python</a></li>
+<li class="toc-h4 nav-item toc-entry" _msthidden="1"><a class="reference internal nav-link" href="https://matplotlib.org/stable/install/dependencies.html#external-tools" _msttexthash="238888" _msthidden="1" _msthash="288">External tools</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="https://matplotlib.org/stable/install/dependencies.html#documentation-dependencies" _msttexthash="814138" _msthash="289">Dependências de documentação</a><ul class="nav section-nav flex-column" _msthidden="4">
+<li class="toc-h3 nav-item toc-entry" _msthidden="1"><a class="reference internal nav-link" href="https://matplotlib.org/stable/install/dependencies.html#id9" _msttexthash="79989" _msthidden="1" _msthash="290">Python</a></li>
+<li class="toc-h3 nav-item toc-entry" _msthidden="3"><a class="reference internal nav-link" href="https://matplotlib.org/stable/install/dependencies.html#doc-dependencies-external" _msttexthash="238888" _msthidden="1" _msthash="291">External tools</a><ul class="nav section-nav flex-column" _msthidden="2">
+<li class="toc-h4 nav-item toc-entry" _msthidden="1"><a class="reference internal nav-link" href="https://matplotlib.org/stable/install/dependencies.html#id11" _msttexthash="114465" _msthidden="1" _msthash="292">Required</a></li>
+<li class="toc-h4 nav-item toc-entry" _msthidden="1"><a class="reference internal nav-link" href="https://matplotlib.org/stable/install/dependencies.html#id12" _msttexthash="115141" _msthidden="1" _msthash="293">Optional</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+  </nav></div>
+
+</div></div>
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+          </footer>
+        
+      </main>
+    </div>
+  </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script src="./Dependências — Documentação Matplotlib 3.10.8_files/bootstrap.js.baixados" type="text/javascript"></script>
+<script src="./Dependências — Documentação Matplotlib 3.10.8_files/pydata-sphinx-theme.js.baixados" type="text/javascript"></script>
+
+  <footer class="bd-footer">
+<div class="bd-footer__inner bd-page-width">
+  
+    <div class="footer-items__start">
+      
+        <div class="footer-item">
+
+  <p class="copyright"><font _mstmutation="1" _msttexthash="27348451" _msthash="294">
+    
+      © Copyright 2002–2012 John Hunter, Darren Dale, Eric Firing, Michael Droettboom and the Matplotlib development team; 2012–2025 The Matplotlib development team.
+      </font><br>
+    
+  </p>
+</div>
+      
+        <div class="footer-item">
+
+  <p class="sphinx-version"><font _mstmutation="1" _msttexthash="489177" _msthash="295">
+    Created using <a href="https://www.sphinx-doc.org/" _mstmutation="1">Sphinx</a> 8.2.3.
+    </font><br>
+  </p>
+</div>
+      
+        <div class="footer-item">
+  <p class="sphinx-version"><font _mstmutation="1" _msttexthash="594438" _msthash="296">
+    Built from v3.10.8-7-g1957ba3918.
+    </font><br>
+  </p>
+</div>
+      
+    </div>
+  
+  
+  
+    <div class="footer-items__end">
+      
+        <div class="footer-item">
+<p class="theme-version" _msttexthash="986830" _msthash="297">
+  Built with the <a href="https://pydata-sphinx-theme.readthedocs.io/en/stable/index.html">PyData Sphinx Theme</a> 0.15.4.
+</p></div>
+      
+    </div>
+  
+</div>
+
+  </footer>
+  <script defer="" src="./Dependências — Documentação Matplotlib 3.10.8_files/v8c78df7c7c0f484497ecbca7046644da1771523124516" integrity="sha512-8DS7rgIrAmghBFwoOTujcf6D9rXvH8xm8JQ1Ja01h9QX8EzXldiszufYa4IFfKdLUKTTrnSFXLDkUEOTrZQ8Qg==" data-cf-beacon="{&quot;version&quot;:&quot;2024.11.0&quot;,&quot;token&quot;:&quot;0175964edbd040b6ac0bff692bcb22ec&quot;,&quot;server_timing&quot;:{&quot;name&quot;:{&quot;cfCacheStatus&quot;:true,&quot;cfEdge&quot;:true,&quot;cfExtPri&quot;:true,&quot;cfL4&quot;:true,&quot;cfOrigin&quot;:true,&quot;cfSpeedBrain&quot;:true},&quot;location_startswith&quot;:null}}" crossorigin="anonymous"></script>
+
+</body></html>

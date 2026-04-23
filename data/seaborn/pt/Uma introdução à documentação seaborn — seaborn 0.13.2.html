@@ -1,0 +1,832 @@
+<!DOCTYPE html>
+<!-- saved from url=(0053)https://seaborn.pydata.org/tutorial/introduction.html -->
+<html lang="pt" data-mode="light" data-theme="light"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"><meta name="generator" content="Docutils 0.19: https://docutils.sourceforge.io/">
+
+    <title _msttexthash="6128083" _msthash="0">Uma introdução à documentação seaborn — seaborn 0.13.2</title>
+  <script>
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "light";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "light";
+  </script>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="./Uma introdução à documentação seaborn — seaborn 0.13.2_files/theme.css" rel="stylesheet">
+<link href="./Uma introdução à documentação seaborn — seaborn 0.13.2_files/pydata-sphinx-theme.css" rel="stylesheet">
+
+  
+  <link rel="stylesheet" href="./Uma introdução à documentação seaborn — seaborn 0.13.2_files/all.min.css">
+  <link rel="preload" as="font" type="font/woff2" crossorigin="" href="https://seaborn.pydata.org/_static/vendor/fontawesome/5.13.0/webfonts/fa-solid-900.woff2">
+  <link rel="preload" as="font" type="font/woff2" crossorigin="" href="https://seaborn.pydata.org/_static/vendor/fontawesome/5.13.0/webfonts/fa-brands-400.woff2">
+
+    <link rel="stylesheet" type="text/css" href="./Uma introdução à documentação seaborn — seaborn 0.13.2_files/pygments.css">
+    <link rel="stylesheet" type="text/css" href="./Uma introdução à documentação seaborn — seaborn 0.13.2_files/plot_directive.css">
+    <link rel="stylesheet" type="text/css" href="./Uma introdução à documentação seaborn — seaborn 0.13.2_files/copybutton.css">
+    <link rel="stylesheet" type="text/css" href="./Uma introdução à documentação seaborn — seaborn 0.13.2_files/design-style.1e8bd061cd6da7fc9cf755528e8ffc24.min.css">
+    <link rel="stylesheet" type="text/css" href="./Uma introdução à documentação seaborn — seaborn 0.13.2_files/custom.css">
+  
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="./Uma introdução à documentação seaborn — seaborn 0.13.2_files/pydata-sphinx-theme.js.baixados">
+
+    <script data-url_root="../" id="documentation_options" src="./Uma introdução à documentação seaborn — seaborn 0.13.2_files/documentation_options.js.baixados"></script>
+    <script src="./Uma introdução à documentação seaborn — seaborn 0.13.2_files/jquery.js.baixados"></script>
+    <script src="./Uma introdução à documentação seaborn — seaborn 0.13.2_files/underscore.js.baixados"></script>
+    <script src="./Uma introdução à documentação seaborn — seaborn 0.13.2_files/_sphinx_javascript_frameworks_compat.js.baixados"></script>
+    <script src="./Uma introdução à documentação seaborn — seaborn 0.13.2_files/doctools.js.baixados"></script>
+    <script src="./Uma introdução à documentação seaborn — seaborn 0.13.2_files/sphinx_highlight.js.baixados"></script>
+    <script src="./Uma introdução à documentação seaborn — seaborn 0.13.2_files/clipboard.min.js.baixados"></script>
+    <script src="./Uma introdução à documentação seaborn — seaborn 0.13.2_files/copybutton.js.baixados"></script>
+    <script src="./Uma introdução à documentação seaborn — seaborn 0.13.2_files/design-tabs.js.baixados"></script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'tutorial/introduction';</script>
+    <link rel="shortcut icon" href="https://seaborn.pydata.org/_static/favicon.ico">
+    <link rel="index" title="Index" href="https://seaborn.pydata.org/genindex.html">
+    <link rel="search" title="Search" href="https://seaborn.pydata.org/search.html">
+    <link rel="next" title="Overview of seaborn plotting functions" href="https://seaborn.pydata.org/tutorial/function_overview.html">
+    <link rel="prev" title="User guide and tutorial" href="https://seaborn.pydata.org/tutorial.html">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="docsearch:language" content="en">
+  </head>
+  
+  
+  <body data-spy="scroll" data-target="#bd-toc-nav" data-offset="180" data-default-mode="light">
+
+  
+  <input type="checkbox" class="sidebar-toggle" name="__primary" id="__primary">
+  <label class="overlay overlay-primary" for="__primary"></label>
+
+  
+  <input type="checkbox" class="sidebar-toggle" name="__secondary" id="__secondary">
+  <label class="overlay overlay-secondary" for="__secondary"></label>
+
+  
+  <div class="search-button__wrapper" _msthidden="1">
+    <div class="search-button__overlay"></div>
+    <div class="search-button__search-container" _msthidden="1">
+      
+<form class="bd-search d-flex align-items-center" action="https://seaborn.pydata.org/search.html" method="get" _msthidden="1">
+  <i class="icon fas fa-search"></i>
+  <input type="search" class="form-control" name="q" id="search-input" placeholder="Search the docs ..." aria-label="Search the docs ..." autocomplete="off" _msthidden="A" _mstplaceholder="267410" _msthash="1" _mstaria-label="267410">
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form>
+    </div>
+  </div>
+
+  
+  <nav class="bd-header navbar navbar-expand-lg bd-navbar" id="navbar-main"><div class="bd-header__inner container-xl">
+  <label class="sidebar-toggle primary-toggle" for="__primary">
+      <span class="fas fa-bars"></span>
+  </label>
+  <div id="navbar-start">
+    
+    
+  
+
+
+<a class="navbar-brand logo" href="https://seaborn.pydata.org/index.html">
+  
+  
+  
+  
+  
+  
+    <img src="./Uma introdução à documentação seaborn — seaborn 0.13.2_files/logo-wide-lightbg.svg" class="logo__image only-light" alt="Imagem do logo" _mstalt="131794" _msthash="2">
+    <img src="./Uma introdução à documentação seaborn — seaborn 0.13.2_files/logo-wide-lightbg.svg" class="logo__image only-dark" alt="Logo image" _msthidden="A" _mstalt="131794" _msthash="3">
+  
+  
+</a>
+    
+  </div>
+
+  
+  <div class="col-lg-9 navbar-header-items">
+    <div id="navbar-center" class="mr-auto">
+      
+      <div class="navbar-center-item">
+        <ul id="navbar-main-elements" class="navbar-nav">
+    <li class="toctree-l1 nav-item">
+ <a class="reference internal nav-link" href="https://seaborn.pydata.org/installing.html" _msttexthash="203125" _msthash="4"> Instalação </a>
+</li>
+
+<li class="toctree-l1 nav-item">
+ <a class="reference internal nav-link" href="https://seaborn.pydata.org/examples/index.html" _msttexthash="91390" _msthash="5"> Galeria </a>
+</li>
+
+<li class="toctree-l1 current active nav-item">
+ <a class="reference internal nav-link" href="https://seaborn.pydata.org/tutorial.html" _msttexthash="116545" _msthash="6">
+  Tutorial
+ </a>
+</li>
+
+<li class="toctree-l1 nav-item">
+ <a class="reference internal nav-link" href="https://seaborn.pydata.org/api.html" _msttexthash="22776" _msthash="7">
+  API
+ </a>
+</li>
+
+<li class="toctree-l1 nav-item">
+ <a class="reference internal nav-link" href="https://seaborn.pydata.org/whatsnew/index.html" _msttexthash="198991" _msthash="8"> Lançamentos </a>
+</li>
+
+<li class="toctree-l1 nav-item">
+ <a class="reference internal nav-link" href="https://seaborn.pydata.org/citing.html" _msttexthash="130403" _msthash="9"> Citação </a>
+</li>
+
+<li class="toctree-l1 nav-item">
+ <a class="reference internal nav-link" href="https://seaborn.pydata.org/faq.html" _msttexthash="22607" _msthash="10">
+  FAQ
+ </a>
+</li>
+
+</ul>
+      </div>
+      
+    </div>
+
+    <div id="navbar-end">
+      <div class="navbar-end-item navbar-end__search-button-container">
+        
+<button class="btn btn-sm navbar-btn search-button search-button__button" title="Search">
+  <i class="fas fa-search"></i>
+</button>
+      </div>
+      
+      <div class="navbar-end-item">
+        <ul id="navbar-icon-links" class="navbar-nav" aria-label="Links de Ícones" _mstaria-label="131963" _msthash="11">
+        <li class="nav-item">
+          
+          
+          
+          
+          
+          
+          <a href="https://github.com/mwaskom/seaborn" title="GitHub" class="nav-link" rel="noopener" target="_blank"><span><i class="fab fa-github"></i></span>
+            <label class="sr-only" _msttexthash="72332" _msthash="12">GitHub</label></a>
+        </li>
+        <li class="nav-item">
+          
+          
+          
+          
+          
+          
+          <a href="https://stackoverflow.com/tags/seaborn" title="StackOverflow" class="nav-link" rel="noopener" target="_blank"><span><i class="fab fa-stack-overflow"></i></span>
+            <label class="sr-only" _msttexthash="232466" _msthash="13">StackOverflow</label></a>
+        </li>
+        <li class="nav-item">
+          
+          
+          
+          
+          
+          
+          <a href="https://twitter.com/michaelwaskom" title="Twitter" class="nav-link" rel="noopener" target="_blank"><span><i class="fab fa-twitter"></i></span>
+            <label class="sr-only" _msttexthash="98995" _msthash="14">Twitter</label></a>
+        </li>
+      </ul>
+      </div>
+      
+    </div>
+  </div>
+
+
+  
+  <div class="search-button-container--mobile">
+<button class="btn btn-sm navbar-btn search-button search-button__button" title="Search">
+  <i class="fas fa-search"></i>
+</button>
+  </div>
+
+  
+  <label class="sidebar-toggle secondary-toggle" for="__secondary">
+      <span class="fas fa-outdent"></span>
+  </label>
+  
+
+</div>
+  </nav>
+  
+
+  <div class="bd-container container-xl">
+    <div class="bd-container__inner row">
+      
+      <div class="bd-sidebar-primary bd-sidebar">
+        
+  
+  <div class="sidebar-header-items sidebar-primary__section" _msthidden="13">
+    <p class="sidebar-header-items__title" role="heading" aria-level="1" aria-label="Navigation" _msthidden="1" _mstaria-label="157742" _msthash="15" _msttexthash="256997">
+      Site Navigation
+    </p>
+    
+    
+      <div class="sidebar-header-items__center" _msthidden="7">
+      
+      <div class="navbar-center-item" _msthidden="7">
+        <ul id="navbar-main-elements" class="navbar-nav" _msthidden="7">
+    <li class="toctree-l1 nav-item" _msthidden="1">
+ <a class="reference internal nav-link" href="https://seaborn.pydata.org/installing.html" _msttexthash="157573" _msthidden="1" _msthash="16">
+  Installing
+ </a>
+</li>
+
+<li class="toctree-l1 nav-item" _msthidden="1">
+ <a class="reference internal nav-link" href="https://seaborn.pydata.org/examples/index.html" _msttexthash="95901" _msthidden="1" _msthash="17">
+  Gallery
+ </a>
+</li>
+
+<li class="toctree-l1 current active nav-item" _msthidden="1">
+ <a class="reference internal nav-link" href="https://seaborn.pydata.org/tutorial.html" _msttexthash="116545" _msthidden="1" _msthash="18">
+  Tutorial
+ </a>
+</li>
+
+<li class="toctree-l1 nav-item" _msthidden="1">
+ <a class="reference internal nav-link" href="https://seaborn.pydata.org/api.html" _msttexthash="22776" _msthidden="1" _msthash="19">
+  API
+ </a>
+</li>
+
+<li class="toctree-l1 nav-item" _msthidden="1">
+ <a class="reference internal nav-link" href="https://seaborn.pydata.org/whatsnew/index.html" _msttexthash="113542" _msthidden="1" _msthash="20">
+  Releases
+ </a>
+</li>
+
+<li class="toctree-l1 nav-item" _msthidden="1">
+ <a class="reference internal nav-link" href="https://seaborn.pydata.org/citing.html" _msttexthash="76037" _msthidden="1" _msthash="21">
+  Citing
+ </a>
+</li>
+
+<li class="toctree-l1 nav-item" _msthidden="1">
+ <a class="reference internal nav-link" href="https://seaborn.pydata.org/faq.html" _msttexthash="22607" _msthidden="1" _msthash="22">
+  FAQ
+ </a>
+</li>
+
+</ul>
+      </div>
+      
+      </div>
+    
+
+    
+    
+    <div class="sidebar-header-items__end" _msthidden="4">
+      
+      <div class="navbar-end-item" _msthidden="4">
+        <ul id="navbar-icon-links" class="navbar-nav" aria-label="Icon Links" _msthidden="3" _mstaria-label="131963" _msthash="23">
+        <li class="nav-item" _msthidden="1">
+          
+          
+          
+          
+          
+          
+          <a href="https://github.com/mwaskom/seaborn" title="GitHub" class="nav-link" rel="noopener" target="_blank" _msthidden="1"><span><i class="fab fa-github"></i></span>
+            <label class="sr-only" _msttexthash="72332" _msthidden="1" _msthash="24">GitHub</label></a>
+        </li>
+        <li class="nav-item" _msthidden="1">
+          
+          
+          
+          
+          
+          
+          <a href="https://stackoverflow.com/tags/seaborn" title="StackOverflow" class="nav-link" rel="noopener" target="_blank" _msthidden="1"><span><i class="fab fa-stack-overflow"></i></span>
+            <label class="sr-only" _msttexthash="232466" _msthidden="1" _msthash="25">StackOverflow</label></a>
+        </li>
+        <li class="nav-item" _msthidden="1">
+          
+          
+          
+          
+          
+          
+          <a href="https://twitter.com/michaelwaskom" title="Twitter" class="nav-link" rel="noopener" target="_blank" _msthidden="1"><span><i class="fab fa-twitter"></i></span>
+            <label class="sr-only" _msttexthash="98995" _msthidden="1" _msthash="26">Twitter</label></a>
+        </li>
+      </ul>
+      </div>
+      
+    </div>
+    
+  </div>
+
+  
+  <div class="sidebar-start-items sidebar-primary__section">
+    <div class="sidebar-start-items__item"><nav class="bd-links" id="bd-docs-nav" aria-label="Navegação por seções" _mstaria-label="353847" _msthash="27">
+  <div class="bd-toc-item navbar-nav">
+    <ul class="current nav bd-sidenav">
+ <li class="toctree-l1 current active">
+  <a class="current reference internal" href="https://seaborn.pydata.org/tutorial/introduction.html#" _msttexthash="591084" _msthash="28"> Uma introdução ao seaborn </a>
+ </li>
+</ul>
+<ul class="nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="https://seaborn.pydata.org/tutorial/function_overview.html" _msttexthash="1374724" _msthash="29"> Visão geral das funções de plotagem seaborn </a>
+ </li>
+</ul>
+<ul class="nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="https://seaborn.pydata.org/tutorial/data_structure.html" _msttexthash="1162369" _msthash="30"> Estruturas de dados aceitas pelo seaborn </a>
+ </li>
+</ul>
+<ul class="nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="https://seaborn.pydata.org/tutorial/objects_interface.html" _msttexthash="632931" _msthash="31"> A interface seaborn.objects </a>
+ </li>
+</ul>
+<ul class="nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="https://seaborn.pydata.org/tutorial/properties.html" _msttexthash="692822" _msthash="32"> Propriedades dos objetos Mark </a>
+ </li>
+</ul>
+<ul class="nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="https://seaborn.pydata.org/tutorial/relational.html" _msttexthash="1139190" _msthash="33"> Visualizando relações estatísticas </a>
+ </li>
+</ul>
+<ul class="nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="https://seaborn.pydata.org/tutorial/distributions.html" _msttexthash="1386658" _msthash="34"> Visualização das distribuições dos dados </a>
+ </li>
+</ul>
+<ul class="nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="https://seaborn.pydata.org/tutorial/categorical.html" _msttexthash="995553" _msthash="35"> Visualização de dados categóricos </a>
+ </li>
+</ul>
+<ul class="nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="https://seaborn.pydata.org/tutorial/error_bars.html" _msttexthash="1143376" _msthash="36"> Estimativa estatística e barras de erro </a>
+ </li>
+</ul>
+<ul class="nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="https://seaborn.pydata.org/tutorial/regression.html" _msttexthash="1013727" _msthash="37"> Estimativa dos ajustes de regressão </a>
+ </li>
+</ul>
+<ul class="nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="https://seaborn.pydata.org/tutorial/axis_grids.html" _msttexthash="1925560" _msthash="38"> Construindo grades estruturadas de múltiplos plots </a>
+ </li>
+</ul>
+<ul class="nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="https://seaborn.pydata.org/tutorial/aesthetics.html" _msttexthash="711880" _msthash="39"> Estética de controle da figura </a>
+ </li>
+</ul>
+<ul class="nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="https://seaborn.pydata.org/tutorial/color_palettes.html" _msttexthash="608400" _msthash="40"> Escolha das paletas de cores </a>
+ </li>
+</ul>
+
+  </div>
+</nav>
+    </div>
+  </div>
+  
+
+  
+  <div class="sidebar-end-items sidebar-primary__section">
+    <div class="sidebar-end-items__item">
+    </div>
+  </div>
+
+      </div>
+
+      
+      
+      
+        <div class="bd-sidebar-secondary bd-toc">
+          
+<div class="toc-item">
+  
+<div class="tocsection onthispage">
+    <i class="fas fa-list"></i><font _mstmutation="1" _msttexthash="199043" _msthash="41"> Nesta página </font></div>
+<nav id="bd-toc-nav" class="page-toc">
+    <ul class="visible nav section-nav flex-column">
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="https://seaborn.pydata.org/tutorial/introduction.html#a-high-level-api-for-statistical-graphics" _msttexthash="1686022" _msthash="42"> Uma API de alto nível para gráficos estatísticos </a>
+  <ul class="nav section-nav flex-column" _msthidden="3">
+   <li class="toc-h3 nav-item toc-entry" _msthidden="1">
+    <a class="reference internal nav-link" href="https://seaborn.pydata.org/tutorial/introduction.html#statistical-estimation" _msttexthash="498550" _msthidden="1" _msthash="43">
+     Statistical estimation
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry" _msthidden="1">
+    <a class="reference internal nav-link" href="https://seaborn.pydata.org/tutorial/introduction.html#distributional-representations" _msttexthash="859755" _msthidden="1" _msthash="44">
+     Distributional representations
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry" _msthidden="1">
+    <a class="reference internal nav-link" href="https://seaborn.pydata.org/tutorial/introduction.html#plots-for-categorical-data" _msttexthash="564252" _msthidden="1" _msthash="45">
+     Plots for categorical data
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="https://seaborn.pydata.org/tutorial/introduction.html#multivariate-views-on-complex-datasets" _msttexthash="1920620" _msthash="46"> Visões multivariadas em conjuntos de dados complexos </a>
+  <ul class="nav section-nav flex-column" _msthidden="1">
+   <li class="toc-h3 nav-item toc-entry" _msthidden="1">
+    <a class="reference internal nav-link" href="https://seaborn.pydata.org/tutorial/introduction.html#lower-level-tools-for-building-figures" _msttexthash="1110382" _msthidden="1" _msthash="47">
+     Lower-level tools for building figures
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="https://seaborn.pydata.org/tutorial/introduction.html#opinionated-defaults-and-flexible-customization" _msttexthash="1698099" _msthash="48"> Padrões opinativos e personalização flexível </a>
+  <ul class="nav section-nav flex-column" _msthidden="2">
+   <li class="toc-h3 nav-item toc-entry" _msthidden="1">
+    <a class="reference internal nav-link" href="https://seaborn.pydata.org/tutorial/introduction.html#relationship-to-matplotlib" _msttexthash="623519" _msthidden="1" _msthash="49">
+     Relationship to matplotlib
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry" _msthidden="1">
+    <a class="reference internal nav-link" href="https://seaborn.pydata.org/tutorial/introduction.html#next-steps" _msttexthash="141141" _msthidden="1" _msthash="50">
+     Next steps
+    </a>
+   </li>
+  </ul>
+ </li>
+</ul>
+
+</nav>
+</div>
+
+<div class="toc-item">
+  
+</div>
+
+<div class="toc-item">
+  
+</div>
+
+        </div>
+      
+      
+
+      
+      
+      <div class="bd-content col">
+          
+          <div class="bd-header-article">
+              
+          </div>
+
+          
+          
+          <article class="bd-article" role="main">
+            
+  <section id="an-introduction-to-seaborn">
+<span id="introduction"></span><h1><font _mstmutation="1" _msttexthash="591084" _msthash="51">Uma introdução ao seaborn</font><a class="headerlink" href="https://seaborn.pydata.org/tutorial/introduction.html#an-introduction-to-seaborn" title="Permalink to this heading">#</a></h1>
+<p _msttexthash="14143987" _msthash="52">Seaborn é uma biblioteca para criar gráficos estatísticos em Python. Ele se baseia em cima do <a class="reference external" href="https://matplotlib.org/" _istranslated="1">matplotlib</a> e integra-se de perto com as estruturas de dados <a class="reference external" href="https://pandas.pydata.org/" _istranslated="1">do pandas</a>.</p>
+<p _msttexthash="105710930" _msthash="53">Seaborn ajuda você a explorar e entender seus dados. Suas funções de plotagem operam sobre dataframes e arrays contendo conjuntos de dados completos e realizam internamente o mapeamento semântico e agregação estatística necessários para produzir gráficos informativos. Sua API declarativa orientada a conjuntos de dados permite que você foque no significado dos diferentes elementos dos seus gráficos, em vez dos detalhes de como desenhá-los.</p>
+<p _msttexthash="1473875" _msthash="54">Aqui está um exemplo do que o seaborn pode fazer:</p>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre id="codecell0"><span></span><span class="c1"># Import seaborn</span>
+<span class="kn">import</span> <span class="nn">seaborn</span> <span class="k">as</span> <span class="nn">sns</span>
+
+<span class="c1"># Apply the default theme</span>
+<span class="n">sns</span><span class="o">.</span><span class="n">set_theme</span><span class="p">()</span>
+
+<span class="c1"># Load an example dataset</span>
+<span class="n">tips</span> <span class="o">=</span> <span class="n">sns</span><span class="o">.</span><span class="n">load_dataset</span><span class="p">(</span><span class="s2">"tips"</span><span class="p">)</span>
+
+<span class="c1"># Create a visualization</span>
+<span class="n">sns</span><span class="o">.</span><span class="n">relplot</span><span class="p">(</span>
+    <span class="n">data</span><span class="o">=</span><span class="n">tips</span><span class="p">,</span>
+    <span class="n">x</span><span class="o">=</span><span class="s2">"total_bill"</span><span class="p">,</span> <span class="n">y</span><span class="o">=</span><span class="s2">"tip"</span><span class="p">,</span> <span class="n">col</span><span class="o">=</span><span class="s2">"time"</span><span class="p">,</span>
+    <span class="n">hue</span><span class="o">=</span><span class="s2">"smoker"</span><span class="p">,</span> <span class="n">style</span><span class="o">=</span><span class="s2">"smoker"</span><span class="p">,</span> <span class="n">size</span><span class="o">=</span><span class="s2">"size"</span><span class="p">,</span>
+<span class="p">)</span>
+</pre><button class="copybtn o-tooltip--left" data-tooltip="Copy" data-clipboard-target="#codecell0">
+      <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-copy" width="44" height="44" viewBox="0 0 24 24" stroke-width="1.5" stroke="#000000" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <title>Copy to clipboard</title>
+  <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
+  <rect x="8" y="8" width="12" height="12" rx="2"></rect>
+  <path d="M16 8v-2a2 2 0 0 0 -2 -2h-8a2 2 0 0 0 -2 2v8a2 2 0 0 0 2 2h2"></path>
+</svg>
+    </button></div>
+</div>
+<img alt="../_images/introduction_1_0.png" src="./Uma introdução à documentação seaborn — seaborn 0.13.2_files/introduction_1_0.png" _msthidden="A" _mstalt="838487" _msthash="55">
+<p _msttexthash="2417675" _msthash="56">Algumas coisas aconteceram aqui. Vamos analisá-los um por um:</p>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre id="codecell1"><span></span><span class="c1"># Import seaborn</span>
+<span class="kn">import</span> <span class="nn">seaborn</span> <span class="k">as</span> <span class="nn">sns</span>
+</pre><button class="copybtn o-tooltip--left" data-tooltip="Copy" data-clipboard-target="#codecell1">
+      <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-copy" width="44" height="44" viewBox="0 0 24 24" stroke-width="1.5" stroke="#000000" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <title>Copy to clipboard</title>
+  <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
+  <rect x="8" y="8" width="12" height="12" rx="2"></rect>
+  <path d="M16 8v-2a2 2 0 0 0 -2 -2h-8a2 2 0 0 0 -2 2v8a2 2 0 0 0 2 2h2"></path>
+</svg>
+    </button></div>
+</div>
+<p><font _mstmutation="1" _msttexthash="9366344" _msthash="57">Seaborn é a única biblioteca que precisamos importar para esse exemplo simples. Por convenção, é importado com a abreviação .</font><code class="docutils literal notranslate"><span class="pre">sns</span></code></p>
+<p _msttexthash="27948375" _msthash="58">Nos bastidores, seaborn usa matplotlib para desenhar suas tramas. Para trabalhos interativos, recomenda-se usar uma interface Jupyter/IPython no <a class="reference external" href="https://ipython.readthedocs.io/en/stable/interactive/plotting.html" _istranslated="1">modo matplotlib</a>, caso contrário você terá que ligar <a class="reference external" href="https://matplotlib.org/stable/api/_as_gen/matplotlib.pyplot.show.html#matplotlib.pyplot.show" title="(in Matplotlib v3.8.2)" _istranslated="1"><code class="xref py py-func docutils literal notranslate" _istranslated="1"></code></a> quando quiser ver a trama.</p>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre id="codecell2"><span></span><span class="c1"># Apply the default theme</span>
+<span class="n">sns</span><span class="o">.</span><span class="n">set_theme</span><span class="p">()</span>
+</pre><button class="copybtn o-tooltip--left" data-tooltip="Copy" data-clipboard-target="#codecell2">
+      <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-copy" width="44" height="44" viewBox="0 0 24 24" stroke-width="1.5" stroke="#000000" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <title>Copy to clipboard</title>
+  <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
+  <rect x="8" y="8" width="12" height="12" rx="2"></rect>
+  <path d="M16 8v-2a2 2 0 0 0 -2 -2h-8a2 2 0 0 0 -2 2v8a2 2 0 0 0 2 2h2"></path>
+</svg>
+    </button></div>
+</div>
+<p _msttexthash="169869765" _msthash="59">Isso usa o sistema matplotlib rcParam e vai afetar como todos os plots matplotlib parecem, mesmo que você não os faça com seaborn. Além do tema padrão, existem <a class="reference internal" href="https://seaborn.pydata.org/tutorial/aesthetics.html" _istranslated="1"><span class="doc" _istranslated="1">várias outras opções</span></a>, e você pode controlar independentemente o estilo e a escala do enredo para traduzir rapidamente seu trabalho entre contextos de apresentação (por exemplo, criando uma versão da sua figura que terá fontes legíveis quando projetada durante uma palestra). Se você gosta dos padrões do matplotlib ou prefere um tema diferente, pode pular essa etapa e ainda usar as funções de ploting do seaborn.</p>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre id="codecell3"><span></span><span class="c1"># Load an example dataset</span>
+<span class="n">tips</span> <span class="o">=</span> <span class="n">sns</span><span class="o">.</span><span class="n">load_dataset</span><span class="p">(</span><span class="s2">"tips"</span><span class="p">)</span>
+</pre><button class="copybtn o-tooltip--left" data-tooltip="Copy" data-clipboard-target="#codecell3">
+      <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-copy" width="44" height="44" viewBox="0 0 24 24" stroke-width="1.5" stroke="#000000" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <title>Copy to clipboard</title>
+  <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
+  <rect x="8" y="8" width="12" height="12" rx="2"></rect>
+  <path d="M16 8v-2a2 2 0 0 0 -2 -2h-8a2 2 0 0 0 -2 2v8a2 2 0 0 0 2 2h2"></path>
+</svg>
+    </button></div>
+</div>
+<p _msttexthash="90667616" _msthash="60">A maior parte do código na documentação usa a <a class="reference internal" href="https://seaborn.pydata.org/generated/seaborn.load_dataset.html#seaborn.load_dataset" title="seaborn.load_dataset" _istranslated="1"><code class="xref py py-func docutils literal notranslate" _istranslated="1"></code></a> função para obter acesso rápido a um conjunto de dados de exemplo. Não há nada de especial nesses conjuntos de dados: eles são apenas dataframes do pandas, e poderíamos tê-los <a class="reference external" href="https://pandas.pydata.org/pandas-docs/stable/reference/api/pandas.read_csv.html#pandas.read_csv" title="(in pandas v2.2.0)" _istranslated="1"><code class="xref py py-func docutils literal notranslate" _istranslated="1"></code></a> carregado ou construído manualmente. A maioria dos exemplos na documentação especifica dados usando dataframes do pandas, mas a Seaborn é muito flexível quanto às <a class="reference internal" href="https://seaborn.pydata.org/tutorial/data_structure.html" _istranslated="1"><span class="doc" _istranslated="1">estruturas de dados</span></a> que aceita.</p>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre id="codecell4"><span></span><span class="c1"># Create a visualization</span>
+<span class="n">sns</span><span class="o">.</span><span class="n">relplot</span><span class="p">(</span>
+    <span class="n">data</span><span class="o">=</span><span class="n">tips</span><span class="p">,</span>
+    <span class="n">x</span><span class="o">=</span><span class="s2">"total_bill"</span><span class="p">,</span> <span class="n">y</span><span class="o">=</span><span class="s2">"tip"</span><span class="p">,</span> <span class="n">col</span><span class="o">=</span><span class="s2">"time"</span><span class="p">,</span>
+    <span class="n">hue</span><span class="o">=</span><span class="s2">"smoker"</span><span class="p">,</span> <span class="n">style</span><span class="o">=</span><span class="s2">"smoker"</span><span class="p">,</span> <span class="n">size</span><span class="o">=</span><span class="s2">"size"</span><span class="p">,</span>
+<span class="p">)</span>
+</pre><button class="copybtn o-tooltip--left" data-tooltip="Copy" data-clipboard-target="#codecell4">
+      <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-copy" width="44" height="44" viewBox="0 0 24 24" stroke-width="1.5" stroke="#000000" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <title>Copy to clipboard</title>
+  <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
+  <rect x="8" y="8" width="12" height="12" rx="2"></rect>
+  <path d="M16 8v-2a2 2 0 0 0 -2 -2h-8a2 2 0 0 0 -2 2v8a2 2 0 0 0 2 2h2"></path>
+</svg>
+    </button></div>
+</div>
+<p _msttexthash="202919444" _msthash="61">Este gráfico mostra a relação entre cinco variáveis no conjunto de dados tips, usando uma única chamada para a função <a class="reference internal" href="https://seaborn.pydata.org/generated/seaborn.relplot.html#seaborn.relplot" title="seaborn.relplot" _istranslated="1"><code class="xref py py-func docutils literal notranslate" _istranslated="1"></code></a>seaborn . Repare como fornecemos apenas os nomes das variáveis e seus papéis no gráfico. Diferente de usar o Matplotlib diretamente, não era necessário especificar atributos dos elementos do gráfico em termos dos valores de cor ou códigos de marcação. Nos bastidores, Seaborn cuidou da tradução dos valores no dataframe para argumentos que o matplotlib entende. Essa abordagem declarativa permite que você mantenha o foco nas perguntas que deseja responder, em vez dos detalhes de como controlar o matplotlib.</p>
+<section id="a-high-level-api-for-statistical-graphics">
+<span id="intro-api-abstraction"></span><h2><font _mstmutation="1" _msttexthash="1686022" _msthash="62">Uma API de alto nível para gráficos estatísticos</font><a class="headerlink" href="https://seaborn.pydata.org/tutorial/introduction.html#a-high-level-api-for-statistical-graphics" title="Permalink to this heading">#</a></h2>
+<p _msttexthash="27448603" _msthash="63">There is no universally best way to visualize data. Different questions are best answered by different plots. Seaborn makes it easy to switch between different visual representations by using a consistent dataset-oriented API.</p>
+<p><font _mstmutation="1" _msttexthash="70895175" _msthash="64">The function <a class="reference internal" href="https://seaborn.pydata.org/generated/seaborn.relplot.html#seaborn.relplot" title="seaborn.relplot" _mstmutation="1"><code class="xref py py-func docutils literal notranslate"><span class="pre">relplot()</span></code></a> is named that way because it is designed to visualize many different statistical <em _mstmutation="1">relationships</em>. While scatter plots are often effective, relationships where one variable represents a measure of time are better represented by a line. The <a class="reference internal" href="https://seaborn.pydata.org/generated/seaborn.relplot.html#seaborn.relplot" title="seaborn.relplot" _mstmutation="1"><code class="xref py py-func docutils literal notranslate"><span class="pre">relplot()</span></code></a> function has a convenient  parameter that lets you easily switch to this alternate representation:</font><code class="docutils literal notranslate"><span class="pre">kind</span></code></p>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre id="codecell5"><span></span><span class="n">dots</span> <span class="o">=</span> <span class="n">sns</span><span class="o">.</span><span class="n">load_dataset</span><span class="p">(</span><span class="s2">"dots"</span><span class="p">)</span>
+<span class="n">sns</span><span class="o">.</span><span class="n">relplot</span><span class="p">(</span>
+    <span class="n">data</span><span class="o">=</span><span class="n">dots</span><span class="p">,</span> <span class="n">kind</span><span class="o">=</span><span class="s2">"line"</span><span class="p">,</span>
+    <span class="n">x</span><span class="o">=</span><span class="s2">"time"</span><span class="p">,</span> <span class="n">y</span><span class="o">=</span><span class="s2">"firing_rate"</span><span class="p">,</span> <span class="n">col</span><span class="o">=</span><span class="s2">"align"</span><span class="p">,</span>
+    <span class="n">hue</span><span class="o">=</span><span class="s2">"choice"</span><span class="p">,</span> <span class="n">size</span><span class="o">=</span><span class="s2">"coherence"</span><span class="p">,</span> <span class="n">style</span><span class="o">=</span><span class="s2">"choice"</span><span class="p">,</span>
+    <span class="n">facet_kws</span><span class="o">=</span><span class="nb">dict</span><span class="p">(</span><span class="n">sharex</span><span class="o">=</span><span class="kc">False</span><span class="p">),</span>
+<span class="p">)</span>
+</pre><button class="copybtn o-tooltip--left" data-tooltip="Copy" data-clipboard-target="#codecell5">
+      <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-copy" width="44" height="44" viewBox="0 0 24 24" stroke-width="1.5" stroke="#000000" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <title>Copy to clipboard</title>
+  <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
+  <rect x="8" y="8" width="12" height="12" rx="2"></rect>
+  <path d="M16 8v-2a2 2 0 0 0 -2 -2h-8a2 2 0 0 0 -2 2v8a2 2 0 0 0 2 2h2"></path>
+</svg>
+    </button></div>
+</div>
+<img alt="../_images/introduction_11_0.png" src="./Uma introdução à documentação seaborn — seaborn 0.13.2_files/introduction_11_0.png" _msthidden="A" _mstalt="865553" _msthash="65">
+<p><font _mstmutation="1" _msttexthash="67382926" _msthash="66">Notice how the  and  parameters are used in both the scatter and line plots, but they affect the two visualizations differently: changing the marker area and symbol in the scatter plot vs the line width and dashing in the line plot. We did not need to keep those details in mind, letting us focus on the overall structure of the plot and the information we want it to convey.</font><code class="docutils literal notranslate"><span class="pre">size</span></code><code class="docutils literal notranslate"><span class="pre">style</span></code></p>
+<section id="statistical-estimation">
+<span id="intro-stat-estimation"></span><h3><font _mstmutation="1" _msttexthash="498550" _msthash="67">Statistical estimation</font><a class="headerlink" href="https://seaborn.pydata.org/tutorial/introduction.html#statistical-estimation" title="Permalink to this heading">#</a></h3>
+<p _msttexthash="25570116" _msthash="68">Often, we are interested in the <em>average</em> value of one variable as a function of other variables. Many seaborn functions will automatically perform the statistical estimation that is necessary to answer these questions:</p>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre id="codecell6"><span></span><span class="n">fmri</span> <span class="o">=</span> <span class="n">sns</span><span class="o">.</span><span class="n">load_dataset</span><span class="p">(</span><span class="s2">"fmri"</span><span class="p">)</span>
+<span class="n">sns</span><span class="o">.</span><span class="n">relplot</span><span class="p">(</span>
+    <span class="n">data</span><span class="o">=</span><span class="n">fmri</span><span class="p">,</span> <span class="n">kind</span><span class="o">=</span><span class="s2">"line"</span><span class="p">,</span>
+    <span class="n">x</span><span class="o">=</span><span class="s2">"timepoint"</span><span class="p">,</span> <span class="n">y</span><span class="o">=</span><span class="s2">"signal"</span><span class="p">,</span> <span class="n">col</span><span class="o">=</span><span class="s2">"region"</span><span class="p">,</span>
+    <span class="n">hue</span><span class="o">=</span><span class="s2">"event"</span><span class="p">,</span> <span class="n">style</span><span class="o">=</span><span class="s2">"event"</span><span class="p">,</span>
+<span class="p">)</span>
+</pre><button class="copybtn o-tooltip--left" data-tooltip="Copy" data-clipboard-target="#codecell6">
+      <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-copy" width="44" height="44" viewBox="0 0 24 24" stroke-width="1.5" stroke="#000000" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <title>Copy to clipboard</title>
+  <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
+  <rect x="8" y="8" width="12" height="12" rx="2"></rect>
+  <path d="M16 8v-2a2 2 0 0 0 -2 -2h-8a2 2 0 0 0 -2 2v8a2 2 0 0 0 2 2h2"></path>
+</svg>
+    </button></div>
+</div>
+<img alt="../_images/introduction_13_0.png" src="./Uma introdução à documentação seaborn — seaborn 0.13.2_files/introduction_13_0.png" _msthidden="A" _mstalt="866385" _msthash="69">
+<p _msttexthash="15922439" _msthash="70">When statistical values are estimated, seaborn will use bootstrapping to compute confidence intervals and draw error bars representing the uncertainty of the estimate.</p>
+<p _msttexthash="21503105" _msthash="71">Statistical estimation in seaborn goes beyond descriptive statistics. For example, it is possible to enhance a scatterplot by including a linear regression model (and its uncertainty) using <a class="reference internal" href="https://seaborn.pydata.org/generated/seaborn.lmplot.html#seaborn.lmplot" title="seaborn.lmplot"><code class="xref py py-func docutils literal notranslate"><span class="pre">lmplot()</span></code></a>:</p>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre id="codecell7"><span></span><span class="n">sns</span><span class="o">.</span><span class="n">lmplot</span><span class="p">(</span><span class="n">data</span><span class="o">=</span><span class="n">tips</span><span class="p">,</span> <span class="n">x</span><span class="o">=</span><span class="s2">"total_bill"</span><span class="p">,</span> <span class="n">y</span><span class="o">=</span><span class="s2">"tip"</span><span class="p">,</span> <span class="n">col</span><span class="o">=</span><span class="s2">"time"</span><span class="p">,</span> <span class="n">hue</span><span class="o">=</span><span class="s2">"smoker"</span><span class="p">)</span>
+</pre><button class="copybtn o-tooltip--left" data-tooltip="Copy" data-clipboard-target="#codecell7">
+      <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-copy" width="44" height="44" viewBox="0 0 24 24" stroke-width="1.5" stroke="#000000" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <title>Copy to clipboard</title>
+  <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
+  <rect x="8" y="8" width="12" height="12" rx="2"></rect>
+  <path d="M16 8v-2a2 2 0 0 0 -2 -2h-8a2 2 0 0 0 -2 2v8a2 2 0 0 0 2 2h2"></path>
+</svg>
+    </button></div>
+</div>
+<img alt="../_images/introduction_15_0.png" src="./Uma introdução à documentação seaborn — seaborn 0.13.2_files/introduction_15_0.png" _msthidden="A" _mstalt="867217" _msthash="72">
+</section>
+<section id="distributional-representations">
+<span id="intro-distributions"></span><h3><font _mstmutation="1" _msttexthash="859755" _msthash="73">Distributional representations</font><a class="headerlink" href="https://seaborn.pydata.org/tutorial/introduction.html#distributional-representations" title="Permalink to this heading">#</a></h3>
+<p _msttexthash="52030433" _msthash="74">Statistical analyses require knowledge about the distribution of variables in your dataset. The seaborn function <a class="reference internal" href="https://seaborn.pydata.org/generated/seaborn.displot.html#seaborn.displot" title="seaborn.displot"><code class="xref py py-func docutils literal notranslate"><span class="pre">displot()</span></code></a> supports several approaches to visualizing distributions. These include classic techniques like histograms and computationally-intensive approaches like kernel density estimation:</p>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre id="codecell8"><span></span><span class="n">sns</span><span class="o">.</span><span class="n">displot</span><span class="p">(</span><span class="n">data</span><span class="o">=</span><span class="n">tips</span><span class="p">,</span> <span class="n">x</span><span class="o">=</span><span class="s2">"total_bill"</span><span class="p">,</span> <span class="n">col</span><span class="o">=</span><span class="s2">"time"</span><span class="p">,</span> <span class="n">kde</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+</pre><button class="copybtn o-tooltip--left" data-tooltip="Copy" data-clipboard-target="#codecell8">
+      <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-copy" width="44" height="44" viewBox="0 0 24 24" stroke-width="1.5" stroke="#000000" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <title>Copy to clipboard</title>
+  <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
+  <rect x="8" y="8" width="12" height="12" rx="2"></rect>
+  <path d="M16 8v-2a2 2 0 0 0 -2 -2h-8a2 2 0 0 0 -2 2v8a2 2 0 0 0 2 2h2"></path>
+</svg>
+    </button></div>
+</div>
+<img alt="../_images/introduction_17_0.png" src="./Uma introdução à documentação seaborn — seaborn 0.13.2_files/introduction_17_0.png" _msthidden="A" _mstalt="868049" _msthash="75">
+<p _msttexthash="16069872" _msthash="76">Seaborn also tries to promote techniques that are powerful but less familiar, such as calculating and plotting the empirical cumulative distribution function of the data:</p>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre id="codecell9"><span></span><span class="n">sns</span><span class="o">.</span><span class="n">displot</span><span class="p">(</span><span class="n">data</span><span class="o">=</span><span class="n">tips</span><span class="p">,</span> <span class="n">kind</span><span class="o">=</span><span class="s2">"ecdf"</span><span class="p">,</span> <span class="n">x</span><span class="o">=</span><span class="s2">"total_bill"</span><span class="p">,</span> <span class="n">col</span><span class="o">=</span><span class="s2">"time"</span><span class="p">,</span> <span class="n">hue</span><span class="o">=</span><span class="s2">"smoker"</span><span class="p">,</span> <span class="n">rug</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+</pre><button class="copybtn o-tooltip--left" data-tooltip="Copy" data-clipboard-target="#codecell9">
+      <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-copy" width="44" height="44" viewBox="0 0 24 24" stroke-width="1.5" stroke="#000000" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <title>Copy to clipboard</title>
+  <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
+  <rect x="8" y="8" width="12" height="12" rx="2"></rect>
+  <path d="M16 8v-2a2 2 0 0 0 -2 -2h-8a2 2 0 0 0 -2 2v8a2 2 0 0 0 2 2h2"></path>
+</svg>
+    </button></div>
+</div>
+<img alt="../_images/introduction_19_0.png" src="./Uma introdução à documentação seaborn — seaborn 0.13.2_files/introduction_19_0.png" _msthidden="A" _mstalt="868881" _msthash="77">
+</section>
+<section id="plots-for-categorical-data">
+<span id="intro-categorical"></span><h3><font _mstmutation="1" _msttexthash="564252" _msthash="78">Plots for categorical data</font><a class="headerlink" href="https://seaborn.pydata.org/tutorial/introduction.html#plots-for-categorical-data" title="Permalink to this heading">#</a></h3>
+<p _msttexthash="155721657" _msthash="79">Several specialized plot types in seaborn are oriented towards visualizing categorical data. They can be accessed through <a class="reference internal" href="https://seaborn.pydata.org/generated/seaborn.catplot.html#seaborn.catplot" title="seaborn.catplot"><code class="xref py py-func docutils literal notranslate"><span class="pre">catplot()</span></code></a>. These plots offer different levels of granularity. At the finest level, you may wish to see every observation by drawing a “swarm” plot: a scatter plot that adjusts the positions of the points along the categorical axis so that they don’t overlap:</p>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre id="codecell10"><span></span><span class="n">sns</span><span class="o">.</span><span class="n">catplot</span><span class="p">(</span><span class="n">data</span><span class="o">=</span><span class="n">tips</span><span class="p">,</span> <span class="n">kind</span><span class="o">=</span><span class="s2">"swarm"</span><span class="p">,</span> <span class="n">x</span><span class="o">=</span><span class="s2">"day"</span><span class="p">,</span> <span class="n">y</span><span class="o">=</span><span class="s2">"total_bill"</span><span class="p">,</span> <span class="n">hue</span><span class="o">=</span><span class="s2">"smoker"</span><span class="p">)</span>
+</pre><button class="copybtn o-tooltip--left" data-tooltip="Copy" data-clipboard-target="#codecell10">
+      <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-copy" width="44" height="44" viewBox="0 0 24 24" stroke-width="1.5" stroke="#000000" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <title>Copy to clipboard</title>
+  <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
+  <rect x="8" y="8" width="12" height="12" rx="2"></rect>
+  <path d="M16 8v-2a2 2 0 0 0 -2 -2h-8a2 2 0 0 0 -2 2v8a2 2 0 0 0 2 2h2"></path>
+</svg>
+    </button></div>
+</div>
+<img alt="../_images/introduction_21_0.png" src="./Uma introdução à documentação seaborn — seaborn 0.13.2_files/introduction_21_0.png" _msthidden="A" _mstalt="865956" _msthash="80">
+<p _msttexthash="9455862" _msthash="81">Alternately, you could use kernel density estimation to represent the underlying distribution that the points are sampled from:</p>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre id="codecell11"><span></span><span class="n">sns</span><span class="o">.</span><span class="n">catplot</span><span class="p">(</span><span class="n">data</span><span class="o">=</span><span class="n">tips</span><span class="p">,</span> <span class="n">kind</span><span class="o">=</span><span class="s2">"violin"</span><span class="p">,</span> <span class="n">x</span><span class="o">=</span><span class="s2">"day"</span><span class="p">,</span> <span class="n">y</span><span class="o">=</span><span class="s2">"total_bill"</span><span class="p">,</span> <span class="n">hue</span><span class="o">=</span><span class="s2">"smoker"</span><span class="p">,</span> <span class="n">split</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+</pre><button class="copybtn o-tooltip--left" data-tooltip="Copy" data-clipboard-target="#codecell11">
+      <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-copy" width="44" height="44" viewBox="0 0 24 24" stroke-width="1.5" stroke="#000000" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <title>Copy to clipboard</title>
+  <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
+  <rect x="8" y="8" width="12" height="12" rx="2"></rect>
+  <path d="M16 8v-2a2 2 0 0 0 -2 -2h-8a2 2 0 0 0 -2 2v8a2 2 0 0 0 2 2h2"></path>
+</svg>
+    </button></div>
+</div>
+<img alt="../_images/introduction_23_0.png" src="./Uma introdução à documentação seaborn — seaborn 0.13.2_files/introduction_23_0.png" _msthidden="A" _mstalt="866788" _msthash="82">
+<p _msttexthash="5000814" _msthash="83">Or you could show only the mean value and its confidence interval within each nested category:</p>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre id="codecell12"><span></span><span class="n">sns</span><span class="o">.</span><span class="n">catplot</span><span class="p">(</span><span class="n">data</span><span class="o">=</span><span class="n">tips</span><span class="p">,</span> <span class="n">kind</span><span class="o">=</span><span class="s2">"bar"</span><span class="p">,</span> <span class="n">x</span><span class="o">=</span><span class="s2">"day"</span><span class="p">,</span> <span class="n">y</span><span class="o">=</span><span class="s2">"total_bill"</span><span class="p">,</span> <span class="n">hue</span><span class="o">=</span><span class="s2">"smoker"</span><span class="p">)</span>
+</pre><button class="copybtn o-tooltip--left" data-tooltip="Copy" data-clipboard-target="#codecell12">
+      <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-copy" width="44" height="44" viewBox="0 0 24 24" stroke-width="1.5" stroke="#000000" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <title>Copy to clipboard</title>
+  <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
+  <rect x="8" y="8" width="12" height="12" rx="2"></rect>
+  <path d="M16 8v-2a2 2 0 0 0 -2 -2h-8a2 2 0 0 0 -2 2v8a2 2 0 0 0 2 2h2"></path>
+</svg>
+    </button></div>
+</div>
+<img alt="../_images/introduction_25_0.png" src="./Uma introdução à documentação seaborn — seaborn 0.13.2_files/introduction_25_0.png" _msthidden="A" _mstalt="867620" _msthash="84">
+</section>
+</section>
+<section id="multivariate-views-on-complex-datasets">
+<span id="intro-dataset-funcs"></span><h2><font _mstmutation="1" _msttexthash="1125033" _msthash="85">Multivariate views on complex datasets</font><a class="headerlink" href="https://seaborn.pydata.org/tutorial/introduction.html#multivariate-views-on-complex-datasets" title="Permalink to this heading">#</a></h2>
+<p _msttexthash="59197619" _msthash="86">Some seaborn functions combine multiple kinds of plots to quickly give informative summaries of a dataset. One, <a class="reference internal" href="https://seaborn.pydata.org/generated/seaborn.jointplot.html#seaborn.jointplot" title="seaborn.jointplot"><code class="xref py py-func docutils literal notranslate"><span class="pre">jointplot()</span></code></a>, focuses on a single relationship. It plots the joint distribution between two variables along with each variable’s marginal distribution:</p>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre id="codecell13"><span></span><span class="n">penguins</span> <span class="o">=</span> <span class="n">sns</span><span class="o">.</span><span class="n">load_dataset</span><span class="p">(</span><span class="s2">"penguins"</span><span class="p">)</span>
+<span class="n">sns</span><span class="o">.</span><span class="n">jointplot</span><span class="p">(</span><span class="n">data</span><span class="o">=</span><span class="n">penguins</span><span class="p">,</span> <span class="n">x</span><span class="o">=</span><span class="s2">"flipper_length_mm"</span><span class="p">,</span> <span class="n">y</span><span class="o">=</span><span class="s2">"bill_length_mm"</span><span class="p">,</span> <span class="n">hue</span><span class="o">=</span><span class="s2">"species"</span><span class="p">)</span>
+</pre><button class="copybtn o-tooltip--left" data-tooltip="Copy" data-clipboard-target="#codecell13">
+      <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-copy" width="44" height="44" viewBox="0 0 24 24" stroke-width="1.5" stroke="#000000" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <title>Copy to clipboard</title>
+  <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
+  <rect x="8" y="8" width="12" height="12" rx="2"></rect>
+  <path d="M16 8v-2a2 2 0 0 0 -2 -2h-8a2 2 0 0 0 -2 2v8a2 2 0 0 0 2 2h2"></path>
+</svg>
+    </button></div>
+</div>
+<img alt="../_images/introduction_27_0.png" src="./Uma introdução à documentação seaborn — seaborn 0.13.2_files/introduction_27_0.png" _msthidden="A" _mstalt="868452" _msthash="87">
+<p _msttexthash="13266526" _msthash="88">The other, <a class="reference internal" href="https://seaborn.pydata.org/generated/seaborn.pairplot.html#seaborn.pairplot" title="seaborn.pairplot"><code class="xref py py-func docutils literal notranslate"><span class="pre">pairplot()</span></code></a>, takes a broader view: it shows joint and marginal distributions for all pairwise relationships and for each variable, respectively:</p>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre id="codecell14"><span></span><span class="n">sns</span><span class="o">.</span><span class="n">pairplot</span><span class="p">(</span><span class="n">data</span><span class="o">=</span><span class="n">penguins</span><span class="p">,</span> <span class="n">hue</span><span class="o">=</span><span class="s2">"species"</span><span class="p">)</span>
+</pre><button class="copybtn o-tooltip--left" data-tooltip="Copy" data-clipboard-target="#codecell14">
+      <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-copy" width="44" height="44" viewBox="0 0 24 24" stroke-width="1.5" stroke="#000000" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <title>Copy to clipboard</title>
+  <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
+  <rect x="8" y="8" width="12" height="12" rx="2"></rect>
+  <path d="M16 8v-2a2 2 0 0 0 -2 -2h-8a2 2 0 0 0 -2 2v8a2 2 0 0 0 2 2h2"></path>
+</svg>
+    </button></div>
+</div>
+<img alt="../_images/introduction_29_0.png" src="./Uma introdução à documentação seaborn — seaborn 0.13.2_files/introduction_29_0.png" _msthidden="A" _mstalt="869284" _msthash="89">
+<section id="lower-level-tools-for-building-figures">
+<span id="intro-figure-classes"></span><h3><font _mstmutation="1" _msttexthash="1110382" _msthash="90">Lower-level tools for building figures</font><a class="headerlink" href="https://seaborn.pydata.org/tutorial/introduction.html#lower-level-tools-for-building-figures" title="Permalink to this heading">#</a></h3>
+<p _msttexthash="43410874" _msthash="91">These tools work by combining <a class="reference internal" href="https://seaborn.pydata.org/tutorial/function_overview.html"><span class="doc">axes-level</span></a> plotting functions with objects that manage the layout of the figure, linking the structure of a dataset to a <a class="reference internal" href="https://seaborn.pydata.org/tutorial/axis_grids.html"><span class="doc">grid of axes</span></a>. Both elements are part of the public API, and you can use them directly to create complex figures with only a few more lines of code:</p>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre id="codecell15"><span></span><span class="n">g</span> <span class="o">=</span> <span class="n">sns</span><span class="o">.</span><span class="n">PairGrid</span><span class="p">(</span><span class="n">penguins</span><span class="p">,</span> <span class="n">hue</span><span class="o">=</span><span class="s2">"species"</span><span class="p">,</span> <span class="n">corner</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+<span class="n">g</span><span class="o">.</span><span class="n">map_lower</span><span class="p">(</span><span class="n">sns</span><span class="o">.</span><span class="n">kdeplot</span><span class="p">,</span> <span class="n">hue</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">levels</span><span class="o">=</span><span class="mi">5</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s2">".2"</span><span class="p">)</span>
+<span class="n">g</span><span class="o">.</span><span class="n">map_lower</span><span class="p">(</span><span class="n">sns</span><span class="o">.</span><span class="n">scatterplot</span><span class="p">,</span> <span class="n">marker</span><span class="o">=</span><span class="s2">"+"</span><span class="p">)</span>
+<span class="n">g</span><span class="o">.</span><span class="n">map_diag</span><span class="p">(</span><span class="n">sns</span><span class="o">.</span><span class="n">histplot</span><span class="p">,</span> <span class="n">element</span><span class="o">=</span><span class="s2">"step"</span><span class="p">,</span> <span class="n">linewidth</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">kde</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+<span class="n">g</span><span class="o">.</span><span class="n">add_legend</span><span class="p">(</span><span class="n">frameon</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+<span class="n">g</span><span class="o">.</span><span class="n">legend</span><span class="o">.</span><span class="n">set_bbox_to_anchor</span><span class="p">((</span><span class="mf">.61</span><span class="p">,</span> <span class="mf">.6</span><span class="p">))</span>
+</pre><button class="copybtn o-tooltip--left" data-tooltip="Copy" data-clipboard-target="#codecell15">
+      <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-copy" width="44" height="44" viewBox="0 0 24 24" stroke-width="1.5" stroke="#000000" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <title>Copy to clipboard</title>
+  <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
+  <rect x="8" y="8" width="12" height="12" rx="2"></rect>
+  <path d="M16 8v-2a2 2 0 0 0 -2 -2h-8a2 2 0 0 0 -2 2v8a2 2 0 0 0 2 2h2"></path>
+</svg>
+    </button></div>
+</div>
+<img alt="../_images/introduction_31_0.png" src="./Uma introdução à documentação seaborn — seaborn 0.13.2_files/introduction_31_0.png" _msthidden="A" _mstalt="866359" _msthash="92">
+</section>
+</section>
+<section id="opinionated-defaults-and-flexible-customization">
+<span id="intro-defaults"></span><h2><font _mstmutation="1" _msttexthash="1684956" _msthash="93">Opinionated defaults and flexible customization</font><a class="headerlink" href="https://seaborn.pydata.org/tutorial/introduction.html#opinionated-defaults-and-flexible-customization" title="Permalink to this heading">#</a></h2>
+<p _msttexthash="21469240" _msthash="94">Seaborn creates complete graphics with a single function call: when possible, its functions will automatically add informative axis labels and legends that explain the semantic mappings in the plot.</p>
+<p><font _mstmutation="1" _msttexthash="73780733" _msthash="95">In many cases, seaborn will also choose default values for its parameters based on characteristics of the data. For example, the <a class="reference internal" href="https://seaborn.pydata.org/tutorial/color_palettes.html" _mstmutation="1"><span class="doc">color mappings</span></a> that we have seen so far used distinct hues (blue, orange, and sometimes green) to represent different levels of the categorical variables assigned to . When mapping a numeric variable, some functions will switch to a continuous gradient:</font><code class="docutils literal notranslate"><span class="pre">hue</span></code></p>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre id="codecell16"><span></span><span class="n">sns</span><span class="o">.</span><span class="n">relplot</span><span class="p">(</span>
+    <span class="n">data</span><span class="o">=</span><span class="n">penguins</span><span class="p">,</span>
+    <span class="n">x</span><span class="o">=</span><span class="s2">"bill_length_mm"</span><span class="p">,</span> <span class="n">y</span><span class="o">=</span><span class="s2">"bill_depth_mm"</span><span class="p">,</span> <span class="n">hue</span><span class="o">=</span><span class="s2">"body_mass_g"</span>
+<span class="p">)</span>
+</pre><button class="copybtn o-tooltip--left" data-tooltip="Copy" data-clipboard-target="#codecell16">
+      <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-copy" width="44" height="44" viewBox="0 0 24 24" stroke-width="1.5" stroke="#000000" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <title>Copy to clipboard</title>
+  <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
+  <rect x="8" y="8" width="12" height="12" rx="2"></rect>
+  <path d="M16 8v-2a2 2 0 0 0 -2 -2h-8a2 2 0 0 0 -2 2v8a2 2 0 0 0 2 2h2"></path>
+</svg>
+    </button></div>
+</div>
+<img alt="../_images/introduction_33_0.png" src="./Uma introdução à documentação seaborn — seaborn 0.13.2_files/introduction_33_0.png" _msthidden="A" _mstalt="867191" _msthash="96">
+<p _msttexthash="237021018" _msthash="97">When you’re ready to share or publish your work, you’ll probably want to polish the figure beyond what the defaults achieve. Seaborn allows for several levels of customization. It defines multiple built-in <a class="reference internal" href="https://seaborn.pydata.org/tutorial/aesthetics.html"><span class="doc">themes</span></a> that apply to all figures, its functions have standardized parameters that can modify the semantic mappings for each plot, and additional keyword arguments are passed down to the underlying matplotlib artists, allowing even more control. Once you’ve created a plot, its properties can be modified through both the seaborn API and by dropping down to the matplotlib layer for fine-grained tweaking:</p>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre id="codecell17"><span></span><span class="n">sns</span><span class="o">.</span><span class="n">set_theme</span><span class="p">(</span><span class="n">style</span><span class="o">=</span><span class="s2">"ticks"</span><span class="p">,</span> <span class="n">font_scale</span><span class="o">=</span><span class="mf">1.25</span><span class="p">)</span>
+<span class="n">g</span> <span class="o">=</span> <span class="n">sns</span><span class="o">.</span><span class="n">relplot</span><span class="p">(</span>
+    <span class="n">data</span><span class="o">=</span><span class="n">penguins</span><span class="p">,</span>
+    <span class="n">x</span><span class="o">=</span><span class="s2">"bill_length_mm"</span><span class="p">,</span> <span class="n">y</span><span class="o">=</span><span class="s2">"bill_depth_mm"</span><span class="p">,</span> <span class="n">hue</span><span class="o">=</span><span class="s2">"body_mass_g"</span><span class="p">,</span>
+    <span class="n">palette</span><span class="o">=</span><span class="s2">"crest"</span><span class="p">,</span> <span class="n">marker</span><span class="o">=</span><span class="s2">"x"</span><span class="p">,</span> <span class="n">s</span><span class="o">=</span><span class="mi">100</span><span class="p">,</span>
+<span class="p">)</span>
+<span class="n">g</span><span class="o">.</span><span class="n">set_axis_labels</span><span class="p">(</span><span class="s2">"Bill length (mm)"</span><span class="p">,</span> <span class="s2">"Bill depth (mm)"</span><span class="p">,</span> <span class="n">labelpad</span><span class="o">=</span><span class="mi">10</span><span class="p">)</span>
+<span class="n">g</span><span class="o">.</span><span class="n">legend</span><span class="o">.</span><span class="n">set_title</span><span class="p">(</span><span class="s2">"Body mass (g)"</span><span class="p">)</span>
+<span class="n">g</span><span class="o">.</span><span class="n">figure</span><span class="o">.</span><span class="n">set_size_inches</span><span class="p">(</span><span class="mf">6.5</span><span class="p">,</span> <span class="mf">4.5</span><span class="p">)</span>
+<span class="n">g</span><span class="o">.</span><span class="n">ax</span><span class="o">.</span><span class="n">margins</span><span class="p">(</span><span class="mf">.15</span><span class="p">)</span>
+<span class="n">g</span><span class="o">.</span><span class="n">despine</span><span class="p">(</span><span class="n">trim</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+</pre><button class="copybtn o-tooltip--left" data-tooltip="Copy" data-clipboard-target="#codecell17">
+      <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-copy" width="44" height="44" viewBox="0 0 24 24" stroke-width="1.5" stroke="#000000" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <title>Copy to clipboard</title>
+  <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
+  <rect x="8" y="8" width="12" height="12" rx="2"></rect>
+  <path d="M16 8v-2a2 2 0 0 0 -2 -2h-8a2 2 0 0 0 -2 2v8a2 2 0 0 0 2 2h2"></path>
+</svg>
+    </button></div>
+</div>
+<img alt="../_images/introduction_35_0.png" src="./Uma introdução à documentação seaborn — seaborn 0.13.2_files/introduction_35_0.png" _msthidden="A" _mstalt="868023" _msthash="98">
+<section id="relationship-to-matplotlib">
+<span id="intro-matplotlib"></span><h3><font _mstmutation="1" _msttexthash="623519" _msthash="99">Relationship to matplotlib</font><a class="headerlink" href="https://seaborn.pydata.org/tutorial/introduction.html#relationship-to-matplotlib" title="Permalink to this heading">#</a></h3>
+<p _msttexthash="38987377" _msthash="100">Seaborn’s integration with matplotlib allows you to use it across the many environments that matplotlib supports, including exploratory analysis in notebooks, real-time interaction in GUI applications, and archival output in a number of raster and vector formats.</p>
+<p _msttexthash="103958374" _msthash="101">While you can be productive using only seaborn functions, full customization of your graphics will require some knowledge of matplotlib’s concepts and API. One aspect of the learning curve for new users of seaborn will be knowing when dropping down to the matplotlib layer is necessary to achieve a particular customization. On the other hand, users coming from matplotlib will find that much of their knowledge transfers.</p>
+<p _msttexthash="90007814" _msthash="102">Matplotlib has a comprehensive and powerful API; just about any attribute of the figure can be changed to your liking. A combination of seaborn’s high-level interface and matplotlib’s deep customizability will allow you both to quickly explore your data and to create graphics that can be tailored into a <a class="reference external" href="https://github.com/wagnerlabpapers/Waskom_PNAS_2017">publication quality</a> final product.</p>
+</section>
+<section id="next-steps">
+<span id="intro-next-steps"></span><h3><font _mstmutation="1" _msttexthash="141141" _msthash="103">Next steps</font><a class="headerlink" href="https://seaborn.pydata.org/tutorial/introduction.html#next-steps" title="Permalink to this heading">#</a></h3>
+<p _msttexthash="208419783" _msthash="104">You have a few options for where to go next. You might first want to learn how to <a class="reference internal" href="https://seaborn.pydata.org/installing.html"><span class="doc">install seaborn</span></a>. Once that’s done, you can browse the <a class="reference internal" href="https://seaborn.pydata.org/examples/index.html"><span class="doc">example gallery</span></a> to get a broader sense for what kind of graphics seaborn can produce. Or you can read through the rest of the <a class="reference internal" href="https://seaborn.pydata.org/tutorial.html"><span class="doc">user guide and tutorial</span></a> for a deeper discussion of the different tools and what they are designed to accomplish. If you have a specific plot in mind and want to know how to make it, you could check out the <a class="reference internal" href="https://seaborn.pydata.org/api.html"><span class="doc">API reference</span></a>, which documents each function’s parameters and shows many examples to illustrate usage.</p>
+</section>
+</section>
+</section>
+
+
+          </article>
+          
+
+          
+          
+      </div>
+      
+    </div>
+  </div>
+
+  
+    
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script src="./Uma introdução à documentação seaborn — seaborn 0.13.2_files/pydata-sphinx-theme.js.baixados"></script>
+
+<footer class="footer" style="border-top: 1px solid #ccc; padding-top: 10px">
+  <div class="container">
+    <div id="credits" style="width: 50%; float: left">
+      <p><font _mstmutation="1" _msttexthash="3639389" _msthash="105">
+      © Copyright 2012-2024, <a href="https://mwaskom.github.io/" _mstmutation="1">Michael Waskom</a>.<br _mstmutation="1">
+      Created using <a href="https://www.sphinx-doc.org/" _mstmutation="1">Sphinx</a> and the <a href="https://pydata-sphinx-theme.readthedocs.io/en/stable/" _mstmutation="1">PyData Theme</a>.</font><br>
+      </p>
+    </div>
+    <div class="dropup show" style="float: right; margin: 10px">
+        <a class="btn btn-secondary dropdown-toggle" href="https://seaborn.pydata.org/tutorial/introduction.html#" role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" _msttexthash="93366" _msthash="106">
+            Archive
+        </a>
+        <div class="dropdown-menu dropdown-menu-right" aria-labelledby="dropdownMenuLink" _msthidden="4">
+          <a class="dropdown-item" href="https://seaborn.pydata.org/archive/0.12/index.html" _msttexthash="34632" _msthidden="1" _msthash="107">v0.12</a>
+          <a class="dropdown-item" href="https://seaborn.pydata.org/archive/0.11/index.html" _msttexthash="34489" _msthidden="1" _msthash="108">v0.11</a>
+          <a class="dropdown-item" href="https://seaborn.pydata.org/archive/0.10/index.html" _msttexthash="34346" _msthidden="1" _msthash="109">v0.10</a>
+          <a class="dropdown-item" href="https://seaborn.pydata.org/archive/0.9/index.html" _msttexthash="28522" _msthidden="1" _msthash="110">v0.9</a>
+        </div>
+    </div>
+    <div id="version" style="color: #999; float: right; margin: 15px" _msttexthash="50401" _msthash="111">v0.13.2</div>
+    </div>
+  
+</footer>
+  
+</body></html>

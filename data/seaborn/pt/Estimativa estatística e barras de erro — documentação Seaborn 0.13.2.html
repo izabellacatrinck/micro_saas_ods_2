@@ -1,0 +1,700 @@
+<!DOCTYPE html>
+<!-- saved from url=(0051)https://seaborn.pydata.org/tutorial/error_bars.html -->
+<html lang="pt" data-mode="light" data-theme="light"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"><meta name="generator" content="Docutils 0.19: https://docutils.sourceforge.io/">
+
+    <title _msttexthash="7247773" _msthash="0">Estimativa estatística e barras de erro — documentação Seaborn 0.13.2</title>
+  <script>
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "light";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "light";
+  </script>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="./Estimativa estatística e barras de erro — documentação Seaborn 0.13.2_files/theme.css" rel="stylesheet">
+<link href="./Estimativa estatística e barras de erro — documentação Seaborn 0.13.2_files/pydata-sphinx-theme.css" rel="stylesheet">
+
+  
+  <link rel="stylesheet" href="./Estimativa estatística e barras de erro — documentação Seaborn 0.13.2_files/all.min.css">
+  <link rel="preload" as="font" type="font/woff2" crossorigin="" href="https://seaborn.pydata.org/_static/vendor/fontawesome/5.13.0/webfonts/fa-solid-900.woff2">
+  <link rel="preload" as="font" type="font/woff2" crossorigin="" href="https://seaborn.pydata.org/_static/vendor/fontawesome/5.13.0/webfonts/fa-brands-400.woff2">
+
+    <link rel="stylesheet" type="text/css" href="./Estimativa estatística e barras de erro — documentação Seaborn 0.13.2_files/pygments.css">
+    <link rel="stylesheet" type="text/css" href="./Estimativa estatística e barras de erro — documentação Seaborn 0.13.2_files/plot_directive.css">
+    <link rel="stylesheet" type="text/css" href="./Estimativa estatística e barras de erro — documentação Seaborn 0.13.2_files/copybutton.css">
+    <link rel="stylesheet" type="text/css" href="./Estimativa estatística e barras de erro — documentação Seaborn 0.13.2_files/design-style.1e8bd061cd6da7fc9cf755528e8ffc24.min.css">
+    <link rel="stylesheet" type="text/css" href="./Estimativa estatística e barras de erro — documentação Seaborn 0.13.2_files/custom.css">
+  
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="./Estimativa estatística e barras de erro — documentação Seaborn 0.13.2_files/pydata-sphinx-theme.js.baixados">
+
+    <script data-url_root="../" id="documentation_options" src="./Estimativa estatística e barras de erro — documentação Seaborn 0.13.2_files/documentation_options.js.baixados"></script>
+    <script src="./Estimativa estatística e barras de erro — documentação Seaborn 0.13.2_files/jquery.js.baixados"></script>
+    <script src="./Estimativa estatística e barras de erro — documentação Seaborn 0.13.2_files/underscore.js.baixados"></script>
+    <script src="./Estimativa estatística e barras de erro — documentação Seaborn 0.13.2_files/_sphinx_javascript_frameworks_compat.js.baixados"></script>
+    <script src="./Estimativa estatística e barras de erro — documentação Seaborn 0.13.2_files/doctools.js.baixados"></script>
+    <script src="./Estimativa estatística e barras de erro — documentação Seaborn 0.13.2_files/sphinx_highlight.js.baixados"></script>
+    <script src="./Estimativa estatística e barras de erro — documentação Seaborn 0.13.2_files/clipboard.min.js.baixados"></script>
+    <script src="./Estimativa estatística e barras de erro — documentação Seaborn 0.13.2_files/copybutton.js.baixados"></script>
+    <script src="./Estimativa estatística e barras de erro — documentação Seaborn 0.13.2_files/design-tabs.js.baixados"></script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'tutorial/error_bars';</script>
+    <link rel="shortcut icon" href="https://seaborn.pydata.org/_static/favicon.ico">
+    <link rel="index" title="Index" href="https://seaborn.pydata.org/genindex.html">
+    <link rel="search" title="Search" href="https://seaborn.pydata.org/search.html">
+    <link rel="next" title="Estimating regression fits" href="https://seaborn.pydata.org/tutorial/regression.html">
+    <link rel="prev" title="Visualizing categorical data" href="https://seaborn.pydata.org/tutorial/categorical.html">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="docsearch:language" content="en">
+  </head>
+  
+  
+  <body data-spy="scroll" data-target="#bd-toc-nav" data-offset="180" data-default-mode="light">
+
+  
+  <input type="checkbox" class="sidebar-toggle" name="__primary" id="__primary">
+  <label class="overlay overlay-primary" for="__primary"></label>
+
+  
+  <input type="checkbox" class="sidebar-toggle" name="__secondary" id="__secondary">
+  <label class="overlay overlay-secondary" for="__secondary"></label>
+
+  
+  <div class="search-button__wrapper" _msthidden="1">
+    <div class="search-button__overlay"></div>
+    <div class="search-button__search-container" _msthidden="1">
+      
+<form class="bd-search d-flex align-items-center" action="https://seaborn.pydata.org/search.html" method="get" _msthidden="1">
+  <i class="icon fas fa-search"></i>
+  <input type="search" class="form-control" name="q" id="search-input" placeholder="Search the docs ..." aria-label="Search the docs ..." autocomplete="off" _msthidden="A" _mstplaceholder="267410" _msthash="1" _mstaria-label="267410">
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form>
+    </div>
+  </div>
+
+  
+  <nav class="bd-header navbar navbar-expand-lg bd-navbar" id="navbar-main"><div class="bd-header__inner container-xl">
+  <label class="sidebar-toggle primary-toggle" for="__primary">
+      <span class="fas fa-bars"></span>
+  </label>
+  <div id="navbar-start">
+    
+    
+  
+
+
+<a class="navbar-brand logo" href="https://seaborn.pydata.org/index.html">
+  
+  
+  
+  
+  
+  
+    <img src="./Estimativa estatística e barras de erro — documentação Seaborn 0.13.2_files/logo-wide-lightbg.svg" class="logo__image only-light" alt="Imagem do logo" _mstalt="131794" _msthash="2">
+    <img src="./Estimativa estatística e barras de erro — documentação Seaborn 0.13.2_files/logo-wide-lightbg.svg" class="logo__image only-dark" alt="Logo image" _msthidden="A" _mstalt="131794" _msthash="3">
+  
+  
+</a>
+    
+  </div>
+
+  
+  <div class="col-lg-9 navbar-header-items">
+    <div id="navbar-center" class="mr-auto">
+      
+      <div class="navbar-center-item">
+        <ul id="navbar-main-elements" class="navbar-nav">
+    <li class="toctree-l1 nav-item">
+ <a class="reference internal nav-link" href="https://seaborn.pydata.org/installing.html" _msttexthash="203125" _msthash="4"> Instalação </a>
+</li>
+
+<li class="toctree-l1 nav-item">
+ <a class="reference internal nav-link" href="https://seaborn.pydata.org/examples/index.html" _msttexthash="91390" _msthash="5"> Galeria </a>
+</li>
+
+<li class="toctree-l1 current active nav-item">
+ <a class="reference internal nav-link" href="https://seaborn.pydata.org/tutorial.html" _msttexthash="116545" _msthash="6">
+  Tutorial
+ </a>
+</li>
+
+<li class="toctree-l1 nav-item">
+ <a class="reference internal nav-link" href="https://seaborn.pydata.org/api.html" _msttexthash="22776" _msthash="7">
+  API
+ </a>
+</li>
+
+<li class="toctree-l1 nav-item">
+ <a class="reference internal nav-link" href="https://seaborn.pydata.org/whatsnew/index.html" _msttexthash="198991" _msthash="8"> Lançamentos </a>
+</li>
+
+<li class="toctree-l1 nav-item">
+ <a class="reference internal nav-link" href="https://seaborn.pydata.org/citing.html" _msttexthash="130403" _msthash="9"> Citação </a>
+</li>
+
+<li class="toctree-l1 nav-item">
+ <a class="reference internal nav-link" href="https://seaborn.pydata.org/faq.html" _msttexthash="22607" _msthash="10">
+  FAQ
+ </a>
+</li>
+
+</ul>
+      </div>
+      
+    </div>
+
+    <div id="navbar-end">
+      <div class="navbar-end-item navbar-end__search-button-container">
+        
+<button class="btn btn-sm navbar-btn search-button search-button__button" title="Search">
+  <i class="fas fa-search"></i>
+</button>
+      </div>
+      
+      <div class="navbar-end-item">
+        <ul id="navbar-icon-links" class="navbar-nav" aria-label="Links de Ícones" _mstaria-label="131963" _msthash="11">
+        <li class="nav-item">
+          
+          
+          
+          
+          
+          
+          <a href="https://github.com/mwaskom/seaborn" title="GitHub" class="nav-link" rel="noopener" target="_blank"><span><i class="fab fa-github"></i></span>
+            <label class="sr-only" _msttexthash="72332" _msthash="12">GitHub</label></a>
+        </li>
+        <li class="nav-item">
+          
+          
+          
+          
+          
+          
+          <a href="https://stackoverflow.com/tags/seaborn" title="StackOverflow" class="nav-link" rel="noopener" target="_blank"><span><i class="fab fa-stack-overflow"></i></span>
+            <label class="sr-only" _msttexthash="232466" _msthash="13">StackOverflow</label></a>
+        </li>
+        <li class="nav-item">
+          
+          
+          
+          
+          
+          
+          <a href="https://twitter.com/michaelwaskom" title="Twitter" class="nav-link" rel="noopener" target="_blank"><span><i class="fab fa-twitter"></i></span>
+            <label class="sr-only" _msttexthash="98995" _msthash="14">Twitter</label></a>
+        </li>
+      </ul>
+      </div>
+      
+    </div>
+  </div>
+
+
+  
+  <div class="search-button-container--mobile">
+<button class="btn btn-sm navbar-btn search-button search-button__button" title="Search">
+  <i class="fas fa-search"></i>
+</button>
+  </div>
+
+  
+  <label class="sidebar-toggle secondary-toggle" for="__secondary">
+      <span class="fas fa-outdent"></span>
+  </label>
+  
+
+</div>
+  </nav>
+  
+
+  <div class="bd-container container-xl">
+    <div class="bd-container__inner row">
+      
+      <div class="bd-sidebar-primary bd-sidebar">
+        
+  
+  <div class="sidebar-header-items sidebar-primary__section" _msthidden="13">
+    <p class="sidebar-header-items__title" role="heading" aria-level="1" aria-label="Navigation" _msthidden="1" _mstaria-label="157742" _msthash="15" _msttexthash="256997">
+      Site Navigation
+    </p>
+    
+    
+      <div class="sidebar-header-items__center" _msthidden="7">
+      
+      <div class="navbar-center-item" _msthidden="7">
+        <ul id="navbar-main-elements" class="navbar-nav" _msthidden="7">
+    <li class="toctree-l1 nav-item" _msthidden="1">
+ <a class="reference internal nav-link" href="https://seaborn.pydata.org/installing.html" _msttexthash="157573" _msthidden="1" _msthash="16">
+  Installing
+ </a>
+</li>
+
+<li class="toctree-l1 nav-item" _msthidden="1">
+ <a class="reference internal nav-link" href="https://seaborn.pydata.org/examples/index.html" _msttexthash="95901" _msthidden="1" _msthash="17">
+  Gallery
+ </a>
+</li>
+
+<li class="toctree-l1 current active nav-item" _msthidden="1">
+ <a class="reference internal nav-link" href="https://seaborn.pydata.org/tutorial.html" _msttexthash="116545" _msthidden="1" _msthash="18">
+  Tutorial
+ </a>
+</li>
+
+<li class="toctree-l1 nav-item" _msthidden="1">
+ <a class="reference internal nav-link" href="https://seaborn.pydata.org/api.html" _msttexthash="22776" _msthidden="1" _msthash="19">
+  API
+ </a>
+</li>
+
+<li class="toctree-l1 nav-item" _msthidden="1">
+ <a class="reference internal nav-link" href="https://seaborn.pydata.org/whatsnew/index.html" _msttexthash="113542" _msthidden="1" _msthash="20">
+  Releases
+ </a>
+</li>
+
+<li class="toctree-l1 nav-item" _msthidden="1">
+ <a class="reference internal nav-link" href="https://seaborn.pydata.org/citing.html" _msttexthash="76037" _msthidden="1" _msthash="21">
+  Citing
+ </a>
+</li>
+
+<li class="toctree-l1 nav-item" _msthidden="1">
+ <a class="reference internal nav-link" href="https://seaborn.pydata.org/faq.html" _msttexthash="22607" _msthidden="1" _msthash="22">
+  FAQ
+ </a>
+</li>
+
+</ul>
+      </div>
+      
+      </div>
+    
+
+    
+    
+    <div class="sidebar-header-items__end" _msthidden="4">
+      
+      <div class="navbar-end-item" _msthidden="4">
+        <ul id="navbar-icon-links" class="navbar-nav" aria-label="Icon Links" _msthidden="3" _mstaria-label="131963" _msthash="23">
+        <li class="nav-item" _msthidden="1">
+          
+          
+          
+          
+          
+          
+          <a href="https://github.com/mwaskom/seaborn" title="GitHub" class="nav-link" rel="noopener" target="_blank" _msthidden="1"><span><i class="fab fa-github"></i></span>
+            <label class="sr-only" _msttexthash="72332" _msthidden="1" _msthash="24">GitHub</label></a>
+        </li>
+        <li class="nav-item" _msthidden="1">
+          
+          
+          
+          
+          
+          
+          <a href="https://stackoverflow.com/tags/seaborn" title="StackOverflow" class="nav-link" rel="noopener" target="_blank" _msthidden="1"><span><i class="fab fa-stack-overflow"></i></span>
+            <label class="sr-only" _msttexthash="232466" _msthidden="1" _msthash="25">StackOverflow</label></a>
+        </li>
+        <li class="nav-item" _msthidden="1">
+          
+          
+          
+          
+          
+          
+          <a href="https://twitter.com/michaelwaskom" title="Twitter" class="nav-link" rel="noopener" target="_blank" _msthidden="1"><span><i class="fab fa-twitter"></i></span>
+            <label class="sr-only" _msttexthash="98995" _msthidden="1" _msthash="26">Twitter</label></a>
+        </li>
+      </ul>
+      </div>
+      
+    </div>
+    
+  </div>
+
+  
+  <div class="sidebar-start-items sidebar-primary__section">
+    <div class="sidebar-start-items__item"><nav class="bd-links" id="bd-docs-nav" aria-label="Navegação por seções" _mstaria-label="353847" _msthash="27">
+  <div class="bd-toc-item navbar-nav">
+    <ul class="nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="https://seaborn.pydata.org/tutorial/introduction.html" _msttexthash="591084" _msthash="28"> Uma introdução ao seaborn </a>
+ </li>
+</ul>
+<ul class="nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="https://seaborn.pydata.org/tutorial/function_overview.html" _msttexthash="1374724" _msthash="29"> Visão geral das funções de plotagem seaborn </a>
+ </li>
+</ul>
+<ul class="nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="https://seaborn.pydata.org/tutorial/data_structure.html" _msttexthash="1162369" _msthash="30"> Estruturas de dados aceitas pelo seaborn </a>
+ </li>
+</ul>
+<ul class="nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="https://seaborn.pydata.org/tutorial/objects_interface.html" _msttexthash="632931" _msthash="31"> A interface seaborn.objects </a>
+ </li>
+</ul>
+<ul class="nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="https://seaborn.pydata.org/tutorial/properties.html" _msttexthash="692822" _msthash="32"> Propriedades dos objetos Mark </a>
+ </li>
+</ul>
+<ul class="nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="https://seaborn.pydata.org/tutorial/relational.html" _msttexthash="1139190" _msthash="33"> Visualizando relações estatísticas </a>
+ </li>
+</ul>
+<ul class="nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="https://seaborn.pydata.org/tutorial/distributions.html" _msttexthash="1386658" _msthash="34"> Visualização das distribuições dos dados </a>
+ </li>
+</ul>
+<ul class="nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="https://seaborn.pydata.org/tutorial/categorical.html" _msttexthash="995553" _msthash="35"> Visualização de dados categóricos </a>
+ </li>
+</ul>
+<ul class="current nav bd-sidenav">
+ <li class="toctree-l1 current active">
+  <a class="current reference internal" href="https://seaborn.pydata.org/tutorial/error_bars.html#" _msttexthash="1143376" _msthash="36"> Estimativa estatística e barras de erro </a>
+ </li>
+</ul>
+<ul class="nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="https://seaborn.pydata.org/tutorial/regression.html" _msttexthash="1013727" _msthash="37"> Estimativa dos ajustes de regressão </a>
+ </li>
+</ul>
+<ul class="nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="https://seaborn.pydata.org/tutorial/axis_grids.html" _msttexthash="1925560" _msthash="38"> Construindo grades estruturadas de múltiplos plots </a>
+ </li>
+</ul>
+<ul class="nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="https://seaborn.pydata.org/tutorial/aesthetics.html" _msttexthash="711880" _msthash="39"> Estética de controle da figura </a>
+ </li>
+</ul>
+<ul class="nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="https://seaborn.pydata.org/tutorial/color_palettes.html" _msttexthash="608400" _msthash="40"> Escolha das paletas de cores </a>
+ </li>
+</ul>
+
+  </div>
+</nav>
+    </div>
+  </div>
+  
+
+  
+  <div class="sidebar-end-items sidebar-primary__section">
+    <div class="sidebar-end-items__item">
+    </div>
+  </div>
+
+      </div>
+
+      
+      
+      
+        <div class="bd-sidebar-secondary bd-toc">
+          
+<div class="toc-item">
+  
+<div class="tocsection onthispage">
+    <i class="fas fa-list"></i><font _mstmutation="1" _msttexthash="199043" _msthash="41"> Nesta página </font></div>
+<nav id="bd-toc-nav" class="page-toc">
+    <ul class="visible nav section-nav flex-column">
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="https://seaborn.pydata.org/tutorial/error_bars.html#measures-of-data-spread" _msttexthash="916942" _msthash="42"> Medidas de disseminação dos dados </a>
+  <ul class="nav section-nav flex-column" _msthidden="2">
+   <li class="toc-h3 nav-item toc-entry" _msthidden="1">
+    <a class="reference internal nav-link" href="https://seaborn.pydata.org/tutorial/error_bars.html#standard-deviation-error-bars" _msttexthash="706849" _msthidden="1" _msthash="43">
+     Standard deviation error bars
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry" _msthidden="1">
+    <a class="reference internal nav-link" href="https://seaborn.pydata.org/tutorial/error_bars.html#percentile-interval-error-bars" _msttexthash="756626" _msthidden="1" _msthash="44">
+     Percentile interval error bars
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="https://seaborn.pydata.org/tutorial/error_bars.html#measures-of-estimate-uncertainty" _msttexthash="794300" _msthash="45"> Medidas de incerteza estimativa </a>
+  <ul class="nav section-nav flex-column" _msthidden="3">
+   <li class="toc-h3 nav-item toc-entry" _msthidden="1">
+    <a class="reference internal nav-link" href="https://seaborn.pydata.org/tutorial/error_bars.html#standard-error-bars" _msttexthash="353847" _msthidden="1" _msthash="46">
+     Standard error bars
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry" _msthidden="1">
+    <a class="reference internal nav-link" href="https://seaborn.pydata.org/tutorial/error_bars.html#confidence-interval-error-bars" _msttexthash="752037" _msthidden="1" _msthash="47">
+     Confidence interval error bars
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry" _msthidden="1">
+    <a class="reference internal nav-link" href="https://seaborn.pydata.org/tutorial/error_bars.html#custom-error-bars" _msttexthash="295932" _msthidden="1" _msthash="48">
+     Custom error bars
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="https://seaborn.pydata.org/tutorial/error_bars.html#error-bars-on-regression-fits" _msttexthash="1065272" _msthash="49"> Barras de erro em ajustes de regressão </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="https://seaborn.pydata.org/tutorial/error_bars.html#are-error-bars-enough" _msttexthash="766831" _msthash="50"> Barras de erro são suficientes? </a>
+ </li>
+</ul>
+
+</nav>
+</div>
+
+<div class="toc-item">
+  
+</div>
+
+<div class="toc-item">
+  
+</div>
+
+        </div>
+      
+      
+
+      
+      
+      <div class="bd-content col">
+          
+          <div class="bd-header-article">
+              
+          </div>
+
+          
+          
+          <article class="bd-article" role="main">
+            
+  <section id="statistical-estimation-and-error-bars">
+<span id="errorbar-tutorial"></span><h1><font _mstmutation="1" _msttexthash="1143376" _msthash="51">Estimativa estatística e barras de erro</font><a class="headerlink" href="https://seaborn.pydata.org/tutorial/error_bars.html#statistical-estimation-and-error-bars" title="Permalink to this heading">#</a></h1>
+<p _msttexthash="68868644" _msthash="52">A visualização de dados às vezes envolve uma etapa de agregação ou estimativa, onde múltiplos pontos de dados são reduzidos a uma estatística resumida, como a média ou mediana. Ao mostrar uma estatística resumida, geralmente é apropriado adicionar <em _istranslated="1">barras de erro</em>, que fornecem uma pista visual sobre o quão bem o resumo representa os pontos de dados subjacentes.</p>
+<p _msttexthash="45705036" _msthash="53">Várias funções do seaborn calculam automaticamente tanto estatísticas resumidas quanto barras de erro quando recebem um conjunto completo de dados. Este capítulo explica como você pode controlar o que as barras de erro mostram e por que pode escolher cada uma das opções que a Seaborn oferece.</p>
+<p _msttexthash="107200756" _msthash="54">As barras de erro em torno de uma estimativa de tendência central podem mostrar uma de duas coisas gerais: ou a faixa de incerteza sobre a estimativa ou a distribuição dos dados subjacentes ao redor dela. Essas medidas estão relacionadas: dado o mesmo tamanho da amostra, as estimativas serão mais incertas quando os dados tiverem uma disseminação maior. Mas a incerteza diminuirá à medida que o tamanho das amostras cresce, enquanto a disseminação não.</p>
+<p _msttexthash="37842298" _msthash="55">No seaborn, existem duas abordagens para construir cada tipo de barra de erro. Uma abordagem é paramétrica, usando uma fórmula que se baseia em suposições sobre a forma da distribuição. A outra abordagem é não paramétrica, usando apenas os dados que você fornece.</p>
+<p><font _mstmutation="1" _msttexthash="57516797" _msthash="56">Sua escolha é feita com o parâmetro que existe para cada função que faz estimativa como parte do plotamento. Esse parâmetro aceita o nome do método a ser usado e, opcionalmente, um parâmetro que controla o tamanho do intervalo. As escolhas podem ser definidas em uma taxonomia 2D que depende do que é mostrado e de como ela é construída:</font><code class="docutils literal notranslate"><span class="pre">errorbar</span></code></p>
+<img alt=".. /_images/error_bars_2_0.svg" src="./Estimativa estatística e barras de erro — documentação Seaborn 0.13.2_files/error_bars_2_0.svg" _mstalt="739037" _msthash="57"><p _msttexthash="84188650" _msthash="58">Você notará que o parâmetro de tamanho é definido de forma diferente para as abordagens paramétricas e não paramétricas. Para barras de erro paramétrico, é um fator escalar que é multiplicado pela estatística que define o erro (erro padrão ou desvio padrão). Para barras de erro não paramétricas, é uma largura percentual. Isso é explicado mais detalhadamente para cada abordagem específica abaixo.</p>
+<div class="admonition note">
+<p class="admonition-title" _msttexthash="44824" _msthash="59">Nota</p>
+<p><font _mstmutation="1" _msttexthash="25564656" _msthash="60">A API descrita aqui foi introduzida no seaborn v0.12. Em versões anteriores, as únicas opções eram mostrar um intervalo de confiança bootstrap ou um desvio padrão, com a escolha controlada pelo parâmetro (ou seja, ou ).</font><code class="docutils literal notranslate"><span class="pre">errorbar</span></code><code class="docutils literal notranslate"><span class="pre">ci</span></code><code class="docutils literal notranslate"><span class="pre">ci=&lt;size&gt;</span></code><code class="docutils literal notranslate"><span class="pre">ci="sd"</span></code></p>
+</div>
+<p _msttexthash="4561999" _msthash="61">Para comparar as diferentes parametrizações, usaremos a seguinte função auxiliar:</p>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre id="codecell0"><span></span><span class="k">def</span> <span class="nf">plot_errorbars</span><span class="p">(</span><span class="n">arg</span><span class="p">,</span> <span class="o">**</span><span class="n">kws</span><span class="p">):</span>
+    <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">seed</span><span class="p">(</span><span class="nb">sum</span><span class="p">(</span><span class="nb">map</span><span class="p">(</span><span class="nb">ord</span><span class="p">,</span> <span class="s2">"error_bars"</span><span class="p">)))</span>
+    <span class="n">x</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">normal</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">100</span><span class="p">)</span>
+    <span class="n">f</span><span class="p">,</span> <span class="n">axs</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">7</span><span class="p">,</span> <span class="mi">2</span><span class="p">),</span> <span class="n">sharex</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">layout</span><span class="o">=</span><span class="s2">"tight"</span><span class="p">)</span>
+    <span class="n">sns</span><span class="o">.</span><span class="n">pointplot</span><span class="p">(</span><span class="n">x</span><span class="o">=</span><span class="n">x</span><span class="p">,</span> <span class="n">errorbar</span><span class="o">=</span><span class="n">arg</span><span class="p">,</span> <span class="o">**</span><span class="n">kws</span><span class="p">,</span> <span class="n">capsize</span><span class="o">=</span><span class="mf">.3</span><span class="p">,</span> <span class="n">ax</span><span class="o">=</span><span class="n">axs</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span>
+    <span class="n">sns</span><span class="o">.</span><span class="n">stripplot</span><span class="p">(</span><span class="n">x</span><span class="o">=</span><span class="n">x</span><span class="p">,</span> <span class="n">jitter</span><span class="o">=</span><span class="mf">.3</span><span class="p">,</span> <span class="n">ax</span><span class="o">=</span><span class="n">axs</span><span class="p">[</span><span class="mi">1</span><span class="p">])</span>
+</pre><button class="copybtn o-tooltip--left" data-tooltip="Copy" data-clipboard-target="#codecell0">
+      <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-copy" width="44" height="44" viewBox="0 0 24 24" stroke-width="1.5" stroke="#000000" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <title>Copy to clipboard</title>
+  <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
+  <rect x="8" y="8" width="12" height="12" rx="2"></rect>
+  <path d="M16 8v-2a2 2 0 0 0 -2 -2h-8a2 2 0 0 0 -2 2v8a2 2 0 0 0 2 2h2"></path>
+</svg>
+    </button></div>
+</div>
+<section id="measures-of-data-spread">
+<h2><font _mstmutation="1" _msttexthash="916942" _msthash="62">Medidas de disseminação dos dados</font><a class="headerlink" href="https://seaborn.pydata.org/tutorial/error_bars.html#measures-of-data-spread" title="Permalink to this heading">#</a></h2>
+<p _msttexthash="18394779" _msthash="63">Barras de erro que representam a dispersão dos dados apresentam uma exibição compacta da distribuição, usando três números onde <a class="reference internal" href="https://seaborn.pydata.org/generated/seaborn.boxplot.html#seaborn.boxplot" title="seaborn.boxplot" _istranslated="1"><code class="xref py py-func docutils literal notranslate" _istranslated="1"></code></a> usariam 5 ou mais e <a class="reference internal" href="https://seaborn.pydata.org/generated/seaborn.violinplot.html#seaborn.violinplot" title="seaborn.violinplot" _istranslated="1"><code class="xref py py-func docutils literal notranslate" _istranslated="1"></code></a> usariam um algoritmo complicado.</p>
+<section id="standard-deviation-error-bars">
+<h3><font _mstmutation="1" _msttexthash="706849" _msthash="64">Standard deviation error bars</font><a class="headerlink" href="https://seaborn.pydata.org/tutorial/error_bars.html#standard-deviation-error-bars" title="Permalink to this heading">#</a></h3>
+<p><font _mstmutation="1" _msttexthash="109342402" _msthash="65">Standard deviation error bars are the simplest to explain, because the standard deviation is a familiar statistic. It is the average distance from each data point to the sample mean. By default,  will draw error bars at +/- 1 sd around the estimate, but the range can be increased by passing a scaling size parameter. Note that, assuming normally-distributed data, ~68% of the data will lie within one standard deviation, ~95% will lie within two, and ~99.7% will lie within three:</font><code class="docutils literal notranslate"><span class="pre">errorbar="sd"</span></code></p>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre id="codecell1"><span></span><span class="n">plot_errorbars</span><span class="p">(</span><span class="s2">"sd"</span><span class="p">)</span>
+</pre><button class="copybtn o-tooltip--left" data-tooltip="Copy" data-clipboard-target="#codecell1">
+      <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-copy" width="44" height="44" viewBox="0 0 24 24" stroke-width="1.5" stroke="#000000" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <title>Copy to clipboard</title>
+  <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
+  <rect x="8" y="8" width="12" height="12" rx="2"></rect>
+  <path d="M16 8v-2a2 2 0 0 0 -2 -2h-8a2 2 0 0 0 -2 2v8a2 2 0 0 0 2 2h2"></path>
+</svg>
+    </button></div>
+</div>
+<img alt="../_images/error_bars_6_0.png" src="./Estimativa estatística e barras de erro — documentação Seaborn 0.13.2_files/error_bars_6_0.png" _mstalt="735722" _msthash="66">
+</section>
+<section id="percentile-interval-error-bars">
+<h3><font _mstmutation="1" _msttexthash="756626" _msthash="67">Percentile interval error bars</font><a class="headerlink" href="https://seaborn.pydata.org/tutorial/error_bars.html#percentile-interval-error-bars" title="Permalink to this heading">#</a></h3>
+<p><font _mstmutation="1" _msttexthash="55799939" _msthash="68">Percentile intervals also represent the range where some amount of the data fall, but they do so by
+computing those percentiles directly from your sample. By default,  will show a 95% interval, ranging from the 2.5 to the 97.5 percentiles. You can choose a different range by passing a size parameter, e.g., to show the inter-quartile range:</font><code class="docutils literal notranslate"><span class="pre">errorbar="pi"</span></code></p>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre id="codecell2"><span></span><span class="n">plot_errorbars</span><span class="p">((</span><span class="s2">"pi"</span><span class="p">,</span> <span class="mi">50</span><span class="p">))</span>
+</pre><button class="copybtn o-tooltip--left" data-tooltip="Copy" data-clipboard-target="#codecell2">
+      <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-copy" width="44" height="44" viewBox="0 0 24 24" stroke-width="1.5" stroke="#000000" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <title>Copy to clipboard</title>
+  <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
+  <rect x="8" y="8" width="12" height="12" rx="2"></rect>
+  <path d="M16 8v-2a2 2 0 0 0 -2 -2h-8a2 2 0 0 0 -2 2v8a2 2 0 0 0 2 2h2"></path>
+</svg>
+    </button></div>
+</div>
+<img alt="../_images/error_bars_8_0.png" src="./Estimativa estatística e barras de erro — documentação Seaborn 0.13.2_files/error_bars_8_0.png" _mstalt="736476" _msthash="69">
+<p _msttexthash="164044413" _msthash="70">The standard deviation error bars will always be symmetrical around the estimate. This can be a problem when the data are skewed, especially if there are natural bounds (e.g., if the data represent a quantity that can only be positive). In some cases, standard deviation error bars may extend to “impossible” values. The nonparametric approach does not have this problem, because it can account for asymmetrical spread and will never extend beyond the range of the data.</p>
+</section>
+</section>
+<section id="measures-of-estimate-uncertainty">
+<h2><font _mstmutation="1" _msttexthash="859287" _msthash="71">Measures of estimate uncertainty</font><a class="headerlink" href="https://seaborn.pydata.org/tutorial/error_bars.html#measures-of-estimate-uncertainty" title="Permalink to this heading">#</a></h2>
+<p _msttexthash="35269065" _msthash="72">If your data are a random sample from a larger population, then the mean (or other estimate) will be an imperfect measure of the true population average. Error bars that show estimate uncertainty try to represent the range of likely values for the true parameter.</p>
+<section id="standard-error-bars">
+<h3><font _mstmutation="1" _msttexthash="353847" _msthash="73">Standard error bars</font><a class="headerlink" href="https://seaborn.pydata.org/tutorial/error_bars.html#standard-error-bars" title="Permalink to this heading">#</a></h3>
+<p><font _mstmutation="1" _msttexthash="25603396" _msthash="74">The standard error statistic is related to the standard deviation: in fact it is just the standard deviation divided by the square root of the sample size. The default, with , draws an interval +/-1 standard error from the mean:</font><code class="docutils literal notranslate"><span class="pre">errorbar="se"</span></code></p>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre id="codecell3"><span></span><span class="n">plot_errorbars</span><span class="p">(</span><span class="s2">"se"</span><span class="p">)</span>
+</pre><button class="copybtn o-tooltip--left" data-tooltip="Copy" data-clipboard-target="#codecell3">
+      <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-copy" width="44" height="44" viewBox="0 0 24 24" stroke-width="1.5" stroke="#000000" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <title>Copy to clipboard</title>
+  <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
+  <rect x="8" y="8" width="12" height="12" rx="2"></rect>
+  <path d="M16 8v-2a2 2 0 0 0 -2 -2h-8a2 2 0 0 0 -2 2v8a2 2 0 0 0 2 2h2"></path>
+</svg>
+    </button></div>
+</div>
+<img alt="../_images/error_bars_11_0.png" src="./Estimativa estatística e barras de erro — documentação Seaborn 0.13.2_files/error_bars_11_0.png" _mstalt="759629" _msthash="75">
+</section>
+<section id="confidence-interval-error-bars">
+<h3><font _mstmutation="1" _msttexthash="752037" _msthash="76">Confidence interval error bars</font><a class="headerlink" href="https://seaborn.pydata.org/tutorial/error_bars.html#confidence-interval-error-bars" title="Permalink to this heading">#</a></h3>
+<p _msttexthash="78186472" _msthash="77">The nonparametric approach to representing uncertainty uses <em>bootstrapping</em>: a procedure where the dataset is randomly resampled with replacement a number of times, and the estimate is recalculated from each resample. This procedure creates a distribution of statistics approximating the distribution of values that you could have gotten for your estimate if you had a different sample.</p>
+<p><font _mstmutation="1" _msttexthash="11583572" _msthash="78">The confidence interval is constructed by taking a percentile interval of the <em _mstmutation="1">bootstrap distribution</em>. By default  draws a 95% confidence interval:</font><code class="docutils literal notranslate"><span class="pre">errorbar="ci"</span></code></p>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre id="codecell4"><span></span><span class="n">plot_errorbars</span><span class="p">(</span><span class="s2">"ci"</span><span class="p">)</span>
+</pre><button class="copybtn o-tooltip--left" data-tooltip="Copy" data-clipboard-target="#codecell4">
+      <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-copy" width="44" height="44" viewBox="0 0 24 24" stroke-width="1.5" stroke="#000000" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <title>Copy to clipboard</title>
+  <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
+  <rect x="8" y="8" width="12" height="12" rx="2"></rect>
+  <path d="M16 8v-2a2 2 0 0 0 -2 -2h-8a2 2 0 0 0 -2 2v8a2 2 0 0 0 2 2h2"></path>
+</svg>
+    </button></div>
+</div>
+<img alt="../_images/error_bars_13_0.png" src="./Estimativa estatística e barras de erro — documentação Seaborn 0.13.2_files/error_bars_13_0.png" _mstalt="760409" _msthash="79">
+<p _msttexthash="67407327" _msthash="80">The seaborn terminology is somewhat specific, because a confidence interval in statistics can be parametric or nonparametric. To draw a parametric confidence interval, you scale the standard error, using a formula similar to the one mentioned above. For example, an approximate 95% confidence interval can be constructed by taking the mean +/- two standard errors:</p>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre id="codecell5"><span></span><span class="n">plot_errorbars</span><span class="p">((</span><span class="s2">"se"</span><span class="p">,</span> <span class="mi">2</span><span class="p">))</span>
+</pre><button class="copybtn o-tooltip--left" data-tooltip="Copy" data-clipboard-target="#codecell5">
+      <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-copy" width="44" height="44" viewBox="0 0 24 24" stroke-width="1.5" stroke="#000000" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <title>Copy to clipboard</title>
+  <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
+  <rect x="8" y="8" width="12" height="12" rx="2"></rect>
+  <path d="M16 8v-2a2 2 0 0 0 -2 -2h-8a2 2 0 0 0 -2 2v8a2 2 0 0 0 2 2h2"></path>
+</svg>
+    </button></div>
+</div>
+<img alt="../_images/error_bars_15_0.png" src="./Estimativa estatística e barras de erro — documentação Seaborn 0.13.2_files/error_bars_15_0.png" _mstalt="761189" _msthash="81">
+<p _msttexthash="56574973" _msthash="82">The nonparametric bootstrap has advantages similar to those of the percentile interval: it will naturally adapt to skewed and bounded data in a way that a standard error interval cannot. It is also more general. While the standard error formula is specific to the mean, error bars can be computed using the bootstrap for any estimator:</p>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre id="codecell6"><span></span><span class="n">plot_errorbars</span><span class="p">(</span><span class="s2">"ci"</span><span class="p">,</span> <span class="n">estimator</span><span class="o">=</span><span class="s2">"median"</span><span class="p">)</span>
+</pre><button class="copybtn o-tooltip--left" data-tooltip="Copy" data-clipboard-target="#codecell6">
+      <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-copy" width="44" height="44" viewBox="0 0 24 24" stroke-width="1.5" stroke="#000000" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <title>Copy to clipboard</title>
+  <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
+  <rect x="8" y="8" width="12" height="12" rx="2"></rect>
+  <path d="M16 8v-2a2 2 0 0 0 -2 -2h-8a2 2 0 0 0 -2 2v8a2 2 0 0 0 2 2h2"></path>
+</svg>
+    </button></div>
+</div>
+<img alt="../_images/error_bars_17_0.png" src="./Estimativa estatística e barras de erro — documentação Seaborn 0.13.2_files/error_bars_17_0.png" _mstalt="761969" _msthash="83">
+<p><font _mstmutation="1" _msttexthash="64399452" _msthash="84">Bootstrapping involves randomness, and the error bars will appear slightly different each time you run the code that creates them. A few parameters control this. One sets the number of iterations (): with more iterations, the resulting intervals will be more stable. The other sets the  for the random number generator, which will ensure identical results:</font><code class="docutils literal notranslate"><span class="pre">n_boot</span></code><code class="docutils literal notranslate"><span class="pre">seed</span></code></p>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre id="codecell7"><span></span><span class="n">plot_errorbars</span><span class="p">(</span><span class="s2">"ci"</span><span class="p">,</span> <span class="n">n_boot</span><span class="o">=</span><span class="mi">5000</span><span class="p">,</span> <span class="n">seed</span><span class="o">=</span><span class="mi">10</span><span class="p">)</span>
+</pre><button class="copybtn o-tooltip--left" data-tooltip="Copy" data-clipboard-target="#codecell7">
+      <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-copy" width="44" height="44" viewBox="0 0 24 24" stroke-width="1.5" stroke="#000000" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <title>Copy to clipboard</title>
+  <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
+  <rect x="8" y="8" width="12" height="12" rx="2"></rect>
+  <path d="M16 8v-2a2 2 0 0 0 -2 -2h-8a2 2 0 0 0 -2 2v8a2 2 0 0 0 2 2h2"></path>
+</svg>
+    </button></div>
+</div>
+<img alt="../_images/error_bars_19_0.png" src="./Estimativa estatística e barras de erro — documentação Seaborn 0.13.2_files/error_bars_19_0.png" _mstalt="762749" _msthash="85">
+<p _msttexthash="33784439" _msthash="86">Because of its iterative process, bootstrap intervals can be expensive to compute, especially for large datasets. But because uncertainty decreases with sample size, it may be more informative in that case to use an error bar that represents data spread.</p>
+</section>
+<section id="custom-error-bars">
+<h3><font _mstmutation="1" _msttexthash="295932" _msthash="87">Custom error bars</font><a class="headerlink" href="https://seaborn.pydata.org/tutorial/error_bars.html#custom-error-bars" title="Permalink to this heading">#</a></h3>
+<p><font _mstmutation="1" _msttexthash="26260858" _msthash="88">If these recipes are not sufficient, it is also possible to pass a generic function to the  parameter. This function should take a vector and produce a pair of values representing the minimum and maximum points of the interval:</font><code class="docutils literal notranslate"><span class="pre">errorbar</span></code></p>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre id="codecell8"><span></span><span class="n">plot_errorbars</span><span class="p">(</span><span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> <span class="p">(</span><span class="n">x</span><span class="o">.</span><span class="n">min</span><span class="p">(),</span> <span class="n">x</span><span class="o">.</span><span class="n">max</span><span class="p">()))</span>
+</pre><button class="copybtn o-tooltip--left" data-tooltip="Copy" data-clipboard-target="#codecell8">
+      <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-copy" width="44" height="44" viewBox="0 0 24 24" stroke-width="1.5" stroke="#000000" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <title>Copy to clipboard</title>
+  <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
+  <rect x="8" y="8" width="12" height="12" rx="2"></rect>
+  <path d="M16 8v-2a2 2 0 0 0 -2 -2h-8a2 2 0 0 0 -2 2v8a2 2 0 0 0 2 2h2"></path>
+</svg>
+    </button></div>
+</div>
+<img alt="../_images/error_bars_21_0.png" src="./Estimativa estatística e barras de erro — documentação Seaborn 0.13.2_files/error_bars_21_0.png" _mstalt="760006" _msthash="89">
+<p><font _mstmutation="1" _msttexthash="6066593" _msthash="90">(In practice, you could show the full range of the data with  rather than the custom function shown above).</font><code class="docutils literal notranslate"><span class="pre">errorbar=("pi",</span> <span class="pre">100)</span></code></p>
+<p _msttexthash="20125209" _msthash="91">Note that seaborn functions cannot currently draw error bars from values that have been calculated externally, although matplotlib functions can be used to add such error bars to seaborn plots.</p>
+</section>
+</section>
+<section id="error-bars-on-regression-fits">
+<h2><font _mstmutation="1" _msttexthash="671684" _msthash="92">Error bars on regression fits</font><a class="headerlink" href="https://seaborn.pydata.org/tutorial/error_bars.html#error-bars-on-regression-fits" title="Permalink to this heading">#</a></h2>
+<p _msttexthash="87012406" _msthash="93">The preceding discussion has focused on error bars shown around parameter estimates for aggregate data. Error bars also arise in seaborn when estimating regression models to visualize relationships. Here, the error bars will be represented by a “band” around the regression line:</p>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre id="codecell9"><span></span><span class="n">x</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">normal</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">50</span><span class="p">)</span>
+<span class="n">y</span> <span class="o">=</span> <span class="n">x</span> <span class="o">*</span> <span class="mi">2</span> <span class="o">+</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">normal</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="n">size</span><span class="o">=</span><span class="n">x</span><span class="o">.</span><span class="n">size</span><span class="p">)</span>
+<span class="n">sns</span><span class="o">.</span><span class="n">regplot</span><span class="p">(</span><span class="n">x</span><span class="o">=</span><span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="o">=</span><span class="n">y</span><span class="p">)</span>
+</pre><button class="copybtn o-tooltip--left" data-tooltip="Copy" data-clipboard-target="#codecell9">
+      <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-copy" width="44" height="44" viewBox="0 0 24 24" stroke-width="1.5" stroke="#000000" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <title>Copy to clipboard</title>
+  <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
+  <rect x="8" y="8" width="12" height="12" rx="2"></rect>
+  <path d="M16 8v-2a2 2 0 0 0 -2 -2h-8a2 2 0 0 0 -2 2v8a2 2 0 0 0 2 2h2"></path>
+</svg>
+    </button></div>
+</div>
+<img alt="../_images/error_bars_24_0.png" src="./Estimativa estatística e barras de erro — documentação Seaborn 0.13.2_files/error_bars_24_0.png" _mstalt="761176" _msthash="94">
+<p><font _mstmutation="1" _msttexthash="13498004" _msthash="95">Currently, the error bars on a regression estimate are less flexible, only showing a confidence interval with a size set through . This may change in the future.</font><code class="docutils literal notranslate"><span class="pre">ci=</span></code></p>
+</section>
+<section id="are-error-bars-enough">
+<h2><font _mstmutation="1" _msttexthash="408733" _msthash="96">Are error bars enough?</font><a class="headerlink" href="https://seaborn.pydata.org/tutorial/error_bars.html#are-error-bars-enough" title="Permalink to this heading">#</a></h2>
+<p _msttexthash="27346787" _msthash="97">You should always ask yourself whether it’s best to use a plot that displays only a summary statistic and error bar. In many cases, it isn’t.</p>
+<p _msttexthash="68160625" _msthash="98">If you are interested in questions about summaries (such as whether the mean value differs between groups or increases over time), aggregation reduces the complexity of the plot and makes those inferences easier. But in doing so, it obscures valuable information about the underlying data points, such as the shape of the distributions and the presence of outliers.</p>
+<p _msttexthash="52881764" _msthash="99">When analyzing your own data, don’t be satisfied with summary statistics. Always look at the underlying distributions too. Sometimes, it can be helpful to combine both perspectives into the same figure. Many seaborn functions can help with this task, especially those discussed in the <a class="reference internal" href="https://seaborn.pydata.org/tutorial/categorical.html"><span class="doc">categorical tutorial</span></a>.</p>
+</section>
+</section>
+
+
+          </article>
+          
+
+          
+          
+      </div>
+      
+    </div>
+  </div>
+
+  
+    
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script src="./Estimativa estatística e barras de erro — documentação Seaborn 0.13.2_files/pydata-sphinx-theme.js.baixados"></script>
+
+<footer class="footer" style="border-top: 1px solid #ccc; padding-top: 10px">
+  <div class="container">
+    <div id="credits" style="width: 50%; float: left">
+      <p><font _mstmutation="1" _msttexthash="3639389" _msthash="100">
+      © Copyright 2012-2024, <a href="https://mwaskom.github.io/" _mstmutation="1">Michael Waskom</a>.<br _mstmutation="1">
+      Created using <a href="https://www.sphinx-doc.org/" _mstmutation="1">Sphinx</a> and the <a href="https://pydata-sphinx-theme.readthedocs.io/en/stable/" _mstmutation="1">PyData Theme</a>.</font><br>
+      </p>
+    </div>
+    <div class="dropup show" style="float: right; margin: 10px">
+        <a class="btn btn-secondary dropdown-toggle" href="https://seaborn.pydata.org/tutorial/error_bars.html#" role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" _msttexthash="93366" _msthash="101">
+            Archive
+        </a>
+        <div class="dropdown-menu dropdown-menu-right" aria-labelledby="dropdownMenuLink" _msthidden="4">
+          <a class="dropdown-item" href="https://seaborn.pydata.org/archive/0.12/index.html" _msttexthash="34632" _msthidden="1" _msthash="102">v0.12</a>
+          <a class="dropdown-item" href="https://seaborn.pydata.org/archive/0.11/index.html" _msttexthash="34489" _msthidden="1" _msthash="103">v0.11</a>
+          <a class="dropdown-item" href="https://seaborn.pydata.org/archive/0.10/index.html" _msttexthash="34346" _msthidden="1" _msthash="104">v0.10</a>
+          <a class="dropdown-item" href="https://seaborn.pydata.org/archive/0.9/index.html" _msttexthash="28522" _msthidden="1" _msthash="105">v0.9</a>
+        </div>
+    </div>
+    <div id="version" style="color: #999; float: right; margin: 15px" _msttexthash="50401" _msthash="106">v0.13.2</div>
+    </div>
+  
+</footer>
+  
+</body></html>

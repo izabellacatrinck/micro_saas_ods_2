@@ -1,0 +1,909 @@
+<!DOCTYPE html>
+<!-- saved from url=(0052)https://seaborn.pydata.org/tutorial/categorical.html -->
+<html lang="pt" data-mode="light" data-theme="light"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"><meta name="generator" content="Docutils 0.19: https://docutils.sourceforge.io/">
+
+    <title _msttexthash="6130137" _msthash="0">Visualizando dados categóricos — documentação seaborn 0.13.2</title>
+  <script>
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "light";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "light";
+  </script>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="./Visualizando dados categóricos — documentação seaborn 0.13.2_files/theme.css" rel="stylesheet">
+<link href="./Visualizando dados categóricos — documentação seaborn 0.13.2_files/pydata-sphinx-theme.css" rel="stylesheet">
+
+  
+  <link rel="stylesheet" href="./Visualizando dados categóricos — documentação seaborn 0.13.2_files/all.min.css">
+  <link rel="preload" as="font" type="font/woff2" crossorigin="" href="https://seaborn.pydata.org/_static/vendor/fontawesome/5.13.0/webfonts/fa-solid-900.woff2">
+  <link rel="preload" as="font" type="font/woff2" crossorigin="" href="https://seaborn.pydata.org/_static/vendor/fontawesome/5.13.0/webfonts/fa-brands-400.woff2">
+
+    <link rel="stylesheet" type="text/css" href="./Visualizando dados categóricos — documentação seaborn 0.13.2_files/pygments.css">
+    <link rel="stylesheet" type="text/css" href="./Visualizando dados categóricos — documentação seaborn 0.13.2_files/plot_directive.css">
+    <link rel="stylesheet" type="text/css" href="./Visualizando dados categóricos — documentação seaborn 0.13.2_files/copybutton.css">
+    <link rel="stylesheet" type="text/css" href="./Visualizando dados categóricos — documentação seaborn 0.13.2_files/design-style.1e8bd061cd6da7fc9cf755528e8ffc24.min.css">
+    <link rel="stylesheet" type="text/css" href="./Visualizando dados categóricos — documentação seaborn 0.13.2_files/custom.css">
+  
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="./Visualizando dados categóricos — documentação seaborn 0.13.2_files/pydata-sphinx-theme.js.baixados">
+
+    <script data-url_root="../" id="documentation_options" src="./Visualizando dados categóricos — documentação seaborn 0.13.2_files/documentation_options.js.baixados"></script>
+    <script src="./Visualizando dados categóricos — documentação seaborn 0.13.2_files/jquery.js.baixados"></script>
+    <script src="./Visualizando dados categóricos — documentação seaborn 0.13.2_files/underscore.js.baixados"></script>
+    <script src="./Visualizando dados categóricos — documentação seaborn 0.13.2_files/_sphinx_javascript_frameworks_compat.js.baixados"></script>
+    <script src="./Visualizando dados categóricos — documentação seaborn 0.13.2_files/doctools.js.baixados"></script>
+    <script src="./Visualizando dados categóricos — documentação seaborn 0.13.2_files/sphinx_highlight.js.baixados"></script>
+    <script src="./Visualizando dados categóricos — documentação seaborn 0.13.2_files/clipboard.min.js.baixados"></script>
+    <script src="./Visualizando dados categóricos — documentação seaborn 0.13.2_files/copybutton.js.baixados"></script>
+    <script src="./Visualizando dados categóricos — documentação seaborn 0.13.2_files/design-tabs.js.baixados"></script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'tutorial/categorical';</script>
+    <link rel="shortcut icon" href="https://seaborn.pydata.org/_static/favicon.ico">
+    <link rel="index" title="Index" href="https://seaborn.pydata.org/genindex.html">
+    <link rel="search" title="Search" href="https://seaborn.pydata.org/search.html">
+    <link rel="next" title="Statistical estimation and error bars" href="https://seaborn.pydata.org/tutorial/error_bars.html">
+    <link rel="prev" title="Visualizing distributions of data" href="https://seaborn.pydata.org/tutorial/distributions.html">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="docsearch:language" content="en">
+  </head>
+  
+  
+  <body data-spy="scroll" data-target="#bd-toc-nav" data-offset="180" data-default-mode="light">
+
+  
+  <input type="checkbox" class="sidebar-toggle" name="__primary" id="__primary">
+  <label class="overlay overlay-primary" for="__primary"></label>
+
+  
+  <input type="checkbox" class="sidebar-toggle" name="__secondary" id="__secondary">
+  <label class="overlay overlay-secondary" for="__secondary"></label>
+
+  
+  <div class="search-button__wrapper" _msthidden="1">
+    <div class="search-button__overlay"></div>
+    <div class="search-button__search-container" _msthidden="1">
+      
+<form class="bd-search d-flex align-items-center" action="https://seaborn.pydata.org/search.html" method="get" _msthidden="1">
+  <i class="icon fas fa-search"></i>
+  <input type="search" class="form-control" name="q" id="search-input" placeholder="Search the docs ..." aria-label="Search the docs ..." autocomplete="off" _msthidden="A" _mstplaceholder="267410" _msthash="1" _mstaria-label="267410">
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form>
+    </div>
+  </div>
+
+  
+  <nav class="bd-header navbar navbar-expand-lg bd-navbar" id="navbar-main"><div class="bd-header__inner container-xl">
+  <label class="sidebar-toggle primary-toggle" for="__primary">
+      <span class="fas fa-bars"></span>
+  </label>
+  <div id="navbar-start">
+    
+    
+  
+
+
+<a class="navbar-brand logo" href="https://seaborn.pydata.org/index.html">
+  
+  
+  
+  
+  
+  
+    <img src="./Visualizando dados categóricos — documentação seaborn 0.13.2_files/logo-wide-lightbg.svg" class="logo__image only-light" alt="Imagem do logo" _mstalt="131794" _msthash="2">
+    <img src="./Visualizando dados categóricos — documentação seaborn 0.13.2_files/logo-wide-lightbg.svg" class="logo__image only-dark" alt="Logo image" _msthidden="A" _mstalt="131794" _msthash="3">
+  
+  
+</a>
+    
+  </div>
+
+  
+  <div class="col-lg-9 navbar-header-items">
+    <div id="navbar-center" class="mr-auto">
+      
+      <div class="navbar-center-item">
+        <ul id="navbar-main-elements" class="navbar-nav">
+    <li class="toctree-l1 nav-item">
+ <a class="reference internal nav-link" href="https://seaborn.pydata.org/installing.html" _msttexthash="203125" _msthash="4"> Instalação </a>
+</li>
+
+<li class="toctree-l1 nav-item">
+ <a class="reference internal nav-link" href="https://seaborn.pydata.org/examples/index.html" _msttexthash="91390" _msthash="5"> Galeria </a>
+</li>
+
+<li class="toctree-l1 current active nav-item">
+ <a class="reference internal nav-link" href="https://seaborn.pydata.org/tutorial.html" _msttexthash="116545" _msthash="6">
+  Tutorial
+ </a>
+</li>
+
+<li class="toctree-l1 nav-item">
+ <a class="reference internal nav-link" href="https://seaborn.pydata.org/api.html" _msttexthash="22776" _msthash="7">
+  API
+ </a>
+</li>
+
+<li class="toctree-l1 nav-item">
+ <a class="reference internal nav-link" href="https://seaborn.pydata.org/whatsnew/index.html" _msttexthash="198991" _msthash="8"> Lançamentos </a>
+</li>
+
+<li class="toctree-l1 nav-item">
+ <a class="reference internal nav-link" href="https://seaborn.pydata.org/citing.html" _msttexthash="130403" _msthash="9"> Citação </a>
+</li>
+
+<li class="toctree-l1 nav-item">
+ <a class="reference internal nav-link" href="https://seaborn.pydata.org/faq.html" _msttexthash="22607" _msthash="10">
+  FAQ
+ </a>
+</li>
+
+</ul>
+      </div>
+      
+    </div>
+
+    <div id="navbar-end">
+      <div class="navbar-end-item navbar-end__search-button-container">
+        
+<button class="btn btn-sm navbar-btn search-button search-button__button" title="Search">
+  <i class="fas fa-search"></i>
+</button>
+      </div>
+      
+      <div class="navbar-end-item">
+        <ul id="navbar-icon-links" class="navbar-nav" aria-label="Links de Ícones" _mstaria-label="131963" _msthash="11">
+        <li class="nav-item">
+          
+          
+          
+          
+          
+          
+          <a href="https://github.com/mwaskom/seaborn" title="GitHub" class="nav-link" rel="noopener" target="_blank"><span><i class="fab fa-github"></i></span>
+            <label class="sr-only" _msttexthash="72332" _msthash="12">GitHub</label></a>
+        </li>
+        <li class="nav-item">
+          
+          
+          
+          
+          
+          
+          <a href="https://stackoverflow.com/tags/seaborn" title="StackOverflow" class="nav-link" rel="noopener" target="_blank"><span><i class="fab fa-stack-overflow"></i></span>
+            <label class="sr-only" _msttexthash="232466" _msthash="13">StackOverflow</label></a>
+        </li>
+        <li class="nav-item">
+          
+          
+          
+          
+          
+          
+          <a href="https://twitter.com/michaelwaskom" title="Twitter" class="nav-link" rel="noopener" target="_blank"><span><i class="fab fa-twitter"></i></span>
+            <label class="sr-only" _msttexthash="98995" _msthash="14">Twitter</label></a>
+        </li>
+      </ul>
+      </div>
+      
+    </div>
+  </div>
+
+
+  
+  <div class="search-button-container--mobile">
+<button class="btn btn-sm navbar-btn search-button search-button__button" title="Search">
+  <i class="fas fa-search"></i>
+</button>
+  </div>
+
+  
+  <label class="sidebar-toggle secondary-toggle" for="__secondary">
+      <span class="fas fa-outdent"></span>
+  </label>
+  
+
+</div>
+  </nav>
+  
+
+  <div class="bd-container container-xl">
+    <div class="bd-container__inner row">
+      
+      <div class="bd-sidebar-primary bd-sidebar">
+        
+  
+  <div class="sidebar-header-items sidebar-primary__section" _msthidden="13">
+    <p class="sidebar-header-items__title" role="heading" aria-level="1" aria-label="Navigation" _msthidden="1" _mstaria-label="157742" _msthash="15" _msttexthash="256997">
+      Site Navigation
+    </p>
+    
+    
+      <div class="sidebar-header-items__center" _msthidden="7">
+      
+      <div class="navbar-center-item" _msthidden="7">
+        <ul id="navbar-main-elements" class="navbar-nav" _msthidden="7">
+    <li class="toctree-l1 nav-item" _msthidden="1">
+ <a class="reference internal nav-link" href="https://seaborn.pydata.org/installing.html" _msttexthash="157573" _msthidden="1" _msthash="16">
+  Installing
+ </a>
+</li>
+
+<li class="toctree-l1 nav-item" _msthidden="1">
+ <a class="reference internal nav-link" href="https://seaborn.pydata.org/examples/index.html" _msttexthash="95901" _msthidden="1" _msthash="17">
+  Gallery
+ </a>
+</li>
+
+<li class="toctree-l1 current active nav-item" _msthidden="1">
+ <a class="reference internal nav-link" href="https://seaborn.pydata.org/tutorial.html" _msttexthash="116545" _msthidden="1" _msthash="18">
+  Tutorial
+ </a>
+</li>
+
+<li class="toctree-l1 nav-item" _msthidden="1">
+ <a class="reference internal nav-link" href="https://seaborn.pydata.org/api.html" _msttexthash="22776" _msthidden="1" _msthash="19">
+  API
+ </a>
+</li>
+
+<li class="toctree-l1 nav-item" _msthidden="1">
+ <a class="reference internal nav-link" href="https://seaborn.pydata.org/whatsnew/index.html" _msttexthash="113542" _msthidden="1" _msthash="20">
+  Releases
+ </a>
+</li>
+
+<li class="toctree-l1 nav-item" _msthidden="1">
+ <a class="reference internal nav-link" href="https://seaborn.pydata.org/citing.html" _msttexthash="76037" _msthidden="1" _msthash="21">
+  Citing
+ </a>
+</li>
+
+<li class="toctree-l1 nav-item" _msthidden="1">
+ <a class="reference internal nav-link" href="https://seaborn.pydata.org/faq.html" _msttexthash="22607" _msthidden="1" _msthash="22">
+  FAQ
+ </a>
+</li>
+
+</ul>
+      </div>
+      
+      </div>
+    
+
+    
+    
+    <div class="sidebar-header-items__end" _msthidden="4">
+      
+      <div class="navbar-end-item" _msthidden="4">
+        <ul id="navbar-icon-links" class="navbar-nav" aria-label="Icon Links" _msthidden="3" _mstaria-label="131963" _msthash="23">
+        <li class="nav-item" _msthidden="1">
+          
+          
+          
+          
+          
+          
+          <a href="https://github.com/mwaskom/seaborn" title="GitHub" class="nav-link" rel="noopener" target="_blank" _msthidden="1"><span><i class="fab fa-github"></i></span>
+            <label class="sr-only" _msttexthash="72332" _msthidden="1" _msthash="24">GitHub</label></a>
+        </li>
+        <li class="nav-item" _msthidden="1">
+          
+          
+          
+          
+          
+          
+          <a href="https://stackoverflow.com/tags/seaborn" title="StackOverflow" class="nav-link" rel="noopener" target="_blank" _msthidden="1"><span><i class="fab fa-stack-overflow"></i></span>
+            <label class="sr-only" _msttexthash="232466" _msthidden="1" _msthash="25">StackOverflow</label></a>
+        </li>
+        <li class="nav-item" _msthidden="1">
+          
+          
+          
+          
+          
+          
+          <a href="https://twitter.com/michaelwaskom" title="Twitter" class="nav-link" rel="noopener" target="_blank" _msthidden="1"><span><i class="fab fa-twitter"></i></span>
+            <label class="sr-only" _msttexthash="98995" _msthidden="1" _msthash="26">Twitter</label></a>
+        </li>
+      </ul>
+      </div>
+      
+    </div>
+    
+  </div>
+
+  
+  <div class="sidebar-start-items sidebar-primary__section">
+    <div class="sidebar-start-items__item"><nav class="bd-links" id="bd-docs-nav" aria-label="Navegação por seções" _mstaria-label="353847" _msthash="27">
+  <div class="bd-toc-item navbar-nav">
+    <ul class="nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="https://seaborn.pydata.org/tutorial/introduction.html" _msttexthash="591084" _msthash="28"> Uma introdução ao seaborn </a>
+ </li>
+</ul>
+<ul class="nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="https://seaborn.pydata.org/tutorial/function_overview.html" _msttexthash="1374724" _msthash="29"> Visão geral das funções de plotagem seaborn </a>
+ </li>
+</ul>
+<ul class="nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="https://seaborn.pydata.org/tutorial/data_structure.html" _msttexthash="1162369" _msthash="30"> Estruturas de dados aceitas pelo seaborn </a>
+ </li>
+</ul>
+<ul class="nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="https://seaborn.pydata.org/tutorial/objects_interface.html" _msttexthash="632931" _msthash="31"> A interface seaborn.objects </a>
+ </li>
+</ul>
+<ul class="nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="https://seaborn.pydata.org/tutorial/properties.html" _msttexthash="692822" _msthash="32"> Propriedades dos objetos Mark </a>
+ </li>
+</ul>
+<ul class="nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="https://seaborn.pydata.org/tutorial/relational.html" _msttexthash="1139190" _msthash="33"> Visualizando relações estatísticas </a>
+ </li>
+</ul>
+<ul class="nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="https://seaborn.pydata.org/tutorial/distributions.html" _msttexthash="1386658" _msthash="34"> Visualização das distribuições dos dados </a>
+ </li>
+</ul>
+<ul class="current nav bd-sidenav">
+ <li class="toctree-l1 current active">
+  <a class="current reference internal" href="https://seaborn.pydata.org/tutorial/categorical.html#" _msttexthash="995553" _msthash="35"> Visualização de dados categóricos </a>
+ </li>
+</ul>
+<ul class="nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="https://seaborn.pydata.org/tutorial/error_bars.html" _msttexthash="1143376" _msthash="36"> Estimativa estatística e barras de erro </a>
+ </li>
+</ul>
+<ul class="nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="https://seaborn.pydata.org/tutorial/regression.html" _msttexthash="1013727" _msthash="37"> Estimativa dos ajustes de regressão </a>
+ </li>
+</ul>
+<ul class="nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="https://seaborn.pydata.org/tutorial/axis_grids.html" _msttexthash="1925560" _msthash="38"> Construindo grades estruturadas de múltiplos plots </a>
+ </li>
+</ul>
+<ul class="nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="https://seaborn.pydata.org/tutorial/aesthetics.html" _msttexthash="711880" _msthash="39"> Estética de controle da figura </a>
+ </li>
+</ul>
+<ul class="nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="https://seaborn.pydata.org/tutorial/color_palettes.html" _msttexthash="608400" _msthash="40"> Escolha das paletas de cores </a>
+ </li>
+</ul>
+
+  </div>
+</nav>
+    </div>
+  </div>
+  
+
+  
+  <div class="sidebar-end-items sidebar-primary__section">
+    <div class="sidebar-end-items__item">
+    </div>
+  </div>
+
+      </div>
+
+      
+      
+      
+        <div class="bd-sidebar-secondary bd-toc">
+          
+<div class="toc-item">
+  
+<div class="tocsection onthispage">
+    <i class="fas fa-list"></i><font _mstmutation="1" _msttexthash="199043" _msthash="41"> Nesta página </font></div>
+<nav id="bd-toc-nav" class="page-toc">
+    <ul class="visible nav section-nav flex-column">
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="https://seaborn.pydata.org/tutorial/categorical.html#categorical-scatterplots" _msttexthash="1031706" _msthash="42"> Diagramas de dispersão categóricas </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="https://seaborn.pydata.org/tutorial/categorical.html#comparing-distributions" _msttexthash="666120" _msthash="43"> Comparando distribuições </a>
+  <ul class="nav section-nav flex-column" _msthidden="2">
+   <li class="toc-h3 nav-item toc-entry" _msthidden="1">
+    <a class="reference internal nav-link" href="https://seaborn.pydata.org/tutorial/categorical.html#boxplots" _msttexthash="119444" _msthidden="1" _msthash="44">
+     Boxplots
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry" _msthidden="1">
+    <a class="reference internal nav-link" href="https://seaborn.pydata.org/tutorial/categorical.html#violinplots" _msttexthash="187720" _msthidden="1" _msthash="45">
+     Violinplots
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="https://seaborn.pydata.org/tutorial/categorical.html#estimating-central-tendency" _msttexthash="822952" _msthash="46"> Estimativa da tendência central </a>
+  <ul class="nav section-nav flex-column" _msthidden="2">
+   <li class="toc-h3 nav-item toc-entry" _msthidden="1">
+    <a class="reference internal nav-link" href="https://seaborn.pydata.org/tutorial/categorical.html#bar-plots" _msttexthash="117286" _msthidden="1" _msthash="47">
+     Bar plots
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry" _msthidden="1">
+    <a class="reference internal nav-link" href="https://seaborn.pydata.org/tutorial/categorical.html#point-plots" _msttexthash="164463" _msthidden="1" _msthash="48">
+     Point plots
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="https://seaborn.pydata.org/tutorial/categorical.html#showing-additional-dimensions" _msttexthash="829205" _msthash="49"> Mostrando dimensões adicionais </a>
+ </li>
+</ul>
+
+</nav>
+</div>
+
+<div class="toc-item">
+  
+</div>
+
+<div class="toc-item">
+  
+</div>
+
+        </div>
+      
+      
+
+      
+      
+      <div class="bd-content col">
+          
+          <div class="bd-header-article">
+              
+          </div>
+
+          
+          
+          <article class="bd-article" role="main">
+            
+  <section id="visualizing-categorical-data">
+<span id="categorical-tutorial"></span><h1><font _mstmutation="1" _msttexthash="995553" _msthash="50">Visualização de dados categóricos</font><a class="headerlink" href="https://seaborn.pydata.org/tutorial/categorical.html#visualizing-categorical-data" title="Permalink to this heading">#</a></h1>
+<p _msttexthash="89178011" _msthash="51">No tutorial de <a class="reference internal" href="https://seaborn.pydata.org/tutorial/relational.html#relational-tutorial" _istranslated="1"><span class="std std-ref" _istranslated="1">gráfico relacional</span></a>, vimos como usar diferentes representações visuais para mostrar a relação entre múltiplas variáveis em um conjunto de dados. Nos exemplos, focamos em casos em que a principal relação era entre duas variáveis numéricas. Se uma das principais variáveis for "categórica" (dividida em grupos discretos), pode ser útil usar uma abordagem mais especializada para visualização.</p>
+<p _msttexthash="71431750" _msthash="52">No seaborn, existem várias maneiras diferentes de visualizar uma relação envolvendo dados categóricos. Semelhante à relação entre <a class="reference internal" href="https://seaborn.pydata.org/generated/seaborn.relplot.html#seaborn.relplot" title="seaborn.relplot" _istranslated="1"><code class="xref py py-func docutils literal notranslate" _istranslated="1"></code></a> e ou <a class="reference internal" href="https://seaborn.pydata.org/generated/seaborn.scatterplot.html#seaborn.scatterplot" title="seaborn.scatterplot" _istranslated="1"><code class="xref py py-func docutils literal notranslate" _istranslated="1"></code></a> ou <a class="reference internal" href="https://seaborn.pydata.org/generated/seaborn.lineplot.html#seaborn.lineplot" title="seaborn.lineplot" _istranslated="1"><code class="xref py py-func docutils literal notranslate" _istranslated="1"></code></a>, existem duas maneiras de fazer esses enredos. Existem várias funções em nível de eixo para plotar dados categóricos de diferentes maneiras e uma interface em nível de figura, <a class="reference internal" href="https://seaborn.pydata.org/generated/seaborn.catplot.html#seaborn.catplot" title="seaborn.catplot" _istranslated="1"><code class="xref py py-func docutils literal notranslate" _istranslated="1"></code></a>, que dá acesso unificado de nível superior a elas.</p>
+<p _msttexthash="12646400" _msthash="53">É útil pensar nos diferentes tipos de enredos categóricos como pertencendo a três famílias distintas, que discutiremos em detalhes abaixo. São elas:</p>
+<p _msttexthash="1066910" _msthash="54">Diagramas de dispersão categóricos:</p>
+<ul class="simple">
+<li><p><font _mstmutation="1" _msttexthash="232908" _msthash="55"><a class="reference internal" href="https://seaborn.pydata.org/generated/seaborn.stripplot.html#seaborn.stripplot" title="seaborn.stripplot" _mstmutation="1" _istranslated="1"><code class="xref py py-func docutils literal notranslate" _istranslated="1"></code></a> (com ; o padrão)</font><code class="docutils literal notranslate"><span class="pre">kind="strip"</span></code></p></li>
+<li><p><font _mstmutation="1" _msttexthash="41093" _msthash="56"><a class="reference internal" href="https://seaborn.pydata.org/generated/seaborn.swarmplot.html#seaborn.swarmplot" title="seaborn.swarmplot" _mstmutation="1" _istranslated="1"><code class="xref py py-func docutils literal notranslate" _istranslated="1"></code></a> (com </font><code class="docutils literal notranslate"><span class="pre">kind="swarm"</span></code>)</p></li>
+</ul>
+<p _msttexthash="1174498" _msthash="57">Gráficos de distribuição categórica:</p>
+<ul class="simple">
+<li><p><font _mstmutation="1" _msttexthash="41093" _msthash="58"><a class="reference internal" href="https://seaborn.pydata.org/generated/seaborn.boxplot.html#seaborn.boxplot" title="seaborn.boxplot" _mstmutation="1" _istranslated="1"><code class="xref py py-func docutils literal notranslate" _istranslated="1"></code></a> (com </font><code class="docutils literal notranslate"><span class="pre">kind="box"</span></code>)</p></li>
+<li><p><font _mstmutation="1" _msttexthash="41093" _msthash="59"><a class="reference internal" href="https://seaborn.pydata.org/generated/seaborn.violinplot.html#seaborn.violinplot" title="seaborn.violinplot" _mstmutation="1" _istranslated="1"><code class="xref py py-func docutils literal notranslate" _istranslated="1"></code></a> (com </font><code class="docutils literal notranslate"><span class="pre">kind="violin"</span></code>)</p></li>
+<li><p><font _mstmutation="1" _msttexthash="41093" _msthash="60"><a class="reference internal" href="https://seaborn.pydata.org/generated/seaborn.boxenplot.html#seaborn.boxenplot" title="seaborn.boxenplot" _mstmutation="1" _istranslated="1"><code class="xref py py-func docutils literal notranslate" _istranslated="1"></code></a> (com </font><code class="docutils literal notranslate"><span class="pre">kind="boxen"</span></code>)</p></li>
+</ul>
+<p _msttexthash="1093196" _msthash="61">Gráficos de estimativas categóricas:</p>
+<ul class="simple">
+<li><p><font _mstmutation="1" _msttexthash="41093" _msthash="62"><a class="reference internal" href="https://seaborn.pydata.org/generated/seaborn.pointplot.html#seaborn.pointplot" title="seaborn.pointplot" _mstmutation="1" _istranslated="1"><code class="xref py py-func docutils literal notranslate" _istranslated="1"></code></a> (com </font><code class="docutils literal notranslate"><span class="pre">kind="point"</span></code>)</p></li>
+<li><p><font _mstmutation="1" _msttexthash="41093" _msthash="63"><a class="reference internal" href="https://seaborn.pydata.org/generated/seaborn.barplot.html#seaborn.barplot" title="seaborn.barplot" _mstmutation="1" _istranslated="1"><code class="xref py py-func docutils literal notranslate" _istranslated="1"></code></a> (com </font><code class="docutils literal notranslate"><span class="pre">kind="bar"</span></code>)</p></li>
+<li><p><font _mstmutation="1" _msttexthash="41093" _msthash="64"><a class="reference internal" href="https://seaborn.pydata.org/generated/seaborn.countplot.html#seaborn.countplot" title="seaborn.countplot" _mstmutation="1" _istranslated="1"><code class="xref py py-func docutils literal notranslate" _istranslated="1"></code></a> (com </font><code class="docutils literal notranslate"><span class="pre">kind="count"</span></code>)</p></li>
+</ul>
+<p _msttexthash="39008320" _msthash="65">Essas famílias representam os dados usando diferentes níveis de granularidade. Ao decidir qual usar, você terá que pensar na pergunta que deseja responder. A API unificada facilita a troca entre diferentes tipos e a visualização dos seus dados sob várias perspectivas.</p>
+<p _msttexthash="50168430" _msthash="66">Neste tutorial, vamos focar principalmente na interface em nível de figura, <a class="reference internal" href="https://seaborn.pydata.org/generated/seaborn.catplot.html#seaborn.catplot" title="seaborn.catplot" _istranslated="1"><code class="xref py py-func docutils literal notranslate" _istranslated="1"></code></a>. Lembre-se de que essa função é uma interface de nível mais alto para cada uma das funções acima, então vamos consultá-las quando mostrarmos cada tipo de gráfico, mantendo à mão a documentação mais detalhada e específica da API.</p>
+<section id="categorical-scatterplots">
+<h2><font _mstmutation="1" _msttexthash="1031706" _msthash="67">Diagramas de dispersão categóricas</font><a class="headerlink" href="https://seaborn.pydata.org/tutorial/categorical.html#categorical-scatterplots" title="Permalink to this heading">#</a></h2>
+<p _msttexthash="168700961" _msthash="68">A representação padrão dos dados em <a class="reference internal" href="https://seaborn.pydata.org/generated/seaborn.catplot.html#seaborn.catplot" title="seaborn.catplot" _istranslated="1"><code class="xref py py-func docutils literal notranslate" _istranslated="1"></code></a> usa um gráfico de scatterplot. Na verdade, existem dois gráficos de dispersão categóricos diferentes em seaborn. Eles adotam abordagens diferentes para resolver o principal desafio de representar dados categóricos com um gráfico de dispersão, que é que todos os pontos pertencentes a uma categoria cairiam na mesma posição ao longo do eixo correspondente à variável categórica. A abordagem usada por <a class="reference internal" href="https://seaborn.pydata.org/generated/seaborn.stripplot.html#seaborn.stripplot" title="seaborn.stripplot" _istranslated="1"><code class="xref py py-func docutils literal notranslate" _istranslated="1"></code></a>, que é o "tipo" padrão em <a class="reference internal" href="https://seaborn.pydata.org/generated/seaborn.catplot.html#seaborn.catplot" title="seaborn.catplot" _istranslated="1"><code class="xref py py-func docutils literal notranslate" _istranslated="1"></code></a> é ajustar as posições dos pontos no eixo categórico com uma pequena quantidade de "jitter" aleatório:</p>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre id="codecell0"><span></span><span class="n">tips</span> <span class="o">=</span> <span class="n">sns</span><span class="o">.</span><span class="n">load_dataset</span><span class="p">(</span><span class="s2">"tips"</span><span class="p">)</span>
+<span class="n">sns</span><span class="o">.</span><span class="n">catplot</span><span class="p">(</span><span class="n">data</span><span class="o">=</span><span class="n">tips</span><span class="p">,</span> <span class="n">x</span><span class="o">=</span><span class="s2">"day"</span><span class="p">,</span> <span class="n">y</span><span class="o">=</span><span class="s2">"total_bill"</span><span class="p">)</span>
+</pre><button class="copybtn o-tooltip--left" data-tooltip="Copy" data-clipboard-target="#codecell0">
+      <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-copy" width="44" height="44" viewBox="0 0 24 24" stroke-width="1.5" stroke="#000000" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <title>Copy to clipboard</title>
+  <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
+  <rect x="8" y="8" width="12" height="12" rx="2"></rect>
+  <path d="M16 8v-2a2 2 0 0 0 -2 -2h-8a2 2 0 0 0 -2 2v8a2 2 0 0 0 2 2h2"></path>
+</svg>
+    </button></div>
+</div>
+<img alt=".. /_images/categorical_3_0.png" src="./Visualizando dados categóricos — documentação seaborn 0.13.2_files/categorical_3_0.png" _mstalt="773448" _msthash="69">
+<p><font _mstmutation="1" _msttexthash="3300349" _msthash="70">The  parameter controls the magnitude of jitter or disables it altogether:</font><code class="docutils literal notranslate"><span class="pre">jitter</span></code></p>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre id="codecell1"><span></span><span class="n">sns</span><span class="o">.</span><span class="n">catplot</span><span class="p">(</span><span class="n">data</span><span class="o">=</span><span class="n">tips</span><span class="p">,</span> <span class="n">x</span><span class="o">=</span><span class="s2">"day"</span><span class="p">,</span> <span class="n">y</span><span class="o">=</span><span class="s2">"total_bill"</span><span class="p">,</span> <span class="n">jitter</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+</pre><button class="copybtn o-tooltip--left" data-tooltip="Copy" data-clipboard-target="#codecell1">
+      <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-copy" width="44" height="44" viewBox="0 0 24 24" stroke-width="1.5" stroke="#000000" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <title>Copy to clipboard</title>
+  <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
+  <rect x="8" y="8" width="12" height="12" rx="2"></rect>
+  <path d="M16 8v-2a2 2 0 0 0 -2 -2h-8a2 2 0 0 0 -2 2v8a2 2 0 0 0 2 2h2"></path>
+</svg>
+    </button></div>
+</div>
+<img alt="../_images/categorical_5_0.png" src="./Visualizando dados categóricos — documentação seaborn 0.13.2_files/categorical_5_0.png" _mstalt="774228" _msthash="71">
+<p><font _mstmutation="1" _msttexthash="131162538" _msthash="72">The second approach adjusts the points along the categorical axis using an algorithm that prevents them from overlapping. It can give a better representation of the distribution of observations, although it only works well for relatively small datasets. This kind of plot is sometimes called a “beeswarm” and is drawn in seaborn by <a class="reference internal" href="https://seaborn.pydata.org/generated/seaborn.swarmplot.html#seaborn.swarmplot" title="seaborn.swarmplot" _mstmutation="1"><code class="xref py py-func docutils literal notranslate"><span class="pre">swarmplot()</span></code></a>, which is activated by setting  in <a class="reference internal" href="https://seaborn.pydata.org/generated/seaborn.catplot.html#seaborn.catplot" title="seaborn.catplot" _mstmutation="1"><code class="xref py py-func docutils literal notranslate"><span class="pre">catplot()</span></code></a>:</font><code class="docutils literal notranslate"><span class="pre">kind="swarm"</span></code></p>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre id="codecell2"><span></span><span class="n">sns</span><span class="o">.</span><span class="n">catplot</span><span class="p">(</span><span class="n">data</span><span class="o">=</span><span class="n">tips</span><span class="p">,</span> <span class="n">x</span><span class="o">=</span><span class="s2">"day"</span><span class="p">,</span> <span class="n">y</span><span class="o">=</span><span class="s2">"total_bill"</span><span class="p">,</span> <span class="n">kind</span><span class="o">=</span><span class="s2">"swarm"</span><span class="p">)</span>
+</pre><button class="copybtn o-tooltip--left" data-tooltip="Copy" data-clipboard-target="#codecell2">
+      <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-copy" width="44" height="44" viewBox="0 0 24 24" stroke-width="1.5" stroke="#000000" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <title>Copy to clipboard</title>
+  <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
+  <rect x="8" y="8" width="12" height="12" rx="2"></rect>
+  <path d="M16 8v-2a2 2 0 0 0 -2 -2h-8a2 2 0 0 0 -2 2v8a2 2 0 0 0 2 2h2"></path>
+</svg>
+    </button></div>
+</div>
+<img alt="../_images/categorical_7_0.png" src="./Visualizando dados categóricos — documentação seaborn 0.13.2_files/categorical_7_0.png" _mstalt="775008" _msthash="73">
+<p><font _mstmutation="1" _msttexthash="61837828" _msthash="74">Similar to the relational plots, it’s possible to add another dimension to a categorical plot by using a  semantic. (The categorical plots do not currently support  or  semantics). Each different categorical plotting function handles the  semantic differently. For the scatter plots, it is only necessary to change the color of the points:</font><code class="docutils literal notranslate"><span class="pre">hue</span></code><code class="docutils literal notranslate"><span class="pre">size</span></code><code class="docutils literal notranslate"><span class="pre">style</span></code><code class="docutils literal notranslate"><span class="pre">hue</span></code></p>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre id="codecell3"><span></span><span class="n">sns</span><span class="o">.</span><span class="n">catplot</span><span class="p">(</span><span class="n">data</span><span class="o">=</span><span class="n">tips</span><span class="p">,</span> <span class="n">x</span><span class="o">=</span><span class="s2">"day"</span><span class="p">,</span> <span class="n">y</span><span class="o">=</span><span class="s2">"total_bill"</span><span class="p">,</span> <span class="n">hue</span><span class="o">=</span><span class="s2">"sex"</span><span class="p">,</span> <span class="n">kind</span><span class="o">=</span><span class="s2">"swarm"</span><span class="p">)</span>
+</pre><button class="copybtn o-tooltip--left" data-tooltip="Copy" data-clipboard-target="#codecell3">
+      <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-copy" width="44" height="44" viewBox="0 0 24 24" stroke-width="1.5" stroke="#000000" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <title>Copy to clipboard</title>
+  <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
+  <rect x="8" y="8" width="12" height="12" rx="2"></rect>
+  <path d="M16 8v-2a2 2 0 0 0 -2 -2h-8a2 2 0 0 0 -2 2v8a2 2 0 0 0 2 2h2"></path>
+</svg>
+    </button></div>
+</div>
+<img alt="../_images/categorical_9_0.png" src="./Visualizando dados categóricos — documentação seaborn 0.13.2_files/categorical_9_0.png" _mstalt="775788" _msthash="75">
+<p><font _mstmutation="1" _msttexthash="218712572" _msthash="76">Unlike with numerical data, it is not always obvious how to order the levels of the categorical variable along its axis. In general, the seaborn categorical plotting functions try to infer the order of categories from the data. If your data have a pandas  datatype, then the default order of the categories can be set there. If the variable passed to the categorical axis looks numerical, the levels will be sorted. But, by default, the data are still treated as categorical and drawn at ordinal positions on the categorical axes (specifically, at 0, 1, …) even when numbers are used to label them:</font><code class="docutils literal notranslate"><span class="pre">Categorical</span></code></p>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre id="codecell4"><span></span><span class="n">sns</span><span class="o">.</span><span class="n">catplot</span><span class="p">(</span><span class="n">data</span><span class="o">=</span><span class="n">tips</span><span class="o">.</span><span class="n">query</span><span class="p">(</span><span class="s2">"size != 3"</span><span class="p">),</span> <span class="n">x</span><span class="o">=</span><span class="s2">"size"</span><span class="p">,</span> <span class="n">y</span><span class="o">=</span><span class="s2">"total_bill"</span><span class="p">)</span>
+</pre><button class="copybtn o-tooltip--left" data-tooltip="Copy" data-clipboard-target="#codecell4">
+      <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-copy" width="44" height="44" viewBox="0 0 24 24" stroke-width="1.5" stroke="#000000" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <title>Copy to clipboard</title>
+  <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
+  <rect x="8" y="8" width="12" height="12" rx="2"></rect>
+  <path d="M16 8v-2a2 2 0 0 0 -2 -2h-8a2 2 0 0 0 -2 2v8a2 2 0 0 0 2 2h2"></path>
+</svg>
+    </button></div>
+</div>
+<img alt="../_images/categorical_11_0.png" src="./Visualizando dados categóricos — documentação seaborn 0.13.2_files/categorical_11_0.png" _mstalt="799097" _msthash="77">
+<p><font _mstmutation="1" _msttexthash="22779341" _msthash="78">As of v0.13.0, all categorical plotting functions have a  parameter, which can be set to  when you want to use numeric or datetime data for categorical grouping without changing the underlying data properties:</font><code class="docutils literal notranslate"><span class="pre">native_scale</span></code><code class="docutils literal notranslate"><span class="pre">True</span></code></p>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre id="codecell5"><span></span><span class="n">sns</span><span class="o">.</span><span class="n">catplot</span><span class="p">(</span><span class="n">data</span><span class="o">=</span><span class="n">tips</span><span class="o">.</span><span class="n">query</span><span class="p">(</span><span class="s2">"size != 3"</span><span class="p">),</span> <span class="n">x</span><span class="o">=</span><span class="s2">"size"</span><span class="p">,</span> <span class="n">y</span><span class="o">=</span><span class="s2">"total_bill"</span><span class="p">,</span> <span class="n">native_scale</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+</pre><button class="copybtn o-tooltip--left" data-tooltip="Copy" data-clipboard-target="#codecell5">
+      <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-copy" width="44" height="44" viewBox="0 0 24 24" stroke-width="1.5" stroke="#000000" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <title>Copy to clipboard</title>
+  <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
+  <rect x="8" y="8" width="12" height="12" rx="2"></rect>
+  <path d="M16 8v-2a2 2 0 0 0 -2 -2h-8a2 2 0 0 0 -2 2v8a2 2 0 0 0 2 2h2"></path>
+</svg>
+    </button></div>
+</div>
+<img alt="../_images/categorical_13_0.png" src="./Visualizando dados categóricos — documentação seaborn 0.13.2_files/categorical_13_0.png" _mstalt="799903" _msthash="79">
+<p><font _mstmutation="1" _msttexthash="74437506" _msthash="80">The other option for choosing a default ordering is to take the levels of the category as they appear in the dataset. The ordering can also be controlled on a plot-specific basis using the  parameter. This can be important when drawing multiple categorical plots in the same figure, which we’ll see more of below:</font><code class="docutils literal notranslate"><span class="pre">order</span></code></p>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre id="codecell6"><span></span><span class="n">sns</span><span class="o">.</span><span class="n">catplot</span><span class="p">(</span><span class="n">data</span><span class="o">=</span><span class="n">tips</span><span class="p">,</span> <span class="n">x</span><span class="o">=</span><span class="s2">"smoker"</span><span class="p">,</span> <span class="n">y</span><span class="o">=</span><span class="s2">"tip"</span><span class="p">,</span> <span class="n">order</span><span class="o">=</span><span class="p">[</span><span class="s2">"No"</span><span class="p">,</span> <span class="s2">"Yes"</span><span class="p">])</span>
+</pre><button class="copybtn o-tooltip--left" data-tooltip="Copy" data-clipboard-target="#codecell6">
+      <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-copy" width="44" height="44" viewBox="0 0 24 24" stroke-width="1.5" stroke="#000000" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <title>Copy to clipboard</title>
+  <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
+  <rect x="8" y="8" width="12" height="12" rx="2"></rect>
+  <path d="M16 8v-2a2 2 0 0 0 -2 -2h-8a2 2 0 0 0 -2 2v8a2 2 0 0 0 2 2h2"></path>
+</svg>
+    </button></div>
+</div>
+<img alt="../_images/categorical_15_0.png" src="./Visualizando dados categóricos — documentação seaborn 0.13.2_files/categorical_15_0.png" _mstalt="800709" _msthash="81">
+<p _msttexthash="86708245" _msthash="82">We’ve referred to the idea of “categorical axis”. In these examples, that’s always corresponded to the horizontal axis. But it’s often helpful to put the categorical variable on the vertical axis (particularly when the category names are relatively long or there are many categories). To do this, swap the assignment of variables to axes:</p>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre id="codecell7"><span></span><span class="n">sns</span><span class="o">.</span><span class="n">catplot</span><span class="p">(</span><span class="n">data</span><span class="o">=</span><span class="n">tips</span><span class="p">,</span> <span class="n">x</span><span class="o">=</span><span class="s2">"total_bill"</span><span class="p">,</span> <span class="n">y</span><span class="o">=</span><span class="s2">"day"</span><span class="p">,</span> <span class="n">hue</span><span class="o">=</span><span class="s2">"time"</span><span class="p">,</span> <span class="n">kind</span><span class="o">=</span><span class="s2">"swarm"</span><span class="p">)</span>
+</pre><button class="copybtn o-tooltip--left" data-tooltip="Copy" data-clipboard-target="#codecell7">
+      <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-copy" width="44" height="44" viewBox="0 0 24 24" stroke-width="1.5" stroke="#000000" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <title>Copy to clipboard</title>
+  <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
+  <rect x="8" y="8" width="12" height="12" rx="2"></rect>
+  <path d="M16 8v-2a2 2 0 0 0 -2 -2h-8a2 2 0 0 0 -2 2v8a2 2 0 0 0 2 2h2"></path>
+</svg>
+    </button></div>
+</div>
+<img alt="../_images/categorical_17_0.png" src="./Visualizando dados categóricos — documentação seaborn 0.13.2_files/categorical_17_0.png" _mstalt="801515" _msthash="83">
+</section>
+<section id="comparing-distributions">
+<h2><font _mstmutation="1" _msttexthash="543647" _msthash="84">Comparing distributions</font><a class="headerlink" href="https://seaborn.pydata.org/tutorial/categorical.html#comparing-distributions" title="Permalink to this heading">#</a></h2>
+<p _msttexthash="57769283" _msthash="85">As the size of the dataset grows, categorical scatter plots become limited in the information they can provide about the distribution of values within each category. When this happens, there are several approaches for summarizing the distributional information in ways that facilitate easy comparisons across the category levels.</p>
+<section id="boxplots">
+<h3><font _mstmutation="1" _msttexthash="119444" _msthash="86">Boxplots</font><a class="headerlink" href="https://seaborn.pydata.org/tutorial/categorical.html#boxplots" title="Permalink to this heading">#</a></h3>
+<p _msttexthash="104985049" _msthash="87">The first is the familiar <a class="reference internal" href="https://seaborn.pydata.org/generated/seaborn.boxplot.html#seaborn.boxplot" title="seaborn.boxplot"><code class="xref py py-func docutils literal notranslate"><span class="pre">boxplot()</span></code></a>. This kind of plot shows the three quartile values of the distribution along with extreme values. The “whiskers” extend to points that lie within 1.5 IQRs of the lower and upper quartile, and then observations that fall outside this range are displayed independently. This means that each value in the boxplot corresponds to an actual observation in the data.</p>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre id="codecell8"><span></span><span class="n">sns</span><span class="o">.</span><span class="n">catplot</span><span class="p">(</span><span class="n">data</span><span class="o">=</span><span class="n">tips</span><span class="p">,</span> <span class="n">x</span><span class="o">=</span><span class="s2">"day"</span><span class="p">,</span> <span class="n">y</span><span class="o">=</span><span class="s2">"total_bill"</span><span class="p">,</span> <span class="n">kind</span><span class="o">=</span><span class="s2">"box"</span><span class="p">)</span>
+</pre><button class="copybtn o-tooltip--left" data-tooltip="Copy" data-clipboard-target="#codecell8">
+      <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-copy" width="44" height="44" viewBox="0 0 24 24" stroke-width="1.5" stroke="#000000" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <title>Copy to clipboard</title>
+  <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
+  <rect x="8" y="8" width="12" height="12" rx="2"></rect>
+  <path d="M16 8v-2a2 2 0 0 0 -2 -2h-8a2 2 0 0 0 -2 2v8a2 2 0 0 0 2 2h2"></path>
+</svg>
+    </button></div>
+</div>
+<img alt="../_images/categorical_19_0.png" src="./Visualizando dados categóricos — documentação seaborn 0.13.2_files/categorical_19_0.png" _mstalt="802321" _msthash="88">
+<p><font _mstmutation="1" _msttexthash="8759049" _msthash="89">When adding a  semantic, the box for each level of the semantic variable is made narrower and shifted along the categorical axis:</font><code class="docutils literal notranslate"><span class="pre">hue</span></code></p>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre id="codecell9"><span></span><span class="n">sns</span><span class="o">.</span><span class="n">catplot</span><span class="p">(</span><span class="n">data</span><span class="o">=</span><span class="n">tips</span><span class="p">,</span> <span class="n">x</span><span class="o">=</span><span class="s2">"day"</span><span class="p">,</span> <span class="n">y</span><span class="o">=</span><span class="s2">"total_bill"</span><span class="p">,</span> <span class="n">hue</span><span class="o">=</span><span class="s2">"smoker"</span><span class="p">,</span> <span class="n">kind</span><span class="o">=</span><span class="s2">"box"</span><span class="p">)</span>
+</pre><button class="copybtn o-tooltip--left" data-tooltip="Copy" data-clipboard-target="#codecell9">
+      <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-copy" width="44" height="44" viewBox="0 0 24 24" stroke-width="1.5" stroke="#000000" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <title>Copy to clipboard</title>
+  <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
+  <rect x="8" y="8" width="12" height="12" rx="2"></rect>
+  <path d="M16 8v-2a2 2 0 0 0 -2 -2h-8a2 2 0 0 0 -2 2v8a2 2 0 0 0 2 2h2"></path>
+</svg>
+    </button></div>
+</div>
+<img alt="../_images/categorical_21_0.png" src="./Visualizando dados categóricos — documentação seaborn 0.13.2_files/categorical_21_0.png" _mstalt="799487" _msthash="90">
+<p><font _mstmutation="1" _msttexthash="18758974" _msthash="91">This behavior is called “dodging”, and it is controlled by the  parameter. By default (as of v0.13.0), elements dodge only if they would otherwise overlap:</font><code class="docutils literal notranslate"><span class="pre">dodge</span></code></p>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre id="codecell10"><span></span><span class="n">tips</span><span class="p">[</span><span class="s2">"weekend"</span><span class="p">]</span> <span class="o">=</span> <span class="n">tips</span><span class="p">[</span><span class="s2">"day"</span><span class="p">]</span><span class="o">.</span><span class="n">isin</span><span class="p">([</span><span class="s2">"Sat"</span><span class="p">,</span> <span class="s2">"Sun"</span><span class="p">])</span>
+<span class="n">sns</span><span class="o">.</span><span class="n">catplot</span><span class="p">(</span><span class="n">data</span><span class="o">=</span><span class="n">tips</span><span class="p">,</span> <span class="n">x</span><span class="o">=</span><span class="s2">"day"</span><span class="p">,</span> <span class="n">y</span><span class="o">=</span><span class="s2">"total_bill"</span><span class="p">,</span> <span class="n">hue</span><span class="o">=</span><span class="s2">"weekend"</span><span class="p">,</span> <span class="n">kind</span><span class="o">=</span><span class="s2">"box"</span><span class="p">)</span>
+</pre><button class="copybtn o-tooltip--left" data-tooltip="Copy" data-clipboard-target="#codecell10">
+      <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-copy" width="44" height="44" viewBox="0 0 24 24" stroke-width="1.5" stroke="#000000" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <title>Copy to clipboard</title>
+  <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
+  <rect x="8" y="8" width="12" height="12" rx="2"></rect>
+  <path d="M16 8v-2a2 2 0 0 0 -2 -2h-8a2 2 0 0 0 -2 2v8a2 2 0 0 0 2 2h2"></path>
+</svg>
+    </button></div>
+</div>
+<img alt="../_images/categorical_23_0.png" src="./Visualizando dados categóricos — documentação seaborn 0.13.2_files/categorical_23_0.png" _mstalt="800293" _msthash="92">
+<p _msttexthash="19569667" _msthash="93">A related function, <a class="reference internal" href="https://seaborn.pydata.org/generated/seaborn.boxenplot.html#seaborn.boxenplot" title="seaborn.boxenplot"><code class="xref py py-func docutils literal notranslate"><span class="pre">boxenplot()</span></code></a>, draws a plot that is similar to a box plot but optimized for showing more information about the shape of the distribution. It is best suited for larger datasets:</p>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre id="codecell11"><span></span><span class="n">diamonds</span> <span class="o">=</span> <span class="n">sns</span><span class="o">.</span><span class="n">load_dataset</span><span class="p">(</span><span class="s2">"diamonds"</span><span class="p">)</span>
+<span class="n">sns</span><span class="o">.</span><span class="n">catplot</span><span class="p">(</span>
+    <span class="n">data</span><span class="o">=</span><span class="n">diamonds</span><span class="o">.</span><span class="n">sort_values</span><span class="p">(</span><span class="s2">"color"</span><span class="p">),</span>
+    <span class="n">x</span><span class="o">=</span><span class="s2">"color"</span><span class="p">,</span> <span class="n">y</span><span class="o">=</span><span class="s2">"price"</span><span class="p">,</span> <span class="n">kind</span><span class="o">=</span><span class="s2">"boxen"</span><span class="p">,</span>
+<span class="p">)</span>
+</pre><button class="copybtn o-tooltip--left" data-tooltip="Copy" data-clipboard-target="#codecell11">
+      <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-copy" width="44" height="44" viewBox="0 0 24 24" stroke-width="1.5" stroke="#000000" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <title>Copy to clipboard</title>
+  <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
+  <rect x="8" y="8" width="12" height="12" rx="2"></rect>
+  <path d="M16 8v-2a2 2 0 0 0 -2 -2h-8a2 2 0 0 0 -2 2v8a2 2 0 0 0 2 2h2"></path>
+</svg>
+    </button></div>
+</div>
+<img alt="../_images/categorical_25_0.png" src="./Visualizando dados categóricos — documentação seaborn 0.13.2_files/categorical_25_0.png" _mstalt="801099" _msthash="94">
+</section>
+<section id="violinplots">
+<h3><font _mstmutation="1" _msttexthash="187720" _msthash="95">Violinplots</font><a class="headerlink" href="https://seaborn.pydata.org/tutorial/categorical.html#violinplots" title="Permalink to this heading">#</a></h3>
+<p _msttexthash="12876032" _msthash="96">A different approach is a <a class="reference internal" href="https://seaborn.pydata.org/generated/seaborn.violinplot.html#seaborn.violinplot" title="seaborn.violinplot"><code class="xref py py-func docutils literal notranslate"><span class="pre">violinplot()</span></code></a>, which combines a boxplot with the kernel density estimation procedure described in the <a class="reference internal" href="https://seaborn.pydata.org/tutorial/distributions.html#distribution-tutorial"><span class="std std-ref">distributions</span></a> tutorial:</p>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre id="codecell12"><span></span><span class="n">sns</span><span class="o">.</span><span class="n">catplot</span><span class="p">(</span>
+    <span class="n">data</span><span class="o">=</span><span class="n">tips</span><span class="p">,</span> <span class="n">x</span><span class="o">=</span><span class="s2">"total_bill"</span><span class="p">,</span> <span class="n">y</span><span class="o">=</span><span class="s2">"day"</span><span class="p">,</span> <span class="n">hue</span><span class="o">=</span><span class="s2">"sex"</span><span class="p">,</span> <span class="n">kind</span><span class="o">=</span><span class="s2">"violin"</span><span class="p">,</span>
+<span class="p">)</span>
+</pre><button class="copybtn o-tooltip--left" data-tooltip="Copy" data-clipboard-target="#codecell12">
+      <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-copy" width="44" height="44" viewBox="0 0 24 24" stroke-width="1.5" stroke="#000000" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <title>Copy to clipboard</title>
+  <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
+  <rect x="8" y="8" width="12" height="12" rx="2"></rect>
+  <path d="M16 8v-2a2 2 0 0 0 -2 -2h-8a2 2 0 0 0 -2 2v8a2 2 0 0 0 2 2h2"></path>
+</svg>
+    </button></div>
+</div>
+<img alt="../_images/categorical_27_0.png" src="./Visualizando dados categóricos — documentação seaborn 0.13.2_files/categorical_27_0.png" _mstalt="801905" _msthash="97">
+<p _msttexthash="73761558" _msthash="98">This approach uses the kernel density estimate to provide a richer description of the distribution of values. Additionally, the quartile and whisker values from the boxplot are shown inside the violin. The downside is that, because the violinplot uses a KDE, there are some other parameters that may need tweaking, adding some complexity relative to the straightforward boxplot:</p>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre id="codecell13"><span></span><span class="n">sns</span><span class="o">.</span><span class="n">catplot</span><span class="p">(</span>
+    <span class="n">data</span><span class="o">=</span><span class="n">tips</span><span class="p">,</span> <span class="n">x</span><span class="o">=</span><span class="s2">"total_bill"</span><span class="p">,</span> <span class="n">y</span><span class="o">=</span><span class="s2">"day"</span><span class="p">,</span> <span class="n">hue</span><span class="o">=</span><span class="s2">"sex"</span><span class="p">,</span>
+    <span class="n">kind</span><span class="o">=</span><span class="s2">"violin"</span><span class="p">,</span> <span class="n">bw_adjust</span><span class="o">=</span><span class="mf">.5</span><span class="p">,</span> <span class="n">cut</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span>
+<span class="p">)</span>
+</pre><button class="copybtn o-tooltip--left" data-tooltip="Copy" data-clipboard-target="#codecell13">
+      <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-copy" width="44" height="44" viewBox="0 0 24 24" stroke-width="1.5" stroke="#000000" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <title>Copy to clipboard</title>
+  <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
+  <rect x="8" y="8" width="12" height="12" rx="2"></rect>
+  <path d="M16 8v-2a2 2 0 0 0 -2 -2h-8a2 2 0 0 0 -2 2v8a2 2 0 0 0 2 2h2"></path>
+</svg>
+    </button></div>
+</div>
+<img alt="../_images/categorical_29_0.png" src="./Visualizando dados categóricos — documentação seaborn 0.13.2_files/categorical_29_0.png" _mstalt="802711" _msthash="99">
+<p _msttexthash="11587797" _msthash="100">It’s also possible to “split” the violins, which can allow for a more efficient use of space:</p>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre id="codecell14"><span></span><span class="n">sns</span><span class="o">.</span><span class="n">catplot</span><span class="p">(</span>
+    <span class="n">data</span><span class="o">=</span><span class="n">tips</span><span class="p">,</span> <span class="n">x</span><span class="o">=</span><span class="s2">"day"</span><span class="p">,</span> <span class="n">y</span><span class="o">=</span><span class="s2">"total_bill"</span><span class="p">,</span> <span class="n">hue</span><span class="o">=</span><span class="s2">"sex"</span><span class="p">,</span>
+    <span class="n">kind</span><span class="o">=</span><span class="s2">"violin"</span><span class="p">,</span> <span class="n">split</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
+<span class="p">)</span>
+</pre><button class="copybtn o-tooltip--left" data-tooltip="Copy" data-clipboard-target="#codecell14">
+      <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-copy" width="44" height="44" viewBox="0 0 24 24" stroke-width="1.5" stroke="#000000" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <title>Copy to clipboard</title>
+  <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
+  <rect x="8" y="8" width="12" height="12" rx="2"></rect>
+  <path d="M16 8v-2a2 2 0 0 0 -2 -2h-8a2 2 0 0 0 -2 2v8a2 2 0 0 0 2 2h2"></path>
+</svg>
+    </button></div>
+</div>
+<img alt="../_images/categorical_31_0.png" src="./Visualizando dados categóricos — documentação seaborn 0.13.2_files/categorical_31_0.png" _mstalt="799877" _msthash="101">
+<p _msttexthash="17971096" _msthash="102">Finally, there are several options for the plot that is drawn on the interior of the violins, including ways to show each individual observation instead of the summary boxplot values:</p>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre id="codecell15"><span></span><span class="n">sns</span><span class="o">.</span><span class="n">catplot</span><span class="p">(</span>
+    <span class="n">data</span><span class="o">=</span><span class="n">tips</span><span class="p">,</span> <span class="n">x</span><span class="o">=</span><span class="s2">"day"</span><span class="p">,</span> <span class="n">y</span><span class="o">=</span><span class="s2">"total_bill"</span><span class="p">,</span> <span class="n">hue</span><span class="o">=</span><span class="s2">"sex"</span><span class="p">,</span>
+    <span class="n">kind</span><span class="o">=</span><span class="s2">"violin"</span><span class="p">,</span> <span class="n">inner</span><span class="o">=</span><span class="s2">"stick"</span><span class="p">,</span> <span class="n">split</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">palette</span><span class="o">=</span><span class="s2">"pastel"</span><span class="p">,</span>
+<span class="p">)</span>
+</pre><button class="copybtn o-tooltip--left" data-tooltip="Copy" data-clipboard-target="#codecell15">
+      <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-copy" width="44" height="44" viewBox="0 0 24 24" stroke-width="1.5" stroke="#000000" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <title>Copy to clipboard</title>
+  <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
+  <rect x="8" y="8" width="12" height="12" rx="2"></rect>
+  <path d="M16 8v-2a2 2 0 0 0 -2 -2h-8a2 2 0 0 0 -2 2v8a2 2 0 0 0 2 2h2"></path>
+</svg>
+    </button></div>
+</div>
+<img alt="../_images/categorical_33_0.png" src="./Visualizando dados categóricos — documentação seaborn 0.13.2_files/categorical_33_0.png" _mstalt="800683" _msthash="103">
+<p _msttexthash="12920141" _msthash="104">It can also be useful to combine <a class="reference internal" href="https://seaborn.pydata.org/generated/seaborn.swarmplot.html#seaborn.swarmplot" title="seaborn.swarmplot"><code class="xref py py-func docutils literal notranslate"><span class="pre">swarmplot()</span></code></a> or <a class="reference internal" href="https://seaborn.pydata.org/generated/seaborn.stripplot.html#seaborn.stripplot" title="seaborn.stripplot"><code class="xref py py-func docutils literal notranslate"><span class="pre">stripplot()</span></code></a> with a box plot or violin plot to show each observation along with a summary of the distribution:</p>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre id="codecell16"><span></span><span class="n">g</span> <span class="o">=</span> <span class="n">sns</span><span class="o">.</span><span class="n">catplot</span><span class="p">(</span><span class="n">data</span><span class="o">=</span><span class="n">tips</span><span class="p">,</span> <span class="n">x</span><span class="o">=</span><span class="s2">"day"</span><span class="p">,</span> <span class="n">y</span><span class="o">=</span><span class="s2">"total_bill"</span><span class="p">,</span> <span class="n">kind</span><span class="o">=</span><span class="s2">"violin"</span><span class="p">,</span> <span class="n">inner</span><span class="o">=</span><span class="kc">None</span><span class="p">)</span>
+<span class="n">sns</span><span class="o">.</span><span class="n">swarmplot</span><span class="p">(</span><span class="n">data</span><span class="o">=</span><span class="n">tips</span><span class="p">,</span> <span class="n">x</span><span class="o">=</span><span class="s2">"day"</span><span class="p">,</span> <span class="n">y</span><span class="o">=</span><span class="s2">"total_bill"</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s2">"k"</span><span class="p">,</span> <span class="n">size</span><span class="o">=</span><span class="mi">3</span><span class="p">,</span> <span class="n">ax</span><span class="o">=</span><span class="n">g</span><span class="o">.</span><span class="n">ax</span><span class="p">)</span>
+</pre><button class="copybtn o-tooltip--left" data-tooltip="Copy" data-clipboard-target="#codecell16">
+      <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-copy" width="44" height="44" viewBox="0 0 24 24" stroke-width="1.5" stroke="#000000" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <title>Copy to clipboard</title>
+  <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
+  <rect x="8" y="8" width="12" height="12" rx="2"></rect>
+  <path d="M16 8v-2a2 2 0 0 0 -2 -2h-8a2 2 0 0 0 -2 2v8a2 2 0 0 0 2 2h2"></path>
+</svg>
+    </button></div>
+</div>
+<img alt="../_images/categorical_35_0.png" src="./Visualizando dados categóricos — documentação seaborn 0.13.2_files/categorical_35_0.png" _mstalt="801489" _msthash="105">
+</section>
+</section>
+<section id="estimating-central-tendency">
+<h2><font _mstmutation="1" _msttexthash="658671" _msthash="106">Estimating central tendency</font><a class="headerlink" href="https://seaborn.pydata.org/tutorial/categorical.html#estimating-central-tendency" title="Permalink to this heading">#</a></h2>
+<p _msttexthash="47646404" _msthash="107">For other applications, rather than showing the distribution within each category, you might want to show an estimate of the central tendency of the values. Seaborn has two main ways to show this information. Importantly, the basic API for these functions is identical to that for the ones discussed above.</p>
+<section id="bar-plots">
+<h3><font _mstmutation="1" _msttexthash="117286" _msthash="108">Bar plots</font><a class="headerlink" href="https://seaborn.pydata.org/tutorial/categorical.html#bar-plots" title="Permalink to this heading">#</a></h3>
+<p _msttexthash="70941819" _msthash="109">A familiar style of plot that accomplishes this goal is a bar plot. In seaborn, the <a class="reference internal" href="https://seaborn.pydata.org/generated/seaborn.barplot.html#seaborn.barplot" title="seaborn.barplot"><code class="xref py py-func docutils literal notranslate"><span class="pre">barplot()</span></code></a> function operates on a full dataset and applies a function to obtain the estimate (taking the mean by default). When there are multiple observations in each category, it also uses bootstrapping to compute a confidence interval around the estimate, which is plotted using error bars:</p>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre id="codecell17"><span></span><span class="n">titanic</span> <span class="o">=</span> <span class="n">sns</span><span class="o">.</span><span class="n">load_dataset</span><span class="p">(</span><span class="s2">"titanic"</span><span class="p">)</span>
+<span class="n">sns</span><span class="o">.</span><span class="n">catplot</span><span class="p">(</span><span class="n">data</span><span class="o">=</span><span class="n">titanic</span><span class="p">,</span> <span class="n">x</span><span class="o">=</span><span class="s2">"sex"</span><span class="p">,</span> <span class="n">y</span><span class="o">=</span><span class="s2">"survived"</span><span class="p">,</span> <span class="n">hue</span><span class="o">=</span><span class="s2">"class"</span><span class="p">,</span> <span class="n">kind</span><span class="o">=</span><span class="s2">"bar"</span><span class="p">)</span>
+</pre><button class="copybtn o-tooltip--left" data-tooltip="Copy" data-clipboard-target="#codecell17">
+      <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-copy" width="44" height="44" viewBox="0 0 24 24" stroke-width="1.5" stroke="#000000" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <title>Copy to clipboard</title>
+  <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
+  <rect x="8" y="8" width="12" height="12" rx="2"></rect>
+  <path d="M16 8v-2a2 2 0 0 0 -2 -2h-8a2 2 0 0 0 -2 2v8a2 2 0 0 0 2 2h2"></path>
+</svg>
+    </button></div>
+</div>
+<img alt="../_images/categorical_37_0.png" src="./Visualizando dados categóricos — documentação seaborn 0.13.2_files/categorical_37_0.png" _mstalt="802295" _msthash="110">
+<p _msttexthash="10844106" _msthash="111">The default error bars show 95% confidence intervals, but (starting in
+v0.12), it is possible to select from a number of other representations:</p>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre id="codecell18"><span></span><span class="n">sns</span><span class="o">.</span><span class="n">catplot</span><span class="p">(</span><span class="n">data</span><span class="o">=</span><span class="n">titanic</span><span class="p">,</span> <span class="n">x</span><span class="o">=</span><span class="s2">"age"</span><span class="p">,</span> <span class="n">y</span><span class="o">=</span><span class="s2">"deck"</span><span class="p">,</span> <span class="n">errorbar</span><span class="o">=</span><span class="p">(</span><span class="s2">"pi"</span><span class="p">,</span> <span class="mi">95</span><span class="p">),</span> <span class="n">kind</span><span class="o">=</span><span class="s2">"bar"</span><span class="p">)</span>
+</pre><button class="copybtn o-tooltip--left" data-tooltip="Copy" data-clipboard-target="#codecell18">
+      <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-copy" width="44" height="44" viewBox="0 0 24 24" stroke-width="1.5" stroke="#000000" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <title>Copy to clipboard</title>
+  <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
+  <rect x="8" y="8" width="12" height="12" rx="2"></rect>
+  <path d="M16 8v-2a2 2 0 0 0 -2 -2h-8a2 2 0 0 0 -2 2v8a2 2 0 0 0 2 2h2"></path>
+</svg>
+    </button></div>
+</div>
+<img alt="../_images/categorical_39_0.png" src="./Visualizando dados categóricos — documentação seaborn 0.13.2_files/categorical_39_0.png" _mstalt="803101" _msthash="112">
+<p _msttexthash="69501562" _msthash="113">A special case for the bar plot is when you want to show the number of observations in each category rather than computing a statistic for a second variable. This is similar to a histogram over a categorical, rather than quantitative, variable. In seaborn, it’s easy to do so with the <a class="reference internal" href="https://seaborn.pydata.org/generated/seaborn.countplot.html#seaborn.countplot" title="seaborn.countplot"><code class="xref py py-func docutils literal notranslate"><span class="pre">countplot()</span></code></a> function:</p>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre id="codecell19"><span></span><span class="n">sns</span><span class="o">.</span><span class="n">catplot</span><span class="p">(</span><span class="n">data</span><span class="o">=</span><span class="n">titanic</span><span class="p">,</span> <span class="n">x</span><span class="o">=</span><span class="s2">"deck"</span><span class="p">,</span> <span class="n">kind</span><span class="o">=</span><span class="s2">"count"</span><span class="p">)</span>
+</pre><button class="copybtn o-tooltip--left" data-tooltip="Copy" data-clipboard-target="#codecell19">
+      <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-copy" width="44" height="44" viewBox="0 0 24 24" stroke-width="1.5" stroke="#000000" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <title>Copy to clipboard</title>
+  <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
+  <rect x="8" y="8" width="12" height="12" rx="2"></rect>
+  <path d="M16 8v-2a2 2 0 0 0 -2 -2h-8a2 2 0 0 0 -2 2v8a2 2 0 0 0 2 2h2"></path>
+</svg>
+    </button></div>
+</div>
+<img alt="../_images/categorical_41_0.png" src="./Visualizando dados categóricos — documentação seaborn 0.13.2_files/categorical_41_0.png" _mstalt="800267" _msthash="114">
+<p _msttexthash="16557060" _msthash="115">Both <a class="reference internal" href="https://seaborn.pydata.org/generated/seaborn.barplot.html#seaborn.barplot" title="seaborn.barplot"><code class="xref py py-func docutils literal notranslate"><span class="pre">barplot()</span></code></a> and <a class="reference internal" href="https://seaborn.pydata.org/generated/seaborn.countplot.html#seaborn.countplot" title="seaborn.countplot"><code class="xref py py-func docutils literal notranslate"><span class="pre">countplot()</span></code></a> can be invoked with all of the options discussed above, along with others that are demonstrated in the detailed documentation for each function:</p>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre id="codecell20"><span></span><span class="n">sns</span><span class="o">.</span><span class="n">catplot</span><span class="p">(</span>
+    <span class="n">data</span><span class="o">=</span><span class="n">titanic</span><span class="p">,</span> <span class="n">y</span><span class="o">=</span><span class="s2">"deck"</span><span class="p">,</span> <span class="n">hue</span><span class="o">=</span><span class="s2">"class"</span><span class="p">,</span> <span class="n">kind</span><span class="o">=</span><span class="s2">"count"</span><span class="p">,</span>
+    <span class="n">palette</span><span class="o">=</span><span class="s2">"pastel"</span><span class="p">,</span> <span class="n">edgecolor</span><span class="o">=</span><span class="s2">".6"</span><span class="p">,</span>
+<span class="p">)</span>
+</pre><button class="copybtn o-tooltip--left" data-tooltip="Copy" data-clipboard-target="#codecell20">
+      <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-copy" width="44" height="44" viewBox="0 0 24 24" stroke-width="1.5" stroke="#000000" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <title>Copy to clipboard</title>
+  <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
+  <rect x="8" y="8" width="12" height="12" rx="2"></rect>
+  <path d="M16 8v-2a2 2 0 0 0 -2 -2h-8a2 2 0 0 0 -2 2v8a2 2 0 0 0 2 2h2"></path>
+</svg>
+    </button></div>
+</div>
+<img alt="../_images/categorical_43_0.png" src="./Visualizando dados categóricos — documentação seaborn 0.13.2_files/categorical_43_0.png" _mstalt="801073" _msthash="116">
+</section>
+<section id="point-plots">
+<h3><font _mstmutation="1" _msttexthash="164463" _msthash="117">Point plots</font><a class="headerlink" href="https://seaborn.pydata.org/tutorial/categorical.html#point-plots" title="Permalink to this heading">#</a></h3>
+<p><font _mstmutation="1" _msttexthash="127860031" _msthash="118">An alternative style for visualizing the same information is offered by the <a class="reference internal" href="https://seaborn.pydata.org/generated/seaborn.pointplot.html#seaborn.pointplot" title="seaborn.pointplot" _mstmutation="1"><code class="xref py py-func docutils literal notranslate"><span class="pre">pointplot()</span></code></a> function. This function also encodes the value of the estimate with height on the other axis, but rather than showing a full bar, it plots the point estimate and confidence interval. Additionally, <a class="reference internal" href="https://seaborn.pydata.org/generated/seaborn.pointplot.html#seaborn.pointplot" title="seaborn.pointplot" _mstmutation="1"><code class="xref py py-func docutils literal notranslate"><span class="pre">pointplot()</span></code></a> connects points from the same  category. This makes it easy to see how the main relationship is changing as a function of the hue semantic, because your eyes are quite good at picking up on differences of slopes:</font><code class="docutils literal notranslate"><span class="pre">hue</span></code></p>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre id="codecell21"><span></span><span class="n">sns</span><span class="o">.</span><span class="n">catplot</span><span class="p">(</span><span class="n">data</span><span class="o">=</span><span class="n">titanic</span><span class="p">,</span> <span class="n">x</span><span class="o">=</span><span class="s2">"sex"</span><span class="p">,</span> <span class="n">y</span><span class="o">=</span><span class="s2">"survived"</span><span class="p">,</span> <span class="n">hue</span><span class="o">=</span><span class="s2">"class"</span><span class="p">,</span> <span class="n">kind</span><span class="o">=</span><span class="s2">"point"</span><span class="p">)</span>
+</pre><button class="copybtn o-tooltip--left" data-tooltip="Copy" data-clipboard-target="#codecell21">
+      <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-copy" width="44" height="44" viewBox="0 0 24 24" stroke-width="1.5" stroke="#000000" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <title>Copy to clipboard</title>
+  <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
+  <rect x="8" y="8" width="12" height="12" rx="2"></rect>
+  <path d="M16 8v-2a2 2 0 0 0 -2 -2h-8a2 2 0 0 0 -2 2v8a2 2 0 0 0 2 2h2"></path>
+</svg>
+    </button></div>
+</div>
+<img alt="../_images/categorical_45_0.png" src="./Visualizando dados categóricos — documentação seaborn 0.13.2_files/categorical_45_0.png" _mstalt="801879" _msthash="119">
+<p><font _mstmutation="1" _msttexthash="30728399" _msthash="120">While the categorical functions lack the  semantic of the relational functions, it can still be a good idea to vary the marker and/or linestyle along with the hue to make figures that are maximally accessible and reproduce well in black and white:</font><code class="docutils literal notranslate"><span class="pre">style</span></code></p>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre id="codecell22"><span></span><span class="n">sns</span><span class="o">.</span><span class="n">catplot</span><span class="p">(</span>
+    <span class="n">data</span><span class="o">=</span><span class="n">titanic</span><span class="p">,</span> <span class="n">x</span><span class="o">=</span><span class="s2">"class"</span><span class="p">,</span> <span class="n">y</span><span class="o">=</span><span class="s2">"survived"</span><span class="p">,</span> <span class="n">hue</span><span class="o">=</span><span class="s2">"sex"</span><span class="p">,</span>
+    <span class="n">palette</span><span class="o">=</span><span class="p">{</span><span class="s2">"male"</span><span class="p">:</span> <span class="s2">"g"</span><span class="p">,</span> <span class="s2">"female"</span><span class="p">:</span> <span class="s2">"m"</span><span class="p">},</span>
+    <span class="n">markers</span><span class="o">=</span><span class="p">[</span><span class="s2">"^"</span><span class="p">,</span> <span class="s2">"o"</span><span class="p">],</span> <span class="n">linestyles</span><span class="o">=</span><span class="p">[</span><span class="s2">"-"</span><span class="p">,</span> <span class="s2">"--"</span><span class="p">],</span>
+    <span class="n">kind</span><span class="o">=</span><span class="s2">"point"</span>
+<span class="p">)</span>
+</pre><button class="copybtn o-tooltip--left" data-tooltip="Copy" data-clipboard-target="#codecell22">
+      <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-copy" width="44" height="44" viewBox="0 0 24 24" stroke-width="1.5" stroke="#000000" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <title>Copy to clipboard</title>
+  <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
+  <rect x="8" y="8" width="12" height="12" rx="2"></rect>
+  <path d="M16 8v-2a2 2 0 0 0 -2 -2h-8a2 2 0 0 0 -2 2v8a2 2 0 0 0 2 2h2"></path>
+</svg>
+    </button></div>
+</div>
+<img alt="../_images/categorical_47_0.png" src="./Visualizando dados categóricos — documentação seaborn 0.13.2_files/categorical_47_0.png" _mstalt="802685" _msthash="121">
+</section>
+</section>
+<section id="showing-additional-dimensions">
+<h2><font _mstmutation="1" _msttexthash="751361" _msthash="122">Showing additional dimensions</font><a class="headerlink" href="https://seaborn.pydata.org/tutorial/categorical.html#showing-additional-dimensions" title="Permalink to this heading">#</a></h2>
+<p _msttexthash="14355848" _msthash="123">Just like <a class="reference internal" href="https://seaborn.pydata.org/generated/seaborn.relplot.html#seaborn.relplot" title="seaborn.relplot"><code class="xref py py-func docutils literal notranslate"><span class="pre">relplot()</span></code></a>, the fact that <a class="reference internal" href="https://seaborn.pydata.org/generated/seaborn.catplot.html#seaborn.catplot" title="seaborn.catplot"><code class="xref py py-func docutils literal notranslate"><span class="pre">catplot()</span></code></a> is built on a <a class="reference internal" href="https://seaborn.pydata.org/generated/seaborn.FacetGrid.html#seaborn.FacetGrid" title="seaborn.FacetGrid"><code class="xref py py-class docutils literal notranslate"><span class="pre">FacetGrid</span></code></a> means that it is easy to add faceting variables to visualize higher-dimensional relationships:</p>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre id="codecell23"><span></span><span class="n">sns</span><span class="o">.</span><span class="n">catplot</span><span class="p">(</span>
+    <span class="n">data</span><span class="o">=</span><span class="n">tips</span><span class="p">,</span> <span class="n">x</span><span class="o">=</span><span class="s2">"day"</span><span class="p">,</span> <span class="n">y</span><span class="o">=</span><span class="s2">"total_bill"</span><span class="p">,</span> <span class="n">hue</span><span class="o">=</span><span class="s2">"smoker"</span><span class="p">,</span>
+    <span class="n">kind</span><span class="o">=</span><span class="s2">"swarm"</span><span class="p">,</span> <span class="n">col</span><span class="o">=</span><span class="s2">"time"</span><span class="p">,</span> <span class="n">aspect</span><span class="o">=</span><span class="mf">.7</span><span class="p">,</span>
+<span class="p">)</span>
+</pre><button class="copybtn o-tooltip--left" data-tooltip="Copy" data-clipboard-target="#codecell23">
+      <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-copy" width="44" height="44" viewBox="0 0 24 24" stroke-width="1.5" stroke="#000000" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <title>Copy to clipboard</title>
+  <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
+  <rect x="8" y="8" width="12" height="12" rx="2"></rect>
+  <path d="M16 8v-2a2 2 0 0 0 -2 -2h-8a2 2 0 0 0 -2 2v8a2 2 0 0 0 2 2h2"></path>
+</svg>
+    </button></div>
+</div>
+<img alt="../_images/categorical_49_0.png" src="./Visualizando dados categóricos — documentação seaborn 0.13.2_files/categorical_49_0.png" _mstalt="803491" _msthash="124">
+<p _msttexthash="5844683" _msthash="125">For further customization of the plot, you can use the methods on the <a class="reference internal" href="https://seaborn.pydata.org/generated/seaborn.FacetGrid.html#seaborn.FacetGrid" title="seaborn.FacetGrid"><code class="xref py py-class docutils literal notranslate"><span class="pre">FacetGrid</span></code></a> object that it returns:</p>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre id="codecell24"><span></span><span class="n">g</span> <span class="o">=</span> <span class="n">sns</span><span class="o">.</span><span class="n">catplot</span><span class="p">(</span>
+    <span class="n">data</span><span class="o">=</span><span class="n">titanic</span><span class="p">,</span>
+    <span class="n">x</span><span class="o">=</span><span class="s2">"fare"</span><span class="p">,</span> <span class="n">y</span><span class="o">=</span><span class="s2">"embark_town"</span><span class="p">,</span> <span class="n">row</span><span class="o">=</span><span class="s2">"class"</span><span class="p">,</span>
+    <span class="n">kind</span><span class="o">=</span><span class="s2">"box"</span><span class="p">,</span> <span class="n">orient</span><span class="o">=</span><span class="s2">"h"</span><span class="p">,</span>
+    <span class="n">sharex</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">margin_titles</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
+    <span class="n">height</span><span class="o">=</span><span class="mf">1.5</span><span class="p">,</span> <span class="n">aspect</span><span class="o">=</span><span class="mi">4</span><span class="p">,</span>
+<span class="p">)</span>
+<span class="n">g</span><span class="o">.</span><span class="n">set</span><span class="p">(</span><span class="n">xlabel</span><span class="o">=</span><span class="s2">"Fare"</span><span class="p">,</span> <span class="n">ylabel</span><span class="o">=</span><span class="s2">""</span><span class="p">)</span>
+<span class="n">g</span><span class="o">.</span><span class="n">set_titles</span><span class="p">(</span><span class="n">row_template</span><span class="o">=</span><span class="s2">"</span><span class="si">{row_name}</span><span class="s2"> class"</span><span class="p">)</span>
+<span class="k">for</span> <span class="n">ax</span> <span class="ow">in</span> <span class="n">g</span><span class="o">.</span><span class="n">axes</span><span class="o">.</span><span class="n">flat</span><span class="p">:</span>
+    <span class="n">ax</span><span class="o">.</span><span class="n">xaxis</span><span class="o">.</span><span class="n">set_major_formatter</span><span class="p">(</span><span class="s1">'$</span><span class="si">{x:.0f}</span><span class="s1">'</span><span class="p">)</span>
+</pre><button class="copybtn o-tooltip--left" data-tooltip="Copy" data-clipboard-target="#codecell24">
+      <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-copy" width="44" height="44" viewBox="0 0 24 24" stroke-width="1.5" stroke="#000000" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <title>Copy to clipboard</title>
+  <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
+  <rect x="8" y="8" width="12" height="12" rx="2"></rect>
+  <path d="M16 8v-2a2 2 0 0 0 -2 -2h-8a2 2 0 0 0 -2 2v8a2 2 0 0 0 2 2h2"></path>
+</svg>
+    </button></div>
+</div>
+<img alt="../_images/categorical_51_0.png" src="./Visualizando dados categóricos — documentação seaborn 0.13.2_files/categorical_51_0.png" _mstalt="800657" _msthash="126">
+</section>
+</section>
+
+
+          </article>
+          
+
+          
+          
+      </div>
+      
+    </div>
+  </div>
+
+  
+    
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script src="./Visualizando dados categóricos — documentação seaborn 0.13.2_files/pydata-sphinx-theme.js.baixados"></script>
+
+<footer class="footer" style="border-top: 1px solid #ccc; padding-top: 10px">
+  <div class="container">
+    <div id="credits" style="width: 50%; float: left">
+      <p><font _mstmutation="1" _msttexthash="3639389" _msthash="127">
+      © Copyright 2012-2024, <a href="https://mwaskom.github.io/" _mstmutation="1">Michael Waskom</a>.<br _mstmutation="1">
+      Created using <a href="https://www.sphinx-doc.org/" _mstmutation="1">Sphinx</a> and the <a href="https://pydata-sphinx-theme.readthedocs.io/en/stable/" _mstmutation="1">PyData Theme</a>.</font><br>
+      </p>
+    </div>
+    <div class="dropup show" style="float: right; margin: 10px">
+        <a class="btn btn-secondary dropdown-toggle" href="https://seaborn.pydata.org/tutorial/categorical.html#" role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" _msttexthash="93366" _msthash="128">
+            Archive
+        </a>
+        <div class="dropdown-menu dropdown-menu-right" aria-labelledby="dropdownMenuLink" _msthidden="4">
+          <a class="dropdown-item" href="https://seaborn.pydata.org/archive/0.12/index.html" _msttexthash="34632" _msthidden="1" _msthash="129">v0.12</a>
+          <a class="dropdown-item" href="https://seaborn.pydata.org/archive/0.11/index.html" _msttexthash="34489" _msthidden="1" _msthash="130">v0.11</a>
+          <a class="dropdown-item" href="https://seaborn.pydata.org/archive/0.10/index.html" _msttexthash="34346" _msthidden="1" _msthash="131">v0.10</a>
+          <a class="dropdown-item" href="https://seaborn.pydata.org/archive/0.9/index.html" _msttexthash="28522" _msthidden="1" _msthash="132">v0.9</a>
+        </div>
+    </div>
+    <div id="version" style="color: #999; float: right; margin: 15px" _msttexthash="50401" _msthash="133">v0.13.2</div>
+    </div>
+  
+</footer>
+  
+</body></html>

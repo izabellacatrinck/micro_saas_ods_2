@@ -1,0 +1,1038 @@
+<!DOCTYPE html>
+<!-- saved from url=(0061)https://numpy.org/doc/stable/dev/development_environment.html -->
+<html lang="pt" data-content_root="../" data-theme="light" data-mode="light" class="fontawesome-i2svg-active fontawesome-i2svg-complete"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"><meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <title _msttexthash="9021766" _msthash="0">Configurando e usando seu ambiente de desenvolvimento — Manual do NumPy v2.4</title>
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "light";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "light";
+  </script>
+  <!--
+    this give us a css class that will be invisible only if js is disabled
+  -->
+  <noscript>
+    <style>
+      .pst-js-only { display: none !important; }
+
+    </style>
+  </noscript>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <style type="text/css">:host,:root{--fa-font-solid:normal 900 1em/1 "Font Awesome 6 Solid";--fa-font-regular:normal 400 1em/1 "Font Awesome 6 Regular";--fa-font-light:normal 300 1em/1 "Font Awesome 6 Light";--fa-font-thin:normal 100 1em/1 "Font Awesome 6 Thin";--fa-font-duotone:normal 900 1em/1 "Font Awesome 6 Duotone";--fa-font-sharp-solid:normal 900 1em/1 "Font Awesome 6 Sharp";--fa-font-sharp-regular:normal 400 1em/1 "Font Awesome 6 Sharp";--fa-font-sharp-light:normal 300 1em/1 "Font Awesome 6 Sharp";--fa-font-sharp-thin:normal 100 1em/1 "Font Awesome 6 Sharp";--fa-font-brands:normal 400 1em/1 "Font Awesome 6 Brands"}svg:not(:host).svg-inline--fa,svg:not(:root).svg-inline--fa{overflow:visible;box-sizing:content-box}.svg-inline--fa{display:var(--fa-display,inline-block);height:1em;overflow:visible;vertical-align:-.125em}.svg-inline--fa.fa-2xs{vertical-align:.1em}.svg-inline--fa.fa-xs{vertical-align:0}.svg-inline--fa.fa-sm{vertical-align:-.0714285705em}.svg-inline--fa.fa-lg{vertical-align:-.2em}.svg-inline--fa.fa-xl{vertical-align:-.25em}.svg-inline--fa.fa-2xl{vertical-align:-.3125em}.svg-inline--fa.fa-pull-left{margin-right:var(--fa-pull-margin,.3em);width:auto}.svg-inline--fa.fa-pull-right{margin-left:var(--fa-pull-margin,.3em);width:auto}.svg-inline--fa.fa-li{width:var(--fa-li-width,2em);top:.25em}.svg-inline--fa.fa-fw{width:var(--fa-fw-width,1.25em)}.fa-layers svg.svg-inline--fa{bottom:0;left:0;margin:auto;position:absolute;right:0;top:0}.fa-layers-counter,.fa-layers-text{display:inline-block;position:absolute;text-align:center}.fa-layers{display:inline-block;height:1em;position:relative;text-align:center;vertical-align:-.125em;width:1em}.fa-layers svg.svg-inline--fa{-webkit-transform-origin:center center;transform-origin:center center}.fa-layers-text{left:50%;top:50%;-webkit-transform:translate(-50%,-50%);transform:translate(-50%,-50%);-webkit-transform-origin:center center;transform-origin:center center}.fa-layers-counter{background-color:var(--fa-counter-background-color,#ff253a);border-radius:var(--fa-counter-border-radius,1em);box-sizing:border-box;color:var(--fa-inverse,#fff);line-height:var(--fa-counter-line-height,1);max-width:var(--fa-counter-max-width,5em);min-width:var(--fa-counter-min-width,1.5em);overflow:hidden;padding:var(--fa-counter-padding,.25em .5em);right:var(--fa-right,0);text-overflow:ellipsis;top:var(--fa-top,0);-webkit-transform:scale(var(--fa-counter-scale,.25));transform:scale(var(--fa-counter-scale,.25));-webkit-transform-origin:top right;transform-origin:top right}.fa-layers-bottom-right{bottom:var(--fa-bottom,0);right:var(--fa-right,0);top:auto;-webkit-transform:scale(var(--fa-layers-scale,.25));transform:scale(var(--fa-layers-scale,.25));-webkit-transform-origin:bottom right;transform-origin:bottom right}.fa-layers-bottom-left{bottom:var(--fa-bottom,0);left:var(--fa-left,0);right:auto;top:auto;-webkit-transform:scale(var(--fa-layers-scale,.25));transform:scale(var(--fa-layers-scale,.25));-webkit-transform-origin:bottom left;transform-origin:bottom left}.fa-layers-top-right{top:var(--fa-top,0);right:var(--fa-right,0);-webkit-transform:scale(var(--fa-layers-scale,.25));transform:scale(var(--fa-layers-scale,.25));-webkit-transform-origin:top right;transform-origin:top right}.fa-layers-top-left{left:var(--fa-left,0);right:auto;top:var(--fa-top,0);-webkit-transform:scale(var(--fa-layers-scale,.25));transform:scale(var(--fa-layers-scale,.25));-webkit-transform-origin:top left;transform-origin:top left}.fa-1x{font-size:1em}.fa-2x{font-size:2em}.fa-3x{font-size:3em}.fa-4x{font-size:4em}.fa-5x{font-size:5em}.fa-6x{font-size:6em}.fa-7x{font-size:7em}.fa-8x{font-size:8em}.fa-9x{font-size:9em}.fa-10x{font-size:10em}.fa-2xs{font-size:.625em;line-height:.1em;vertical-align:.225em}.fa-xs{font-size:.75em;line-height:.0833333337em;vertical-align:.125em}.fa-sm{font-size:.875em;line-height:.0714285718em;vertical-align:.0535714295em}.fa-lg{font-size:1.25em;line-height:.05em;vertical-align:-.075em}.fa-xl{font-size:1.5em;line-height:.0416666682em;vertical-align:-.125em}.fa-2xl{font-size:2em;line-height:.03125em;vertical-align:-.1875em}.fa-fw{text-align:center;width:1.25em}.fa-ul{list-style-type:none;margin-left:var(--fa-li-margin,2.5em);padding-left:0}.fa-ul>li{position:relative}.fa-li{left:calc(var(--fa-li-width,2em) * -1);position:absolute;text-align:center;width:var(--fa-li-width,2em);line-height:inherit}.fa-border{border-color:var(--fa-border-color,#eee);border-radius:var(--fa-border-radius,.1em);border-style:var(--fa-border-style,solid);border-width:var(--fa-border-width,.08em);padding:var(--fa-border-padding,.2em .25em .15em)}.fa-pull-left{float:left;margin-right:var(--fa-pull-margin,.3em)}.fa-pull-right{float:right;margin-left:var(--fa-pull-margin,.3em)}.fa-beat{-webkit-animation-name:fa-beat;animation-name:fa-beat;-webkit-animation-delay:var(--fa-animation-delay,0s);animation-delay:var(--fa-animation-delay,0s);-webkit-animation-direction:var(--fa-animation-direction,normal);animation-direction:var(--fa-animation-direction,normal);-webkit-animation-duration:var(--fa-animation-duration,1s);animation-duration:var(--fa-animation-duration,1s);-webkit-animation-iteration-count:var(--fa-animation-iteration-count,infinite);animation-iteration-count:var(--fa-animation-iteration-count,infinite);-webkit-animation-timing-function:var(--fa-animation-timing,ease-in-out);animation-timing-function:var(--fa-animation-timing,ease-in-out)}.fa-bounce{-webkit-animation-name:fa-bounce;animation-name:fa-bounce;-webkit-animation-delay:var(--fa-animation-delay,0s);animation-delay:var(--fa-animation-delay,0s);-webkit-animation-direction:var(--fa-animation-direction,normal);animation-direction:var(--fa-animation-direction,normal);-webkit-animation-duration:var(--fa-animation-duration,1s);animation-duration:var(--fa-animation-duration,1s);-webkit-animation-iteration-count:var(--fa-animation-iteration-count,infinite);animation-iteration-count:var(--fa-animation-iteration-count,infinite);-webkit-animation-timing-function:var(--fa-animation-timing,cubic-bezier(.28,.84,.42,1));animation-timing-function:var(--fa-animation-timing,cubic-bezier(.28,.84,.42,1))}.fa-fade{-webkit-animation-name:fa-fade;animation-name:fa-fade;-webkit-animation-delay:var(--fa-animation-delay,0s);animation-delay:var(--fa-animation-delay,0s);-webkit-animation-direction:var(--fa-animation-direction,normal);animation-direction:var(--fa-animation-direction,normal);-webkit-animation-duration:var(--fa-animation-duration,1s);animation-duration:var(--fa-animation-duration,1s);-webkit-animation-iteration-count:var(--fa-animation-iteration-count,infinite);animation-iteration-count:var(--fa-animation-iteration-count,infinite);-webkit-animation-timing-function:var(--fa-animation-timing,cubic-bezier(.4,0,.6,1));animation-timing-function:var(--fa-animation-timing,cubic-bezier(.4,0,.6,1))}.fa-beat-fade{-webkit-animation-name:fa-beat-fade;animation-name:fa-beat-fade;-webkit-animation-delay:var(--fa-animation-delay,0s);animation-delay:var(--fa-animation-delay,0s);-webkit-animation-direction:var(--fa-animation-direction,normal);animation-direction:var(--fa-animation-direction,normal);-webkit-animation-duration:var(--fa-animation-duration,1s);animation-duration:var(--fa-animation-duration,1s);-webkit-animation-iteration-count:var(--fa-animation-iteration-count,infinite);animation-iteration-count:var(--fa-animation-iteration-count,infinite);-webkit-animation-timing-function:var(--fa-animation-timing,cubic-bezier(.4,0,.6,1));animation-timing-function:var(--fa-animation-timing,cubic-bezier(.4,0,.6,1))}.fa-flip{-webkit-animation-name:fa-flip;animation-name:fa-flip;-webkit-animation-delay:var(--fa-animation-delay,0s);animation-delay:var(--fa-animation-delay,0s);-webkit-animation-direction:var(--fa-animation-direction,normal);animation-direction:var(--fa-animation-direction,normal);-webkit-animation-duration:var(--fa-animation-duration,1s);animation-duration:var(--fa-animation-duration,1s);-webkit-animation-iteration-count:var(--fa-animation-iteration-count,infinite);animation-iteration-count:var(--fa-animation-iteration-count,infinite);-webkit-animation-timing-function:var(--fa-animation-timing,ease-in-out);animation-timing-function:var(--fa-animation-timing,ease-in-out)}.fa-shake{-webkit-animation-name:fa-shake;animation-name:fa-shake;-webkit-animation-delay:var(--fa-animation-delay,0s);animation-delay:var(--fa-animation-delay,0s);-webkit-animation-direction:var(--fa-animation-direction,normal);animation-direction:var(--fa-animation-direction,normal);-webkit-animation-duration:var(--fa-animation-duration,1s);animation-duration:var(--fa-animation-duration,1s);-webkit-animation-iteration-count:var(--fa-animation-iteration-count,infinite);animation-iteration-count:var(--fa-animation-iteration-count,infinite);-webkit-animation-timing-function:var(--fa-animation-timing,linear);animation-timing-function:var(--fa-animation-timing,linear)}.fa-spin{-webkit-animation-name:fa-spin;animation-name:fa-spin;-webkit-animation-delay:var(--fa-animation-delay,0s);animation-delay:var(--fa-animation-delay,0s);-webkit-animation-direction:var(--fa-animation-direction,normal);animation-direction:var(--fa-animation-direction,normal);-webkit-animation-duration:var(--fa-animation-duration,2s);animation-duration:var(--fa-animation-duration,2s);-webkit-animation-iteration-count:var(--fa-animation-iteration-count,infinite);animation-iteration-count:var(--fa-animation-iteration-count,infinite);-webkit-animation-timing-function:var(--fa-animation-timing,linear);animation-timing-function:var(--fa-animation-timing,linear)}.fa-spin-reverse{--fa-animation-direction:reverse}.fa-pulse,.fa-spin-pulse{-webkit-animation-name:fa-spin;animation-name:fa-spin;-webkit-animation-direction:var(--fa-animation-direction,normal);animation-direction:var(--fa-animation-direction,normal);-webkit-animation-duration:var(--fa-animation-duration,1s);animation-duration:var(--fa-animation-duration,1s);-webkit-animation-iteration-count:var(--fa-animation-iteration-count,infinite);animation-iteration-count:var(--fa-animation-iteration-count,infinite);-webkit-animation-timing-function:var(--fa-animation-timing,steps(8));animation-timing-function:var(--fa-animation-timing,steps(8))}@media (prefers-reduced-motion:reduce){.fa-beat,.fa-beat-fade,.fa-bounce,.fa-fade,.fa-flip,.fa-pulse,.fa-shake,.fa-spin,.fa-spin-pulse{-webkit-animation-delay:-1ms;animation-delay:-1ms;-webkit-animation-duration:1ms;animation-duration:1ms;-webkit-animation-iteration-count:1;animation-iteration-count:1;-webkit-transition-delay:0s;transition-delay:0s;-webkit-transition-duration:0s;transition-duration:0s}}@-webkit-keyframes fa-beat{0%,90%{-webkit-transform:scale(1);transform:scale(1)}45%{-webkit-transform:scale(var(--fa-beat-scale,1.25));transform:scale(var(--fa-beat-scale,1.25))}}@keyframes fa-beat{0%,90%{-webkit-transform:scale(1);transform:scale(1)}45%{-webkit-transform:scale(var(--fa-beat-scale,1.25));transform:scale(var(--fa-beat-scale,1.25))}}@-webkit-keyframes fa-bounce{0%{-webkit-transform:scale(1,1) translateY(0);transform:scale(1,1) translateY(0)}10%{-webkit-transform:scale(var(--fa-bounce-start-scale-x,1.1),var(--fa-bounce-start-scale-y,.9)) translateY(0);transform:scale(var(--fa-bounce-start-scale-x,1.1),var(--fa-bounce-start-scale-y,.9)) translateY(0)}30%{-webkit-transform:scale(var(--fa-bounce-jump-scale-x,.9),var(--fa-bounce-jump-scale-y,1.1)) translateY(var(--fa-bounce-height,-.5em));transform:scale(var(--fa-bounce-jump-scale-x,.9),var(--fa-bounce-jump-scale-y,1.1)) translateY(var(--fa-bounce-height,-.5em))}50%{-webkit-transform:scale(var(--fa-bounce-land-scale-x,1.05),var(--fa-bounce-land-scale-y,.95)) translateY(0);transform:scale(var(--fa-bounce-land-scale-x,1.05),var(--fa-bounce-land-scale-y,.95)) translateY(0)}57%{-webkit-transform:scale(1,1) translateY(var(--fa-bounce-rebound,-.125em));transform:scale(1,1) translateY(var(--fa-bounce-rebound,-.125em))}64%{-webkit-transform:scale(1,1) translateY(0);transform:scale(1,1) translateY(0)}100%{-webkit-transform:scale(1,1) translateY(0);transform:scale(1,1) translateY(0)}}@keyframes fa-bounce{0%{-webkit-transform:scale(1,1) translateY(0);transform:scale(1,1) translateY(0)}10%{-webkit-transform:scale(var(--fa-bounce-start-scale-x,1.1),var(--fa-bounce-start-scale-y,.9)) translateY(0);transform:scale(var(--fa-bounce-start-scale-x,1.1),var(--fa-bounce-start-scale-y,.9)) translateY(0)}30%{-webkit-transform:scale(var(--fa-bounce-jump-scale-x,.9),var(--fa-bounce-jump-scale-y,1.1)) translateY(var(--fa-bounce-height,-.5em));transform:scale(var(--fa-bounce-jump-scale-x,.9),var(--fa-bounce-jump-scale-y,1.1)) translateY(var(--fa-bounce-height,-.5em))}50%{-webkit-transform:scale(var(--fa-bounce-land-scale-x,1.05),var(--fa-bounce-land-scale-y,.95)) translateY(0);transform:scale(var(--fa-bounce-land-scale-x,1.05),var(--fa-bounce-land-scale-y,.95)) translateY(0)}57%{-webkit-transform:scale(1,1) translateY(var(--fa-bounce-rebound,-.125em));transform:scale(1,1) translateY(var(--fa-bounce-rebound,-.125em))}64%{-webkit-transform:scale(1,1) translateY(0);transform:scale(1,1) translateY(0)}100%{-webkit-transform:scale(1,1) translateY(0);transform:scale(1,1) translateY(0)}}@-webkit-keyframes fa-fade{50%{opacity:var(--fa-fade-opacity,.4)}}@keyframes fa-fade{50%{opacity:var(--fa-fade-opacity,.4)}}@-webkit-keyframes fa-beat-fade{0%,100%{opacity:var(--fa-beat-fade-opacity,.4);-webkit-transform:scale(1);transform:scale(1)}50%{opacity:1;-webkit-transform:scale(var(--fa-beat-fade-scale,1.125));transform:scale(var(--fa-beat-fade-scale,1.125))}}@keyframes fa-beat-fade{0%,100%{opacity:var(--fa-beat-fade-opacity,.4);-webkit-transform:scale(1);transform:scale(1)}50%{opacity:1;-webkit-transform:scale(var(--fa-beat-fade-scale,1.125));transform:scale(var(--fa-beat-fade-scale,1.125))}}@-webkit-keyframes fa-flip{50%{-webkit-transform:rotate3d(var(--fa-flip-x,0),var(--fa-flip-y,1),var(--fa-flip-z,0),var(--fa-flip-angle,-180deg));transform:rotate3d(var(--fa-flip-x,0),var(--fa-flip-y,1),var(--fa-flip-z,0),var(--fa-flip-angle,-180deg))}}@keyframes fa-flip{50%{-webkit-transform:rotate3d(var(--fa-flip-x,0),var(--fa-flip-y,1),var(--fa-flip-z,0),var(--fa-flip-angle,-180deg));transform:rotate3d(var(--fa-flip-x,0),var(--fa-flip-y,1),var(--fa-flip-z,0),var(--fa-flip-angle,-180deg))}}@-webkit-keyframes fa-shake{0%{-webkit-transform:rotate(-15deg);transform:rotate(-15deg)}4%{-webkit-transform:rotate(15deg);transform:rotate(15deg)}24%,8%{-webkit-transform:rotate(-18deg);transform:rotate(-18deg)}12%,28%{-webkit-transform:rotate(18deg);transform:rotate(18deg)}16%{-webkit-transform:rotate(-22deg);transform:rotate(-22deg)}20%{-webkit-transform:rotate(22deg);transform:rotate(22deg)}32%{-webkit-transform:rotate(-12deg);transform:rotate(-12deg)}36%{-webkit-transform:rotate(12deg);transform:rotate(12deg)}100%,40%{-webkit-transform:rotate(0);transform:rotate(0)}}@keyframes fa-shake{0%{-webkit-transform:rotate(-15deg);transform:rotate(-15deg)}4%{-webkit-transform:rotate(15deg);transform:rotate(15deg)}24%,8%{-webkit-transform:rotate(-18deg);transform:rotate(-18deg)}12%,28%{-webkit-transform:rotate(18deg);transform:rotate(18deg)}16%{-webkit-transform:rotate(-22deg);transform:rotate(-22deg)}20%{-webkit-transform:rotate(22deg);transform:rotate(22deg)}32%{-webkit-transform:rotate(-12deg);transform:rotate(-12deg)}36%{-webkit-transform:rotate(12deg);transform:rotate(12deg)}100%,40%{-webkit-transform:rotate(0);transform:rotate(0)}}@-webkit-keyframes fa-spin{0%{-webkit-transform:rotate(0);transform:rotate(0)}100%{-webkit-transform:rotate(360deg);transform:rotate(360deg)}}@keyframes fa-spin{0%{-webkit-transform:rotate(0);transform:rotate(0)}100%{-webkit-transform:rotate(360deg);transform:rotate(360deg)}}.fa-rotate-90{-webkit-transform:rotate(90deg);transform:rotate(90deg)}.fa-rotate-180{-webkit-transform:rotate(180deg);transform:rotate(180deg)}.fa-rotate-270{-webkit-transform:rotate(270deg);transform:rotate(270deg)}.fa-flip-horizontal{-webkit-transform:scale(-1,1);transform:scale(-1,1)}.fa-flip-vertical{-webkit-transform:scale(1,-1);transform:scale(1,-1)}.fa-flip-both,.fa-flip-horizontal.fa-flip-vertical{-webkit-transform:scale(-1,-1);transform:scale(-1,-1)}.fa-rotate-by{-webkit-transform:rotate(var(--fa-rotate-angle,0));transform:rotate(var(--fa-rotate-angle,0))}.fa-stack{display:inline-block;vertical-align:middle;height:2em;position:relative;width:2.5em}.fa-stack-1x,.fa-stack-2x{bottom:0;left:0;margin:auto;position:absolute;right:0;top:0;z-index:var(--fa-stack-z-index,auto)}.svg-inline--fa.fa-stack-1x{height:1em;width:1.25em}.svg-inline--fa.fa-stack-2x{height:2em;width:2.5em}.fa-inverse{color:var(--fa-inverse,#fff)}.fa-sr-only,.sr-only{position:absolute;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0,0,0,0);white-space:nowrap;border-width:0}.fa-sr-only-focusable:not(:focus),.sr-only-focusable:not(:focus){position:absolute;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0,0,0,0);white-space:nowrap;border-width:0}.svg-inline--fa .fa-primary{fill:var(--fa-primary-color,currentColor);opacity:var(--fa-primary-opacity,1)}.svg-inline--fa .fa-secondary{fill:var(--fa-secondary-color,currentColor);opacity:var(--fa-secondary-opacity,.4)}.svg-inline--fa.fa-swap-opacity .fa-primary{opacity:var(--fa-secondary-opacity,.4)}.svg-inline--fa.fa-swap-opacity .fa-secondary{opacity:var(--fa-primary-opacity,1)}.svg-inline--fa mask .fa-primary,.svg-inline--fa mask .fa-secondary{fill:#000}.fa-duotone.fa-inverse,.fad.fa-inverse{color:var(--fa-inverse,#fff)}</style><link href="./Configurando e usando seu ambiente de desenvolvimento — Manual do NumPy v2.4_files/theme.css" rel="stylesheet">
+<link href="./Configurando e usando seu ambiente de desenvolvimento — Manual do NumPy v2.4_files/pydata-sphinx-theme.css" rel="stylesheet">
+
+    <link rel="stylesheet" type="text/css" href="./Configurando e usando seu ambiente de desenvolvimento — Manual do NumPy v2.4_files/pygments.css">
+    <link rel="stylesheet" type="text/css" href="./Configurando e usando seu ambiente de desenvolvimento — Manual do NumPy v2.4_files/graphviz.css">
+    <link rel="stylesheet" type="text/css" href="./Configurando e usando seu ambiente de desenvolvimento — Manual do NumPy v2.4_files/plot_directive.css">
+    <link rel="stylesheet" type="text/css" href="./Configurando e usando seu ambiente de desenvolvimento — Manual do NumPy v2.4_files/copybutton.css">
+    <link rel="stylesheet" type="text/css" href="./Configurando e usando seu ambiente de desenvolvimento — Manual do NumPy v2.4_files/css">
+    <link rel="stylesheet" type="text/css" href="./Configurando e usando seu ambiente de desenvolvimento — Manual do NumPy v2.4_files/jupyterlite_sphinx.css">
+    <link rel="stylesheet" type="text/css" href="./Configurando e usando seu ambiente de desenvolvimento — Manual do NumPy v2.4_files/sphinx-design.min.css">
+    <link rel="stylesheet" type="text/css" href="./Configurando e usando seu ambiente de desenvolvimento — Manual do NumPy v2.4_files/numpy.css">
+  
+  <!-- So that users can add custom icons -->
+  <script src="./Configurando e usando seu ambiente de desenvolvimento — Manual do NumPy v2.4_files/fontawesome.js.baixados"></script>
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="./Configurando e usando seu ambiente de desenvolvimento — Manual do NumPy v2.4_files/bootstrap.js.baixados">
+<link rel="preload" as="script" href="./Configurando e usando seu ambiente de desenvolvimento — Manual do NumPy v2.4_files/pydata-sphinx-theme.js.baixados">
+
+    <script src="./Configurando e usando seu ambiente de desenvolvimento — Manual do NumPy v2.4_files/documentation_options.js.baixados"></script>
+    <script src="./Configurando e usando seu ambiente de desenvolvimento — Manual do NumPy v2.4_files/doctools.js.baixados"></script><script type="text/javascript" src="./Configurando e usando seu ambiente de desenvolvimento — Manual do NumPy v2.4_files/versionwarning.js.baixados"></script>
+    <script src="./Configurando e usando seu ambiente de desenvolvimento — Manual do NumPy v2.4_files/sphinx_highlight.js.baixados"></script>
+    <script src="./Configurando e usando seu ambiente de desenvolvimento — Manual do NumPy v2.4_files/clipboard.min.js.baixados"></script>
+    <script src="./Configurando e usando seu ambiente de desenvolvimento — Manual do NumPy v2.4_files/copybutton.js.baixados"></script>
+    <script src="./Configurando e usando seu ambiente de desenvolvimento — Manual do NumPy v2.4_files/jupyterlite_sphinx.js.baixados"></script>
+    <script src="./Configurando e usando seu ambiente de desenvolvimento — Manual do NumPy v2.4_files/design-tabs.js.baixados"></script>
+    <script data-domain="numpy.org/doc/stable/" defer="defer" src="./Configurando e usando seu ambiente de desenvolvimento — Manual do NumPy v2.4_files/script.js.baixados"></script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'dev/development_environment';</script>
+    <script>
+        DOCUMENTATION_OPTIONS.theme_version = '0.16.1';
+        DOCUMENTATION_OPTIONS.theme_switcher_json_url = 'https://numpy.org/doc/_static/versions.json';
+        DOCUMENTATION_OPTIONS.theme_switcher_version_match = '2.4';
+        DOCUMENTATION_OPTIONS.show_version_warning_banner =
+            true;
+        </script>
+    <link rel="icon" href="https://numpy.org/doc/stable/_static/favicon.ico">
+    <link rel="index" title="Index" href="https://numpy.org/doc/stable/genindex.html">
+    <link rel="search" title="Search" href="https://numpy.org/doc/stable/search.html">
+    <link rel="next" title="Building the NumPy API and reference docs" href="https://numpy.org/doc/stable/dev/howto_build_docs.html">
+    <link rel="prev" title="Contributing to NumPy" href="https://numpy.org/doc/stable/dev/index.html">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="docsearch:language" content="en">
+  <meta name="docsearch:version" content="2.4">
+    <meta name="docbuild:last-update" content="Dec 21, 2025">
+  </head>
+  
+  
+  <body data-bs-spy="scroll" data-bs-target=".bd-toc-nav" data-offset="180" data-bs-root-margin="0px 0px -60%" data-default-mode="light">
+
+  
+  
+  <div id="pst-skip-link" class="skip-link d-print-none"><a href="https://numpy.org/doc/stable/dev/development_environment.html#main-content" _msttexthash="357760" _msthash="1">Skip to main content</a></div>
+  
+  <div id="pst-scroll-pixel-helper"></div>
+  
+  <button type="button" class="btn rounded-pill" id="pst-back-to-top" _msthidden="1">
+    <svg class="svg-inline--fa fa-arrow-up" aria-hidden="true" focusable="false" data-prefix="fas" data-icon="arrow-up" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 384 512" data-fa-i2svg=""><path fill="currentColor" d="M214.6 41.4c-12.5-12.5-32.8-12.5-45.3 0l-160 160c-12.5 12.5-12.5 32.8 0 45.3s32.8 12.5 45.3 0L160 141.2V448c0 17.7 14.3 32 32 32s32-14.3 32-32V141.2L329.4 246.6c12.5 12.5 32.8 12.5 45.3 0s12.5-32.8 0-45.3l-160-160z"></path></svg><!-- <i class="fa-solid fa-arrow-up"></i> Font Awesome fontawesome.com --><font _mstmutation="1" _msttexthash="137137" _msthidden="1" _msthash="2">Back to top</font></button>
+
+  
+  <dialog id="pst-search-dialog" _msthidden="1">
+    
+<form class="bd-search d-flex align-items-center" action="https://numpy.org/doc/stable/search.html" method="get" _msthidden="1">
+  <svg class="svg-inline--fa fa-magnifying-glass" aria-hidden="true" focusable="false" data-prefix="fas" data-icon="magnifying-glass" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" data-fa-i2svg=""><path fill="currentColor" d="M416 208c0 45.9-14.9 88.3-40 122.7L502.6 457.4c12.5 12.5 12.5 32.8 0 45.3s-32.8 12.5-45.3 0L330.7 376c-34.4 25.2-76.8 40-122.7 40C93.1 416 0 322.9 0 208S93.1 0 208 0S416 93.1 416 208zM208 352a144 144 0 1 0 0-288 144 144 0 1 0 0 288z"></path></svg><!-- <i class="fa-solid fa-magnifying-glass"></i> Font Awesome fontawesome.com -->
+  <input type="search" class="form-control" name="q" placeholder="Search the docs ..." aria-label="Search the docs ..." autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false" _msthidden="A" _mstplaceholder="267410" _msthash="3" _mstaria-label="267410">
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form>
+  </dialog>
+
+  <div class="pst-async-banner-revealer" _msthidden="1" style="height: auto;">
+  <aside id="bd-header-version-warning" class="d-none d-print-none" aria-label="Version warning" _msthidden="A" _mstaria-label="264654" _msthash="4"></aside>
+</div>
+
+  
+    <header class="bd-header navbar navbar-expand-lg bd-navbar d-print-none">
+<div class="bd-header__inner bd-page-width">
+  <button class="pst-navbar-icon sidebar-toggle primary-toggle" aria-label="Site navigation" _msthidden="A" _mstaria-label="261573" _msthash="5">
+    <svg class="svg-inline--fa fa-bars" aria-hidden="true" focusable="false" data-prefix="fas" data-icon="bars" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512" data-fa-i2svg=""><path fill="currentColor" d="M0 96C0 78.3 14.3 64 32 64H416c17.7 0 32 14.3 32 32s-14.3 32-32 32H32C14.3 128 0 113.7 0 96zM0 256c0-17.7 14.3-32 32-32H416c17.7 0 32 14.3 32 32s-14.3 32-32 32H32c-17.7 0-32-14.3-32-32zM448 416c0 17.7-14.3 32-32 32H32c-17.7 0-32-14.3-32-32s14.3-32 32-32H416c17.7 0 32 14.3 32 32z"></path></svg><!-- <span class="fa-solid fa-bars"></span> Font Awesome fontawesome.com -->
+  </button>
+  
+  
+  <div class="col-lg-3 navbar-header-items__start">
+    
+      <div class="navbar-item">
+
+  
+    
+  
+
+<a class="navbar-brand logo" href="https://numpy.org/doc/stable/index.html">
+  
+  
+  
+  
+  
+    
+    
+    
+    <img src="./Configurando e usando seu ambiente de desenvolvimento — Manual do NumPy v2.4_files/numpylogo.svg" class="logo__image only-light" alt="Manual do NumPy v2.4 - Início" _mstalt="390481" _msthash="6">
+    <img src="./Configurando e usando seu ambiente de desenvolvimento — Manual do NumPy v2.4_files/numpylogo_dark.svg" class="logo__image only-dark pst-js-only" alt="NumPy v2.4 Manual - Home" _msthidden="A" _mstalt="390481" _msthash="7">
+  
+  
+</a></div>
+    
+  </div>
+  
+  <div class="col-lg-9 navbar-header-items">
+    
+    <div class="me-auto navbar-header-items__center">
+      
+        <div class="navbar-item">
+<nav>
+  <ul class="bd-navbar-elements navbar-nav">
+    
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="https://numpy.org/doc/stable/user/index.html" _msttexthash="257231" _msthash="8"> Guia do Usuário </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="https://numpy.org/doc/stable/reference/index.html" _msttexthash="275613" _msthash="9"> Referência de API </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="https://numpy.org/doc/stable/building/index.html" _msttexthash="661245" _msthash="10"> Construindo a partir da fonte </a>
+</li>
+
+
+<li class="nav-item current active">
+  <a class="nav-link nav-internal" href="https://numpy.org/doc/stable/dev/index.html" _msttexthash="296036" _msthash="11"> Desenvolvimento </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="https://numpy.org/doc/stable/release.html" _msttexthash="378716" _msthash="12"> Notas de lançamento </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-external" href="https://numpy.org/numpy-tutorials/" _msttexthash="91754" _msthash="13"> Aprenda </a>
+</li>
+
+            <li class="nav-item dropdown">
+                <button class="btn dropdown-toggle nav-item" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-controls="pst-nav-more-links" _msttexthash="44330" _msthash="14"> Mais </button>
+                <ul id="pst-nav-more-links" class="dropdown-menu" _msthidden="1">
+                    
+<li class=" " _msthidden="1">
+  <a class="nav-link dropdown-item nav-external" href="https://numpy.org/neps" _msttexthash="38584" _msthidden="1" _msthash="15">
+    NEPs
+  </a>
+</li>
+
+                </ul>
+            </li>
+            
+  </ul>
+</nav></div>
+      
+    </div>
+    
+    
+    <div class="navbar-header-items__end">
+      
+      
+        <div class="navbar-item">
+
+<button class="btn btn-sm pst-navbar-icon search-button search-button__button pst-js-only" aria-label="Busca" data-bs-placement="bottom" data-bs-toggle="tooltip" data-bs-original-title="Search" _mstaria-label="74607" _msthash="16">
+    <svg class="svg-inline--fa fa-magnifying-glass fa-lg" aria-hidden="true" focusable="false" data-prefix="fas" data-icon="magnifying-glass" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" data-fa-i2svg=""><path fill="currentColor" d="M416 208c0 45.9-14.9 88.3-40 122.7L502.6 457.4c12.5 12.5 12.5 32.8 0 45.3s-32.8 12.5-45.3 0L330.7 376c-34.4 25.2-76.8 40-122.7 40C93.1 416 0 322.9 0 208S93.1 0 208 0S416 93.1 416 208zM208 352a144 144 0 1 0 0-288 144 144 0 1 0 0 288z"></path></svg><!-- <i class="fa-solid fa-magnifying-glass fa-lg"></i> Font Awesome fontawesome.com -->
+</button></div>
+      
+        <div class="navbar-item">
+
+<button class="btn btn-sm nav-link pst-navbar-icon theme-switch-button pst-js-only" aria-label="Modo de cor" data-bs-title="Color mode" data-bs-placement="bottom" data-bs-toggle="tooltip" _mstaria-label="134667" _msthash="17">
+  <svg class="svg-inline--fa fa-sun theme-switch fa-lg" data-mode="light" aria-labelledby="svg-inline--fa-title-uEilDIG7IbDF" data-prefix="fas" data-icon="sun" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" data-fa-i2svg=""><title id="svg-inline--fa-title-uEilDIG7IbDF" _mstTextHash="33358" _mstHash="18">Luz</title><path fill="currentColor" d="M361.5 1.2c5 2.1 8.6 6.6 9.6 11.9L391 121l107.9 19.8c5.3 1 9.8 4.6 11.9 9.6s1.5 10.7-1.6 15.2L446.9 256l62.3 90.3c3.1 4.5 3.7 10.2 1.6 15.2s-6.6 8.6-11.9 9.6L391 391 371.1 498.9c-1 5.3-4.6 9.8-9.6 11.9s-10.7 1.5-15.2-1.6L256 446.9l-90.3 62.3c-4.5 3.1-10.2 3.7-15.2 1.6s-8.6-6.6-9.6-11.9L121 391 13.1 371.1c-5.3-1-9.8-4.6-11.9-9.6s-1.5-10.7 1.6-15.2L65.1 256 2.8 165.7c-3.1-4.5-3.7-10.2-1.6-15.2s6.6-8.6 11.9-9.6L121 121 140.9 13.1c1-5.3 4.6-9.8 9.6-11.9s10.7-1.5 15.2 1.6L256 65.1 346.3 2.8c4.5-3.1 10.2-3.7 15.2-1.6zM160 256a96 96 0 1 1 192 0 96 96 0 1 1 -192 0zm224 0a128 128 0 1 0 -256 0 128 128 0 1 0 256 0z"></path></svg><!-- <i class="theme-switch fa-solid fa-sun                fa-lg" data-mode="light" title="Light"></i> Font Awesome fontawesome.com -->
+  <svg class="svg-inline--fa fa-moon theme-switch fa-lg" data-mode="dark" aria-labelledby="svg-inline--fa-title-rGbxVv5lSYRo" data-prefix="fas" data-icon="moon" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 384 512" data-fa-i2svg=""><title id="svg-inline--fa-title-rGbxVv5lSYRo" _mstTextHash="78650" _mstHash="19">Escuro</title><path fill="currentColor" d="M223.5 32C100 32 0 132.3 0 256S100 480 223.5 480c60.6 0 115.5-24.2 155.8-63.4c5-4.9 6.3-12.5 3.1-18.7s-10.1-9.7-17-8.5c-9.8 1.7-19.8 2.6-30.1 2.6c-96.9 0-175.5-78.8-175.5-176c0-65.8 36-123.1 89.3-153.3c6.1-3.5 9.2-10.5 7.7-17.3s-7.3-11.9-14.3-12.5c-6.3-.5-12.6-.8-19-.8z"></path></svg><!-- <i class="theme-switch fa-solid fa-moon               fa-lg" data-mode="dark" title="Dark"></i> Font Awesome fontawesome.com -->
+  <svg class="svg-inline--fa fa-circle-half-stroke theme-switch fa-lg" data-mode="auto" aria-labelledby="svg-inline--fa-title-OYPptjpYtFoS" data-prefix="fas" data-icon="circle-half-stroke" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" data-fa-i2svg=""><title id="svg-inline--fa-title-OYPptjpYtFoS" _mstTextHash="581243" _mstHash="20">Configurações do Sistema</title><path fill="currentColor" d="M448 256c0-106-86-192-192-192V448c106 0 192-86 192-192zM0 256a256 256 0 1 1 512 0A256 256 0 1 1 0 256z"></path></svg><!-- <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg" data-mode="auto" title="System Settings"></i> Font Awesome fontawesome.com -->
+</button></div>
+      
+        <div class="navbar-item">
+<div class="version-switcher__container dropdown pst-js-only">
+  <button id="pst-version-switcher-button-2" type="button" class="version-switcher__button btn btn-sm dropdown-toggle" data-bs-toggle="dropdown" aria-haspopup="listbox" aria-controls="pst-version-switcher-list-2" aria-label="Lista de switchers de versões" _mstaria-label="431249" _msthash="21" data-active-version-name="2.4 (stable)" data-active-version="2.4" _msttexthash="191035">2.4 (estável)</button>
+  <div id="pst-version-switcher-list-2" class="version-switcher__menu dropdown-menu list-group-flush py-0" role="listbox" aria-labelledby="pst-version-switcher-button-2">
+    <!-- dropdown will be populated by javascript on page load -->
+  <a class="dropdown-item list-group-item list-group-item-action py-1" href="https://numpy.org/devdocs/dev/development_environment.html" role="option" data-version-name="dev" data-version="devdocs" _msthidden="1"><span _msttexthash="33410" _msthidden="1" _msthash="197">dev</span></a><a class="dropdown-item list-group-item list-group-item-action py-1 active" href="https://numpy.org/doc/stable/dev/development_environment.html" role="option" data-version-name="2.4 (stable)" data-version="2.4" _msthidden="1"><span _msttexthash="140517" _msthidden="1" _msthash="195">2.4 (stable)</span></a><a class="dropdown-item list-group-item list-group-item-action py-1" href="https://numpy.org/doc/2.3/dev/development_environment.html" role="option" data-version-name="2.3" data-version="2.3" _msthidden="1"><span _msttexthash="15301" _msthidden="1" _msthash="193">2.3</span></a><a class="dropdown-item list-group-item list-group-item-action py-1" href="https://numpy.org/doc/2.2/dev/development_environment.html" role="option" data-version-name="2.2" data-version="2.2" _msthidden="1"><span _msttexthash="15184" _msthidden="1" _msthash="191">2.2</span></a><a class="dropdown-item list-group-item list-group-item-action py-1" href="https://numpy.org/doc/2.1/dev/development_environment.html" role="option" data-version-name="2.1" data-version="2.1" _msthidden="1"><span _msttexthash="15067" _msthidden="1" _msthash="189">2.1</span></a><a class="dropdown-item list-group-item list-group-item-action py-1" href="https://numpy.org/doc/2.0/dev/development_environment.html" role="option" data-version-name="2.0" data-version="2.0" _msthidden="1"><span _msttexthash="14950" _msthidden="1" _msthash="187">2.0</span></a><a class="dropdown-item list-group-item list-group-item-action py-1" href="https://numpy.org/doc/1.26/dev/development_environment.html" role="option" data-version-name="1.26" data-version="doc/1.26" _msthidden="1"><span _msttexthash="22113" _msthidden="1" _msthash="185">1.26</span></a><a class="dropdown-item list-group-item list-group-item-action py-1" href="https://numpy.org/doc/1.25/dev/development_environment.html" role="option" data-version-name="1.25" data-version="doc/1.25" _msthidden="1"><span _msttexthash="21983" _msthidden="1" _msthash="183">1.25</span></a><a class="dropdown-item list-group-item list-group-item-action py-1" href="https://numpy.org/doc/1.24/dev/development_environment.html" role="option" data-version-name="1.24" data-version="doc/1.24" _msthidden="1"><span _msttexthash="21853" _msthidden="1" _msthash="181">1.24</span></a><a class="dropdown-item list-group-item list-group-item-action py-1" href="https://numpy.org/doc/1.23/dev/development_environment.html" role="option" data-version-name="1.23" data-version="doc/1.23" _msthidden="1"><span _msttexthash="21723" _msthidden="1" _msthash="179">1.23</span></a><a class="dropdown-item list-group-item list-group-item-action py-1" href="https://numpy.org/doc/1.22/dev/development_environment.html" role="option" data-version-name="1.22" data-version="1.22" _msthidden="1"><span _msttexthash="21593" _msthidden="1" _msthash="177">1.22</span></a><a class="dropdown-item list-group-item list-group-item-action py-1" href="https://numpy.org/doc/1.21/dev/development_environment.html" role="option" data-version-name="1.21" data-version="1.21" _msthidden="1"><span _msttexthash="21463" _msthidden="1" _msthash="175">1.21</span></a><a class="dropdown-item list-group-item list-group-item-action py-1" href="https://numpy.org/doc/1.20/dev/development_environment.html" role="option" data-version-name="1.20" data-version="1.20" _msthidden="1"><span _msttexthash="21333" _msthidden="1" _msthash="173">1.20</span></a><a class="dropdown-item list-group-item list-group-item-action py-1" href="https://numpy.org/doc/1.19/dev/development_environment.html" role="option" data-version-name="1.19" data-version="1.19" _msthidden="1"><span _msttexthash="22386" _msthidden="1" _msthash="171">1.19</span></a><a class="dropdown-item list-group-item list-group-item-action py-1" href="https://numpy.org/doc/1.18/dev/development_environment.html" role="option" data-version-name="1.18" data-version="1.18" _msthidden="1"><span _msttexthash="22256" _msthidden="1" _msthash="169">1.18</span></a><a class="dropdown-item list-group-item list-group-item-action py-1" href="https://numpy.org/doc/1.17/dev/development_environment.html" role="option" data-version-name="1.17" data-version="1.17" _msthidden="1"><span _msttexthash="22126" _msthidden="1" _msthash="167">1.17</span></a><a class="dropdown-item list-group-item list-group-item-action py-1" href="https://numpy.org/doc/1.16/dev/development_environment.html" role="option" data-version-name="1.16" data-version="1.16" _msthidden="1"><span _msttexthash="21996" _msthidden="1" _msthash="165">1.16</span></a><a class="dropdown-item list-group-item list-group-item-action py-1" href="https://numpy.org/doc/1.15/dev/development_environment.html" role="option" data-version-name="1.15" data-version="1.15" _msthidden="1"><span _msttexthash="21866" _msthidden="1" _msthash="163">1.15</span></a><a class="dropdown-item list-group-item list-group-item-action py-1" href="https://numpy.org/doc/1.14/dev/development_environment.html" role="option" data-version-name="1.14" data-version="1.14" _msthidden="1"><span _msttexthash="21736" _msthidden="1" _msthash="161">1.14</span></a><a class="dropdown-item list-group-item list-group-item-action py-1" href="https://numpy.org/doc/1.13/dev/development_environment.html" role="option" data-version-name="1.13" data-version="1.13" _msthidden="1"><span _msttexthash="21606" _msthidden="1" _msthash="159">1.13</span></a></div>
+</div></div>
+      
+        <div class="navbar-item"><ul class="navbar-icon-links" aria-label="Links de Ícones" _mstaria-label="131963" _msthash="23">
+        <li class="nav-item">
+          
+          
+          
+          
+          
+          
+          
+          
+          <a href="https://github.com/numpy/numpy" class="nav-link pst-navbar-icon" rel="noopener" target="_blank" data-bs-toggle="tooltip" data-bs-placement="bottom" data-bs-original-title="GitHub"><svg class="svg-inline--fa fa-square-github fa-lg" aria-hidden="true" focusable="false" data-prefix="fab" data-icon="square-github" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512" data-fa-i2svg=""><path fill="currentColor" d="M448 96c0-35.3-28.7-64-64-64H64C28.7 32 0 60.7 0 96V416c0 35.3 28.7 64 64 64H384c35.3 0 64-28.7 64-64V96zM265.8 407.7c0-1.8 0-6 .1-11.6c.1-11.4 .1-28.8 .1-43.7c0-15.6-5.2-25.5-11.3-30.7c37-4.1 76-9.2 76-73.1c0-18.2-6.5-27.3-17.1-39c1.7-4.3 7.4-22-1.7-45c-13.9-4.3-45.7 17.9-45.7 17.9c-13.2-3.7-27.5-5.6-41.6-5.6s-28.4 1.9-41.6 5.6c0 0-31.8-22.2-45.7-17.9c-9.1 22.9-3.5 40.6-1.7 45c-10.6 11.7-15.6 20.8-15.6 39c0 63.6 37.3 69 74.3 73.1c-4.8 4.3-9.1 11.7-10.6 22.3c-9.5 4.3-33.8 11.7-48.3-13.9c-9.1-15.8-25.5-17.1-25.5-17.1c-16.2-.2-1.1 10.2-1.1 10.2c10.8 5 18.4 24.2 18.4 24.2c9.7 29.7 56.1 19.7 56.1 19.7c0 9 .1 21.7 .1 30.6c0 4.8 .1 8.6 .1 10c0 4.3-3 9.5-11.5 8C106 393.6 59.8 330.8 59.8 257.4c0-91.8 70.2-161.5 162-161.5s166.2 69.7 166.2 161.5c.1 73.4-44.7 136.3-110.7 158.3c-8.4 1.5-11.5-3.7-11.5-8zm-90.5-54.8c-.2-1.5 1.1-2.8 3-3.2c1.9-.2 3.7 .6 3.9 1.9c.3 1.3-1 2.6-3 3c-1.9 .4-3.7-.4-3.9-1.7zm-9.1 3.2c-2.2 .2-3.7-.9-3.7-2.4c0-1.3 1.5-2.4 3.5-2.4c1.9-.2 3.7 .9 3.7 2.4c0 1.3-1.5 2.4-3.5 2.4zm-14.3-2.2c-1.9-.4-3.2-1.9-2.8-3.2s2.4-1.9 4.1-1.5c2 .6 3.3 2.1 2.8 3.4c-.4 1.3-2.4 1.9-4.1 1.3zm-12.5-7.3c-1.5-1.3-1.9-3.2-.9-4.1c.9-1.1 2.8-.9 4.3 .6c1.3 1.3 1.8 3.3 .9 4.1c-.9 1.1-2.8 .9-4.3-.6zm-8.5-10c-1.1-1.5-1.1-3.2 0-3.9c1.1-.9 2.8-.2 3.7 1.3c1.1 1.5 1.1 3.3 0 4.1c-.9 .6-2.6 0-3.7-1.5zm-6.3-8.8c-1.1-1.3-1.3-2.8-.4-3.5c.9-.9 2.4-.4 3.5 .6c1.1 1.3 1.3 2.8 .4 3.5c-.9 .9-2.4 .4-3.5-.6zm-6-6.4c-1.3-.6-1.9-1.7-1.5-2.6c.4-.6 1.5-.9 2.8-.4c1.3 .7 1.9 1.8 1.5 2.6c-.4 .9-1.7 1.1-2.8 .4z"></path></svg><!-- <i class="fa-brands fa-square-github fa-lg" aria-hidden="true"></i> Font Awesome fontawesome.com -->
+            <span class="sr-only" _msttexthash="72332" _msthash="24">GitHub</span></a>
+        </li>
+</ul></div>
+      
+    </div>
+    
+  </div>
+  
+  
+
+  
+    <button class="pst-navbar-icon sidebar-toggle secondary-toggle" aria-label="On this page" _msthidden="A" _mstaria-label="156351" _msthash="25">
+      <svg class="svg-inline--fa fa-outdent" aria-hidden="true" focusable="false" data-prefix="fas" data-icon="outdent" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512" data-fa-i2svg=""><path fill="currentColor" d="M0 64C0 46.3 14.3 32 32 32H416c17.7 0 32 14.3 32 32s-14.3 32-32 32H32C14.3 96 0 81.7 0 64zM192 192c0-17.7 14.3-32 32-32H416c17.7 0 32 14.3 32 32s-14.3 32-32 32H224c-17.7 0-32-14.3-32-32zm32 96H416c17.7 0 32 14.3 32 32s-14.3 32-32 32H224c-17.7 0-32-14.3-32-32s14.3-32 32-32zM0 448c0-17.7 14.3-32 32-32H416c17.7 0 32 14.3 32 32s-14.3 32-32 32H32c-17.7 0-32-14.3-32-32zM.2 268.6c-8.2-6.4-8.2-18.9 0-25.3l101.9-79.3c10.5-8.2 25.8-.7 25.8 12.6V335.3c0 13.3-15.3 20.8-25.8 12.6L.2 268.6z"></path></svg><!-- <span class="fa-solid fa-outdent"></span> Font Awesome fontawesome.com -->
+    </button>
+  
+</div>
+
+    </header>
+  
+
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      
+      
+      <dialog id="pst-primary-sidebar-modal"></dialog>
+      <div id="pst-primary-sidebar" class="bd-sidebar-primary bd-sidebar">
+        
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+      <div class="sidebar-header-items__center" _msthidden="7">
+        
+          
+          
+            <div class="navbar-item" _msthidden="7">
+<nav _msthidden="7">
+  <ul class="bd-navbar-elements navbar-nav" _msthidden="7">
+    
+<li class="nav-item " _msthidden="1">
+  <a class="nav-link nav-internal" href="https://numpy.org/doc/stable/user/index.html" _msttexthash="130377" _msthidden="1" _msthash="26">
+    User Guide
+  </a>
+</li>
+
+
+<li class="nav-item " _msthidden="1">
+  <a class="nav-link nav-internal" href="https://numpy.org/doc/stable/reference/index.html" _msttexthash="193856" _msthidden="1" _msthash="27">
+    API reference
+  </a>
+</li>
+
+
+<li class="nav-item " _msthidden="1">
+  <a class="nav-link nav-internal" href="https://numpy.org/doc/stable/building/index.html" _msttexthash="389077" _msthidden="1" _msthash="28">
+    Building from source
+  </a>
+</li>
+
+
+<li class="nav-item current active" _msthidden="1">
+  <a class="nav-link nav-internal" href="https://numpy.org/doc/stable/dev/index.html" _msttexthash="183365" _msthidden="1" _msthash="29">
+    Development
+  </a>
+</li>
+
+
+<li class="nav-item " _msthidden="1">
+  <a class="nav-link nav-internal" href="https://numpy.org/doc/stable/release.html" _msttexthash="207636" _msthidden="1" _msthash="30">
+    Release notes
+  </a>
+</li>
+
+
+<li class="nav-item " _msthidden="1">
+  <a class="nav-link nav-external" href="https://numpy.org/numpy-tutorials/" _msttexthash="59319" _msthidden="1" _msthash="31">
+    Learn
+  </a>
+</li>
+
+
+<li class="nav-item " _msthidden="1">
+  <a class="nav-link nav-external" href="https://numpy.org/neps" _msttexthash="38584" _msthidden="1" _msthash="32">
+    NEPs
+  </a>
+</li>
+
+  </ul>
+</nav></div>
+          
+        
+      </div>
+    
+    
+    
+      <div class="sidebar-header-items__end">
+        
+          <div class="navbar-item" _msthidden="1">
+
+<button class="btn btn-sm pst-navbar-icon search-button search-button__button pst-js-only" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip" data-bs-original-title="Search" _msthidden="A" _mstaria-label="74607" _msthash="33">
+    <svg class="svg-inline--fa fa-magnifying-glass fa-lg" aria-hidden="true" focusable="false" data-prefix="fas" data-icon="magnifying-glass" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" data-fa-i2svg=""><path fill="currentColor" d="M416 208c0 45.9-14.9 88.3-40 122.7L502.6 457.4c12.5 12.5 12.5 32.8 0 45.3s-32.8 12.5-45.3 0L330.7 376c-34.4 25.2-76.8 40-122.7 40C93.1 416 0 322.9 0 208S93.1 0 208 0S416 93.1 416 208zM208 352a144 144 0 1 0 0-288 144 144 0 1 0 0 288z"></path></svg><!-- <i class="fa-solid fa-magnifying-glass fa-lg"></i> Font Awesome fontawesome.com -->
+</button></div>
+        
+          <div class="navbar-item">
+
+<button class="btn btn-sm nav-link pst-navbar-icon theme-switch-button pst-js-only" aria-label="Color mode" data-bs-title="Color mode" data-bs-placement="bottom" data-bs-toggle="tooltip" _msthidden="A" _mstaria-label="134667" _msthash="34">
+  <svg class="svg-inline--fa fa-sun theme-switch fa-lg" data-mode="light" aria-labelledby="svg-inline--fa-title-iPzo2S842m97" data-prefix="fas" data-icon="sun" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" data-fa-i2svg=""><title id="svg-inline--fa-title-iPzo2S842m97" _mstTextHash="33358" _mstHash="35">Luz</title><path fill="currentColor" d="M361.5 1.2c5 2.1 8.6 6.6 9.6 11.9L391 121l107.9 19.8c5.3 1 9.8 4.6 11.9 9.6s1.5 10.7-1.6 15.2L446.9 256l62.3 90.3c3.1 4.5 3.7 10.2 1.6 15.2s-6.6 8.6-11.9 9.6L391 391 371.1 498.9c-1 5.3-4.6 9.8-9.6 11.9s-10.7 1.5-15.2-1.6L256 446.9l-90.3 62.3c-4.5 3.1-10.2 3.7-15.2 1.6s-8.6-6.6-9.6-11.9L121 391 13.1 371.1c-5.3-1-9.8-4.6-11.9-9.6s-1.5-10.7 1.6-15.2L65.1 256 2.8 165.7c-3.1-4.5-3.7-10.2-1.6-15.2s6.6-8.6 11.9-9.6L121 121 140.9 13.1c1-5.3 4.6-9.8 9.6-11.9s10.7-1.5 15.2 1.6L256 65.1 346.3 2.8c4.5-3.1 10.2-3.7 15.2-1.6zM160 256a96 96 0 1 1 192 0 96 96 0 1 1 -192 0zm224 0a128 128 0 1 0 -256 0 128 128 0 1 0 256 0z"></path></svg><!-- <i class="theme-switch fa-solid fa-sun                fa-lg" data-mode="light" title="Light"></i> Font Awesome fontawesome.com -->
+  <svg class="svg-inline--fa fa-moon theme-switch fa-lg" data-mode="dark" aria-labelledby="svg-inline--fa-title-Kf626HcJG4lL" data-prefix="fas" data-icon="moon" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 384 512" data-fa-i2svg=""><title id="svg-inline--fa-title-Kf626HcJG4lL" _mstTextHash="78650" _mstHash="36">Escuro</title><path fill="currentColor" d="M223.5 32C100 32 0 132.3 0 256S100 480 223.5 480c60.6 0 115.5-24.2 155.8-63.4c5-4.9 6.3-12.5 3.1-18.7s-10.1-9.7-17-8.5c-9.8 1.7-19.8 2.6-30.1 2.6c-96.9 0-175.5-78.8-175.5-176c0-65.8 36-123.1 89.3-153.3c6.1-3.5 9.2-10.5 7.7-17.3s-7.3-11.9-14.3-12.5c-6.3-.5-12.6-.8-19-.8z"></path></svg><!-- <i class="theme-switch fa-solid fa-moon               fa-lg" data-mode="dark" title="Dark"></i> Font Awesome fontawesome.com -->
+  <svg class="svg-inline--fa fa-circle-half-stroke theme-switch fa-lg" data-mode="auto" aria-labelledby="svg-inline--fa-title-6pj1ABYxG58u" data-prefix="fas" data-icon="circle-half-stroke" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" data-fa-i2svg=""><title id="svg-inline--fa-title-6pj1ABYxG58u" _mstTextHash="581243" _mstHash="37">Configurações do Sistema</title><path fill="currentColor" d="M448 256c0-106-86-192-192-192V448c106 0 192-86 192-192zM0 256a256 256 0 1 1 512 0A256 256 0 1 1 0 256z"></path></svg><!-- <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg" data-mode="auto" title="System Settings"></i> Font Awesome fontawesome.com -->
+</button></div>
+        
+          <div class="navbar-item" _msthidden="2">
+<div class="version-switcher__container dropdown pst-js-only" _msthidden="2">
+  <button id="pst-version-switcher-button-3" type="button" class="version-switcher__button btn btn-sm dropdown-toggle" data-bs-toggle="dropdown" aria-haspopup="listbox" aria-controls="pst-version-switcher-list-3" aria-label="Version switcher list" _msthidden="1" _mstaria-label="431249" _msthash="38" data-active-version-name="2.4 (stable)" data-active-version="2.4" _msttexthash="140517">2.4 (stable)</button>
+  <div id="pst-version-switcher-list-3" class="version-switcher__menu dropdown-menu list-group-flush py-0" role="listbox" aria-labelledby="pst-version-switcher-button-3">
+    <!-- dropdown will be populated by javascript on page load -->
+  <a class="dropdown-item list-group-item list-group-item-action py-1" href="https://numpy.org/devdocs/dev/development_environment.html" role="option" data-version-name="dev" data-version="devdocs" _msthidden="1"><span _msttexthash="33410" _msthidden="1" _msthash="196">dev</span></a><a class="dropdown-item list-group-item list-group-item-action py-1 active" href="https://numpy.org/doc/stable/dev/development_environment.html" role="option" data-version-name="2.4 (stable)" data-version="2.4" _msthidden="1"><span _msttexthash="140517" _msthidden="1" _msthash="194">2.4 (stable)</span></a><a class="dropdown-item list-group-item list-group-item-action py-1" href="https://numpy.org/doc/2.3/dev/development_environment.html" role="option" data-version-name="2.3" data-version="2.3" _msthidden="1"><span _msttexthash="15301" _msthidden="1" _msthash="192">2.3</span></a><a class="dropdown-item list-group-item list-group-item-action py-1" href="https://numpy.org/doc/2.2/dev/development_environment.html" role="option" data-version-name="2.2" data-version="2.2" _msthidden="1"><span _msttexthash="15184" _msthidden="1" _msthash="190">2.2</span></a><a class="dropdown-item list-group-item list-group-item-action py-1" href="https://numpy.org/doc/2.1/dev/development_environment.html" role="option" data-version-name="2.1" data-version="2.1" _msthidden="1"><span _msttexthash="15067" _msthidden="1" _msthash="188">2.1</span></a><a class="dropdown-item list-group-item list-group-item-action py-1" href="https://numpy.org/doc/2.0/dev/development_environment.html" role="option" data-version-name="2.0" data-version="2.0" _msthidden="1"><span _msttexthash="14950" _msthidden="1" _msthash="186">2.0</span></a><a class="dropdown-item list-group-item list-group-item-action py-1" href="https://numpy.org/doc/1.26/dev/development_environment.html" role="option" data-version-name="1.26" data-version="doc/1.26" _msthidden="1"><span _msttexthash="22113" _msthidden="1" _msthash="184">1.26</span></a><a class="dropdown-item list-group-item list-group-item-action py-1" href="https://numpy.org/doc/1.25/dev/development_environment.html" role="option" data-version-name="1.25" data-version="doc/1.25" _msthidden="1"><span _msttexthash="21983" _msthidden="1" _msthash="182">1.25</span></a><a class="dropdown-item list-group-item list-group-item-action py-1" href="https://numpy.org/doc/1.24/dev/development_environment.html" role="option" data-version-name="1.24" data-version="doc/1.24" _msthidden="1"><span _msttexthash="21853" _msthidden="1" _msthash="180">1.24</span></a><a class="dropdown-item list-group-item list-group-item-action py-1" href="https://numpy.org/doc/1.23/dev/development_environment.html" role="option" data-version-name="1.23" data-version="doc/1.23" _msthidden="1"><span _msttexthash="21723" _msthidden="1" _msthash="178">1.23</span></a><a class="dropdown-item list-group-item list-group-item-action py-1" href="https://numpy.org/doc/1.22/dev/development_environment.html" role="option" data-version-name="1.22" data-version="1.22" _msthidden="1"><span _msttexthash="21593" _msthidden="1" _msthash="176">1.22</span></a><a class="dropdown-item list-group-item list-group-item-action py-1" href="https://numpy.org/doc/1.21/dev/development_environment.html" role="option" data-version-name="1.21" data-version="1.21" _msthidden="1"><span _msttexthash="21463" _msthidden="1" _msthash="174">1.21</span></a><a class="dropdown-item list-group-item list-group-item-action py-1" href="https://numpy.org/doc/1.20/dev/development_environment.html" role="option" data-version-name="1.20" data-version="1.20" _msthidden="1"><span _msttexthash="21333" _msthidden="1" _msthash="172">1.20</span></a><a class="dropdown-item list-group-item list-group-item-action py-1" href="https://numpy.org/doc/1.19/dev/development_environment.html" role="option" data-version-name="1.19" data-version="1.19" _msthidden="1"><span _msttexthash="22386" _msthidden="1" _msthash="170">1.19</span></a><a class="dropdown-item list-group-item list-group-item-action py-1" href="https://numpy.org/doc/1.18/dev/development_environment.html" role="option" data-version-name="1.18" data-version="1.18" _msthidden="1"><span _msttexthash="22256" _msthidden="1" _msthash="168">1.18</span></a><a class="dropdown-item list-group-item list-group-item-action py-1" href="https://numpy.org/doc/1.17/dev/development_environment.html" role="option" data-version-name="1.17" data-version="1.17" _msthidden="1"><span _msttexthash="22126" _msthidden="1" _msthash="166">1.17</span></a><a class="dropdown-item list-group-item list-group-item-action py-1" href="https://numpy.org/doc/1.16/dev/development_environment.html" role="option" data-version-name="1.16" data-version="1.16" _msthidden="1"><span _msttexthash="21996" _msthidden="1" _msthash="164">1.16</span></a><a class="dropdown-item list-group-item list-group-item-action py-1" href="https://numpy.org/doc/1.15/dev/development_environment.html" role="option" data-version-name="1.15" data-version="1.15" _msthidden="1"><span _msttexthash="21866" _msthidden="1" _msthash="162">1.15</span></a><a class="dropdown-item list-group-item list-group-item-action py-1" href="https://numpy.org/doc/1.14/dev/development_environment.html" role="option" data-version-name="1.14" data-version="1.14" _msthidden="1"><span _msttexthash="21736" _msthidden="1" _msthash="160">1.14</span></a><a class="dropdown-item list-group-item list-group-item-action py-1" href="https://numpy.org/doc/1.13/dev/development_environment.html" role="option" data-version-name="1.13" data-version="1.13" _msthidden="1"><span _msttexthash="21606" _msthidden="1" _msthash="158">1.13</span></a></div>
+</div></div>
+        
+          <div class="navbar-item" _msthidden="2"><ul class="navbar-icon-links" aria-label="Icon Links" _msthidden="1" _mstaria-label="131963" _msthash="40">
+        <li class="nav-item" _msthidden="1">
+          
+          
+          
+          
+          
+          
+          
+          
+          <a href="https://github.com/numpy/numpy" class="nav-link pst-navbar-icon" rel="noopener" target="_blank" data-bs-toggle="tooltip" data-bs-placement="bottom" data-bs-original-title="GitHub" _msthidden="1"><svg class="svg-inline--fa fa-square-github fa-lg" aria-hidden="true" focusable="false" data-prefix="fab" data-icon="square-github" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512" data-fa-i2svg=""><path fill="currentColor" d="M448 96c0-35.3-28.7-64-64-64H64C28.7 32 0 60.7 0 96V416c0 35.3 28.7 64 64 64H384c35.3 0 64-28.7 64-64V96zM265.8 407.7c0-1.8 0-6 .1-11.6c.1-11.4 .1-28.8 .1-43.7c0-15.6-5.2-25.5-11.3-30.7c37-4.1 76-9.2 76-73.1c0-18.2-6.5-27.3-17.1-39c1.7-4.3 7.4-22-1.7-45c-13.9-4.3-45.7 17.9-45.7 17.9c-13.2-3.7-27.5-5.6-41.6-5.6s-28.4 1.9-41.6 5.6c0 0-31.8-22.2-45.7-17.9c-9.1 22.9-3.5 40.6-1.7 45c-10.6 11.7-15.6 20.8-15.6 39c0 63.6 37.3 69 74.3 73.1c-4.8 4.3-9.1 11.7-10.6 22.3c-9.5 4.3-33.8 11.7-48.3-13.9c-9.1-15.8-25.5-17.1-25.5-17.1c-16.2-.2-1.1 10.2-1.1 10.2c10.8 5 18.4 24.2 18.4 24.2c9.7 29.7 56.1 19.7 56.1 19.7c0 9 .1 21.7 .1 30.6c0 4.8 .1 8.6 .1 10c0 4.3-3 9.5-11.5 8C106 393.6 59.8 330.8 59.8 257.4c0-91.8 70.2-161.5 162-161.5s166.2 69.7 166.2 161.5c.1 73.4-44.7 136.3-110.7 158.3c-8.4 1.5-11.5-3.7-11.5-8zm-90.5-54.8c-.2-1.5 1.1-2.8 3-3.2c1.9-.2 3.7 .6 3.9 1.9c.3 1.3-1 2.6-3 3c-1.9 .4-3.7-.4-3.9-1.7zm-9.1 3.2c-2.2 .2-3.7-.9-3.7-2.4c0-1.3 1.5-2.4 3.5-2.4c1.9-.2 3.7 .9 3.7 2.4c0 1.3-1.5 2.4-3.5 2.4zm-14.3-2.2c-1.9-.4-3.2-1.9-2.8-3.2s2.4-1.9 4.1-1.5c2 .6 3.3 2.1 2.8 3.4c-.4 1.3-2.4 1.9-4.1 1.3zm-12.5-7.3c-1.5-1.3-1.9-3.2-.9-4.1c.9-1.1 2.8-.9 4.3 .6c1.3 1.3 1.8 3.3 .9 4.1c-.9 1.1-2.8 .9-4.3-.6zm-8.5-10c-1.1-1.5-1.1-3.2 0-3.9c1.1-.9 2.8-.2 3.7 1.3c1.1 1.5 1.1 3.3 0 4.1c-.9 .6-2.6 0-3.7-1.5zm-6.3-8.8c-1.1-1.3-1.3-2.8-.4-3.5c.9-.9 2.4-.4 3.5 .6c1.1 1.3 1.3 2.8 .4 3.5c-.9 .9-2.4 .4-3.5-.6zm-6-6.4c-1.3-.6-1.9-1.7-1.5-2.6c.4-.6 1.5-.9 2.8-.4c1.3 .7 1.9 1.8 1.5 2.6c-.4 .9-1.7 1.1-2.8 .4z"></path></svg><!-- <i class="fa-brands fa-square-github fa-lg" aria-hidden="true"></i> Font Awesome fontawesome.com -->
+            <span class="sr-only" _msttexthash="72332" _msthidden="1" _msthash="41">GitHub</span></a>
+        </li>
+</ul></div>
+        
+      </div>
+    
+  </div>
+  
+    <div class="sidebar-primary-items__start sidebar-primary__section">
+        <div class="sidebar-primary-item">
+<nav class="bd-docs-nav bd-links" aria-label="Navegação por Seção" _mstaria-label="348023" _msthash="42">
+  <p class="bd-links__title" role="heading" aria-level="1" _msttexthash="458419" _msthash="43">Navegação por Seção</p>
+  <div class="bd-toc-item navbar-nav"><ul class="current nav bd-sidenav">
+<li class="toctree-l1 current active"><a class="current reference internal" href="https://numpy.org/doc/stable/dev/development_environment.html#" _msttexthash="2280759" _msthash="44">Configurando e utilizando seu ambiente de desenvolvimento</a></li>
+<li class="toctree-l1"><a class="reference internal" href="https://numpy.org/doc/stable/dev/howto_build_docs.html" _msttexthash="1843205" _msthash="45">Construindo a API do NumPy e documentos de referência</a></li>
+<li class="toctree-l1"><a class="reference internal" href="https://numpy.org/doc/stable/dev/development_workflow.html" _msttexthash="1006187" _msthash="46">Fluxo de trabalho de desenvolvimento</a></li>
+<li class="toctree-l1"><a class="reference internal" href="https://numpy.org/doc/stable/dev/development_advanced_debugging.html" _msttexthash="1084239" _msthash="47">Ferramentas avançadas de depuração</a></li>
+<li class="toctree-l1"><a class="reference internal" href="https://numpy.org/doc/stable/dev/development_ghcodespaces.html" _msttexthash="2147184" _msthash="48">Usando Codespaces do GitHub para desenvolvimento em NumPy</a></li>
+<li class="toctree-l1"><a class="reference internal" href="https://numpy.org/doc/stable/dev/reviewer_guidelines.html" _msttexthash="585416" _msthash="49">Diretrizes para revisores</a></li>
+<li class="toctree-l1"><a class="reference internal" href="https://numpy.org/doc/stable/benchmarking.html" _msttexthash="281424" _msthash="50">Benchmarks NumPy</a></li>
+<li class="toctree-l1"><a class="reference external" href="https://numpy.org/neps/nep-0045-c_style_guide.html" _msttexthash="365287" _msthash="51">Guia de estilo NumPy C</a></li>
+<li class="toctree-l1"><a class="reference internal" href="https://numpy.org/doc/stable/dev/depending_on_numpy.html" _msttexthash="798083" _msthash="52">Para autores de pacotes a jusante</a></li>
+<li class="toctree-l1"><a class="reference internal" href="https://numpy.org/doc/stable/dev/releasing.html" _msttexthash="555607" _msthash="53">Lançamento de uma versão</a></li>
+<li class="toctree-l1"><a class="reference internal" href="https://numpy.org/doc/stable/dev/governance/index.html" _msttexthash="305409" _msthash="54">Governança NumPy</a></li>
+<li class="toctree-l1"><a class="reference internal" href="https://numpy.org/doc/stable/dev/howto-docs.html" _msttexthash="1440166" _msthash="55">Como contribuir para a documentação do NumPy</a></li>
+</ul>
+</div>
+</nav></div>
+    </div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+      <div class="sidebar-primary-item">
+<div id="ethical-ad-placement" class="flat" data-ea-publisher="readthedocs" data-ea-type="readthedocs-sidebar" data-ea-manual="true">
+</div></div>
+  </div>
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main" role="main">
+        
+        
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article d-print-none">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item">
+
+<nav aria-label="Breadcrumb" class="d-print-none" _mstaria-label="154232" _msthash="56">
+  <ul class="bd-breadcrumbs">
+    
+    <li class="breadcrumb-item breadcrumb-home">
+      <a href="https://numpy.org/doc/stable/index.html" class="nav-link" aria-label="Casa" _mstaria-label="43979" _msthash="57">
+        <svg class="svg-inline--fa fa-house" aria-hidden="true" focusable="false" data-prefix="fas" data-icon="house" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 576 512" data-fa-i2svg=""><path fill="currentColor" d="M575.8 255.5c0 18-15 32.1-32 32.1h-32l.7 160.2c0 2.7-.2 5.4-.5 8.1V472c0 22.1-17.9 40-40 40H456c-1.1 0-2.2 0-3.3-.1c-1.4 .1-2.8 .1-4.2 .1H416 392c-22.1 0-40-17.9-40-40V448 384c0-17.7-14.3-32-32-32H256c-17.7 0-32 14.3-32 32v64 24c0 22.1-17.9 40-40 40H160 128.1c-1.5 0-3-.1-4.5-.2c-1.2 .1-2.4 .2-3.6 .2H104c-22.1 0-40-17.9-40-40V360c0-.9 0-1.9 .1-2.8V287.6H32c-18 0-32-14-32-32.1c0-9 3-17 10-24L266.4 8c7-7 15-8 22-8s15 2 21 7L564.8 231.5c8 7 12 15 11 24z"></path></svg><!-- <i class="fa-solid fa-home"></i> Font Awesome fontawesome.com -->
+      </a>
+    </li>
+    
+    <li class="breadcrumb-item"><a href="https://numpy.org/doc/stable/dev/index.html" class="nav-link" _msttexthash="523822" _msthash="58">Contribuindo para o NumPy</a></li>
+    
+    <li class="breadcrumb-item active" aria-current="page"><span class="ellipsis" _msttexthash="2280759" _msthash="59">Configurando e utilizando seu ambiente de desenvolvimento</span></li>
+  </ul>
+</nav>
+</div>
+      
+    </div>
+  
+  
+</div>
+</div>
+              
+              
+              
+                
+<div id="searchbox"></div>
+                <article class="bd-article">
+                  
+  <section id="setting-up-and-using-your-development-environment">
+<span id="development-environment"></span><h1><font _mstmutation="1" _msttexthash="2280759" _msthash="60">Configurando e utilizando seu ambiente de desenvolvimento</font><a class="headerlink" href="https://numpy.org/doc/stable/dev/development_environment.html#setting-up-and-using-your-development-environment" title="Link to this heading">#</a></h1>
+<section id="recommended-development-setup">
+<span id="id1"></span><h2><font _mstmutation="1" _msttexthash="1522040" _msthash="61">Configuração recomendada de desenvolvimento</font><a class="headerlink" href="https://numpy.org/doc/stable/dev/development_environment.html#recommended-development-setup" title="Link to this heading">#</a></h2>
+<p><font _mstmutation="1" _msttexthash="49018567" _msthash="62">Como o NumPy contém partes escritas em C e Cython, isso precisa ser
+compilado antes de usar, certifique-se de ter os compiladores necessários e Python
+cabeçalhos de desenvolvimento instalados - <a class="reference internal" href="https://numpy.org/doc/stable/building/index.html#building-from-source" _mstmutation="1" _istranslated="1"><span class="std std-ref" _istranslated="1">veja Construindo a partir da fonte</span></a>. Construção
+O NumPy na versão requer compiladores compatíveis com C11 e C++17.</font><code class="docutils literal notranslate"><span class="pre">2.0</span></code></p>
+<p _msttexthash="45896058" _msthash="63">Ter código compilado também significa importar o NumPy do desenvolvimento
+Fontes precisam de algumas etapas adicionais, que são explicadas abaixo. Para o resto
+Neste capítulo, assumimos que você configurou seu repositório git conforme descrito em <a class="reference external" href="https://scikit-image.org/docs/stable/gitwash/index.html#using-git" title="(in skimage v0.26.0)" _istranslated="1"><span _istranslated="1">Trabalhar com código-fonte scikit-image</span></a>.</p>
+<div class="admonition note">
+<p class="admonition-title" _msttexthash="44824" _msthash="64">Nota</p>
+<p _msttexthash="71580483" _msthash="65">Se você está tendo dificuldades para montar o NumPy a partir da fonte ou configurar seu
+ambiente de desenvolvimento local, você pode tentar construir o NumPy com o GitHub
+Codespaces. Isso permite criar o ambiente de desenvolvimento correto
+Diretamente no seu navegador, reduzindo a necessidade de instalar desenvolvimento local
+e lidam com dependências incompatíveis.</p>
+<p><font _mstmutation="1" _msttexthash="296259613" _msthash="66">Se você tem boa conectividade à internet e quer uma configuração temporária, é isso
+muitas vezes mais rápido para trabalhar no NumPy em um ambiente Codespaces. Para documentação
+sobre como começar com o Codespaces, <a class="reference external" href="https://docs.github.com/en/codespaces" _mstmutation="1" _istranslated="1">veja a documentação do Codespaces</a>.
+Ao criar um espaço de código para o repositório, o padrão
+Funciona do tipo máquina de 2 núcleos; O 4-core vai construir e funcionar um pouco mais rápido (mas de
+ao custo de reduzir pela metade seu número de horas de uso gratuito). Quando seu
+O espaço de código começou, você pode rodar e seu
+O ambiente de desenvolvimento está completamente configurado - você pode então seguir o
+partes relevantes da documentação do NumPy para construir, testar, desenvolver e escrever
+documentação, e contribuir para o NumPy.</font><code class="docutils literal notranslate"><span class="pre">numpy/numpy</span></code><code class="docutils literal notranslate"><span class="pre">conda</span> <span class="pre">activate</span> <span class="pre">numpy-dev</span></code></p>
+</div>
+</section>
+<section id="using-virtual-environments">
+<h2><font _mstmutation="1" _msttexthash="541346" _msthash="67">Uso de ambientes virtuais</font><a class="headerlink" href="https://numpy.org/doc/stable/dev/development_environment.html#using-virtual-environments" title="Link to this heading">#</a></h2>
+<p _msttexthash="13680719" _msthash="68">Uma pergunta frequente é: "Como configuro uma versão de desenvolvimento do NumPy
+em paralelo a uma versão lançada que uso para fazer meu trabalho/pesquisa?".</p>
+<p _msttexthash="18068310" _msthash="69">Uma maneira simples de conseguir isso é instalar a versão lançada em
+site-packages, usando pip ou conda por exemplo, e set
+Atualize a versão de desenvolvimento em um ambiente virtual.</p>
+<p><font _mstmutation="1" _msttexthash="27763229" _msthash="70">Se você usa o Conda, recomendamos criar um ambiente virtual separado para
+Desenvolvimento numpy usando o arquivo na raiz do repositório
+(isso criará o ambiente e instalará todas as dependências de desenvolvimento em
+uma vez):</font><code class="docutils literal notranslate"><span class="pre">environment.yml</span></code></p>
+<div class="highlight-default notranslate"><div class="highlight"><pre id="codecell0" tabindex="-1"><span></span>$ conda env create -f environment.yml  # `mamba` works too for this command
+$ conda activate numpy-dev
+</pre><button class="copybtn o-tooltip--left" data-tooltip="Copy" data-clipboard-target="#codecell0">
+      <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-copy" width="44" height="44" viewBox="0 0 24 24" stroke-width="1.5" stroke="#000000" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <title>Copy to clipboard</title>
+  <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
+  <rect x="8" y="8" width="12" height="12" rx="2"></rect>
+  <path d="M16 8v-2a2 2 0 0 0 -2 -2h-8a2 2 0 0 0 -2 2v8a2 2 0 0 0 2 2h2"></path>
+</svg>
+    </button></div>
+</div>
+<p><font _mstmutation="1" _msttexthash="27137916" _msthash="71">Se você instalou Python de outra forma que não seja o conda, primeiro instale <a class="reference external" href="https://virtualenv.pypa.io/" _mstmutation="1" _istranslated="1">o virtualenv</a> (opcionalmente use <a class="reference external" href="https://doughellmann.com/projects/virtualenvwrapper/" _mstmutation="1" _istranslated="1">virtualenvwrapper</a>), depois crie seu
+virtualenv (nomeado aqui), ative e instale todos os projetos
+Dependências com:</font><code class="docutils literal notranslate"><span class="pre">numpy-dev</span></code></p>
+<div class="highlight-default notranslate"><div class="highlight"><pre id="codecell1" tabindex="-1"><span></span>$ virtualenv numpy-dev
+$ source numpy-dev/bin/activate # activate virtual environment
+$ python -m pip install -r requirements/all_requirements.txt
+</pre><button class="copybtn o-tooltip--left" data-tooltip="Copy" data-clipboard-target="#codecell1">
+      <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-copy" width="44" height="44" viewBox="0 0 24 24" stroke-width="1.5" stroke="#000000" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <title>Copy to clipboard</title>
+  <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
+  <rect x="8" y="8" width="12" height="12" rx="2"></rect>
+  <path d="M16 8v-2a2 2 0 0 0 -2 -2h-8a2 2 0 0 0 -2 2v8a2 2 0 0 0 2 2h2"></path>
+</svg>
+    </button></div>
+</div>
+<p><font _mstmutation="1" _msttexthash="11236823" _msthash="72">Agora, sempre que você quiser mudar para o ambiente virtual, pode usar o
+comando , e para sair do
+Ambiente virtual e de volta à sua concha anterior.</font><code class="docutils literal notranslate"><span class="pre">source</span> <span class="pre">numpy-dev/bin/activate</span></code><code class="docutils literal notranslate"><span class="pre">deactivate</span></code></p>
+</section>
+<section id="building-from-source">
+<h2><font _mstmutation="1" _msttexthash="661245" _msthash="73">Construindo a partir da fonte</font><a class="headerlink" href="https://numpy.org/doc/stable/dev/development_environment.html#building-from-source" title="Link to this heading">#</a></h2>
+<p _msttexthash="510068" _msthash="74">See <a class="reference internal" href="https://numpy.org/doc/stable/building/index.html#building-from-source"><span class="std std-ref">Building from source</span></a>.</p>
+</section>
+<section id="testing-builds">
+<span id="id2"></span><h2><font _mstmutation="1" _msttexthash="234429" _msthash="75">Testing builds</font><a class="headerlink" href="https://numpy.org/doc/stable/dev/development_environment.html#testing-builds" title="Link to this heading">#</a></h2>
+<p _msttexthash="2467608" _msthash="76">Before running the tests, first install the test dependencies:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre id="codecell2" tabindex="-1"><span></span>$ python -m pip install -r requirements/test_requirements.txt
+$ python -m pip install asv # only for running benchmarks
+</pre><button class="copybtn o-tooltip--left" data-tooltip="Copy" data-clipboard-target="#codecell2">
+      <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-copy" width="44" height="44" viewBox="0 0 24 24" stroke-width="1.5" stroke="#000000" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <title>Copy to clipboard</title>
+  <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
+  <rect x="8" y="8" width="12" height="12" rx="2"></rect>
+  <path d="M16 8v-2a2 2 0 0 0 -2 -2h-8a2 2 0 0 0 -2 2v8a2 2 0 0 0 2 2h2"></path>
+</svg>
+    </button></div>
+</div>
+<p _msttexthash="16354780" _msthash="77">To build the development version of NumPy and run tests, spawn
+interactive shells with the Python import paths properly set up etc., use the
+<a class="reference external" href="https://github.com/scientific-python/spin">spin</a> utility. To run tests, do
+one of:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre id="codecell3" tabindex="-1"><span></span>$ spin test -v
+$ spin test numpy/random  # to run the tests in a specific module
+$ spin test -v -t numpy/_core/tests/test_nditer.py::test_iter_c_order
+$ spin test -p auto # to run tests in parallel threads using pytest-run-parallel
+</pre><button class="copybtn o-tooltip--left" data-tooltip="Copy" data-clipboard-target="#codecell3">
+      <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-copy" width="44" height="44" viewBox="0 0 24 24" stroke-width="1.5" stroke="#000000" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <title>Copy to clipboard</title>
+  <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
+  <rect x="8" y="8" width="12" height="12" rx="2"></rect>
+  <path d="M16 8v-2a2 2 0 0 0 -2 -2h-8a2 2 0 0 0 -2 2v8a2 2 0 0 0 2 2h2"></path>
+</svg>
+    </button></div>
+</div>
+<p _msttexthash="2643251" _msthash="78">This builds NumPy first, so the first time it may take a few minutes.</p>
+<p><font _mstmutation="1" _msttexthash="2782052" _msthash="79">You can also use  for benchmarking. See  for more
+command line options.</font><code class="docutils literal notranslate"><span class="pre">spin</span> <span class="pre">bench</span></code><code class="docutils literal notranslate"><span class="pre">spin</span> <span class="pre">--help</span></code></p>
+<div class="admonition note">
+<p class="admonition-title" _msttexthash="45344" _msthash="80">Note</p>
+<p><font _mstmutation="1" _msttexthash="905814" _msthash="81">If the above commands result in ,
+run .</font><code class="docutils literal notranslate"><span class="pre">RuntimeError:</span> <span class="pre">Cannot</span> <span class="pre">parse</span> <span class="pre">version</span> <span class="pre">0+untagged.xxxxx</span></code><code class="docutils literal notranslate"><span class="pre">git</span> <span class="pre">pull</span> <span class="pre">upstream</span> <span class="pre">main</span> <span class="pre">--tags</span></code></p>
+</div>
+<p><font _mstmutation="1" _msttexthash="16119415" _msthash="82">Additional arguments may be forwarded to  by passing the extra
+arguments after a bare . For example, to run a test method with the
+ flag forwarded to the target, run the following:</font><code class="docutils literal notranslate"><span class="pre">pytest</span></code><code class="docutils literal notranslate"><span class="pre">--</span></code><code class="docutils literal notranslate"><span class="pre">--pdb</span></code></p>
+<div class="highlight-default notranslate"><div class="highlight"><pre id="codecell4" tabindex="-1"><span></span>$ spin test -t numpy/tests/test_scripts.py::test_f2py -- --pdb
+</pre><button class="copybtn o-tooltip--left" data-tooltip="Copy" data-clipboard-target="#codecell4">
+      <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-copy" width="44" height="44" viewBox="0 0 24 24" stroke-width="1.5" stroke="#000000" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <title>Copy to clipboard</title>
+  <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
+  <rect x="8" y="8" width="12" height="12" rx="2"></rect>
+  <path d="M16 8v-2a2 2 0 0 0 -2 -2h-8a2 2 0 0 0 -2 2v8a2 2 0 0 0 2 2h2"></path>
+</svg>
+    </button></div>
+</div>
+<p><font _mstmutation="1" _msttexthash="4425954" _msthash="83">You can also  <a class="reference external" href="https://docs.pytest.org/en/latest/usage.html#specifying-tests-selecting-tests" _mstmutation="1">match test names using python operators</a> by passing the 
+argument to pytest:</font><code class="docutils literal notranslate"><span class="pre">-k</span></code></p>
+<div class="highlight-default notranslate"><div class="highlight"><pre id="codecell5" tabindex="-1"><span></span>$ spin test -v -t numpy/_core/tests/test_multiarray.py -- -k "MatMul and not vector"
+</pre><button class="copybtn o-tooltip--left" data-tooltip="Copy" data-clipboard-target="#codecell5">
+      <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-copy" width="44" height="44" viewBox="0 0 24 24" stroke-width="1.5" stroke="#000000" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <title>Copy to clipboard</title>
+  <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
+  <rect x="8" y="8" width="12" height="12" rx="2"></rect>
+  <path d="M16 8v-2a2 2 0 0 0 -2 -2h-8a2 2 0 0 0 -2 2v8a2 2 0 0 0 2 2h2"></path>
+</svg>
+    </button></div>
+</div>
+<p><font _mstmutation="1" _msttexthash="48356776" _msthash="84">To run “doctests” – to check that the code examples in the documentation is correct –
+use the <em class="xref py py-obj" _mstmutation="1">check-docs</em> spin command. It relies on the <em class="xref py py-obj" _mstmutation="1">scipy-docs</em> package, which
+provides several additional features on top of the standard library 
+package. Install  and run one of:</font><code class="docutils literal notranslate"><span class="pre">doctest</span></code><code class="docutils literal notranslate"><span class="pre">scipy-doctest</span></code></p>
+<div class="highlight-default notranslate"><div class="highlight"><pre id="codecell6" tabindex="-1"><span></span>$ spin check-docs -v
+$ spin check-docs numpy/linalg
+$ spin check-docs -v -- -k 'det and not slogdet'
+</pre><button class="copybtn o-tooltip--left" data-tooltip="Copy" data-clipboard-target="#codecell6">
+      <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-copy" width="44" height="44" viewBox="0 0 24 24" stroke-width="1.5" stroke="#000000" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <title>Copy to clipboard</title>
+  <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
+  <rect x="8" y="8" width="12" height="12" rx="2"></rect>
+  <path d="M16 8v-2a2 2 0 0 0 -2 -2h-8a2 2 0 0 0 -2 2v8a2 2 0 0 0 2 2h2"></path>
+</svg>
+    </button></div>
+</div>
+<div class="admonition note">
+<p class="admonition-title" _msttexthash="45344" _msthash="85">Note</p>
+<p _msttexthash="3485521" _msthash="86">Remember that all tests of NumPy should pass before committing your changes.</p>
+</div>
+<div class="admonition note">
+<p class="admonition-title" _msttexthash="45344" _msthash="87">Note</p>
+<p _msttexthash="7685002" _msthash="88">Some of the tests in the test suite require a large amount of
+memory, and are skipped if your system does not have enough.</p>
+</div>
+</section>
+<section id="other-build-options">
+<h2><font _mstmutation="1" _msttexthash="359723" _msthash="89">Other build options</font><a class="headerlink" href="https://numpy.org/doc/stable/dev/development_environment.html#other-build-options" title="Link to this heading">#</a></h2>
+<p _msttexthash="19144931" _msthash="90">For more options including selecting compilers, setting custom compiler flags
+and controlling parallelism, see <a class="reference external" href="https://docs.scipy.org/doc/scipy/building/compilers_and_options.html" title="(in SciPy v1.16.2)"><span>Compiler selection and customizing a build</span></a>
+(from the SciPy documentation.)</p>
+</section>
+<section id="running-tests">
+<h2><font _mstmutation="1" _msttexthash="213655" _msthash="91">Running tests</font><a class="headerlink" href="https://numpy.org/doc/stable/dev/development_environment.html#running-tests" title="Link to this heading">#</a></h2>
+<p><font _mstmutation="1" _msttexthash="6211816" _msthash="92">Besides using , there are various ways to run the tests.  Inside
+the interpreter, tests can be run like this:</font><code class="docutils literal notranslate"><span class="pre">spin</span></code></p>
+<div class="highlight-default notranslate"><div class="highlight"><pre id="codecell7" tabindex="-1"><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">np</span><span class="o">.</span><span class="n">test</span><span class="p">()</span>  
+<span class="gp">&gt;&gt;&gt; </span><span class="n">np</span><span class="o">.</span><span class="n">test</span><span class="p">(</span><span class="s1">'full'</span><span class="p">)</span>   <span class="c1"># Also run tests marked as slow</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">np</span><span class="o">.</span><span class="n">test</span><span class="p">(</span><span class="s1">'full'</span><span class="p">,</span> <span class="n">verbose</span><span class="o">=</span><span class="mi">2</span><span class="p">)</span>   <span class="c1"># Additionally print test name/file</span>
+
+<span class="go">An example of a successful test :</span>
+<span class="go">``4686 passed, 362 skipped, 9 xfailed, 5 warnings in 213.99 seconds``</span>
+</pre><button class="copybtn o-tooltip--left" data-tooltip="Copy" data-clipboard-target="#codecell7">
+      <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-copy" width="44" height="44" viewBox="0 0 24 24" stroke-width="1.5" stroke="#000000" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <title>Copy to clipboard</title>
+  <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
+  <rect x="8" y="8" width="12" height="12" rx="2"></rect>
+  <path d="M16 8v-2a2 2 0 0 0 -2 -2h-8a2 2 0 0 0 -2 2v8a2 2 0 0 0 2 2h2"></path>
+</svg>
+    </button></div>
+</div>
+<p _msttexthash="973115" _msthash="93">Or a similar way from the command line:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre id="codecell8" tabindex="-1"><span></span>$ python -c "import numpy as np; np.test()"
+</pre><button class="copybtn o-tooltip--left" data-tooltip="Copy" data-clipboard-target="#codecell8">
+      <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-copy" width="44" height="44" viewBox="0 0 24 24" stroke-width="1.5" stroke="#000000" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <title>Copy to clipboard</title>
+  <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
+  <rect x="8" y="8" width="12" height="12" rx="2"></rect>
+  <path d="M16 8v-2a2 2 0 0 0 -2 -2h-8a2 2 0 0 0 -2 2v8a2 2 0 0 0 2 2h2"></path>
+</svg>
+    </button></div>
+</div>
+<p><font _mstmutation="1" _msttexthash="7134374" _msthash="94">Tests can also be run with , however then the NumPy-specific
+plugin is not found which causes strange side effects.</font><code class="docutils literal notranslate"><span class="pre">pytest</span> <span class="pre">numpy</span></code></p>
+<p><font _mstmutation="1" _msttexthash="17254874" _msthash="95">Running individual test files can be useful; it’s much faster than running the
+whole test suite or that of a whole module (example: ).
+This can be done with:</font><code class="docutils literal notranslate"><span class="pre">np.random.test()</span></code></p>
+<div class="highlight-default notranslate"><div class="highlight"><pre id="codecell9" tabindex="-1"><span></span>$ python path_to_testfile/test_file.py
+</pre><button class="copybtn o-tooltip--left" data-tooltip="Copy" data-clipboard-target="#codecell9">
+      <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-copy" width="44" height="44" viewBox="0 0 24 24" stroke-width="1.5" stroke="#000000" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <title>Copy to clipboard</title>
+  <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
+  <rect x="8" y="8" width="12" height="12" rx="2"></rect>
+  <path d="M16 8v-2a2 2 0 0 0 -2 -2h-8a2 2 0 0 0 -2 2v8a2 2 0 0 0 2 2h2"></path>
+</svg>
+    </button></div>
+</div>
+<p><font _mstmutation="1" _msttexthash="8093709" _msthash="96">That also takes extra arguments, like  which drops you into the Python
+debugger when a test fails or an exception is raised.</font><code class="docutils literal notranslate"><span class="pre">--pdb</span></code></p>
+<p _msttexthash="6653309" _msthash="97">Running tests with <a class="reference external" href="https://tox.readthedocs.io/">tox</a> is also supported.  For example, to build NumPy and
+run the test suite with Python 3.9, use:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre id="codecell10" tabindex="-1"><span></span>$ tox -e py39
+</pre><button class="copybtn o-tooltip--left" data-tooltip="Copy" data-clipboard-target="#codecell10">
+      <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-copy" width="44" height="44" viewBox="0 0 24 24" stroke-width="1.5" stroke="#000000" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <title>Copy to clipboard</title>
+  <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
+  <rect x="8" y="8" width="12" height="12" rx="2"></rect>
+  <path d="M16 8v-2a2 2 0 0 0 -2 -2h-8a2 2 0 0 0 -2 2v8a2 2 0 0 0 2 2h2"></path>
+</svg>
+    </button></div>
+</div>
+<p _msttexthash="2038673" _msthash="98">For more extensive information, see <a class="reference internal" href="https://numpy.org/doc/stable/reference/testing.html#testing-guidelines"><span class="std std-ref">Testing guidelines</span></a>.</p>
+<p><font _mstmutation="1" _msttexthash="8110739" _msthash="99">Note: do not run the tests from the root directory of your numpy git repo without ,
+that will result in strange test errors.</font><code class="docutils literal notranslate"><span class="pre">spin</span></code></p>
+</section>
+<section id="running-type-checks">
+<h2><font _mstmutation="1" _msttexthash="353834" _msthash="100">Running type checks</font><a class="headerlink" href="https://numpy.org/doc/stable/dev/development_environment.html#running-type-checks" title="Link to this heading">#</a></h2>
+<p><font _mstmutation="1" _msttexthash="7624292" _msthash="101">Changes that involve static type declarations are also executed using .
+The invocation will look like the following:</font><code class="docutils literal notranslate"><span class="pre">spin</span></code></p>
+<blockquote>
+<div><p _msttexthash="139152" _msthash="102">$ spin mypy</p>
+</div></blockquote>
+<p><font _mstmutation="1" _msttexthash="4508374" _msthash="103">This will look in the  directory for sets of operations to
+test for type incompatibility.</font><code class="docutils literal notranslate"><span class="pre">typing/tests</span></code></p>
+</section>
+<section id="running-linting">
+<h2><font _mstmutation="1" _msttexthash="263549" _msthash="104">Running linting</font><a class="headerlink" href="https://numpy.org/doc/stable/dev/development_environment.html#running-linting" title="Link to this heading">#</a></h2>
+<p _msttexthash="2441959" _msthash="105">Lint checks can be performed on newly added lines of Python code.</p>
+<p _msttexthash="1195961" _msthash="106">Install all dependent packages using pip:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre id="codecell11" tabindex="-1"><span></span>$ python -m pip install -r requirements/linter_requirements.txt
+</pre><button class="copybtn o-tooltip--left" data-tooltip="Copy" data-clipboard-target="#codecell11">
+      <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-copy" width="44" height="44" viewBox="0 0 24 24" stroke-width="1.5" stroke="#000000" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <title>Copy to clipboard</title>
+  <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
+  <rect x="8" y="8" width="12" height="12" rx="2"></rect>
+  <path d="M16 8v-2a2 2 0 0 0 -2 -2h-8a2 2 0 0 0 -2 2v8a2 2 0 0 0 2 2h2"></path>
+</svg>
+    </button></div>
+</div>
+<p _msttexthash="1614977" _msthash="107">To run lint checks before committing new code, run:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre id="codecell12" tabindex="-1"><span></span>$ python tools/linter.py
+</pre><button class="copybtn o-tooltip--left" data-tooltip="Copy" data-clipboard-target="#codecell12">
+      <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-copy" width="44" height="44" viewBox="0 0 24 24" stroke-width="1.5" stroke="#000000" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <title>Copy to clipboard</title>
+  <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
+  <rect x="8" y="8" width="12" height="12" rx="2"></rect>
+  <path d="M16 8v-2a2 2 0 0 0 -2 -2h-8a2 2 0 0 0 -2 2v8a2 2 0 0 0 2 2h2"></path>
+</svg>
+    </button></div>
+</div>
+<p _msttexthash="4467086" _msthash="108">To check all changes in newly added Python code of current branch with target branch, run:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre id="codecell13" tabindex="-1"><span></span>$ python tools/linter.py
+</pre><button class="copybtn o-tooltip--left" data-tooltip="Copy" data-clipboard-target="#codecell13">
+      <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-copy" width="44" height="44" viewBox="0 0 24 24" stroke-width="1.5" stroke="#000000" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <title>Copy to clipboard</title>
+  <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
+  <rect x="8" y="8" width="12" height="12" rx="2"></rect>
+  <path d="M16 8v-2a2 2 0 0 0 -2 -2h-8a2 2 0 0 0 -2 2v8a2 2 0 0 0 2 2h2"></path>
+</svg>
+    </button></div>
+</div>
+<p _msttexthash="6679920" _msthash="109">If there are no errors, the script exits with no message. In case of errors,
+check the error message for details:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre id="codecell14" tabindex="-1"><span></span>$ python tools/linter.py
+./numpy/_core/tests/test_scalarmath.py:34:5: E303 too many blank lines (3)
+1       E303 too many blank lines (3)
+</pre><button class="copybtn o-tooltip--left" data-tooltip="Copy" data-clipboard-target="#codecell14">
+      <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-copy" width="44" height="44" viewBox="0 0 24 24" stroke-width="1.5" stroke="#000000" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <title>Copy to clipboard</title>
+  <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
+  <rect x="8" y="8" width="12" height="12" rx="2"></rect>
+  <path d="M16 8v-2a2 2 0 0 0 -2 -2h-8a2 2 0 0 0 -2 2v8a2 2 0 0 0 2 2h2"></path>
+</svg>
+    </button></div>
+</div>
+<p _msttexthash="8178664" _msthash="110">It is advisable to run lint checks before pushing commits to a remote branch
+since the linter runs as part of the CI pipeline.</p>
+<p _msttexthash="962052" _msthash="111">For more details on Style Guidelines:</p>
+<ul class="simple">
+<li><p><a class="reference external" href="https://www.python.org/dev/peps/pep-0008/" _msttexthash="312507" _msthash="112">Python Style Guide</a></p></li>
+<li><p><a class="reference external" href="https://numpy.org/neps/nep-0045-c_style_guide.html#nep45" title="(in NumPy Enhancement Proposals)"><span _msttexthash="1589913" _msthash="113">NEP 45 — C style guide</span></a></p></li>
+</ul>
+</section>
+<section id="rebuilding-cleaning-the-workspace">
+<h2><font _mstmutation="1" _msttexthash="925990" _msthash="114">Rebuilding &amp; cleaning the workspace</font><a class="headerlink" href="https://numpy.org/doc/stable/dev/development_environment.html#rebuilding-cleaning-the-workspace" title="Link to this heading">#</a></h2>
+<p _msttexthash="51846158" _msthash="115">Rebuilding NumPy after making changes to compiled code can be done with the
+same build command as you used previously - only the changed files will be
+re-built.  Doing a full build, which sometimes is necessary, requires cleaning
+the workspace first.  The standard way of doing this is (<em>note: deletes any
+uncommitted files!</em>):</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre id="codecell15" tabindex="-1"><span></span>$ git clean -xdf
+</pre><button class="copybtn o-tooltip--left" data-tooltip="Copy" data-clipboard-target="#codecell15">
+      <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-copy" width="44" height="44" viewBox="0 0 24 24" stroke-width="1.5" stroke="#000000" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <title>Copy to clipboard</title>
+  <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
+  <rect x="8" y="8" width="12" height="12" rx="2"></rect>
+  <path d="M16 8v-2a2 2 0 0 0 -2 -2h-8a2 2 0 0 0 -2 2v8a2 2 0 0 0 2 2h2"></path>
+</svg>
+    </button></div>
+</div>
+<p _msttexthash="4267458" _msthash="116">When you want to discard all changes and go back to the last commit in the
+repo, use one of:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre id="codecell16" tabindex="-1"><span></span>$ git checkout .
+$ git reset --hard
+</pre><button class="copybtn o-tooltip--left" data-tooltip="Copy" data-clipboard-target="#codecell16">
+      <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-copy" width="44" height="44" viewBox="0 0 24 24" stroke-width="1.5" stroke="#000000" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <title>Copy to clipboard</title>
+  <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
+  <rect x="8" y="8" width="12" height="12" rx="2"></rect>
+  <path d="M16 8v-2a2 2 0 0 0 -2 -2h-8a2 2 0 0 0 -2 2v8a2 2 0 0 0 2 2h2"></path>
+</svg>
+    </button></div>
+</div>
+</section>
+<section id="debugging">
+<span id="id3"></span><h2><font _mstmutation="1" _msttexthash="132015" _msthash="117">Debugging</font><a class="headerlink" href="https://numpy.org/doc/stable/dev/development_environment.html#debugging" title="Link to this heading">#</a></h2>
+<p _msttexthash="47557549" _msthash="118">Another frequently asked question is “How do I debug C code inside NumPy?”.
+First, ensure that you have gdb installed on your system with the Python
+extensions (often the default on Linux). You can see which version of
+Python is running inside gdb to verify your setup:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre id="codecell17" tabindex="-1"><span></span><span class="p">(</span><span class="n">gdb</span><span class="p">)</span> <span class="n">python</span>
+<span class="o">&gt;</span><span class="kn">import</span><span class="w"> </span><span class="nn">sys</span>
+<span class="o">&gt;</span><span class="nb">print</span><span class="p">(</span><span class="n">sys</span><span class="o">.</span><span class="n">version_info</span><span class="p">)</span>
+<span class="o">&gt;</span><span class="n">end</span>
+<span class="n">sys</span><span class="o">.</span><span class="n">version_info</span><span class="p">(</span><span class="n">major</span><span class="o">=</span><span class="mi">3</span><span class="p">,</span> <span class="n">minor</span><span class="o">=</span><span class="mi">7</span><span class="p">,</span> <span class="n">micro</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">releaselevel</span><span class="o">=</span><span class="s1">'final'</span><span class="p">,</span> <span class="n">serial</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
+</pre><button class="copybtn o-tooltip--left" data-tooltip="Copy" data-clipboard-target="#codecell17">
+      <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-copy" width="44" height="44" viewBox="0 0 24 24" stroke-width="1.5" stroke="#000000" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <title>Copy to clipboard</title>
+  <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
+  <rect x="8" y="8" width="12" height="12" rx="2"></rect>
+  <path d="M16 8v-2a2 2 0 0 0 -2 -2h-8a2 2 0 0 0 -2 2v8a2 2 0 0 0 2 2h2"></path>
+</svg>
+    </button></div>
+</div>
+<p _msttexthash="23067070" _msthash="119">Most python builds do not include debug symbols and are built with compiler
+optimizations enabled. To get the best debugging experience using a debug build
+of Python is encouraged, see <a class="reference internal" href="https://numpy.org/doc/stable/dev/development_advanced_debugging.html#advanced-debugging"><span class="std std-ref">Advanced debugging tools</span></a>.</p>
+<p><font _mstmutation="1" _msttexthash="34855392" _msthash="120">In terms of debugging, NumPy also needs to be built in a debug mode. You need to use
+ build type and disable optimizations to make sure  flag is used
+during object building. Note that NumPy should NOT be installed in your environment
+before you build with the  command.</font><code class="docutils literal notranslate"><span class="pre">debug</span></code><code class="docutils literal notranslate"><span class="pre">-O0</span></code><code class="docutils literal notranslate"><span class="pre">spin</span> <span class="pre">build</span></code></p>
+<p _msttexthash="3304925" _msthash="121">To generate source-level debug information within the build process run:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre id="codecell18" tabindex="-1"><span></span>$ spin build --clean -- -Dbuildtype=debug -Ddisable-optimization=true
+</pre><button class="copybtn o-tooltip--left" data-tooltip="Copy" data-clipboard-target="#codecell18">
+      <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-copy" width="44" height="44" viewBox="0 0 24 24" stroke-width="1.5" stroke="#000000" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <title>Copy to clipboard</title>
+  <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
+  <rect x="8" y="8" width="12" height="12" rx="2"></rect>
+  <path d="M16 8v-2a2 2 0 0 0 -2 -2h-8a2 2 0 0 0 -2 2v8a2 2 0 0 0 2 2h2"></path>
+</svg>
+    </button></div>
+</div>
+<div class="admonition note">
+<p class="admonition-title" _msttexthash="45344" _msthash="122">Note</p>
+<p><font _mstmutation="1" _msttexthash="136278831" _msthash="123">In case you are using conda environment be aware that conda sets 
+and  automatically, and they will include the  flag by default.
+You can safely use  to avoid them or provide them
+at the beginning of the  command: .
+Alternatively, to take control of these variables more permanently, you can create
+ file in the 
+directory. In this file you can export  and  variables.
+For complete instructions please refer to
+<a class="reference external" href="https://conda.io/projects/conda/en/latest/user-guide/tasks/manage-environments.html#saving-environment-variables" _mstmutation="1">https://conda.io/projects/conda/en/latest/user-guide/tasks/manage-environments.html#saving-environment-variables</a>.</font><code class="docutils literal notranslate"><span class="pre">CFLAGS</span></code><code class="docutils literal notranslate"><span class="pre">CXXFLAGS</span></code><code class="docutils literal notranslate"><span class="pre">-O2</span></code><code class="docutils literal notranslate"><span class="pre">unset</span> <span class="pre">CFLAGS</span> <span class="pre">&amp;&amp;</span> <span class="pre">unset</span> <span class="pre">CXXFLAGS</span></code><code class="docutils literal notranslate"><span class="pre">spin</span></code><code class="docutils literal notranslate"><span class="pre">CFLAGS="-O0</span> <span class="pre">-g"</span> <span class="pre">CXXFLAGS="-O0</span> <span class="pre">-g"</span></code><code class="docutils literal notranslate"><span class="pre">env_vars.sh</span></code><code class="docutils literal notranslate"><span class="pre">&lt;path-to-conda-envs&gt;/numpy-dev/etc/conda/activate.d</span></code><code class="docutils literal notranslate"><span class="pre">CFLAGS</span></code><code class="docutils literal notranslate"><span class="pre">CXXFLAGS</span></code></p>
+</div>
+<p><font _mstmutation="1" _msttexthash="6471062" _msthash="124">Next you need to write a Python script that invokes the C code whose execution
+you want to debug. For instance :</font><code class="docutils literal notranslate"><span class="pre">mytest.py</span></code></p>
+<div class="highlight-default notranslate"><div class="highlight"><pre id="codecell19" tabindex="-1"><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">numpy</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">np</span>
+<span class="n">x</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="mi">5</span><span class="p">)</span>
+<span class="n">np</span><span class="o">.</span><span class="n">empty_like</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>
+</pre><button class="copybtn o-tooltip--left" data-tooltip="Copy" data-clipboard-target="#codecell19">
+      <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-copy" width="44" height="44" viewBox="0 0 24 24" stroke-width="1.5" stroke="#000000" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <title>Copy to clipboard</title>
+  <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
+  <rect x="8" y="8" width="12" height="12" rx="2"></rect>
+  <path d="M16 8v-2a2 2 0 0 0 -2 -2h-8a2 2 0 0 0 -2 2v8a2 2 0 0 0 2 2h2"></path>
+</svg>
+    </button></div>
+</div>
+<p _msttexthash="4017208" _msthash="125">Note that your test file needs to be outside the NumPy clone you have. Now, you can
+run:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre id="codecell20" tabindex="-1"><span></span>$ spin gdb /path/to/mytest.py
+</pre><button class="copybtn o-tooltip--left" data-tooltip="Copy" data-clipboard-target="#codecell20">
+      <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-copy" width="44" height="44" viewBox="0 0 24 24" stroke-width="1.5" stroke="#000000" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <title>Copy to clipboard</title>
+  <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
+  <rect x="8" y="8" width="12" height="12" rx="2"></rect>
+  <path d="M16 8v-2a2 2 0 0 0 -2 -2h-8a2 2 0 0 0 -2 2v8a2 2 0 0 0 2 2h2"></path>
+</svg>
+    </button></div>
+</div>
+<p _msttexthash="971503" _msthash="126">In case you are using clang toolchain:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre id="codecell21" tabindex="-1"><span></span>$ spin lldb /path/to/mytest.py
+</pre><button class="copybtn o-tooltip--left" data-tooltip="Copy" data-clipboard-target="#codecell21">
+      <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-copy" width="44" height="44" viewBox="0 0 24 24" stroke-width="1.5" stroke="#000000" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <title>Copy to clipboard</title>
+  <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
+  <rect x="8" y="8" width="12" height="12" rx="2"></rect>
+  <path d="M16 8v-2a2 2 0 0 0 -2 -2h-8a2 2 0 0 0 -2 2v8a2 2 0 0 0 2 2h2"></path>
+</svg>
+    </button></div>
+</div>
+<p _msttexthash="470483" _msthash="127">And then in the debugger:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre id="codecell22" tabindex="-1"><span></span><span class="p">(</span><span class="n">gdb</span><span class="p">)</span> <span class="k">break</span> <span class="n">array_empty_like</span>
+<span class="p">(</span><span class="n">gdb</span><span class="p">)</span> <span class="n">run</span>
+</pre><button class="copybtn o-tooltip--left" data-tooltip="Copy" data-clipboard-target="#codecell22">
+      <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-copy" width="44" height="44" viewBox="0 0 24 24" stroke-width="1.5" stroke="#000000" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <title>Copy to clipboard</title>
+  <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
+  <rect x="8" y="8" width="12" height="12" rx="2"></rect>
+  <path d="M16 8v-2a2 2 0 0 0 -2 -2h-8a2 2 0 0 0 -2 2v8a2 2 0 0 0 2 2h2"></path>
+</svg>
+    </button></div>
+</div>
+<p _msttexthash="313651" _msthash="128">lldb counterpart:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre id="codecell23" tabindex="-1"><span></span><span class="p">(</span><span class="n">lldb</span><span class="p">)</span> <span class="nb">breakpoint</span> <span class="nb">set</span> <span class="o">--</span><span class="n">name</span> <span class="n">array_empty_like</span>
+<span class="p">(</span><span class="n">lldb</span><span class="p">)</span> <span class="n">run</span>
+</pre><button class="copybtn o-tooltip--left" data-tooltip="Copy" data-clipboard-target="#codecell23">
+      <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-copy" width="44" height="44" viewBox="0 0 24 24" stroke-width="1.5" stroke="#000000" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <title>Copy to clipboard</title>
+  <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
+  <rect x="8" y="8" width="12" height="12" rx="2"></rect>
+  <path d="M16 8v-2a2 2 0 0 0 -2 -2h-8a2 2 0 0 0 -2 2v8a2 2 0 0 0 2 2h2"></path>
+</svg>
+    </button></div>
+</div>
+<p><font _mstmutation="1" _msttexthash="51930619" _msthash="129">The execution will now stop at the corresponding C function and you can step
+through it as usual. A number of useful Python-specific commands are available.
+For example to see where in the Python code you are, use , to see the
+python traceback, use .  For more details, see
+<a class="reference external" href="https://wiki.python.org/moin/DebuggingWithGdb" _mstmutation="1">DebuggingWithGdb</a>. Here are some commonly used commands:</font><code class="docutils literal notranslate"><span class="pre">py-list</span></code><code class="docutils literal notranslate"><span class="pre">py-bt</span></code></p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">list</span></code><font _mstmutation="1" _msttexthash="815009" _msthash="130">: List specified function or line.</font></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">next</span></code><font _mstmutation="1" _msttexthash="1842204" _msthash="131">: Step program, proceeding through subroutine calls.</font></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">step</span></code><font _mstmutation="1" _msttexthash="2420925" _msthash="132">: Continue program being debugged, after signal or breakpoint.</font></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">print</span></code><font _mstmutation="1" _msttexthash="697905" _msthash="133">: Print value of expression EXP.</font></p></li>
+</ul>
+<p><font _mstmutation="1" _msttexthash="123589869" _msthash="134">Rich support for Python debugging requires that the  script
+distributed with Python is installed in a path where gdb can find it. If you
+installed your Python build from your system package manager, you likely do
+not need to manually do anything. However, if you built Python from source,
+you will likely need to create a  file in your home directory
+pointing gdb at the location of your Python installation. For example, a
+version of python installed via <a class="reference external" href="https://github.com/pyenv/pyenv" _mstmutation="1">pyenv</a>
+needs a  file with the following contents:</font><code class="docutils literal notranslate"><span class="pre">python-gdb.py</span></code><code class="docutils literal notranslate"><span class="pre">.gdbinit</span></code><code class="docutils literal notranslate"><span class="pre">.gdbinit</span></code></p>
+<div class="highlight-text notranslate"><div class="highlight"><pre id="codecell24" tabindex="-1"><span></span>add-auto-load-safe-path ~/.pyenv
+</pre><button class="copybtn o-tooltip--left" data-tooltip="Copy" data-clipboard-target="#codecell24">
+      <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-copy" width="44" height="44" viewBox="0 0 24 24" stroke-width="1.5" stroke="#000000" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <title>Copy to clipboard</title>
+  <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
+  <rect x="8" y="8" width="12" height="12" rx="2"></rect>
+  <path d="M16 8v-2a2 2 0 0 0 -2 -2h-8a2 2 0 0 0 -2 2v8a2 2 0 0 0 2 2h2"></path>
+</svg>
+    </button></div>
+</div>
+<p><font _mstmutation="1" _msttexthash="8574605" _msthash="135">Building NumPy with a Python built with debug support (on Linux distributions
+typically packaged as ) is highly recommended.</font><code class="docutils literal notranslate"><span class="pre">python-dbg</span></code></p>
+</section>
+<section id="understanding-the-code-getting-started">
+<h2><font _mstmutation="1" _msttexthash="1141959" _msthash="136">Understanding the code &amp; getting started</font><a class="headerlink" href="https://numpy.org/doc/stable/dev/development_environment.html#understanding-the-code-getting-started" title="Link to this heading">#</a></h2>
+<p _msttexthash="157421693" _msthash="137">The best strategy to better understand the code base is to pick something you
+want to change and start reading the code to figure out how it works. When in
+doubt, you can ask questions on the mailing list. It is perfectly okay if your
+pull requests aren’t perfect, the community is always happy to help. As a
+volunteer project, things do sometimes get dropped and it’s totally fine to
+ping us if something has sat without a response for about two to four weeks.</p>
+<p _msttexthash="62190726" _msthash="138">So go ahead and pick something that annoys or confuses you about NumPy,
+experiment with the code, hang around for discussions or go through the
+reference documents to try to fix it. Things will fall in place and soon
+you’ll have a pretty good understanding of the project as a whole. Good Luck!</p>
+</section>
+</section>
+
+
+                </article>
+              
+              
+              
+              
+              
+                <footer class="prev-next-footer d-print-none">
+                  
+<div class="prev-next-area">
+    <a class="left-prev" href="https://numpy.org/doc/stable/dev/index.html" title="previous page">
+      <svg class="svg-inline--fa fa-angle-left" aria-hidden="true" focusable="false" data-prefix="fas" data-icon="angle-left" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 512" data-fa-i2svg=""><path fill="currentColor" d="M41.4 233.4c-12.5 12.5-12.5 32.8 0 45.3l160 160c12.5 12.5 32.8 12.5 45.3 0s12.5-32.8 0-45.3L109.3 256 246.6 118.6c12.5-12.5 12.5-32.8 0-45.3s-32.8-12.5-45.3 0l-160 160z"></path></svg><!-- <i class="fa-solid fa-angle-left"></i> Font Awesome fontawesome.com -->
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle" _msttexthash="122239" _msthash="139">previous</p>
+        <p class="prev-next-title" _msttexthash="418145" _msthash="140">Contributing to NumPy</p>
+      </div>
+    </a>
+    <a class="right-next" href="https://numpy.org/doc/stable/dev/howto_build_docs.html" title="next page">
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle" _msttexthash="49634" _msthash="141">next</p>
+        <p class="prev-next-title" _msttexthash="1109394" _msthash="142">Building the NumPy API and reference docs</p>
+      </div>
+      <svg class="svg-inline--fa fa-angle-right" aria-hidden="true" focusable="false" data-prefix="fas" data-icon="angle-right" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 512" data-fa-i2svg=""><path fill="currentColor" d="M278.6 233.4c12.5 12.5 12.5 32.8 0 45.3l-160 160c-12.5 12.5-32.8 12.5-45.3 0s-12.5-32.8 0-45.3L210.7 256 73.4 118.6c-12.5-12.5-12.5-32.8 0-45.3s32.8-12.5 45.3 0l160 160z"></path></svg><!-- <i class="fa-solid fa-angle-right"></i> Font Awesome fontawesome.com -->
+    </a>
+</div>
+                </footer>
+              
+            </div>
+            
+            
+              
+                <dialog id="pst-secondary-sidebar-modal"></dialog>
+                <div id="pst-secondary-sidebar" class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+
+  <div class="sidebar-secondary-item">
+<div id="pst-page-navigation-heading-2" class="page-toc tocsection onthispage">
+    <svg class="svg-inline--fa fa-list" aria-hidden="true" focusable="false" data-prefix="fas" data-icon="list" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" data-fa-i2svg=""><path fill="currentColor" d="M40 48C26.7 48 16 58.7 16 72v48c0 13.3 10.7 24 24 24H88c13.3 0 24-10.7 24-24V72c0-13.3-10.7-24-24-24H40zM192 64c-17.7 0-32 14.3-32 32s14.3 32 32 32H480c17.7 0 32-14.3 32-32s-14.3-32-32-32H192zm0 160c-17.7 0-32 14.3-32 32s14.3 32 32 32H480c17.7 0 32-14.3 32-32s-14.3-32-32-32H192zm0 160c-17.7 0-32 14.3-32 32s14.3 32 32 32H480c17.7 0 32-14.3 32-32s-14.3-32-32-32H192zM16 232v48c0 13.3 10.7 24 24 24H88c13.3 0 24-10.7 24-24V232c0-13.3-10.7-24-24-24H40c-13.3 0-24 10.7-24 24zM40 368c-13.3 0-24 10.7-24 24v48c0 13.3 10.7 24 24 24H88c13.3 0 24-10.7 24-24V392c0-13.3-10.7-24-24-24H40z"></path></svg><!-- <i class="fa-solid fa-list"></i> Font Awesome fontawesome.com --><font _mstmutation="1" _msttexthash="199043" _msthash="143"> Nesta página </font></div>
+  <nav class="bd-toc-nav page-toc" aria-labelledby="pst-page-navigation-heading-2">
+    <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="https://numpy.org/doc/stable/dev/development_environment.html#recommended-development-setup" _msttexthash="1522040" _msthash="144">Configuração recomendada de desenvolvimento</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="https://numpy.org/doc/stable/dev/development_environment.html#using-virtual-environments" _msttexthash="541346" _msthash="145">Uso de ambientes virtuais</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="https://numpy.org/doc/stable/dev/development_environment.html#building-from-source" _msttexthash="661245" _msthash="146">Construindo a partir da fonte</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="https://numpy.org/doc/stable/dev/development_environment.html#testing-builds" _msttexthash="260871" _msthash="147">Testes de builds</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="https://numpy.org/doc/stable/dev/development_environment.html#other-build-options" _msttexthash="772694" _msthash="148">Outras opções de construção</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="https://numpy.org/doc/stable/dev/development_environment.html#running-tests" _msttexthash="434486" _msthash="149">Realização de testes</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="https://numpy.org/doc/stable/dev/development_environment.html#running-type-checks" _msttexthash="794469" _msthash="150">Verificações de tipo em corrida</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="https://numpy.org/doc/stable/dev/development_environment.html#running-linting" _msttexthash="315562" _msthash="151">Linting de corrida</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="https://numpy.org/doc/stable/dev/development_environment.html#rebuilding-cleaning-the-workspace" _msttexthash="1444703" _msthash="152">Reconstrução e limpeza do espaço de trabalho</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="https://numpy.org/doc/stable/dev/development_environment.html#debugging" _msttexthash="178438" _msthash="153">Depuração</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="https://numpy.org/doc/stable/dev/development_environment.html#understanding-the-code-getting-started" _msttexthash="815152" _msthash="154">Entendendo o código e começando</a></li>
+</ul>
+  </nav></div>
+
+</div></div>
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+          </footer>
+        
+      </main>
+    </div>
+  </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script defer="" src="./Configurando e usando seu ambiente de desenvolvimento — Manual do NumPy v2.4_files/bootstrap.js.baixados"></script>
+<script defer="" src="./Configurando e usando seu ambiente de desenvolvimento — Manual do NumPy v2.4_files/pydata-sphinx-theme.js.baixados"></script>
+
+  <footer class="bd-footer">
+<div class="bd-footer__inner bd-page-width">
+  
+    <div class="footer-items__start">
+      
+        <div class="footer-item">
+
+  <p class="copyright"><font _mstmutation="1" _msttexthash="1020123" _msthash="155">
+    
+      © Copyright 2008-2025, NumPy Developers.
+      </font><br>
+    
+  </p>
+</div>
+      
+        <div class="footer-item">
+
+  <p class="sphinx-version"><font _mstmutation="1" _msttexthash="489983" _msthash="156">
+    Created using <a href="https://www.sphinx-doc.org/" _mstmutation="1">Sphinx</a> 7.2.6.
+    </font><br>
+  </p>
+</div>
+      
+    </div>
+  
+  
+  
+    <div class="footer-items__end">
+      
+        <div class="footer-item">
+<p class="theme-version">
+  <!-- # L10n: Setting the PST URL as an argument as this does not need to be localized --><font _mstmutation="1" _msttexthash="985738" _msthash="157">
+  Built with the <a href="https://pydata-sphinx-theme.readthedocs.io/en/stable/index.html" _mstmutation="1">PyData Sphinx Theme</a> 0.16.1.
+</font></p></div>
+      
+    </div>
+  
+</div>
+
+  </footer>
+  <script defer="" src="./Configurando e usando seu ambiente de desenvolvimento — Manual do NumPy v2.4_files/v8c78df7c7c0f484497ecbca7046644da1771523124516" integrity="sha512-8DS7rgIrAmghBFwoOTujcf6D9rXvH8xm8JQ1Ja01h9QX8EzXldiszufYa4IFfKdLUKTTrnSFXLDkUEOTrZQ8Qg==" data-cf-beacon="{&quot;version&quot;:&quot;2024.11.0&quot;,&quot;token&quot;:&quot;f02b77b6fbcf4229aa0f4247afbdad50&quot;,&quot;r&quot;:1,&quot;server_timing&quot;:{&quot;name&quot;:{&quot;cfCacheStatus&quot;:true,&quot;cfEdge&quot;:true,&quot;cfExtPri&quot;:true,&quot;cfL4&quot;:true,&quot;cfOrigin&quot;:true,&quot;cfSpeedBrain&quot;:true},&quot;location_startswith&quot;:null}}" crossorigin="anonymous"></script>
+
+</body></html>

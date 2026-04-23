@@ -1,0 +1,597 @@
+<!DOCTYPE html>
+<!-- saved from url=(0042)https://seaborn.pydata.org/installing.html -->
+<html lang="pt" data-mode="light" data-theme="light"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"><meta name="generator" content="Docutils 0.19: https://docutils.sourceforge.io/">
+
+    <title _msttexthash="4304066" _msthash="0">Instalação e início — documentação do seaborn 0.13.2</title>
+  <script>
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "light";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "light";
+  </script>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="./Instalação e início — documentação do seaborn 0.13.2_files/theme.css" rel="stylesheet">
+<link href="./Instalação e início — documentação do seaborn 0.13.2_files/pydata-sphinx-theme.css" rel="stylesheet">
+
+  
+  <link rel="stylesheet" href="./Instalação e início — documentação do seaborn 0.13.2_files/all.min.css">
+  <link rel="preload" as="font" type="font/woff2" crossorigin="" href="https://seaborn.pydata.org/_static/vendor/fontawesome/5.13.0/webfonts/fa-solid-900.woff2">
+  <link rel="preload" as="font" type="font/woff2" crossorigin="" href="https://seaborn.pydata.org/_static/vendor/fontawesome/5.13.0/webfonts/fa-brands-400.woff2">
+
+    <link rel="stylesheet" type="text/css" href="./Instalação e início — documentação do seaborn 0.13.2_files/pygments.css">
+    <link rel="stylesheet" type="text/css" href="./Instalação e início — documentação do seaborn 0.13.2_files/plot_directive.css">
+    <link rel="stylesheet" type="text/css" href="./Instalação e início — documentação do seaborn 0.13.2_files/copybutton.css">
+    <link rel="stylesheet" type="text/css" href="./Instalação e início — documentação do seaborn 0.13.2_files/design-style.1e8bd061cd6da7fc9cf755528e8ffc24.min.css">
+    <link rel="stylesheet" type="text/css" href="./Instalação e início — documentação do seaborn 0.13.2_files/custom.css">
+  
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="./Instalação e início — documentação do seaborn 0.13.2_files/pydata-sphinx-theme.js.baixados">
+
+    <script data-url_root="./" id="documentation_options" src="./Instalação e início — documentação do seaborn 0.13.2_files/documentation_options.js.baixados"></script>
+    <script src="./Instalação e início — documentação do seaborn 0.13.2_files/jquery.js.baixados"></script>
+    <script src="./Instalação e início — documentação do seaborn 0.13.2_files/underscore.js.baixados"></script>
+    <script src="./Instalação e início — documentação do seaborn 0.13.2_files/_sphinx_javascript_frameworks_compat.js.baixados"></script>
+    <script src="./Instalação e início — documentação do seaborn 0.13.2_files/doctools.js.baixados"></script>
+    <script src="./Instalação e início — documentação do seaborn 0.13.2_files/sphinx_highlight.js.baixados"></script>
+    <script src="./Instalação e início — documentação do seaborn 0.13.2_files/clipboard.min.js.baixados"></script>
+    <script src="./Instalação e início — documentação do seaborn 0.13.2_files/copybutton.js.baixados"></script>
+    <script src="./Instalação e início — documentação do seaborn 0.13.2_files/design-tabs.js.baixados"></script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'installing';</script>
+    <link rel="shortcut icon" href="https://seaborn.pydata.org/_static/favicon.ico">
+    <link rel="index" title="Index" href="https://seaborn.pydata.org/genindex.html">
+    <link rel="search" title="Search" href="https://seaborn.pydata.org/search.html">
+    <link rel="next" title="Example gallery" href="https://seaborn.pydata.org/examples/index.html">
+    <link rel="prev" title="seaborn: statistical data visualization" href="https://seaborn.pydata.org/index.html">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="docsearch:language" content="en">
+  </head>
+  
+  
+  <body data-spy="scroll" data-target="#bd-toc-nav" data-offset="180" data-default-mode="light">
+
+  
+  <input type="checkbox" class="sidebar-toggle" name="__primary" id="__primary">
+  <label class="overlay overlay-primary" for="__primary"></label>
+
+  
+  <input type="checkbox" class="sidebar-toggle" name="__secondary" id="__secondary">
+  <label class="overlay overlay-secondary" for="__secondary"></label>
+
+  
+  <div class="search-button__wrapper" _msthidden="1">
+    <div class="search-button__overlay"></div>
+    <div class="search-button__search-container" _msthidden="1">
+      
+<form class="bd-search d-flex align-items-center" action="https://seaborn.pydata.org/search.html" method="get" _msthidden="1">
+  <i class="icon fas fa-search"></i>
+  <input type="search" class="form-control" name="q" id="search-input" placeholder="Search the docs ..." aria-label="Search the docs ..." autocomplete="off" _msthidden="A" _mstplaceholder="267410" _msthash="1" _mstaria-label="267410">
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form>
+    </div>
+  </div>
+
+  
+  <nav class="bd-header navbar navbar-expand-lg bd-navbar" id="navbar-main"><div class="bd-header__inner container-xl">
+  <label class="sidebar-toggle primary-toggle" for="__primary">
+      <span class="fas fa-bars"></span>
+  </label>
+  <div id="navbar-start">
+    
+    
+  
+
+
+<a class="navbar-brand logo" href="https://seaborn.pydata.org/index.html">
+  
+  
+  
+  
+  
+  
+    <img src="./Instalação e início — documentação do seaborn 0.13.2_files/logo-wide-lightbg.svg" class="logo__image only-light" alt="Imagem do logo" _mstalt="131794" _msthash="2">
+    <img src="./Instalação e início — documentação do seaborn 0.13.2_files/logo-wide-lightbg.svg" class="logo__image only-dark" alt="Logo image" _msthidden="A" _mstalt="131794" _msthash="3">
+  
+  
+</a>
+    
+  </div>
+
+  
+  <div class="col-lg-9 navbar-header-items">
+    <div id="navbar-center" class="mr-auto">
+      
+      <div class="navbar-center-item">
+        <ul id="navbar-main-elements" class="navbar-nav">
+    <li class="toctree-l1 current active nav-item">
+ <a class="current reference internal nav-link" href="https://seaborn.pydata.org/installing.html#" _msttexthash="203125" _msthash="4"> Instalação </a>
+</li>
+
+<li class="toctree-l1 nav-item">
+ <a class="reference internal nav-link" href="https://seaborn.pydata.org/examples/index.html" _msttexthash="91390" _msthash="5"> Galeria </a>
+</li>
+
+<li class="toctree-l1 nav-item">
+ <a class="reference internal nav-link" href="https://seaborn.pydata.org/tutorial.html" _msttexthash="116545" _msthash="6">
+  Tutorial
+ </a>
+</li>
+
+<li class="toctree-l1 nav-item">
+ <a class="reference internal nav-link" href="https://seaborn.pydata.org/api.html" _msttexthash="22776" _msthash="7">
+  API
+ </a>
+</li>
+
+<li class="toctree-l1 nav-item">
+ <a class="reference internal nav-link" href="https://seaborn.pydata.org/whatsnew/index.html" _msttexthash="198991" _msthash="8"> Lançamentos </a>
+</li>
+
+<li class="toctree-l1 nav-item">
+ <a class="reference internal nav-link" href="https://seaborn.pydata.org/citing.html" _msttexthash="130403" _msthash="9"> Citação </a>
+</li>
+
+<li class="toctree-l1 nav-item">
+ <a class="reference internal nav-link" href="https://seaborn.pydata.org/faq.html" _msttexthash="22607" _msthash="10">
+  FAQ
+ </a>
+</li>
+
+</ul>
+      </div>
+      
+    </div>
+
+    <div id="navbar-end">
+      <div class="navbar-end-item navbar-end__search-button-container">
+        
+<button class="btn btn-sm navbar-btn search-button search-button__button" title="Search">
+  <i class="fas fa-search"></i>
+</button>
+      </div>
+      
+      <div class="navbar-end-item">
+        <ul id="navbar-icon-links" class="navbar-nav" aria-label="Links de Ícones" _mstaria-label="131963" _msthash="11">
+        <li class="nav-item">
+          
+          
+          
+          
+          
+          
+          <a href="https://github.com/mwaskom/seaborn" title="GitHub" class="nav-link" rel="noopener" target="_blank"><span><i class="fab fa-github"></i></span>
+            <label class="sr-only" _msttexthash="72332" _msthash="12">GitHub</label></a>
+        </li>
+        <li class="nav-item">
+          
+          
+          
+          
+          
+          
+          <a href="https://stackoverflow.com/tags/seaborn" title="StackOverflow" class="nav-link" rel="noopener" target="_blank"><span><i class="fab fa-stack-overflow"></i></span>
+            <label class="sr-only" _msttexthash="232466" _msthash="13">StackOverflow</label></a>
+        </li>
+        <li class="nav-item">
+          
+          
+          
+          
+          
+          
+          <a href="https://twitter.com/michaelwaskom" title="Twitter" class="nav-link" rel="noopener" target="_blank"><span><i class="fab fa-twitter"></i></span>
+            <label class="sr-only" _msttexthash="98995" _msthash="14">Twitter</label></a>
+        </li>
+      </ul>
+      </div>
+      
+    </div>
+  </div>
+
+
+  
+  <div class="search-button-container--mobile">
+<button class="btn btn-sm navbar-btn search-button search-button__button" title="Search">
+  <i class="fas fa-search"></i>
+</button>
+  </div>
+
+  
+  <label class="sidebar-toggle secondary-toggle" for="__secondary">
+      <span class="fas fa-outdent"></span>
+  </label>
+  
+
+</div>
+  </nav>
+  
+
+  <div class="bd-container container-xl">
+    <div class="bd-container__inner row">
+      
+      <div class="bd-sidebar-primary bd-sidebar hide-on-wide" _msthidden="13">
+        
+  
+  <div class="sidebar-header-items sidebar-primary__section" _msthidden="13">
+    <p class="sidebar-header-items__title" role="heading" aria-level="1" aria-label="Navigation" _msthidden="1" _mstaria-label="157742" _msthash="15" _msttexthash="256997">
+      Site Navigation
+    </p>
+    
+    
+      <div class="sidebar-header-items__center" _msthidden="7">
+      
+      <div class="navbar-center-item" _msthidden="7">
+        <ul id="navbar-main-elements" class="navbar-nav" _msthidden="7">
+    <li class="toctree-l1 current active nav-item" _msthidden="1">
+ <a class="current reference internal nav-link" href="https://seaborn.pydata.org/installing.html#" _msttexthash="157573" _msthidden="1" _msthash="16">
+  Installing
+ </a>
+</li>
+
+<li class="toctree-l1 nav-item" _msthidden="1">
+ <a class="reference internal nav-link" href="https://seaborn.pydata.org/examples/index.html" _msttexthash="95901" _msthidden="1" _msthash="17">
+  Gallery
+ </a>
+</li>
+
+<li class="toctree-l1 nav-item" _msthidden="1">
+ <a class="reference internal nav-link" href="https://seaborn.pydata.org/tutorial.html" _msttexthash="116545" _msthidden="1" _msthash="18">
+  Tutorial
+ </a>
+</li>
+
+<li class="toctree-l1 nav-item" _msthidden="1">
+ <a class="reference internal nav-link" href="https://seaborn.pydata.org/api.html" _msttexthash="22776" _msthidden="1" _msthash="19">
+  API
+ </a>
+</li>
+
+<li class="toctree-l1 nav-item" _msthidden="1">
+ <a class="reference internal nav-link" href="https://seaborn.pydata.org/whatsnew/index.html" _msttexthash="113542" _msthidden="1" _msthash="20">
+  Releases
+ </a>
+</li>
+
+<li class="toctree-l1 nav-item" _msthidden="1">
+ <a class="reference internal nav-link" href="https://seaborn.pydata.org/citing.html" _msttexthash="76037" _msthidden="1" _msthash="21">
+  Citing
+ </a>
+</li>
+
+<li class="toctree-l1 nav-item" _msthidden="1">
+ <a class="reference internal nav-link" href="https://seaborn.pydata.org/faq.html" _msttexthash="22607" _msthidden="1" _msthash="22">
+  FAQ
+ </a>
+</li>
+
+</ul>
+      </div>
+      
+      </div>
+    
+
+    
+    
+    <div class="sidebar-header-items__end" _msthidden="4">
+      
+      <div class="navbar-end-item" _msthidden="4">
+        <ul id="navbar-icon-links" class="navbar-nav" aria-label="Icon Links" _msthidden="3" _mstaria-label="131963" _msthash="23">
+        <li class="nav-item" _msthidden="1">
+          
+          
+          
+          
+          
+          
+          <a href="https://github.com/mwaskom/seaborn" title="GitHub" class="nav-link" rel="noopener" target="_blank" _msthidden="1"><span><i class="fab fa-github"></i></span>
+            <label class="sr-only" _msttexthash="72332" _msthidden="1" _msthash="24">GitHub</label></a>
+        </li>
+        <li class="nav-item" _msthidden="1">
+          
+          
+          
+          
+          
+          
+          <a href="https://stackoverflow.com/tags/seaborn" title="StackOverflow" class="nav-link" rel="noopener" target="_blank" _msthidden="1"><span><i class="fab fa-stack-overflow"></i></span>
+            <label class="sr-only" _msttexthash="232466" _msthidden="1" _msthash="25">StackOverflow</label></a>
+        </li>
+        <li class="nav-item" _msthidden="1">
+          
+          
+          
+          
+          
+          
+          <a href="https://twitter.com/michaelwaskom" title="Twitter" class="nav-link" rel="noopener" target="_blank" _msthidden="1"><span><i class="fab fa-twitter"></i></span>
+            <label class="sr-only" _msttexthash="98995" _msthidden="1" _msthash="26">Twitter</label></a>
+        </li>
+      </ul>
+      </div>
+      
+    </div>
+    
+  </div>
+
+  
+
+  
+  <div class="sidebar-end-items sidebar-primary__section">
+    <div class="sidebar-end-items__item">
+    </div>
+  </div>
+
+      </div>
+
+      
+      
+      
+        <div class="bd-sidebar-secondary bd-toc">
+          
+<div class="toc-item">
+  
+<div class="tocsection onthispage">
+    <i class="fas fa-list"></i><font _mstmutation="1" _msttexthash="199043" _msthash="27"> Nesta página </font></div>
+<nav id="bd-toc-nav" class="page-toc">
+    <ul class="visible nav section-nav flex-column">
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="https://seaborn.pydata.org/installing.html#dependencies" _msttexthash="223314" _msthash="28"> Dependências </a>
+  <ul class="nav section-nav flex-column" _msthidden="3">
+   <li class="toc-h3 nav-item toc-entry" _mstvisible="0">
+    <a class="reference internal nav-link" href="https://seaborn.pydata.org/installing.html#supported-python-versions" _msttexthash="683891" _msthash="29" _mstvisible="1"> Versões suportadas em Python </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry" _mstvisible="0">
+    <a class="reference internal nav-link" href="https://seaborn.pydata.org/installing.html#mandatory-dependencies" _msttexthash="677911" _msthash="30" _mstvisible="1"> Dependências obrigatórias </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry" _mstvisible="0">
+    <a class="reference internal nav-link" href="https://seaborn.pydata.org/installing.html#optional-dependencies" _msttexthash="511797" _msthash="31" _mstvisible="1"> Dependências opcionais </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toc-h2 nav-item toc-entry active">
+  <a class="reference internal nav-link active" href="https://seaborn.pydata.org/installing.html#quickstart" _msttexthash="242983" _msthash="32"> Início rápido </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="https://seaborn.pydata.org/installing.html#debugging-install-issues" _msttexthash="1189669" _msthash="33"> Problemas de instalação de depuração </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="https://seaborn.pydata.org/installing.html#getting-help" _msttexthash="226811" _msthash="34"> Buscando ajuda </a>
+ </li>
+</ul>
+
+</nav>
+</div>
+
+<div class="toc-item">
+  
+</div>
+
+<div class="toc-item">
+  
+</div>
+
+        </div>
+      
+      
+
+      
+      
+      <div class="bd-content col">
+          
+          <div class="bd-header-article">
+              
+          </div>
+
+          
+          
+          <article class="bd-article" role="main">
+            
+  <section id="installing-and-getting-started">
+<span id="installing"></span><h1><font _mstmutation="1" _msttexthash="429052" _msthash="35">Instalação e início</font><a class="headerlink" href="https://seaborn.pydata.org/installing.html#installing-and-getting-started" title="Permalink to this heading">#</a></h1>
+<p _msttexthash="2194660" _msthash="36">Versões oficiais do seaborn podem ser instaladas pelo <a class="reference external" href="https://pypi.org/project/seaborn/" _istranslated="1">PyPI:</a></p>
+<div class="highlight-default notranslate"><div class="highlight"><pre id="codecell0"><span></span><span class="n">pip</span> <span class="n">install</span> <span class="n">seaborn</span>
+</pre><button class="copybtn o-tooltip--left" data-tooltip="Copy" data-clipboard-target="#codecell0">
+      <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-copy" width="44" height="44" viewBox="0 0 24 24" stroke-width="1.5" stroke="#000000" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <title>Copy to clipboard</title>
+  <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
+  <rect x="8" y="8" width="12" height="12" rx="2"></rect>
+  <path d="M16 8v-2a2 2 0 0 0 -2 -2h-8a2 2 0 0 0 -2 2v8a2 2 0 0 0 2 2h2"></path>
+</svg>
+    </button></div>
+</div>
+<p><font _mstmutation="1" _msttexthash="18968157" _msthash="37">A invocação básica de will instala seaborn e, se necessário, suas dependências obrigatórias.
+É possível incluir dependências opcionais que dão acesso a alguns recursos avançados:</font><code class="docutils literal notranslate"><span class="pre">pip</span></code></p>
+<div class="highlight-default notranslate"><div class="highlight"><pre id="codecell1"><span></span><span class="n">pip</span> <span class="n">install</span> <span class="n">seaborn</span><span class="p">[</span><span class="n">stats</span><span class="p">]</span>
+</pre><button class="copybtn o-tooltip--left" data-tooltip="Copy" data-clipboard-target="#codecell1">
+      <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-copy" width="44" height="44" viewBox="0 0 24 24" stroke-width="1.5" stroke="#000000" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <title>Copy to clipboard</title>
+  <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
+  <rect x="8" y="8" width="12" height="12" rx="2"></rect>
+  <path d="M16 8v-2a2 2 0 0 0 -2 -2h-8a2 2 0 0 0 -2 2v8a2 2 0 0 0 2 2h2"></path>
+</svg>
+    </button></div>
+</div>
+<p><font _mstmutation="1" _msttexthash="5782049" _msthash="38">A biblioteca também está incluída como parte da distribuição <a class="reference external" href="https://repo.anaconda.com/" _mstmutation="1" _istranslated="1">da Anaconda</a>,
+e pode ser instalado com:</font><code class="docutils literal notranslate"><span class="pre">conda</span></code></p>
+<div class="highlight-default notranslate"><div class="highlight"><pre id="codecell2"><span></span><span class="n">conda</span> <span class="n">install</span> <span class="n">seaborn</span>
+</pre><button class="copybtn o-tooltip--left" data-tooltip="Copy" data-clipboard-target="#codecell2">
+      <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-copy" width="44" height="44" viewBox="0 0 24 24" stroke-width="1.5" stroke="#000000" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <title>Copy to clipboard</title>
+  <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
+  <rect x="8" y="8" width="12" height="12" rx="2"></rect>
+  <path d="M16 8v-2a2 2 0 0 0 -2 -2h-8a2 2 0 0 0 -2 2v8a2 2 0 0 0 2 2h2"></path>
+</svg>
+    </button></div>
+</div>
+<p _msttexthash="10069228" _msthash="39">Como o repositório principal da Anaconda pode demorar para adicionar novos lançamentos, você pode preferir usar o canal <a class="reference external" href="https://conda-forge.org/" _istranslated="1">conda-forge</a>:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre id="codecell3"><span></span><span class="n">conda</span> <span class="n">install</span> <span class="n">seaborn</span> <span class="o">-</span><span class="n">c</span> <span class="n">conda</span><span class="o">-</span><span class="n">forge</span>
+</pre><button class="copybtn o-tooltip--left" data-tooltip="Copy" data-clipboard-target="#codecell3">
+      <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-copy" width="44" height="44" viewBox="0 0 24 24" stroke-width="1.5" stroke="#000000" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <title>Copy to clipboard</title>
+  <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
+  <rect x="8" y="8" width="12" height="12" rx="2"></rect>
+  <path d="M16 8v-2a2 2 0 0 0 -2 -2h-8a2 2 0 0 0 -2 2v8a2 2 0 0 0 2 2h2"></path>
+</svg>
+    </button></div>
+</div>
+<section id="dependencies">
+<h2><font _mstmutation="1" _msttexthash="223314" _msthash="40">Dependências</font><a class="headerlink" href="https://seaborn.pydata.org/installing.html#dependencies" title="Permalink to this heading">#</a></h2>
+<section id="supported-python-versions">
+<h3><font _mstmutation="1" _msttexthash="683891" _msthash="41">Versões suportadas em Python</font><a class="headerlink" href="https://seaborn.pydata.org/installing.html#supported-python-versions" title="Permalink to this heading">#</a></h3>
+<ul class="simple">
+<li><p _msttexthash="116844" _msthash="42">Python 3.8+</p></li>
+</ul>
+</section>
+<section id="mandatory-dependencies">
+<h3><font _mstmutation="1" _msttexthash="677911" _msthash="43">Dependências obrigatórias</font><a class="headerlink" href="https://seaborn.pydata.org/installing.html#mandatory-dependencies" title="Permalink to this heading">#</a></h3>
+<ul class="simple">
+<li><p><a class="reference external" href="https://numpy.org/" _msttexthash="66794" _msthash="44">numpy</a></p></li>
+<li><p><a class="reference external" href="https://pandas.pydata.org/" _msttexthash="75049" _msthash="45">Pandas</a></p></li>
+<li><p><a class="reference external" href="https://matplotlib.org/" _msttexthash="161018" _msthash="46">matplotlib</a></p></li>
+</ul>
+</section>
+<section id="optional-dependencies">
+<h3><font _mstmutation="1" _msttexthash="511797" _msthash="47">Dependências opcionais</font><a class="headerlink" href="https://seaborn.pydata.org/installing.html#optional-dependencies" title="Permalink to this heading">#</a></h3>
+<ul class="simple">
+<li><p _msttexthash="1899092" _msthash="48"><a class="reference external" href="https://www.statsmodels.org/" _istranslated="1">Statsmodels</a>, para gráficos avançados de regressão</p></li>
+<li><p _msttexthash="2669446" _msthash="49"><a class="reference external" href="https://www.scipy.org/" _istranslated="1">scipy</a>, para clustering de matrizes e algumas opções avançadas</p></li>
+<li><p _msttexthash="2163993" _msthash="50"><a class="reference external" href="https://pypi.org/project/fastcluster/" _istranslated="1">fastcluster</a>, clustering mais rápido de matrizes grandes</p></li>
+</ul>
+</section>
+</section>
+<section id="quickstart">
+<h2><font _mstmutation="1" _msttexthash="242983" _msthash="51">Início rápido</font><a class="headerlink" href="https://seaborn.pydata.org/installing.html#quickstart" title="Permalink to this heading">#</a></h2>
+<p _msttexthash="10634676" _msthash="52">Depois de instalar o Seaborn, estará pronto para começar.
+Para testar, você poderia carregar e plotar um dos conjuntos de dados de exemplo:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre id="codecell4"><span></span><span class="kn">import</span> <span class="nn">seaborn</span> <span class="k">as</span> <span class="nn">sns</span>
+<span class="n">df</span> <span class="o">=</span> <span class="n">sns</span><span class="o">.</span><span class="n">load_dataset</span><span class="p">(</span><span class="s2">"penguins"</span><span class="p">)</span>
+<span class="n">sns</span><span class="o">.</span><span class="n">pairplot</span><span class="p">(</span><span class="n">df</span><span class="p">,</span> <span class="n">hue</span><span class="o">=</span><span class="s2">"species"</span><span class="p">)</span>
+</pre><button class="copybtn o-tooltip--left" data-tooltip="Copy" data-clipboard-target="#codecell4">
+      <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-copy" width="44" height="44" viewBox="0 0 24 24" stroke-width="1.5" stroke="#000000" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <title>Copy to clipboard</title>
+  <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
+  <rect x="8" y="8" width="12" height="12" rx="2"></rect>
+  <path d="M16 8v-2a2 2 0 0 0 -2 -2h-8a2 2 0 0 0 -2 2v8a2 2 0 0 0 2 2h2"></path>
+</svg>
+    </button></div>
+</div>
+<p _msttexthash="22820408" _msthash="53">Se você estiver trabalhando em um notebook Jupyter ou em um terminal IPython com <a class="reference external" href="https://ipython.readthedocs.io/en/stable/interactive/plotting.html" _istranslated="1">o modo matplotlib</a> ativado, deve ver <a class="reference internal" href="https://seaborn.pydata.org/examples/scatterplot_matrix.html#scatterplot-matrix" _istranslated="1"><span class="std std-ref" _istranslated="1">imediatamente o gráfico</span></a>.
+Caso contrário, talvez seja necessário chamar <a class="reference external" href="https://matplotlib.org/stable/api/_as_gen/matplotlib.pyplot.show.html#matplotlib.pyplot.show" title="(in Matplotlib v3.8.2)" _istranslated="1"><code class="xref py py-func docutils literal notranslate" _istranslated="1"></code></a>explicitamente :</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre id="codecell5"><span></span><span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre><button class="copybtn o-tooltip--left" data-tooltip="Copy" data-clipboard-target="#codecell5">
+      <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-copy" width="44" height="44" viewBox="0 0 24 24" stroke-width="1.5" stroke="#000000" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <title>Copy to clipboard</title>
+  <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
+  <rect x="8" y="8" width="12" height="12" rx="2"></rect>
+  <path d="M16 8v-2a2 2 0 0 0 -2 -2h-8a2 2 0 0 0 -2 2v8a2 2 0 0 0 2 2h2"></path>
+</svg>
+    </button></div>
+</div>
+<p _msttexthash="22682075" _msthash="54">Embora você possa ir bem longe apenas com Seaborn importado, tendo acesso a
+As funções Matplotlib costumam ser úteis. Os tutoriais e a documentação da API
+Normalmente assumem as seguintes importações:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre id="codecell6"><span></span><span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+<span class="kn">import</span> <span class="nn">pandas</span> <span class="k">as</span> <span class="nn">pd</span>
+
+<span class="kn">import</span> <span class="nn">matplotlib</span> <span class="k">as</span> <span class="nn">mpl</span>
+<span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
+
+<span class="kn">import</span> <span class="nn">seaborn</span> <span class="k">as</span> <span class="nn">sns</span>
+<span class="kn">import</span> <span class="nn">seaborn.objects</span> <span class="k">as</span> <span class="nn">so</span>
+</pre><button class="copybtn o-tooltip--left" data-tooltip="Copy" data-clipboard-target="#codecell6">
+      <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-copy" width="44" height="44" viewBox="0 0 24 24" stroke-width="1.5" stroke="#000000" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <title>Copy to clipboard</title>
+  <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
+  <rect x="8" y="8" width="12" height="12" rx="2"></rect>
+  <path d="M16 8v-2a2 2 0 0 0 -2 -2h-8a2 2 0 0 0 -2 2v8a2 2 0 0 0 2 2h2"></path>
+</svg>
+    </button></div>
+</div>
+</section>
+<section id="debugging-install-issues">
+<h2><font _mstmutation="1" _msttexthash="1189669" _msthash="55">Problemas de instalação de depuração</font><a class="headerlink" href="https://seaborn.pydata.org/installing.html#debugging-install-issues" title="Permalink to this heading">#</a></h2>
+<p><font _mstmutation="1" _msttexthash="162180187" _msthash="56">O código do seaborn é puro Python, e a biblioteca geralmente deve ser instalada
+Sem descendência. Ocasionalmente, surgem dificuldades devido às dependências
+inclua código compilado e link para bibliotecas do sistema. Essas dificuldades
+normalmente se manifestam como erros na importação com mensagens como . Para depurar tais problemas, leia o rastreamento de exceção para
+Descubra qual biblioteca específica falhou em importar e então consulte o
+Documentação de instalação desse pacote para ver se eles têm dicas para o seu caso específico
+sistema.</font><code class="docutils literal notranslate"><span class="pre">"DLL</span> <span class="pre">load</span>
+<span class="pre">failed"</span></code></p>
+<p><font _mstmutation="1" _msttexthash="93530801" _msthash="57">Em alguns casos, uma instalação de seaborn parecerá ter sucesso, mas está tentando
+para importá-la gerará um erro com a mensagem . Isso geralmente significa que você tem várias instalações de Python em
+seu sistema e que seu ou aponta para um sistema diferente
+Instalação do que onde seu intérprete mora. Resolvendo essa questão
+Vai envolver organizar os caminhos no seu sistema, mas às vezes pode ser
+evitado invocando com .</font><code class="docutils literal notranslate"><span class="pre">"No</span> <span class="pre">module</span> <span class="pre">named</span>
+<span class="pre">seaborn"</span></code><code class="docutils literal notranslate"><span class="pre">pip</span></code><code class="docutils literal notranslate"><span class="pre">conda</span></code><code class="docutils literal notranslate"><span class="pre">pip</span></code><code class="docutils literal notranslate"><span class="pre">python</span> <span class="pre">-m</span> <span class="pre">pip</span> <span class="pre">install</span> <span class="pre">seaborn</span></code></p>
+</section>
+<section id="getting-help">
+<h2><font _mstmutation="1" _msttexthash="226811" _msthash="58">Buscando ajuda</font><a class="headerlink" href="https://seaborn.pydata.org/installing.html#getting-help" title="Permalink to this heading">#</a></h2>
+<p _msttexthash="18275673" _msthash="59">Se você acha que encontrou um bug no seaborn, por favor, reporte no <a class="reference external" href="https://github.com/mwaskom/seaborn/issues" _istranslated="1">rastreador de problemas do GitHub</a>.
+Para serem úteis, os relatórios de bugs devem incluir as seguintes informações:</p>
+<ul class="simple">
+<li><p _msttexthash="2295904" _msthash="60">Um exemplo de código reproduzível que demonstra o problema</p></li>
+<li><p _msttexthash="3191383" _msthash="61">A saída que você está vendo (uma imagem de um gráfico ou a mensagem de erro)</p></li>
+<li><p _msttexthash="2508935" _msthash="62">Uma explicação clara do porquê você acha que algo está errado</p></li>
+<li><p _msttexthash="4177927" _msthash="63">As versões específicas de seaborn e matplotlib com as quais você está trabalhando</p></li>
+</ul>
+<p _msttexthash="77681864" _msthash="64">Relatórios de bugs são mais fáceis de resolver se puderem ser demonstrados usando um dos
+Exemplos de conjuntos de dados do Seaborn Docs (ou seja, com <a class="reference internal" href="https://seaborn.pydata.org/generated/seaborn.load_dataset.html#seaborn.load_dataset" title="seaborn.load_dataset" _istranslated="1"><code class="xref py py-func docutils literal notranslate" _istranslated="1"></code></a>).
+Caso contrário, é preferível que seu exemplo gere dados sintéticos para
+Reproduza o problema. Se você só puder demonstrar o problema com seu
+Conjunto de dados propriamente ditos, você precisará compartilhá-lo, idealmente como um CSV.</p>
+<p _msttexthash="19896695" _msthash="65">Se você encontrou um erro, procure o texto específico da mensagem
+Antes de abrir uma nova edição, muitas vezes você pode ajudar a resolvê-lo rapidamente e
+Evite fazer um relatório duplicado.</p>
+<p _msttexthash="66926418" _msthash="66">Porque o matplotlib cuida da renderização real, erros ou resultados incorretos
+Pode ser devido a um problema no Matplotlib em vez de um no Seaborn. Isso pode economizar tempo
+Se você tentar reproduzir o problema em um exemplo que use apenas o matplotlib,
+Para que você possa denunciar no lugar certo. Mas tudo bem pular isso
+Passe se não estiver óbvio como fazer.</p>
+<p _msttexthash="65025324" _msthash="67">Perguntas de suporte geral são mais acessíveis no <a class="reference external" href="https://stackoverflow.com/questions/tagged/seaborn/" _istranslated="1">stackoverflow</a>, onde há um
+Público maior de pessoas que verão seu post e podem oferecer
+Assistência. Sua chance de obter uma resposta rápida será maior se você incluir <a class="reference external" href="https://stackoverflow.com/help/minimal-reproducible-example" _istranslated="1">código executável</a>,
+uma declaração precisa do que você espera alcançar e uma explicação clara
+dos problemas que você encontrou.</p>
+</section>
+</section>
+
+
+          </article>
+          
+
+          
+          
+      </div>
+      
+    </div>
+  </div>
+
+  
+    
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script src="./Instalação e início — documentação do seaborn 0.13.2_files/pydata-sphinx-theme.js.baixados"></script>
+
+<footer class="footer" style="border-top: 1px solid #ccc; padding-top: 10px">
+  <div class="container">
+    <div id="credits" style="width: 50%; float: left">
+      <p><font _mstmutation="1" _msttexthash="3817788" _msthash="68"> © Direitos autorais 2012-2024, <a href="https://mwaskom.github.io/" _mstmutation="1" _istranslated="1">Michael Waskom</a>. <br _mstmutation="1" _istranslated="1"> Criado usando <a href="https://www.sphinx-doc.org/" _mstmutation="1" _istranslated="1">Sphinx</a> e o <a href="https://pydata-sphinx-theme.readthedocs.io/en/stable/" _mstmutation="1" _istranslated="1">tema PyData</a>.</font><br>
+      </p>
+    </div>
+    <div class="dropup show" style="float: right; margin: 10px">
+        <a class="btn btn-secondary dropdown-toggle" href="https://seaborn.pydata.org/installing.html#" role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" _msttexthash="98384" _msthash="69"> Arquivo </a>
+        <div class="dropdown-menu dropdown-menu-right" aria-labelledby="dropdownMenuLink" _msthidden="4">
+          <a class="dropdown-item" href="https://seaborn.pydata.org/archive/0.12/index.html" _msttexthash="34632" _msthidden="1" _msthash="70">v0.12</a>
+          <a class="dropdown-item" href="https://seaborn.pydata.org/archive/0.11/index.html" _msttexthash="34489" _msthidden="1" _msthash="71">v0.11</a>
+          <a class="dropdown-item" href="https://seaborn.pydata.org/archive/0.10/index.html" _msttexthash="34346" _msthidden="1" _msthash="72">v0.10</a>
+          <a class="dropdown-item" href="https://seaborn.pydata.org/archive/0.9/index.html" _msttexthash="28522" _msthidden="1" _msthash="73">v0.9</a>
+        </div>
+    </div>
+    <div id="version" style="color: #999; float: right; margin: 15px" _msttexthash="50401" _msthash="74">v0.13.2</div>
+    </div>
+  
+</footer>
+  
+</body></html>

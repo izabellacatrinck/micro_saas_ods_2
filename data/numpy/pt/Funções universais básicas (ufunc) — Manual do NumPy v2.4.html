@@ -1,0 +1,945 @@
+<!DOCTYPE html>
+<!-- saved from url=(0052)https://numpy.org/doc/stable/user/basics.ufuncs.html -->
+<html lang="pt" data-content_root="../" data-theme="light" data-mode="light" class="fontawesome-i2svg-active fontawesome-i2svg-complete"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"><meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <title _msttexthash="5983770" _msthash="0">Funções universais básicas (ufunc) — Manual do NumPy v2.4</title>
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "light";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "light";
+  </script>
+  <!--
+    this give us a css class that will be invisible only if js is disabled
+  -->
+  <noscript>
+    <style>
+      .pst-js-only { display: none !important; }
+
+    </style>
+  </noscript>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <style type="text/css">:host,:root{--fa-font-solid:normal 900 1em/1 "Font Awesome 6 Solid";--fa-font-regular:normal 400 1em/1 "Font Awesome 6 Regular";--fa-font-light:normal 300 1em/1 "Font Awesome 6 Light";--fa-font-thin:normal 100 1em/1 "Font Awesome 6 Thin";--fa-font-duotone:normal 900 1em/1 "Font Awesome 6 Duotone";--fa-font-sharp-solid:normal 900 1em/1 "Font Awesome 6 Sharp";--fa-font-sharp-regular:normal 400 1em/1 "Font Awesome 6 Sharp";--fa-font-sharp-light:normal 300 1em/1 "Font Awesome 6 Sharp";--fa-font-sharp-thin:normal 100 1em/1 "Font Awesome 6 Sharp";--fa-font-brands:normal 400 1em/1 "Font Awesome 6 Brands"}svg:not(:host).svg-inline--fa,svg:not(:root).svg-inline--fa{overflow:visible;box-sizing:content-box}.svg-inline--fa{display:var(--fa-display,inline-block);height:1em;overflow:visible;vertical-align:-.125em}.svg-inline--fa.fa-2xs{vertical-align:.1em}.svg-inline--fa.fa-xs{vertical-align:0}.svg-inline--fa.fa-sm{vertical-align:-.0714285705em}.svg-inline--fa.fa-lg{vertical-align:-.2em}.svg-inline--fa.fa-xl{vertical-align:-.25em}.svg-inline--fa.fa-2xl{vertical-align:-.3125em}.svg-inline--fa.fa-pull-left{margin-right:var(--fa-pull-margin,.3em);width:auto}.svg-inline--fa.fa-pull-right{margin-left:var(--fa-pull-margin,.3em);width:auto}.svg-inline--fa.fa-li{width:var(--fa-li-width,2em);top:.25em}.svg-inline--fa.fa-fw{width:var(--fa-fw-width,1.25em)}.fa-layers svg.svg-inline--fa{bottom:0;left:0;margin:auto;position:absolute;right:0;top:0}.fa-layers-counter,.fa-layers-text{display:inline-block;position:absolute;text-align:center}.fa-layers{display:inline-block;height:1em;position:relative;text-align:center;vertical-align:-.125em;width:1em}.fa-layers svg.svg-inline--fa{-webkit-transform-origin:center center;transform-origin:center center}.fa-layers-text{left:50%;top:50%;-webkit-transform:translate(-50%,-50%);transform:translate(-50%,-50%);-webkit-transform-origin:center center;transform-origin:center center}.fa-layers-counter{background-color:var(--fa-counter-background-color,#ff253a);border-radius:var(--fa-counter-border-radius,1em);box-sizing:border-box;color:var(--fa-inverse,#fff);line-height:var(--fa-counter-line-height,1);max-width:var(--fa-counter-max-width,5em);min-width:var(--fa-counter-min-width,1.5em);overflow:hidden;padding:var(--fa-counter-padding,.25em .5em);right:var(--fa-right,0);text-overflow:ellipsis;top:var(--fa-top,0);-webkit-transform:scale(var(--fa-counter-scale,.25));transform:scale(var(--fa-counter-scale,.25));-webkit-transform-origin:top right;transform-origin:top right}.fa-layers-bottom-right{bottom:var(--fa-bottom,0);right:var(--fa-right,0);top:auto;-webkit-transform:scale(var(--fa-layers-scale,.25));transform:scale(var(--fa-layers-scale,.25));-webkit-transform-origin:bottom right;transform-origin:bottom right}.fa-layers-bottom-left{bottom:var(--fa-bottom,0);left:var(--fa-left,0);right:auto;top:auto;-webkit-transform:scale(var(--fa-layers-scale,.25));transform:scale(var(--fa-layers-scale,.25));-webkit-transform-origin:bottom left;transform-origin:bottom left}.fa-layers-top-right{top:var(--fa-top,0);right:var(--fa-right,0);-webkit-transform:scale(var(--fa-layers-scale,.25));transform:scale(var(--fa-layers-scale,.25));-webkit-transform-origin:top right;transform-origin:top right}.fa-layers-top-left{left:var(--fa-left,0);right:auto;top:var(--fa-top,0);-webkit-transform:scale(var(--fa-layers-scale,.25));transform:scale(var(--fa-layers-scale,.25));-webkit-transform-origin:top left;transform-origin:top left}.fa-1x{font-size:1em}.fa-2x{font-size:2em}.fa-3x{font-size:3em}.fa-4x{font-size:4em}.fa-5x{font-size:5em}.fa-6x{font-size:6em}.fa-7x{font-size:7em}.fa-8x{font-size:8em}.fa-9x{font-size:9em}.fa-10x{font-size:10em}.fa-2xs{font-size:.625em;line-height:.1em;vertical-align:.225em}.fa-xs{font-size:.75em;line-height:.0833333337em;vertical-align:.125em}.fa-sm{font-size:.875em;line-height:.0714285718em;vertical-align:.0535714295em}.fa-lg{font-size:1.25em;line-height:.05em;vertical-align:-.075em}.fa-xl{font-size:1.5em;line-height:.0416666682em;vertical-align:-.125em}.fa-2xl{font-size:2em;line-height:.03125em;vertical-align:-.1875em}.fa-fw{text-align:center;width:1.25em}.fa-ul{list-style-type:none;margin-left:var(--fa-li-margin,2.5em);padding-left:0}.fa-ul>li{position:relative}.fa-li{left:calc(var(--fa-li-width,2em) * -1);position:absolute;text-align:center;width:var(--fa-li-width,2em);line-height:inherit}.fa-border{border-color:var(--fa-border-color,#eee);border-radius:var(--fa-border-radius,.1em);border-style:var(--fa-border-style,solid);border-width:var(--fa-border-width,.08em);padding:var(--fa-border-padding,.2em .25em .15em)}.fa-pull-left{float:left;margin-right:var(--fa-pull-margin,.3em)}.fa-pull-right{float:right;margin-left:var(--fa-pull-margin,.3em)}.fa-beat{-webkit-animation-name:fa-beat;animation-name:fa-beat;-webkit-animation-delay:var(--fa-animation-delay,0s);animation-delay:var(--fa-animation-delay,0s);-webkit-animation-direction:var(--fa-animation-direction,normal);animation-direction:var(--fa-animation-direction,normal);-webkit-animation-duration:var(--fa-animation-duration,1s);animation-duration:var(--fa-animation-duration,1s);-webkit-animation-iteration-count:var(--fa-animation-iteration-count,infinite);animation-iteration-count:var(--fa-animation-iteration-count,infinite);-webkit-animation-timing-function:var(--fa-animation-timing,ease-in-out);animation-timing-function:var(--fa-animation-timing,ease-in-out)}.fa-bounce{-webkit-animation-name:fa-bounce;animation-name:fa-bounce;-webkit-animation-delay:var(--fa-animation-delay,0s);animation-delay:var(--fa-animation-delay,0s);-webkit-animation-direction:var(--fa-animation-direction,normal);animation-direction:var(--fa-animation-direction,normal);-webkit-animation-duration:var(--fa-animation-duration,1s);animation-duration:var(--fa-animation-duration,1s);-webkit-animation-iteration-count:var(--fa-animation-iteration-count,infinite);animation-iteration-count:var(--fa-animation-iteration-count,infinite);-webkit-animation-timing-function:var(--fa-animation-timing,cubic-bezier(.28,.84,.42,1));animation-timing-function:var(--fa-animation-timing,cubic-bezier(.28,.84,.42,1))}.fa-fade{-webkit-animation-name:fa-fade;animation-name:fa-fade;-webkit-animation-delay:var(--fa-animation-delay,0s);animation-delay:var(--fa-animation-delay,0s);-webkit-animation-direction:var(--fa-animation-direction,normal);animation-direction:var(--fa-animation-direction,normal);-webkit-animation-duration:var(--fa-animation-duration,1s);animation-duration:var(--fa-animation-duration,1s);-webkit-animation-iteration-count:var(--fa-animation-iteration-count,infinite);animation-iteration-count:var(--fa-animation-iteration-count,infinite);-webkit-animation-timing-function:var(--fa-animation-timing,cubic-bezier(.4,0,.6,1));animation-timing-function:var(--fa-animation-timing,cubic-bezier(.4,0,.6,1))}.fa-beat-fade{-webkit-animation-name:fa-beat-fade;animation-name:fa-beat-fade;-webkit-animation-delay:var(--fa-animation-delay,0s);animation-delay:var(--fa-animation-delay,0s);-webkit-animation-direction:var(--fa-animation-direction,normal);animation-direction:var(--fa-animation-direction,normal);-webkit-animation-duration:var(--fa-animation-duration,1s);animation-duration:var(--fa-animation-duration,1s);-webkit-animation-iteration-count:var(--fa-animation-iteration-count,infinite);animation-iteration-count:var(--fa-animation-iteration-count,infinite);-webkit-animation-timing-function:var(--fa-animation-timing,cubic-bezier(.4,0,.6,1));animation-timing-function:var(--fa-animation-timing,cubic-bezier(.4,0,.6,1))}.fa-flip{-webkit-animation-name:fa-flip;animation-name:fa-flip;-webkit-animation-delay:var(--fa-animation-delay,0s);animation-delay:var(--fa-animation-delay,0s);-webkit-animation-direction:var(--fa-animation-direction,normal);animation-direction:var(--fa-animation-direction,normal);-webkit-animation-duration:var(--fa-animation-duration,1s);animation-duration:var(--fa-animation-duration,1s);-webkit-animation-iteration-count:var(--fa-animation-iteration-count,infinite);animation-iteration-count:var(--fa-animation-iteration-count,infinite);-webkit-animation-timing-function:var(--fa-animation-timing,ease-in-out);animation-timing-function:var(--fa-animation-timing,ease-in-out)}.fa-shake{-webkit-animation-name:fa-shake;animation-name:fa-shake;-webkit-animation-delay:var(--fa-animation-delay,0s);animation-delay:var(--fa-animation-delay,0s);-webkit-animation-direction:var(--fa-animation-direction,normal);animation-direction:var(--fa-animation-direction,normal);-webkit-animation-duration:var(--fa-animation-duration,1s);animation-duration:var(--fa-animation-duration,1s);-webkit-animation-iteration-count:var(--fa-animation-iteration-count,infinite);animation-iteration-count:var(--fa-animation-iteration-count,infinite);-webkit-animation-timing-function:var(--fa-animation-timing,linear);animation-timing-function:var(--fa-animation-timing,linear)}.fa-spin{-webkit-animation-name:fa-spin;animation-name:fa-spin;-webkit-animation-delay:var(--fa-animation-delay,0s);animation-delay:var(--fa-animation-delay,0s);-webkit-animation-direction:var(--fa-animation-direction,normal);animation-direction:var(--fa-animation-direction,normal);-webkit-animation-duration:var(--fa-animation-duration,2s);animation-duration:var(--fa-animation-duration,2s);-webkit-animation-iteration-count:var(--fa-animation-iteration-count,infinite);animation-iteration-count:var(--fa-animation-iteration-count,infinite);-webkit-animation-timing-function:var(--fa-animation-timing,linear);animation-timing-function:var(--fa-animation-timing,linear)}.fa-spin-reverse{--fa-animation-direction:reverse}.fa-pulse,.fa-spin-pulse{-webkit-animation-name:fa-spin;animation-name:fa-spin;-webkit-animation-direction:var(--fa-animation-direction,normal);animation-direction:var(--fa-animation-direction,normal);-webkit-animation-duration:var(--fa-animation-duration,1s);animation-duration:var(--fa-animation-duration,1s);-webkit-animation-iteration-count:var(--fa-animation-iteration-count,infinite);animation-iteration-count:var(--fa-animation-iteration-count,infinite);-webkit-animation-timing-function:var(--fa-animation-timing,steps(8));animation-timing-function:var(--fa-animation-timing,steps(8))}@media (prefers-reduced-motion:reduce){.fa-beat,.fa-beat-fade,.fa-bounce,.fa-fade,.fa-flip,.fa-pulse,.fa-shake,.fa-spin,.fa-spin-pulse{-webkit-animation-delay:-1ms;animation-delay:-1ms;-webkit-animation-duration:1ms;animation-duration:1ms;-webkit-animation-iteration-count:1;animation-iteration-count:1;-webkit-transition-delay:0s;transition-delay:0s;-webkit-transition-duration:0s;transition-duration:0s}}@-webkit-keyframes fa-beat{0%,90%{-webkit-transform:scale(1);transform:scale(1)}45%{-webkit-transform:scale(var(--fa-beat-scale,1.25));transform:scale(var(--fa-beat-scale,1.25))}}@keyframes fa-beat{0%,90%{-webkit-transform:scale(1);transform:scale(1)}45%{-webkit-transform:scale(var(--fa-beat-scale,1.25));transform:scale(var(--fa-beat-scale,1.25))}}@-webkit-keyframes fa-bounce{0%{-webkit-transform:scale(1,1) translateY(0);transform:scale(1,1) translateY(0)}10%{-webkit-transform:scale(var(--fa-bounce-start-scale-x,1.1),var(--fa-bounce-start-scale-y,.9)) translateY(0);transform:scale(var(--fa-bounce-start-scale-x,1.1),var(--fa-bounce-start-scale-y,.9)) translateY(0)}30%{-webkit-transform:scale(var(--fa-bounce-jump-scale-x,.9),var(--fa-bounce-jump-scale-y,1.1)) translateY(var(--fa-bounce-height,-.5em));transform:scale(var(--fa-bounce-jump-scale-x,.9),var(--fa-bounce-jump-scale-y,1.1)) translateY(var(--fa-bounce-height,-.5em))}50%{-webkit-transform:scale(var(--fa-bounce-land-scale-x,1.05),var(--fa-bounce-land-scale-y,.95)) translateY(0);transform:scale(var(--fa-bounce-land-scale-x,1.05),var(--fa-bounce-land-scale-y,.95)) translateY(0)}57%{-webkit-transform:scale(1,1) translateY(var(--fa-bounce-rebound,-.125em));transform:scale(1,1) translateY(var(--fa-bounce-rebound,-.125em))}64%{-webkit-transform:scale(1,1) translateY(0);transform:scale(1,1) translateY(0)}100%{-webkit-transform:scale(1,1) translateY(0);transform:scale(1,1) translateY(0)}}@keyframes fa-bounce{0%{-webkit-transform:scale(1,1) translateY(0);transform:scale(1,1) translateY(0)}10%{-webkit-transform:scale(var(--fa-bounce-start-scale-x,1.1),var(--fa-bounce-start-scale-y,.9)) translateY(0);transform:scale(var(--fa-bounce-start-scale-x,1.1),var(--fa-bounce-start-scale-y,.9)) translateY(0)}30%{-webkit-transform:scale(var(--fa-bounce-jump-scale-x,.9),var(--fa-bounce-jump-scale-y,1.1)) translateY(var(--fa-bounce-height,-.5em));transform:scale(var(--fa-bounce-jump-scale-x,.9),var(--fa-bounce-jump-scale-y,1.1)) translateY(var(--fa-bounce-height,-.5em))}50%{-webkit-transform:scale(var(--fa-bounce-land-scale-x,1.05),var(--fa-bounce-land-scale-y,.95)) translateY(0);transform:scale(var(--fa-bounce-land-scale-x,1.05),var(--fa-bounce-land-scale-y,.95)) translateY(0)}57%{-webkit-transform:scale(1,1) translateY(var(--fa-bounce-rebound,-.125em));transform:scale(1,1) translateY(var(--fa-bounce-rebound,-.125em))}64%{-webkit-transform:scale(1,1) translateY(0);transform:scale(1,1) translateY(0)}100%{-webkit-transform:scale(1,1) translateY(0);transform:scale(1,1) translateY(0)}}@-webkit-keyframes fa-fade{50%{opacity:var(--fa-fade-opacity,.4)}}@keyframes fa-fade{50%{opacity:var(--fa-fade-opacity,.4)}}@-webkit-keyframes fa-beat-fade{0%,100%{opacity:var(--fa-beat-fade-opacity,.4);-webkit-transform:scale(1);transform:scale(1)}50%{opacity:1;-webkit-transform:scale(var(--fa-beat-fade-scale,1.125));transform:scale(var(--fa-beat-fade-scale,1.125))}}@keyframes fa-beat-fade{0%,100%{opacity:var(--fa-beat-fade-opacity,.4);-webkit-transform:scale(1);transform:scale(1)}50%{opacity:1;-webkit-transform:scale(var(--fa-beat-fade-scale,1.125));transform:scale(var(--fa-beat-fade-scale,1.125))}}@-webkit-keyframes fa-flip{50%{-webkit-transform:rotate3d(var(--fa-flip-x,0),var(--fa-flip-y,1),var(--fa-flip-z,0),var(--fa-flip-angle,-180deg));transform:rotate3d(var(--fa-flip-x,0),var(--fa-flip-y,1),var(--fa-flip-z,0),var(--fa-flip-angle,-180deg))}}@keyframes fa-flip{50%{-webkit-transform:rotate3d(var(--fa-flip-x,0),var(--fa-flip-y,1),var(--fa-flip-z,0),var(--fa-flip-angle,-180deg));transform:rotate3d(var(--fa-flip-x,0),var(--fa-flip-y,1),var(--fa-flip-z,0),var(--fa-flip-angle,-180deg))}}@-webkit-keyframes fa-shake{0%{-webkit-transform:rotate(-15deg);transform:rotate(-15deg)}4%{-webkit-transform:rotate(15deg);transform:rotate(15deg)}24%,8%{-webkit-transform:rotate(-18deg);transform:rotate(-18deg)}12%,28%{-webkit-transform:rotate(18deg);transform:rotate(18deg)}16%{-webkit-transform:rotate(-22deg);transform:rotate(-22deg)}20%{-webkit-transform:rotate(22deg);transform:rotate(22deg)}32%{-webkit-transform:rotate(-12deg);transform:rotate(-12deg)}36%{-webkit-transform:rotate(12deg);transform:rotate(12deg)}100%,40%{-webkit-transform:rotate(0);transform:rotate(0)}}@keyframes fa-shake{0%{-webkit-transform:rotate(-15deg);transform:rotate(-15deg)}4%{-webkit-transform:rotate(15deg);transform:rotate(15deg)}24%,8%{-webkit-transform:rotate(-18deg);transform:rotate(-18deg)}12%,28%{-webkit-transform:rotate(18deg);transform:rotate(18deg)}16%{-webkit-transform:rotate(-22deg);transform:rotate(-22deg)}20%{-webkit-transform:rotate(22deg);transform:rotate(22deg)}32%{-webkit-transform:rotate(-12deg);transform:rotate(-12deg)}36%{-webkit-transform:rotate(12deg);transform:rotate(12deg)}100%,40%{-webkit-transform:rotate(0);transform:rotate(0)}}@-webkit-keyframes fa-spin{0%{-webkit-transform:rotate(0);transform:rotate(0)}100%{-webkit-transform:rotate(360deg);transform:rotate(360deg)}}@keyframes fa-spin{0%{-webkit-transform:rotate(0);transform:rotate(0)}100%{-webkit-transform:rotate(360deg);transform:rotate(360deg)}}.fa-rotate-90{-webkit-transform:rotate(90deg);transform:rotate(90deg)}.fa-rotate-180{-webkit-transform:rotate(180deg);transform:rotate(180deg)}.fa-rotate-270{-webkit-transform:rotate(270deg);transform:rotate(270deg)}.fa-flip-horizontal{-webkit-transform:scale(-1,1);transform:scale(-1,1)}.fa-flip-vertical{-webkit-transform:scale(1,-1);transform:scale(1,-1)}.fa-flip-both,.fa-flip-horizontal.fa-flip-vertical{-webkit-transform:scale(-1,-1);transform:scale(-1,-1)}.fa-rotate-by{-webkit-transform:rotate(var(--fa-rotate-angle,0));transform:rotate(var(--fa-rotate-angle,0))}.fa-stack{display:inline-block;vertical-align:middle;height:2em;position:relative;width:2.5em}.fa-stack-1x,.fa-stack-2x{bottom:0;left:0;margin:auto;position:absolute;right:0;top:0;z-index:var(--fa-stack-z-index,auto)}.svg-inline--fa.fa-stack-1x{height:1em;width:1.25em}.svg-inline--fa.fa-stack-2x{height:2em;width:2.5em}.fa-inverse{color:var(--fa-inverse,#fff)}.fa-sr-only,.sr-only{position:absolute;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0,0,0,0);white-space:nowrap;border-width:0}.fa-sr-only-focusable:not(:focus),.sr-only-focusable:not(:focus){position:absolute;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0,0,0,0);white-space:nowrap;border-width:0}.svg-inline--fa .fa-primary{fill:var(--fa-primary-color,currentColor);opacity:var(--fa-primary-opacity,1)}.svg-inline--fa .fa-secondary{fill:var(--fa-secondary-color,currentColor);opacity:var(--fa-secondary-opacity,.4)}.svg-inline--fa.fa-swap-opacity .fa-primary{opacity:var(--fa-secondary-opacity,.4)}.svg-inline--fa.fa-swap-opacity .fa-secondary{opacity:var(--fa-primary-opacity,1)}.svg-inline--fa mask .fa-primary,.svg-inline--fa mask .fa-secondary{fill:#000}.fa-duotone.fa-inverse,.fad.fa-inverse{color:var(--fa-inverse,#fff)}</style><link href="./Funções universais básicas (ufunc) — Manual do NumPy v2.4_files/theme.css" rel="stylesheet">
+<link href="./Funções universais básicas (ufunc) — Manual do NumPy v2.4_files/pydata-sphinx-theme.css" rel="stylesheet">
+
+    <link rel="stylesheet" type="text/css" href="./Funções universais básicas (ufunc) — Manual do NumPy v2.4_files/pygments.css">
+    <link rel="stylesheet" type="text/css" href="./Funções universais básicas (ufunc) — Manual do NumPy v2.4_files/graphviz.css">
+    <link rel="stylesheet" type="text/css" href="./Funções universais básicas (ufunc) — Manual do NumPy v2.4_files/plot_directive.css">
+    <link rel="stylesheet" type="text/css" href="./Funções universais básicas (ufunc) — Manual do NumPy v2.4_files/copybutton.css">
+    <link rel="stylesheet" type="text/css" href="./Funções universais básicas (ufunc) — Manual do NumPy v2.4_files/css">
+    <link rel="stylesheet" type="text/css" href="./Funções universais básicas (ufunc) — Manual do NumPy v2.4_files/jupyterlite_sphinx.css">
+    <link rel="stylesheet" type="text/css" href="./Funções universais básicas (ufunc) — Manual do NumPy v2.4_files/sphinx-design.min.css">
+    <link rel="stylesheet" type="text/css" href="./Funções universais básicas (ufunc) — Manual do NumPy v2.4_files/numpy.css">
+  
+  <!-- So that users can add custom icons -->
+  <script src="./Funções universais básicas (ufunc) — Manual do NumPy v2.4_files/fontawesome.js.baixados"></script>
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="./Funções universais básicas (ufunc) — Manual do NumPy v2.4_files/bootstrap.js.baixados">
+<link rel="preload" as="script" href="./Funções universais básicas (ufunc) — Manual do NumPy v2.4_files/pydata-sphinx-theme.js.baixados">
+
+    <script src="./Funções universais básicas (ufunc) — Manual do NumPy v2.4_files/documentation_options.js.baixados"></script>
+    <script src="./Funções universais básicas (ufunc) — Manual do NumPy v2.4_files/doctools.js.baixados"></script><script type="text/javascript" src="./Funções universais básicas (ufunc) — Manual do NumPy v2.4_files/versionwarning.js.baixados"></script>
+    <script src="./Funções universais básicas (ufunc) — Manual do NumPy v2.4_files/sphinx_highlight.js.baixados"></script>
+    <script src="./Funções universais básicas (ufunc) — Manual do NumPy v2.4_files/clipboard.min.js.baixados"></script>
+    <script src="./Funções universais básicas (ufunc) — Manual do NumPy v2.4_files/copybutton.js.baixados"></script>
+    <script src="./Funções universais básicas (ufunc) — Manual do NumPy v2.4_files/jupyterlite_sphinx.js.baixados"></script>
+    <script src="./Funções universais básicas (ufunc) — Manual do NumPy v2.4_files/design-tabs.js.baixados"></script>
+    <script data-domain="numpy.org/doc/stable/" defer="defer" src="./Funções universais básicas (ufunc) — Manual do NumPy v2.4_files/script.js.baixados"></script>
+    <script async="async" src="./Funções universais básicas (ufunc) — Manual do NumPy v2.4_files/MathJax.js.baixados"></script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'user/basics.ufuncs';</script>
+    <script>
+        DOCUMENTATION_OPTIONS.theme_version = '0.16.1';
+        DOCUMENTATION_OPTIONS.theme_switcher_json_url = 'https://numpy.org/doc/_static/versions.json';
+        DOCUMENTATION_OPTIONS.theme_switcher_version_match = '2.4';
+        DOCUMENTATION_OPTIONS.show_version_warning_banner =
+            true;
+        </script>
+    <link rel="icon" href="https://numpy.org/doc/stable/_static/favicon.ico">
+    <link rel="index" title="Index" href="https://numpy.org/doc/stable/genindex.html">
+    <link rel="search" title="Search" href="https://numpy.org/doc/stable/search.html">
+    <link rel="next" title="NumPy for MATLAB users" href="https://numpy.org/doc/stable/user/numpy-for-matlab-users.html">
+    <link rel="prev" title="Structured arrays" href="https://numpy.org/doc/stable/user/basics.rec.html">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="docsearch:language" content="en">
+  <meta name="docsearch:version" content="2.4">
+    <meta name="docbuild:last-update" content="Dec 21, 2025">
+  <style type="text/css">.MathJax_Preview {color: #888}
+#MathJax_Message {position: fixed; left: 1em; bottom: 1.5em; background-color: #E6E6E6; border: 1px solid #959595; margin: 0px; padding: 2px 8px; z-index: 102; color: black; font-size: 80%; width: auto; white-space: nowrap}
+#MathJax_MSIE_Frame {position: absolute; top: 0; left: 0; width: 0px; z-index: 101; border: 0px; margin: 0px; padding: 0px}
+.MathJax_Error {color: #CC0000; font-style: italic}
+</style><style type="text/css">.MathJax_Preview .MJXf-math {color: inherit!important}
+</style><style type="text/css">.MJX_Assistive_MathML {position: absolute!important; top: 0; left: 0; clip: rect(1px, 1px, 1px, 1px); padding: 1px 0 0 0!important; border: 0!important; height: 1px!important; width: 1px!important; overflow: hidden!important; display: block!important; -webkit-touch-callout: none; -webkit-user-select: none; -khtml-user-select: none; -moz-user-select: none; -ms-user-select: none; user-select: none}
+.MJX_Assistive_MathML.MJX_Assistive_MathML_Block {width: 100%!important}
+</style><style type="text/css">.MathJax_Hover_Frame {border-radius: .25em; -webkit-border-radius: .25em; -moz-border-radius: .25em; -khtml-border-radius: .25em; box-shadow: 0px 0px 15px #83A; -webkit-box-shadow: 0px 0px 15px #83A; -moz-box-shadow: 0px 0px 15px #83A; -khtml-box-shadow: 0px 0px 15px #83A; border: 1px solid #A6D ! important; display: inline-block; position: absolute}
+.MathJax_Menu_Button .MathJax_Hover_Arrow {position: absolute; cursor: pointer; display: inline-block; border: 2px solid #AAA; border-radius: 4px; -webkit-border-radius: 4px; -moz-border-radius: 4px; -khtml-border-radius: 4px; font-family: 'Courier New',Courier; font-size: 9px; color: #F0F0F0}
+.MathJax_Menu_Button .MathJax_Hover_Arrow span {display: block; background-color: #AAA; border: 1px solid; border-radius: 3px; line-height: 0; padding: 4px}
+.MathJax_Hover_Arrow:hover {color: white!important; border: 2px solid #CCC!important}
+.MathJax_Hover_Arrow:hover span {background-color: #CCC!important}
+</style><style type="text/css">.MathJax_SVG_Display {text-align: center; margin: 1em 0em; position: relative; display: block!important; text-indent: 0; max-width: none; max-height: none; min-width: 0; min-height: 0; width: 100%}
+.MathJax_SVG .MJX-monospace {font-family: monospace}
+.MathJax_SVG .MJX-sans-serif {font-family: sans-serif}
+#MathJax_SVG_Tooltip {background-color: InfoBackground; color: InfoText; border: 1px solid black; box-shadow: 2px 2px 5px #AAAAAA; -webkit-box-shadow: 2px 2px 5px #AAAAAA; -moz-box-shadow: 2px 2px 5px #AAAAAA; -khtml-box-shadow: 2px 2px 5px #AAAAAA; padding: 3px 4px; z-index: 401; position: absolute; left: 0; top: 0; width: auto; height: auto; display: none}
+.MathJax_SVG {display: inline; font-style: normal; font-weight: normal; line-height: normal; font-size: 100%; font-size-adjust: none; text-indent: 0; text-align: left; text-transform: none; letter-spacing: normal; word-spacing: normal; word-wrap: normal; white-space: nowrap; float: none; direction: ltr; max-width: none; max-height: none; min-width: 0; min-height: 0; border: 0; padding: 0; margin: 0}
+.MathJax_SVG * {transition: none; -webkit-transition: none; -moz-transition: none; -ms-transition: none; -o-transition: none}
+.mjx-svg-href {fill: blue; stroke: blue}
+.MathJax_SVG_Processing {visibility: hidden; position: absolute; top: 0; left: 0; width: 0; height: 0; overflow: hidden; display: block!important}
+.MathJax_SVG_Processed {display: none!important}
+.MathJax_SVG_ExBox {display: block!important; overflow: hidden; width: 1px; height: 60ex; min-height: 0; max-height: none; padding: 0; border: 0; margin: 0}
+.MathJax_SVG_LineBox {display: table!important}
+.MathJax_SVG_LineBox span {display: table-cell!important; width: 10000em!important; min-width: 0; max-width: none; padding: 0; border: 0; margin: 0}
+.MathJax_SVG .noError {vertical-align: ; font-size: 90%; text-align: left; color: black; padding: 1px 3px; border: 1px solid}
+</style><style type="text/css">.MJXp-script {font-size: .8em}
+.MJXp-right {-webkit-transform-origin: right; -moz-transform-origin: right; -ms-transform-origin: right; -o-transform-origin: right; transform-origin: right}
+.MJXp-bold {font-weight: bold}
+.MJXp-italic {font-style: italic}
+.MJXp-scr {font-family: MathJax_Script,'Times New Roman',Times,STIXGeneral,serif}
+.MJXp-frak {font-family: MathJax_Fraktur,'Times New Roman',Times,STIXGeneral,serif}
+.MJXp-sf {font-family: MathJax_SansSerif,'Times New Roman',Times,STIXGeneral,serif}
+.MJXp-cal {font-family: MathJax_Caligraphic,'Times New Roman',Times,STIXGeneral,serif}
+.MJXp-mono {font-family: MathJax_Typewriter,'Times New Roman',Times,STIXGeneral,serif}
+.MJXp-largeop {font-size: 150%}
+.MJXp-largeop.MJXp-int {vertical-align: -.2em}
+.MJXp-math {display: inline-block; line-height: 1.2; text-indent: 0; font-family: 'Times New Roman',Times,STIXGeneral,serif; white-space: nowrap; border-collapse: collapse}
+.MJXp-display {display: block; text-align: center; margin: 1em 0}
+.MJXp-math span {display: inline-block}
+.MJXp-box {display: block!important; text-align: center}
+.MJXp-box:after {content: " "}
+.MJXp-rule {display: block!important; margin-top: .1em}
+.MJXp-char {display: block!important}
+.MJXp-mo {margin: 0 .15em}
+.MJXp-mfrac {margin: 0 .125em; vertical-align: .25em}
+.MJXp-denom {display: inline-table!important; width: 100%}
+.MJXp-denom > * {display: table-row!important}
+.MJXp-surd {vertical-align: top}
+.MJXp-surd > * {display: block!important}
+.MJXp-script-box > *  {display: table!important; height: 50%}
+.MJXp-script-box > * > * {display: table-cell!important; vertical-align: top}
+.MJXp-script-box > *:last-child > * {vertical-align: bottom}
+.MJXp-script-box > * > * > * {display: block!important}
+.MJXp-mphantom {visibility: hidden}
+.MJXp-munderover {display: inline-table!important}
+.MJXp-over {display: inline-block!important; text-align: center}
+.MJXp-over > * {display: block!important}
+.MJXp-munderover > * {display: table-row!important}
+.MJXp-mtable {vertical-align: .25em; margin: 0 .125em}
+.MJXp-mtable > * {display: inline-table!important; vertical-align: middle}
+.MJXp-mtr {display: table-row!important}
+.MJXp-mtd {display: table-cell!important; text-align: center; padding: .5em 0 0 .5em}
+.MJXp-mtr > .MJXp-mtd:first-child {padding-left: 0}
+.MJXp-mtr:first-child > .MJXp-mtd {padding-top: 0}
+.MJXp-mlabeledtr {display: table-row!important}
+.MJXp-mlabeledtr > .MJXp-mtd:first-child {padding-left: 0}
+.MJXp-mlabeledtr:first-child > .MJXp-mtd {padding-top: 0}
+.MJXp-merror {background-color: #FFFF88; color: #CC0000; border: 1px solid #CC0000; padding: 1px 3px; font-style: normal; font-size: 90%}
+.MJXp-scale0 {-webkit-transform: scaleX(.0); -moz-transform: scaleX(.0); -ms-transform: scaleX(.0); -o-transform: scaleX(.0); transform: scaleX(.0)}
+.MJXp-scale1 {-webkit-transform: scaleX(.1); -moz-transform: scaleX(.1); -ms-transform: scaleX(.1); -o-transform: scaleX(.1); transform: scaleX(.1)}
+.MJXp-scale2 {-webkit-transform: scaleX(.2); -moz-transform: scaleX(.2); -ms-transform: scaleX(.2); -o-transform: scaleX(.2); transform: scaleX(.2)}
+.MJXp-scale3 {-webkit-transform: scaleX(.3); -moz-transform: scaleX(.3); -ms-transform: scaleX(.3); -o-transform: scaleX(.3); transform: scaleX(.3)}
+.MJXp-scale4 {-webkit-transform: scaleX(.4); -moz-transform: scaleX(.4); -ms-transform: scaleX(.4); -o-transform: scaleX(.4); transform: scaleX(.4)}
+.MJXp-scale5 {-webkit-transform: scaleX(.5); -moz-transform: scaleX(.5); -ms-transform: scaleX(.5); -o-transform: scaleX(.5); transform: scaleX(.5)}
+.MJXp-scale6 {-webkit-transform: scaleX(.6); -moz-transform: scaleX(.6); -ms-transform: scaleX(.6); -o-transform: scaleX(.6); transform: scaleX(.6)}
+.MJXp-scale7 {-webkit-transform: scaleX(.7); -moz-transform: scaleX(.7); -ms-transform: scaleX(.7); -o-transform: scaleX(.7); transform: scaleX(.7)}
+.MJXp-scale8 {-webkit-transform: scaleX(.8); -moz-transform: scaleX(.8); -ms-transform: scaleX(.8); -o-transform: scaleX(.8); transform: scaleX(.8)}
+.MJXp-scale9 {-webkit-transform: scaleX(.9); -moz-transform: scaleX(.9); -ms-transform: scaleX(.9); -o-transform: scaleX(.9); transform: scaleX(.9)}
+.MathJax_PHTML .noError {vertical-align: ; font-size: 90%; text-align: left; color: black; padding: 1px 3px; border: 1px solid}
+</style></head>
+  
+  
+  <body data-bs-spy="scroll" data-bs-target=".bd-toc-nav" data-offset="180" data-bs-root-margin="0px 0px -60%" data-default-mode="light"><div style="visibility: hidden; overflow: hidden; position: absolute; top: 0px; height: 1px; width: auto; padding: 0px; border: 0px; margin: 0px; text-align: left; text-indent: 0px; text-transform: none; line-height: normal; letter-spacing: normal; word-spacing: normal;"><div id="MathJax_SVG_Hidden"></div><svg><defs id="MathJax_SVG_glyphs"><path stroke-width="1" id="MJMAIN-32" d="M109 429Q82 429 66 447T50 491Q50 562 103 614T235 666Q326 666 387 610T449 465Q449 422 429 383T381 315T301 241Q265 210 201 149L142 93L218 92Q375 92 385 97Q392 99 409 186V189H449V186Q448 183 436 95T421 3V0H50V19V31Q50 38 56 46T86 81Q115 113 136 137Q145 147 170 174T204 211T233 244T261 278T284 308T305 340T320 369T333 401T340 431T343 464Q343 527 309 573T212 619Q179 619 154 602T119 569T109 550Q109 549 114 549Q132 549 151 535T170 489Q170 464 154 447T109 429Z"></path><path stroke-width="1" id="MJMAIN-28" d="M94 250Q94 319 104 381T127 488T164 576T202 643T244 695T277 729T302 750H315H319Q333 750 333 741Q333 738 316 720T275 667T226 581T184 443T167 250T184 58T225 -81T274 -167T316 -220T333 -241Q333 -250 318 -250H315H302L274 -226Q180 -141 137 -14T94 250Z"></path><path stroke-width="1" id="MJMATHI-6E" d="M21 287Q22 293 24 303T36 341T56 388T89 425T135 442Q171 442 195 424T225 390T231 369Q231 367 232 367L243 378Q304 442 382 442Q436 442 469 415T503 336T465 179T427 52Q427 26 444 26Q450 26 453 27Q482 32 505 65T540 145Q542 153 560 153Q580 153 580 145Q580 144 576 130Q568 101 554 73T508 17T439 -10Q392 -10 371 17T350 73Q350 92 386 193T423 345Q423 404 379 404H374Q288 404 229 303L222 291L189 157Q156 26 151 16Q138 -11 108 -11Q95 -11 87 -5T76 7T74 17Q74 30 112 180T152 343Q153 348 153 366Q153 405 129 405Q91 405 66 305Q60 285 60 284Q58 278 41 278H27Q21 284 21 287Z"></path><path stroke-width="1" id="MJMAIN-69" d="M69 609Q69 637 87 653T131 669Q154 667 171 652T188 609Q188 579 171 564T129 549Q104 549 87 564T69 609ZM247 0Q232 3 143 3Q132 3 106 3T56 1L34 0H26V46H42Q70 46 91 49Q100 53 102 60T104 102V205V293Q104 345 102 359T88 378Q74 385 41 385H30V408Q30 431 32 431L42 432Q52 433 70 434T106 436Q123 437 142 438T171 441T182 442H185V62Q190 52 197 50T232 46H255V0H247Z"></path><path stroke-width="1" id="MJMAIN-6E" d="M41 46H55Q94 46 102 60V68Q102 77 102 91T102 122T103 161T103 203Q103 234 103 269T102 328V351Q99 370 88 376T43 385H25V408Q25 431 27 431L37 432Q47 433 65 434T102 436Q119 437 138 438T167 441T178 442H181V402Q181 364 182 364T187 369T199 384T218 402T247 421T285 437Q305 442 336 442Q450 438 463 329Q464 322 464 190V104Q464 66 466 59T477 49Q498 46 526 46H542V0H534L510 1Q487 2 460 2T422 3Q319 3 310 0H302V46H318Q379 46 379 62Q380 64 380 200Q379 335 378 343Q372 371 358 385T334 402T308 404Q263 404 229 370Q202 343 195 315T187 232V168V108Q187 78 188 68T191 55T200 49Q221 46 249 46H265V0H257L234 1Q210 2 183 2T145 3Q42 3 33 0H25V46H41Z"></path><path stroke-width="1" id="MJMAIN-70" d="M36 -148H50Q89 -148 97 -134V-126Q97 -119 97 -107T97 -77T98 -38T98 6T98 55T98 106Q98 140 98 177T98 243T98 296T97 335T97 351Q94 370 83 376T38 385H20V408Q20 431 22 431L32 432Q42 433 61 434T98 436Q115 437 135 438T165 441T176 442H179V416L180 390L188 397Q247 441 326 441Q407 441 464 377T522 216Q522 115 457 52T310 -11Q242 -11 190 33L182 40V-45V-101Q182 -128 184 -134T195 -145Q216 -148 244 -148H260V-194H252L228 -193Q205 -192 178 -192T140 -191Q37 -191 28 -194H20V-148H36ZM424 218Q424 292 390 347T305 402Q234 402 182 337V98Q222 26 294 26Q345 26 384 80T424 218Z"></path><path stroke-width="1" id="MJMAIN-75" d="M383 58Q327 -10 256 -10H249Q124 -10 105 89Q104 96 103 226Q102 335 102 348T96 369Q86 385 36 385H25V408Q25 431 27 431L38 432Q48 433 67 434T105 436Q122 437 142 438T172 441T184 442H187V261Q188 77 190 64Q193 49 204 40Q224 26 264 26Q290 26 311 35T343 58T363 90T375 120T379 144Q379 145 379 161T380 201T380 248V315Q380 361 370 372T320 385H302V431Q304 431 378 436T457 442H464V264Q464 84 465 81Q468 61 479 55T524 46H542V0Q540 0 467 -5T390 -11H383V58Z"></path><path stroke-width="1" id="MJMAIN-74" d="M27 422Q80 426 109 478T141 600V615H181V431H316V385H181V241Q182 116 182 100T189 68Q203 29 238 29Q282 29 292 100Q293 108 293 146V181H333V146V134Q333 57 291 17Q264 -10 221 -10Q187 -10 162 2T124 33T105 68T98 100Q97 107 97 248V385H18V422H27Z"></path><path stroke-width="1" id="MJMAIN-73" d="M295 316Q295 356 268 385T190 414Q154 414 128 401Q98 382 98 349Q97 344 98 336T114 312T157 287Q175 282 201 278T245 269T277 256Q294 248 310 236T342 195T359 133Q359 71 321 31T198 -10H190Q138 -10 94 26L86 19L77 10Q71 4 65 -1L54 -11H46H42Q39 -11 33 -5V74V132Q33 153 35 157T45 162H54Q66 162 70 158T75 146T82 119T101 77Q136 26 198 26Q295 26 295 104Q295 133 277 151Q257 175 194 187T111 210Q75 227 54 256T33 318Q33 357 50 384T93 424T143 442T187 447H198Q238 447 268 432L283 424L292 431Q302 440 314 448H322H326Q329 448 335 442V310L329 304H301Q295 310 295 316Z"></path><path stroke-width="1" id="MJMAIN-2B" d="M56 237T56 250T70 270H369V420L370 570Q380 583 389 583Q402 583 409 568V270H707Q722 262 722 250T707 230H409V-68Q401 -82 391 -82H389H387Q375 -82 369 -68V230H70Q56 237 56 250Z"></path><path stroke-width="1" id="MJMAIN-6F" d="M28 214Q28 309 93 378T250 448Q340 448 405 380T471 215Q471 120 407 55T250 -10Q153 -10 91 57T28 214ZM250 30Q372 30 372 193V225V250Q372 272 371 288T364 326T348 362T317 390T268 410Q263 411 252 411Q222 411 195 399Q152 377 139 338T126 246V226Q126 130 145 91Q177 30 250 30Z"></path><path stroke-width="1" id="MJMAIN-29" d="M60 749L64 750Q69 750 74 750H86L114 726Q208 641 251 514T294 250Q294 182 284 119T261 12T224 -76T186 -143T145 -194T113 -227T90 -246Q87 -249 86 -250H74Q66 -250 63 -250T58 -247T55 -238Q56 -237 66 -225Q221 -64 221 250T66 725Q56 737 55 738Q55 746 60 749Z"></path></defs></svg></div><div id="MathJax_Message" style="display: none;"></div>
+
+  
+  
+  <div id="pst-skip-link" class="skip-link d-print-none"><a href="https://numpy.org/doc/stable/user/basics.ufuncs.html#main-content" _msttexthash="357760" _msthash="1">Skip to main content</a></div>
+  
+  <div id="pst-scroll-pixel-helper"></div>
+  
+  <button type="button" class="btn rounded-pill" id="pst-back-to-top" _msthidden="1">
+    <svg class="svg-inline--fa fa-arrow-up" aria-hidden="true" focusable="false" data-prefix="fas" data-icon="arrow-up" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 384 512" data-fa-i2svg=""><path fill="currentColor" d="M214.6 41.4c-12.5-12.5-32.8-12.5-45.3 0l-160 160c-12.5 12.5-12.5 32.8 0 45.3s32.8 12.5 45.3 0L160 141.2V448c0 17.7 14.3 32 32 32s32-14.3 32-32V141.2L329.4 246.6c12.5 12.5 32.8 12.5 45.3 0s12.5-32.8 0-45.3l-160-160z"></path></svg><!-- <i class="fa-solid fa-arrow-up"></i> Font Awesome fontawesome.com --><font _mstmutation="1" _msttexthash="137137" _msthidden="1" _msthash="2">Back to top</font></button>
+
+  
+  <dialog id="pst-search-dialog" _msthidden="1">
+    
+<form class="bd-search d-flex align-items-center" action="https://numpy.org/doc/stable/search.html" method="get" _msthidden="1">
+  <svg class="svg-inline--fa fa-magnifying-glass" aria-hidden="true" focusable="false" data-prefix="fas" data-icon="magnifying-glass" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" data-fa-i2svg=""><path fill="currentColor" d="M416 208c0 45.9-14.9 88.3-40 122.7L502.6 457.4c12.5 12.5 12.5 32.8 0 45.3s-32.8 12.5-45.3 0L330.7 376c-34.4 25.2-76.8 40-122.7 40C93.1 416 0 322.9 0 208S93.1 0 208 0S416 93.1 416 208zM208 352a144 144 0 1 0 0-288 144 144 0 1 0 0 288z"></path></svg><!-- <i class="fa-solid fa-magnifying-glass"></i> Font Awesome fontawesome.com -->
+  <input type="search" class="form-control" name="q" placeholder="Search the docs ..." aria-label="Search the docs ..." autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false" _msthidden="A" _mstplaceholder="267410" _msthash="3" _mstaria-label="267410">
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form>
+  </dialog>
+
+  <div class="pst-async-banner-revealer" style="height: auto;" _msthidden="1">
+  <aside id="bd-header-version-warning" class="d-none d-print-none" aria-label="Version warning" _msthidden="A" _mstaria-label="264654" _msthash="4"></aside>
+</div>
+
+  
+    <header class="bd-header navbar navbar-expand-lg bd-navbar d-print-none">
+<div class="bd-header__inner bd-page-width">
+  <button class="pst-navbar-icon sidebar-toggle primary-toggle" aria-label="Site navigation" _msthidden="A" _mstaria-label="261573" _msthash="5">
+    <svg class="svg-inline--fa fa-bars" aria-hidden="true" focusable="false" data-prefix="fas" data-icon="bars" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512" data-fa-i2svg=""><path fill="currentColor" d="M0 96C0 78.3 14.3 64 32 64H416c17.7 0 32 14.3 32 32s-14.3 32-32 32H32C14.3 128 0 113.7 0 96zM0 256c0-17.7 14.3-32 32-32H416c17.7 0 32 14.3 32 32s-14.3 32-32 32H32c-17.7 0-32-14.3-32-32zM448 416c0 17.7-14.3 32-32 32H32c-17.7 0-32-14.3-32-32s14.3-32 32-32H416c17.7 0 32 14.3 32 32z"></path></svg><!-- <span class="fa-solid fa-bars"></span> Font Awesome fontawesome.com -->
+  </button>
+  
+  
+  <div class="col-lg-3 navbar-header-items__start">
+    
+      <div class="navbar-item">
+
+  
+    
+  
+
+<a class="navbar-brand logo" href="https://numpy.org/doc/stable/index.html">
+  
+  
+  
+  
+  
+    
+    
+    
+    <img src="./Funções universais básicas (ufunc) — Manual do NumPy v2.4_files/numpylogo.svg" class="logo__image only-light" alt="Manual do NumPy v2.4 - Início" _mstalt="390481" _msthash="6">
+    <img src="./Funções universais básicas (ufunc) — Manual do NumPy v2.4_files/numpylogo_dark.svg" class="logo__image only-dark pst-js-only" alt="NumPy v2.4 Manual - Home" _msthidden="A" _mstalt="390481" _msthash="7">
+  
+  
+</a></div>
+    
+  </div>
+  
+  <div class="col-lg-9 navbar-header-items">
+    
+    <div class="me-auto navbar-header-items__center">
+      
+        <div class="navbar-item">
+<nav>
+  <ul class="bd-navbar-elements navbar-nav">
+    
+<li class="nav-item current active">
+  <a class="nav-link nav-internal" href="https://numpy.org/doc/stable/user/index.html" _msttexthash="257231" _msthash="8"> Guia do Usuário </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="https://numpy.org/doc/stable/reference/index.html" _msttexthash="275613" _msthash="9"> Referência de API </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="https://numpy.org/doc/stable/building/index.html" _msttexthash="661245" _msthash="10"> Construindo a partir da fonte </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="https://numpy.org/doc/stable/dev/index.html" _msttexthash="296036" _msthash="11"> Desenvolvimento </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="https://numpy.org/doc/stable/release.html" _msttexthash="378716" _msthash="12"> Notas de lançamento </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-external" href="https://numpy.org/numpy-tutorials/" _msttexthash="91754" _msthash="13"> Aprenda </a>
+</li>
+
+            <li class="nav-item dropdown">
+                <button class="btn dropdown-toggle nav-item" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-controls="pst-nav-more-links" _msttexthash="44330" _msthash="14"> Mais </button>
+                <ul id="pst-nav-more-links" class="dropdown-menu" _msthidden="1">
+                    
+<li class=" " _msthidden="1">
+  <a class="nav-link dropdown-item nav-external" href="https://numpy.org/neps" _msttexthash="38584" _msthidden="1" _msthash="15">
+    NEPs
+  </a>
+</li>
+
+                </ul>
+            </li>
+            
+  </ul>
+</nav></div>
+      
+    </div>
+    
+    
+    <div class="navbar-header-items__end">
+      
+      
+        <div class="navbar-item">
+
+<button class="btn btn-sm pst-navbar-icon search-button search-button__button pst-js-only" aria-label="Busca" data-bs-placement="bottom" data-bs-toggle="tooltip" data-bs-original-title="Search" _mstaria-label="74607" _msthash="16">
+    <svg class="svg-inline--fa fa-magnifying-glass fa-lg" aria-hidden="true" focusable="false" data-prefix="fas" data-icon="magnifying-glass" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" data-fa-i2svg=""><path fill="currentColor" d="M416 208c0 45.9-14.9 88.3-40 122.7L502.6 457.4c12.5 12.5 12.5 32.8 0 45.3s-32.8 12.5-45.3 0L330.7 376c-34.4 25.2-76.8 40-122.7 40C93.1 416 0 322.9 0 208S93.1 0 208 0S416 93.1 416 208zM208 352a144 144 0 1 0 0-288 144 144 0 1 0 0 288z"></path></svg><!-- <i class="fa-solid fa-magnifying-glass fa-lg"></i> Font Awesome fontawesome.com -->
+</button></div>
+      
+        <div class="navbar-item">
+
+<button class="btn btn-sm nav-link pst-navbar-icon theme-switch-button pst-js-only" aria-label="Modo de cor" data-bs-title="Color mode" data-bs-placement="bottom" data-bs-toggle="tooltip" _mstaria-label="134667" _msthash="17">
+  <svg class="svg-inline--fa fa-sun theme-switch fa-lg" data-mode="light" aria-labelledby="svg-inline--fa-title-sdV0a2reJ15g" data-prefix="fas" data-icon="sun" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" data-fa-i2svg=""><title id="svg-inline--fa-title-sdV0a2reJ15g" _mstTextHash="33358" _mstHash="18">Luz</title><path fill="currentColor" d="M361.5 1.2c5 2.1 8.6 6.6 9.6 11.9L391 121l107.9 19.8c5.3 1 9.8 4.6 11.9 9.6s1.5 10.7-1.6 15.2L446.9 256l62.3 90.3c3.1 4.5 3.7 10.2 1.6 15.2s-6.6 8.6-11.9 9.6L391 391 371.1 498.9c-1 5.3-4.6 9.8-9.6 11.9s-10.7 1.5-15.2-1.6L256 446.9l-90.3 62.3c-4.5 3.1-10.2 3.7-15.2 1.6s-8.6-6.6-9.6-11.9L121 391 13.1 371.1c-5.3-1-9.8-4.6-11.9-9.6s-1.5-10.7 1.6-15.2L65.1 256 2.8 165.7c-3.1-4.5-3.7-10.2-1.6-15.2s6.6-8.6 11.9-9.6L121 121 140.9 13.1c1-5.3 4.6-9.8 9.6-11.9s10.7-1.5 15.2 1.6L256 65.1 346.3 2.8c4.5-3.1 10.2-3.7 15.2-1.6zM160 256a96 96 0 1 1 192 0 96 96 0 1 1 -192 0zm224 0a128 128 0 1 0 -256 0 128 128 0 1 0 256 0z"></path></svg><!-- <i class="theme-switch fa-solid fa-sun                fa-lg" data-mode="light" title="Light"></i> Font Awesome fontawesome.com -->
+  <svg class="svg-inline--fa fa-moon theme-switch fa-lg" data-mode="dark" aria-labelledby="svg-inline--fa-title-YMYJQM3X1WOY" data-prefix="fas" data-icon="moon" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 384 512" data-fa-i2svg=""><title id="svg-inline--fa-title-YMYJQM3X1WOY" _mstTextHash="78650" _mstHash="19">Escuro</title><path fill="currentColor" d="M223.5 32C100 32 0 132.3 0 256S100 480 223.5 480c60.6 0 115.5-24.2 155.8-63.4c5-4.9 6.3-12.5 3.1-18.7s-10.1-9.7-17-8.5c-9.8 1.7-19.8 2.6-30.1 2.6c-96.9 0-175.5-78.8-175.5-176c0-65.8 36-123.1 89.3-153.3c6.1-3.5 9.2-10.5 7.7-17.3s-7.3-11.9-14.3-12.5c-6.3-.5-12.6-.8-19-.8z"></path></svg><!-- <i class="theme-switch fa-solid fa-moon               fa-lg" data-mode="dark" title="Dark"></i> Font Awesome fontawesome.com -->
+  <svg class="svg-inline--fa fa-circle-half-stroke theme-switch fa-lg" data-mode="auto" aria-labelledby="svg-inline--fa-title-40TtvWbzbeqw" data-prefix="fas" data-icon="circle-half-stroke" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" data-fa-i2svg=""><title id="svg-inline--fa-title-40TtvWbzbeqw" _mstTextHash="581243" _mstHash="20">Configurações do Sistema</title><path fill="currentColor" d="M448 256c0-106-86-192-192-192V448c106 0 192-86 192-192zM0 256a256 256 0 1 1 512 0A256 256 0 1 1 0 256z"></path></svg><!-- <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg" data-mode="auto" title="System Settings"></i> Font Awesome fontawesome.com -->
+</button></div>
+      
+        <div class="navbar-item">
+<div class="version-switcher__container dropdown pst-js-only">
+  <button id="pst-version-switcher-button-2" type="button" class="version-switcher__button btn btn-sm dropdown-toggle" data-bs-toggle="dropdown" aria-haspopup="listbox" aria-controls="pst-version-switcher-list-2" aria-label="Lista de switchers de versões" data-active-version-name="2.4 (stable)" data-active-version="2.4" _mstaria-label="431249" _msthash="21" _msttexthash="191035">2.4 (estável)</button>
+  <div id="pst-version-switcher-list-2" class="version-switcher__menu dropdown-menu list-group-flush py-0" role="listbox" aria-labelledby="pst-version-switcher-button-2" _msthidden="20">
+    <!-- dropdown will be populated by javascript on page load -->
+  <a class="dropdown-item list-group-item list-group-item-action py-1" href="https://numpy.org/devdocs/user/basics.ufuncs.html" role="option" data-version-name="dev" data-version="devdocs" _msthidden="1"><span _msttexthash="33410" _msthidden="1" _msthash="22">dev</span></a><a class="dropdown-item list-group-item list-group-item-action py-1 active" href="https://numpy.org/doc/stable/user/basics.ufuncs.html" role="option" data-version-name="2.4 (stable)" data-version="2.4" _msthidden="1"><span _msttexthash="140517" _msthidden="1" _msthash="23">2.4 (stable)</span></a><a class="dropdown-item list-group-item list-group-item-action py-1" href="https://numpy.org/doc/2.3/user/basics.ufuncs.html" role="option" data-version-name="2.3" data-version="2.3" _msthidden="1"><span _msttexthash="15301" _msthidden="1" _msthash="24">2.3</span></a><a class="dropdown-item list-group-item list-group-item-action py-1" href="https://numpy.org/doc/2.2/user/basics.ufuncs.html" role="option" data-version-name="2.2" data-version="2.2" _msthidden="1"><span _msttexthash="15184" _msthidden="1" _msthash="25">2.2</span></a><a class="dropdown-item list-group-item list-group-item-action py-1" href="https://numpy.org/doc/2.1/user/basics.ufuncs.html" role="option" data-version-name="2.1" data-version="2.1" _msthidden="1"><span _msttexthash="15067" _msthidden="1" _msthash="26">2.1</span></a><a class="dropdown-item list-group-item list-group-item-action py-1" href="https://numpy.org/doc/2.0/user/basics.ufuncs.html" role="option" data-version-name="2.0" data-version="2.0" _msthidden="1"><span _msttexthash="14950" _msthidden="1" _msthash="27">2.0</span></a><a class="dropdown-item list-group-item list-group-item-action py-1" href="https://numpy.org/doc/1.26/user/basics.ufuncs.html" role="option" data-version-name="1.26" data-version="doc/1.26" _msthidden="1"><span _msttexthash="22113" _msthidden="1" _msthash="28">1.26</span></a><a class="dropdown-item list-group-item list-group-item-action py-1" href="https://numpy.org/doc/1.25/user/basics.ufuncs.html" role="option" data-version-name="1.25" data-version="doc/1.25" _msthidden="1"><span _msttexthash="21983" _msthidden="1" _msthash="29">1.25</span></a><a class="dropdown-item list-group-item list-group-item-action py-1" href="https://numpy.org/doc/1.24/user/basics.ufuncs.html" role="option" data-version-name="1.24" data-version="doc/1.24" _msthidden="1"><span _msttexthash="21853" _msthidden="1" _msthash="30">1.24</span></a><a class="dropdown-item list-group-item list-group-item-action py-1" href="https://numpy.org/doc/1.23/user/basics.ufuncs.html" role="option" data-version-name="1.23" data-version="doc/1.23" _msthidden="1"><span _msttexthash="21723" _msthidden="1" _msthash="31">1.23</span></a><a class="dropdown-item list-group-item list-group-item-action py-1" href="https://numpy.org/doc/1.22/user/basics.ufuncs.html" role="option" data-version-name="1.22" data-version="1.22" _msthidden="1"><span _msttexthash="21593" _msthidden="1" _msthash="32">1.22</span></a><a class="dropdown-item list-group-item list-group-item-action py-1" href="https://numpy.org/doc/1.21/user/basics.ufuncs.html" role="option" data-version-name="1.21" data-version="1.21" _msthidden="1"><span _msttexthash="21463" _msthidden="1" _msthash="33">1.21</span></a><a class="dropdown-item list-group-item list-group-item-action py-1" href="https://numpy.org/doc/1.20/user/basics.ufuncs.html" role="option" data-version-name="1.20" data-version="1.20" _msthidden="1"><span _msttexthash="21333" _msthidden="1" _msthash="34">1.20</span></a><a class="dropdown-item list-group-item list-group-item-action py-1" href="https://numpy.org/doc/1.19/user/basics.ufuncs.html" role="option" data-version-name="1.19" data-version="1.19" _msthidden="1"><span _msttexthash="22386" _msthidden="1" _msthash="35">1.19</span></a><a class="dropdown-item list-group-item list-group-item-action py-1" href="https://numpy.org/doc/1.18/user/basics.ufuncs.html" role="option" data-version-name="1.18" data-version="1.18" _msthidden="1"><span _msttexthash="22256" _msthidden="1" _msthash="36">1.18</span></a><a class="dropdown-item list-group-item list-group-item-action py-1" href="https://numpy.org/doc/1.17/user/basics.ufuncs.html" role="option" data-version-name="1.17" data-version="1.17" _msthidden="1"><span _msttexthash="22126" _msthidden="1" _msthash="37">1.17</span></a><a class="dropdown-item list-group-item list-group-item-action py-1" href="https://numpy.org/doc/1.16/user/basics.ufuncs.html" role="option" data-version-name="1.16" data-version="1.16" _msthidden="1"><span _msttexthash="21996" _msthidden="1" _msthash="38">1.16</span></a><a class="dropdown-item list-group-item list-group-item-action py-1" href="https://numpy.org/doc/1.15/user/basics.ufuncs.html" role="option" data-version-name="1.15" data-version="1.15" _msthidden="1"><span _msttexthash="21866" _msthidden="1" _msthash="39">1.15</span></a><a class="dropdown-item list-group-item list-group-item-action py-1" href="https://numpy.org/doc/1.14/user/basics.ufuncs.html" role="option" data-version-name="1.14" data-version="1.14" _msthidden="1"><span _msttexthash="21736" _msthidden="1" _msthash="40">1.14</span></a><a class="dropdown-item list-group-item list-group-item-action py-1" href="https://numpy.org/doc/1.13/user/basics.ufuncs.html" role="option" data-version-name="1.13" data-version="1.13" _msthidden="1"><span _msttexthash="21606" _msthidden="1" _msthash="41">1.13</span></a></div>
+</div></div>
+      
+        <div class="navbar-item"><ul class="navbar-icon-links" aria-label="Links de Ícones" _mstaria-label="131963" _msthash="42">
+        <li class="nav-item">
+          
+          
+          
+          
+          
+          
+          
+          
+          <a href="https://github.com/numpy/numpy" class="nav-link pst-navbar-icon" rel="noopener" target="_blank" data-bs-toggle="tooltip" data-bs-placement="bottom" data-bs-original-title="GitHub"><svg class="svg-inline--fa fa-square-github fa-lg" aria-hidden="true" focusable="false" data-prefix="fab" data-icon="square-github" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512" data-fa-i2svg=""><path fill="currentColor" d="M448 96c0-35.3-28.7-64-64-64H64C28.7 32 0 60.7 0 96V416c0 35.3 28.7 64 64 64H384c35.3 0 64-28.7 64-64V96zM265.8 407.7c0-1.8 0-6 .1-11.6c.1-11.4 .1-28.8 .1-43.7c0-15.6-5.2-25.5-11.3-30.7c37-4.1 76-9.2 76-73.1c0-18.2-6.5-27.3-17.1-39c1.7-4.3 7.4-22-1.7-45c-13.9-4.3-45.7 17.9-45.7 17.9c-13.2-3.7-27.5-5.6-41.6-5.6s-28.4 1.9-41.6 5.6c0 0-31.8-22.2-45.7-17.9c-9.1 22.9-3.5 40.6-1.7 45c-10.6 11.7-15.6 20.8-15.6 39c0 63.6 37.3 69 74.3 73.1c-4.8 4.3-9.1 11.7-10.6 22.3c-9.5 4.3-33.8 11.7-48.3-13.9c-9.1-15.8-25.5-17.1-25.5-17.1c-16.2-.2-1.1 10.2-1.1 10.2c10.8 5 18.4 24.2 18.4 24.2c9.7 29.7 56.1 19.7 56.1 19.7c0 9 .1 21.7 .1 30.6c0 4.8 .1 8.6 .1 10c0 4.3-3 9.5-11.5 8C106 393.6 59.8 330.8 59.8 257.4c0-91.8 70.2-161.5 162-161.5s166.2 69.7 166.2 161.5c.1 73.4-44.7 136.3-110.7 158.3c-8.4 1.5-11.5-3.7-11.5-8zm-90.5-54.8c-.2-1.5 1.1-2.8 3-3.2c1.9-.2 3.7 .6 3.9 1.9c.3 1.3-1 2.6-3 3c-1.9 .4-3.7-.4-3.9-1.7zm-9.1 3.2c-2.2 .2-3.7-.9-3.7-2.4c0-1.3 1.5-2.4 3.5-2.4c1.9-.2 3.7 .9 3.7 2.4c0 1.3-1.5 2.4-3.5 2.4zm-14.3-2.2c-1.9-.4-3.2-1.9-2.8-3.2s2.4-1.9 4.1-1.5c2 .6 3.3 2.1 2.8 3.4c-.4 1.3-2.4 1.9-4.1 1.3zm-12.5-7.3c-1.5-1.3-1.9-3.2-.9-4.1c.9-1.1 2.8-.9 4.3 .6c1.3 1.3 1.8 3.3 .9 4.1c-.9 1.1-2.8 .9-4.3-.6zm-8.5-10c-1.1-1.5-1.1-3.2 0-3.9c1.1-.9 2.8-.2 3.7 1.3c1.1 1.5 1.1 3.3 0 4.1c-.9 .6-2.6 0-3.7-1.5zm-6.3-8.8c-1.1-1.3-1.3-2.8-.4-3.5c.9-.9 2.4-.4 3.5 .6c1.1 1.3 1.3 2.8 .4 3.5c-.9 .9-2.4 .4-3.5-.6zm-6-6.4c-1.3-.6-1.9-1.7-1.5-2.6c.4-.6 1.5-.9 2.8-.4c1.3 .7 1.9 1.8 1.5 2.6c-.4 .9-1.7 1.1-2.8 .4z"></path></svg><!-- <i class="fa-brands fa-square-github fa-lg" aria-hidden="true"></i> Font Awesome fontawesome.com -->
+            <span class="sr-only" _msttexthash="72332" _msthash="43">GitHub</span></a>
+        </li>
+</ul></div>
+      
+    </div>
+    
+  </div>
+  
+  
+
+  
+    <button class="pst-navbar-icon sidebar-toggle secondary-toggle" aria-label="On this page" _msthidden="A" _mstaria-label="156351" _msthash="44">
+      <svg class="svg-inline--fa fa-outdent" aria-hidden="true" focusable="false" data-prefix="fas" data-icon="outdent" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512" data-fa-i2svg=""><path fill="currentColor" d="M0 64C0 46.3 14.3 32 32 32H416c17.7 0 32 14.3 32 32s-14.3 32-32 32H32C14.3 96 0 81.7 0 64zM192 192c0-17.7 14.3-32 32-32H416c17.7 0 32 14.3 32 32s-14.3 32-32 32H224c-17.7 0-32-14.3-32-32zm32 96H416c17.7 0 32 14.3 32 32s-14.3 32-32 32H224c-17.7 0-32-14.3-32-32s14.3-32 32-32zM0 448c0-17.7 14.3-32 32-32H416c17.7 0 32 14.3 32 32s-14.3 32-32 32H32c-17.7 0-32-14.3-32-32zM.2 268.6c-8.2-6.4-8.2-18.9 0-25.3l101.9-79.3c10.5-8.2 25.8-.7 25.8 12.6V335.3c0 13.3-15.3 20.8-25.8 12.6L.2 268.6z"></path></svg><!-- <span class="fa-solid fa-outdent"></span> Font Awesome fontawesome.com -->
+    </button>
+  
+</div>
+
+    </header>
+  
+
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      
+      
+      <dialog id="pst-primary-sidebar-modal"></dialog>
+      <div id="pst-primary-sidebar" class="bd-sidebar-primary bd-sidebar">
+        
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+      <div class="sidebar-header-items__center" _msthidden="7">
+        
+          
+          
+            <div class="navbar-item" _msthidden="7">
+<nav _msthidden="7">
+  <ul class="bd-navbar-elements navbar-nav" _msthidden="7">
+    
+<li class="nav-item current active" _msthidden="1">
+  <a class="nav-link nav-internal" href="https://numpy.org/doc/stable/user/index.html" _msttexthash="130377" _msthidden="1" _msthash="45">
+    User Guide
+  </a>
+</li>
+
+
+<li class="nav-item " _msthidden="1">
+  <a class="nav-link nav-internal" href="https://numpy.org/doc/stable/reference/index.html" _msttexthash="193856" _msthidden="1" _msthash="46">
+    API reference
+  </a>
+</li>
+
+
+<li class="nav-item " _msthidden="1">
+  <a class="nav-link nav-internal" href="https://numpy.org/doc/stable/building/index.html" _msttexthash="389077" _msthidden="1" _msthash="47">
+    Building from source
+  </a>
+</li>
+
+
+<li class="nav-item " _msthidden="1">
+  <a class="nav-link nav-internal" href="https://numpy.org/doc/stable/dev/index.html" _msttexthash="183365" _msthidden="1" _msthash="48">
+    Development
+  </a>
+</li>
+
+
+<li class="nav-item " _msthidden="1">
+  <a class="nav-link nav-internal" href="https://numpy.org/doc/stable/release.html" _msttexthash="207636" _msthidden="1" _msthash="49">
+    Release notes
+  </a>
+</li>
+
+
+<li class="nav-item " _msthidden="1">
+  <a class="nav-link nav-external" href="https://numpy.org/numpy-tutorials/" _msttexthash="59319" _msthidden="1" _msthash="50">
+    Learn
+  </a>
+</li>
+
+
+<li class="nav-item " _msthidden="1">
+  <a class="nav-link nav-external" href="https://numpy.org/neps" _msttexthash="38584" _msthidden="1" _msthash="51">
+    NEPs
+  </a>
+</li>
+
+  </ul>
+</nav></div>
+          
+        
+      </div>
+    
+    
+    
+      <div class="sidebar-header-items__end">
+        
+          <div class="navbar-item" _msthidden="1">
+
+<button class="btn btn-sm pst-navbar-icon search-button search-button__button pst-js-only" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip" data-bs-original-title="Search" _msthidden="A" _mstaria-label="74607" _msthash="52">
+    <svg class="svg-inline--fa fa-magnifying-glass fa-lg" aria-hidden="true" focusable="false" data-prefix="fas" data-icon="magnifying-glass" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" data-fa-i2svg=""><path fill="currentColor" d="M416 208c0 45.9-14.9 88.3-40 122.7L502.6 457.4c12.5 12.5 12.5 32.8 0 45.3s-32.8 12.5-45.3 0L330.7 376c-34.4 25.2-76.8 40-122.7 40C93.1 416 0 322.9 0 208S93.1 0 208 0S416 93.1 416 208zM208 352a144 144 0 1 0 0-288 144 144 0 1 0 0 288z"></path></svg><!-- <i class="fa-solid fa-magnifying-glass fa-lg"></i> Font Awesome fontawesome.com -->
+</button></div>
+        
+          <div class="navbar-item">
+
+<button class="btn btn-sm nav-link pst-navbar-icon theme-switch-button pst-js-only" aria-label="Color mode" data-bs-title="Color mode" data-bs-placement="bottom" data-bs-toggle="tooltip" _msthidden="A" _mstaria-label="134667" _msthash="53">
+  <svg class="svg-inline--fa fa-sun theme-switch fa-lg" data-mode="light" aria-labelledby="svg-inline--fa-title-XsWJKsqkdnU5" data-prefix="fas" data-icon="sun" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" data-fa-i2svg=""><title id="svg-inline--fa-title-XsWJKsqkdnU5" _mstTextHash="33358" _mstHash="54">Luz</title><path fill="currentColor" d="M361.5 1.2c5 2.1 8.6 6.6 9.6 11.9L391 121l107.9 19.8c5.3 1 9.8 4.6 11.9 9.6s1.5 10.7-1.6 15.2L446.9 256l62.3 90.3c3.1 4.5 3.7 10.2 1.6 15.2s-6.6 8.6-11.9 9.6L391 391 371.1 498.9c-1 5.3-4.6 9.8-9.6 11.9s-10.7 1.5-15.2-1.6L256 446.9l-90.3 62.3c-4.5 3.1-10.2 3.7-15.2 1.6s-8.6-6.6-9.6-11.9L121 391 13.1 371.1c-5.3-1-9.8-4.6-11.9-9.6s-1.5-10.7 1.6-15.2L65.1 256 2.8 165.7c-3.1-4.5-3.7-10.2-1.6-15.2s6.6-8.6 11.9-9.6L121 121 140.9 13.1c1-5.3 4.6-9.8 9.6-11.9s10.7-1.5 15.2 1.6L256 65.1 346.3 2.8c4.5-3.1 10.2-3.7 15.2-1.6zM160 256a96 96 0 1 1 192 0 96 96 0 1 1 -192 0zm224 0a128 128 0 1 0 -256 0 128 128 0 1 0 256 0z"></path></svg><!-- <i class="theme-switch fa-solid fa-sun                fa-lg" data-mode="light" title="Light"></i> Font Awesome fontawesome.com -->
+  <svg class="svg-inline--fa fa-moon theme-switch fa-lg" data-mode="dark" aria-labelledby="svg-inline--fa-title-3z2gzLnd2US1" data-prefix="fas" data-icon="moon" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 384 512" data-fa-i2svg=""><title id="svg-inline--fa-title-3z2gzLnd2US1" _mstTextHash="78650" _mstHash="55">Escuro</title><path fill="currentColor" d="M223.5 32C100 32 0 132.3 0 256S100 480 223.5 480c60.6 0 115.5-24.2 155.8-63.4c5-4.9 6.3-12.5 3.1-18.7s-10.1-9.7-17-8.5c-9.8 1.7-19.8 2.6-30.1 2.6c-96.9 0-175.5-78.8-175.5-176c0-65.8 36-123.1 89.3-153.3c6.1-3.5 9.2-10.5 7.7-17.3s-7.3-11.9-14.3-12.5c-6.3-.5-12.6-.8-19-.8z"></path></svg><!-- <i class="theme-switch fa-solid fa-moon               fa-lg" data-mode="dark" title="Dark"></i> Font Awesome fontawesome.com -->
+  <svg class="svg-inline--fa fa-circle-half-stroke theme-switch fa-lg" data-mode="auto" aria-labelledby="svg-inline--fa-title-QJrCJL0UxLPu" data-prefix="fas" data-icon="circle-half-stroke" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" data-fa-i2svg=""><title id="svg-inline--fa-title-QJrCJL0UxLPu" _mstTextHash="581243" _mstHash="56">Configurações do Sistema</title><path fill="currentColor" d="M448 256c0-106-86-192-192-192V448c106 0 192-86 192-192zM0 256a256 256 0 1 1 512 0A256 256 0 1 1 0 256z"></path></svg><!-- <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg" data-mode="auto" title="System Settings"></i> Font Awesome fontawesome.com -->
+</button></div>
+        
+          <div class="navbar-item" _msthidden="22">
+<div class="version-switcher__container dropdown pst-js-only" _msthidden="22">
+  <button id="pst-version-switcher-button-3" type="button" class="version-switcher__button btn btn-sm dropdown-toggle" data-bs-toggle="dropdown" aria-haspopup="listbox" aria-controls="pst-version-switcher-list-3" aria-label="Version switcher list" data-active-version-name="2.4 (stable)" data-active-version="2.4" _msthidden="1" _mstaria-label="431249" _msthash="57" _msttexthash="140517">2.4 (stable)</button>
+  <div id="pst-version-switcher-list-3" class="version-switcher__menu dropdown-menu list-group-flush py-0" role="listbox" aria-labelledby="pst-version-switcher-button-3" _msthidden="20">
+    <!-- dropdown will be populated by javascript on page load -->
+  <a class="dropdown-item list-group-item list-group-item-action py-1" href="https://numpy.org/devdocs/user/basics.ufuncs.html" role="option" data-version-name="dev" data-version="devdocs" _msthidden="1"><span _msttexthash="33410" _msthidden="1" _msthash="58">dev</span></a><a class="dropdown-item list-group-item list-group-item-action py-1 active" href="https://numpy.org/doc/stable/user/basics.ufuncs.html" role="option" data-version-name="2.4 (stable)" data-version="2.4" _msthidden="1"><span _msttexthash="140517" _msthidden="1" _msthash="59">2.4 (stable)</span></a><a class="dropdown-item list-group-item list-group-item-action py-1" href="https://numpy.org/doc/2.3/user/basics.ufuncs.html" role="option" data-version-name="2.3" data-version="2.3" _msthidden="1"><span _msttexthash="15301" _msthidden="1" _msthash="60">2.3</span></a><a class="dropdown-item list-group-item list-group-item-action py-1" href="https://numpy.org/doc/2.2/user/basics.ufuncs.html" role="option" data-version-name="2.2" data-version="2.2" _msthidden="1"><span _msttexthash="15184" _msthidden="1" _msthash="61">2.2</span></a><a class="dropdown-item list-group-item list-group-item-action py-1" href="https://numpy.org/doc/2.1/user/basics.ufuncs.html" role="option" data-version-name="2.1" data-version="2.1" _msthidden="1"><span _msttexthash="15067" _msthidden="1" _msthash="62">2.1</span></a><a class="dropdown-item list-group-item list-group-item-action py-1" href="https://numpy.org/doc/2.0/user/basics.ufuncs.html" role="option" data-version-name="2.0" data-version="2.0" _msthidden="1"><span _msttexthash="14950" _msthidden="1" _msthash="63">2.0</span></a><a class="dropdown-item list-group-item list-group-item-action py-1" href="https://numpy.org/doc/1.26/user/basics.ufuncs.html" role="option" data-version-name="1.26" data-version="doc/1.26" _msthidden="1"><span _msttexthash="22113" _msthidden="1" _msthash="64">1.26</span></a><a class="dropdown-item list-group-item list-group-item-action py-1" href="https://numpy.org/doc/1.25/user/basics.ufuncs.html" role="option" data-version-name="1.25" data-version="doc/1.25" _msthidden="1"><span _msttexthash="21983" _msthidden="1" _msthash="65">1.25</span></a><a class="dropdown-item list-group-item list-group-item-action py-1" href="https://numpy.org/doc/1.24/user/basics.ufuncs.html" role="option" data-version-name="1.24" data-version="doc/1.24" _msthidden="1"><span _msttexthash="21853" _msthidden="1" _msthash="66">1.24</span></a><a class="dropdown-item list-group-item list-group-item-action py-1" href="https://numpy.org/doc/1.23/user/basics.ufuncs.html" role="option" data-version-name="1.23" data-version="doc/1.23" _msthidden="1"><span _msttexthash="21723" _msthidden="1" _msthash="67">1.23</span></a><a class="dropdown-item list-group-item list-group-item-action py-1" href="https://numpy.org/doc/1.22/user/basics.ufuncs.html" role="option" data-version-name="1.22" data-version="1.22" _msthidden="1"><span _msttexthash="21593" _msthidden="1" _msthash="68">1.22</span></a><a class="dropdown-item list-group-item list-group-item-action py-1" href="https://numpy.org/doc/1.21/user/basics.ufuncs.html" role="option" data-version-name="1.21" data-version="1.21" _msthidden="1"><span _msttexthash="21463" _msthidden="1" _msthash="69">1.21</span></a><a class="dropdown-item list-group-item list-group-item-action py-1" href="https://numpy.org/doc/1.20/user/basics.ufuncs.html" role="option" data-version-name="1.20" data-version="1.20" _msthidden="1"><span _msttexthash="21333" _msthidden="1" _msthash="70">1.20</span></a><a class="dropdown-item list-group-item list-group-item-action py-1" href="https://numpy.org/doc/1.19/user/basics.ufuncs.html" role="option" data-version-name="1.19" data-version="1.19" _msthidden="1"><span _msttexthash="22386" _msthidden="1" _msthash="71">1.19</span></a><a class="dropdown-item list-group-item list-group-item-action py-1" href="https://numpy.org/doc/1.18/user/basics.ufuncs.html" role="option" data-version-name="1.18" data-version="1.18" _msthidden="1"><span _msttexthash="22256" _msthidden="1" _msthash="72">1.18</span></a><a class="dropdown-item list-group-item list-group-item-action py-1" href="https://numpy.org/doc/1.17/user/basics.ufuncs.html" role="option" data-version-name="1.17" data-version="1.17" _msthidden="1"><span _msttexthash="22126" _msthidden="1" _msthash="73">1.17</span></a><a class="dropdown-item list-group-item list-group-item-action py-1" href="https://numpy.org/doc/1.16/user/basics.ufuncs.html" role="option" data-version-name="1.16" data-version="1.16" _msthidden="1"><span _msttexthash="21996" _msthidden="1" _msthash="74">1.16</span></a><a class="dropdown-item list-group-item list-group-item-action py-1" href="https://numpy.org/doc/1.15/user/basics.ufuncs.html" role="option" data-version-name="1.15" data-version="1.15" _msthidden="1"><span _msttexthash="21866" _msthidden="1" _msthash="75">1.15</span></a><a class="dropdown-item list-group-item list-group-item-action py-1" href="https://numpy.org/doc/1.14/user/basics.ufuncs.html" role="option" data-version-name="1.14" data-version="1.14" _msthidden="1"><span _msttexthash="21736" _msthidden="1" _msthash="76">1.14</span></a><a class="dropdown-item list-group-item list-group-item-action py-1" href="https://numpy.org/doc/1.13/user/basics.ufuncs.html" role="option" data-version-name="1.13" data-version="1.13" _msthidden="1"><span _msttexthash="21606" _msthidden="1" _msthash="77">1.13</span></a></div>
+</div></div>
+        
+          <div class="navbar-item" _msthidden="2"><ul class="navbar-icon-links" aria-label="Icon Links" _msthidden="1" _mstaria-label="131963" _msthash="78">
+        <li class="nav-item" _msthidden="1">
+          
+          
+          
+          
+          
+          
+          
+          
+          <a href="https://github.com/numpy/numpy" class="nav-link pst-navbar-icon" rel="noopener" target="_blank" data-bs-toggle="tooltip" data-bs-placement="bottom" data-bs-original-title="GitHub" _msthidden="1"><svg class="svg-inline--fa fa-square-github fa-lg" aria-hidden="true" focusable="false" data-prefix="fab" data-icon="square-github" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512" data-fa-i2svg=""><path fill="currentColor" d="M448 96c0-35.3-28.7-64-64-64H64C28.7 32 0 60.7 0 96V416c0 35.3 28.7 64 64 64H384c35.3 0 64-28.7 64-64V96zM265.8 407.7c0-1.8 0-6 .1-11.6c.1-11.4 .1-28.8 .1-43.7c0-15.6-5.2-25.5-11.3-30.7c37-4.1 76-9.2 76-73.1c0-18.2-6.5-27.3-17.1-39c1.7-4.3 7.4-22-1.7-45c-13.9-4.3-45.7 17.9-45.7 17.9c-13.2-3.7-27.5-5.6-41.6-5.6s-28.4 1.9-41.6 5.6c0 0-31.8-22.2-45.7-17.9c-9.1 22.9-3.5 40.6-1.7 45c-10.6 11.7-15.6 20.8-15.6 39c0 63.6 37.3 69 74.3 73.1c-4.8 4.3-9.1 11.7-10.6 22.3c-9.5 4.3-33.8 11.7-48.3-13.9c-9.1-15.8-25.5-17.1-25.5-17.1c-16.2-.2-1.1 10.2-1.1 10.2c10.8 5 18.4 24.2 18.4 24.2c9.7 29.7 56.1 19.7 56.1 19.7c0 9 .1 21.7 .1 30.6c0 4.8 .1 8.6 .1 10c0 4.3-3 9.5-11.5 8C106 393.6 59.8 330.8 59.8 257.4c0-91.8 70.2-161.5 162-161.5s166.2 69.7 166.2 161.5c.1 73.4-44.7 136.3-110.7 158.3c-8.4 1.5-11.5-3.7-11.5-8zm-90.5-54.8c-.2-1.5 1.1-2.8 3-3.2c1.9-.2 3.7 .6 3.9 1.9c.3 1.3-1 2.6-3 3c-1.9 .4-3.7-.4-3.9-1.7zm-9.1 3.2c-2.2 .2-3.7-.9-3.7-2.4c0-1.3 1.5-2.4 3.5-2.4c1.9-.2 3.7 .9 3.7 2.4c0 1.3-1.5 2.4-3.5 2.4zm-14.3-2.2c-1.9-.4-3.2-1.9-2.8-3.2s2.4-1.9 4.1-1.5c2 .6 3.3 2.1 2.8 3.4c-.4 1.3-2.4 1.9-4.1 1.3zm-12.5-7.3c-1.5-1.3-1.9-3.2-.9-4.1c.9-1.1 2.8-.9 4.3 .6c1.3 1.3 1.8 3.3 .9 4.1c-.9 1.1-2.8 .9-4.3-.6zm-8.5-10c-1.1-1.5-1.1-3.2 0-3.9c1.1-.9 2.8-.2 3.7 1.3c1.1 1.5 1.1 3.3 0 4.1c-.9 .6-2.6 0-3.7-1.5zm-6.3-8.8c-1.1-1.3-1.3-2.8-.4-3.5c.9-.9 2.4-.4 3.5 .6c1.1 1.3 1.3 2.8 .4 3.5c-.9 .9-2.4 .4-3.5-.6zm-6-6.4c-1.3-.6-1.9-1.7-1.5-2.6c.4-.6 1.5-.9 2.8-.4c1.3 .7 1.9 1.8 1.5 2.6c-.4 .9-1.7 1.1-2.8 .4z"></path></svg><!-- <i class="fa-brands fa-square-github fa-lg" aria-hidden="true"></i> Font Awesome fontawesome.com -->
+            <span class="sr-only" _msttexthash="72332" _msthidden="1" _msthash="79">GitHub</span></a>
+        </li>
+</ul></div>
+        
+      </div>
+    
+  </div>
+  
+    <div class="sidebar-primary-items__start sidebar-primary__section">
+        <div class="sidebar-primary-item">
+<nav class="bd-docs-nav bd-links" aria-label="Navegação por Seção" _mstaria-label="348023" _msthash="80">
+  <p class="bd-links__title" role="heading" aria-level="1" _msttexthash="348023" _msthash="81">Section Navigation</p>
+  <div class="bd-toc-item navbar-nav"><p aria-level="2" class="caption" role="heading"><span class="caption-text" _msttexthash="150124" _msthash="82">Começando</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="https://numpy.org/doc/stable/user/whatisnumpy.html" _msttexthash="185549" _msthash="83">O que é NumPy?</a></li>
+<li class="toctree-l1"><a class="reference external" href="https://numpy.org/install/" _msttexthash="203125" _msthash="84">Instalação</a></li>
+<li class="toctree-l1"><a class="reference internal" href="https://numpy.org/doc/stable/user/quickstart.html" _msttexthash="448175" _msthash="85">Início rápido do NumPy</a></li>
+<li class="toctree-l1"><a class="reference internal" href="https://numpy.org/doc/stable/user/absolute_beginners.html" _msttexthash="1180868" _msthash="86">NumPy: o básico absoluto para iniciantes</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text" _msttexthash="296231" _msthash="87">Fundamentos e uso</span></p>
+<ul class="current nav bd-sidenav">
+<li class="toctree-l1 current active has-children"><a class="reference internal" href="https://numpy.org/doc/stable/user/basics.html" _msttexthash="379379" _msthash="88">Fundamentos do NumPy</a><details open="open"><summary><span class="toctree-toggle" role="presentation"><svg class="svg-inline--fa fa-chevron-down" aria-hidden="true" focusable="false" data-prefix="fas" data-icon="chevron-down" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" data-fa-i2svg=""><path fill="currentColor" d="M233.4 406.6c12.5 12.5 32.8 12.5 45.3 0l192-192c12.5-12.5 12.5-32.8 0-45.3s-32.8-12.5-45.3 0L256 338.7 86.6 169.4c-12.5-12.5-32.8-12.5-45.3 0s-12.5 32.8 0 45.3l192 192z"></path></svg><!-- <i class="fa-solid fa-chevron-down"></i> Font Awesome fontawesome.com --></span></summary><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="https://numpy.org/doc/stable/user/basics.creation.html" _msttexthash="326807" _msthash="89">Criação de arrays</a></li>
+<li class="toctree-l2"><a class="reference internal" href="https://numpy.org/doc/stable/user/basics.indexing.html"><font _mstmutation="1" _msttexthash="222300" _msthash="90">Indexação em </font><code class="xref py py-class docutils literal notranslate"><span class="pre">ndarrays</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="https://numpy.org/doc/stable/user/basics.io.html" _msttexthash="191061" _msthash="91">E/S com o NumPy</a></li>
+<li class="toctree-l2"><a class="reference internal" href="https://numpy.org/doc/stable/user/basics.types.html" _msttexthash="204568" _msthash="92">Tipos de dados</a></li>
+<li class="toctree-l2"><a class="reference internal" href="https://numpy.org/doc/stable/user/basics.broadcasting.html" _msttexthash="211445" _msthash="93">Transmissão</a></li>
+<li class="toctree-l2"><a class="reference internal" href="https://numpy.org/doc/stable/user/basics.copies.html" _msttexthash="553657" _msthash="94">Cópias e visualizações</a></li>
+<li class="toctree-l2"><a class="reference internal" href="https://numpy.org/doc/stable/user/basics.strings.html" _msttexthash="1127633" _msthash="95">Trabalhando com Arrays de Strings E Bytes</a></li>
+<li class="toctree-l2"><a class="reference internal" href="https://numpy.org/doc/stable/user/basics.rec.html" _msttexthash="398983" _msthash="96">Arrays estruturados</a></li>
+<li class="toctree-l2 current active"><a class="current reference internal" href="https://numpy.org/doc/stable/user/basics.ufuncs.html#"><font _mstmutation="1" _msttexthash="900562" _msthash="97">Funções universais () fundamentos</font><code class="xref py py-class docutils literal notranslate"><span class="pre">ufunc</span></code></a></li>
+</ul>
+</details></li>
+</ul>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="https://numpy.org/doc/stable/user/numpy-for-matlab-users.html" _msttexthash="617682" _msthash="98">NumPy para usuários do MATLAB</a></li>
+<li class="toctree-l1"><a class="reference external" href="https://numpy.org/numpy-tutorials/" _msttexthash="315692" _msthash="99">Tutoriais do NumPy</a></li>
+<li class="toctree-l1"><a class="reference internal" href="https://numpy.org/doc/stable/user/howtos_index.html" _msttexthash="315692" _msthash="100">Tutoriais do NumPy</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text" _msttexthash="899119" _msthash="101">Uso avançado e interoperabilidade</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="https://numpy.org/doc/stable/user/c-info.html" _msttexthash="289731" _msthash="102">Usando a NumPy C-API</a></li>
+<li class="toctree-l1"><a class="reference internal" href="https://numpy.org/doc/stable/f2py/index.html" _msttexthash="1331772" _msthash="103">Guia do usuário e manual de referência de F2PY</a></li>
+<li class="toctree-l1"><a class="reference internal" href="https://numpy.org/doc/stable/dev/underthehood.html" _msttexthash="1368289" _msthash="104">Documentação básica para desenvolvedores</a></li>
+<li class="toctree-l1"><a class="reference internal" href="https://numpy.org/doc/stable/user/basics.interoperability.html" _msttexthash="727285" _msthash="105">Interoperabilidade com o NumPy</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text" _msttexthash="78962" _msthash="106">Extras</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="https://numpy.org/doc/stable/glossary.html" _msttexthash="157196" _msthash="107">Glossário</a></li>
+<li class="toctree-l1"><a class="reference internal" href="https://numpy.org/doc/stable/release.html" _msttexthash="378716" _msthash="108">Notas de lançamento</a></li>
+<li class="toctree-l1"><a class="reference internal" href="https://numpy.org/doc/stable/numpy_2_0_migration_guide.html" _msttexthash="593398" _msthash="109">Guia de migração do NumPy 2.0</a></li>
+<li class="toctree-l1"><a class="reference internal" href="https://numpy.org/doc/stable/license.html" _msttexthash="216385" _msthash="110">Licença NumPy</a></li>
+</ul>
+</div>
+</nav></div>
+    </div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+      <div class="sidebar-primary-item">
+<div id="ethical-ad-placement" class="flat" data-ea-publisher="readthedocs" data-ea-type="readthedocs-sidebar" data-ea-manual="true">
+</div></div>
+  </div>
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main" role="main">
+        
+        
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article d-print-none">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item">
+
+<nav aria-label="Breadcrumb" class="d-print-none" _mstaria-label="154232" _msthash="111">
+  <ul class="bd-breadcrumbs">
+    
+    <li class="breadcrumb-item breadcrumb-home">
+      <a href="https://numpy.org/doc/stable/index.html" class="nav-link" aria-label="Casa" _mstaria-label="43979" _msthash="112">
+        <svg class="svg-inline--fa fa-house" aria-hidden="true" focusable="false" data-prefix="fas" data-icon="house" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 576 512" data-fa-i2svg=""><path fill="currentColor" d="M575.8 255.5c0 18-15 32.1-32 32.1h-32l.7 160.2c0 2.7-.2 5.4-.5 8.1V472c0 22.1-17.9 40-40 40H456c-1.1 0-2.2 0-3.3-.1c-1.4 .1-2.8 .1-4.2 .1H416 392c-22.1 0-40-17.9-40-40V448 384c0-17.7-14.3-32-32-32H256c-17.7 0-32 14.3-32 32v64 24c0 22.1-17.9 40-40 40H160 128.1c-1.5 0-3-.1-4.5-.2c-1.2 .1-2.4 .2-3.6 .2H104c-22.1 0-40-17.9-40-40V360c0-.9 0-1.9 .1-2.8V287.6H32c-18 0-32-14-32-32.1c0-9 3-17 10-24L266.4 8c7-7 15-8 22-8s15 2 21 7L564.8 231.5c8 7 12 15 11 24z"></path></svg><!-- <i class="fa-solid fa-home"></i> Font Awesome fontawesome.com -->
+      </a>
+    </li>
+    
+    <li class="breadcrumb-item"><a href="https://numpy.org/doc/stable/user/index.html" class="nav-link" _msttexthash="477139" _msthash="113">Guia do usuário do NumPy</a></li>
+    
+    
+    <li class="breadcrumb-item"><a href="https://numpy.org/doc/stable/user/basics.html" class="nav-link" _msttexthash="379379" _msthash="114">Fundamentos do NumPy</a></li>
+    
+    <li class="breadcrumb-item active" aria-current="page"><span class="ellipsis"><font _mstmutation="1" _msttexthash="900562" _msthash="115">Funções universais () fundamentos</font><code class="xref py py-class docutils literal notranslate"><span class="pre">ufunc</span></code></span></li>
+  </ul>
+</nav>
+</div>
+      
+    </div>
+  
+  
+</div>
+</div>
+              
+              
+              
+                
+<div id="searchbox"></div>
+                <article class="bd-article">
+                  
+  <section id="universal-functions-ufunc-basics">
+<span id="ufuncs-basics"></span><h1><font _mstmutation="1" _msttexthash="900562" _msthash="116">Funções universais (<a class="reference internal" href="https://numpy.org/doc/stable/reference/generated/numpy.ufunc.html#numpy.ufunc" title="numpy.ufunc" _mstmutation="1" _istranslated="1"><code class="xref py py-class docutils literal notranslate" _istranslated="1"></code></a>) fundamentos</font><a class="headerlink" href="https://numpy.org/doc/stable/user/basics.ufuncs.html#universal-functions-ufunc-basics" title="Link to this heading">#</a></h1>
+<div class="admonition seealso">
+<p class="admonition-title" _msttexthash="179426" _msthash="117">Veja também</p>
+<p><a class="reference internal" href="https://numpy.org/doc/stable/reference/ufuncs.html#ufuncs"><span class="std std-ref" _msttexthash="614315" _msthash="118">Funções universais (ufunc)</span></a></p>
+</div>
+<p _msttexthash="57004675" _msthash="119">Uma função universal (ou <a class="reference internal" href="https://numpy.org/doc/stable/glossary.html#term-ufunc" _istranslated="1"><span class="xref std std-term" _istranslated="1">ufunc</span></a>, para abreviar) é uma função que
+opera <a class="reference internal" href="https://numpy.org/doc/stable/reference/generated/numpy.ndarray.html#numpy.ndarray" title="numpy.ndarray" _istranslated="1"><code class="xref py py-class docutils literal notranslate" _istranslated="1"></code></a> elemento por elemento,
+Suporte <a class="reference internal" href="https://numpy.org/doc/stable/user/basics.ufuncs.html#ufuncs-broadcasting" _istranslated="1"><span class="std std-ref" _istranslated="1">à Transmissão em Array</span></a>, <a class="reference internal" href="https://numpy.org/doc/stable/user/basics.ufuncs.html#ufuncs-casting" _istranslated="1"><span class="std std-ref" _istranslated="1">Tipo
+elenco</span></a> e vários outros recursos padrão. Isso
+É, um UFUNC é um wrapper "<a class="reference internal" href="https://numpy.org/doc/stable/glossary.html#term-vectorization" _istranslated="1"><span class="xref std std-term" _istranslated="1">vetorizado</span></a>" para uma função
+que recebe um número fixo de entradas específicas e produz um número fixo de
+saídas específicas.</p>
+<p _msttexthash="70487222" _msthash="120">No NumPy, funções universais são instâncias da <a class="reference internal" href="https://numpy.org/doc/stable/reference/generated/numpy.ufunc.html#numpy.ufunc" title="numpy.ufunc" _istranslated="1"><code class="xref py py-class docutils literal notranslate" _istranslated="1"></code></a> classe. Muitas das funções embutidas são
+implementado em código C compilado. Os ufuncs básicos operam em escalares, mas
+Existe também um tipo generalizado para o qual os elementos básicos são sub-arrays
+(vetores, matrizes, etc.), e a difusão é feita sobre outras dimensões.
+O exemplo mais simples é o operador de soma:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre id="codecell0" tabindex="-1"><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="mi">0</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="mi">3</span><span class="p">,</span><span class="mi">4</span><span class="p">])</span> <span class="o">+</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="mi">1</span><span class="p">,</span><span class="mi">1</span><span class="p">,</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">])</span>
+<span class="go">array([1, 3, 2, 6])</span>
+</pre><button class="copybtn o-tooltip--left" data-tooltip="Copy" data-clipboard-target="#codecell0">
+      <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-copy" width="44" height="44" viewBox="0 0 24 24" stroke-width="1.5" stroke="#000000" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <title>Copy to clipboard</title>
+  <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
+  <rect x="8" y="8" width="12" height="12" rx="2"></rect>
+  <path d="M16 8v-2a2 2 0 0 0 -2 -2h-8a2 2 0 0 0 -2 2v8a2 2 0 0 0 2 2h2"></path>
+</svg>
+    </button></div>
+</div>
+<p _msttexthash="4407065" _msthash="121">Também é possível produzir instâncias personalizadas <a class="reference internal" href="https://numpy.org/doc/stable/reference/generated/numpy.ufunc.html#numpy.ufunc" title="numpy.ufunc" _istranslated="1"><code class="xref py py-class docutils literal notranslate" _istranslated="1"></code></a> usando a <a class="reference internal" href="https://numpy.org/doc/stable/reference/generated/numpy.frompyfunc.html#numpy.frompyfunc" title="numpy.frompyfunc" _istranslated="1"><code class="xref py py-func docutils literal notranslate" _istranslated="1"></code></a> função de fábrica.</p>
+<section id="ufunc-methods">
+<h2><font _mstmutation="1" _msttexthash="267917" _msthash="122">Métodos da Ufunc</font><a class="headerlink" href="https://numpy.org/doc/stable/user/basics.ufuncs.html#ufunc-methods" title="Link to this heading">#</a></h2>
+<p _msttexthash="38251876" _msthash="123">Todos os UFUNCS possuem quatro métodos. Eles podem ser encontrados em <a class="reference internal" href="https://numpy.org/doc/stable/reference/ufuncs.html#ufuncs-methods" _istranslated="1"><span class="std std-ref" _istranslated="1">Métodos</span></a>. No entanto, esses métodos só fazem sentido em escalares
+UFUNCs que pegam dois argumentos de entrada e retornam um argumento de saída.
+Tentar chamar esses métodos em outros UFUNCS causará um <a class="reference external" href="https://docs.python.org/3/library/exceptions.html#ValueError" title="(in Python v3.14)" _istranslated="1"><code class="xref py py-exc docutils literal notranslate" _istranslated="1"></code></a>.</p>
+<p><font _mstmutation="1" _msttexthash="101915216" _msthash="124">Os métodos do tipo redução recebem todos uma palavra-chave <em _mstmutation="1" _istranslated="1">eixo</em>, uma palavra-chave <em _mstmutation="1" _istranslated="1">dtype</em> e uma <em _mstmutation="1" _istranslated="1">palavra-chave out</em>, e os arrays devem ter dimensão &gt;= 1.
+A palavra-chave <em _mstmutation="1" _istranslated="1">eixo</em> especifica o eixo do array sobre o qual a redução
+ocorrerá (com valores negativos contando de trás para frente). Geralmente, é um
+inteiro, embora para <a class="reference internal" href="https://numpy.org/doc/stable/reference/generated/numpy.ufunc.reduce.html#numpy.ufunc.reduce" title="numpy.ufunc.reduce" _mstmutation="1" _istranslated="1"><code class="xref py py-meth docutils literal notranslate" _istranslated="1"></code></a>, também pode ser uma tupla de para reduzir em vários eixos ao mesmo tempo, ou , para reduzir sobre o total
+machados. Por exemplo:</font><code class="docutils literal notranslate"><span class="pre">int</span></code><code class="docutils literal notranslate"><span class="pre">None</span></code></p>
+<div class="highlight-default notranslate"><div class="highlight"><pre id="codecell1" tabindex="-1"><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">x</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="mi">9</span><span class="p">)</span><span class="o">.</span><span class="n">reshape</span><span class="p">(</span><span class="mi">3</span><span class="p">,</span><span class="mi">3</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">x</span>
+<span class="go">array([[0, 1, 2],</span>
+<span class="go">      [3, 4, 5],</span>
+<span class="go">      [6, 7, 8]])</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">np</span><span class="o">.</span><span class="n">add</span><span class="o">.</span><span class="n">reduce</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span>
+<span class="go">array([ 3, 12, 21])</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">np</span><span class="o">.</span><span class="n">add</span><span class="o">.</span><span class="n">reduce</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">))</span>
+<span class="go">36</span>
+</pre><button class="copybtn o-tooltip--left" data-tooltip="Copy" data-clipboard-target="#codecell1">
+      <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-copy" width="44" height="44" viewBox="0 0 24 24" stroke-width="1.5" stroke="#000000" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <title>Copy to clipboard</title>
+  <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
+  <rect x="8" y="8" width="12" height="12" rx="2"></rect>
+  <path d="M16 8v-2a2 2 0 0 0 -2 -2h-8a2 2 0 0 0 -2 2v8a2 2 0 0 0 2 2h2"></path>
+</svg>
+    </button></div>
+</div>
+<p _msttexthash="418638844" _msthash="125">A palavra-chave <em _istranslated="1">dtype</em> permite que você gerencie um problema muito comum que surge
+quando ingenuamente se usa <a class="reference internal" href="https://numpy.org/doc/stable/reference/generated/numpy.ufunc.reduce.html#numpy.ufunc.reduce" title="numpy.ufunc.reduce" _istranslated="1"><code class="xref py py-meth docutils literal notranslate" _istranslated="1"></code></a>. Às vezes você pode
+ter um array de um certo tipo de dado e desejar somar todos os seus
+mas o resultado não cabe no tipo de dado do
+Arranjo. Isso acontece comumente se você tiver um array de byte único
+inteiros. A palavra-chave <em _istranslated="1">dtype</em> permite alterar o tipo de dado sobre o qual
+a redução ocorre (e, portanto, o tipo de saída). Assim,
+Você pode garantir que a saída seja um tipo de dado com precisão suficientemente grande
+para lidar com sua produção. A responsabilidade de alterar o tipo de redução é
+Depende principalmente de você. Há uma exceção: se nenhum <em _istranslated="1">dtype</em> for dado para um
+redução nas operações de "adicionar" ou "multiplicar", então se o tipo de entrada for
+um tipo de dado inteiro (ou booleano) e menor que o tamanho do <a class="reference internal" href="https://numpy.org/doc/stable/reference/arrays.scalars.html#numpy.int_" title="numpy.int_" _istranslated="1"><code class="xref py py-class docutils literal notranslate" _istranslated="1"></code></a> tipo de dado, ele será internamente upcast para o <a class="reference internal" href="https://numpy.org/doc/stable/reference/arrays.scalars.html#numpy.int_" title="numpy.int_" _istranslated="1"><code class="xref py py-class docutils literal notranslate" _istranslated="1"></code></a> (ou <a class="reference internal" href="https://numpy.org/doc/stable/reference/arrays.scalars.html#numpy.uint" title="numpy.uint" _istranslated="1"><code class="xref py py-class docutils literal notranslate" _istranslated="1"></code></a>)tipo de dado. No exemplo anterior:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre id="codecell2" tabindex="-1"><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">x</span><span class="o">.</span><span class="n">dtype</span>
+<span class="go">dtype('int64')</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">np</span><span class="o">.</span><span class="n">multiply</span><span class="o">.</span><span class="n">reduce</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">dtype</span><span class="o">=</span><span class="nb">float</span><span class="p">)</span>
+<span class="go">array([ 0., 28., 80.])</span>
+</pre><button class="copybtn o-tooltip--left" data-tooltip="Copy" data-clipboard-target="#codecell2">
+      <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-copy" width="44" height="44" viewBox="0 0 24 24" stroke-width="1.5" stroke="#000000" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <title>Copy to clipboard</title>
+  <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
+  <rect x="8" y="8" width="12" height="12" rx="2"></rect>
+  <path d="M16 8v-2a2 2 0 0 0 -2 -2h-8a2 2 0 0 0 -2 2v8a2 2 0 0 0 2 2h2"></path>
+</svg>
+    </button></div>
+</div>
+<p><font _mstmutation="1" _msttexthash="31816876" _msthash="126">Por fim, a <em _mstmutation="1" _istranslated="1">palavra-chave out</em> permite que você
+fornecer um array de saída (ou um tuplo de arrays de saída para UFUNCs de múltiplas saídas).
+Se <em _mstmutation="1" _istranslated="1">out</em> for dado, o argumento <em _mstmutation="1" _istranslated="1">dtype</em> é usado apenas para os cálculos internos.
+Considerando o exemplo anterior:</font><code class="docutils literal notranslate"><span class="pre">x</span></code></p>
+<div class="highlight-default notranslate"><div class="highlight"><pre id="codecell3" tabindex="-1"><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">y</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">(</span><span class="mi">3</span><span class="p">,</span> <span class="n">dtype</span><span class="o">=</span><span class="nb">int</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">y</span>
+<span class="go">array([0, 0, 0])</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">np</span><span class="o">.</span><span class="n">multiply</span><span class="o">.</span><span class="n">reduce</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">dtype</span><span class="o">=</span><span class="nb">float</span><span class="p">,</span> <span class="n">out</span><span class="o">=</span><span class="n">y</span><span class="p">)</span>
+<span class="go">array([ 0, 28, 80])</span>
+</pre><button class="copybtn o-tooltip--left" data-tooltip="Copy" data-clipboard-target="#codecell3">
+      <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-copy" width="44" height="44" viewBox="0 0 24 24" stroke-width="1.5" stroke="#000000" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <title>Copy to clipboard</title>
+  <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
+  <rect x="8" y="8" width="12" height="12" rx="2"></rect>
+  <path d="M16 8v-2a2 2 0 0 0 -2 -2h-8a2 2 0 0 0 -2 2v8a2 2 0 0 0 2 2h2"></path>
+</svg>
+    </button></div>
+</div>
+<p _msttexthash="57507892" _msthash="127">Ufuncs also have a fifth method, <a class="reference internal" href="https://numpy.org/doc/stable/reference/generated/numpy.ufunc.at.html#numpy.ufunc.at" title="numpy.ufunc.at"><code class="xref py py-func docutils literal notranslate"><span class="pre">numpy.ufunc.at</span></code></a>, that allows in place
+operations to be performed using advanced indexing. No
+<a class="reference internal" href="https://numpy.org/doc/stable/user/basics.ufuncs.html#use-of-internal-buffers"><span class="std std-ref">buffering</span></a> is used on the dimensions where
+advanced indexing is used, so the advanced index can
+list an item more than once and the operation will be performed on the result
+of the previous operation for that item.</p>
+</section>
+<section id="output-type-determination">
+<span id="ufuncs-output-type"></span><h2><font _mstmutation="1" _msttexthash="584909" _msthash="128">Output type determination</font><a class="headerlink" href="https://numpy.org/doc/stable/user/basics.ufuncs.html#output-type-determination" title="Link to this heading">#</a></h2>
+<p><font _mstmutation="1" _msttexthash="31373017" _msthash="129">If the input arguments of the ufunc (or its methods) are
+<a class="reference internal" href="https://numpy.org/doc/stable/reference/generated/numpy.ndarray.html#numpy.ndarray" title="numpy.ndarray" _mstmutation="1"><code class="xref py py-class docutils literal notranslate"><span class="pre">ndarrays</span></code></a>, then the output will be as well.
+The exception is when the result is zero-dimensional, in which case the
+output will be converted to an <em class="xref py py-obj" _mstmutation="1">array scalar</em>. This can
+be avoided by passing in  or .</font><code class="docutils literal notranslate"><span class="pre">out=...</span></code><code class="docutils literal notranslate"><span class="pre">out=Ellipsis</span></code></p>
+<p _msttexthash="28673827" _msthash="130">If some or all of the input arguments are not
+<a class="reference internal" href="https://numpy.org/doc/stable/reference/generated/numpy.ndarray.html#numpy.ndarray" title="numpy.ndarray"><code class="xref py py-class docutils literal notranslate"><span class="pre">ndarrays</span></code></a>, then the output may not be an
+<a class="reference internal" href="https://numpy.org/doc/stable/reference/generated/numpy.ndarray.html#numpy.ndarray" title="numpy.ndarray"><code class="xref py py-class docutils literal notranslate"><span class="pre">ndarray</span></code></a> either.
+Indeed, if any input defines an <a class="reference internal" href="https://numpy.org/doc/stable/reference/arrays.classes.html#numpy.class.__array_ufunc__" title="numpy.class.__array_ufunc__"><code class="xref py py-obj docutils literal notranslate"><span class="pre">__array_ufunc__</span></code></a> method,
+control will be passed completely to that function, i.e., the ufunc is
+<a class="reference internal" href="https://numpy.org/doc/stable/user/basics.ufuncs.html#ufuncs-overrides"><span class="std std-ref">overridden</span></a>.</p>
+<p _msttexthash="84110468" _msthash="131">If none of the inputs overrides the ufunc, then
+all output arrays will be passed to the <a class="reference internal" href="https://numpy.org/doc/stable/reference/arrays.classes.html#numpy.class.__array_wrap__" title="numpy.class.__array_wrap__"><code class="xref py py-obj docutils literal notranslate"><span class="pre">__array_wrap__</span></code></a>
+method of the input (besides <a class="reference internal" href="https://numpy.org/doc/stable/reference/generated/numpy.ndarray.html#numpy.ndarray" title="numpy.ndarray"><code class="xref py py-class docutils literal notranslate"><span class="pre">ndarrays</span></code></a>, and scalars)
+that defines it <strong>and</strong> has the highest <a class="reference internal" href="https://numpy.org/doc/stable/reference/arrays.classes.html#numpy.class.__array_priority__" title="numpy.class.__array_priority__"><code class="xref py py-obj docutils literal notranslate"><span class="pre">__array_priority__</span></code></a>
+of any other input to the universal function. The default
+<a class="reference internal" href="https://numpy.org/doc/stable/reference/arrays.classes.html#numpy.class.__array_priority__" title="numpy.class.__array_priority__"><code class="xref py py-obj docutils literal notranslate"><span class="pre">__array_priority__</span></code></a> of the
+ndarray is 0.0, and the default <a class="reference internal" href="https://numpy.org/doc/stable/reference/arrays.classes.html#numpy.class.__array_priority__" title="numpy.class.__array_priority__"><code class="xref py py-obj docutils literal notranslate"><span class="pre">__array_priority__</span></code></a> of a subtype
+is 0.0. Matrices have <a class="reference internal" href="https://numpy.org/doc/stable/reference/arrays.classes.html#numpy.class.__array_priority__" title="numpy.class.__array_priority__"><code class="xref py py-obj docutils literal notranslate"><span class="pre">__array_priority__</span></code></a> equal to 10.0.</p>
+<p _msttexthash="34571407" _msthash="132">All ufuncs can also take output arguments which must be arrays or subclasses.
+If necessary, the result will be cast to the data-type(s) of the provided
+output array(s).
+If the output has an <a class="reference internal" href="https://numpy.org/doc/stable/reference/arrays.classes.html#numpy.class.__array_wrap__" title="numpy.class.__array_wrap__"><code class="xref py py-obj docutils literal notranslate"><span class="pre">__array_wrap__</span></code></a> method it is called instead
+of the one found on the inputs.</p>
+</section>
+<section id="broadcasting">
+<span id="ufuncs-broadcasting"></span><h2><font _mstmutation="1" _msttexthash="203398" _msthash="133">Broadcasting</font><a class="headerlink" href="https://numpy.org/doc/stable/user/basics.ufuncs.html#broadcasting" title="Link to this heading">#</a></h2>
+<div class="admonition seealso">
+<p class="admonition-title" _msttexthash="94627" _msthash="134">See also</p>
+<p><a class="reference internal" href="https://numpy.org/doc/stable/user/basics.broadcasting.html"><span class="doc" _msttexthash="379730" _msthash="135">Broadcasting basics</span></a></p>
+</div>
+<p id="index-0" _msttexthash="68800719" _msthash="136">Each universal function takes array inputs and produces array outputs
+by performing the core function element-wise on the inputs (where an
+element is generally a scalar, but can be a vector or higher-order
+sub-array for generalized ufuncs). Standard
+<a class="reference internal" href="https://numpy.org/doc/stable/user/basics.broadcasting.html#general-broadcasting-rules"><span class="std std-ref">broadcasting rules</span></a> are applied
+so that inputs not sharing exactly the
+same shapes can still be usefully operated on.</p>
+<p _msttexthash="43210375" _msthash="137">By these rules, if an input has a dimension size of 1 in its shape, the
+first data entry in that dimension will be used for all calculations along
+that dimension. In other words, the stepping machinery of the
+<a class="reference internal" href="https://numpy.org/doc/stable/glossary.html#term-ufunc"><span class="xref std std-term">ufunc</span></a> will simply not step along that dimension (the
+<a class="reference internal" href="https://numpy.org/doc/stable/reference/arrays.ndarray.html#memory-layout"><span class="std std-ref">stride</span></a> will be 0 for that dimension).</p>
+</section>
+<section id="type-casting-rules">
+<span id="ufuncs-casting"></span><h2><font _mstmutation="1" _msttexthash="326534" _msthash="138">Type casting rules</font><a class="headerlink" href="https://numpy.org/doc/stable/user/basics.ufuncs.html#type-casting-rules" title="Link to this heading">#</a></h2>
+<div class="admonition note" id="index-1">
+<p class="admonition-title" _msttexthash="45344" _msthash="139">Note</p>
+<p _msttexthash="24400961" _msthash="140">In NumPy 1.6.0, a type promotion API was created to encapsulate the
+mechanism for determining output types. See the functions
+<a class="reference internal" href="https://numpy.org/doc/stable/reference/generated/numpy.result_type.html#numpy.result_type" title="numpy.result_type"><code class="xref py py-func docutils literal notranslate"><span class="pre">numpy.result_type</span></code></a>, <a class="reference internal" href="https://numpy.org/doc/stable/reference/generated/numpy.promote_types.html#numpy.promote_types" title="numpy.promote_types"><code class="xref py py-func docutils literal notranslate"><span class="pre">numpy.promote_types</span></code></a>, and
+<a class="reference internal" href="https://numpy.org/doc/stable/reference/generated/numpy.min_scalar_type.html#numpy.min_scalar_type" title="numpy.min_scalar_type"><code class="xref py py-func docutils literal notranslate"><span class="pre">numpy.min_scalar_type</span></code></a> for more details.</p>
+</div>
+<p _msttexthash="159788278" _msthash="141">At the core of every ufunc is a one-dimensional strided loop that
+implements the actual function for a specific type combination. When a
+ufunc is created, it is given a static list of inner loops and a
+corresponding list of type signatures over which the ufunc operates.
+The ufunc machinery uses this list to determine which inner loop to
+use for a particular case. You can inspect the <a class="reference internal" href="https://numpy.org/doc/stable/reference/generated/numpy.ufunc.types.html#numpy.ufunc.types" title="numpy.ufunc.types"><code class="xref py py-attr docutils literal notranslate"><span class="pre">.types</span></code></a> attribute for a particular ufunc to see which type
+combinations have a defined inner loop and which output type they
+produce (<a class="reference internal" href="https://numpy.org/doc/stable/reference/arrays.scalars.html#arrays-scalars-character-codes"><span class="std std-ref">character codes</span></a> are used
+in said output for brevity).</p>
+<p _msttexthash="209339052" _msthash="142">Casting must be done on one or more of the inputs whenever the ufunc
+does not have a core loop implementation for the input types provided.
+If an implementation for the input types cannot be found, then the
+algorithm searches for an implementation with a type signature to
+which all of the inputs can be cast “safely.” The first one it finds
+in its internal list of loops is selected and performed, after all
+necessary type casting. Recall that internal copies during ufuncs (even
+for casting) are limited to the size of an internal buffer (which is user
+settable).</p>
+<div class="admonition note">
+<p class="admonition-title" _msttexthash="45344" _msthash="143">Note</p>
+<p _msttexthash="25394551" _msthash="144">Universal functions in NumPy are flexible enough to have mixed type
+signatures. Thus, for example, a universal function could be defined
+that works with floating-point and integer values. See
+<a class="reference internal" href="https://numpy.org/doc/stable/reference/generated/numpy.ldexp.html#numpy.ldexp" title="numpy.ldexp"><code class="xref py py-func docutils literal notranslate"><span class="pre">numpy.ldexp</span></code></a> for an example.</p>
+</div>
+<p _msttexthash="156503659" _msthash="145">By the above description, the casting rules are essentially
+implemented by the question of when a data type can be cast “safely”
+to another data type. The answer to this question can be determined in
+Python with a function call: <a class="reference internal" href="https://numpy.org/doc/stable/reference/generated/numpy.can_cast.html#numpy.can_cast" title="numpy.can_cast"><code class="xref py py-func docutils literal notranslate"><span class="pre">can_cast(fromtype,</span> <span class="pre">totype)</span></code></a>. The example below shows the results of this call for
+the 24 internally supported types on the author’s 64-bit system. You
+can generate this table for your system with the code given in the example.</p>
+<p class="rubric" _msttexthash="94211" _msthash="146">Example</p>
+<p _msttexthash="20899138" _msthash="147">Code segment showing the “can cast safely” table for a 64-bit system.
+Generally the output depends on the system; your system might result in
+a different table.</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre id="codecell4" tabindex="-1"><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">mark</span> <span class="o">=</span> <span class="p">{</span><span class="kc">False</span><span class="p">:</span> <span class="s1">' -'</span><span class="p">,</span> <span class="kc">True</span><span class="p">:</span> <span class="s1">' Y'</span><span class="p">}</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="k">def</span><span class="w"> </span><span class="nf">print_table</span><span class="p">(</span><span class="n">ntypes</span><span class="p">):</span>
+<span class="gp">... </span>    <span class="nb">print</span><span class="p">(</span><span class="s1">'X '</span> <span class="o">+</span> <span class="s1">' '</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">ntypes</span><span class="p">))</span>
+<span class="gp">... </span>    <span class="k">for</span> <span class="n">row</span> <span class="ow">in</span> <span class="n">ntypes</span><span class="p">:</span>
+<span class="gp">... </span>        <span class="nb">print</span><span class="p">(</span><span class="n">row</span><span class="p">,</span> <span class="n">end</span><span class="o">=</span><span class="s1">''</span><span class="p">)</span>
+<span class="gp">... </span>        <span class="k">for</span> <span class="n">col</span> <span class="ow">in</span> <span class="n">ntypes</span><span class="p">:</span>
+<span class="gp">... </span>            <span class="nb">print</span><span class="p">(</span><span class="n">mark</span><span class="p">[</span><span class="n">np</span><span class="o">.</span><span class="n">can_cast</span><span class="p">(</span><span class="n">row</span><span class="p">,</span> <span class="n">col</span><span class="p">)],</span> <span class="n">end</span><span class="o">=</span><span class="s1">''</span><span class="p">)</span>
+<span class="gp">... </span>        <span class="nb">print</span><span class="p">()</span>
+<span class="gp">...</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">print_table</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">typecodes</span><span class="p">[</span><span class="s1">'All'</span><span class="p">])</span>
+<span class="go">X ? b h i l q n p B H I L Q N P e f d g F D G S U V O M m</span>
+<span class="go">? Y Y Y Y Y Y Y Y Y Y Y Y Y Y Y Y Y Y Y Y Y Y Y Y Y Y - Y</span>
+<span class="go">b - Y Y Y Y Y Y Y - - - - - - - Y Y Y Y Y Y Y Y Y Y Y - Y</span>
+<span class="go">h - - Y Y Y Y Y Y - - - - - - - - Y Y Y Y Y Y Y Y Y Y - Y</span>
+<span class="go">i - - - Y Y Y Y Y - - - - - - - - - Y Y - Y Y Y Y Y Y - Y</span>
+<span class="go">l - - - - Y Y Y Y - - - - - - - - - Y Y - Y Y Y Y Y Y - Y</span>
+<span class="go">q - - - - Y Y Y Y - - - - - - - - - Y Y - Y Y Y Y Y Y - Y</span>
+<span class="go">n - - - - Y Y Y Y - - - - - - - - - Y Y - Y Y Y Y Y Y - Y</span>
+<span class="go">p - - - - Y Y Y Y - - - - - - - - - Y Y - Y Y Y Y Y Y - Y</span>
+<span class="go">B - - Y Y Y Y Y Y Y Y Y Y Y Y Y Y Y Y Y Y Y Y Y Y Y Y - Y</span>
+<span class="go">H - - - Y Y Y Y Y - Y Y Y Y Y Y - Y Y Y Y Y Y Y Y Y Y - Y</span>
+<span class="go">I - - - - Y Y Y Y - - Y Y Y Y Y - - Y Y - Y Y Y Y Y Y - Y</span>
+<span class="go">L - - - - - - - - - - - Y Y Y Y - - Y Y - Y Y Y Y Y Y - -</span>
+<span class="go">Q - - - - - - - - - - - Y Y Y Y - - Y Y - Y Y Y Y Y Y - -</span>
+<span class="go">N - - - - - - - - - - - Y Y Y Y - - Y Y - Y Y Y Y Y Y - -</span>
+<span class="go">P - - - - - - - - - - - Y Y Y Y - - Y Y - Y Y Y Y Y Y - -</span>
+<span class="go">e - - - - - - - - - - - - - - - Y Y Y Y Y Y Y Y Y Y Y - -</span>
+<span class="go">f - - - - - - - - - - - - - - - - Y Y Y Y Y Y Y Y Y Y - -</span>
+<span class="go">d - - - - - - - - - - - - - - - - - Y Y - Y Y Y Y Y Y - -</span>
+<span class="go">g - - - - - - - - - - - - - - - - - - Y - - Y Y Y Y Y - -</span>
+<span class="go">F - - - - - - - - - - - - - - - - - - - Y Y Y Y Y Y Y - -</span>
+<span class="go">D - - - - - - - - - - - - - - - - - - - - Y Y Y Y Y Y - -</span>
+<span class="go">G - - - - - - - - - - - - - - - - - - - - - Y Y Y Y Y - -</span>
+<span class="go">S - - - - - - - - - - - - - - - - - - - - - - Y Y Y Y - -</span>
+<span class="go">U - - - - - - - - - - - - - - - - - - - - - - - Y Y Y - -</span>
+<span class="go">V - - - - - - - - - - - - - - - - - - - - - - - - Y Y - -</span>
+<span class="go">O - - - - - - - - - - - - - - - - - - - - - - - - - Y - -</span>
+<span class="go">M - - - - - - - - - - - - - - - - - - - - - - - - Y Y Y -</span>
+<span class="go">m - - - - - - - - - - - - - - - - - - - - - - - - Y Y - Y</span>
+</pre><button class="copybtn o-tooltip--left" data-tooltip="Copy" data-clipboard-target="#codecell4">
+      <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-copy" width="44" height="44" viewBox="0 0 24 24" stroke-width="1.5" stroke="#000000" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <title>Copy to clipboard</title>
+  <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
+  <rect x="8" y="8" width="12" height="12" rx="2"></rect>
+  <path d="M16 8v-2a2 2 0 0 0 -2 -2h-8a2 2 0 0 0 -2 2v8a2 2 0 0 0 2 2h2"></path>
+</svg>
+    </button></div>
+</div>
+<p _msttexthash="76108149" _msthash="148">You should note that, while included in the table for completeness,
+the ‘S’, ‘U’, and ‘V’ types cannot be operated on by ufuncs. Also,
+note that on a 32-bit system the integer types may have different
+sizes, resulting in a slightly altered table.</p>
+<p _msttexthash="150431541" _msthash="149">Mixed scalar-array operations use a different set of casting rules
+that ensure that a scalar cannot “upcast” an array unless the scalar is
+of a fundamentally different kind of data (i.e., under a different
+hierarchy in the data-type hierarchy) than the array.  This rule
+enables you to use scalar constants in your code (which, as Python
+types, are interpreted accordingly in ufuncs) without worrying about
+whether the precision of the scalar constant will cause upcasting on
+your large (small precision) array.</p>
+</section>
+<section id="use-of-internal-buffers">
+<span id="id1"></span><h2><font _mstmutation="1" _msttexthash="458224" _msthash="150">Use of internal buffers</font><a class="headerlink" href="https://numpy.org/doc/stable/user/basics.ufuncs.html#use-of-internal-buffers" title="Link to this heading">#</a></h2>
+<p id="index-2"><font _mstmutation="1" _msttexthash="297368682" _msthash="151">Internally, buffers are used for misaligned data, swapped data, and
+data that has to be converted from one data type to another. The size
+of internal buffers is settable on a per-thread basis. There can
+be up to 
+buffers of the specified size created to handle the data from all the
+inputs and outputs of a ufunc. The default size of a buffer is
+10,000 elements. Whenever buffer-based calculation would be needed,
+but all input arrays are smaller than the buffer size, those
+misbehaved or incorrectly-typed arrays will be copied before the
+calculation proceeds. Adjusting the size of the buffer may therefore
+alter the speed at which ufunc calculations of various sorts are
+completed. A simple interface for setting this variable is accessible
+using the function <a class="reference internal" href="https://numpy.org/doc/stable/reference/generated/numpy.setbufsize.html#numpy.setbufsize" title="numpy.setbufsize" _mstmutation="1"><code class="xref py py-func docutils literal notranslate"><span class="pre">numpy.setbufsize</span></code></a>.</font><span class="math notranslate nohighlight"><span class="MathJax_Preview" style="color: inherit; display: none;"></span><span class="MathJax_SVG" id="MathJax-Element-1-Frame" tabindex="0" style="font-size: 100%; display: inline-block; position: relative;" data-mathml="&lt;math xmlns=&quot;http://www.w3.org/1998/Math/MathML&quot;&gt;&lt;mn&gt;2&lt;/mn&gt;&lt;mo stretchy=&quot;false&quot;&gt;(&lt;/mo&gt;&lt;msub&gt;&lt;mi&gt;n&lt;/mi&gt;&lt;mrow class=&quot;MJX-TeXAtom-ORD&quot;&gt;&lt;mrow class=&quot;MJX-TeXAtom-ORD&quot;&gt;&lt;mi mathvariant=&quot;normal&quot;&gt;i&lt;/mi&gt;&lt;mi mathvariant=&quot;normal&quot;&gt;n&lt;/mi&gt;&lt;mi mathvariant=&quot;normal&quot;&gt;p&lt;/mi&gt;&lt;mi mathvariant=&quot;normal&quot;&gt;u&lt;/mi&gt;&lt;mi mathvariant=&quot;normal&quot;&gt;t&lt;/mi&gt;&lt;mi mathvariant=&quot;normal&quot;&gt;s&lt;/mi&gt;&lt;/mrow&gt;&lt;/mrow&gt;&lt;/msub&gt;&lt;mo&gt;+&lt;/mo&gt;&lt;msub&gt;&lt;mi&gt;n&lt;/mi&gt;&lt;mrow class=&quot;MJX-TeXAtom-ORD&quot;&gt;&lt;mrow class=&quot;MJX-TeXAtom-ORD&quot;&gt;&lt;mi mathvariant=&quot;normal&quot;&gt;o&lt;/mi&gt;&lt;mi mathvariant=&quot;normal&quot;&gt;u&lt;/mi&gt;&lt;mi mathvariant=&quot;normal&quot;&gt;t&lt;/mi&gt;&lt;mi mathvariant=&quot;normal&quot;&gt;p&lt;/mi&gt;&lt;mi mathvariant=&quot;normal&quot;&gt;u&lt;/mi&gt;&lt;mi mathvariant=&quot;normal&quot;&gt;t&lt;/mi&gt;&lt;mi mathvariant=&quot;normal&quot;&gt;s&lt;/mi&gt;&lt;/mrow&gt;&lt;/mrow&gt;&lt;/msub&gt;&lt;mo stretchy=&quot;false&quot;&gt;)&lt;/mo&gt;&lt;/math&gt;" role="presentation"><svg xmlns:xlink="http://www.w3.org/1999/xlink" width="19.044ex" height="2.694ex" viewBox="0 -806.1 8199.5 1160" role="img" focusable="false" style="vertical-align: -0.822ex;" aria-hidden="true"><g stroke="currentColor" fill="currentColor" stroke-width="0" transform="matrix(1 0 0 -1 0 0)"><use href="#MJMAIN-32" x="0" y="0"></use><use href="#MJMAIN-28" x="500" y="0"></use><g transform="translate(890,0)"><use href="#MJMATHI-6E" x="0" y="0"></use><g transform="translate(600,-150)"><use transform="scale(0.707)" href="#MJMAIN-69" x="0" y="0"></use><use transform="scale(0.707)" href="#MJMAIN-6E" x="278" y="0"></use><use transform="scale(0.707)" href="#MJMAIN-70" x="835" y="0"></use><use transform="scale(0.707)" href="#MJMAIN-75" x="1391" y="0"></use><use transform="scale(0.707)" href="#MJMAIN-74" x="1948" y="0"></use><use transform="scale(0.707)" href="#MJMAIN-73" x="2337" y="0"></use></g></g><use href="#MJMAIN-2B" x="3744" y="0"></use><g transform="translate(4745,0)"><use href="#MJMATHI-6E" x="0" y="0"></use><g transform="translate(600,-150)"><use transform="scale(0.707)" href="#MJMAIN-6F" x="0" y="0"></use><use transform="scale(0.707)" href="#MJMAIN-75" x="500" y="0"></use><use transform="scale(0.707)" href="#MJMAIN-74" x="1057" y="0"></use><use transform="scale(0.707)" href="#MJMAIN-70" x="1446" y="0"></use><use transform="scale(0.707)" href="#MJMAIN-75" x="2002" y="0"></use><use transform="scale(0.707)" href="#MJMAIN-74" x="2559" y="0"></use><use transform="scale(0.707)" href="#MJMAIN-73" x="2949" y="0"></use></g></g><use href="#MJMAIN-29" x="7809" y="0"></use></g></svg><span class="MJX_Assistive_MathML" role="presentation"><math xmlns="http://www.w3.org/1998/Math/MathML"><mn>2</mn><mo stretchy="false">(</mo><msub><mi>n</mi><mrow class="MJX-TeXAtom-ORD"><mrow class="MJX-TeXAtom-ORD"><mi mathvariant="normal">i</mi><mi mathvariant="normal">n</mi><mi mathvariant="normal">p</mi><mi mathvariant="normal">u</mi><mi mathvariant="normal">t</mi><mi mathvariant="normal">s</mi></mrow></mrow></msub><mo>+</mo><msub><mi>n</mi><mrow class="MJX-TeXAtom-ORD"><mrow class="MJX-TeXAtom-ORD"><mi mathvariant="normal">o</mi><mi mathvariant="normal">u</mi><mi mathvariant="normal">t</mi><mi mathvariant="normal">p</mi><mi mathvariant="normal">u</mi><mi mathvariant="normal">t</mi><mi mathvariant="normal">s</mi></mrow></mrow></msub><mo stretchy="false">)</mo></math></span></span><script type="math/tex" id="MathJax-Element-1">2 (n_{\mathrm{inputs}} + n_{\mathrm{outputs}})</script></span></p>
+</section>
+<section id="error-handling">
+<h2><font _mstmutation="1" _msttexthash="231192" _msthash="152">Error handling</font><a class="headerlink" href="https://numpy.org/doc/stable/user/basics.ufuncs.html#error-handling" title="Link to this heading">#</a></h2>
+<p id="index-3" _msttexthash="59211568" _msthash="153">Universal functions can trip special floating-point status registers
+in your hardware (such as divide-by-zero). If available on your
+platform, these registers will be regularly checked during
+calculation. Error handling is controlled on a per-thread basis,
+and can be configured using the functions <a class="reference internal" href="https://numpy.org/doc/stable/reference/generated/numpy.seterr.html#numpy.seterr" title="numpy.seterr"><code class="xref py py-func docutils literal notranslate"><span class="pre">numpy.seterr</span></code></a> and
+<a class="reference internal" href="https://numpy.org/doc/stable/reference/generated/numpy.seterrcall.html#numpy.seterrcall" title="numpy.seterrcall"><code class="xref py py-func docutils literal notranslate"><span class="pre">numpy.seterrcall</span></code></a>.</p>
+</section>
+<section id="overriding-ufunc-behavior">
+<span id="ufuncs-overrides"></span><h2><font _mstmutation="1" _msttexthash="574236" _msthash="154">Overriding ufunc behavior</font><a class="headerlink" href="https://numpy.org/doc/stable/user/basics.ufuncs.html#overriding-ufunc-behavior" title="Link to this heading">#</a></h2>
+<p _msttexthash="13283309" _msthash="155">Classes (including ndarray subclasses) can override how ufuncs act on
+them by defining certain special methods.  For details, see
+<a class="reference internal" href="https://numpy.org/doc/stable/reference/arrays.classes.html#arrays-classes"><span class="std std-ref">Standard array subclasses</span></a>.</p>
+</section>
+</section>
+
+
+                </article>
+              
+              
+              
+              
+              
+                <footer class="prev-next-footer d-print-none">
+                  
+<div class="prev-next-area">
+    <a class="left-prev" href="https://numpy.org/doc/stable/user/basics.rec.html" title="previous page">
+      <svg class="svg-inline--fa fa-angle-left" aria-hidden="true" focusable="false" data-prefix="fas" data-icon="angle-left" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 512" data-fa-i2svg=""><path fill="currentColor" d="M41.4 233.4c-12.5 12.5-12.5 32.8 0 45.3l160 160c12.5 12.5 32.8 12.5 45.3 0s12.5-32.8 0-45.3L109.3 256 246.6 118.6c12.5-12.5 12.5-32.8 0-45.3s-32.8-12.5-45.3 0l-160 160z"></path></svg><!-- <i class="fa-solid fa-angle-left"></i> Font Awesome fontawesome.com -->
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle" _msttexthash="122239" _msthash="156">previous</p>
+        <p class="prev-next-title" _msttexthash="328848" _msthash="157">Structured arrays</p>
+      </div>
+    </a>
+    <a class="right-next" href="https://numpy.org/doc/stable/user/numpy-for-matlab-users.html" title="next page">
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle" _msttexthash="49634" _msthash="158">next</p>
+        <p class="prev-next-title" _msttexthash="381212" _msthash="159">NumPy for MATLAB users</p>
+      </div>
+      <svg class="svg-inline--fa fa-angle-right" aria-hidden="true" focusable="false" data-prefix="fas" data-icon="angle-right" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 512" data-fa-i2svg=""><path fill="currentColor" d="M278.6 233.4c12.5 12.5 12.5 32.8 0 45.3l-160 160c-12.5 12.5-32.8 12.5-45.3 0s-12.5-32.8 0-45.3L210.7 256 73.4 118.6c-12.5-12.5-12.5-32.8 0-45.3s32.8-12.5 45.3 0l160 160z"></path></svg><!-- <i class="fa-solid fa-angle-right"></i> Font Awesome fontawesome.com -->
+    </a>
+</div>
+                </footer>
+              
+            </div>
+            
+            
+              
+                <dialog id="pst-secondary-sidebar-modal"></dialog>
+                <div id="pst-secondary-sidebar" class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+
+  <div class="sidebar-secondary-item">
+<div id="pst-page-navigation-heading-2" class="page-toc tocsection onthispage">
+    <svg class="svg-inline--fa fa-list" aria-hidden="true" focusable="false" data-prefix="fas" data-icon="list" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" data-fa-i2svg=""><path fill="currentColor" d="M40 48C26.7 48 16 58.7 16 72v48c0 13.3 10.7 24 24 24H88c13.3 0 24-10.7 24-24V72c0-13.3-10.7-24-24-24H40zM192 64c-17.7 0-32 14.3-32 32s14.3 32 32 32H480c17.7 0 32-14.3 32-32s-14.3-32-32-32H192zm0 160c-17.7 0-32 14.3-32 32s14.3 32 32 32H480c17.7 0 32-14.3 32-32s-14.3-32-32-32H192zm0 160c-17.7 0-32 14.3-32 32s14.3 32 32 32H480c17.7 0 32-14.3 32-32s-14.3-32-32-32H192zM16 232v48c0 13.3 10.7 24 24 24H88c13.3 0 24-10.7 24-24V232c0-13.3-10.7-24-24-24H40c-13.3 0-24 10.7-24 24zM40 368c-13.3 0-24 10.7-24 24v48c0 13.3 10.7 24 24 24H88c13.3 0 24-10.7 24-24V392c0-13.3-10.7-24-24-24H40z"></path></svg><!-- <i class="fa-solid fa-list"></i> Font Awesome fontawesome.com --><font _mstmutation="1" _msttexthash="199043" _msthash="160"> Nesta página </font></div>
+  <nav class="bd-toc-nav page-toc" aria-labelledby="pst-page-navigation-heading-2">
+    <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="https://numpy.org/doc/stable/user/basics.ufuncs.html#ufunc-methods" _msttexthash="267917" _msthash="161">Métodos da Ufunc</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="https://numpy.org/doc/stable/user/basics.ufuncs.html#output-type-determination" _msttexthash="750698" _msthash="162">Determinação do tipo de saída</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="https://numpy.org/doc/stable/user/basics.ufuncs.html#broadcasting" _msttexthash="211445" _msthash="163">Transmissão</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="https://numpy.org/doc/stable/user/basics.ufuncs.html#type-casting-rules" _msttexthash="734461" _msthash="164">Regras de conjuração de tipos</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="https://numpy.org/doc/stable/user/basics.ufuncs.html#use-of-internal-buffers" _msttexthash="465192" _msthash="165">Uso de buffers internos</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="https://numpy.org/doc/stable/user/basics.ufuncs.html#error-handling" _msttexthash="357175" _msthash="166">Tratamento de erros</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="https://numpy.org/doc/stable/user/basics.ufuncs.html#overriding-ufunc-behavior" _msttexthash="736749" _msthash="167">Sobrepor comportamento da UFUNC</a></li>
+</ul>
+  </nav></div>
+
+</div></div>
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+          </footer>
+        
+      </main>
+    </div>
+  </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script defer="" src="./Funções universais básicas (ufunc) — Manual do NumPy v2.4_files/bootstrap.js.baixados"></script>
+<script defer="" src="./Funções universais básicas (ufunc) — Manual do NumPy v2.4_files/pydata-sphinx-theme.js.baixados"></script>
+
+  <footer class="bd-footer">
+<div class="bd-footer__inner bd-page-width">
+  
+    <div class="footer-items__start">
+      
+        <div class="footer-item">
+
+  <p class="copyright"><font _mstmutation="1" _msttexthash="1020123" _msthash="168">
+    
+      © Copyright 2008-2025, NumPy Developers.
+      </font><br>
+    
+  </p>
+</div>
+      
+        <div class="footer-item">
+
+  <p class="sphinx-version"><font _mstmutation="1" _msttexthash="489983" _msthash="169">
+    Created using <a href="https://www.sphinx-doc.org/" _mstmutation="1">Sphinx</a> 7.2.6.
+    </font><br>
+  </p>
+</div>
+      
+    </div>
+  
+  
+  
+    <div class="footer-items__end">
+      
+        <div class="footer-item">
+<p class="theme-version">
+  <!-- # L10n: Setting the PST URL as an argument as this does not need to be localized --><font _mstmutation="1" _msttexthash="985738" _msthash="170">
+  Built with the <a href="https://pydata-sphinx-theme.readthedocs.io/en/stable/index.html" _mstmutation="1">PyData Sphinx Theme</a> 0.16.1.
+</font></p></div>
+      
+    </div>
+  
+</div>
+
+  </footer>
+  <script defer="" src="./Funções universais básicas (ufunc) — Manual do NumPy v2.4_files/v8c78df7c7c0f484497ecbca7046644da1771523124516" integrity="sha512-8DS7rgIrAmghBFwoOTujcf6D9rXvH8xm8JQ1Ja01h9QX8EzXldiszufYa4IFfKdLUKTTrnSFXLDkUEOTrZQ8Qg==" data-cf-beacon="{&quot;version&quot;:&quot;2024.11.0&quot;,&quot;token&quot;:&quot;f02b77b6fbcf4229aa0f4247afbdad50&quot;,&quot;r&quot;:1,&quot;server_timing&quot;:{&quot;name&quot;:{&quot;cfCacheStatus&quot;:true,&quot;cfEdge&quot;:true,&quot;cfExtPri&quot;:true,&quot;cfL4&quot;:true,&quot;cfOrigin&quot;:true,&quot;cfSpeedBrain&quot;:true},&quot;location_startswith&quot;:null}}" crossorigin="anonymous"></script>
+
+</body></html>

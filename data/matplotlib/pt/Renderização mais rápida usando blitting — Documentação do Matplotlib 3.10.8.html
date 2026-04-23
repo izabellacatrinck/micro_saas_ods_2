@@ -1,0 +1,966 @@
+<!DOCTYPE html>
+<!-- saved from url=(0068)https://matplotlib.org/stable/users/explain/animations/blitting.html -->
+<html lang="pt" data-content_root="../../../" data-mode="auto" data-theme="dark" class="fontawesome-i2svg-active fontawesome-i2svg-complete"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"><meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <title _msttexthash="8165053" _msthash="0">Renderização mais rápida usando blitting — Documentação do Matplotlib 3.10.8</title>
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "";
+  </script>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <style type="text/css">:host,:root{--fa-font-solid:normal 900 1em/1 "Font Awesome 6 Solid";--fa-font-regular:normal 400 1em/1 "Font Awesome 6 Regular";--fa-font-light:normal 300 1em/1 "Font Awesome 6 Light";--fa-font-thin:normal 100 1em/1 "Font Awesome 6 Thin";--fa-font-duotone:normal 900 1em/1 "Font Awesome 6 Duotone";--fa-font-sharp-solid:normal 900 1em/1 "Font Awesome 6 Sharp";--fa-font-sharp-regular:normal 400 1em/1 "Font Awesome 6 Sharp";--fa-font-sharp-light:normal 300 1em/1 "Font Awesome 6 Sharp";--fa-font-sharp-thin:normal 100 1em/1 "Font Awesome 6 Sharp";--fa-font-brands:normal 400 1em/1 "Font Awesome 6 Brands"}svg:not(:host).svg-inline--fa,svg:not(:root).svg-inline--fa{overflow:visible;box-sizing:content-box}.svg-inline--fa{display:var(--fa-display,inline-block);height:1em;overflow:visible;vertical-align:-.125em}.svg-inline--fa.fa-2xs{vertical-align:.1em}.svg-inline--fa.fa-xs{vertical-align:0}.svg-inline--fa.fa-sm{vertical-align:-.0714285705em}.svg-inline--fa.fa-lg{vertical-align:-.2em}.svg-inline--fa.fa-xl{vertical-align:-.25em}.svg-inline--fa.fa-2xl{vertical-align:-.3125em}.svg-inline--fa.fa-pull-left{margin-right:var(--fa-pull-margin,.3em);width:auto}.svg-inline--fa.fa-pull-right{margin-left:var(--fa-pull-margin,.3em);width:auto}.svg-inline--fa.fa-li{width:var(--fa-li-width,2em);top:.25em}.svg-inline--fa.fa-fw{width:var(--fa-fw-width,1.25em)}.fa-layers svg.svg-inline--fa{bottom:0;left:0;margin:auto;position:absolute;right:0;top:0}.fa-layers-counter,.fa-layers-text{display:inline-block;position:absolute;text-align:center}.fa-layers{display:inline-block;height:1em;position:relative;text-align:center;vertical-align:-.125em;width:1em}.fa-layers svg.svg-inline--fa{-webkit-transform-origin:center center;transform-origin:center center}.fa-layers-text{left:50%;top:50%;-webkit-transform:translate(-50%,-50%);transform:translate(-50%,-50%);-webkit-transform-origin:center center;transform-origin:center center}.fa-layers-counter{background-color:var(--fa-counter-background-color,#ff253a);border-radius:var(--fa-counter-border-radius,1em);box-sizing:border-box;color:var(--fa-inverse,#fff);line-height:var(--fa-counter-line-height,1);max-width:var(--fa-counter-max-width,5em);min-width:var(--fa-counter-min-width,1.5em);overflow:hidden;padding:var(--fa-counter-padding,.25em .5em);right:var(--fa-right,0);text-overflow:ellipsis;top:var(--fa-top,0);-webkit-transform:scale(var(--fa-counter-scale,.25));transform:scale(var(--fa-counter-scale,.25));-webkit-transform-origin:top right;transform-origin:top right}.fa-layers-bottom-right{bottom:var(--fa-bottom,0);right:var(--fa-right,0);top:auto;-webkit-transform:scale(var(--fa-layers-scale,.25));transform:scale(var(--fa-layers-scale,.25));-webkit-transform-origin:bottom right;transform-origin:bottom right}.fa-layers-bottom-left{bottom:var(--fa-bottom,0);left:var(--fa-left,0);right:auto;top:auto;-webkit-transform:scale(var(--fa-layers-scale,.25));transform:scale(var(--fa-layers-scale,.25));-webkit-transform-origin:bottom left;transform-origin:bottom left}.fa-layers-top-right{top:var(--fa-top,0);right:var(--fa-right,0);-webkit-transform:scale(var(--fa-layers-scale,.25));transform:scale(var(--fa-layers-scale,.25));-webkit-transform-origin:top right;transform-origin:top right}.fa-layers-top-left{left:var(--fa-left,0);right:auto;top:var(--fa-top,0);-webkit-transform:scale(var(--fa-layers-scale,.25));transform:scale(var(--fa-layers-scale,.25));-webkit-transform-origin:top left;transform-origin:top left}.fa-1x{font-size:1em}.fa-2x{font-size:2em}.fa-3x{font-size:3em}.fa-4x{font-size:4em}.fa-5x{font-size:5em}.fa-6x{font-size:6em}.fa-7x{font-size:7em}.fa-8x{font-size:8em}.fa-9x{font-size:9em}.fa-10x{font-size:10em}.fa-2xs{font-size:.625em;line-height:.1em;vertical-align:.225em}.fa-xs{font-size:.75em;line-height:.0833333337em;vertical-align:.125em}.fa-sm{font-size:.875em;line-height:.0714285718em;vertical-align:.0535714295em}.fa-lg{font-size:1.25em;line-height:.05em;vertical-align:-.075em}.fa-xl{font-size:1.5em;line-height:.0416666682em;vertical-align:-.125em}.fa-2xl{font-size:2em;line-height:.03125em;vertical-align:-.1875em}.fa-fw{text-align:center;width:1.25em}.fa-ul{list-style-type:none;margin-left:var(--fa-li-margin,2.5em);padding-left:0}.fa-ul>li{position:relative}.fa-li{left:calc(var(--fa-li-width,2em) * -1);position:absolute;text-align:center;width:var(--fa-li-width,2em);line-height:inherit}.fa-border{border-color:var(--fa-border-color,#eee);border-radius:var(--fa-border-radius,.1em);border-style:var(--fa-border-style,solid);border-width:var(--fa-border-width,.08em);padding:var(--fa-border-padding,.2em .25em .15em)}.fa-pull-left{float:left;margin-right:var(--fa-pull-margin,.3em)}.fa-pull-right{float:right;margin-left:var(--fa-pull-margin,.3em)}.fa-beat{-webkit-animation-name:fa-beat;animation-name:fa-beat;-webkit-animation-delay:var(--fa-animation-delay,0s);animation-delay:var(--fa-animation-delay,0s);-webkit-animation-direction:var(--fa-animation-direction,normal);animation-direction:var(--fa-animation-direction,normal);-webkit-animation-duration:var(--fa-animation-duration,1s);animation-duration:var(--fa-animation-duration,1s);-webkit-animation-iteration-count:var(--fa-animation-iteration-count,infinite);animation-iteration-count:var(--fa-animation-iteration-count,infinite);-webkit-animation-timing-function:var(--fa-animation-timing,ease-in-out);animation-timing-function:var(--fa-animation-timing,ease-in-out)}.fa-bounce{-webkit-animation-name:fa-bounce;animation-name:fa-bounce;-webkit-animation-delay:var(--fa-animation-delay,0s);animation-delay:var(--fa-animation-delay,0s);-webkit-animation-direction:var(--fa-animation-direction,normal);animation-direction:var(--fa-animation-direction,normal);-webkit-animation-duration:var(--fa-animation-duration,1s);animation-duration:var(--fa-animation-duration,1s);-webkit-animation-iteration-count:var(--fa-animation-iteration-count,infinite);animation-iteration-count:var(--fa-animation-iteration-count,infinite);-webkit-animation-timing-function:var(--fa-animation-timing,cubic-bezier(.28,.84,.42,1));animation-timing-function:var(--fa-animation-timing,cubic-bezier(.28,.84,.42,1))}.fa-fade{-webkit-animation-name:fa-fade;animation-name:fa-fade;-webkit-animation-delay:var(--fa-animation-delay,0s);animation-delay:var(--fa-animation-delay,0s);-webkit-animation-direction:var(--fa-animation-direction,normal);animation-direction:var(--fa-animation-direction,normal);-webkit-animation-duration:var(--fa-animation-duration,1s);animation-duration:var(--fa-animation-duration,1s);-webkit-animation-iteration-count:var(--fa-animation-iteration-count,infinite);animation-iteration-count:var(--fa-animation-iteration-count,infinite);-webkit-animation-timing-function:var(--fa-animation-timing,cubic-bezier(.4,0,.6,1));animation-timing-function:var(--fa-animation-timing,cubic-bezier(.4,0,.6,1))}.fa-beat-fade{-webkit-animation-name:fa-beat-fade;animation-name:fa-beat-fade;-webkit-animation-delay:var(--fa-animation-delay,0s);animation-delay:var(--fa-animation-delay,0s);-webkit-animation-direction:var(--fa-animation-direction,normal);animation-direction:var(--fa-animation-direction,normal);-webkit-animation-duration:var(--fa-animation-duration,1s);animation-duration:var(--fa-animation-duration,1s);-webkit-animation-iteration-count:var(--fa-animation-iteration-count,infinite);animation-iteration-count:var(--fa-animation-iteration-count,infinite);-webkit-animation-timing-function:var(--fa-animation-timing,cubic-bezier(.4,0,.6,1));animation-timing-function:var(--fa-animation-timing,cubic-bezier(.4,0,.6,1))}.fa-flip{-webkit-animation-name:fa-flip;animation-name:fa-flip;-webkit-animation-delay:var(--fa-animation-delay,0s);animation-delay:var(--fa-animation-delay,0s);-webkit-animation-direction:var(--fa-animation-direction,normal);animation-direction:var(--fa-animation-direction,normal);-webkit-animation-duration:var(--fa-animation-duration,1s);animation-duration:var(--fa-animation-duration,1s);-webkit-animation-iteration-count:var(--fa-animation-iteration-count,infinite);animation-iteration-count:var(--fa-animation-iteration-count,infinite);-webkit-animation-timing-function:var(--fa-animation-timing,ease-in-out);animation-timing-function:var(--fa-animation-timing,ease-in-out)}.fa-shake{-webkit-animation-name:fa-shake;animation-name:fa-shake;-webkit-animation-delay:var(--fa-animation-delay,0s);animation-delay:var(--fa-animation-delay,0s);-webkit-animation-direction:var(--fa-animation-direction,normal);animation-direction:var(--fa-animation-direction,normal);-webkit-animation-duration:var(--fa-animation-duration,1s);animation-duration:var(--fa-animation-duration,1s);-webkit-animation-iteration-count:var(--fa-animation-iteration-count,infinite);animation-iteration-count:var(--fa-animation-iteration-count,infinite);-webkit-animation-timing-function:var(--fa-animation-timing,linear);animation-timing-function:var(--fa-animation-timing,linear)}.fa-spin{-webkit-animation-name:fa-spin;animation-name:fa-spin;-webkit-animation-delay:var(--fa-animation-delay,0s);animation-delay:var(--fa-animation-delay,0s);-webkit-animation-direction:var(--fa-animation-direction,normal);animation-direction:var(--fa-animation-direction,normal);-webkit-animation-duration:var(--fa-animation-duration,2s);animation-duration:var(--fa-animation-duration,2s);-webkit-animation-iteration-count:var(--fa-animation-iteration-count,infinite);animation-iteration-count:var(--fa-animation-iteration-count,infinite);-webkit-animation-timing-function:var(--fa-animation-timing,linear);animation-timing-function:var(--fa-animation-timing,linear)}.fa-spin-reverse{--fa-animation-direction:reverse}.fa-pulse,.fa-spin-pulse{-webkit-animation-name:fa-spin;animation-name:fa-spin;-webkit-animation-direction:var(--fa-animation-direction,normal);animation-direction:var(--fa-animation-direction,normal);-webkit-animation-duration:var(--fa-animation-duration,1s);animation-duration:var(--fa-animation-duration,1s);-webkit-animation-iteration-count:var(--fa-animation-iteration-count,infinite);animation-iteration-count:var(--fa-animation-iteration-count,infinite);-webkit-animation-timing-function:var(--fa-animation-timing,steps(8));animation-timing-function:var(--fa-animation-timing,steps(8))}@media (prefers-reduced-motion:reduce){.fa-beat,.fa-beat-fade,.fa-bounce,.fa-fade,.fa-flip,.fa-pulse,.fa-shake,.fa-spin,.fa-spin-pulse{-webkit-animation-delay:-1ms;animation-delay:-1ms;-webkit-animation-duration:1ms;animation-duration:1ms;-webkit-animation-iteration-count:1;animation-iteration-count:1;-webkit-transition-delay:0s;transition-delay:0s;-webkit-transition-duration:0s;transition-duration:0s}}@-webkit-keyframes fa-beat{0%,90%{-webkit-transform:scale(1);transform:scale(1)}45%{-webkit-transform:scale(var(--fa-beat-scale,1.25));transform:scale(var(--fa-beat-scale,1.25))}}@keyframes fa-beat{0%,90%{-webkit-transform:scale(1);transform:scale(1)}45%{-webkit-transform:scale(var(--fa-beat-scale,1.25));transform:scale(var(--fa-beat-scale,1.25))}}@-webkit-keyframes fa-bounce{0%{-webkit-transform:scale(1,1) translateY(0);transform:scale(1,1) translateY(0)}10%{-webkit-transform:scale(var(--fa-bounce-start-scale-x,1.1),var(--fa-bounce-start-scale-y,.9)) translateY(0);transform:scale(var(--fa-bounce-start-scale-x,1.1),var(--fa-bounce-start-scale-y,.9)) translateY(0)}30%{-webkit-transform:scale(var(--fa-bounce-jump-scale-x,.9),var(--fa-bounce-jump-scale-y,1.1)) translateY(var(--fa-bounce-height,-.5em));transform:scale(var(--fa-bounce-jump-scale-x,.9),var(--fa-bounce-jump-scale-y,1.1)) translateY(var(--fa-bounce-height,-.5em))}50%{-webkit-transform:scale(var(--fa-bounce-land-scale-x,1.05),var(--fa-bounce-land-scale-y,.95)) translateY(0);transform:scale(var(--fa-bounce-land-scale-x,1.05),var(--fa-bounce-land-scale-y,.95)) translateY(0)}57%{-webkit-transform:scale(1,1) translateY(var(--fa-bounce-rebound,-.125em));transform:scale(1,1) translateY(var(--fa-bounce-rebound,-.125em))}64%{-webkit-transform:scale(1,1) translateY(0);transform:scale(1,1) translateY(0)}100%{-webkit-transform:scale(1,1) translateY(0);transform:scale(1,1) translateY(0)}}@keyframes fa-bounce{0%{-webkit-transform:scale(1,1) translateY(0);transform:scale(1,1) translateY(0)}10%{-webkit-transform:scale(var(--fa-bounce-start-scale-x,1.1),var(--fa-bounce-start-scale-y,.9)) translateY(0);transform:scale(var(--fa-bounce-start-scale-x,1.1),var(--fa-bounce-start-scale-y,.9)) translateY(0)}30%{-webkit-transform:scale(var(--fa-bounce-jump-scale-x,.9),var(--fa-bounce-jump-scale-y,1.1)) translateY(var(--fa-bounce-height,-.5em));transform:scale(var(--fa-bounce-jump-scale-x,.9),var(--fa-bounce-jump-scale-y,1.1)) translateY(var(--fa-bounce-height,-.5em))}50%{-webkit-transform:scale(var(--fa-bounce-land-scale-x,1.05),var(--fa-bounce-land-scale-y,.95)) translateY(0);transform:scale(var(--fa-bounce-land-scale-x,1.05),var(--fa-bounce-land-scale-y,.95)) translateY(0)}57%{-webkit-transform:scale(1,1) translateY(var(--fa-bounce-rebound,-.125em));transform:scale(1,1) translateY(var(--fa-bounce-rebound,-.125em))}64%{-webkit-transform:scale(1,1) translateY(0);transform:scale(1,1) translateY(0)}100%{-webkit-transform:scale(1,1) translateY(0);transform:scale(1,1) translateY(0)}}@-webkit-keyframes fa-fade{50%{opacity:var(--fa-fade-opacity,.4)}}@keyframes fa-fade{50%{opacity:var(--fa-fade-opacity,.4)}}@-webkit-keyframes fa-beat-fade{0%,100%{opacity:var(--fa-beat-fade-opacity,.4);-webkit-transform:scale(1);transform:scale(1)}50%{opacity:1;-webkit-transform:scale(var(--fa-beat-fade-scale,1.125));transform:scale(var(--fa-beat-fade-scale,1.125))}}@keyframes fa-beat-fade{0%,100%{opacity:var(--fa-beat-fade-opacity,.4);-webkit-transform:scale(1);transform:scale(1)}50%{opacity:1;-webkit-transform:scale(var(--fa-beat-fade-scale,1.125));transform:scale(var(--fa-beat-fade-scale,1.125))}}@-webkit-keyframes fa-flip{50%{-webkit-transform:rotate3d(var(--fa-flip-x,0),var(--fa-flip-y,1),var(--fa-flip-z,0),var(--fa-flip-angle,-180deg));transform:rotate3d(var(--fa-flip-x,0),var(--fa-flip-y,1),var(--fa-flip-z,0),var(--fa-flip-angle,-180deg))}}@keyframes fa-flip{50%{-webkit-transform:rotate3d(var(--fa-flip-x,0),var(--fa-flip-y,1),var(--fa-flip-z,0),var(--fa-flip-angle,-180deg));transform:rotate3d(var(--fa-flip-x,0),var(--fa-flip-y,1),var(--fa-flip-z,0),var(--fa-flip-angle,-180deg))}}@-webkit-keyframes fa-shake{0%{-webkit-transform:rotate(-15deg);transform:rotate(-15deg)}4%{-webkit-transform:rotate(15deg);transform:rotate(15deg)}24%,8%{-webkit-transform:rotate(-18deg);transform:rotate(-18deg)}12%,28%{-webkit-transform:rotate(18deg);transform:rotate(18deg)}16%{-webkit-transform:rotate(-22deg);transform:rotate(-22deg)}20%{-webkit-transform:rotate(22deg);transform:rotate(22deg)}32%{-webkit-transform:rotate(-12deg);transform:rotate(-12deg)}36%{-webkit-transform:rotate(12deg);transform:rotate(12deg)}100%,40%{-webkit-transform:rotate(0);transform:rotate(0)}}@keyframes fa-shake{0%{-webkit-transform:rotate(-15deg);transform:rotate(-15deg)}4%{-webkit-transform:rotate(15deg);transform:rotate(15deg)}24%,8%{-webkit-transform:rotate(-18deg);transform:rotate(-18deg)}12%,28%{-webkit-transform:rotate(18deg);transform:rotate(18deg)}16%{-webkit-transform:rotate(-22deg);transform:rotate(-22deg)}20%{-webkit-transform:rotate(22deg);transform:rotate(22deg)}32%{-webkit-transform:rotate(-12deg);transform:rotate(-12deg)}36%{-webkit-transform:rotate(12deg);transform:rotate(12deg)}100%,40%{-webkit-transform:rotate(0);transform:rotate(0)}}@-webkit-keyframes fa-spin{0%{-webkit-transform:rotate(0);transform:rotate(0)}100%{-webkit-transform:rotate(360deg);transform:rotate(360deg)}}@keyframes fa-spin{0%{-webkit-transform:rotate(0);transform:rotate(0)}100%{-webkit-transform:rotate(360deg);transform:rotate(360deg)}}.fa-rotate-90{-webkit-transform:rotate(90deg);transform:rotate(90deg)}.fa-rotate-180{-webkit-transform:rotate(180deg);transform:rotate(180deg)}.fa-rotate-270{-webkit-transform:rotate(270deg);transform:rotate(270deg)}.fa-flip-horizontal{-webkit-transform:scale(-1,1);transform:scale(-1,1)}.fa-flip-vertical{-webkit-transform:scale(1,-1);transform:scale(1,-1)}.fa-flip-both,.fa-flip-horizontal.fa-flip-vertical{-webkit-transform:scale(-1,-1);transform:scale(-1,-1)}.fa-rotate-by{-webkit-transform:rotate(var(--fa-rotate-angle,0));transform:rotate(var(--fa-rotate-angle,0))}.fa-stack{display:inline-block;vertical-align:middle;height:2em;position:relative;width:2.5em}.fa-stack-1x,.fa-stack-2x{bottom:0;left:0;margin:auto;position:absolute;right:0;top:0;z-index:var(--fa-stack-z-index,auto)}.svg-inline--fa.fa-stack-1x{height:1em;width:1.25em}.svg-inline--fa.fa-stack-2x{height:2em;width:2.5em}.fa-inverse{color:var(--fa-inverse,#fff)}.fa-sr-only,.sr-only{position:absolute;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0,0,0,0);white-space:nowrap;border-width:0}.fa-sr-only-focusable:not(:focus),.sr-only-focusable:not(:focus){position:absolute;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0,0,0,0);white-space:nowrap;border-width:0}.svg-inline--fa .fa-primary{fill:var(--fa-primary-color,currentColor);opacity:var(--fa-primary-opacity,1)}.svg-inline--fa .fa-secondary{fill:var(--fa-secondary-color,currentColor);opacity:var(--fa-secondary-opacity,.4)}.svg-inline--fa.fa-swap-opacity .fa-primary{opacity:var(--fa-secondary-opacity,.4)}.svg-inline--fa.fa-swap-opacity .fa-secondary{opacity:var(--fa-primary-opacity,1)}.svg-inline--fa mask .fa-primary,.svg-inline--fa mask .fa-secondary{fill:#000}.fa-duotone.fa-inverse,.fad.fa-inverse{color:var(--fa-inverse,#fff)}</style><link href="./Renderização mais rápida usando blitting — Documentação do Matplotlib 3.10.8_files/theme.css" rel="stylesheet">
+<link href="./Renderização mais rápida usando blitting — Documentação do Matplotlib 3.10.8_files/bootstrap.css" rel="stylesheet">
+<link href="./Renderização mais rápida usando blitting — Documentação do Matplotlib 3.10.8_files/pydata-sphinx-theme.css" rel="stylesheet">
+
+  
+  <link href="./Renderização mais rápida usando blitting — Documentação do Matplotlib 3.10.8_files/all.min.css" rel="stylesheet">
+  <link rel="preload" as="font" type="font/woff2" crossorigin="" href="https://matplotlib.org/stable/_static/vendor/fontawesome/6.5.2/webfonts/fa-solid-900.woff2">
+<link rel="preload" as="font" type="font/woff2" crossorigin="" href="https://matplotlib.org/stable/_static/vendor/fontawesome/6.5.2/webfonts/fa-brands-400.woff2">
+<link rel="preload" as="font" type="font/woff2" crossorigin="" href="https://matplotlib.org/stable/_static/vendor/fontawesome/6.5.2/webfonts/fa-regular-400.woff2">
+
+    <link rel="stylesheet" type="text/css" href="./Renderização mais rápida usando blitting — Documentação do Matplotlib 3.10.8_files/pygments.css">
+    <link rel="stylesheet" type="text/css" href="./Renderização mais rápida usando blitting — Documentação do Matplotlib 3.10.8_files/style.css">
+    <link rel="stylesheet" type="text/css" href="./Renderização mais rápida usando blitting — Documentação do Matplotlib 3.10.8_files/graphviz.css">
+    <link rel="stylesheet" type="text/css" href="./Renderização mais rápida usando blitting — Documentação do Matplotlib 3.10.8_files/plot_directive.css">
+    <link rel="stylesheet" type="text/css" href="./Renderização mais rápida usando blitting — Documentação do Matplotlib 3.10.8_files/copybutton.css">
+    <link rel="stylesheet" type="text/css" href="./Renderização mais rápida usando blitting — Documentação do Matplotlib 3.10.8_files/sg_gallery.css">
+    <link rel="stylesheet" type="text/css" href="./Renderização mais rápida usando blitting — Documentação do Matplotlib 3.10.8_files/sg_gallery-binder.css">
+    <link rel="stylesheet" type="text/css" href="./Renderização mais rápida usando blitting — Documentação do Matplotlib 3.10.8_files/sg_gallery-dataframe.css">
+    <link rel="stylesheet" type="text/css" href="./Renderização mais rápida usando blitting — Documentação do Matplotlib 3.10.8_files/sg_gallery-rendered-html.css">
+    <link rel="stylesheet" type="text/css" href="./Renderização mais rápida usando blitting — Documentação do Matplotlib 3.10.8_files/sphinx-design.min.css">
+    <link rel="stylesheet" type="text/css" href="./Renderização mais rápida usando blitting — Documentação do Matplotlib 3.10.8_files/mpl.css">
+  
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="./Renderização mais rápida usando blitting — Documentação do Matplotlib 3.10.8_files/bootstrap.js.baixados">
+<link rel="preload" as="script" href="./Renderização mais rápida usando blitting — Documentação do Matplotlib 3.10.8_files/pydata-sphinx-theme.js.baixados">
+  <script src="./Renderização mais rápida usando blitting — Documentação do Matplotlib 3.10.8_files/all.min.js.baixados" type="text/javascript"></script>
+
+    <script src="./Renderização mais rápida usando blitting — Documentação do Matplotlib 3.10.8_files/documentation_options.js.baixados" type="text/javascript"></script>
+    <script src="./Renderização mais rápida usando blitting — Documentação do Matplotlib 3.10.8_files/doctools.js.baixados" type="text/javascript"></script>
+    <script src="./Renderização mais rápida usando blitting — Documentação do Matplotlib 3.10.8_files/sphinx_highlight.js.baixados" type="text/javascript"></script>
+    <script src="./Renderização mais rápida usando blitting — Documentação do Matplotlib 3.10.8_files/clipboard.min.js.baixados" type="text/javascript"></script>
+    <script src="./Renderização mais rápida usando blitting — Documentação do Matplotlib 3.10.8_files/copybutton.js.baixados" type="text/javascript"></script>
+    <script src="./Renderização mais rápida usando blitting — Documentação do Matplotlib 3.10.8_files/design-tabs.js.baixados" type="text/javascript"></script>
+    <script data-domain="matplotlib.org" defer="defer" src="./Renderização mais rápida usando blitting — Documentação do Matplotlib 3.10.8_files/script.js.baixados" type="text/javascript"></script>
+    <script type="text/javascript">DOCUMENTATION_OPTIONS.pagename = 'users/explain/animations/blitting';</script>
+    <script type="text/javascript">
+        DOCUMENTATION_OPTIONS.theme_version = '0.15.4';
+        DOCUMENTATION_OPTIONS.theme_switcher_json_url = 'https://matplotlib.org/devdocs/_static/switcher.json?v3.10.8-7-g1957ba3918';
+        DOCUMENTATION_OPTIONS.theme_switcher_version_match = '3.10.8';
+        DOCUMENTATION_OPTIONS.show_version_warning_banner = true;
+        </script>
+    <link rel="canonical" href="https://matplotlib.org/stable/users/explain/animations/blitting.html">
+    <link rel="search" type="application/opensearchdescription+xml" title="Search within Matplotlib 3.10.8 documentation" href="https://matplotlib.org/stable/_static/opensearch.xml">
+    <link rel="icon" href="https://matplotlib.org/stable/_static/favicon.ico">
+    <link rel="search" title="Search" href="https://matplotlib.org/stable/search.html">
+    <link rel="next" title="User Toolkits" href="https://matplotlib.org/stable/users/explain/toolkits/index.html">
+    <link rel="prev" title="Animations using Matplotlib" href="https://matplotlib.org/stable/users/explain/animations/animations.html">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="docsearch:language" content="en">
+    <meta name="docbuild:last-update" content="Dec 12, 2025">
+  </head>
+  
+  
+  <body data-bs-spy="scroll" data-bs-target=".bd-toc-nav" data-offset="180" data-bs-root-margin="0px 0px -60%" data-default-mode="">
+
+  
+  
+  <div id="pst-skip-link" class="skip-link d-print-none"><a href="https://matplotlib.org/stable/users/explain/animations/blitting.html#main-content" _msttexthash="357760" _msthash="1">Skip to main content</a></div>
+  
+  <div id="pst-scroll-pixel-helper"></div>
+  
+  <button type="button" class="btn rounded-pill" id="pst-back-to-top" _msthidden="1">
+    <svg class="svg-inline--fa fa-arrow-up" aria-hidden="true" focusable="false" data-prefix="fas" data-icon="arrow-up" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 384 512" data-fa-i2svg=""><path fill="currentColor" d="M214.6 41.4c-12.5-12.5-32.8-12.5-45.3 0l-160 160c-12.5 12.5-12.5 32.8 0 45.3s32.8 12.5 45.3 0L160 141.2V448c0 17.7 14.3 32 32 32s32-14.3 32-32V141.2L329.4 246.6c12.5 12.5 32.8 12.5 45.3 0s12.5-32.8 0-45.3l-160-160z"></path></svg><!-- <i class="fa-solid fa-arrow-up"></i> Font Awesome fontawesome.com --><font _mstmutation="1" _msttexthash="137137" _msthidden="1" _msthash="2">Back to top</font></button>
+
+  
+  <input type="checkbox" class="sidebar-toggle" id="pst-primary-sidebar-checkbox">
+  <label class="overlay overlay-primary" for="pst-primary-sidebar-checkbox"></label>
+  
+  <input type="checkbox" class="sidebar-toggle" id="pst-secondary-sidebar-checkbox">
+  <label class="overlay overlay-secondary" for="pst-secondary-sidebar-checkbox"></label>
+  
+  <div class="search-button__wrapper" _msthidden="1">
+    <div class="search-button__overlay"></div>
+    <div class="search-button__search-container" _msthidden="1">
+<form class="bd-search d-flex align-items-center" action="https://matplotlib.org/stable/search.html" method="get" _msthidden="1">
+  <svg class="svg-inline--fa fa-magnifying-glass" aria-hidden="true" focusable="false" data-prefix="fas" data-icon="magnifying-glass" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" data-fa-i2svg=""><path fill="currentColor" d="M416 208c0 45.9-14.9 88.3-40 122.7L502.6 457.4c12.5 12.5 12.5 32.8 0 45.3s-32.8 12.5-45.3 0L330.7 376c-34.4 25.2-76.8 40-122.7 40C93.1 416 0 322.9 0 208S93.1 0 208 0S416 93.1 416 208zM208 352a144 144 0 1 0 0-288 144 144 0 1 0 0 288z"></path></svg><!-- <i class="fa-solid fa-magnifying-glass"></i> Font Awesome fontawesome.com -->
+  <input type="search" class="form-control" name="q" id="search-input" placeholder="Search the docs ..." aria-label="Search the docs ..." autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false" _msthidden="A" _mstplaceholder="267410" _msthash="3" _mstaria-label="267410">
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form></div>
+  </div>
+
+  <div class="pst-async-banner-revealer" _msthidden="1" style="height: auto;">
+  <aside id="bd-header-version-warning" class="d-none d-print-none" aria-label="Version warning" _msthidden="A" _mstaria-label="264654" _msthash="4"></aside>
+</div>
+
+  
+    <header class="bd-header navbar navbar-expand-lg bd-navbar d-print-none">
+<div class="bd-header__inner bd-page-width">
+  <button class="pst-navbar-icon sidebar-toggle primary-toggle" aria-label="Site navigation" _msthidden="A" _mstaria-label="261573" _msthash="5">
+    <svg class="svg-inline--fa fa-bars" aria-hidden="true" focusable="false" data-prefix="fas" data-icon="bars" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512" data-fa-i2svg=""><path fill="currentColor" d="M0 96C0 78.3 14.3 64 32 64H416c17.7 0 32 14.3 32 32s-14.3 32-32 32H32C14.3 128 0 113.7 0 96zM0 256c0-17.7 14.3-32 32-32H416c17.7 0 32 14.3 32 32s-14.3 32-32 32H32c-17.7 0-32-14.3-32-32zM448 416c0 17.7-14.3 32-32 32H32c-17.7 0-32-14.3-32-32s14.3-32 32-32H416c17.7 0 32 14.3 32 32z"></path></svg><!-- <span class="fa-solid fa-bars"></span> Font Awesome fontawesome.com -->
+  </button>
+  
+  
+  <div class="col-lg-3 navbar-header-items__start" _msthidden="1">
+    
+      <div class="navbar-item" _msthidden="1">
+
+  
+     
+  
+
+<a class="navbar-brand logo" href="https://matplotlib.org/stable/" _msthidden="1">
+  
+  
+  
+  
+  
+    
+    
+      
+    
+    
+    <img src="./Renderização mais rápida usando blitting — Documentação do Matplotlib 3.10.8_files/logo_light.svg" class="logo__image only-light" alt="Matplotlib 3.10.8 documentation - Home" _msthidden="A" _mstalt="981097" _msthash="6">
+    <script type="text/javascript">document.write(`<img src="../../../_static/logo_dark.svg" class="logo__image only-dark" alt="Matplotlib 3.10.8 documentation - Home"/>`);</script><img src="./Renderização mais rápida usando blitting — Documentação do Matplotlib 3.10.8_files/logo_dark.svg" class="logo__image only-dark" alt="Documentação Matplotlib 3.10.8 - Início" _mstalt="981097" _msthash="130">
+  
+  
+</a></div>
+    
+  </div>
+  
+  <div class="col-lg-9 navbar-header-items">
+    
+    <div class="me-auto navbar-header-items__center">
+      
+        <div class="navbar-item"><ul id="navbar-main-elements" class="navbar-nav">
+  <li class="nav-item">
+    <a class="reference internal nav-link" href="https://matplotlib.org/stable/plot_types/index.html" _msttexthash="261794" _msthash="7">Tipos de enredos</a>
+  </li>
+  <li class="nav-item">
+    <a class="reference internal nav-link" href="https://matplotlib.org/stable/users/index.html" _msttexthash="262639" _msthash="8">Guia do usuário</a>
+  </li>
+  <li class="nav-item">
+    <a class="reference internal nav-link" href="https://matplotlib.org/stable/tutorials/index.html" _msttexthash="138424" _msthash="9">Tutoriais</a>
+  </li>
+  <li class="nav-item">
+    <a class="reference internal nav-link" href="https://matplotlib.org/stable/gallery/index.html" _msttexthash="117299" _msthash="10">Exemplos</a>
+  </li>
+  <li class="nav-item">
+    <a class="reference internal nav-link" href="https://matplotlib.org/stable/api/index.html" _msttexthash="173095" _msthash="11">Referência</a>
+  </li>
+  <li class="nav-item">
+    <a class="reference internal nav-link" href="https://matplotlib.org/stable/devel/index.html" _msttexthash="160316" _msthash="12">Contribuir</a>
+  </li>
+  <li class="nav-item">
+    <a class="reference internal nav-link" href="https://matplotlib.org/stable/users/release_notes.html" _msttexthash="198991" _msthash="13">Lançamentos</a>
+  </li>
+</ul></div>
+      
+    </div>
+    
+    
+    <div class="navbar-header-items__end">
+      
+        <div class="navbar-item navbar-persistent--container">
+          
+
+<script type="text/javascript">
+document.write(`
+  <button class="btn btn-sm pst-navbar-icon search-button search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass fa-lg"></i>
+  </button>
+`);
+</script>
+  <button class="btn btn-sm pst-navbar-icon search-button search-button__button" aria-label="Busca" data-bs-placement="bottom" data-bs-toggle="tooltip" _mstaria-label="74607" _msthash="131" data-bs-original-title="Search">
+    <svg class="svg-inline--fa fa-magnifying-glass fa-lg" aria-hidden="true" focusable="false" data-prefix="fas" data-icon="magnifying-glass" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" data-fa-i2svg=""><path fill="currentColor" d="M416 208c0 45.9-14.9 88.3-40 122.7L502.6 457.4c12.5 12.5 12.5 32.8 0 45.3s-32.8 12.5-45.3 0L330.7 376c-34.4 25.2-76.8 40-122.7 40C93.1 416 0 322.9 0 208S93.1 0 208 0S416 93.1 416 208zM208 352a144 144 0 1 0 0-288 144 144 0 1 0 0 288z"></path></svg><!-- <i class="fa-solid fa-magnifying-glass fa-lg"></i> Font Awesome fontawesome.com -->
+  </button>
+
+        </div>
+      
+      
+        <div class="navbar-item">
+
+<script type="text/javascript">
+document.write(`
+  <button class="btn btn-sm nav-link pst-navbar-icon theme-switch-button" title="light/dark" aria-label="light/dark" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="theme-switch fa-solid fa-sun fa-lg" data-mode="light"></i>
+    <i class="theme-switch fa-solid fa-moon fa-lg" data-mode="dark"></i>
+    <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg" data-mode="auto"></i>
+  </button>
+`);
+</script>
+  <button class="btn btn-sm nav-link pst-navbar-icon theme-switch-button" aria-label="Luz/Escuro" data-bs-placement="bottom" data-bs-toggle="tooltip" _mstaria-label="149279" _msthash="132" data-bs-original-title="light/dark">
+    <svg class="svg-inline--fa fa-sun theme-switch fa-lg" data-mode="light" aria-hidden="true" focusable="false" data-prefix="fas" data-icon="sun" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" data-fa-i2svg=""><path fill="currentColor" d="M361.5 1.2c5 2.1 8.6 6.6 9.6 11.9L391 121l107.9 19.8c5.3 1 9.8 4.6 11.9 9.6s1.5 10.7-1.6 15.2L446.9 256l62.3 90.3c3.1 4.5 3.7 10.2 1.6 15.2s-6.6 8.6-11.9 9.6L391 391 371.1 498.9c-1 5.3-4.6 9.8-9.6 11.9s-10.7 1.5-15.2-1.6L256 446.9l-90.3 62.3c-4.5 3.1-10.2 3.7-15.2 1.6s-8.6-6.6-9.6-11.9L121 391 13.1 371.1c-5.3-1-9.8-4.6-11.9-9.6s-1.5-10.7 1.6-15.2L65.1 256 2.8 165.7c-3.1-4.5-3.7-10.2-1.6-15.2s6.6-8.6 11.9-9.6L121 121 140.9 13.1c1-5.3 4.6-9.8 9.6-11.9s10.7-1.5 15.2 1.6L256 65.1 346.3 2.8c4.5-3.1 10.2-3.7 15.2-1.6zM160 256a96 96 0 1 1 192 0 96 96 0 1 1 -192 0zm224 0a128 128 0 1 0 -256 0 128 128 0 1 0 256 0z"></path></svg><!-- <i class="theme-switch fa-solid fa-sun fa-lg" data-mode="light"></i> Font Awesome fontawesome.com -->
+    <svg class="svg-inline--fa fa-moon theme-switch fa-lg" data-mode="dark" aria-hidden="true" focusable="false" data-prefix="fas" data-icon="moon" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 384 512" data-fa-i2svg=""><path fill="currentColor" d="M223.5 32C100 32 0 132.3 0 256S100 480 223.5 480c60.6 0 115.5-24.2 155.8-63.4c5-4.9 6.3-12.5 3.1-18.7s-10.1-9.7-17-8.5c-9.8 1.7-19.8 2.6-30.1 2.6c-96.9 0-175.5-78.8-175.5-176c0-65.8 36-123.1 89.3-153.3c6.1-3.5 9.2-10.5 7.7-17.3s-7.3-11.9-14.3-12.5c-6.3-.5-12.6-.8-19-.8z"></path></svg><!-- <i class="theme-switch fa-solid fa-moon fa-lg" data-mode="dark"></i> Font Awesome fontawesome.com -->
+    <svg class="svg-inline--fa fa-circle-half-stroke theme-switch fa-lg" data-mode="auto" aria-hidden="true" focusable="false" data-prefix="fas" data-icon="circle-half-stroke" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" data-fa-i2svg=""><path fill="currentColor" d="M448 256c0-106-86-192-192-192V448c106 0 192-86 192-192zM0 256a256 256 0 1 1 512 0A256 256 0 1 1 0 256z"></path></svg><!-- <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg" data-mode="auto"></i> Font Awesome fontawesome.com -->
+  </button>
+</div>
+      
+        <div class="navbar-item">
+<script type="text/javascript">
+document.write(`
+  <div class="version-switcher__container dropdown">
+    <button id="pst-version-switcher-button-2"
+      type="button"
+      class="version-switcher__button btn btn-sm dropdown-toggle"
+      data-bs-toggle="dropdown"
+      aria-haspopup="listbox"
+      aria-controls="pst-version-switcher-list-2"
+      aria-label="Version switcher list"
+    >
+      Choose version  <!-- this text may get changed later by javascript -->
+      <span class="caret"></span>
+    </button>
+    <div id="pst-version-switcher-list-2"
+      class="version-switcher__menu dropdown-menu list-group-flush py-0"
+      role="listbox" aria-labelledby="pst-version-switcher-button-2">
+      <!-- dropdown will be populated by javascript on page load -->
+    </div>
+  </div>
+`);
+</script>
+  <div class="version-switcher__container dropdown" _msthidden="2">
+    <button id="pst-version-switcher-button-2" type="button" class="version-switcher__button btn btn-sm dropdown-toggle" data-bs-toggle="dropdown" aria-haspopup="listbox" aria-controls="pst-version-switcher-list-2" aria-label="Lista de switchers de versões" _mstaria-label="431249" _msthash="137" data-active-version-name="3.10 (stable)" data-active-version="3.10.8" _msttexthash="209560">3.10 (estável)</button>
+    <div id="pst-version-switcher-list-2" class="version-switcher__menu dropdown-menu list-group-flush py-0 dropdown-menu-dark" role="listbox" aria-labelledby="pst-version-switcher-button-2">
+      <!-- dropdown will be populated by javascript on page load -->
+    <a class="dropdown-item list-group-item list-group-item-action py-1 active" href="https://matplotlib.org/stable/users/explain/animations/blitting.html" role="option" data-version-name="3.10 (stable)" data-version="3.10.8" _msthidden="1"><span _msttexthash="155805" _msthidden="1" _msthash="158">3.10 (stable)</span></a><a class="dropdown-item list-group-item list-group-item-action py-1" href="https://matplotlib.org/devdocs/users/explain/animations/blitting.html" role="option" data-version-name="3.11 (dev)" data-version="dev" _msthidden="1"><span _msttexthash="89388" _msthidden="1" _msthash="156">3.11 (dev)</span></a><a class="dropdown-item list-group-item list-group-item-action py-1" href="https://matplotlib.org/3.9.3/users/explain/animations/blitting.html" role="option" data-version-name="3.9" data-version="3.9.3" _msthidden="1"><span _msttexthash="16094" _msthidden="1" _msthash="154">3.9</span></a><a class="dropdown-item list-group-item list-group-item-action py-1" href="https://matplotlib.org/3.8.4/users/explain/animations/blitting.html" role="option" data-version-name="3.8" data-version="3.8.4" _msthidden="1"><span _msttexthash="15977" _msthidden="1" _msthash="152">3.8</span></a><a class="dropdown-item list-group-item list-group-item-action py-1" href="https://matplotlib.org/3.7.5/users/explain/animations/blitting.html" role="option" data-version-name="3.7" data-version="3.7.5" _msthidden="1"><span _msttexthash="15860" _msthidden="1" _msthash="150">3.7</span></a><a class="dropdown-item list-group-item list-group-item-action py-1" href="https://matplotlib.org/3.6.3/users/explain/animations/blitting.html" role="option" data-version-name="3.6" data-version="3.6.3" _msthidden="1"><span _msttexthash="15743" _msthidden="1" _msthash="148">3.6</span></a><a class="dropdown-item list-group-item list-group-item-action py-1" href="https://matplotlib.org/3.5.3/users/explain/animations/blitting.html" role="option" data-version-name="3.5" data-version="3.5.3" _msthidden="1"><span _msttexthash="15626" _msthidden="1" _msthash="146">3.5</span></a><a class="dropdown-item list-group-item list-group-item-action py-1" href="https://matplotlib.org/3.4.3/users/explain/animations/blitting.html" role="option" data-version-name="3.4" data-version="3.4.3" _msthidden="1"><span _msttexthash="15509" _msthidden="1" _msthash="144">3.4</span></a><a class="dropdown-item list-group-item list-group-item-action py-1" href="https://matplotlib.org/3.3.4/users/explain/animations/blitting.html" role="option" data-version-name="3.3" data-version="3.3.4" _msthidden="1"><span _msttexthash="15392" _msthidden="1" _msthash="142">3.3</span></a><a class="dropdown-item list-group-item list-group-item-action py-1" href="https://matplotlib.org/2.2.4/users/explain/animations/blitting.html" role="option" data-version-name="2.2" data-version="2.2.4" _msthidden="1"><span _msttexthash="15184" _msthidden="1" _msthash="140">2.2</span></a></div>
+  </div>
+</div>
+      
+        <div class="navbar-item"><ul class="navbar-icon-links" aria-label="Links de Ícones" _mstaria-label="131963" _msthash="14">
+        <li class="nav-item">
+          
+          
+          
+          
+          
+          
+          
+          
+          <a href="https://gitter.im/matplotlib/matplotlib" class="nav-link pst-navbar-icon" rel="noopener" target="_blank" data-bs-toggle="tooltip" data-bs-placement="bottom" data-bs-original-title="Gitter"><svg class="svg-inline--fa fa-gitter fa-lg" aria-hidden="true" focusable="false" data-prefix="fab" data-icon="gitter" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 384 512" data-fa-i2svg=""><path fill="currentColor" d="M66.4 322.5H16V0h50.4v322.5zM166.9 76.1h-50.4V512h50.4V76.1zm100.6 0h-50.4V512h50.4V76.1zM368 76h-50.4v247H368V76z"></path></svg><!-- <i class="fa-brands fa-gitter fa-lg" aria-hidden="true"></i> Font Awesome fontawesome.com -->
+            <span class="sr-only" _msttexthash="78260" _msthash="15">Gitter</span></a>
+        </li>
+        <li class="nav-item">
+          
+          
+          
+          
+          
+          
+          
+          
+          <a href="https://discourse.matplotlib.org/" class="nav-link pst-navbar-icon" rel="noopener" target="_blank" data-bs-toggle="tooltip" data-bs-placement="bottom" data-bs-original-title="Discourse"><svg class="svg-inline--fa fa-discourse fa-lg" aria-hidden="true" focusable="false" data-prefix="fab" data-icon="discourse" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512" data-fa-i2svg=""><path fill="currentColor" d="M225.9 32C103.3 32 0 130.5 0 252.1 0 256 .1 480 .1 480l225.8-.2c122.7 0 222.1-102.3 222.1-223.9C448 134.3 348.6 32 225.9 32zM224 384c-19.4 0-37.9-4.3-54.4-12.1L88.5 392l22.9-75c-9.8-18.1-15.4-38.9-15.4-61 0-70.7 57.3-128 128-128s128 57.3 128 128-57.3 128-128 128z"></path></svg><!-- <i class="fa-brands fa-discourse fa-lg" aria-hidden="true"></i> Font Awesome fontawesome.com -->
+            <span class="sr-only" _msttexthash="117585" _msthash="16">Discurso</span></a>
+        </li>
+        <li class="nav-item">
+          
+          
+          
+          
+          
+          
+          
+          
+          <a href="https://github.com/matplotlib/matplotlib" class="nav-link pst-navbar-icon" rel="noopener" target="_blank" data-bs-toggle="tooltip" data-bs-placement="bottom" data-bs-original-title="GitHub"><svg class="svg-inline--fa fa-github fa-lg" aria-hidden="true" focusable="false" data-prefix="fab" data-icon="github" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 496 512" data-fa-i2svg=""><path fill="currentColor" d="M165.9 397.4c0 2-2.3 3.6-5.2 3.6-3.3.3-5.6-1.3-5.6-3.6 0-2 2.3-3.6 5.2-3.6 3-.3 5.6 1.3 5.6 3.6zm-31.1-4.5c-.7 2 1.3 4.3 4.3 4.9 2.6 1 5.6 0 6.2-2s-1.3-4.3-4.3-5.2c-2.6-.7-5.5.3-6.2 2.3zm44.2-1.7c-2.9.7-4.9 2.6-4.6 4.9.3 2 2.9 3.3 5.9 2.6 2.9-.7 4.9-2.6 4.6-4.6-.3-1.9-3-3.2-5.9-2.9zM244.8 8C106.1 8 0 113.3 0 252c0 110.9 69.8 205.8 169.5 239.2 12.8 2.3 17.3-5.6 17.3-12.1 0-6.2-.3-40.4-.3-61.4 0 0-70 15-84.7-29.8 0 0-11.4-29.1-27.8-36.6 0 0-22.9-15.7 1.6-15.4 0 0 24.9 2 38.6 25.8 21.9 38.6 58.6 27.5 72.9 20.9 2.3-16 8.8-27.1 16-33.7-55.9-6.2-112.3-14.3-112.3-110.5 0-27.5 7.6-41.3 23.6-58.9-2.6-6.5-11.1-33.3 2.6-67.9 20.9-6.5 69 27 69 27 20-5.6 41.5-8.5 62.8-8.5s42.8 2.9 62.8 8.5c0 0 48.1-33.6 69-27 13.7 34.7 5.2 61.4 2.6 67.9 16 17.7 25.8 31.5 25.8 58.9 0 96.5-58.9 104.2-114.8 110.5 9.2 7.9 17 22.9 17 46.4 0 33.7-.3 75.4-.3 83.6 0 6.5 4.6 14.4 17.3 12.1C428.2 457.8 496 362.9 496 252 496 113.3 383.5 8 244.8 8zM97.2 352.9c-1.3 1-1 3.3.7 5.2 1.6 1.6 3.9 2.3 5.2 1 1.3-1 1-3.3-.7-5.2-1.6-1.6-3.9-2.3-5.2-1zm-10.8-8.1c-.7 1.3.3 2.9 2.3 3.9 1.6 1 3.6.7 4.3-.7.7-1.3-.3-2.9-2.3-3.9-2-.6-3.6-.3-4.3.7zm32.4 35.6c-1.6 1.3-1 4.3 1.3 6.2 2.3 2.3 5.2 2.6 6.5 1 1.3-1.3.7-4.3-1.3-6.2-2.2-2.3-5.2-2.6-6.5-1zm-11.4-14.7c-1.6 1-1.6 3.6 0 5.9 1.6 2.3 4.3 3.3 5.6 2.3 1.6-1.3 1.6-3.9 0-6.2-1.4-2.3-4-3.3-5.6-2z"></path></svg><!-- <i class="fa-brands fa-github fa-lg" aria-hidden="true"></i> Font Awesome fontawesome.com -->
+            <span class="sr-only" _msttexthash="72332" _msthash="17">GitHub</span></a>
+        </li>
+        <li class="nav-item">
+          
+          
+          
+          
+          
+          
+          
+          
+          <a href="https://twitter.com/matplotlib/" class="nav-link pst-navbar-icon" rel="noopener" target="_blank" data-bs-toggle="tooltip" data-bs-placement="bottom" data-bs-original-title="Twitter"><svg class="svg-inline--fa fa-twitter fa-lg" aria-hidden="true" focusable="false" data-prefix="fab" data-icon="twitter" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" data-fa-i2svg=""><path fill="currentColor" d="M459.37 151.716c.325 4.548.325 9.097.325 13.645 0 138.72-105.583 298.558-298.558 298.558-59.452 0-114.68-17.219-161.137-47.106 8.447.974 16.568 1.299 25.34 1.299 49.055 0 94.213-16.568 130.274-44.832-46.132-.975-84.792-31.188-98.112-72.772 6.498.974 12.995 1.624 19.818 1.624 9.421 0 18.843-1.3 27.614-3.573-48.081-9.747-84.143-51.98-84.143-102.985v-1.299c13.969 7.797 30.214 12.67 47.431 13.319-28.264-18.843-46.781-51.005-46.781-87.391 0-19.492 5.197-37.36 14.294-52.954 51.655 63.675 129.3 105.258 216.365 109.807-1.624-7.797-2.599-15.918-2.599-24.04 0-57.828 46.782-104.934 104.934-104.934 30.213 0 57.502 12.67 76.67 33.137 23.715-4.548 46.456-13.32 66.599-25.34-7.798 24.366-24.366 44.833-46.132 57.827 21.117-2.273 41.584-8.122 60.426-16.243-14.292 20.791-32.161 39.308-52.628 54.253z"></path></svg><!-- <i class="fa-brands fa-twitter fa-lg" aria-hidden="true"></i> Font Awesome fontawesome.com -->
+            <span class="sr-only" _msttexthash="98995" _msthash="18">Twitter</span></a>
+        </li>
+</ul></div>
+      
+    </div>
+    
+  </div>
+  
+  
+    <div class="navbar-persistent--mobile" _msthidden="1">
+
+<script type="text/javascript" _msthidden="2">
+document.write(`
+  <button class="btn btn-sm pst-navbar-icon search-button search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass fa-lg"></i>
+  </button>
+`);
+</script>
+  <button class="btn btn-sm pst-navbar-icon search-button search-button__button" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip" _msthidden="A" _mstaria-label="74607" _msthash="133" data-bs-original-title="Search">
+    <svg class="svg-inline--fa fa-magnifying-glass fa-lg" aria-hidden="true" focusable="false" data-prefix="fas" data-icon="magnifying-glass" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" data-fa-i2svg=""><path fill="currentColor" d="M416 208c0 45.9-14.9 88.3-40 122.7L502.6 457.4c12.5 12.5 12.5 32.8 0 45.3s-32.8 12.5-45.3 0L330.7 376c-34.4 25.2-76.8 40-122.7 40C93.1 416 0 322.9 0 208S93.1 0 208 0S416 93.1 416 208zM208 352a144 144 0 1 0 0-288 144 144 0 1 0 0 288z"></path></svg><!-- <i class="fa-solid fa-magnifying-glass fa-lg"></i> Font Awesome fontawesome.com -->
+  </button>
+
+    </div>
+  
+
+  
+    <button class="pst-navbar-icon sidebar-toggle secondary-toggle" aria-label="On this page" _msthidden="A" _mstaria-label="156351" _msthash="19">
+      <svg class="svg-inline--fa fa-outdent" aria-hidden="true" focusable="false" data-prefix="fas" data-icon="outdent" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512" data-fa-i2svg=""><path fill="currentColor" d="M0 64C0 46.3 14.3 32 32 32H416c17.7 0 32 14.3 32 32s-14.3 32-32 32H32C14.3 96 0 81.7 0 64zM192 192c0-17.7 14.3-32 32-32H416c17.7 0 32 14.3 32 32s-14.3 32-32 32H224c-17.7 0-32-14.3-32-32zm32 96H416c17.7 0 32 14.3 32 32s-14.3 32-32 32H224c-17.7 0-32-14.3-32-32s14.3-32 32-32zM0 448c0-17.7 14.3-32 32-32H416c17.7 0 32 14.3 32 32s-14.3 32-32 32H32c-17.7 0-32-14.3-32-32zM.2 268.6c-8.2-6.4-8.2-18.9 0-25.3l101.9-79.3c10.5-8.2 25.8-.7 25.8 12.6V335.3c0 13.3-15.3 20.8-25.8 12.6L.2 268.6z"></path></svg><!-- <span class="fa-solid fa-outdent"></span> Font Awesome fontawesome.com -->
+    </button>
+  
+</div>
+
+    </header>
+  
+
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      
+      
+      <div class="bd-sidebar-primary bd-sidebar">
+        
+
+  
+  <div class="sidebar-header-items sidebar-primary__section" _msthidden="12">
+    
+    
+      <div class="sidebar-header-items__center" _msthidden="7">
+        
+          
+          
+            <div class="navbar-item" _msthidden="7"><ul id="navbar-main-elements" class="navbar-nav" _msthidden="7">
+  <li class="nav-item" _msthidden="1">
+    <a class="reference internal nav-link" href="https://matplotlib.org/stable/plot_types/index.html" _msttexthash="141778" _msthidden="1" _msthash="20">Plot types</a>
+  </li>
+  <li class="nav-item" _msthidden="1">
+    <a class="reference internal nav-link" href="https://matplotlib.org/stable/users/index.html" _msttexthash="134953" _msthidden="1" _msthash="21">User guide</a>
+  </li>
+  <li class="nav-item" _msthidden="1">
+    <a class="reference internal nav-link" href="https://matplotlib.org/stable/tutorials/index.html" _msttexthash="138970" _msthidden="1" _msthash="22">Tutorials</a>
+  </li>
+  <li class="nav-item" _msthidden="1">
+    <a class="reference internal nav-link" href="https://matplotlib.org/stable/gallery/index.html" _msttexthash="115141" _msthidden="1" _msthash="23">Examples</a>
+  </li>
+  <li class="nav-item" _msthidden="1">
+    <a class="reference internal nav-link" href="https://matplotlib.org/stable/api/index.html" _msttexthash="131391" _msthidden="1" _msthash="24">Reference</a>
+  </li>
+  <li class="nav-item" _msthidden="1">
+    <a class="reference internal nav-link" href="https://matplotlib.org/stable/devel/index.html" _msttexthash="159757" _msthidden="1" _msthash="25">Contribute</a>
+  </li>
+  <li class="nav-item" _msthidden="1">
+    <a class="reference internal nav-link" href="https://matplotlib.org/stable/users/release_notes.html" _msttexthash="113542" _msthidden="1" _msthash="26">Releases</a>
+  </li>
+</ul></div>
+          
+        
+      </div>
+    
+    
+    
+      <div class="sidebar-header-items__end" _msthidden="5">
+        
+          <div class="navbar-item" _msthidden="1">
+
+<script type="text/javascript" _msthidden="2">
+document.write(`
+  <button class="btn btn-sm nav-link pst-navbar-icon theme-switch-button" title="light/dark" aria-label="light/dark" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="theme-switch fa-solid fa-sun fa-lg" data-mode="light"></i>
+    <i class="theme-switch fa-solid fa-moon fa-lg" data-mode="dark"></i>
+    <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg" data-mode="auto"></i>
+  </button>
+`);
+</script>
+  <button class="btn btn-sm nav-link pst-navbar-icon theme-switch-button" aria-label="light/dark" data-bs-placement="bottom" data-bs-toggle="tooltip" _msthidden="A" _mstaria-label="149279" _msthash="134" data-bs-original-title="light/dark">
+    <svg class="svg-inline--fa fa-sun theme-switch fa-lg" data-mode="light" aria-hidden="true" focusable="false" data-prefix="fas" data-icon="sun" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" data-fa-i2svg=""><path fill="currentColor" d="M361.5 1.2c5 2.1 8.6 6.6 9.6 11.9L391 121l107.9 19.8c5.3 1 9.8 4.6 11.9 9.6s1.5 10.7-1.6 15.2L446.9 256l62.3 90.3c3.1 4.5 3.7 10.2 1.6 15.2s-6.6 8.6-11.9 9.6L391 391 371.1 498.9c-1 5.3-4.6 9.8-9.6 11.9s-10.7 1.5-15.2-1.6L256 446.9l-90.3 62.3c-4.5 3.1-10.2 3.7-15.2 1.6s-8.6-6.6-9.6-11.9L121 391 13.1 371.1c-5.3-1-9.8-4.6-11.9-9.6s-1.5-10.7 1.6-15.2L65.1 256 2.8 165.7c-3.1-4.5-3.7-10.2-1.6-15.2s6.6-8.6 11.9-9.6L121 121 140.9 13.1c1-5.3 4.6-9.8 9.6-11.9s10.7-1.5 15.2 1.6L256 65.1 346.3 2.8c4.5-3.1 10.2-3.7 15.2-1.6zM160 256a96 96 0 1 1 192 0 96 96 0 1 1 -192 0zm224 0a128 128 0 1 0 -256 0 128 128 0 1 0 256 0z"></path></svg><!-- <i class="theme-switch fa-solid fa-sun fa-lg" data-mode="light"></i> Font Awesome fontawesome.com -->
+    <svg class="svg-inline--fa fa-moon theme-switch fa-lg" data-mode="dark" aria-hidden="true" focusable="false" data-prefix="fas" data-icon="moon" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 384 512" data-fa-i2svg=""><path fill="currentColor" d="M223.5 32C100 32 0 132.3 0 256S100 480 223.5 480c60.6 0 115.5-24.2 155.8-63.4c5-4.9 6.3-12.5 3.1-18.7s-10.1-9.7-17-8.5c-9.8 1.7-19.8 2.6-30.1 2.6c-96.9 0-175.5-78.8-175.5-176c0-65.8 36-123.1 89.3-153.3c6.1-3.5 9.2-10.5 7.7-17.3s-7.3-11.9-14.3-12.5c-6.3-.5-12.6-.8-19-.8z"></path></svg><!-- <i class="theme-switch fa-solid fa-moon fa-lg" data-mode="dark"></i> Font Awesome fontawesome.com -->
+    <svg class="svg-inline--fa fa-circle-half-stroke theme-switch fa-lg" data-mode="auto" aria-hidden="true" focusable="false" data-prefix="fas" data-icon="circle-half-stroke" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" data-fa-i2svg=""><path fill="currentColor" d="M448 256c0-106-86-192-192-192V448c106 0 192-86 192-192zM0 256a256 256 0 1 1 512 0A256 256 0 1 1 0 256z"></path></svg><!-- <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg" data-mode="auto"></i> Font Awesome fontawesome.com -->
+  </button>
+</div>
+        
+          <div class="navbar-item">
+<script type="text/javascript" _msthidden="2">
+document.write(`
+  <div class="version-switcher__container dropdown">
+    <button id="pst-version-switcher-button-3"
+      type="button"
+      class="version-switcher__button btn btn-sm dropdown-toggle"
+      data-bs-toggle="dropdown"
+      aria-haspopup="listbox"
+      aria-controls="pst-version-switcher-list-3"
+      aria-label="Version switcher list"
+    >
+      Choose version  <!-- this text may get changed later by javascript -->
+      <span class="caret"></span>
+    </button>
+    <div id="pst-version-switcher-list-3"
+      class="version-switcher__menu dropdown-menu list-group-flush py-0"
+      role="listbox" aria-labelledby="pst-version-switcher-button-3">
+      <!-- dropdown will be populated by javascript on page load -->
+    </div>
+  </div>
+`);
+</script>
+  <div class="version-switcher__container dropdown" _msthidden="2">
+    <button id="pst-version-switcher-button-3" type="button" class="version-switcher__button btn btn-sm dropdown-toggle" data-bs-toggle="dropdown" aria-haspopup="listbox" aria-controls="pst-version-switcher-list-3" aria-label="Version switcher list" _msthidden="1" _mstaria-label="431249" _msthash="135" data-active-version-name="3.10 (stable)" data-active-version="3.10.8" _msttexthash="155805">3.10 (stable)</button>
+    <div id="pst-version-switcher-list-3" class="version-switcher__menu dropdown-menu list-group-flush py-0 dropdown-menu-dark" role="listbox" aria-labelledby="pst-version-switcher-button-3">
+      <!-- dropdown will be populated by javascript on page load -->
+    <a class="dropdown-item list-group-item list-group-item-action py-1 active" href="https://matplotlib.org/stable/users/explain/animations/blitting.html" role="option" data-version-name="3.10 (stable)" data-version="3.10.8" _msthidden="1"><span _msttexthash="155805" _msthidden="1" _msthash="157">3.10 (stable)</span></a><a class="dropdown-item list-group-item list-group-item-action py-1" href="https://matplotlib.org/devdocs/users/explain/animations/blitting.html" role="option" data-version-name="3.11 (dev)" data-version="dev" _msthidden="1"><span _msttexthash="89388" _msthidden="1" _msthash="155">3.11 (dev)</span></a><a class="dropdown-item list-group-item list-group-item-action py-1" href="https://matplotlib.org/3.9.3/users/explain/animations/blitting.html" role="option" data-version-name="3.9" data-version="3.9.3" _msthidden="1"><span _msttexthash="16094" _msthidden="1" _msthash="153">3.9</span></a><a class="dropdown-item list-group-item list-group-item-action py-1" href="https://matplotlib.org/3.8.4/users/explain/animations/blitting.html" role="option" data-version-name="3.8" data-version="3.8.4" _msthidden="1"><span _msttexthash="15977" _msthidden="1" _msthash="151">3.8</span></a><a class="dropdown-item list-group-item list-group-item-action py-1" href="https://matplotlib.org/3.7.5/users/explain/animations/blitting.html" role="option" data-version-name="3.7" data-version="3.7.5" _msthidden="1"><span _msttexthash="15860" _msthidden="1" _msthash="149">3.7</span></a><a class="dropdown-item list-group-item list-group-item-action py-1" href="https://matplotlib.org/3.6.3/users/explain/animations/blitting.html" role="option" data-version-name="3.6" data-version="3.6.3" _msthidden="1"><span _msttexthash="15743" _msthidden="1" _msthash="147">3.6</span></a><a class="dropdown-item list-group-item list-group-item-action py-1" href="https://matplotlib.org/3.5.3/users/explain/animations/blitting.html" role="option" data-version-name="3.5" data-version="3.5.3" _msthidden="1"><span _msttexthash="15626" _msthidden="1" _msthash="145">3.5</span></a><a class="dropdown-item list-group-item list-group-item-action py-1" href="https://matplotlib.org/3.4.3/users/explain/animations/blitting.html" role="option" data-version-name="3.4" data-version="3.4.3" _msthidden="1"><span _msttexthash="15509" _msthidden="1" _msthash="143">3.4</span></a><a class="dropdown-item list-group-item list-group-item-action py-1" href="https://matplotlib.org/3.3.4/users/explain/animations/blitting.html" role="option" data-version-name="3.3" data-version="3.3.4" _msthidden="1"><span _msttexthash="15392" _msthidden="1" _msthash="141">3.3</span></a><a class="dropdown-item list-group-item list-group-item-action py-1" href="https://matplotlib.org/2.2.4/users/explain/animations/blitting.html" role="option" data-version-name="2.2" data-version="2.2.4" _msthidden="1"><span _msttexthash="15184" _msthidden="1" _msthash="139">2.2</span></a></div>
+  </div>
+</div>
+        
+          <div class="navbar-item" _msthidden="5"><ul class="navbar-icon-links" aria-label="Icon Links" _msthidden="4" _mstaria-label="131963" _msthash="27">
+        <li class="nav-item" _msthidden="1">
+          
+          
+          
+          
+          
+          
+          
+          
+          <a href="https://gitter.im/matplotlib/matplotlib" class="nav-link pst-navbar-icon" rel="noopener" target="_blank" data-bs-toggle="tooltip" data-bs-placement="bottom" _msthidden="1" data-bs-original-title="Gitter"><svg class="svg-inline--fa fa-gitter fa-lg" aria-hidden="true" focusable="false" data-prefix="fab" data-icon="gitter" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 384 512" data-fa-i2svg=""><path fill="currentColor" d="M66.4 322.5H16V0h50.4v322.5zM166.9 76.1h-50.4V512h50.4V76.1zm100.6 0h-50.4V512h50.4V76.1zM368 76h-50.4v247H368V76z"></path></svg><!-- <i class="fa-brands fa-gitter fa-lg" aria-hidden="true"></i> Font Awesome fontawesome.com -->
+            <span class="sr-only" _msttexthash="78260" _msthidden="1" _msthash="28">Gitter</span></a>
+        </li>
+        <li class="nav-item" _msthidden="1">
+          
+          
+          
+          
+          
+          
+          
+          
+          <a href="https://discourse.matplotlib.org/" class="nav-link pst-navbar-icon" rel="noopener" target="_blank" data-bs-toggle="tooltip" data-bs-placement="bottom" _msthidden="1" data-bs-original-title="Discourse"><svg class="svg-inline--fa fa-discourse fa-lg" aria-hidden="true" focusable="false" data-prefix="fab" data-icon="discourse" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512" data-fa-i2svg=""><path fill="currentColor" d="M225.9 32C103.3 32 0 130.5 0 252.1 0 256 .1 480 .1 480l225.8-.2c122.7 0 222.1-102.3 222.1-223.9C448 134.3 348.6 32 225.9 32zM224 384c-19.4 0-37.9-4.3-54.4-12.1L88.5 392l22.9-75c-9.8-18.1-15.4-38.9-15.4-61 0-70.7 57.3-128 128-128s128 57.3 128 128-57.3 128-128 128z"></path></svg><!-- <i class="fa-brands fa-discourse fa-lg" aria-hidden="true"></i> Font Awesome fontawesome.com -->
+            <span class="sr-only" _msttexthash="137449" _msthidden="1" _msthash="29">Discourse</span></a>
+        </li>
+        <li class="nav-item" _msthidden="1">
+          
+          
+          
+          
+          
+          
+          
+          
+          <a href="https://github.com/matplotlib/matplotlib" class="nav-link pst-navbar-icon" rel="noopener" target="_blank" data-bs-toggle="tooltip" data-bs-placement="bottom" _msthidden="1" data-bs-original-title="GitHub"><svg class="svg-inline--fa fa-github fa-lg" aria-hidden="true" focusable="false" data-prefix="fab" data-icon="github" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 496 512" data-fa-i2svg=""><path fill="currentColor" d="M165.9 397.4c0 2-2.3 3.6-5.2 3.6-3.3.3-5.6-1.3-5.6-3.6 0-2 2.3-3.6 5.2-3.6 3-.3 5.6 1.3 5.6 3.6zm-31.1-4.5c-.7 2 1.3 4.3 4.3 4.9 2.6 1 5.6 0 6.2-2s-1.3-4.3-4.3-5.2c-2.6-.7-5.5.3-6.2 2.3zm44.2-1.7c-2.9.7-4.9 2.6-4.6 4.9.3 2 2.9 3.3 5.9 2.6 2.9-.7 4.9-2.6 4.6-4.6-.3-1.9-3-3.2-5.9-2.9zM244.8 8C106.1 8 0 113.3 0 252c0 110.9 69.8 205.8 169.5 239.2 12.8 2.3 17.3-5.6 17.3-12.1 0-6.2-.3-40.4-.3-61.4 0 0-70 15-84.7-29.8 0 0-11.4-29.1-27.8-36.6 0 0-22.9-15.7 1.6-15.4 0 0 24.9 2 38.6 25.8 21.9 38.6 58.6 27.5 72.9 20.9 2.3-16 8.8-27.1 16-33.7-55.9-6.2-112.3-14.3-112.3-110.5 0-27.5 7.6-41.3 23.6-58.9-2.6-6.5-11.1-33.3 2.6-67.9 20.9-6.5 69 27 69 27 20-5.6 41.5-8.5 62.8-8.5s42.8 2.9 62.8 8.5c0 0 48.1-33.6 69-27 13.7 34.7 5.2 61.4 2.6 67.9 16 17.7 25.8 31.5 25.8 58.9 0 96.5-58.9 104.2-114.8 110.5 9.2 7.9 17 22.9 17 46.4 0 33.7-.3 75.4-.3 83.6 0 6.5 4.6 14.4 17.3 12.1C428.2 457.8 496 362.9 496 252 496 113.3 383.5 8 244.8 8zM97.2 352.9c-1.3 1-1 3.3.7 5.2 1.6 1.6 3.9 2.3 5.2 1 1.3-1 1-3.3-.7-5.2-1.6-1.6-3.9-2.3-5.2-1zm-10.8-8.1c-.7 1.3.3 2.9 2.3 3.9 1.6 1 3.6.7 4.3-.7.7-1.3-.3-2.9-2.3-3.9-2-.6-3.6-.3-4.3.7zm32.4 35.6c-1.6 1.3-1 4.3 1.3 6.2 2.3 2.3 5.2 2.6 6.5 1 1.3-1.3.7-4.3-1.3-6.2-2.2-2.3-5.2-2.6-6.5-1zm-11.4-14.7c-1.6 1-1.6 3.6 0 5.9 1.6 2.3 4.3 3.3 5.6 2.3 1.6-1.3 1.6-3.9 0-6.2-1.4-2.3-4-3.3-5.6-2z"></path></svg><!-- <i class="fa-brands fa-github fa-lg" aria-hidden="true"></i> Font Awesome fontawesome.com -->
+            <span class="sr-only" _msttexthash="72332" _msthidden="1" _msthash="30">GitHub</span></a>
+        </li>
+        <li class="nav-item" _msthidden="1">
+          
+          
+          
+          
+          
+          
+          
+          
+          <a href="https://twitter.com/matplotlib/" class="nav-link pst-navbar-icon" rel="noopener" target="_blank" data-bs-toggle="tooltip" data-bs-placement="bottom" _msthidden="1" data-bs-original-title="Twitter"><svg class="svg-inline--fa fa-twitter fa-lg" aria-hidden="true" focusable="false" data-prefix="fab" data-icon="twitter" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" data-fa-i2svg=""><path fill="currentColor" d="M459.37 151.716c.325 4.548.325 9.097.325 13.645 0 138.72-105.583 298.558-298.558 298.558-59.452 0-114.68-17.219-161.137-47.106 8.447.974 16.568 1.299 25.34 1.299 49.055 0 94.213-16.568 130.274-44.832-46.132-.975-84.792-31.188-98.112-72.772 6.498.974 12.995 1.624 19.818 1.624 9.421 0 18.843-1.3 27.614-3.573-48.081-9.747-84.143-51.98-84.143-102.985v-1.299c13.969 7.797 30.214 12.67 47.431 13.319-28.264-18.843-46.781-51.005-46.781-87.391 0-19.492 5.197-37.36 14.294-52.954 51.655 63.675 129.3 105.258 216.365 109.807-1.624-7.797-2.599-15.918-2.599-24.04 0-57.828 46.782-104.934 104.934-104.934 30.213 0 57.502 12.67 76.67 33.137 23.715-4.548 46.456-13.32 66.599-25.34-7.798 24.366-24.366 44.833-46.132 57.827 21.117-2.273 41.584-8.122 60.426-16.243-14.292 20.791-32.161 39.308-52.628 54.253z"></path></svg><!-- <i class="fa-brands fa-twitter fa-lg" aria-hidden="true"></i> Font Awesome fontawesome.com -->
+            <span class="sr-only" _msttexthash="98995" _msthidden="1" _msthash="31">Twitter</span></a>
+        </li>
+</ul></div>
+        
+      </div>
+    
+  </div>
+  
+    <div class="sidebar-primary-items__start sidebar-primary__section">
+        <div class="sidebar-primary-item">
+<nav class="bd-docs-nav bd-links" aria-label="Navegação por Seção" _mstaria-label="348023" _msthash="32">
+  <p class="bd-links__title" role="heading" aria-level="1" _msttexthash="458419" _msthash="33">Navegação por Seção</p>
+  <div class="bd-toc-item navbar-nav"><ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="https://matplotlib.org/stable/users/explain/quick_start.html" _msttexthash="434863" _msthash="34">Guia rápido de início</a></li>
+</ul>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="https://matplotlib.org/stable/users/faq.html" _msttexthash="422409" _msthash="35">Perguntas Frequentes</a></li>
+</ul>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1 has-children"><a class="reference internal" href="https://matplotlib.org/stable/users/explain/figure/index.html" _msttexthash="313742" _msthash="36">Figuras e backends</a><details><summary><span class="toctree-toggle" role="presentation"><svg class="svg-inline--fa fa-chevron-down" aria-hidden="true" focusable="false" data-prefix="fas" data-icon="chevron-down" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" data-fa-i2svg=""><path fill="currentColor" d="M233.4 406.6c12.5 12.5 32.8 12.5 45.3 0l192-192c12.5-12.5 12.5-32.8 0-45.3s-32.8-12.5-45.3 0L256 338.7 86.6 169.4c-12.5-12.5-32.8-12.5-45.3 0s-12.5 32.8 0 45.3l192 192z"></path></svg><!-- <i class="fa-solid fa-chevron-down"></i> Font Awesome fontawesome.com --></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="https://matplotlib.org/stable/users/explain/figure/figure_intro.html" _msttexthash="499330" _msthash="37">Introdução às figuras</a></li>
+<li class="toctree-l2"><a class="reference internal" href="https://matplotlib.org/stable/users/explain/figure/backends.html" _msttexthash="310661" _msthash="38">Backends de saída</a></li>
+<li class="toctree-l2"><a class="reference internal" href="https://matplotlib.org/stable/users/explain/figure/api_interfaces.html" _msttexthash="1219218" _msthash="39">Interfaces de Aplicação Matplotlib (APIs)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="https://matplotlib.org/stable/users/explain/figure/interactive.html" _msttexthash="493818" _msthash="40">Interagindo com figuras</a></li>
+<li class="toctree-l2"><a class="reference internal" href="https://matplotlib.org/stable/users/explain/figure/interactive_guide.html" _msttexthash="1655563" _msthash="41">Figuras interativas e programação assíncrona</a></li>
+<li class="toctree-l2"><a class="reference internal" href="https://matplotlib.org/stable/users/explain/figure/event_handling.html" _msttexthash="292058" _msthash="42">Manejo de eventos</a></li>
+<li class="toctree-l2"><a class="reference internal" href="https://matplotlib.org/stable/users/explain/figure/writing_a_backend_pyplot_interface.html" _msttexthash="3963401" _msthash="43">Escrevendo um backend — a interface pyplot</a></li>
+</ul>
+</details></li>
+</ul>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1 has-children"><a class="reference internal" href="https://matplotlib.org/stable/users/explain/axes/index.html" _msttexthash="323843" _msthash="44">Eixos e subenredos</a><details><summary><span class="toctree-toggle" role="presentation"><svg class="svg-inline--fa fa-chevron-down" aria-hidden="true" focusable="false" data-prefix="fas" data-icon="chevron-down" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" data-fa-i2svg=""><path fill="currentColor" d="M233.4 406.6c12.5 12.5 32.8 12.5 45.3 0l192-192c12.5-12.5 12.5-32.8 0-45.3s-32.8-12.5-45.3 0L256 338.7 86.6 169.4c-12.5-12.5-32.8-12.5-45.3 0s-12.5 32.8 0 45.3l192 192z"></path></svg><!-- <i class="fa-solid fa-chevron-down"></i> Font Awesome fontawesome.com --></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="https://matplotlib.org/stable/users/explain/axes/axes_intro.html" _msttexthash="990080" _msthash="45">Introdução aos Eixos (ou Subenredos)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="https://matplotlib.org/stable/users/explain/axes/arranging_axes.html" _msttexthash="1271777" _msthash="46">Organizando múltiplos eixos em uma figura</a></li>
+<li class="toctree-l2"><a class="reference internal" href="https://matplotlib.org/stable/users/explain/axes/colorbar_placement.html" _msttexthash="449995" _msthash="47">Colocando barras de cor</a></li>
+<li class="toctree-l2"><a class="reference internal" href="https://matplotlib.org/stable/users/explain/axes/autoscale.html" _msttexthash="617448" _msthash="48">Eixos de autoescalonamento</a></li>
+<li class="toctree-l2"><a class="reference internal" href="https://matplotlib.org/stable/users/explain/axes/axes_scales.html" _msttexthash="230048" _msthash="49">Escalas de eixo</a></li>
+<li class="toctree-l2"><a class="reference internal" href="https://matplotlib.org/stable/users/explain/axes/axes_ticks.html" _msttexthash="346775" _msthash="50">Tique-tacos do eixo</a></li>
+<li class="toctree-l2"><a class="reference internal" href="https://matplotlib.org/stable/users/explain/axes/axes_units.html" _msttexthash="426751" _msthash="51">Plotar datas e strings</a></li>
+<li class="toctree-l2"><a class="reference internal" href="https://matplotlib.org/stable/users/explain/axes/legend_guide.html" _msttexthash="75101" _msthash="52">Lendas</a></li>
+<li class="toctree-l2"><a class="reference internal" href="https://matplotlib.org/stable/users/explain/axes/mosaic.html" _msttexthash="419900" _msthash="53">Mosaico de subenredos</a></li>
+<li class="toctree-l2"><a class="reference internal" href="https://matplotlib.org/stable/users/explain/axes/constrainedlayout_guide.html" _msttexthash="470223" _msthash="54">Guia de layout restrito</a></li>
+<li class="toctree-l2"><a class="reference internal" href="https://matplotlib.org/stable/users/explain/axes/tight_layout_guide.html" _msttexthash="1660802" _msthash="55">Guia de layout apertado (levemente desencorajado)</a></li>
+</ul>
+</details></li>
+</ul>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1 has-children"><a class="reference internal" href="https://matplotlib.org/stable/users/explain/artists/index.html" _msttexthash="116857" _msthash="56">Artistas</a><details><summary><span class="toctree-toggle" role="presentation"><svg class="svg-inline--fa fa-chevron-down" aria-hidden="true" focusable="false" data-prefix="fas" data-icon="chevron-down" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" data-fa-i2svg=""><path fill="currentColor" d="M233.4 406.6c12.5 12.5 32.8 12.5 45.3 0l192-192c12.5-12.5 12.5-32.8 0-45.3s-32.8-12.5-45.3 0L256 338.7 86.6 169.4c-12.5-12.5-32.8-12.5-45.3 0s-12.5 32.8 0 45.3l192 192z"></path></svg><!-- <i class="fa-solid fa-chevron-down"></i> Font Awesome fontawesome.com --></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="https://matplotlib.org/stable/users/explain/artists/artist_intro.html" _msttexthash="542256" _msthash="57">Introdução aos Artistas</a></li>
+<li class="toctree-l2"><a class="reference internal" href="https://matplotlib.org/stable/users/explain/artists/color_cycle.html" _msttexthash="531297" _msthash="58">Ciclo automatizado de cor</a></li>
+<li class="toctree-l2"><a class="reference internal" href="https://matplotlib.org/stable/users/explain/artists/performance.html" _msttexthash="1033656" _msthash="59">Otimizando Artistas para Performance</a></li>
+<li class="toctree-l2"><a class="reference internal" href="https://matplotlib.org/stable/users/explain/artists/paths.html" _msttexthash="114231" _msthash="60">Caminhos</a></li>
+<li class="toctree-l2"><a class="reference internal" href="https://matplotlib.org/stable/users/explain/artists/patheffects_guide.html" _msttexthash="702637" _msthash="61">Guia de efeitos de trajetória</a></li>
+<li class="toctree-l2"><a class="reference internal" href="https://matplotlib.org/stable/users/explain/artists/imshow_extent.html" _msttexthash="2425020" _msthash="62">Entendendo a extensão do argumento da palavra-chave de imshow</a></li>
+<li class="toctree-l2"><a class="reference internal" href="https://matplotlib.org/stable/users/explain/artists/transforms_tutorial.html" _msttexthash="705575" _msthash="63">Tutorial de Transformações</a></li>
+</ul>
+</details></li>
+</ul>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="https://matplotlib.org/stable/users/explain/customizing.html" _msttexthash="2237677" _msthash="64">Personalizando o Matplotlib com folhas de estilo e rcParams</a></li>
+</ul>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1 has-children"><a class="reference internal" href="https://matplotlib.org/stable/users/explain/colors/index.html" _msttexthash="60554" _msthash="65">Cores</a><details><summary><span class="toctree-toggle" role="presentation"><svg class="svg-inline--fa fa-chevron-down" aria-hidden="true" focusable="false" data-prefix="fas" data-icon="chevron-down" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" data-fa-i2svg=""><path fill="currentColor" d="M233.4 406.6c12.5 12.5 32.8 12.5 45.3 0l192-192c12.5-12.5 12.5-32.8 0-45.3s-32.8-12.5-45.3 0L256 338.7 86.6 169.4c-12.5-12.5-32.8-12.5-45.3 0s-12.5 32.8 0 45.3l192 192z"></path></svg><!-- <i class="fa-solid fa-chevron-down"></i> Font Awesome fontawesome.com --></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="https://matplotlib.org/stable/users/explain/colors/colors.html" _msttexthash="504764" _msthash="66">Especificação de cores</a></li>
+<li class="toctree-l2"><a class="reference internal" href="https://matplotlib.org/stable/users/explain/colors/colorbar_only.html" _msttexthash="1067261" _msthash="67">Tutorial Personalizado de Barras de Cor</a></li>
+<li class="toctree-l2"><a class="reference internal" href="https://matplotlib.org/stable/users/explain/colors/colormap-manipulation.html" _msttexthash="936390" _msthash="68">Criando mapas de cores no Matplotlib</a></li>
+<li class="toctree-l2"><a class="reference internal" href="https://matplotlib.org/stable/users/explain/colors/colormapnorms.html" _msttexthash="754351" _msthash="69">Normalização por mapa de cores</a></li>
+<li class="toctree-l2"><a class="reference internal" href="https://matplotlib.org/stable/users/explain/colors/colormaps.html" _msttexthash="1098110" _msthash="70">Escolhendo mapas de cores no Matplotlib</a></li>
+</ul>
+</details></li>
+</ul>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1 has-children"><a class="reference internal" href="https://matplotlib.org/stable/users/explain/text/index.html" _msttexthash="63141" _msthash="71">Texto</a><details><summary><span class="toctree-toggle" role="presentation"><svg class="svg-inline--fa fa-chevron-down" aria-hidden="true" focusable="false" data-prefix="fas" data-icon="chevron-down" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" data-fa-i2svg=""><path fill="currentColor" d="M233.4 406.6c12.5 12.5 32.8 12.5 45.3 0l192-192c12.5-12.5 12.5-32.8 0-45.3s-32.8-12.5-45.3 0L256 338.7 86.6 169.4c-12.5-12.5-32.8-12.5-45.3 0s-12.5 32.8 0 45.3l192 192z"></path></svg><!-- <i class="fa-solid fa-chevron-down"></i> Font Awesome fontawesome.com --></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="https://matplotlib.org/stable/users/explain/text/text_intro.html" _msttexthash="350792" _msthash="72">Texto em Matplotlib</a></li>
+<li class="toctree-l2"><a class="reference internal" href="https://matplotlib.org/stable/users/explain/text/text_props.html" _msttexthash="717873" _msthash="73">Propriedades e layout do texto</a></li>
+
+<li class="toctree-l2"><a class="reference internal" href="https://matplotlib.org/stable/users/explain/text/annotations.html" _msttexthash="177541" _msthash="74">Anotações</a></li>
+<li class="toctree-l2"><a class="reference internal" href="https://matplotlib.org/stable/users/explain/text/fonts.html" _msttexthash="382252" _msthash="75">Fontes em Matplotlib</a></li>
+<li class="toctree-l2"><a class="reference internal" href="https://matplotlib.org/stable/users/explain/text/mathtext.html" _msttexthash="1044004" _msthash="76">Escrevendo expressões matemáticas</a></li>
+<li class="toctree-l2"><a class="reference internal" href="https://matplotlib.org/stable/users/explain/text/pgf.html"><font _mstmutation="1" _msttexthash="1928134" _msthash="77">Renderização de texto com XeLaTeX/LuaLaTeX via backend</font><code class="docutils literal notranslate"><span class="pre">pgf</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="https://matplotlib.org/stable/users/explain/text/usetex.html" _msttexthash="770978" _msthash="78">Renderização de texto com LaTeX</a></li>
+</ul>
+</details></li>
+</ul>
+<ul class="current nav bd-sidenav">
+<li class="toctree-l1 current active has-children"><a class="reference internal" href="https://matplotlib.org/stable/users/explain/animations/index.html" _msttexthash="694317" _msthash="79">Animações usando Matplotlib</a><details open="open"><summary><span class="toctree-toggle" role="presentation"><svg class="svg-inline--fa fa-chevron-down" aria-hidden="true" focusable="false" data-prefix="fas" data-icon="chevron-down" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" data-fa-i2svg=""><path fill="currentColor" d="M233.4 406.6c12.5 12.5 32.8 12.5 45.3 0l192-192c12.5-12.5 12.5-32.8 0-45.3s-32.8-12.5-45.3 0L256 338.7 86.6 169.4c-12.5-12.5-32.8-12.5-45.3 0s-12.5 32.8 0 45.3l192 192z"></path></svg><!-- <i class="fa-solid fa-chevron-down"></i> Font Awesome fontawesome.com --></span></summary><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="https://matplotlib.org/stable/users/explain/animations/animations.html" _msttexthash="694317" _msthash="80">Animações usando Matplotlib</a></li>
+<li class="toctree-l2 current active"><a class="current reference internal" href="https://matplotlib.org/stable/users/explain/animations/blitting.html#" _msttexthash="1316393" _msthash="81">Renderização mais rápida usando blitting</a></li>
+</ul>
+</details></li>
+</ul>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1 has-children"><a class="reference internal" href="https://matplotlib.org/stable/users/explain/toolkits/index.html" _msttexthash="743496" _msthash="82">Kits de Ferramentas do Usuário</a><details><summary><span class="toctree-toggle" role="presentation"><svg class="svg-inline--fa fa-chevron-down" aria-hidden="true" focusable="false" data-prefix="fas" data-icon="chevron-down" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" data-fa-i2svg=""><path fill="currentColor" d="M233.4 406.6c12.5 12.5 32.8 12.5 45.3 0l192-192c12.5-12.5 12.5-32.8 0-45.3s-32.8-12.5-45.3 0L256 338.7 86.6 169.4c-12.5-12.5-32.8-12.5-45.3 0s-12.5 32.8 0 45.3l192 192z"></path></svg><!-- <i class="fa-solid fa-chevron-down"></i> Font Awesome fontawesome.com --></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="https://matplotlib.org/stable/users/explain/toolkits/axisartist.html" _msttexthash="760149" _msthash="83">O kit de ferramentas axisartist</a></li>
+<li class="toctree-l2"><a class="reference internal" href="https://matplotlib.org/stable/users/explain/toolkits/axes_grid.html" _msttexthash="718159" _msthash="84">O kit de ferramentas axes_grid1</a></li>
+<li class="toctree-l2"><a class="reference internal" href="https://matplotlib.org/stable/users/explain/toolkits/mplot3d.html" _msttexthash="597909" _msthash="85">O kit de ferramentas mplot3d</a></li>
+</ul>
+</details></li>
+</ul>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="https://matplotlib.org/stable/users/getting_started/index.html" _msttexthash="150124" _msthash="86">Começando</a></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="https://matplotlib.org/stable/install/index.html" _msttexthash="203125" _msthash="87">Instalação</a><details><summary><span class="toctree-toggle" role="presentation"><svg class="svg-inline--fa fa-chevron-down" aria-hidden="true" focusable="false" data-prefix="fas" data-icon="chevron-down" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" data-fa-i2svg=""><path fill="currentColor" d="M233.4 406.6c12.5 12.5 32.8 12.5 45.3 0l192-192c12.5-12.5 12.5-32.8 0-45.3s-32.8-12.5-45.3 0L256 338.7 86.6 169.4c-12.5-12.5-32.8-12.5-45.3 0s-12.5 32.8 0 45.3l192 192z"></path></svg><!-- <i class="fa-solid fa-chevron-down"></i> Font Awesome fontawesome.com --></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="https://matplotlib.org/stable/install/environment_variables_faq.html" _msttexthash="433979" _msthash="88">Variáveis do ambiente</a></li>
+<li class="toctree-l2"><a class="reference internal" href="https://matplotlib.org/stable/install/dependencies.html" _msttexthash="223314" _msthash="89">Dependências</a></li>
+</ul>
+</details></li>
+</ul>
+</div>
+</nav></div>
+    </div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+  </div>
+  
+  <div id="rtd-footer-container"></div>
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main" role="main">
+        
+        
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article d-print-none">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item">
+
+
+
+<nav aria-label="Breadcrumb" class="d-print-none" _mstaria-label="154232" _msthash="90">
+  <ul class="bd-breadcrumbs">
+    
+    <li class="breadcrumb-item breadcrumb-home">
+      <a href="https://matplotlib.org/stable/index.html" class="nav-link" aria-label="Casa" _mstaria-label="43979" _msthash="91">
+        <svg class="svg-inline--fa fa-house" aria-hidden="true" focusable="false" data-prefix="fas" data-icon="house" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 576 512" data-fa-i2svg=""><path fill="currentColor" d="M575.8 255.5c0 18-15 32.1-32 32.1h-32l.7 160.2c0 2.7-.2 5.4-.5 8.1V472c0 22.1-17.9 40-40 40H456c-1.1 0-2.2 0-3.3-.1c-1.4 .1-2.8 .1-4.2 .1H416 392c-22.1 0-40-17.9-40-40V448 384c0-17.7-14.3-32-32-32H256c-17.7 0-32 14.3-32 32v64 24c0 22.1-17.9 40-40 40H160 128.1c-1.5 0-3-.1-4.5-.2c-1.2 .1-2.4 .2-3.6 .2H104c-22.1 0-40-17.9-40-40V360c0-.9 0-1.9 .1-2.8V287.6H32c-18 0-32-14-32-32.1c0-9 3-17 10-24L266.4 8c7-7 15-8 22-8s15 2 21 7L564.8 231.5c8 7 12 15 11 24z"></path></svg><!-- <i class="fa-solid fa-home"></i> Font Awesome fontawesome.com -->
+      </a>
+    </li>
+    
+    <li class="breadcrumb-item"><a href="https://matplotlib.org/stable/users/index.html" class="nav-link" _msttexthash="316810" _msthash="92">Usando Matplotlib</a></li>
+    
+    
+    <li class="breadcrumb-item"><a href="https://matplotlib.org/stable/users/explain/animations/index.html" class="nav-link" _msttexthash="694317" _msthash="93">Animações usando Matplotlib</a></li>
+    
+    <li class="breadcrumb-item active" aria-current="page" _msttexthash="208650" _msthash="94">Mais rápido...</li>
+  </ul>
+</nav>
+</div>
+      
+    </div>
+  
+  
+</div>
+</div>
+              
+              
+              
+                
+<div id="searchbox"></div>
+                <article class="bd-article">
+                  
+  <div class="sphx-glr-download-link-note admonition note" _msthidden="2">
+<p class="admonition-title" _msttexthash="45344" _msthidden="1" _msthash="95">Note</p>
+<p _msttexthash="1366352" _msthidden="1" _msthash="96"><a class="reference internal" href="https://matplotlib.org/stable/users/explain/animations/blitting.html#sphx-glr-download-users-explain-animations-blitting-py"><span class="std std-ref">Go to the end</span></a>
+to download the full example code.</p>
+</div>
+<section class="sphx-glr-example-title" id="faster-rendering-by-using-blitting">
+<span id="blitting"></span><span id="sphx-glr-users-explain-animations-blitting-py"></span><h1><font _mstmutation="1" _msttexthash="1316393" _msthash="97">Renderização mais rápida usando blitting</font><a class="headerlink" href="https://matplotlib.org/stable/users/explain/animations/blitting.html#faster-rendering-by-using-blitting" title="Link to this heading">#</a></h1>
+<p _msttexthash="51078573" _msthash="98"><em _istranslated="1">Blitting</em> é uma <a class="reference external" href="https://en.wikipedia.org/wiki/Bit_blit" _istranslated="1">técnica padrão</a> em gráficos rasterizados que,
+no contexto do Matplotlib, pode ser usado para melhorar (drasticamente)
+performance de figuras interativas. Por exemplo, os módulos <a class="reference internal" href="https://matplotlib.org/stable/api/animation_api.html#module-matplotlib.animation" title="matplotlib.animation" _istranslated="1"><code class="xref py py-mod docutils literal notranslate" _istranslated="1"></code></a> e <a class="reference internal" href="https://matplotlib.org/stable/api/widgets_api.html#module-matplotlib.widgets" title="matplotlib.widgets" _istranslated="1"><code class="xref py py-mod docutils literal notranslate" _istranslated="1"></code></a> usam blitting
+internamente. Aqui, demonstramos como implementar seu próprio blitting, ao ar livre
+dessas classes.</p>
+<p _msttexthash="73642985" _msthash="99">O blitting acelera o desenho repetitivo ao renderizar tudo que não muda
+elementos gráficos em uma imagem de fundo uma vez. Então, para cada draw, apenas o
+elementos que mudam precisam ser desenhados nesse fundo. Por exemplo,
+se os limites de um Eixo não mudaram, podemos renderizar os Eixos vazios
+incluindo todos os ticks e rótulos uma vez, e só desenhar os dados que mudam depois.</p>
+<p _msttexthash="256282" _msthash="100">A estratégia é</p>
+<ul class="simple">
+<li><p _msttexthash="768794" _msthash="101">Prepare o histórico constante:</p>
+<ul>
+<li><p _msttexthash="5715905" _msthash="102">Desenhe a figura, mas exclua todos os artistas que você quer animar
+marcando-os como <em _istranslated="1">animados</em> (veja <a class="reference internal" href="https://matplotlib.org/stable/api/_as_gen/matplotlib.artist.Artist.set_animated.html#matplotlib.artist.Artist.set_animated" title="matplotlib.artist.Artist.set_animated" _istranslated="1"><code class="xref py py-obj docutils literal notranslate" _istranslated="1"></code></a>).</p></li>
+<li><p _msttexthash="643708" _msthash="103">Salve uma cópia do buffer RBGA.</p></li>
+</ul>
+</li>
+<li><p _msttexthash="870311" _msthash="104">Renderize as imagens individuais:</p>
+<ul>
+<li><p _msttexthash="688246" _msthash="105">Restaure a cópia do buffer RGBA.</p></li>
+<li><p _msttexthash="1106937" _msthash="106">Redesenhe os artistas animados usando <a class="reference internal" href="https://matplotlib.org/stable/api/_as_gen/matplotlib.axes.Axes.draw_artist.html#matplotlib.axes.Axes.draw_artist" title="matplotlib.axes.Axes.draw_artist" _istranslated="1"><code class="xref py py-obj docutils literal notranslate" _istranslated="1"></code></a> /<a class="reference internal" href="https://matplotlib.org/stable/api/_as_gen/matplotlib.figure.Figure.draw_artist.html#matplotlib.figure.Figure.draw_artist" title="matplotlib.figure.Figure.draw_artist" _istranslated="1"><code class="xref py py-obj docutils literal notranslate" _istranslated="1"></code></a>.</p></li>
+<li><p _msttexthash="864552" _msthash="107">Mostre a imagem resultante na tela.</p></li>
+</ul>
+</li>
+</ul>
+<p _msttexthash="8055151" _msthash="108">Uma consequência desse procedimento é que seus artistas animados são sempre
+desenhado sobre os artistas estáticos.</p>
+<p _msttexthash="6606158" _msthash="109">Nem todos os backends suportam blit. Você pode verificar se uma determinada tela funciona via
+a <a class="reference internal" href="https://matplotlib.org/stable/api/backend_bases_api.html#matplotlib.backend_bases.FigureCanvasBase.supports_blit" title="matplotlib.backend_bases.FigureCanvasBase.supports_blit" _istranslated="1"><code class="xref py py-obj docutils literal notranslate" _istranslated="1"></code></a> propriedade.</p>
+<div class="admonition warning">
+<p class="admonition-title" _msttexthash="61295" _msthash="110">Aviso</p>
+<p _msttexthash="6408532" _msthash="111">Esse código não funciona com o backend MacOx (mas funciona com outros
+backends de interface gráfica no Mac).</p>
+</div>
+<section id="minimal-example">
+<h2><font _mstmutation="1" _msttexthash="261430" _msthash="112">Exemplo mínimo</font><a class="headerlink" href="https://matplotlib.org/stable/users/explain/animations/blitting.html#minimal-example" title="Link to this heading">#</a></h2>
+<p><font _mstmutation="1" _msttexthash="13263575" _msthash="113">Podemos usar os <a class="reference internal" href="https://matplotlib.org/stable/api/backend_agg_api.html#matplotlib.backends.backend_agg.FigureCanvasAgg" title="matplotlib.backends.backend_agg.FigureCanvasAgg" _mstmutation="1" _istranslated="1"><code class="xref py py-obj docutils literal notranslate" _istranslated="1"></code></a> métodos <a class="reference internal" href="https://matplotlib.org/stable/api/backend_agg_api.html#matplotlib.backends.backend_agg.FigureCanvasAgg.copy_from_bbox" title="matplotlib.backends.backend_agg.FigureCanvasAgg.copy_from_bbox" _mstmutation="1" _istranslated="1"><code class="xref py py-obj docutils literal notranslate" _istranslated="1"></code></a> e<a class="reference internal" href="https://matplotlib.org/stable/api/backend_agg_api.html#matplotlib.backends.backend_agg.FigureCanvasAgg.restore_region" title="matplotlib.backends.backend_agg.FigureCanvasAgg.restore_region" _mstmutation="1" _istranslated="1"><code class="xref py py-obj docutils literal notranslate" _istranslated="1"></code></a>, em conjunto com a configuração do nosso artista, implementar um exemplo mínimo que
+Usa blitting para acelerar a renderização</font><code class="docutils literal notranslate"><span class="pre">animated=True</span></code></p>
+<div class="highlight-Python notranslate"><div class="highlight"><pre id="codecell0" tabindex="-1"><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">matplotlib.pyplot</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">plt</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">numpy</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">np</span>
+
+<a href="https://numpy.org/doc/stable/reference/generated/numpy.ndarray.html#numpy.ndarray" title="numpy.ndarray" class="sphx-glr-backref-module-numpy sphx-glr-backref-type-py-class sphx-glr-backref-instance"><span class="n">x</span></a> <span class="o">=</span> <a href="https://numpy.org/doc/stable/reference/generated/numpy.linspace.html#numpy.linspace" title="numpy.linspace" class="sphx-glr-backref-module-numpy sphx-glr-backref-type-py-function"><span class="n">np</span><span class="o">.</span><span class="n">linspace</span></a><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">2</span> <span class="o">*</span> <a href="https://docs.python.org/3/library/functions.html#float" title="builtins.float" class="sphx-glr-backref-module-builtins sphx-glr-backref-type-py-class sphx-glr-backref-instance"><span class="n">np</span><span class="o">.</span><span class="n">pi</span></a><span class="p">,</span> <span class="mi">100</span><span class="p">)</span>
+
+<a href="https://matplotlib.org/stable/api/_as_gen/matplotlib.figure.Figure.html#matplotlib.figure.Figure" title="matplotlib.figure.Figure" class="sphx-glr-backref-module-matplotlib-figure sphx-glr-backref-type-py-class sphx-glr-backref-instance"><span class="n">fig</span></a><span class="p">,</span> <a href="https://matplotlib.org/stable/api/_as_gen/matplotlib.axes.Axes.html#matplotlib.axes.Axes" title="matplotlib.axes.Axes" class="sphx-glr-backref-module-matplotlib-axes sphx-glr-backref-type-py-class sphx-glr-backref-instance"><span class="n">ax</span></a> <span class="o">=</span> <a href="https://matplotlib.org/stable/api/_as_gen/matplotlib.pyplot.subplots.html#matplotlib.pyplot.subplots" title="matplotlib.pyplot.subplots" class="sphx-glr-backref-module-matplotlib-pyplot sphx-glr-backref-type-py-function"><span class="n">plt</span><span class="o">.</span><span class="n">subplots</span></a><span class="p">()</span>
+
+<span class="c1"># animated=True tells matplotlib to only draw the artist when we</span>
+<span class="c1"># explicitly request it</span>
+<span class="p">(</span><a href="https://matplotlib.org/stable/api/_as_gen/matplotlib.lines.Line2D.html#matplotlib.lines.Line2D" title="matplotlib.lines.Line2D" class="sphx-glr-backref-module-matplotlib-lines sphx-glr-backref-type-py-class sphx-glr-backref-instance"><span class="n">ln</span></a><span class="p">,)</span> <span class="o">=</span> <a href="https://matplotlib.org/stable/api/_as_gen/matplotlib.axes.Axes.plot.html#matplotlib.axes.Axes.plot" title="matplotlib.axes.Axes.plot" class="sphx-glr-backref-module-matplotlib-axes sphx-glr-backref-type-py-method"><span class="n">ax</span><span class="o">.</span><span class="n">plot</span></a><span class="p">(</span><a href="https://numpy.org/doc/stable/reference/generated/numpy.ndarray.html#numpy.ndarray" title="numpy.ndarray" class="sphx-glr-backref-module-numpy sphx-glr-backref-type-py-class sphx-glr-backref-instance"><span class="n">x</span></a><span class="p">,</span> <a href="https://numpy.org/doc/stable/reference/generated/numpy.ufunc.html#numpy.ufunc" title="numpy.ufunc" class="sphx-glr-backref-module-numpy sphx-glr-backref-type-py-class sphx-glr-backref-instance"><span class="n">np</span><span class="o">.</span><span class="n">sin</span></a><span class="p">(</span><a href="https://numpy.org/doc/stable/reference/generated/numpy.ndarray.html#numpy.ndarray" title="numpy.ndarray" class="sphx-glr-backref-module-numpy sphx-glr-backref-type-py-class sphx-glr-backref-instance"><span class="n">x</span></a><span class="p">),</span> <span class="n">animated</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+
+<span class="c1"># make sure the window is raised, but the script keeps going</span>
+<a href="https://matplotlib.org/stable/api/_as_gen/matplotlib.pyplot.show.html#matplotlib.pyplot.show" title="matplotlib.pyplot.show" class="sphx-glr-backref-module-matplotlib-pyplot sphx-glr-backref-type-py-function"><span class="n">plt</span><span class="o">.</span><span class="n">show</span></a><span class="p">(</span><span class="n">block</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+
+<span class="c1"># stop to admire our empty window axes and ensure it is rendered at</span>
+<span class="c1"># least once.</span>
+<span class="c1">#</span>
+<span class="c1"># We need to fully draw the figure at its final size on the screen</span>
+<span class="c1"># before we continue on so that :</span>
+<span class="c1">#  a) we have the correctly sized and drawn background to grab</span>
+<span class="c1">#  b) we have a cached renderer so that ``ax.draw_artist`` works</span>
+<span class="c1"># so we spin the event loop to let the backend process any pending operations</span>
+<a href="https://matplotlib.org/stable/api/_as_gen/matplotlib.pyplot.pause.html#matplotlib.pyplot.pause" title="matplotlib.pyplot.pause" class="sphx-glr-backref-module-matplotlib-pyplot sphx-glr-backref-type-py-function"><span class="n">plt</span><span class="o">.</span><span class="n">pause</span></a><span class="p">(</span><span class="mf">0.1</span><span class="p">)</span>
+
+<span class="c1"># get copy of entire figure (everything inside fig.bbox) sans animated artist</span>
+<span class="n">bg</span> <span class="o">=</span> <a href="https://matplotlib.org/stable/api/backend_agg_api.html#matplotlib.backends.backend_agg.FigureCanvasAgg.copy_from_bbox" title="matplotlib.backends.backend_agg.FigureCanvasAgg.copy_from_bbox" class="sphx-glr-backref-module-matplotlib-backends-backend_agg sphx-glr-backref-type-py-method"><span class="n">fig</span><span class="o">.</span><span class="n">canvas</span><span class="o">.</span><span class="n">copy_from_bbox</span></a><span class="p">(</span><a href="https://matplotlib.org/stable/api/transformations.html#matplotlib.transforms.TransformedBbox" title="matplotlib.transforms.TransformedBbox" class="sphx-glr-backref-module-matplotlib-transforms sphx-glr-backref-type-py-class sphx-glr-backref-instance"><span class="n">fig</span><span class="o">.</span><span class="n">bbox</span></a><span class="p">)</span>
+<span class="c1"># draw the animated artist, this uses a cached renderer</span>
+<a href="https://matplotlib.org/stable/api/_as_gen/matplotlib.axes.Axes.draw_artist.html#matplotlib.axes.Axes.draw_artist" title="matplotlib.axes.Axes.draw_artist" class="sphx-glr-backref-module-matplotlib-axes sphx-glr-backref-type-py-method"><span class="n">ax</span><span class="o">.</span><span class="n">draw_artist</span></a><span class="p">(</span><a href="https://matplotlib.org/stable/api/_as_gen/matplotlib.lines.Line2D.html#matplotlib.lines.Line2D" title="matplotlib.lines.Line2D" class="sphx-glr-backref-module-matplotlib-lines sphx-glr-backref-type-py-class sphx-glr-backref-instance"><span class="n">ln</span></a><span class="p">)</span>
+<span class="c1"># show the result to the screen, this pushes the updated RGBA buffer from the</span>
+<span class="c1"># renderer to the GUI framework so you can see it</span>
+<a href="https://matplotlib.org/stable/api/backend_bases_api.html#matplotlib.backend_bases.FigureCanvasBase.blit" title="matplotlib.backend_bases.FigureCanvasBase.blit" class="sphx-glr-backref-module-matplotlib-backend_bases sphx-glr-backref-type-py-method"><span class="n">fig</span><span class="o">.</span><span class="n">canvas</span><span class="o">.</span><span class="n">blit</span></a><span class="p">(</span><a href="https://matplotlib.org/stable/api/transformations.html#matplotlib.transforms.TransformedBbox" title="matplotlib.transforms.TransformedBbox" class="sphx-glr-backref-module-matplotlib-transforms sphx-glr-backref-type-py-class sphx-glr-backref-instance"><span class="n">fig</span><span class="o">.</span><span class="n">bbox</span></a><span class="p">)</span>
+
+<span class="k">for</span> <a href="https://docs.python.org/3/library/functions.html#int" title="builtins.int" class="sphx-glr-backref-module-builtins sphx-glr-backref-type-py-class sphx-glr-backref-instance"><span class="n">j</span></a> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">100</span><span class="p">):</span>
+    <span class="c1"># reset the background back in the canvas state, screen unchanged</span>
+    <a href="https://matplotlib.org/stable/api/backend_agg_api.html#matplotlib.backends.backend_agg.FigureCanvasAgg.restore_region" title="matplotlib.backends.backend_agg.FigureCanvasAgg.restore_region" class="sphx-glr-backref-module-matplotlib-backends-backend_agg sphx-glr-backref-type-py-method"><span class="n">fig</span><span class="o">.</span><span class="n">canvas</span><span class="o">.</span><span class="n">restore_region</span></a><span class="p">(</span><span class="n">bg</span><span class="p">)</span>
+    <span class="c1"># update the artist, neither the canvas state nor the screen have changed</span>
+    <a href="https://matplotlib.org/stable/api/_as_gen/matplotlib.lines.Line2D.html#matplotlib.lines.Line2D.set_ydata" title="matplotlib.lines.Line2D.set_ydata" class="sphx-glr-backref-module-matplotlib-lines sphx-glr-backref-type-py-method"><span class="n">ln</span><span class="o">.</span><span class="n">set_ydata</span></a><span class="p">(</span><a href="https://numpy.org/doc/stable/reference/generated/numpy.ufunc.html#numpy.ufunc" title="numpy.ufunc" class="sphx-glr-backref-module-numpy sphx-glr-backref-type-py-class sphx-glr-backref-instance"><span class="n">np</span><span class="o">.</span><span class="n">sin</span></a><span class="p">(</span><a href="https://numpy.org/doc/stable/reference/generated/numpy.ndarray.html#numpy.ndarray" title="numpy.ndarray" class="sphx-glr-backref-module-numpy sphx-glr-backref-type-py-class sphx-glr-backref-instance"><span class="n">x</span></a> <span class="o">+</span> <span class="p">(</span><a href="https://docs.python.org/3/library/functions.html#int" title="builtins.int" class="sphx-glr-backref-module-builtins sphx-glr-backref-type-py-class sphx-glr-backref-instance"><span class="n">j</span></a> <span class="o">/</span> <span class="mi">100</span><span class="p">)</span> <span class="o">*</span> <a href="https://docs.python.org/3/library/functions.html#float" title="builtins.float" class="sphx-glr-backref-module-builtins sphx-glr-backref-type-py-class sphx-glr-backref-instance"><span class="n">np</span><span class="o">.</span><span class="n">pi</span></a><span class="p">))</span>
+    <span class="c1"># re-render the artist, updating the canvas state, but not the screen</span>
+    <a href="https://matplotlib.org/stable/api/_as_gen/matplotlib.axes.Axes.draw_artist.html#matplotlib.axes.Axes.draw_artist" title="matplotlib.axes.Axes.draw_artist" class="sphx-glr-backref-module-matplotlib-axes sphx-glr-backref-type-py-method"><span class="n">ax</span><span class="o">.</span><span class="n">draw_artist</span></a><span class="p">(</span><a href="https://matplotlib.org/stable/api/_as_gen/matplotlib.lines.Line2D.html#matplotlib.lines.Line2D" title="matplotlib.lines.Line2D" class="sphx-glr-backref-module-matplotlib-lines sphx-glr-backref-type-py-class sphx-glr-backref-instance"><span class="n">ln</span></a><span class="p">)</span>
+    <span class="c1"># copy the image to the GUI state, but screen might not be changed yet</span>
+    <a href="https://matplotlib.org/stable/api/backend_bases_api.html#matplotlib.backend_bases.FigureCanvasBase.blit" title="matplotlib.backend_bases.FigureCanvasBase.blit" class="sphx-glr-backref-module-matplotlib-backend_bases sphx-glr-backref-type-py-method"><span class="n">fig</span><span class="o">.</span><span class="n">canvas</span><span class="o">.</span><span class="n">blit</span></a><span class="p">(</span><a href="https://matplotlib.org/stable/api/transformations.html#matplotlib.transforms.TransformedBbox" title="matplotlib.transforms.TransformedBbox" class="sphx-glr-backref-module-matplotlib-transforms sphx-glr-backref-type-py-class sphx-glr-backref-instance"><span class="n">fig</span><span class="o">.</span><span class="n">bbox</span></a><span class="p">)</span>
+    <span class="c1"># flush any pending GUI events, re-painting the screen if needed</span>
+    <a href="https://matplotlib.org/stable/api/backend_bases_api.html#matplotlib.backend_bases.FigureCanvasBase.flush_events" title="matplotlib.backend_bases.FigureCanvasBase.flush_events" class="sphx-glr-backref-module-matplotlib-backend_bases sphx-glr-backref-type-py-method"><span class="n">fig</span><span class="o">.</span><span class="n">canvas</span><span class="o">.</span><span class="n">flush_events</span></a><span class="p">()</span>
+    <span class="c1"># you can put a pause in if you want to slow things down</span>
+    <span class="c1"># plt.pause(.1)</span>
+</pre><button class="copybtn o-tooltip--left" data-tooltip="Copy" data-clipboard-target="#codecell0">
+      <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-copy" width="44" height="44" viewBox="0 0 24 24" stroke-width="1.5" stroke="#000000" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <title>Copy to clipboard</title>
+  <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
+  <rect x="8" y="8" width="12" height="12" rx="2"></rect>
+  <path d="M16 8v-2a2 2 0 0 0 -2 -2h-8a2 2 0 0 0 -2 2v8a2 2 0 0 0 2 2h2"></path>
+</svg>
+    </button></div>
+</div>
+<img src="./Renderização mais rápida usando blitting — Documentação do Matplotlib 3.10.8_files/sphx_glr_blitting_001.png" srcset="../../../_images/sphx_glr_blitting_001.png, ../../../_images/sphx_glr_blitting_001_2_00x.png 2.00x" alt="blitting" class="sphx-glr-single-img" _msthidden="A" _mstalt="117819" _msthash="114"><p _msttexthash="81821116" _msthash="115">This example works and shows a simple animation, however because we
+are only grabbing the background once, if the size of the figure in
+pixels changes (due to either the size or dpi of the figure
+changing) , the background will be invalid and result in incorrect
+(but sometimes cool looking!) images.  There is also a global
+variable and a fair amount of boilerplate which suggests we should
+wrap this in a class.</p>
+</section>
+<section id="class-based-example">
+<h2><font _mstmutation="1" _msttexthash="370929" _msthash="116">Class-based example</font><a class="headerlink" href="https://matplotlib.org/stable/users/explain/animations/blitting.html#class-based-example" title="Link to this heading">#</a></h2>
+<p><font _mstmutation="1" _msttexthash="41569840" _msthash="117">We can use a class to encapsulate the boilerplate logic and state of
+restoring the background, drawing the artists, and then blitting the
+result to the screen.  Additionally, we can use the 
+callback to capture a new background whenever a full re-draw
+happens to handle resizes correctly.</font><code class="docutils literal notranslate"><span class="pre">'draw_event'</span></code></p>
+<div class="highlight-Python notranslate"><div class="highlight"><pre id="codecell1" tabindex="-1"><span></span><span class="k">class</span><span class="w"> </span><span class="nc">BlitManager</span><span class="p">:</span>
+    <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">canvas</span><span class="p">,</span> <span class="n">animated_artists</span><span class="o">=</span><span class="p">()):</span>
+<span class="w">        </span><span class="sd">"""</span>
+<span class="sd">        Parameters</span>
+<span class="sd">        ----------</span>
+<span class="sd">        canvas : FigureCanvasAgg</span>
+<span class="sd">            The canvas to work with, this only works for subclasses of the Agg</span>
+<span class="sd">            canvas which have the `~FigureCanvasAgg.copy_from_bbox` and</span>
+<span class="sd">            `~FigureCanvasAgg.restore_region` methods.</span>
+
+<span class="sd">        animated_artists : Iterable[Artist]</span>
+<span class="sd">            List of the artists to manage</span>
+<span class="sd">        """</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">canvas</span> <span class="o">=</span> <span class="n">canvas</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_bg</span> <span class="o">=</span> <span class="kc">None</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_artists</span> <span class="o">=</span> <span class="p">[]</span>
+
+        <span class="k">for</span> <span class="n">a</span> <span class="ow">in</span> <span class="n">animated_artists</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">add_artist</span><span class="p">(</span><span class="n">a</span><span class="p">)</span>
+        <span class="c1"># grab the background on every draw</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">cid</span> <span class="o">=</span> <span class="n">canvas</span><span class="o">.</span><span class="n">mpl_connect</span><span class="p">(</span><span class="s2">"draw_event"</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">on_draw</span><span class="p">)</span>
+
+    <span class="k">def</span><span class="w"> </span><span class="nf">on_draw</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">event</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">"""Callback to register with 'draw_event'."""</span>
+        <span class="n">cv</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">canvas</span>
+        <span class="k">if</span> <span class="n">event</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="k">if</span> <span class="n">event</span><span class="o">.</span><span class="n">canvas</span> <span class="o">!=</span> <span class="n">cv</span><span class="p">:</span>
+                <span class="k">raise</span> <span class="ne">RuntimeError</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_bg</span> <span class="o">=</span> <span class="n">cv</span><span class="o">.</span><span class="n">copy_from_bbox</span><span class="p">(</span><span class="n">cv</span><span class="o">.</span><span class="n">figure</span><span class="o">.</span><span class="n">bbox</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_draw_animated</span><span class="p">()</span>
+
+    <span class="k">def</span><span class="w"> </span><span class="nf">add_artist</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">art</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">"""</span>
+<span class="sd">        Add an artist to be managed.</span>
+
+<span class="sd">        Parameters</span>
+<span class="sd">        ----------</span>
+<span class="sd">        art : Artist</span>
+
+<span class="sd">            The artist to be added.  Will be set to 'animated' (just</span>
+<span class="sd">            to be safe).  *art* must be in the figure associated with</span>
+<span class="sd">            the canvas this class is managing.</span>
+
+<span class="sd">        """</span>
+        <span class="k">if</span> <span class="n">art</span><span class="o">.</span><span class="n">figure</span> <span class="o">!=</span> <span class="bp">self</span><span class="o">.</span><span class="n">canvas</span><span class="o">.</span><span class="n">figure</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="ne">RuntimeError</span>
+        <span class="n">art</span><span class="o">.</span><span class="n">set_animated</span><span class="p">(</span><span class="kc">True</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_artists</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">art</span><span class="p">)</span>
+
+    <span class="k">def</span><span class="w"> </span><span class="nf">_draw_animated</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">"""Draw all of the animated artists."""</span>
+        <a href="https://matplotlib.org/stable/api/_as_gen/matplotlib.figure.Figure.html#matplotlib.figure.Figure" title="matplotlib.figure.Figure" class="sphx-glr-backref-module-matplotlib-figure sphx-glr-backref-type-py-class sphx-glr-backref-instance"><span class="n">fig</span></a> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">canvas</span><span class="o">.</span><span class="n">figure</span>
+        <span class="k">for</span> <span class="n">a</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">_artists</span><span class="p">:</span>
+            <a href="https://matplotlib.org/stable/api/_as_gen/matplotlib.figure.Figure.draw_artist.html#matplotlib.figure.Figure.draw_artist" title="matplotlib.figure.Figure.draw_artist" class="sphx-glr-backref-module-matplotlib-figure sphx-glr-backref-type-py-method"><span class="n">fig</span><span class="o">.</span><span class="n">draw_artist</span></a><span class="p">(</span><span class="n">a</span><span class="p">)</span>
+
+    <span class="k">def</span><span class="w"> </span><span class="nf">update</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">"""Update the screen with animated artists."""</span>
+        <span class="n">cv</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">canvas</span>
+        <a href="https://matplotlib.org/stable/api/_as_gen/matplotlib.figure.Figure.html#matplotlib.figure.Figure" title="matplotlib.figure.Figure" class="sphx-glr-backref-module-matplotlib-figure sphx-glr-backref-type-py-class sphx-glr-backref-instance"><span class="n">fig</span></a> <span class="o">=</span> <span class="n">cv</span><span class="o">.</span><span class="n">figure</span>
+        <span class="c1"># paranoia in case we missed the draw event,</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">_bg</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">on_draw</span><span class="p">(</span><span class="kc">None</span><span class="p">)</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="c1"># restore the background</span>
+            <span class="n">cv</span><span class="o">.</span><span class="n">restore_region</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_bg</span><span class="p">)</span>
+            <span class="c1"># draw all of the animated artists</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">_draw_animated</span><span class="p">()</span>
+            <span class="c1"># update the GUI state</span>
+            <span class="n">cv</span><span class="o">.</span><span class="n">blit</span><span class="p">(</span><a href="https://matplotlib.org/stable/api/transformations.html#matplotlib.transforms.TransformedBbox" title="matplotlib.transforms.TransformedBbox" class="sphx-glr-backref-module-matplotlib-transforms sphx-glr-backref-type-py-class sphx-glr-backref-instance"><span class="n">fig</span><span class="o">.</span><span class="n">bbox</span></a><span class="p">)</span>
+        <span class="c1"># let the GUI event loop process anything it has to do</span>
+        <span class="n">cv</span><span class="o">.</span><span class="n">flush_events</span><span class="p">()</span>
+</pre><button class="copybtn o-tooltip--left" data-tooltip="Copy" data-clipboard-target="#codecell1">
+      <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-copy" width="44" height="44" viewBox="0 0 24 24" stroke-width="1.5" stroke="#000000" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <title>Copy to clipboard</title>
+  <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
+  <rect x="8" y="8" width="12" height="12" rx="2"></rect>
+  <path d="M16 8v-2a2 2 0 0 0 -2 -2h-8a2 2 0 0 0 -2 2v8a2 2 0 0 0 2 2h2"></path>
+</svg>
+    </button></div>
+</div>
+<p _msttexthash="9638967" _msthash="118">Here is how we would use our class.  This is a slightly more complicated
+example than the first case as we add a text frame counter as well.</p>
+<div class="highlight-Python notranslate"><div class="highlight"><pre id="codecell2" tabindex="-1"><span></span><span class="c1"># make a new figure</span>
+<a href="https://matplotlib.org/stable/api/_as_gen/matplotlib.figure.Figure.html#matplotlib.figure.Figure" title="matplotlib.figure.Figure" class="sphx-glr-backref-module-matplotlib-figure sphx-glr-backref-type-py-class sphx-glr-backref-instance"><span class="n">fig</span></a><span class="p">,</span> <a href="https://matplotlib.org/stable/api/_as_gen/matplotlib.axes.Axes.html#matplotlib.axes.Axes" title="matplotlib.axes.Axes" class="sphx-glr-backref-module-matplotlib-axes sphx-glr-backref-type-py-class sphx-glr-backref-instance"><span class="n">ax</span></a> <span class="o">=</span> <a href="https://matplotlib.org/stable/api/_as_gen/matplotlib.pyplot.subplots.html#matplotlib.pyplot.subplots" title="matplotlib.pyplot.subplots" class="sphx-glr-backref-module-matplotlib-pyplot sphx-glr-backref-type-py-function"><span class="n">plt</span><span class="o">.</span><span class="n">subplots</span></a><span class="p">()</span>
+<span class="c1"># add a line</span>
+<span class="p">(</span><a href="https://matplotlib.org/stable/api/_as_gen/matplotlib.lines.Line2D.html#matplotlib.lines.Line2D" title="matplotlib.lines.Line2D" class="sphx-glr-backref-module-matplotlib-lines sphx-glr-backref-type-py-class sphx-glr-backref-instance"><span class="n">ln</span></a><span class="p">,)</span> <span class="o">=</span> <a href="https://matplotlib.org/stable/api/_as_gen/matplotlib.axes.Axes.plot.html#matplotlib.axes.Axes.plot" title="matplotlib.axes.Axes.plot" class="sphx-glr-backref-module-matplotlib-axes sphx-glr-backref-type-py-method"><span class="n">ax</span><span class="o">.</span><span class="n">plot</span></a><span class="p">(</span><a href="https://numpy.org/doc/stable/reference/generated/numpy.ndarray.html#numpy.ndarray" title="numpy.ndarray" class="sphx-glr-backref-module-numpy sphx-glr-backref-type-py-class sphx-glr-backref-instance"><span class="n">x</span></a><span class="p">,</span> <a href="https://numpy.org/doc/stable/reference/generated/numpy.ufunc.html#numpy.ufunc" title="numpy.ufunc" class="sphx-glr-backref-module-numpy sphx-glr-backref-type-py-class sphx-glr-backref-instance"><span class="n">np</span><span class="o">.</span><span class="n">sin</span></a><span class="p">(</span><a href="https://numpy.org/doc/stable/reference/generated/numpy.ndarray.html#numpy.ndarray" title="numpy.ndarray" class="sphx-glr-backref-module-numpy sphx-glr-backref-type-py-class sphx-glr-backref-instance"><span class="n">x</span></a><span class="p">),</span> <span class="n">animated</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+<span class="c1"># add a frame number</span>
+<a href="https://matplotlib.org/stable/api/text_api.html#matplotlib.text.Annotation" title="matplotlib.text.Annotation" class="sphx-glr-backref-module-matplotlib-text sphx-glr-backref-type-py-class sphx-glr-backref-instance"><span class="n">fr_number</span></a> <span class="o">=</span> <a href="https://matplotlib.org/stable/api/_as_gen/matplotlib.axes.Axes.annotate.html#matplotlib.axes.Axes.annotate" title="matplotlib.axes.Axes.annotate" class="sphx-glr-backref-module-matplotlib-axes sphx-glr-backref-type-py-method"><span class="n">ax</span><span class="o">.</span><span class="n">annotate</span></a><span class="p">(</span>
+    <span class="s2">"0"</span><span class="p">,</span>
+    <span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">),</span>
+    <span class="n">xycoords</span><span class="o">=</span><span class="s2">"axes fraction"</span><span class="p">,</span>
+    <span class="n">xytext</span><span class="o">=</span><span class="p">(</span><span class="mi">10</span><span class="p">,</span> <span class="o">-</span><span class="mi">10</span><span class="p">),</span>
+    <span class="n">textcoords</span><span class="o">=</span><span class="s2">"offset points"</span><span class="p">,</span>
+    <span class="n">ha</span><span class="o">=</span><span class="s2">"left"</span><span class="p">,</span>
+    <span class="n">va</span><span class="o">=</span><span class="s2">"top"</span><span class="p">,</span>
+    <span class="n">animated</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
+<span class="p">)</span>
+<span class="n">bm</span> <span class="o">=</span> <span class="n">BlitManager</span><span class="p">(</span><a href="https://matplotlib.org/stable/api/backend_agg_api.html#matplotlib.backends.backend_agg.FigureCanvasAgg" title="matplotlib.backends.backend_agg.FigureCanvasAgg" class="sphx-glr-backref-module-matplotlib-backends-backend_agg sphx-glr-backref-type-py-class sphx-glr-backref-instance"><span class="n">fig</span><span class="o">.</span><span class="n">canvas</span></a><span class="p">,</span> <span class="p">[</span><a href="https://matplotlib.org/stable/api/_as_gen/matplotlib.lines.Line2D.html#matplotlib.lines.Line2D" title="matplotlib.lines.Line2D" class="sphx-glr-backref-module-matplotlib-lines sphx-glr-backref-type-py-class sphx-glr-backref-instance"><span class="n">ln</span></a><span class="p">,</span> <a href="https://matplotlib.org/stable/api/text_api.html#matplotlib.text.Annotation" title="matplotlib.text.Annotation" class="sphx-glr-backref-module-matplotlib-text sphx-glr-backref-type-py-class sphx-glr-backref-instance"><span class="n">fr_number</span></a><span class="p">])</span>
+<span class="c1"># make sure our window is on the screen and drawn</span>
+<a href="https://matplotlib.org/stable/api/_as_gen/matplotlib.pyplot.show.html#matplotlib.pyplot.show" title="matplotlib.pyplot.show" class="sphx-glr-backref-module-matplotlib-pyplot sphx-glr-backref-type-py-function"><span class="n">plt</span><span class="o">.</span><span class="n">show</span></a><span class="p">(</span><span class="n">block</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+<a href="https://matplotlib.org/stable/api/_as_gen/matplotlib.pyplot.pause.html#matplotlib.pyplot.pause" title="matplotlib.pyplot.pause" class="sphx-glr-backref-module-matplotlib-pyplot sphx-glr-backref-type-py-function"><span class="n">plt</span><span class="o">.</span><span class="n">pause</span></a><span class="p">(</span><span class="mf">.1</span><span class="p">)</span>
+
+<span class="k">for</span> <a href="https://docs.python.org/3/library/functions.html#int" title="builtins.int" class="sphx-glr-backref-module-builtins sphx-glr-backref-type-py-class sphx-glr-backref-instance"><span class="n">j</span></a> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">100</span><span class="p">):</span>
+    <span class="c1"># update the artists</span>
+    <a href="https://matplotlib.org/stable/api/_as_gen/matplotlib.lines.Line2D.html#matplotlib.lines.Line2D.set_ydata" title="matplotlib.lines.Line2D.set_ydata" class="sphx-glr-backref-module-matplotlib-lines sphx-glr-backref-type-py-method"><span class="n">ln</span><span class="o">.</span><span class="n">set_ydata</span></a><span class="p">(</span><a href="https://numpy.org/doc/stable/reference/generated/numpy.ufunc.html#numpy.ufunc" title="numpy.ufunc" class="sphx-glr-backref-module-numpy sphx-glr-backref-type-py-class sphx-glr-backref-instance"><span class="n">np</span><span class="o">.</span><span class="n">sin</span></a><span class="p">(</span><a href="https://numpy.org/doc/stable/reference/generated/numpy.ndarray.html#numpy.ndarray" title="numpy.ndarray" class="sphx-glr-backref-module-numpy sphx-glr-backref-type-py-class sphx-glr-backref-instance"><span class="n">x</span></a> <span class="o">+</span> <span class="p">(</span><a href="https://docs.python.org/3/library/functions.html#int" title="builtins.int" class="sphx-glr-backref-module-builtins sphx-glr-backref-type-py-class sphx-glr-backref-instance"><span class="n">j</span></a> <span class="o">/</span> <span class="mi">100</span><span class="p">)</span> <span class="o">*</span> <a href="https://docs.python.org/3/library/functions.html#float" title="builtins.float" class="sphx-glr-backref-module-builtins sphx-glr-backref-type-py-class sphx-glr-backref-instance"><span class="n">np</span><span class="o">.</span><span class="n">pi</span></a><span class="p">))</span>
+    <a href="https://matplotlib.org/stable/api/text_api.html#matplotlib.text.Text.set_text" title="matplotlib.text.Text.set_text" class="sphx-glr-backref-module-matplotlib-text sphx-glr-backref-type-py-method"><span class="n">fr_number</span><span class="o">.</span><span class="n">set_text</span></a><span class="p">(</span><span class="sa">f</span><span class="s2">"frame: </span><span class="si">{</span><a href="https://docs.python.org/3/library/functions.html#int" title="builtins.int" class="sphx-glr-backref-module-builtins sphx-glr-backref-type-py-class sphx-glr-backref-instance"><span class="n">j</span></a><span class="si">}</span><span class="s2">"</span><span class="p">)</span>
+    <span class="c1"># tell the blitting manager to do its thing</span>
+    <span class="n">bm</span><span class="o">.</span><span class="n">update</span><span class="p">()</span>
+</pre><button class="copybtn o-tooltip--left" data-tooltip="Copy" data-clipboard-target="#codecell2">
+      <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-copy" width="44" height="44" viewBox="0 0 24 24" stroke-width="1.5" stroke="#000000" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <title>Copy to clipboard</title>
+  <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
+  <rect x="8" y="8" width="12" height="12" rx="2"></rect>
+  <path d="M16 8v-2a2 2 0 0 0 -2 -2h-8a2 2 0 0 0 -2 2v8a2 2 0 0 0 2 2h2"></path>
+</svg>
+    </button></div>
+</div>
+<img src="./Renderização mais rápida usando blitting — Documentação do Matplotlib 3.10.8_files/sphx_glr_blitting_002.png" srcset="../../../_images/sphx_glr_blitting_002.png, ../../../_images/sphx_glr_blitting_002_2_00x.png 2.00x" alt="blitting" class="sphx-glr-single-img" _msthidden="A" _mstalt="117819" _msthash="119"><p _msttexthash="4449718" _msthash="120">This class does not depend on <a class="reference internal" href="https://matplotlib.org/stable/api/pyplot_summary.html#module-matplotlib.pyplot" title="matplotlib.pyplot"><code class="xref py py-obj docutils literal notranslate"><span class="pre">pyplot</span></code></a> and is suitable to embed
+into larger GUI application.</p>
+<p class="sphx-glr-timing" _msttexthash="1914315" _msthash="121"><strong>Total running time of the script:</strong> (0 minutes 1.026 seconds)</p>
+<div class="sphx-glr-footer sphx-glr-footer-example docutils container" id="sphx-glr-download-users-explain-animations-blitting-py">
+<div class="sphx-glr-download sphx-glr-download-jupyter docutils container">
+<p><a class="reference download internal" download="" href="https://matplotlib.org/stable/_downloads/4474e5053d9334b09fc7fcf56bb27cd0/blitting.ipynb"><code class="xref download docutils literal notranslate"><span class="pre">Download</span> <span class="pre">Jupyter</span> <span class="pre">notebook:</span> <span class="pre">blitting.ipynb</span></code></a></p>
+</div>
+<div class="sphx-glr-download sphx-glr-download-python docutils container">
+<p><a class="reference download internal" download="" href="https://matplotlib.org/stable/_downloads/45aa008579ef6857fc6688e29efa25be/blitting.py"><code class="xref download docutils literal notranslate"><span class="pre">Download</span> <span class="pre">Python</span> <span class="pre">source</span> <span class="pre">code:</span> <span class="pre">blitting.py</span></code></a></p>
+</div>
+<div class="sphx-glr-download sphx-glr-download-zip docutils container">
+<p><a class="reference download internal" download="" href="https://matplotlib.org/stable/_downloads/a1385b4dae9d7363a88dbd0c341e1610/blitting.zip"><code class="xref download docutils literal notranslate"><span class="pre">Download</span> <span class="pre">zipped:</span> <span class="pre">blitting.zip</span></code></a></p>
+</div>
+</div>
+<p class="sphx-glr-signature"><a class="reference external" href="https://sphinx-gallery.github.io/" _msttexthash="959426" _msthash="122">Gallery generated by Sphinx-Gallery</a></p>
+</section>
+</section>
+
+
+                </article>
+              
+              
+              
+              
+              
+            </div>
+            
+            
+              
+                <div class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+
+  <div class="sidebar-secondary-item">
+<div id="pst-page-navigation-heading-2" class="page-toc tocsection onthispage">
+    <svg class="svg-inline--fa fa-list" aria-hidden="true" focusable="false" data-prefix="fas" data-icon="list" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" data-fa-i2svg=""><path fill="currentColor" d="M40 48C26.7 48 16 58.7 16 72v48c0 13.3 10.7 24 24 24H88c13.3 0 24-10.7 24-24V72c0-13.3-10.7-24-24-24H40zM192 64c-17.7 0-32 14.3-32 32s14.3 32 32 32H480c17.7 0 32-14.3 32-32s-14.3-32-32-32H192zm0 160c-17.7 0-32 14.3-32 32s14.3 32 32 32H480c17.7 0 32-14.3 32-32s-14.3-32-32-32H192zm0 160c-17.7 0-32 14.3-32 32s14.3 32 32 32H480c17.7 0 32-14.3 32-32s-14.3-32-32-32H192zM16 232v48c0 13.3 10.7 24 24 24H88c13.3 0 24-10.7 24-24V232c0-13.3-10.7-24-24-24H40c-13.3 0-24 10.7-24 24zM40 368c-13.3 0-24 10.7-24 24v48c0 13.3 10.7 24 24 24H88c13.3 0 24-10.7 24-24V392c0-13.3-10.7-24-24-24H40z"></path></svg><!-- <i class="fa-solid fa-list"></i> Font Awesome fontawesome.com --><font _mstmutation="1" _msttexthash="199043" _msthash="123"> Nesta página </font></div>
+  <nav class="bd-toc-nav page-toc" aria-labelledby="pst-page-navigation-heading-2">
+    <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="https://matplotlib.org/stable/users/explain/animations/blitting.html#minimal-example" _msttexthash="261430" _msthash="124">Exemplo mínimo</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="https://matplotlib.org/stable/users/explain/animations/blitting.html#class-based-example" _msttexthash="568542" _msthash="125">Exemplo baseado em classes</a></li>
+</ul>
+  </nav></div>
+
+</div></div>
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+          </footer>
+        
+      </main>
+    </div>
+  </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script src="./Renderização mais rápida usando blitting — Documentação do Matplotlib 3.10.8_files/bootstrap.js.baixados" type="text/javascript"></script>
+<script src="./Renderização mais rápida usando blitting — Documentação do Matplotlib 3.10.8_files/pydata-sphinx-theme.js.baixados" type="text/javascript"></script>
+
+  <footer class="bd-footer">
+<div class="bd-footer__inner bd-page-width">
+  
+    <div class="footer-items__start">
+      
+        <div class="footer-item">
+
+  <p class="copyright"><font _mstmutation="1" _msttexthash="27348451" _msthash="126">
+    
+      © Copyright 2002–2012 John Hunter, Darren Dale, Eric Firing, Michael Droettboom and the Matplotlib development team; 2012–2025 The Matplotlib development team.
+      </font><br>
+    
+  </p>
+</div>
+      
+        <div class="footer-item">
+
+  <p class="sphinx-version"><font _mstmutation="1" _msttexthash="489177" _msthash="127">
+    Created using <a href="https://www.sphinx-doc.org/" _mstmutation="1">Sphinx</a> 8.2.3.
+    </font><br>
+  </p>
+</div>
+      
+        <div class="footer-item">
+  <p class="sphinx-version"><font _mstmutation="1" _msttexthash="594438" _msthash="128">
+    Built from v3.10.8-7-g1957ba3918.
+    </font><br>
+  </p>
+</div>
+      
+    </div>
+  
+  
+  
+    <div class="footer-items__end">
+      
+        <div class="footer-item">
+<p class="theme-version" _msttexthash="986830" _msthash="129">
+  Built with the <a href="https://pydata-sphinx-theme.readthedocs.io/en/stable/index.html">PyData Sphinx Theme</a> 0.15.4.
+</p></div>
+      
+    </div>
+  
+</div>
+
+  </footer>
+  <script defer="" src="./Renderização mais rápida usando blitting — Documentação do Matplotlib 3.10.8_files/v8c78df7c7c0f484497ecbca7046644da1771523124516" integrity="sha512-8DS7rgIrAmghBFwoOTujcf6D9rXvH8xm8JQ1Ja01h9QX8EzXldiszufYa4IFfKdLUKTTrnSFXLDkUEOTrZQ8Qg==" data-cf-beacon="{&quot;version&quot;:&quot;2024.11.0&quot;,&quot;token&quot;:&quot;0175964edbd040b6ac0bff692bcb22ec&quot;,&quot;server_timing&quot;:{&quot;name&quot;:{&quot;cfCacheStatus&quot;:true,&quot;cfEdge&quot;:true,&quot;cfExtPri&quot;:true,&quot;cfL4&quot;:true,&quot;cfOrigin&quot;:true,&quot;cfSpeedBrain&quot;:true},&quot;location_startswith&quot;:null}}" crossorigin="anonymous"></script>
+
+</body></html>

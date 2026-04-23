@@ -1,0 +1,803 @@
+<!DOCTYPE html>
+<!-- saved from url=(0051)https://seaborn.pydata.org/tutorial/regression.html -->
+<html lang="pt" data-mode="light" data-theme="light"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"><meta name="generator" content="Docutils 0.19: https://docutils.sourceforge.io/">
+
+    <title _msttexthash="5952349" _msthash="0">Estimando ajustes de regressão — documentação seaborn 0.13.2</title>
+  <script>
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "light";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "light";
+  </script>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="./Estimando ajustes de regressão — documentação seaborn 0.13.2_files/theme.css" rel="stylesheet">
+<link href="./Estimando ajustes de regressão — documentação seaborn 0.13.2_files/pydata-sphinx-theme.css" rel="stylesheet">
+
+  
+  <link rel="stylesheet" href="./Estimando ajustes de regressão — documentação seaborn 0.13.2_files/all.min.css">
+  <link rel="preload" as="font" type="font/woff2" crossorigin="" href="https://seaborn.pydata.org/_static/vendor/fontawesome/5.13.0/webfonts/fa-solid-900.woff2">
+  <link rel="preload" as="font" type="font/woff2" crossorigin="" href="https://seaborn.pydata.org/_static/vendor/fontawesome/5.13.0/webfonts/fa-brands-400.woff2">
+
+    <link rel="stylesheet" type="text/css" href="./Estimando ajustes de regressão — documentação seaborn 0.13.2_files/pygments.css">
+    <link rel="stylesheet" type="text/css" href="./Estimando ajustes de regressão — documentação seaborn 0.13.2_files/plot_directive.css">
+    <link rel="stylesheet" type="text/css" href="./Estimando ajustes de regressão — documentação seaborn 0.13.2_files/copybutton.css">
+    <link rel="stylesheet" type="text/css" href="./Estimando ajustes de regressão — documentação seaborn 0.13.2_files/design-style.1e8bd061cd6da7fc9cf755528e8ffc24.min.css">
+    <link rel="stylesheet" type="text/css" href="./Estimando ajustes de regressão — documentação seaborn 0.13.2_files/custom.css">
+  
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="./Estimando ajustes de regressão — documentação seaborn 0.13.2_files/pydata-sphinx-theme.js.baixados">
+
+    <script data-url_root="../" id="documentation_options" src="./Estimando ajustes de regressão — documentação seaborn 0.13.2_files/documentation_options.js.baixados"></script>
+    <script src="./Estimando ajustes de regressão — documentação seaborn 0.13.2_files/jquery.js.baixados"></script>
+    <script src="./Estimando ajustes de regressão — documentação seaborn 0.13.2_files/underscore.js.baixados"></script>
+    <script src="./Estimando ajustes de regressão — documentação seaborn 0.13.2_files/_sphinx_javascript_frameworks_compat.js.baixados"></script>
+    <script src="./Estimando ajustes de regressão — documentação seaborn 0.13.2_files/doctools.js.baixados"></script>
+    <script src="./Estimando ajustes de regressão — documentação seaborn 0.13.2_files/sphinx_highlight.js.baixados"></script>
+    <script src="./Estimando ajustes de regressão — documentação seaborn 0.13.2_files/clipboard.min.js.baixados"></script>
+    <script src="./Estimando ajustes de regressão — documentação seaborn 0.13.2_files/copybutton.js.baixados"></script>
+    <script src="./Estimando ajustes de regressão — documentação seaborn 0.13.2_files/design-tabs.js.baixados"></script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'tutorial/regression';</script>
+    <link rel="shortcut icon" href="https://seaborn.pydata.org/_static/favicon.ico">
+    <link rel="index" title="Index" href="https://seaborn.pydata.org/genindex.html">
+    <link rel="search" title="Search" href="https://seaborn.pydata.org/search.html">
+    <link rel="next" title="Building structured multi-plot grids" href="https://seaborn.pydata.org/tutorial/axis_grids.html">
+    <link rel="prev" title="Statistical estimation and error bars" href="https://seaborn.pydata.org/tutorial/error_bars.html">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="docsearch:language" content="en">
+  </head>
+  
+  
+  <body data-spy="scroll" data-target="#bd-toc-nav" data-offset="180" data-default-mode="light">
+
+  
+  <input type="checkbox" class="sidebar-toggle" name="__primary" id="__primary">
+  <label class="overlay overlay-primary" for="__primary"></label>
+
+  
+  <input type="checkbox" class="sidebar-toggle" name="__secondary" id="__secondary">
+  <label class="overlay overlay-secondary" for="__secondary"></label>
+
+  
+  <div class="search-button__wrapper" _msthidden="1">
+    <div class="search-button__overlay"></div>
+    <div class="search-button__search-container" _msthidden="1">
+      
+<form class="bd-search d-flex align-items-center" action="https://seaborn.pydata.org/search.html" method="get" _msthidden="1">
+  <i class="icon fas fa-search"></i>
+  <input type="search" class="form-control" name="q" id="search-input" placeholder="Search the docs ..." aria-label="Search the docs ..." autocomplete="off" _msthidden="A" _mstplaceholder="267410" _msthash="1" _mstaria-label="267410">
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form>
+    </div>
+  </div>
+
+  
+  <nav class="bd-header navbar navbar-expand-lg bd-navbar" id="navbar-main"><div class="bd-header__inner container-xl">
+  <label class="sidebar-toggle primary-toggle" for="__primary">
+      <span class="fas fa-bars"></span>
+  </label>
+  <div id="navbar-start">
+    
+    
+  
+
+
+<a class="navbar-brand logo" href="https://seaborn.pydata.org/index.html">
+  
+  
+  
+  
+  
+  
+    <img src="./Estimando ajustes de regressão — documentação seaborn 0.13.2_files/logo-wide-lightbg.svg" class="logo__image only-light" alt="Imagem do logo" _mstalt="131794" _msthash="2">
+    <img src="./Estimando ajustes de regressão — documentação seaborn 0.13.2_files/logo-wide-lightbg.svg" class="logo__image only-dark" alt="Logo image" _msthidden="A" _mstalt="131794" _msthash="3">
+  
+  
+</a>
+    
+  </div>
+
+  
+  <div class="col-lg-9 navbar-header-items">
+    <div id="navbar-center" class="mr-auto">
+      
+      <div class="navbar-center-item">
+        <ul id="navbar-main-elements" class="navbar-nav">
+    <li class="toctree-l1 nav-item">
+ <a class="reference internal nav-link" href="https://seaborn.pydata.org/installing.html" _msttexthash="203125" _msthash="4"> Instalação </a>
+</li>
+
+<li class="toctree-l1 nav-item">
+ <a class="reference internal nav-link" href="https://seaborn.pydata.org/examples/index.html" _msttexthash="91390" _msthash="5"> Galeria </a>
+</li>
+
+<li class="toctree-l1 current active nav-item">
+ <a class="reference internal nav-link" href="https://seaborn.pydata.org/tutorial.html" _msttexthash="116545" _msthash="6">
+  Tutorial
+ </a>
+</li>
+
+<li class="toctree-l1 nav-item">
+ <a class="reference internal nav-link" href="https://seaborn.pydata.org/api.html" _msttexthash="22776" _msthash="7">
+  API
+ </a>
+</li>
+
+<li class="toctree-l1 nav-item">
+ <a class="reference internal nav-link" href="https://seaborn.pydata.org/whatsnew/index.html" _msttexthash="198991" _msthash="8"> Lançamentos </a>
+</li>
+
+<li class="toctree-l1 nav-item">
+ <a class="reference internal nav-link" href="https://seaborn.pydata.org/citing.html" _msttexthash="130403" _msthash="9"> Citação </a>
+</li>
+
+<li class="toctree-l1 nav-item">
+ <a class="reference internal nav-link" href="https://seaborn.pydata.org/faq.html" _msttexthash="22607" _msthash="10">
+  FAQ
+ </a>
+</li>
+
+</ul>
+      </div>
+      
+    </div>
+
+    <div id="navbar-end">
+      <div class="navbar-end-item navbar-end__search-button-container">
+        
+<button class="btn btn-sm navbar-btn search-button search-button__button" title="Search">
+  <i class="fas fa-search"></i>
+</button>
+      </div>
+      
+      <div class="navbar-end-item">
+        <ul id="navbar-icon-links" class="navbar-nav" aria-label="Links de Ícones" _mstaria-label="131963" _msthash="11">
+        <li class="nav-item">
+          
+          
+          
+          
+          
+          
+          <a href="https://github.com/mwaskom/seaborn" title="GitHub" class="nav-link" rel="noopener" target="_blank"><span><i class="fab fa-github"></i></span>
+            <label class="sr-only" _msttexthash="72332" _msthash="12">GitHub</label></a>
+        </li>
+        <li class="nav-item">
+          
+          
+          
+          
+          
+          
+          <a href="https://stackoverflow.com/tags/seaborn" title="StackOverflow" class="nav-link" rel="noopener" target="_blank"><span><i class="fab fa-stack-overflow"></i></span>
+            <label class="sr-only" _msttexthash="232466" _msthash="13">StackOverflow</label></a>
+        </li>
+        <li class="nav-item">
+          
+          
+          
+          
+          
+          
+          <a href="https://twitter.com/michaelwaskom" title="Twitter" class="nav-link" rel="noopener" target="_blank"><span><i class="fab fa-twitter"></i></span>
+            <label class="sr-only" _msttexthash="98995" _msthash="14">Twitter</label></a>
+        </li>
+      </ul>
+      </div>
+      
+    </div>
+  </div>
+
+
+  
+  <div class="search-button-container--mobile">
+<button class="btn btn-sm navbar-btn search-button search-button__button" title="Search">
+  <i class="fas fa-search"></i>
+</button>
+  </div>
+
+  
+  <label class="sidebar-toggle secondary-toggle" for="__secondary">
+      <span class="fas fa-outdent"></span>
+  </label>
+  
+
+</div>
+  </nav>
+  
+
+  <div class="bd-container container-xl">
+    <div class="bd-container__inner row">
+      
+      <div class="bd-sidebar-primary bd-sidebar">
+        
+  
+  <div class="sidebar-header-items sidebar-primary__section" _msthidden="13">
+    <p class="sidebar-header-items__title" role="heading" aria-level="1" aria-label="Navigation" _msthidden="1" _mstaria-label="157742" _msthash="15" _msttexthash="256997">
+      Site Navigation
+    </p>
+    
+    
+      <div class="sidebar-header-items__center" _msthidden="7">
+      
+      <div class="navbar-center-item" _msthidden="7">
+        <ul id="navbar-main-elements" class="navbar-nav" _msthidden="7">
+    <li class="toctree-l1 nav-item" _msthidden="1">
+ <a class="reference internal nav-link" href="https://seaborn.pydata.org/installing.html" _msttexthash="157573" _msthidden="1" _msthash="16">
+  Installing
+ </a>
+</li>
+
+<li class="toctree-l1 nav-item" _msthidden="1">
+ <a class="reference internal nav-link" href="https://seaborn.pydata.org/examples/index.html" _msttexthash="95901" _msthidden="1" _msthash="17">
+  Gallery
+ </a>
+</li>
+
+<li class="toctree-l1 current active nav-item" _msthidden="1">
+ <a class="reference internal nav-link" href="https://seaborn.pydata.org/tutorial.html" _msttexthash="116545" _msthidden="1" _msthash="18">
+  Tutorial
+ </a>
+</li>
+
+<li class="toctree-l1 nav-item" _msthidden="1">
+ <a class="reference internal nav-link" href="https://seaborn.pydata.org/api.html" _msttexthash="22776" _msthidden="1" _msthash="19">
+  API
+ </a>
+</li>
+
+<li class="toctree-l1 nav-item" _msthidden="1">
+ <a class="reference internal nav-link" href="https://seaborn.pydata.org/whatsnew/index.html" _msttexthash="113542" _msthidden="1" _msthash="20">
+  Releases
+ </a>
+</li>
+
+<li class="toctree-l1 nav-item" _msthidden="1">
+ <a class="reference internal nav-link" href="https://seaborn.pydata.org/citing.html" _msttexthash="76037" _msthidden="1" _msthash="21">
+  Citing
+ </a>
+</li>
+
+<li class="toctree-l1 nav-item" _msthidden="1">
+ <a class="reference internal nav-link" href="https://seaborn.pydata.org/faq.html" _msttexthash="22607" _msthidden="1" _msthash="22">
+  FAQ
+ </a>
+</li>
+
+</ul>
+      </div>
+      
+      </div>
+    
+
+    
+    
+    <div class="sidebar-header-items__end" _msthidden="4">
+      
+      <div class="navbar-end-item" _msthidden="4">
+        <ul id="navbar-icon-links" class="navbar-nav" aria-label="Icon Links" _msthidden="3" _mstaria-label="131963" _msthash="23">
+        <li class="nav-item" _msthidden="1">
+          
+          
+          
+          
+          
+          
+          <a href="https://github.com/mwaskom/seaborn" title="GitHub" class="nav-link" rel="noopener" target="_blank" _msthidden="1"><span><i class="fab fa-github"></i></span>
+            <label class="sr-only" _msttexthash="72332" _msthidden="1" _msthash="24">GitHub</label></a>
+        </li>
+        <li class="nav-item" _msthidden="1">
+          
+          
+          
+          
+          
+          
+          <a href="https://stackoverflow.com/tags/seaborn" title="StackOverflow" class="nav-link" rel="noopener" target="_blank" _msthidden="1"><span><i class="fab fa-stack-overflow"></i></span>
+            <label class="sr-only" _msttexthash="232466" _msthidden="1" _msthash="25">StackOverflow</label></a>
+        </li>
+        <li class="nav-item" _msthidden="1">
+          
+          
+          
+          
+          
+          
+          <a href="https://twitter.com/michaelwaskom" title="Twitter" class="nav-link" rel="noopener" target="_blank" _msthidden="1"><span><i class="fab fa-twitter"></i></span>
+            <label class="sr-only" _msttexthash="98995" _msthidden="1" _msthash="26">Twitter</label></a>
+        </li>
+      </ul>
+      </div>
+      
+    </div>
+    
+  </div>
+
+  
+  <div class="sidebar-start-items sidebar-primary__section">
+    <div class="sidebar-start-items__item"><nav class="bd-links" id="bd-docs-nav" aria-label="Navegação por seções" _mstaria-label="353847" _msthash="27">
+  <div class="bd-toc-item navbar-nav">
+    <ul class="nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="https://seaborn.pydata.org/tutorial/introduction.html" _msttexthash="591084" _msthash="28"> Uma introdução ao seaborn </a>
+ </li>
+</ul>
+<ul class="nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="https://seaborn.pydata.org/tutorial/function_overview.html" _msttexthash="1374724" _msthash="29"> Visão geral das funções de plotagem seaborn </a>
+ </li>
+</ul>
+<ul class="nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="https://seaborn.pydata.org/tutorial/data_structure.html" _msttexthash="1162369" _msthash="30"> Estruturas de dados aceitas pelo seaborn </a>
+ </li>
+</ul>
+<ul class="nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="https://seaborn.pydata.org/tutorial/objects_interface.html" _msttexthash="632931" _msthash="31"> A interface seaborn.objects </a>
+ </li>
+</ul>
+<ul class="nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="https://seaborn.pydata.org/tutorial/properties.html" _msttexthash="692822" _msthash="32"> Propriedades dos objetos Mark </a>
+ </li>
+</ul>
+<ul class="nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="https://seaborn.pydata.org/tutorial/relational.html" _msttexthash="1139190" _msthash="33"> Visualizando relações estatísticas </a>
+ </li>
+</ul>
+<ul class="nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="https://seaborn.pydata.org/tutorial/distributions.html" _msttexthash="1386658" _msthash="34"> Visualização das distribuições dos dados </a>
+ </li>
+</ul>
+<ul class="nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="https://seaborn.pydata.org/tutorial/categorical.html" _msttexthash="995553" _msthash="35"> Visualização de dados categóricos </a>
+ </li>
+</ul>
+<ul class="nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="https://seaborn.pydata.org/tutorial/error_bars.html" _msttexthash="1143376" _msthash="36"> Estimativa estatística e barras de erro </a>
+ </li>
+</ul>
+<ul class="current nav bd-sidenav">
+ <li class="toctree-l1 current active">
+  <a class="current reference internal" href="https://seaborn.pydata.org/tutorial/regression.html#" _msttexthash="1013727" _msthash="37"> Estimativa dos ajustes de regressão </a>
+ </li>
+</ul>
+<ul class="nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="https://seaborn.pydata.org/tutorial/axis_grids.html" _msttexthash="1925560" _msthash="38"> Construindo grades estruturadas de múltiplos plots </a>
+ </li>
+</ul>
+<ul class="nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="https://seaborn.pydata.org/tutorial/aesthetics.html" _msttexthash="711880" _msthash="39"> Estética de controle da figura </a>
+ </li>
+</ul>
+<ul class="nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="https://seaborn.pydata.org/tutorial/color_palettes.html" _msttexthash="608400" _msthash="40"> Escolha das paletas de cores </a>
+ </li>
+</ul>
+
+  </div>
+</nav>
+    </div>
+  </div>
+  
+
+  
+  <div class="sidebar-end-items sidebar-primary__section">
+    <div class="sidebar-end-items__item">
+    </div>
+  </div>
+
+      </div>
+
+      
+      
+      
+        <div class="bd-sidebar-secondary bd-toc">
+          
+<div class="toc-item">
+  
+<div class="tocsection onthispage">
+    <i class="fas fa-list"></i><font _mstmutation="1" _msttexthash="199043" _msthash="41"> Nesta página </font></div>
+<nav id="bd-toc-nav" class="page-toc">
+    <ul class="visible nav section-nav flex-column">
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="https://seaborn.pydata.org/tutorial/regression.html#functions-for-drawing-linear-regression-models" _msttexthash="1771445" _msthash="42"> Funções para desenhar modelos de regressão linear </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="https://seaborn.pydata.org/tutorial/regression.html#fitting-different-kinds-of-models" _msttexthash="1210729" _msthash="43"> Adaptação de diferentes tipos de modelos </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="https://seaborn.pydata.org/tutorial/regression.html#conditioning-on-other-variables" _msttexthash="1066221" _msthash="44"> Condicionamento em outras variáveis </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="https://seaborn.pydata.org/tutorial/regression.html#plotting-a-regression-in-other-contexts" _msttexthash="1364363" _msthash="45"> Plotando uma regressão em outros contextos </a>
+ </li>
+</ul>
+
+</nav>
+</div>
+
+<div class="toc-item">
+  
+</div>
+
+<div class="toc-item">
+  
+</div>
+
+        </div>
+      
+      
+
+      
+      
+      <div class="bd-content col">
+          
+          <div class="bd-header-article">
+              
+          </div>
+
+          
+          
+          <article class="bd-article" role="main">
+            
+  <section id="estimating-regression-fits">
+<span id="regression-tutorial"></span><h1><font _mstmutation="1" _msttexthash="1013727" _msthash="46">Estimativa dos ajustes de regressão</font><a class="headerlink" href="https://seaborn.pydata.org/tutorial/regression.html#estimating-regression-fits" title="Permalink to this heading">#</a></h1>
+<p _msttexthash="139170798" _msthash="47">Muitos conjuntos de dados contêm múltiplas variáveis quantitativas, e o objetivo de uma análise é frequentemente relacionar essas variáveis entre si. <a class="reference internal" href="https://seaborn.pydata.org/tutorial/distributions.html#distribution-tutorial" _istranslated="1"><span class="std std-ref" _istranslated="1">Já discutimos</span></a> anteriormente funções que podem realizar isso mostrando a distribuição conjunta de duas variáveis. No entanto, pode ser muito útil usar modelos estatísticos para estimar uma relação simples entre dois conjuntos ruidosos de observações. As funções discutidas neste capítulo farão isso por meio do arcabouço comum da regressão linear.</p>
+<p _msttexthash="198641612" _msthash="48">No espírito de Tukey, os gráficos de regressão em Seaborn têm como principal objetivo adicionar um guia visual que ajuda a enfatizar padrões em um conjunto de dados durante análises exploratórias de dados. Ou seja, o seaborn não é, em si, um pacote para análise estatística. Para obter medidas quantitativas relacionadas ao ajuste dos modelos de regressão, você deve usar <a class="reference external" href="https://www.statsmodels.org/" _istranslated="1">o statsmodels</a>. O objetivo do seaborn, no entanto, é tornar a exploração de um conjunto de dados por meio da visualização rápida e fácil, pois isso é tão (ou até mais) importante do que explorar um conjunto de dados por meio de tabelas estatísticas.</p>
+<section id="functions-for-drawing-linear-regression-models">
+<h2><font _mstmutation="1" _msttexthash="1771445" _msthash="49">Funções para desenhar modelos de regressão linear</font><a class="headerlink" href="https://seaborn.pydata.org/tutorial/regression.html#functions-for-drawing-linear-regression-models" title="Permalink to this heading">#</a></h2>
+<p _msttexthash="3464968" _msthash="50">As duas funções que podem ser usadas para visualizar um ajuste linear são <a class="reference internal" href="https://seaborn.pydata.org/generated/seaborn.regplot.html#seaborn.regplot" title="seaborn.regplot" _istranslated="1"><code class="xref py py-func docutils literal notranslate" _istranslated="1"></code></a> e <a class="reference internal" href="https://seaborn.pydata.org/generated/seaborn.lmplot.html#seaborn.lmplot" title="seaborn.lmplot" _istranslated="1"><code class="xref py py-func docutils literal notranslate" _istranslated="1"></code></a>.</p>
+<p><font _mstmutation="1" _msttexthash="29072654" _msthash="51">Na invocação mais simples, ambas as funções desenham um gráfico de dispersão de duas variáveis, e , e então ajustam o modelo de regressão e traçam a linha de regressão resultante e um intervalo de confiança de 95% para essa regressão:</font><code class="docutils literal notranslate"><span class="pre">x</span></code><code class="docutils literal notranslate"><span class="pre">y</span></code><code class="docutils literal notranslate"><span class="pre">y</span> <span class="pre">~</span> <span class="pre">x</span></code></p>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre id="codecell0"><span></span><span class="n">tips</span> <span class="o">=</span> <span class="n">sns</span><span class="o">.</span><span class="n">load_dataset</span><span class="p">(</span><span class="s2">"tips"</span><span class="p">)</span>
+<span class="n">sns</span><span class="o">.</span><span class="n">regplot</span><span class="p">(</span><span class="n">x</span><span class="o">=</span><span class="s2">"total_bill"</span><span class="p">,</span> <span class="n">y</span><span class="o">=</span><span class="s2">"tip"</span><span class="p">,</span> <span class="n">data</span><span class="o">=</span><span class="n">tips</span><span class="p">);</span>
+</pre><button class="copybtn o-tooltip--left" data-tooltip="Copy" data-clipboard-target="#codecell0">
+      <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-copy" width="44" height="44" viewBox="0 0 24 24" stroke-width="1.5" stroke="#000000" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <title>Copy to clipboard</title>
+  <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
+  <rect x="8" y="8" width="12" height="12" rx="2"></rect>
+  <path d="M16 8v-2a2 2 0 0 0 -2 -2h-8a2 2 0 0 0 -2 2v8a2 2 0 0 0 2 2h2"></path>
+</svg>
+    </button></div>
+</div>
+<img alt="../_images/regression_4_0.png" src="./Estimando ajustes de regressão — documentação seaborn 0.13.2_files/regression_4_0.png" _msthidden="A" _mstalt="740155" _msthash="52">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre id="codecell1"><span></span><span class="n">sns</span><span class="o">.</span><span class="n">lmplot</span><span class="p">(</span><span class="n">x</span><span class="o">=</span><span class="s2">"total_bill"</span><span class="p">,</span> <span class="n">y</span><span class="o">=</span><span class="s2">"tip"</span><span class="p">,</span> <span class="n">data</span><span class="o">=</span><span class="n">tips</span><span class="p">);</span>
+</pre><button class="copybtn o-tooltip--left" data-tooltip="Copy" data-clipboard-target="#codecell1">
+      <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-copy" width="44" height="44" viewBox="0 0 24 24" stroke-width="1.5" stroke="#000000" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <title>Copy to clipboard</title>
+  <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
+  <rect x="8" y="8" width="12" height="12" rx="2"></rect>
+  <path d="M16 8v-2a2 2 0 0 0 -2 -2h-8a2 2 0 0 0 -2 2v8a2 2 0 0 0 2 2h2"></path>
+</svg>
+    </button></div>
+</div>
+<img alt="../_images/regression_5_0.png" src="./Estimando ajustes de regressão — documentação seaborn 0.13.2_files/regression_5_0.png" _msthidden="A" _mstalt="740532" _msthash="53">
+<p><font _mstmutation="1" _msttexthash="84068205" _msthash="54">Essas funções desenham gráficos semelhantes, mas <a class="reference internal" href="https://seaborn.pydata.org/generated/seaborn.regplot.html#seaborn.regplot" title="seaborn.regplot" _mstmutation="1" _istranslated="1"><code class="xref py py-func docutils literal notranslate" _istranslated="1"></code></a> é uma <a class="reference internal" href="https://seaborn.pydata.org/tutorial/function_overview.html" _mstmutation="1" _istranslated="1"><span class="doc" _istranslated="1">função ao nível dos eixos</span></a> e <a class="reference internal" href="https://seaborn.pydata.org/generated/seaborn.lmplot.html#seaborn.lmplot" title="seaborn.lmplot" _mstmutation="1" _istranslated="1"><code class="xref py py-func docutils literal notranslate" _istranslated="1"></code></a> é uma função ao nível da figura. Além disso, <a class="reference internal" href="https://seaborn.pydata.org/generated/seaborn.regplot.html#seaborn.regplot" title="seaborn.regplot" _mstmutation="1" _istranslated="1"><code class="xref py py-func docutils literal notranslate" _istranslated="1"></code></a> aceita as variáveis e em vários formatos, incluindo arrays numpy simples, <a class="reference external" href="https://pandas.pydata.org/pandas-docs/stable/reference/api/pandas.Series.html#pandas.Series" title="(in pandas v2.2.0)" _mstmutation="1" _istranslated="1"><code class="xref py py-class docutils literal notranslate" _istranslated="1"></code></a> objetos ou como referências a variáveis em um <a class="reference external" href="https://pandas.pydata.org/pandas-docs/stable/reference/api/pandas.DataFrame.html#pandas.DataFrame" title="(in pandas v2.2.0)" _mstmutation="1" _istranslated="1"><code class="xref py py-class docutils literal notranslate" _istranslated="1"></code></a> objeto passado para . Em contraste, <a class="reference internal" href="https://seaborn.pydata.org/generated/seaborn.lmplot.html#seaborn.lmplot" title="seaborn.lmplot" _mstmutation="1" _istranslated="1"><code class="xref py py-func docutils literal notranslate" _istranslated="1"></code></a> tem como parâmetro obrigatório e as variáveis e devem ser especificadas como cadeias. Por fim, só <a class="reference internal" href="https://seaborn.pydata.org/generated/seaborn.lmplot.html#seaborn.lmplot" title="seaborn.lmplot" _mstmutation="1" _istranslated="1"><code class="xref py py-func docutils literal notranslate" _istranslated="1"></code></a> tem como parâmetro.</font><code class="docutils literal notranslate"><span class="pre">x</span></code><code class="docutils literal notranslate"><span class="pre">y</span></code><code class="docutils literal notranslate"><span class="pre">data</span></code><code class="docutils literal notranslate"><span class="pre">data</span></code><code class="docutils literal notranslate"><span class="pre">x</span></code><code class="docutils literal notranslate"><span class="pre">y</span></code><code class="docutils literal notranslate"><span class="pre">hue</span></code></p>
+<p _msttexthash="3509376" _msthash="55">A funcionalidade principal é semelhante, então este tutorial vai focar em <a class="reference internal" href="https://seaborn.pydata.org/generated/seaborn.lmplot.html#seaborn.lmplot" title="seaborn.lmplot" _istranslated="1"><code class="xref py py-func docutils literal notranslate" _istranslated="1"></code></a>:.</p>
+<p _msttexthash="22356308" _msthash="56">É possível ajustar uma regressão linear quando uma das variáveis assume valores discretos, porém, o diagrama de dispersão simples produzido por esse tipo de conjunto de dados muitas vezes não é ideal:</p>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre id="codecell2"><span></span><span class="n">sns</span><span class="o">.</span><span class="n">lmplot</span><span class="p">(</span><span class="n">x</span><span class="o">=</span><span class="s2">"size"</span><span class="p">,</span> <span class="n">y</span><span class="o">=</span><span class="s2">"tip"</span><span class="p">,</span> <span class="n">data</span><span class="o">=</span><span class="n">tips</span><span class="p">);</span>
+</pre><button class="copybtn o-tooltip--left" data-tooltip="Copy" data-clipboard-target="#codecell2">
+      <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-copy" width="44" height="44" viewBox="0 0 24 24" stroke-width="1.5" stroke="#000000" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <title>Copy to clipboard</title>
+  <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
+  <rect x="8" y="8" width="12" height="12" rx="2"></rect>
+  <path d="M16 8v-2a2 2 0 0 0 -2 -2h-8a2 2 0 0 0 -2 2v8a2 2 0 0 0 2 2h2"></path>
+</svg>
+    </button></div>
+</div>
+<img alt="../_images/regression_7_0.png" src="./Estimando ajustes de regressão — documentação seaborn 0.13.2_files/regression_7_0.png" _msthidden="A" _mstalt="741286" _msthash="57">
+<p _msttexthash="33604454" _msthash="58">Uma opção é adicionar algum ruído aleatório ("jitter") aos valores discretos para tornar a distribuição desses valores mais clara. Note que o jitter é aplicado apenas aos dados do diagrama de dispersão e não influencia o ajuste da linha de regressão:</p>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre id="codecell3"><span></span><span class="n">sns</span><span class="o">.</span><span class="n">lmplot</span><span class="p">(</span><span class="n">x</span><span class="o">=</span><span class="s2">"size"</span><span class="p">,</span> <span class="n">y</span><span class="o">=</span><span class="s2">"tip"</span><span class="p">,</span> <span class="n">data</span><span class="o">=</span><span class="n">tips</span><span class="p">,</span> <span class="n">x_jitter</span><span class="o">=</span><span class="mf">.05</span><span class="p">);</span>
+</pre><button class="copybtn o-tooltip--left" data-tooltip="Copy" data-clipboard-target="#codecell3">
+      <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-copy" width="44" height="44" viewBox="0 0 24 24" stroke-width="1.5" stroke="#000000" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <title>Copy to clipboard</title>
+  <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
+  <rect x="8" y="8" width="12" height="12" rx="2"></rect>
+  <path d="M16 8v-2a2 2 0 0 0 -2 -2h-8a2 2 0 0 0 -2 2v8a2 2 0 0 0 2 2h2"></path>
+</svg>
+    </button></div>
+</div>
+<img alt="../_images/regression_9_0.png" src="./Estimando ajustes de regressão — documentação seaborn 0.13.2_files/regression_9_0.png" _msthidden="A" _mstalt="742040" _msthash="59">
+<p _msttexthash="13723983" _msthash="60">Uma segunda opção é colapsar sobre as observações em cada bin discreto para traçar uma estimativa da tendência central junto com um intervalo de confiança:</p>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre id="codecell4"><span></span><span class="n">sns</span><span class="o">.</span><span class="n">lmplot</span><span class="p">(</span><span class="n">x</span><span class="o">=</span><span class="s2">"size"</span><span class="p">,</span> <span class="n">y</span><span class="o">=</span><span class="s2">"tip"</span><span class="p">,</span> <span class="n">data</span><span class="o">=</span><span class="n">tips</span><span class="p">,</span> <span class="n">x_estimator</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">mean</span><span class="p">);</span>
+</pre><button class="copybtn o-tooltip--left" data-tooltip="Copy" data-clipboard-target="#codecell4">
+      <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-copy" width="44" height="44" viewBox="0 0 24 24" stroke-width="1.5" stroke="#000000" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <title>Copy to clipboard</title>
+  <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
+  <rect x="8" y="8" width="12" height="12" rx="2"></rect>
+  <path d="M16 8v-2a2 2 0 0 0 -2 -2h-8a2 2 0 0 0 -2 2v8a2 2 0 0 0 2 2h2"></path>
+</svg>
+    </button></div>
+</div>
+<img alt="../_images/regression_11_0.png" src="./Estimando ajustes de regressão — documentação seaborn 0.13.2_files/regression_11_0.png" _msthidden="A" _mstalt="764816" _msthash="61">
+</section>
+<section id="fitting-different-kinds-of-models">
+<h2><font _mstmutation="1" _msttexthash="1210729" _msthash="62">Adaptação de diferentes tipos de modelos</font><a class="headerlink" href="https://seaborn.pydata.org/tutorial/regression.html#fitting-different-kinds-of-models" title="Permalink to this heading">#</a></h2>
+<p _msttexthash="91214162" _msthash="63">O modelo simples de regressão linear usado acima é muito simples de ajustar, porém, não é apropriado para alguns tipos de conjuntos de dados. O conjunto <a class="reference external" href="https://en.wikipedia.org/wiki/Anscombe%27s_quartet" _istranslated="1">de dados quarteto do Anscombe</a> mostra alguns exemplos em que a regressão linear simples fornece uma estimativa idêntica de uma relação em que a inspeção visual simples mostra claramente diferenças. Por exemplo, no primeiro caso, a regressão linear é um bom modelo:</p>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre id="codecell5"><span></span><span class="n">anscombe</span> <span class="o">=</span> <span class="n">sns</span><span class="o">.</span><span class="n">load_dataset</span><span class="p">(</span><span class="s2">"anscombe"</span><span class="p">)</span>
+</pre><button class="copybtn o-tooltip--left" data-tooltip="Copy" data-clipboard-target="#codecell5">
+      <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-copy" width="44" height="44" viewBox="0 0 24 24" stroke-width="1.5" stroke="#000000" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <title>Copy to clipboard</title>
+  <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
+  <rect x="8" y="8" width="12" height="12" rx="2"></rect>
+  <path d="M16 8v-2a2 2 0 0 0 -2 -2h-8a2 2 0 0 0 -2 2v8a2 2 0 0 0 2 2h2"></path>
+</svg>
+    </button></div>
+</div>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre id="codecell6"><span></span><span class="n">sns</span><span class="o">.</span><span class="n">lmplot</span><span class="p">(</span><span class="n">x</span><span class="o">=</span><span class="s2">"x"</span><span class="p">,</span> <span class="n">y</span><span class="o">=</span><span class="s2">"y"</span><span class="p">,</span> <span class="n">data</span><span class="o">=</span><span class="n">anscombe</span><span class="o">.</span><span class="n">query</span><span class="p">(</span><span class="s2">"dataset == 'I'"</span><span class="p">),</span>
+           <span class="n">ci</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">scatter_kws</span><span class="o">=</span><span class="p">{</span><span class="s2">"s"</span><span class="p">:</span> <span class="mi">80</span><span class="p">});</span>
+</pre><button class="copybtn o-tooltip--left" data-tooltip="Copy" data-clipboard-target="#codecell6">
+      <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-copy" width="44" height="44" viewBox="0 0 24 24" stroke-width="1.5" stroke="#000000" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <title>Copy to clipboard</title>
+  <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
+  <rect x="8" y="8" width="12" height="12" rx="2"></rect>
+  <path d="M16 8v-2a2 2 0 0 0 -2 -2h-8a2 2 0 0 0 -2 2v8a2 2 0 0 0 2 2h2"></path>
+</svg>
+    </button></div>
+</div>
+<img alt="../_images/regression_14_0.png" src="./Estimando ajustes de regressão — documentação seaborn 0.13.2_files/regression_14_0.png" _msthidden="A" _mstalt="765986" _msthash="64">
+<p _msttexthash="7091851" _msthash="65">The linear relationship in the second dataset is the same, but the plot clearly shows that this is not a good model:</p>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre id="codecell7"><span></span><span class="n">sns</span><span class="o">.</span><span class="n">lmplot</span><span class="p">(</span><span class="n">x</span><span class="o">=</span><span class="s2">"x"</span><span class="p">,</span> <span class="n">y</span><span class="o">=</span><span class="s2">"y"</span><span class="p">,</span> <span class="n">data</span><span class="o">=</span><span class="n">anscombe</span><span class="o">.</span><span class="n">query</span><span class="p">(</span><span class="s2">"dataset == 'II'"</span><span class="p">),</span>
+           <span class="n">ci</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">scatter_kws</span><span class="o">=</span><span class="p">{</span><span class="s2">"s"</span><span class="p">:</span> <span class="mi">80</span><span class="p">});</span>
+</pre><button class="copybtn o-tooltip--left" data-tooltip="Copy" data-clipboard-target="#codecell7">
+      <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-copy" width="44" height="44" viewBox="0 0 24 24" stroke-width="1.5" stroke="#000000" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <title>Copy to clipboard</title>
+  <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
+  <rect x="8" y="8" width="12" height="12" rx="2"></rect>
+  <path d="M16 8v-2a2 2 0 0 0 -2 -2h-8a2 2 0 0 0 -2 2v8a2 2 0 0 0 2 2h2"></path>
+</svg>
+    </button></div>
+</div>
+<img alt="../_images/regression_16_0.png" src="./Estimando ajustes de regressão — documentação seaborn 0.13.2_files/regression_16_0.png" _msthidden="A" _mstalt="766766" _msthash="66">
+<p _msttexthash="17582162" _msthash="67">In the presence of these kind of higher-order relationships, <a class="reference internal" href="https://seaborn.pydata.org/generated/seaborn.lmplot.html#seaborn.lmplot" title="seaborn.lmplot"><code class="xref py py-func docutils literal notranslate"><span class="pre">lmplot()</span></code></a> and <a class="reference internal" href="https://seaborn.pydata.org/generated/seaborn.regplot.html#seaborn.regplot" title="seaborn.regplot"><code class="xref py py-func docutils literal notranslate"><span class="pre">regplot()</span></code></a> can fit a polynomial regression model to explore simple kinds of nonlinear trends in the dataset:</p>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre id="codecell8"><span></span><span class="n">sns</span><span class="o">.</span><span class="n">lmplot</span><span class="p">(</span><span class="n">x</span><span class="o">=</span><span class="s2">"x"</span><span class="p">,</span> <span class="n">y</span><span class="o">=</span><span class="s2">"y"</span><span class="p">,</span> <span class="n">data</span><span class="o">=</span><span class="n">anscombe</span><span class="o">.</span><span class="n">query</span><span class="p">(</span><span class="s2">"dataset == 'II'"</span><span class="p">),</span>
+           <span class="n">order</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span> <span class="n">ci</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">scatter_kws</span><span class="o">=</span><span class="p">{</span><span class="s2">"s"</span><span class="p">:</span> <span class="mi">80</span><span class="p">});</span>
+</pre><button class="copybtn o-tooltip--left" data-tooltip="Copy" data-clipboard-target="#codecell8">
+      <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-copy" width="44" height="44" viewBox="0 0 24 24" stroke-width="1.5" stroke="#000000" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <title>Copy to clipboard</title>
+  <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
+  <rect x="8" y="8" width="12" height="12" rx="2"></rect>
+  <path d="M16 8v-2a2 2 0 0 0 -2 -2h-8a2 2 0 0 0 -2 2v8a2 2 0 0 0 2 2h2"></path>
+</svg>
+    </button></div>
+</div>
+<img alt="../_images/regression_18_0.png" src="./Estimando ajustes de regressão — documentação seaborn 0.13.2_files/regression_18_0.png" _msthidden="A" _mstalt="767546" _msthash="68">
+<p _msttexthash="17263688" _msthash="69">A different problem is posed by “outlier” observations that deviate for some reason other than the main relationship under study:</p>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre id="codecell9"><span></span><span class="n">sns</span><span class="o">.</span><span class="n">lmplot</span><span class="p">(</span><span class="n">x</span><span class="o">=</span><span class="s2">"x"</span><span class="p">,</span> <span class="n">y</span><span class="o">=</span><span class="s2">"y"</span><span class="p">,</span> <span class="n">data</span><span class="o">=</span><span class="n">anscombe</span><span class="o">.</span><span class="n">query</span><span class="p">(</span><span class="s2">"dataset == 'III'"</span><span class="p">),</span>
+           <span class="n">ci</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">scatter_kws</span><span class="o">=</span><span class="p">{</span><span class="s2">"s"</span><span class="p">:</span> <span class="mi">80</span><span class="p">});</span>
+</pre><button class="copybtn o-tooltip--left" data-tooltip="Copy" data-clipboard-target="#codecell9">
+      <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-copy" width="44" height="44" viewBox="0 0 24 24" stroke-width="1.5" stroke="#000000" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <title>Copy to clipboard</title>
+  <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
+  <rect x="8" y="8" width="12" height="12" rx="2"></rect>
+  <path d="M16 8v-2a2 2 0 0 0 -2 -2h-8a2 2 0 0 0 -2 2v8a2 2 0 0 0 2 2h2"></path>
+</svg>
+    </button></div>
+</div>
+<img alt="../_images/regression_20_0.png" src="./Estimando ajustes de regressão — documentação seaborn 0.13.2_files/regression_20_0.png" _msthidden="A" _mstalt="764803" _msthash="70">
+<p _msttexthash="12531012" _msthash="71">In the presence of outliers, it can be useful to fit a robust regression, which uses a different loss function to downweight relatively large residuals:</p>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre id="codecell10"><span></span><span class="n">sns</span><span class="o">.</span><span class="n">lmplot</span><span class="p">(</span><span class="n">x</span><span class="o">=</span><span class="s2">"x"</span><span class="p">,</span> <span class="n">y</span><span class="o">=</span><span class="s2">"y"</span><span class="p">,</span> <span class="n">data</span><span class="o">=</span><span class="n">anscombe</span><span class="o">.</span><span class="n">query</span><span class="p">(</span><span class="s2">"dataset == 'III'"</span><span class="p">),</span>
+           <span class="n">robust</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">ci</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">scatter_kws</span><span class="o">=</span><span class="p">{</span><span class="s2">"s"</span><span class="p">:</span> <span class="mi">80</span><span class="p">});</span>
+</pre><button class="copybtn o-tooltip--left" data-tooltip="Copy" data-clipboard-target="#codecell10">
+      <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-copy" width="44" height="44" viewBox="0 0 24 24" stroke-width="1.5" stroke="#000000" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <title>Copy to clipboard</title>
+  <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
+  <rect x="8" y="8" width="12" height="12" rx="2"></rect>
+  <path d="M16 8v-2a2 2 0 0 0 -2 -2h-8a2 2 0 0 0 -2 2v8a2 2 0 0 0 2 2h2"></path>
+</svg>
+    </button></div>
+</div>
+<img alt="../_images/regression_22_0.png" src="./Estimando ajustes de regressão — documentação seaborn 0.13.2_files/regression_22_0.png" _msthidden="A" _mstalt="765583" _msthash="72">
+<p><font _mstmutation="1" _msttexthash="19224530" _msthash="73">When the  variable is binary, simple linear regression also “works” but provides implausible predictions:</font><code class="docutils literal notranslate"><span class="pre">y</span></code></p>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre id="codecell11"><span></span><span class="n">tips</span><span class="p">[</span><span class="s2">"big_tip"</span><span class="p">]</span> <span class="o">=</span> <span class="p">(</span><span class="n">tips</span><span class="o">.</span><span class="n">tip</span> <span class="o">/</span> <span class="n">tips</span><span class="o">.</span><span class="n">total_bill</span><span class="p">)</span> <span class="o">&gt;</span> <span class="mf">.15</span>
+<span class="n">sns</span><span class="o">.</span><span class="n">lmplot</span><span class="p">(</span><span class="n">x</span><span class="o">=</span><span class="s2">"total_bill"</span><span class="p">,</span> <span class="n">y</span><span class="o">=</span><span class="s2">"big_tip"</span><span class="p">,</span> <span class="n">data</span><span class="o">=</span><span class="n">tips</span><span class="p">,</span>
+           <span class="n">y_jitter</span><span class="o">=</span><span class="mf">.03</span><span class="p">);</span>
+</pre><button class="copybtn o-tooltip--left" data-tooltip="Copy" data-clipboard-target="#codecell11">
+      <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-copy" width="44" height="44" viewBox="0 0 24 24" stroke-width="1.5" stroke="#000000" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <title>Copy to clipboard</title>
+  <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
+  <rect x="8" y="8" width="12" height="12" rx="2"></rect>
+  <path d="M16 8v-2a2 2 0 0 0 -2 -2h-8a2 2 0 0 0 -2 2v8a2 2 0 0 0 2 2h2"></path>
+</svg>
+    </button></div>
+</div>
+<img alt="../_images/regression_24_0.png" src="./Estimando ajustes de regressão — documentação seaborn 0.13.2_files/regression_24_0.png" _msthidden="A" _mstalt="766363" _msthash="74">
+<p><font _mstmutation="1" _msttexthash="11059932" _msthash="75">The solution in this case is to fit a logistic regression, such that the regression line shows the estimated probability of  for a given value of :</font><code class="docutils literal notranslate"><span class="pre">y</span> <span class="pre">=</span> <span class="pre">1</span></code><code class="docutils literal notranslate"><span class="pre">x</span></code></p>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre id="codecell12"><span></span><span class="n">sns</span><span class="o">.</span><span class="n">lmplot</span><span class="p">(</span><span class="n">x</span><span class="o">=</span><span class="s2">"total_bill"</span><span class="p">,</span> <span class="n">y</span><span class="o">=</span><span class="s2">"big_tip"</span><span class="p">,</span> <span class="n">data</span><span class="o">=</span><span class="n">tips</span><span class="p">,</span>
+           <span class="n">logistic</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">y_jitter</span><span class="o">=</span><span class="mf">.03</span><span class="p">);</span>
+</pre><button class="copybtn o-tooltip--left" data-tooltip="Copy" data-clipboard-target="#codecell12">
+      <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-copy" width="44" height="44" viewBox="0 0 24 24" stroke-width="1.5" stroke="#000000" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <title>Copy to clipboard</title>
+  <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
+  <rect x="8" y="8" width="12" height="12" rx="2"></rect>
+  <path d="M16 8v-2a2 2 0 0 0 -2 -2h-8a2 2 0 0 0 -2 2v8a2 2 0 0 0 2 2h2"></path>
+</svg>
+    </button></div>
+</div>
+<img alt="../_images/regression_26_0.png" src="./Estimando ajustes de regressão — documentação seaborn 0.13.2_files/regression_26_0.png" _msthidden="A" _mstalt="767143" _msthash="76">
+<p><font _mstmutation="1" _msttexthash="43890106" _msthash="77">Note that the logistic regression estimate is considerably more computationally intensive (this is true of robust regression as well). As the confidence interval around the regression line is computed using a bootstrap procedure, you may wish to turn this off for faster iteration (using ).</font><code class="docutils literal notranslate"><span class="pre">ci=None</span></code></p>
+<p _msttexthash="31384353" _msthash="78">An altogether different approach is to fit a nonparametric regression using a <a class="reference external" href="https://en.wikipedia.org/wiki/Local_regression">lowess smoother</a>. This approach has the fewest assumptions, although it is computationally intensive and so currently confidence intervals are not computed at all:</p>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre id="codecell13"><span></span><span class="n">sns</span><span class="o">.</span><span class="n">lmplot</span><span class="p">(</span><span class="n">x</span><span class="o">=</span><span class="s2">"total_bill"</span><span class="p">,</span> <span class="n">y</span><span class="o">=</span><span class="s2">"tip"</span><span class="p">,</span> <span class="n">data</span><span class="o">=</span><span class="n">tips</span><span class="p">,</span>
+           <span class="n">lowess</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">line_kws</span><span class="o">=</span><span class="p">{</span><span class="s2">"color"</span><span class="p">:</span> <span class="s2">"C1"</span><span class="p">});</span>
+</pre><button class="copybtn o-tooltip--left" data-tooltip="Copy" data-clipboard-target="#codecell13">
+      <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-copy" width="44" height="44" viewBox="0 0 24 24" stroke-width="1.5" stroke="#000000" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <title>Copy to clipboard</title>
+  <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
+  <rect x="8" y="8" width="12" height="12" rx="2"></rect>
+  <path d="M16 8v-2a2 2 0 0 0 -2 -2h-8a2 2 0 0 0 -2 2v8a2 2 0 0 0 2 2h2"></path>
+</svg>
+    </button></div>
+</div>
+<img alt="../_images/regression_28_0.png" src="./Estimando ajustes de regressão — documentação seaborn 0.13.2_files/regression_28_0.png" _msthidden="A" _mstalt="767923" _msthash="79">
+<p><font _mstmutation="1" _msttexthash="42748329" _msthash="80">The <a class="reference internal" href="https://seaborn.pydata.org/generated/seaborn.residplot.html#seaborn.residplot" title="seaborn.residplot" _mstmutation="1"><code class="xref py py-func docutils literal notranslate"><span class="pre">residplot()</span></code></a> function can be a useful tool for checking whether the simple regression model is appropriate for a dataset. It fits and removes a simple linear regression and then plots the residual values for each observation. Ideally, these values should be randomly scattered around :</font><code class="docutils literal notranslate"><span class="pre">y</span> <span class="pre">=</span> <span class="pre">0</span></code></p>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre id="codecell14"><span></span><span class="n">sns</span><span class="o">.</span><span class="n">residplot</span><span class="p">(</span><span class="n">x</span><span class="o">=</span><span class="s2">"x"</span><span class="p">,</span> <span class="n">y</span><span class="o">=</span><span class="s2">"y"</span><span class="p">,</span> <span class="n">data</span><span class="o">=</span><span class="n">anscombe</span><span class="o">.</span><span class="n">query</span><span class="p">(</span><span class="s2">"dataset == 'I'"</span><span class="p">),</span>
+              <span class="n">scatter_kws</span><span class="o">=</span><span class="p">{</span><span class="s2">"s"</span><span class="p">:</span> <span class="mi">80</span><span class="p">});</span>
+</pre><button class="copybtn o-tooltip--left" data-tooltip="Copy" data-clipboard-target="#codecell14">
+      <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-copy" width="44" height="44" viewBox="0 0 24 24" stroke-width="1.5" stroke="#000000" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <title>Copy to clipboard</title>
+  <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
+  <rect x="8" y="8" width="12" height="12" rx="2"></rect>
+  <path d="M16 8v-2a2 2 0 0 0 -2 -2h-8a2 2 0 0 0 -2 2v8a2 2 0 0 0 2 2h2"></path>
+</svg>
+    </button></div>
+</div>
+<img alt="../_images/regression_30_0.png" src="./Estimando ajustes de regressão — documentação seaborn 0.13.2_files/regression_30_0.png" _msthidden="A" _mstalt="765180" _msthash="81">
+<p _msttexthash="5923671" _msthash="82">If there is structure in the residuals, it suggests that simple linear regression is not appropriate:</p>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre id="codecell15"><span></span><span class="n">sns</span><span class="o">.</span><span class="n">residplot</span><span class="p">(</span><span class="n">x</span><span class="o">=</span><span class="s2">"x"</span><span class="p">,</span> <span class="n">y</span><span class="o">=</span><span class="s2">"y"</span><span class="p">,</span> <span class="n">data</span><span class="o">=</span><span class="n">anscombe</span><span class="o">.</span><span class="n">query</span><span class="p">(</span><span class="s2">"dataset == 'II'"</span><span class="p">),</span>
+              <span class="n">scatter_kws</span><span class="o">=</span><span class="p">{</span><span class="s2">"s"</span><span class="p">:</span> <span class="mi">80</span><span class="p">});</span>
+</pre><button class="copybtn o-tooltip--left" data-tooltip="Copy" data-clipboard-target="#codecell15">
+      <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-copy" width="44" height="44" viewBox="0 0 24 24" stroke-width="1.5" stroke="#000000" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <title>Copy to clipboard</title>
+  <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
+  <rect x="8" y="8" width="12" height="12" rx="2"></rect>
+  <path d="M16 8v-2a2 2 0 0 0 -2 -2h-8a2 2 0 0 0 -2 2v8a2 2 0 0 0 2 2h2"></path>
+</svg>
+    </button></div>
+</div>
+<img alt="../_images/regression_32_0.png" src="./Estimando ajustes de regressão — documentação seaborn 0.13.2_files/regression_32_0.png" _msthidden="A" _mstalt="765960" _msthash="83">
+</section>
+<section id="conditioning-on-other-variables">
+<h2><font _mstmutation="1" _msttexthash="796848" _msthash="84">Conditioning on other variables</font><a class="headerlink" href="https://seaborn.pydata.org/tutorial/regression.html#conditioning-on-other-variables" title="Permalink to this heading">#</a></h2>
+<p><font _mstmutation="1" _msttexthash="135430152" _msthash="85">The plots above show many ways to explore the relationship between a pair of variables. Often, however, a more interesting question is “how does the relationship between these two variables change as a function of a third variable?” This is where the main differences between <a class="reference internal" href="https://seaborn.pydata.org/generated/seaborn.regplot.html#seaborn.regplot" title="seaborn.regplot" _mstmutation="1"><code class="xref py py-func docutils literal notranslate"><span class="pre">regplot()</span></code></a> and <a class="reference internal" href="https://seaborn.pydata.org/generated/seaborn.lmplot.html#seaborn.lmplot" title="seaborn.lmplot" _mstmutation="1"><code class="xref py py-func docutils literal notranslate"><span class="pre">lmplot()</span></code></a> appear. While <a class="reference internal" href="https://seaborn.pydata.org/generated/seaborn.regplot.html#seaborn.regplot" title="seaborn.regplot" _mstmutation="1"><code class="xref py py-func docutils literal notranslate"><span class="pre">regplot()</span></code></a> always shows a single relationship, <a class="reference internal" href="https://seaborn.pydata.org/generated/seaborn.lmplot.html#seaborn.lmplot" title="seaborn.lmplot" _mstmutation="1"><code class="xref py py-func docutils literal notranslate"><span class="pre">lmplot()</span></code></a> combines <a class="reference internal" href="https://seaborn.pydata.org/generated/seaborn.regplot.html#seaborn.regplot" title="seaborn.regplot" _mstmutation="1"><code class="xref py py-func docutils literal notranslate"><span class="pre">regplot()</span></code></a> with <a class="reference internal" href="https://seaborn.pydata.org/generated/seaborn.FacetGrid.html#seaborn.FacetGrid" title="seaborn.FacetGrid" _mstmutation="1"><code class="xref py py-class docutils literal notranslate"><span class="pre">FacetGrid</span></code></a> to show multiple fits using  mapping or faceting.</font><code class="docutils literal notranslate"><span class="pre">hue</span></code></p>
+<p _msttexthash="7609784" _msthash="86">The best way to separate out a relationship is to plot both levels on the same axes and to use color to distinguish them:</p>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre id="codecell16"><span></span><span class="n">sns</span><span class="o">.</span><span class="n">lmplot</span><span class="p">(</span><span class="n">x</span><span class="o">=</span><span class="s2">"total_bill"</span><span class="p">,</span> <span class="n">y</span><span class="o">=</span><span class="s2">"tip"</span><span class="p">,</span> <span class="n">hue</span><span class="o">=</span><span class="s2">"smoker"</span><span class="p">,</span> <span class="n">data</span><span class="o">=</span><span class="n">tips</span><span class="p">);</span>
+</pre><button class="copybtn o-tooltip--left" data-tooltip="Copy" data-clipboard-target="#codecell16">
+      <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-copy" width="44" height="44" viewBox="0 0 24 24" stroke-width="1.5" stroke="#000000" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <title>Copy to clipboard</title>
+  <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
+  <rect x="8" y="8" width="12" height="12" rx="2"></rect>
+  <path d="M16 8v-2a2 2 0 0 0 -2 -2h-8a2 2 0 0 0 -2 2v8a2 2 0 0 0 2 2h2"></path>
+</svg>
+    </button></div>
+</div>
+<img alt="../_images/regression_34_0.png" src="./Estimando ajustes de regressão — documentação seaborn 0.13.2_files/regression_34_0.png" _msthidden="A" _mstalt="766740" _msthash="87">
+<p><font _mstmutation="1" _msttexthash="17628481" _msthash="88">Unlike <a class="reference internal" href="https://seaborn.pydata.org/generated/seaborn.relplot.html#seaborn.relplot" title="seaborn.relplot" _mstmutation="1"><code class="xref py py-func docutils literal notranslate"><span class="pre">relplot()</span></code></a>, it’s not possible to map a distinct variable to the style properties of the scatter plot, but you can redundantly code the  variable with marker shape:</font><code class="docutils literal notranslate"><span class="pre">hue</span></code></p>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre id="codecell17"><span></span><span class="n">sns</span><span class="o">.</span><span class="n">lmplot</span><span class="p">(</span><span class="n">x</span><span class="o">=</span><span class="s2">"total_bill"</span><span class="p">,</span> <span class="n">y</span><span class="o">=</span><span class="s2">"tip"</span><span class="p">,</span> <span class="n">hue</span><span class="o">=</span><span class="s2">"smoker"</span><span class="p">,</span> <span class="n">data</span><span class="o">=</span><span class="n">tips</span><span class="p">,</span>
+           <span class="n">markers</span><span class="o">=</span><span class="p">[</span><span class="s2">"o"</span><span class="p">,</span> <span class="s2">"x"</span><span class="p">],</span> <span class="n">palette</span><span class="o">=</span><span class="s2">"Set1"</span><span class="p">);</span>
+</pre><button class="copybtn o-tooltip--left" data-tooltip="Copy" data-clipboard-target="#codecell17">
+      <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-copy" width="44" height="44" viewBox="0 0 24 24" stroke-width="1.5" stroke="#000000" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <title>Copy to clipboard</title>
+  <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
+  <rect x="8" y="8" width="12" height="12" rx="2"></rect>
+  <path d="M16 8v-2a2 2 0 0 0 -2 -2h-8a2 2 0 0 0 -2 2v8a2 2 0 0 0 2 2h2"></path>
+</svg>
+    </button></div>
+</div>
+<img alt="../_images/regression_36_0.png" src="./Estimando ajustes de regressão — documentação seaborn 0.13.2_files/regression_36_0.png" _msthidden="A" _mstalt="767520" _msthash="89">
+<p _msttexthash="19784674" _msthash="90">To add another variable, you can draw multiple “facets” with each level of the variable appearing in the rows or columns of the grid:</p>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre id="codecell18"><span></span><span class="n">sns</span><span class="o">.</span><span class="n">lmplot</span><span class="p">(</span><span class="n">x</span><span class="o">=</span><span class="s2">"total_bill"</span><span class="p">,</span> <span class="n">y</span><span class="o">=</span><span class="s2">"tip"</span><span class="p">,</span> <span class="n">hue</span><span class="o">=</span><span class="s2">"smoker"</span><span class="p">,</span> <span class="n">col</span><span class="o">=</span><span class="s2">"time"</span><span class="p">,</span> <span class="n">data</span><span class="o">=</span><span class="n">tips</span><span class="p">);</span>
+</pre><button class="copybtn o-tooltip--left" data-tooltip="Copy" data-clipboard-target="#codecell18">
+      <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-copy" width="44" height="44" viewBox="0 0 24 24" stroke-width="1.5" stroke="#000000" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <title>Copy to clipboard</title>
+  <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
+  <rect x="8" y="8" width="12" height="12" rx="2"></rect>
+  <path d="M16 8v-2a2 2 0 0 0 -2 -2h-8a2 2 0 0 0 -2 2v8a2 2 0 0 0 2 2h2"></path>
+</svg>
+    </button></div>
+</div>
+<img alt="../_images/regression_38_0.png" src="./Estimando ajustes de regressão — documentação seaborn 0.13.2_files/regression_38_0.png" _msthidden="A" _mstalt="768300" _msthash="91">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre id="codecell19"><span></span><span class="n">sns</span><span class="o">.</span><span class="n">lmplot</span><span class="p">(</span><span class="n">x</span><span class="o">=</span><span class="s2">"total_bill"</span><span class="p">,</span> <span class="n">y</span><span class="o">=</span><span class="s2">"tip"</span><span class="p">,</span> <span class="n">hue</span><span class="o">=</span><span class="s2">"smoker"</span><span class="p">,</span>
+           <span class="n">col</span><span class="o">=</span><span class="s2">"time"</span><span class="p">,</span> <span class="n">row</span><span class="o">=</span><span class="s2">"sex"</span><span class="p">,</span> <span class="n">data</span><span class="o">=</span><span class="n">tips</span><span class="p">,</span> <span class="n">height</span><span class="o">=</span><span class="mi">3</span><span class="p">);</span>
+</pre><button class="copybtn o-tooltip--left" data-tooltip="Copy" data-clipboard-target="#codecell19">
+      <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-copy" width="44" height="44" viewBox="0 0 24 24" stroke-width="1.5" stroke="#000000" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <title>Copy to clipboard</title>
+  <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
+  <rect x="8" y="8" width="12" height="12" rx="2"></rect>
+  <path d="M16 8v-2a2 2 0 0 0 -2 -2h-8a2 2 0 0 0 -2 2v8a2 2 0 0 0 2 2h2"></path>
+</svg>
+    </button></div>
+</div>
+<img alt="../_images/regression_39_0.png" src="./Estimando ajustes de regressão — documentação seaborn 0.13.2_files/regression_39_0.png" _msthidden="A" _mstalt="768690" _msthash="92">
+</section>
+<section id="plotting-a-regression-in-other-contexts">
+<h2><font _mstmutation="1" _msttexthash="1135680" _msthash="93">Plotting a regression in other contexts</font><a class="headerlink" href="https://seaborn.pydata.org/tutorial/regression.html#plotting-a-regression-in-other-contexts" title="Permalink to this heading">#</a></h2>
+<p><font _mstmutation="1" _msttexthash="53570283" _msthash="94">A few other seaborn functions use <a class="reference internal" href="https://seaborn.pydata.org/generated/seaborn.regplot.html#seaborn.regplot" title="seaborn.regplot" _mstmutation="1"><code class="xref py py-func docutils literal notranslate"><span class="pre">regplot()</span></code></a> in the context of a larger, more complex plot. The first is the <a class="reference internal" href="https://seaborn.pydata.org/generated/seaborn.jointplot.html#seaborn.jointplot" title="seaborn.jointplot" _mstmutation="1"><code class="xref py py-func docutils literal notranslate"><span class="pre">jointplot()</span></code></a> function that we introduced in the <a class="reference internal" href="https://seaborn.pydata.org/tutorial/distributions.html#distribution-tutorial" _mstmutation="1"><span class="std std-ref">distributions tutorial</span></a>. In addition to the plot styles previously discussed, <a class="reference internal" href="https://seaborn.pydata.org/generated/seaborn.jointplot.html#seaborn.jointplot" title="seaborn.jointplot" _mstmutation="1"><code class="xref py py-func docutils literal notranslate"><span class="pre">jointplot()</span></code></a> can use <a class="reference internal" href="https://seaborn.pydata.org/generated/seaborn.regplot.html#seaborn.regplot" title="seaborn.regplot" _mstmutation="1"><code class="xref py py-func docutils literal notranslate"><span class="pre">regplot()</span></code></a> to show the linear regression fit on the joint axes by passing :</font><code class="docutils literal notranslate"><span class="pre">kind="reg"</span></code></p>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre id="codecell20"><span></span><span class="n">sns</span><span class="o">.</span><span class="n">jointplot</span><span class="p">(</span><span class="n">x</span><span class="o">=</span><span class="s2">"total_bill"</span><span class="p">,</span> <span class="n">y</span><span class="o">=</span><span class="s2">"tip"</span><span class="p">,</span> <span class="n">data</span><span class="o">=</span><span class="n">tips</span><span class="p">,</span> <span class="n">kind</span><span class="o">=</span><span class="s2">"reg"</span><span class="p">);</span>
+</pre><button class="copybtn o-tooltip--left" data-tooltip="Copy" data-clipboard-target="#codecell20">
+      <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-copy" width="44" height="44" viewBox="0 0 24 24" stroke-width="1.5" stroke="#000000" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <title>Copy to clipboard</title>
+  <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
+  <rect x="8" y="8" width="12" height="12" rx="2"></rect>
+  <path d="M16 8v-2a2 2 0 0 0 -2 -2h-8a2 2 0 0 0 -2 2v8a2 2 0 0 0 2 2h2"></path>
+</svg>
+    </button></div>
+</div>
+<img alt="../_images/regression_41_0.png" src="./Estimando ajustes de regressão — documentação seaborn 0.13.2_files/regression_41_0.png" _msthidden="A" _mstalt="765947" _msthash="95">
+<p><font _mstmutation="1" _msttexthash="107026673" _msthash="96">Using the <a class="reference internal" href="https://seaborn.pydata.org/generated/seaborn.pairplot.html#seaborn.pairplot" title="seaborn.pairplot" _mstmutation="1"><code class="xref py py-func docutils literal notranslate"><span class="pre">pairplot()</span></code></a> function with  combines <a class="reference internal" href="https://seaborn.pydata.org/generated/seaborn.regplot.html#seaborn.regplot" title="seaborn.regplot" _mstmutation="1"><code class="xref py py-func docutils literal notranslate"><span class="pre">regplot()</span></code></a> and <a class="reference internal" href="https://seaborn.pydata.org/generated/seaborn.PairGrid.html#seaborn.PairGrid" title="seaborn.PairGrid" _mstmutation="1"><code class="xref py py-class docutils literal notranslate"><span class="pre">PairGrid</span></code></a> to show the linear relationship between variables in a dataset. Take care to note how this is different from <a class="reference internal" href="https://seaborn.pydata.org/generated/seaborn.lmplot.html#seaborn.lmplot" title="seaborn.lmplot" _mstmutation="1"><code class="xref py py-func docutils literal notranslate"><span class="pre">lmplot()</span></code></a>. In the figure below, the two axes don’t show the same relationship conditioned on two levels of a third variable; rather, <a class="reference internal" href="https://seaborn.pydata.org/generated/seaborn.PairGrid.html#seaborn.PairGrid" title="seaborn.PairGrid" _mstmutation="1"><code class="xref py py-func docutils literal notranslate"><span class="pre">PairGrid()</span></code></a> is used to show multiple relationships between different pairings of the variables in a dataset:</font><code class="docutils literal notranslate"><span class="pre">kind="reg"</span></code></p>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre id="codecell21"><span></span><span class="n">sns</span><span class="o">.</span><span class="n">pairplot</span><span class="p">(</span><span class="n">tips</span><span class="p">,</span> <span class="n">x_vars</span><span class="o">=</span><span class="p">[</span><span class="s2">"total_bill"</span><span class="p">,</span> <span class="s2">"size"</span><span class="p">],</span> <span class="n">y_vars</span><span class="o">=</span><span class="p">[</span><span class="s2">"tip"</span><span class="p">],</span>
+             <span class="n">height</span><span class="o">=</span><span class="mi">5</span><span class="p">,</span> <span class="n">aspect</span><span class="o">=</span><span class="mf">.8</span><span class="p">,</span> <span class="n">kind</span><span class="o">=</span><span class="s2">"reg"</span><span class="p">);</span>
+</pre><button class="copybtn o-tooltip--left" data-tooltip="Copy" data-clipboard-target="#codecell21">
+      <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-copy" width="44" height="44" viewBox="0 0 24 24" stroke-width="1.5" stroke="#000000" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <title>Copy to clipboard</title>
+  <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
+  <rect x="8" y="8" width="12" height="12" rx="2"></rect>
+  <path d="M16 8v-2a2 2 0 0 0 -2 -2h-8a2 2 0 0 0 -2 2v8a2 2 0 0 0 2 2h2"></path>
+</svg>
+    </button></div>
+</div>
+<img alt="../_images/regression_43_0.png" src="./Estimando ajustes de regressão — documentação seaborn 0.13.2_files/regression_43_0.png" _msthidden="A" _mstalt="766727" _msthash="97">
+<p><font _mstmutation="1" _msttexthash="6958003" _msthash="98">Conditioning on an additional categorical variable is built into both of these functions using the  parameter:</font><code class="docutils literal notranslate"><span class="pre">hue</span></code></p>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre id="codecell22"><span></span><span class="n">sns</span><span class="o">.</span><span class="n">pairplot</span><span class="p">(</span><span class="n">tips</span><span class="p">,</span> <span class="n">x_vars</span><span class="o">=</span><span class="p">[</span><span class="s2">"total_bill"</span><span class="p">,</span> <span class="s2">"size"</span><span class="p">],</span> <span class="n">y_vars</span><span class="o">=</span><span class="p">[</span><span class="s2">"tip"</span><span class="p">],</span>
+             <span class="n">hue</span><span class="o">=</span><span class="s2">"smoker"</span><span class="p">,</span> <span class="n">height</span><span class="o">=</span><span class="mi">5</span><span class="p">,</span> <span class="n">aspect</span><span class="o">=</span><span class="mf">.8</span><span class="p">,</span> <span class="n">kind</span><span class="o">=</span><span class="s2">"reg"</span><span class="p">);</span>
+</pre><button class="copybtn o-tooltip--left" data-tooltip="Copy" data-clipboard-target="#codecell22">
+      <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-copy" width="44" height="44" viewBox="0 0 24 24" stroke-width="1.5" stroke="#000000" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <title>Copy to clipboard</title>
+  <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
+  <rect x="8" y="8" width="12" height="12" rx="2"></rect>
+  <path d="M16 8v-2a2 2 0 0 0 -2 -2h-8a2 2 0 0 0 -2 2v8a2 2 0 0 0 2 2h2"></path>
+</svg>
+    </button></div>
+</div>
+<img alt="../_images/regression_45_0.png" src="./Estimando ajustes de regressão — documentação seaborn 0.13.2_files/regression_45_0.png" _msthidden="A" _mstalt="767507" _msthash="99">
+</section>
+</section>
+
+
+          </article>
+          
+
+          
+          
+      </div>
+      
+    </div>
+  </div>
+
+  
+    
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script src="./Estimando ajustes de regressão — documentação seaborn 0.13.2_files/pydata-sphinx-theme.js.baixados"></script>
+
+<footer class="footer" style="border-top: 1px solid #ccc; padding-top: 10px">
+  <div class="container">
+    <div id="credits" style="width: 50%; float: left">
+      <p><font _mstmutation="1" _msttexthash="3639389" _msthash="100">
+      © Copyright 2012-2024, <a href="https://mwaskom.github.io/" _mstmutation="1">Michael Waskom</a>.<br _mstmutation="1">
+      Created using <a href="https://www.sphinx-doc.org/" _mstmutation="1">Sphinx</a> and the <a href="https://pydata-sphinx-theme.readthedocs.io/en/stable/" _mstmutation="1">PyData Theme</a>.</font><br>
+      </p>
+    </div>
+    <div class="dropup show" style="float: right; margin: 10px">
+        <a class="btn btn-secondary dropdown-toggle" href="https://seaborn.pydata.org/tutorial/regression.html#" role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" _msttexthash="93366" _msthash="101">
+            Archive
+        </a>
+        <div class="dropdown-menu dropdown-menu-right" aria-labelledby="dropdownMenuLink" _msthidden="4">
+          <a class="dropdown-item" href="https://seaborn.pydata.org/archive/0.12/index.html" _msttexthash="34632" _msthidden="1" _msthash="102">v0.12</a>
+          <a class="dropdown-item" href="https://seaborn.pydata.org/archive/0.11/index.html" _msttexthash="34489" _msthidden="1" _msthash="103">v0.11</a>
+          <a class="dropdown-item" href="https://seaborn.pydata.org/archive/0.10/index.html" _msttexthash="34346" _msthidden="1" _msthash="104">v0.10</a>
+          <a class="dropdown-item" href="https://seaborn.pydata.org/archive/0.9/index.html" _msttexthash="28522" _msthidden="1" _msthash="105">v0.9</a>
+        </div>
+    </div>
+    <div id="version" style="color: #999; float: right; margin: 15px" _msttexthash="50401" _msthash="106">v0.13.2</div>
+    </div>
+  
+</footer>
+  
+</body></html>

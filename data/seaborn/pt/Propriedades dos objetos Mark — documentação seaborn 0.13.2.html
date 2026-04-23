@@ -1,0 +1,708 @@
+<!DOCTYPE html>
+<!-- saved from url=(0051)https://seaborn.pydata.org/tutorial/properties.html -->
+<html lang="pt" data-mode="light" data-theme="light"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"><meta name="generator" content="Docutils 0.19: https://docutils.sourceforge.io/">
+
+    <title _msttexthash="5698875" _msthash="0">Propriedades dos objetos Mark — documentação seaborn 0.13.2</title>
+  <script>
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "light";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "light";
+  </script>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="./Propriedades dos objetos Mark — documentação seaborn 0.13.2_files/theme.css" rel="stylesheet">
+<link href="./Propriedades dos objetos Mark — documentação seaborn 0.13.2_files/pydata-sphinx-theme.css" rel="stylesheet">
+
+  
+  <link rel="stylesheet" href="./Propriedades dos objetos Mark — documentação seaborn 0.13.2_files/all.min.css">
+  <link rel="preload" as="font" type="font/woff2" crossorigin="" href="https://seaborn.pydata.org/_static/vendor/fontawesome/5.13.0/webfonts/fa-solid-900.woff2">
+  <link rel="preload" as="font" type="font/woff2" crossorigin="" href="https://seaborn.pydata.org/_static/vendor/fontawesome/5.13.0/webfonts/fa-brands-400.woff2">
+
+    <link rel="stylesheet" type="text/css" href="./Propriedades dos objetos Mark — documentação seaborn 0.13.2_files/pygments.css">
+    <link rel="stylesheet" type="text/css" href="./Propriedades dos objetos Mark — documentação seaborn 0.13.2_files/plot_directive.css">
+    <link rel="stylesheet" type="text/css" href="./Propriedades dos objetos Mark — documentação seaborn 0.13.2_files/copybutton.css">
+    <link rel="stylesheet" type="text/css" href="./Propriedades dos objetos Mark — documentação seaborn 0.13.2_files/design-style.1e8bd061cd6da7fc9cf755528e8ffc24.min.css">
+    <link rel="stylesheet" type="text/css" href="./Propriedades dos objetos Mark — documentação seaborn 0.13.2_files/custom.css">
+  
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="./Propriedades dos objetos Mark — documentação seaborn 0.13.2_files/pydata-sphinx-theme.js.baixados">
+
+    <script data-url_root="../" id="documentation_options" src="./Propriedades dos objetos Mark — documentação seaborn 0.13.2_files/documentation_options.js.baixados"></script>
+    <script src="./Propriedades dos objetos Mark — documentação seaborn 0.13.2_files/jquery.js.baixados"></script>
+    <script src="./Propriedades dos objetos Mark — documentação seaborn 0.13.2_files/underscore.js.baixados"></script>
+    <script src="./Propriedades dos objetos Mark — documentação seaborn 0.13.2_files/_sphinx_javascript_frameworks_compat.js.baixados"></script>
+    <script src="./Propriedades dos objetos Mark — documentação seaborn 0.13.2_files/doctools.js.baixados"></script>
+    <script src="./Propriedades dos objetos Mark — documentação seaborn 0.13.2_files/sphinx_highlight.js.baixados"></script>
+    <script src="./Propriedades dos objetos Mark — documentação seaborn 0.13.2_files/clipboard.min.js.baixados"></script>
+    <script src="./Propriedades dos objetos Mark — documentação seaborn 0.13.2_files/copybutton.js.baixados"></script>
+    <script src="./Propriedades dos objetos Mark — documentação seaborn 0.13.2_files/design-tabs.js.baixados"></script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'tutorial/properties';</script>
+    <link rel="shortcut icon" href="https://seaborn.pydata.org/_static/favicon.ico">
+    <link rel="index" title="Index" href="https://seaborn.pydata.org/genindex.html">
+    <link rel="search" title="Search" href="https://seaborn.pydata.org/search.html">
+    <link rel="next" title="Visualizing statistical relationships" href="https://seaborn.pydata.org/tutorial/relational.html">
+    <link rel="prev" title="The seaborn.objects interface" href="https://seaborn.pydata.org/tutorial/objects_interface.html">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="docsearch:language" content="en">
+  </head>
+  
+  
+  <body data-spy="scroll" data-target="#bd-toc-nav" data-offset="180" data-default-mode="light">
+
+  
+  <input type="checkbox" class="sidebar-toggle" name="__primary" id="__primary">
+  <label class="overlay overlay-primary" for="__primary"></label>
+
+  
+  <input type="checkbox" class="sidebar-toggle" name="__secondary" id="__secondary">
+  <label class="overlay overlay-secondary" for="__secondary"></label>
+
+  
+  <div class="search-button__wrapper" _msthidden="1">
+    <div class="search-button__overlay"></div>
+    <div class="search-button__search-container" _msthidden="1">
+      
+<form class="bd-search d-flex align-items-center" action="https://seaborn.pydata.org/search.html" method="get" _msthidden="1">
+  <i class="icon fas fa-search"></i>
+  <input type="search" class="form-control" name="q" id="search-input" placeholder="Search the docs ..." aria-label="Search the docs ..." autocomplete="off" _msthidden="A" _mstplaceholder="267410" _msthash="1" _mstaria-label="267410">
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form>
+    </div>
+  </div>
+
+  
+  <nav class="bd-header navbar navbar-expand-lg bd-navbar" id="navbar-main"><div class="bd-header__inner container-xl">
+  <label class="sidebar-toggle primary-toggle" for="__primary">
+      <span class="fas fa-bars"></span>
+  </label>
+  <div id="navbar-start">
+    
+    
+  
+
+
+<a class="navbar-brand logo" href="https://seaborn.pydata.org/index.html">
+  
+  
+  
+  
+  
+  
+    <img src="./Propriedades dos objetos Mark — documentação seaborn 0.13.2_files/logo-wide-lightbg.svg" class="logo__image only-light" alt="Imagem do logo" _mstalt="131794" _msthash="2">
+    <img src="./Propriedades dos objetos Mark — documentação seaborn 0.13.2_files/logo-wide-lightbg.svg" class="logo__image only-dark" alt="Logo image" _msthidden="A" _mstalt="131794" _msthash="3">
+  
+  
+</a>
+    
+  </div>
+
+  
+  <div class="col-lg-9 navbar-header-items">
+    <div id="navbar-center" class="mr-auto">
+      
+      <div class="navbar-center-item">
+        <ul id="navbar-main-elements" class="navbar-nav">
+    <li class="toctree-l1 nav-item">
+ <a class="reference internal nav-link" href="https://seaborn.pydata.org/installing.html" _msttexthash="203125" _msthash="4"> Instalação </a>
+</li>
+
+<li class="toctree-l1 nav-item">
+ <a class="reference internal nav-link" href="https://seaborn.pydata.org/examples/index.html" _msttexthash="91390" _msthash="5"> Galeria </a>
+</li>
+
+<li class="toctree-l1 current active nav-item">
+ <a class="reference internal nav-link" href="https://seaborn.pydata.org/tutorial.html" _msttexthash="116545" _msthash="6">
+  Tutorial
+ </a>
+</li>
+
+<li class="toctree-l1 nav-item">
+ <a class="reference internal nav-link" href="https://seaborn.pydata.org/api.html" _msttexthash="22776" _msthash="7">
+  API
+ </a>
+</li>
+
+<li class="toctree-l1 nav-item">
+ <a class="reference internal nav-link" href="https://seaborn.pydata.org/whatsnew/index.html" _msttexthash="198991" _msthash="8"> Lançamentos </a>
+</li>
+
+<li class="toctree-l1 nav-item">
+ <a class="reference internal nav-link" href="https://seaborn.pydata.org/citing.html" _msttexthash="130403" _msthash="9"> Citação </a>
+</li>
+
+<li class="toctree-l1 nav-item">
+ <a class="reference internal nav-link" href="https://seaborn.pydata.org/faq.html" _msttexthash="22607" _msthash="10">
+  FAQ
+ </a>
+</li>
+
+</ul>
+      </div>
+      
+    </div>
+
+    <div id="navbar-end">
+      <div class="navbar-end-item navbar-end__search-button-container">
+        
+<button class="btn btn-sm navbar-btn search-button search-button__button" title="Search">
+  <i class="fas fa-search"></i>
+</button>
+      </div>
+      
+      <div class="navbar-end-item">
+        <ul id="navbar-icon-links" class="navbar-nav" aria-label="Links de Ícones" _mstaria-label="131963" _msthash="11">
+        <li class="nav-item">
+          
+          
+          
+          
+          
+          
+          <a href="https://github.com/mwaskom/seaborn" title="GitHub" class="nav-link" rel="noopener" target="_blank"><span><i class="fab fa-github"></i></span>
+            <label class="sr-only" _msttexthash="72332" _msthash="12">GitHub</label></a>
+        </li>
+        <li class="nav-item">
+          
+          
+          
+          
+          
+          
+          <a href="https://stackoverflow.com/tags/seaborn" title="StackOverflow" class="nav-link" rel="noopener" target="_blank"><span><i class="fab fa-stack-overflow"></i></span>
+            <label class="sr-only" _msttexthash="232466" _msthash="13">StackOverflow</label></a>
+        </li>
+        <li class="nav-item">
+          
+          
+          
+          
+          
+          
+          <a href="https://twitter.com/michaelwaskom" title="Twitter" class="nav-link" rel="noopener" target="_blank"><span><i class="fab fa-twitter"></i></span>
+            <label class="sr-only" _msttexthash="98995" _msthash="14">Twitter</label></a>
+        </li>
+      </ul>
+      </div>
+      
+    </div>
+  </div>
+
+
+  
+  <div class="search-button-container--mobile">
+<button class="btn btn-sm navbar-btn search-button search-button__button" title="Search">
+  <i class="fas fa-search"></i>
+</button>
+  </div>
+
+  
+  <label class="sidebar-toggle secondary-toggle" for="__secondary">
+      <span class="fas fa-outdent"></span>
+  </label>
+  
+
+</div>
+  </nav>
+  
+
+  <div class="bd-container container-xl">
+    <div class="bd-container__inner row">
+      
+      <div class="bd-sidebar-primary bd-sidebar">
+        
+  
+  <div class="sidebar-header-items sidebar-primary__section" _msthidden="13">
+    <p class="sidebar-header-items__title" role="heading" aria-level="1" aria-label="Navigation" _msthidden="1" _mstaria-label="157742" _msthash="15" _msttexthash="256997">
+      Site Navigation
+    </p>
+    
+    
+      <div class="sidebar-header-items__center" _msthidden="7">
+      
+      <div class="navbar-center-item" _msthidden="7">
+        <ul id="navbar-main-elements" class="navbar-nav" _msthidden="7">
+    <li class="toctree-l1 nav-item" _msthidden="1">
+ <a class="reference internal nav-link" href="https://seaborn.pydata.org/installing.html" _msttexthash="157573" _msthidden="1" _msthash="16">
+  Installing
+ </a>
+</li>
+
+<li class="toctree-l1 nav-item" _msthidden="1">
+ <a class="reference internal nav-link" href="https://seaborn.pydata.org/examples/index.html" _msttexthash="95901" _msthidden="1" _msthash="17">
+  Gallery
+ </a>
+</li>
+
+<li class="toctree-l1 current active nav-item" _msthidden="1">
+ <a class="reference internal nav-link" href="https://seaborn.pydata.org/tutorial.html" _msttexthash="116545" _msthidden="1" _msthash="18">
+  Tutorial
+ </a>
+</li>
+
+<li class="toctree-l1 nav-item" _msthidden="1">
+ <a class="reference internal nav-link" href="https://seaborn.pydata.org/api.html" _msttexthash="22776" _msthidden="1" _msthash="19">
+  API
+ </a>
+</li>
+
+<li class="toctree-l1 nav-item" _msthidden="1">
+ <a class="reference internal nav-link" href="https://seaborn.pydata.org/whatsnew/index.html" _msttexthash="113542" _msthidden="1" _msthash="20">
+  Releases
+ </a>
+</li>
+
+<li class="toctree-l1 nav-item" _msthidden="1">
+ <a class="reference internal nav-link" href="https://seaborn.pydata.org/citing.html" _msttexthash="76037" _msthidden="1" _msthash="21">
+  Citing
+ </a>
+</li>
+
+<li class="toctree-l1 nav-item" _msthidden="1">
+ <a class="reference internal nav-link" href="https://seaborn.pydata.org/faq.html" _msttexthash="22607" _msthidden="1" _msthash="22">
+  FAQ
+ </a>
+</li>
+
+</ul>
+      </div>
+      
+      </div>
+    
+
+    
+    
+    <div class="sidebar-header-items__end" _msthidden="4">
+      
+      <div class="navbar-end-item" _msthidden="4">
+        <ul id="navbar-icon-links" class="navbar-nav" aria-label="Icon Links" _msthidden="3" _mstaria-label="131963" _msthash="23">
+        <li class="nav-item" _msthidden="1">
+          
+          
+          
+          
+          
+          
+          <a href="https://github.com/mwaskom/seaborn" title="GitHub" class="nav-link" rel="noopener" target="_blank" _msthidden="1"><span><i class="fab fa-github"></i></span>
+            <label class="sr-only" _msttexthash="72332" _msthidden="1" _msthash="24">GitHub</label></a>
+        </li>
+        <li class="nav-item" _msthidden="1">
+          
+          
+          
+          
+          
+          
+          <a href="https://stackoverflow.com/tags/seaborn" title="StackOverflow" class="nav-link" rel="noopener" target="_blank" _msthidden="1"><span><i class="fab fa-stack-overflow"></i></span>
+            <label class="sr-only" _msttexthash="232466" _msthidden="1" _msthash="25">StackOverflow</label></a>
+        </li>
+        <li class="nav-item" _msthidden="1">
+          
+          
+          
+          
+          
+          
+          <a href="https://twitter.com/michaelwaskom" title="Twitter" class="nav-link" rel="noopener" target="_blank" _msthidden="1"><span><i class="fab fa-twitter"></i></span>
+            <label class="sr-only" _msttexthash="98995" _msthidden="1" _msthash="26">Twitter</label></a>
+        </li>
+      </ul>
+      </div>
+      
+    </div>
+    
+  </div>
+
+  
+  <div class="sidebar-start-items sidebar-primary__section">
+    <div class="sidebar-start-items__item"><nav class="bd-links" id="bd-docs-nav" aria-label="Navegação por seções" _mstaria-label="353847" _msthash="27">
+  <div class="bd-toc-item navbar-nav">
+    <ul class="nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="https://seaborn.pydata.org/tutorial/introduction.html" _msttexthash="591084" _msthash="28"> Uma introdução ao seaborn </a>
+ </li>
+</ul>
+<ul class="nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="https://seaborn.pydata.org/tutorial/function_overview.html" _msttexthash="1374724" _msthash="29"> Visão geral das funções de plotagem seaborn </a>
+ </li>
+</ul>
+<ul class="nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="https://seaborn.pydata.org/tutorial/data_structure.html" _msttexthash="1162369" _msthash="30"> Estruturas de dados aceitas pelo seaborn </a>
+ </li>
+</ul>
+<ul class="nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="https://seaborn.pydata.org/tutorial/objects_interface.html" _msttexthash="632931" _msthash="31"> A interface seaborn.objects </a>
+ </li>
+</ul>
+<ul class="current nav bd-sidenav">
+ <li class="toctree-l1 current active">
+  <a class="current reference internal" href="https://seaborn.pydata.org/tutorial/properties.html#" _msttexthash="692822" _msthash="32"> Propriedades dos objetos Mark </a>
+ </li>
+</ul>
+<ul class="nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="https://seaborn.pydata.org/tutorial/relational.html" _msttexthash="1139190" _msthash="33"> Visualizando relações estatísticas </a>
+ </li>
+</ul>
+<ul class="nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="https://seaborn.pydata.org/tutorial/distributions.html" _msttexthash="1386658" _msthash="34"> Visualização das distribuições dos dados </a>
+ </li>
+</ul>
+<ul class="nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="https://seaborn.pydata.org/tutorial/categorical.html" _msttexthash="995553" _msthash="35"> Visualização de dados categóricos </a>
+ </li>
+</ul>
+<ul class="nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="https://seaborn.pydata.org/tutorial/error_bars.html" _msttexthash="1143376" _msthash="36"> Estimativa estatística e barras de erro </a>
+ </li>
+</ul>
+<ul class="nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="https://seaborn.pydata.org/tutorial/regression.html" _msttexthash="1013727" _msthash="37"> Estimativa dos ajustes de regressão </a>
+ </li>
+</ul>
+<ul class="nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="https://seaborn.pydata.org/tutorial/axis_grids.html" _msttexthash="1925560" _msthash="38"> Construindo grades estruturadas de múltiplos plots </a>
+ </li>
+</ul>
+<ul class="nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="https://seaborn.pydata.org/tutorial/aesthetics.html" _msttexthash="711880" _msthash="39"> Estética de controle da figura </a>
+ </li>
+</ul>
+<ul class="nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="https://seaborn.pydata.org/tutorial/color_palettes.html" _msttexthash="608400" _msthash="40"> Escolha das paletas de cores </a>
+ </li>
+</ul>
+
+  </div>
+</nav>
+    </div>
+  </div>
+  
+
+  
+  <div class="sidebar-end-items sidebar-primary__section">
+    <div class="sidebar-end-items__item">
+    </div>
+  </div>
+
+      </div>
+
+      
+      
+      
+        <div class="bd-sidebar-secondary bd-toc">
+          
+<div class="toc-item">
+  
+<div class="tocsection onthispage">
+    <i class="fas fa-list"></i><font _mstmutation="1" _msttexthash="199043" _msthash="41"> Nesta página </font></div>
+<nav id="bd-toc-nav" class="page-toc">
+    <ul class="visible nav section-nav flex-column">
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="https://seaborn.pydata.org/tutorial/properties.html#coordinate-properties" _msttexthash="689871" _msthash="42"> Propriedades das coordenadas </a>
+  <ul class="nav section-nav flex-column" _msthidden="1">
+   <li class="toc-h3 nav-item toc-entry" _msthidden="1">
+    <a class="reference internal nav-link" href="https://seaborn.pydata.org/tutorial/properties.html#x-y-xmin-xmax-ymin-ymax" _msttexthash="532636" _msthidden="1" _msthash="43">
+     x, y, xmin, xmax, ymin, ymax
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="https://seaborn.pydata.org/tutorial/properties.html#color-properties" _msttexthash="347399" _msthash="44"> Propriedades de cor </a>
+  <ul class="nav section-nav flex-column" _msthidden="2">
+   <li class="toc-h3 nav-item toc-entry" _msthidden="1">
+    <a class="reference internal nav-link" href="https://seaborn.pydata.org/tutorial/properties.html#color-fillcolor-edgecolor" _msttexthash="631865" _msthidden="1" _msthash="45">
+     color, fillcolor, edgecolor
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry" _msthidden="1">
+    <a class="reference internal nav-link" href="https://seaborn.pydata.org/tutorial/properties.html#alpha-fillalpha-edgealpha" _msttexthash="612014" _msthidden="1" _msthash="46">
+     alpha, fillalpha, edgealpha
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="https://seaborn.pydata.org/tutorial/properties.html#style-properties" _msttexthash="455065" _msthash="47"> Propriedades de estilo </a>
+  <ul class="nav section-nav flex-column" _msthidden="3">
+   <li class="toc-h3 nav-item toc-entry" _msthidden="1">
+    <a class="reference internal nav-link" href="https://seaborn.pydata.org/tutorial/properties.html#fill" _msttexthash="46878" _msthidden="1" _msthash="48">
+     fill
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry" _msthidden="1">
+    <a class="reference internal nav-link" href="https://seaborn.pydata.org/tutorial/properties.html#marker" _msttexthash="79482" _msthidden="1" _msthash="49">
+     marker
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry" _msthidden="1">
+    <a class="reference internal nav-link" href="https://seaborn.pydata.org/tutorial/properties.html#linestyle-edgestyle" _msttexthash="414934" _msthidden="1" _msthash="50">
+     linestyle, edgestyle
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="https://seaborn.pydata.org/tutorial/properties.html#size-properties" _msttexthash="486668" _msthash="51"> Propriedades de tamanho </a>
+  <ul class="nav section-nav flex-column" _msthidden="4">
+   <li class="toc-h3 nav-item toc-entry" _msthidden="1">
+    <a class="reference internal nav-link" href="https://seaborn.pydata.org/tutorial/properties.html#pointsize" _msttexthash="142493" _msthidden="1" _msthash="52">
+     pointsize
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry" _msthidden="1">
+    <a class="reference internal nav-link" href="https://seaborn.pydata.org/tutorial/properties.html#linewidth" _msttexthash="138437" _msthidden="1" _msthash="53">
+     linewidth
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry" _msthidden="1">
+    <a class="reference internal nav-link" href="https://seaborn.pydata.org/tutorial/properties.html#edgewidth" _msttexthash="136461" _msthidden="1" _msthash="54">
+     edgewidth
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry" _msthidden="1">
+    <a class="reference internal nav-link" href="https://seaborn.pydata.org/tutorial/properties.html#stroke" _msttexthash="81354" _msthidden="1" _msthash="55">
+     stroke
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="https://seaborn.pydata.org/tutorial/properties.html#text-properties" _msttexthash="425841" _msthash="56"> Propriedades do texto </a>
+  <ul class="nav section-nav flex-column" _msthidden="3">
+   <li class="toc-h3 nav-item toc-entry" _msthidden="1">
+    <a class="reference internal nav-link" href="https://seaborn.pydata.org/tutorial/properties.html#halign-valign" _msttexthash="222495" _msthidden="1" _msthash="57">
+     halign, valign
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry" _msthidden="1">
+    <a class="reference internal nav-link" href="https://seaborn.pydata.org/tutorial/properties.html#fontsize" _msttexthash="120601" _msthidden="1" _msthash="58">
+     fontsize
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry" _msthidden="1">
+    <a class="reference internal nav-link" href="https://seaborn.pydata.org/tutorial/properties.html#offset" _msttexthash="80132" _msthidden="1" _msthash="59">
+     offset
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="https://seaborn.pydata.org/tutorial/properties.html#other-properties" _msttexthash="386048" _msthash="60"> Outras propriedades </a>
+  <ul class="nav section-nav flex-column" _msthidden="2">
+   <li class="toc-h3 nav-item toc-entry" _msthidden="1">
+    <a class="reference internal nav-link" href="https://seaborn.pydata.org/tutorial/properties.html#text" _msttexthash="50180" _msthidden="1" _msthash="61">
+     text
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry" _msthidden="1">
+    <a class="reference internal nav-link" href="https://seaborn.pydata.org/tutorial/properties.html#group" _msttexthash="65442" _msthidden="1" _msthash="62">
+     group
+    </a>
+   </li>
+  </ul>
+ </li>
+</ul>
+
+</nav>
+</div>
+
+<div class="toc-item">
+  
+</div>
+
+<div class="toc-item">
+  
+</div>
+
+        </div>
+      
+      
+
+      
+      
+      <div class="bd-content col">
+          
+          <div class="bd-header-article">
+              
+          </div>
+
+          
+          
+          <article class="bd-article" role="main">
+            
+  <section id="properties-of-mark-objects">
+<span id="properties-tutorial"></span><h1><font _mstmutation="1" _msttexthash="692822" _msthash="63">Propriedades dos objetos Mark</font><a class="headerlink" href="https://seaborn.pydata.org/tutorial/properties.html#properties-of-mark-objects" title="Permalink to this heading">#</a></h1>
+<section id="coordinate-properties">
+<h2><font _mstmutation="1" _msttexthash="689871" _msthash="64">Propriedades das coordenadas</font><a class="headerlink" href="https://seaborn.pydata.org/tutorial/properties.html#coordinate-properties" title="Permalink to this heading">#</a></h2>
+<section id="x-y-xmin-xmax-ymin-ymax">
+<span id="coordinate-property"></span><h3><font _mstmutation="1" _msttexthash="532636" _msthash="65">x, y, xmin, xmax, ymin, ymax</font><a class="headerlink" href="https://seaborn.pydata.org/tutorial/properties.html#x-y-xmin-xmax-ymin-ymax" title="Permalink to this heading">#</a></h3>
+<p><font _mstmutation="1" _msttexthash="84474585" _msthash="66">As propriedades das coordenadas determinam onde uma marca é desenhada em um gráfico. Canônicamente, a coordenada é a posição horizontal e a coordenada é a posição vertical. Algumas marcas aceitam uma parametrização por intervalo (ou seja, , ) para uma ou ambas as variáveis. Outros podem aceitar e também usar um parâmetro para mostrar um intervalo. O parâmetro da camada determina como isso funciona.</font><code class="docutils literal notranslate"><span class="pre">x</span></code><code class="docutils literal notranslate"><span class="pre">y</span></code><code class="docutils literal notranslate"><span class="pre">min</span></code><code class="docutils literal notranslate"><span class="pre">max</span></code><code class="docutils literal notranslate"><span class="pre">x</span></code><code class="docutils literal notranslate"><span class="pre">y</span></code><code class="docutils literal notranslate"><span class="pre">baseline</span></code><code class="docutils literal notranslate"><span class="pre">orient</span></code></p>
+<p><font _mstmutation="1" _msttexthash="45443450" _msthash="67">Se uma variável não contiver dados numéricos, sua escala aplicará uma conversão para que os dados possam ser desenhados em uma tela. Por exemplo, escalas atribuem um índice inteiro a cada categoria distinta, e escalas representam datas como o número de dias a partir de uma "época" de referência:</font><code class="xref py py-class docutils literal notranslate"><span class="pre">Nominal</span></code><code class="xref py py-class docutils literal notranslate"><span class="pre">Temporal</span></code></p>
+<a class="reference internal image-reference" href="./Propriedades dos objetos Mark — documentação seaborn 0.13.2_files/properties_3_0.png"><img alt=".. /_images/properties_3_0.png" src="./Propriedades dos objetos Mark — documentação seaborn 0.13.2_files/properties_3_0.png" style="width: 563.125px; height: 68.425px;" _mstalt="742443" _msthash="68"></a>
+<p><font _mstmutation="1" _msttexthash="6773091" _msthash="69">Uma escala também pode aplicar uma transformação não linear entre valores de dados e posições espaciais:</font><code class="xref py py-class docutils literal notranslate"><span class="pre">Continuous</span></code></p>
+<a class="reference internal image-reference" href="./Propriedades dos objetos Mark — documentação seaborn 0.13.2_files/properties_5_0.png"><img alt=".. /_images/properties_5_0.png" src="./Propriedades dos objetos Mark — documentação seaborn 0.13.2_files/properties_5_0.png" style="width: 555.475px; height: 68.425px;" _mstalt="743197" _msthash="70"></a>
+</section>
+</section>
+<section id="color-properties">
+<h2><font _mstmutation="1" _msttexthash="347399" _msthash="71">Propriedades de cor</font><a class="headerlink" href="https://seaborn.pydata.org/tutorial/properties.html#color-properties" title="Permalink to this heading">#</a></h2>
+<section id="color-fillcolor-edgecolor">
+<span id="color-property"></span><h3><font _mstmutation="1" _msttexthash="1130675" _msthash="72">cor, cor de preenchimento, cor das bordas</font><a class="headerlink" href="https://seaborn.pydata.org/tutorial/properties.html#color-fillcolor-edgecolor" title="Permalink to this heading">#</a></h3>
+<p><font _mstmutation="1" _msttexthash="30176588" _msthash="73">Todas as marcas podem receber um , e muitas distinguem entre a cor da "borda" e do "preenchimento" da marca. Frequentemente, simplesmente usar será definido ambos, enquanto as propriedades mais específicas permitem um controle adicional:</font><code class="docutils literal notranslate"><span class="pre">color</span></code><code class="docutils literal notranslate"><span class="pre">color</span></code></p>
+<a class="reference internal image-reference" href="./Propriedades dos objetos Mark — documentação seaborn 0.13.2_files/properties_8_0.png"><img alt=".. /_images/properties_8_0.png" src="./Propriedades dos objetos Mark — documentação seaborn 0.13.2_files/properties_8_0.png" style="width: 585.225px; height: 66.3px;" _mstalt="744328" _msthash="74"></a>
+<p _msttexthash="24914084" _msthash="75">Quando a propriedade de cor é mapeada, a paleta padrão depende do tipo de escala. Escalas nominais usam tons discretos e não ordenados, enquanto escalas contínuas (incluindo temporais) usam um gradiente sequencial:</p>
+<a class="reference internal image-reference" href="./Propriedades dos objetos Mark — documentação seaborn 0.13.2_files/properties_10_0.png"><img alt=".. /_images/properties_10_0.png" src="./Propriedades dos objetos Mark — documentação seaborn 0.13.2_files/properties_10_0.png" style="width: 585.225px; height: 66.3px;" _mstalt="767091" _msthash="76"></a>
+<div class="admonition note">
+<p class="admonition-title" _msttexthash="44824" _msthash="77">Nota</p>
+<p _msttexthash="6846476" _msthash="78">A escala contínua padrão está sujeita a alterações em futuras versões para melhorar a discriminabilidade.</p>
+</div>
+<p><font _mstmutation="1" _msttexthash="45611813" _msthash="79">Escalas de cor são parametrizadas pelo nome de uma paleta, como , , ou . Alguns nomes de paletas podem incluir parâmetros, incluindo gradientes simples (por exemplo, ) ou o sistema cubehelix (por exemplo, ). Veja o <a class="reference internal" href="https://seaborn.pydata.org/tutorial/color_palettes.html" _mstmutation="1" _istranslated="1"><span class="doc" _istranslated="1">tutorial da paleta de cores</span></a> para orientações sobre como fazer uma escolha apropriada.</font><code class="docutils literal notranslate"><span class="pre">'viridis'</span></code><code class="docutils literal notranslate"><span class="pre">'rocket'</span></code><code class="docutils literal notranslate"><span class="pre">'deep'</span></code><code class="docutils literal notranslate"><span class="pre">'dark:blue'</span></code><code class="docutils literal notranslate"><span class="pre">'ch:start=.2,rot=-.4`</span></code></p>
+<p _msttexthash="61157330" _msthash="80">Escalas contínuas também podem ser parametrizadas por um tuplo de cores entre as quais a escala deve interpolar. Ao usar uma escala nominal, é possível fornecer o nome da paleta (que será amostrada discretamente, se necessário), uma lista de valores individuais de cor ou um dicionário que mapeie diretamente os valores dos dados para as cores.</p>
+<p><font _mstmutation="1" _msttexthash="37493989" _msthash="81">Cores individuais podem ser especificadas <a class="reference external" href="https://matplotlib.org/stable/tutorials/colors/colors.html" _mstmutation="1" _istranslated="1">em uma ampla variedade de formatos</a>. Essas incluem referências indexadas ao ciclo de cor atual (), taquigrafos de uma letra (), valores em tons de cinza (), códigos hexadecimais RGB (), nomes de cor X11 () e nomes de pesquisa de cores XKCD ():</font><code class="docutils literal notranslate"><span class="pre">'C0'</span></code><code class="docutils literal notranslate"><span class="pre">'b'</span></code><code class="docutils literal notranslate"><span class="pre">'.4'</span></code><code class="docutils literal notranslate"><span class="pre">'#4c72b0'</span></code><code class="docutils literal notranslate"><span class="pre">'seagreen'</span></code><code class="docutils literal notranslate"><span class="pre">'purpleish'</span></code></p>
+<a class="reference internal image-reference" href="./Propriedades dos objetos Mark — documentação seaborn 0.13.2_files/properties_12_0.png"><img alt=".. /_images/properties_12_0.png" src="./Propriedades dos objetos Mark — documentação seaborn 0.13.2_files/properties_12_0.png" style="width: 662.15px; height: 103.27499999999999px;" _mstalt="767871" _msthash="82"></a>
+</section>
+<section id="alpha-fillalpha-edgealpha">
+<span id="alpha-property"></span><h3><font _mstmutation="1" _msttexthash="601393" _msthash="83">Alfa, preenchido, Edgealpha</font><a class="headerlink" href="https://seaborn.pydata.org/tutorial/properties.html#alpha-fillalpha-edgealpha" title="Permalink to this heading">#</a></h3>
+<p><font _mstmutation="1" _msttexthash="9503676" _msthash="84">A propriedade determina a opacidade da marca. Reduzir o alfa pode ser útil para representar a densidade no caso de sobreplotamento:</font><code class="docutils literal notranslate"><span class="pre">alpha</span></code></p>
+<a class="reference internal image-reference" href="./Propriedades dos objetos Mark — documentação seaborn 0.13.2_files/properties_14_0.png"><img alt="../_images/properties_14_0.png" src="./Propriedades dos objetos Mark — documentação seaborn 0.13.2_files/properties_14_0.png" style="width: 585.225px; height: 95.625px;" _mstalt="768651" _msthash="85"></a>
+<p><font _mstmutation="1" _msttexthash="45023875" _msthash="86">Mapping the  property can also be useful even when marks do not overlap because it conveys a sense of importance and can be combined with a  scale to represent two variables. Moreover, colors with lower alpha appear less saturated, which can improve the appearance of larger filled marks (such as bars).</font><code class="docutils literal notranslate"><span class="pre">alpha</span></code><code class="docutils literal notranslate"><span class="pre">color</span></code></p>
+<p><font _mstmutation="1" _msttexthash="3372161" _msthash="87">As with , some marks define separate  and  properties for additional control.</font><code class="docutils literal notranslate"><span class="pre">color</span></code><code class="docutils literal notranslate"><span class="pre">edgealpha</span></code><code class="docutils literal notranslate"><span class="pre">fillalpha</span></code></p>
+</section>
+</section>
+<section id="style-properties">
+<h2><font _mstmutation="1" _msttexthash="297973" _msthash="88">Style properties</font><a class="headerlink" href="https://seaborn.pydata.org/tutorial/properties.html#style-properties" title="Permalink to this heading">#</a></h2>
+<section id="fill">
+<span id="fill-property"></span><h3><font _mstmutation="1" _msttexthash="46878" _msthash="89">fill</font><a class="headerlink" href="https://seaborn.pydata.org/tutorial/properties.html#fill" title="Permalink to this heading">#</a></h3>
+<p><font _mstmutation="1" _msttexthash="15718339" _msthash="90">The  property is relevant to marks with a distinction between the edge and interior and determines whether the interior is visible. It is a boolean state:  can be set only to  or :</font><code class="docutils literal notranslate"><span class="pre">fill</span></code><code class="docutils literal notranslate"><span class="pre">fill</span></code><code class="docutils literal notranslate"><span class="pre">True</span></code><code class="docutils literal notranslate"><span class="pre">False</span></code></p>
+<a class="reference internal image-reference" href="./Propriedades dos objetos Mark — documentação seaborn 0.13.2_files/properties_18_0.png"><img alt="../_images/properties_18_0.png" src="./Propriedades dos objetos Mark — documentação seaborn 0.13.2_files/properties_18_0.png" style="width: 585.225px; height: 119.85px;" _mstalt="770211" _msthash="91"></a>
+</section>
+<section id="marker">
+<span id="marker-property"></span><h3><font _mstmutation="1" _msttexthash="79482" _msthash="92">marker</font><a class="headerlink" href="https://seaborn.pydata.org/tutorial/properties.html#marker" title="Permalink to this heading">#</a></h3>
+<p><font _mstmutation="1" _msttexthash="14664689" _msthash="93">The  property is relevant for dot marks and some line marks. The API for specifying markers is very flexible, as detailed in the matplotlib API docs: <a class="reference external" href="https://matplotlib.org/stable/api/markers_api.html#module-matplotlib.markers" title="(in Matplotlib v3.8.2)" _mstmutation="1"><code class="xref py py-mod docutils literal notranslate"><span class="pre">matplotlib.markers</span></code></a>.</font><code class="docutils literal notranslate"><span class="pre">marker</span></code></p>
+<p _msttexthash="2394613" _msthash="94">Markers can be specified using a number of simple string codes:</p>
+<a class="reference internal image-reference" href="./Propriedades dos objetos Mark — documentação seaborn 0.13.2_files/properties_21_0.png"><img alt="../_images/properties_21_0.png" src="./Propriedades dos objetos Mark — documentação seaborn 0.13.2_files/properties_21_0.png" style="width: 648.55px; height: 70.55px;" _mstalt="767858" _msthash="95"></a>
+<p><font _mstmutation="1" _msttexthash="2077725" _msthash="96">They can also be programatically generated using a  tuple:</font><code class="docutils literal notranslate"><span class="pre">(num_sides,</span> <span class="pre">fill_style,</span> <span class="pre">angle)</span></code></p>
+<a class="reference internal image-reference" href="./Propriedades dos objetos Mark — documentação seaborn 0.13.2_files/properties_23_0.png"><img alt="../_images/properties_23_0.png" src="./Propriedades dos objetos Mark — documentação seaborn 0.13.2_files/properties_23_0.png" style="width: 648.55px; height: 70.55px;" _mstalt="768638" _msthash="97"></a>
+<p><font _mstmutation="1" _msttexthash="6601816" _msthash="98">See the matplotlib docs for additional formats, including mathtex character codes () and arrays of vertices.</font><code class="docutils literal notranslate"><span class="pre">'$...$'</span></code></p>
+<p _msttexthash="24194560" _msthash="99">A marker property is always mapped with a nominal scale; there is no inherent ordering to the different shapes. If no scale is provided, the plot will programmatically generate a suitably large set of unique markers:</p>
+<a class="reference internal image-reference" href="./Propriedades dos objetos Mark — documentação seaborn 0.13.2_files/properties_25_0.png"><img alt="../_images/properties_25_0.png" src="./Propriedades dos objetos Mark — documentação seaborn 0.13.2_files/properties_25_0.png" style="width: 648.55px; height: 70.55px;" _mstalt="769418" _msthash="100"></a>
+<p _msttexthash="34825778" _msthash="101">While this ensures that the shapes are technically distinct, bear in mind that — in most cases —&nbsp;it will be difficult to tell the markers apart if more than a handful are used in a single plot.</p>
+<div class="admonition note">
+<p class="admonition-title" _msttexthash="45344" _msthash="102">Note</p>
+<p _msttexthash="5136690" _msthash="103">The default marker scale is subject to change in future releases to improve discriminability.</p>
+</div>
+</section>
+<section id="linestyle-edgestyle">
+<span id="linestyle-property"></span><h3><font _mstmutation="1" _msttexthash="414934" _msthash="104">linestyle, edgestyle</font><a class="headerlink" href="https://seaborn.pydata.org/tutorial/properties.html#linestyle-edgestyle" title="Permalink to this heading">#</a></h3>
+<p><font _mstmutation="1" _msttexthash="51122292" _msthash="105">The  property is relevant to line marks, and the  property is relevant to a number of marks with “edges. Both properties determine the “dashing” of a line in terms of on-off segments.</font><code class="docutils literal notranslate"><span class="pre">linestyle</span></code><code class="docutils literal notranslate"><span class="pre">edgestyle</span></code></p>
+<p><font _mstmutation="1" _msttexthash="14861912" _msthash="106">Dashes can be specified with a small number of shorthand codes (, , , and ) or programatically using  tuples. In the tuple specification, the unit is equal to the linewidth:</font><code class="docutils literal notranslate"><span class="pre">'-'</span></code><code class="docutils literal notranslate"><span class="pre">'--'</span></code><code class="docutils literal notranslate"><span class="pre">'-.'</span></code><code class="docutils literal notranslate"><span class="pre">':'</span></code><code class="docutils literal notranslate"><span class="pre">(on,</span> <span class="pre">off,</span> <span class="pre">...)</span></code></p>
+<a class="reference internal image-reference" href="./Propriedades dos objetos Mark — documentação seaborn 0.13.2_files/properties_28_0.png"><img alt="../_images/properties_28_0.png" src="./Propriedades dos objetos Mark — documentação seaborn 0.13.2_files/properties_28_0.png" style="width: 658.3249999999999px; height: 173.4px;" _mstalt="770588" _msthash="107"></a>
+</section>
+</section>
+<section id="size-properties">
+<h2><font _mstmutation="1" _msttexthash="267280" _msthash="108">Size properties</font><a class="headerlink" href="https://seaborn.pydata.org/tutorial/properties.html#size-properties" title="Permalink to this heading">#</a></h2>
+<section id="pointsize">
+<span id="pointsize-property"></span><h3><font _mstmutation="1" _msttexthash="142493" _msthash="109">pointsize</font><a class="headerlink" href="https://seaborn.pydata.org/tutorial/properties.html#pointsize" title="Permalink to this heading">#</a></h3>
+<p><font _mstmutation="1" _msttexthash="13822822" _msthash="110">The  property is relevant to dot marks and to line marks that can show markers at individual data points. The units correspond to the diameter of the mark in points.</font><code class="docutils literal notranslate"><span class="pre">pointsize</span></code></p>
+<p _msttexthash="15718911" _msthash="111">Note that, while the parameterization corresponds to diameter, scales will be applied with a square root transform so that data values are linearly proportional to area:</p>
+<a class="reference internal image-reference" href="./Propriedades dos objetos Mark — documentação seaborn 0.13.2_files/properties_31_0.png"><img alt="../_images/properties_31_0.png" src="./Propriedades dos objetos Mark — documentação seaborn 0.13.2_files/properties_31_0.png" style="width: 585.225px; height: 70.55px;" _mstalt="768235" _msthash="112"></a>
+</section>
+<section id="linewidth">
+<span id="linewidth-property"></span><h3><font _mstmutation="1" _msttexthash="138437" _msthash="113">linewidth</font><a class="headerlink" href="https://seaborn.pydata.org/tutorial/properties.html#linewidth" title="Permalink to this heading">#</a></h3>
+<p><font _mstmutation="1" _msttexthash="8467706" _msthash="114">The  property is relevant to line marks and determines their thickness. The value should be non-negative and has point units:</font><code class="docutils literal notranslate"><span class="pre">linewidth</span></code></p>
+<a class="reference internal image-reference" href="./Propriedades dos objetos Mark — documentação seaborn 0.13.2_files/properties_33_0.png"><img alt="../_images/properties_33_0.png" src="./Propriedades dos objetos Mark — documentação seaborn 0.13.2_files/properties_33_0.png" style="width: 614.975px; height: 104.125px;" _mstalt="769015" _msthash="115"></a>
+</section>
+<section id="edgewidth">
+<span id="edgewidth-property"></span><h3><font _mstmutation="1" _msttexthash="136461" _msthash="116">edgewidth</font><a class="headerlink" href="https://seaborn.pydata.org/tutorial/properties.html#edgewidth" title="Permalink to this heading">#</a></h3>
+<p><font _mstmutation="1" _msttexthash="13704678" _msthash="117">The  property is akin to  but applies to marks with an edge/fill rather than to lines. It also has a different default range when used in a scale. The units are the same:</font><code class="docutils literal notranslate"><span class="pre">edgewidth</span></code><code class="docutils literal notranslate"><span class="pre">linewidth</span></code></p>
+<a class="reference internal image-reference" href="./Propriedades dos objetos Mark — documentação seaborn 0.13.2_files/properties_35_0.png"><img alt="../_images/properties_35_0.png" src="./Propriedades dos objetos Mark — documentação seaborn 0.13.2_files/properties_35_0.png" style="width: 585.225px; height: 70.55px;" _mstalt="769795" _msthash="118"></a>
+</section>
+<section id="stroke">
+<span id="stroke-property"></span><h3><font _mstmutation="1" _msttexthash="81354" _msthash="119">stroke</font><a class="headerlink" href="https://seaborn.pydata.org/tutorial/properties.html#stroke" title="Permalink to this heading">#</a></h3>
+<p><font _mstmutation="1" _msttexthash="17423276" _msthash="120">The  property is akin to  but applies when a dot mark is defined by its stroke rather than its fill. It also has a slightly different default scale range, but otherwise behaves similarly:</font><code class="docutils literal notranslate"><span class="pre">stroke</span></code><code class="docutils literal notranslate"><span class="pre">edgewidth</span></code></p>
+<a class="reference internal image-reference" href="./Propriedades dos objetos Mark — documentação seaborn 0.13.2_files/properties_37_0.png"><img alt="../_images/properties_37_0.png" src="./Propriedades dos objetos Mark — documentação seaborn 0.13.2_files/properties_37_0.png" style="width: 585.225px; height: 70.55px;" _mstalt="770575" _msthash="121"></a>
+</section>
+</section>
+<section id="text-properties">
+<h2><font _mstmutation="1" _msttexthash="268671" _msthash="122">Text properties</font><a class="headerlink" href="https://seaborn.pydata.org/tutorial/properties.html#text-properties" title="Permalink to this heading">#</a></h2>
+<section id="halign-valign">
+<span id="verticalalignment-property"></span><span id="horizontalalignment-property"></span><h3><font _mstmutation="1" _msttexthash="222495" _msthash="123">halign, valign</font><a class="headerlink" href="https://seaborn.pydata.org/tutorial/properties.html#halign-valign" title="Permalink to this heading">#</a></h3>
+<p><font _mstmutation="1" _msttexthash="17197401" _msthash="124">The  and  properties control the <em _mstmutation="1">horizontal</em> and <em _mstmutation="1">vertical</em> alignment of text marks. The options for horizontal alignment are , , and , while the options for vertical alignment are , , , , and .</font><code class="docutils literal notranslate"><span class="pre">halign</span></code><code class="docutils literal notranslate"><span class="pre">valign</span></code><code class="docutils literal notranslate"><span class="pre">'left'</span></code><code class="docutils literal notranslate"><span class="pre">'right'</span></code><code class="docutils literal notranslate"><span class="pre">'center'</span></code><code class="docutils literal notranslate"><span class="pre">'top'</span></code><code class="docutils literal notranslate"><span class="pre">'bottom'</span></code><code class="docutils literal notranslate"><span class="pre">'center'</span></code><code class="docutils literal notranslate"><span class="pre">'baseline'</span></code><code class="docutils literal notranslate"><span class="pre">'center_baseline'</span></code></p>
+<a class="reference internal image-reference" href="./Propriedades dos objetos Mark — documentação seaborn 0.13.2_files/properties_40_0.png"><img alt="../_images/properties_40_0.png" src="./Propriedades dos objetos Mark — documentação seaborn 0.13.2_files/properties_40_0.png" style="width: 585.225px; height: 76.925px;" _mstalt="768222" _msthash="125"></a>
+</section>
+<section id="fontsize">
+<span id="fontsize-property"></span><h3><font _mstmutation="1" _msttexthash="120601" _msthash="126">fontsize</font><a class="headerlink" href="https://seaborn.pydata.org/tutorial/properties.html#fontsize" title="Permalink to this heading">#</a></h3>
+<p><font _mstmutation="1" _msttexthash="3303755" _msthash="127">The  property controls the size of textual marks. The value has point units:</font><code class="docutils literal notranslate"><span class="pre">fontsize</span></code></p>
+<a class="reference internal image-reference" href="./Propriedades dos objetos Mark — documentação seaborn 0.13.2_files/properties_42_0.png"><img alt="../_images/properties_42_0.png" src="./Propriedades dos objetos Mark — documentação seaborn 0.13.2_files/properties_42_0.png" style="width: 585.225px; height: 70.55px;" _mstalt="769002" _msthash="128"></a>
+</section>
+<section id="offset">
+<span id="offset-property"></span><h3><font _mstmutation="1" _msttexthash="80132" _msthash="129">offset</font><a class="headerlink" href="https://seaborn.pydata.org/tutorial/properties.html#offset" title="Permalink to this heading">#</a></h3>
+<p><font _mstmutation="1" _msttexthash="17805489" _msthash="130">The  property controls the spacing between a text mark and its anchor position. It applies when <em _mstmutation="1">not</em> using  alignment (i.e., when using left/right or top/bottom). The value has point units.</font><code class="docutils literal notranslate"><span class="pre">offset</span></code><code class="docutils literal notranslate"><span class="pre">center</span></code></p>
+<a class="reference internal image-reference" href="./Propriedades dos objetos Mark — documentação seaborn 0.13.2_files/properties_44_0.png"><img alt="../_images/properties_44_0.png" src="./Propriedades dos objetos Mark — documentação seaborn 0.13.2_files/properties_44_0.png" style="width: 585.225px; height: 70.55px;" _mstalt="769782" _msthash="131"></a>
+</section>
+</section>
+<section id="other-properties">
+<h2><font _mstmutation="1" _msttexthash="296569" _msthash="132">Other properties</font><a class="headerlink" href="https://seaborn.pydata.org/tutorial/properties.html#other-properties" title="Permalink to this heading">#</a></h2>
+<section id="text">
+<span id="property-property"></span><h3><font _mstmutation="1" _msttexthash="50180" _msthash="133">text</font><a class="headerlink" href="https://seaborn.pydata.org/tutorial/properties.html#text" title="Permalink to this heading">#</a></h3>
+<p><font _mstmutation="1" _msttexthash="9327084" _msthash="134">The  property is used to set the content of a textual mark. It is always used literally (not mapped), and cast to string when necessary.</font><code class="docutils literal notranslate"><span class="pre">text</span></code></p>
+</section>
+<section id="group">
+<h3><font _mstmutation="1" _msttexthash="65442" _msthash="135">group</font><a class="headerlink" href="https://seaborn.pydata.org/tutorial/properties.html#group" title="Permalink to this heading">#</a></h3>
+<p><font _mstmutation="1" _msttexthash="23485280" _msthash="136">The  property is special in that it does not change anything about the mark’s appearance but defines additional data subsets that transforms should operate on independently.</font><code class="docutils literal notranslate"><span class="pre">group</span></code></p>
+</section>
+</section>
+</section>
+
+
+          </article>
+          
+
+          
+          
+      </div>
+      
+    </div>
+  </div>
+
+  
+    
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script src="./Propriedades dos objetos Mark — documentação seaborn 0.13.2_files/pydata-sphinx-theme.js.baixados"></script>
+
+<footer class="footer" style="border-top: 1px solid #ccc; padding-top: 10px">
+  <div class="container">
+    <div id="credits" style="width: 50%; float: left">
+      <p><font _mstmutation="1" _msttexthash="3639389" _msthash="137">
+      © Copyright 2012-2024, <a href="https://mwaskom.github.io/" _mstmutation="1">Michael Waskom</a>.<br _mstmutation="1">
+      Created using <a href="https://www.sphinx-doc.org/" _mstmutation="1">Sphinx</a> and the <a href="https://pydata-sphinx-theme.readthedocs.io/en/stable/" _mstmutation="1">PyData Theme</a>.</font><br>
+      </p>
+    </div>
+    <div class="dropup show" style="float: right; margin: 10px">
+        <a class="btn btn-secondary dropdown-toggle" href="https://seaborn.pydata.org/tutorial/properties.html#" role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" _msttexthash="93366" _msthash="138">
+            Archive
+        </a>
+        <div class="dropdown-menu dropdown-menu-right" aria-labelledby="dropdownMenuLink" _msthidden="4">
+          <a class="dropdown-item" href="https://seaborn.pydata.org/archive/0.12/index.html" _msttexthash="34632" _msthidden="1" _msthash="139">v0.12</a>
+          <a class="dropdown-item" href="https://seaborn.pydata.org/archive/0.11/index.html" _msttexthash="34489" _msthidden="1" _msthash="140">v0.11</a>
+          <a class="dropdown-item" href="https://seaborn.pydata.org/archive/0.10/index.html" _msttexthash="34346" _msthidden="1" _msthash="141">v0.10</a>
+          <a class="dropdown-item" href="https://seaborn.pydata.org/archive/0.9/index.html" _msttexthash="28522" _msthidden="1" _msthash="142">v0.9</a>
+        </div>
+    </div>
+    <div id="version" style="color: #999; float: right; margin: 15px" _msttexthash="50401" _msthash="143">v0.13.2</div>
+    </div>
+  
+</footer>
+  
+</body></html>
