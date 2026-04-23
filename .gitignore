@@ -21,3 +21,4 @@ output_texts/
 # OS
 .DS_Store
 Thumbs.db
+data/main_run.log

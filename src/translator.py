@@ -12,9 +12,10 @@ from __future__ import annotations
 import hashlib
 import json
 import re
+import time
 from pathlib import Path
 
-from groq import Groq
+from groq import Groq, RateLimitError, APIConnectionError
 
 from src import config
 
@@ -92,10 +93,28 @@ def restore_code_blocks(stripped: str, blocks: list[str]) -> str:
 
 
 # ---------------------------------------------------------------------------
-# Groq client (None when GROQ_API_KEY is not set)
+# Provider clients (lazy) — translator supports Groq and Gemini.
 # ---------------------------------------------------------------------------
 
 groq_client = Groq(api_key=config.GROQ_API_KEY) if config.GROQ_API_KEY else None
+
+_gemini_model = None  # populated on first use
+
+def _get_gemini_model():
+    """Return a cached google.generativeai GenerativeModel or None if no key."""
+    global _gemini_model
+    if _gemini_model is not None:
+        return _gemini_model
+    if not config.GOOGLE_API_KEY:
+        return None
+    import google.generativeai as genai  # lazy import: optional dependency
+    genai.configure(api_key=config.GOOGLE_API_KEY)
+    _gemini_model = genai.GenerativeModel(
+        model_name=config.GEMINI_TRANSLATION_MODEL,
+        system_instruction=SYSTEM_PROMPT,
+        generation_config={"temperature": 0.0, "max_output_tokens": 4000},
+    )
+    return _gemini_model
 
 GLOSSARY_TERMS = [
     "DataFrame", "Series", "ndarray", "dtype", "axis", "shape",
@@ -127,25 +146,90 @@ def _strip_preamble(text: str) -> str:
     return _PREAMBLE_RE.sub("", text, count=1).strip()
 
 
-def translate(text: str) -> str:
-    """Translate a single passage EN → PT, preserving code blocks and glossary terms."""
-    if groq_client is None:
-        raise RuntimeError("GROQ_API_KEY not set — cannot translate")
+def _extract_retry_after(err: RateLimitError) -> float:
+    """Parse 'Please try again in Xs' from Groq's rate-limit message, default 10s."""
+    msg = str(err)
+    m = re.search(r"try again in ([\d.]+)s", msg)
+    return float(m.group(1)) + 0.5 if m else 10.0
 
+
+def _translate_via_groq(stripped: str, max_retries: int) -> str:
+    if groq_client is None:
+        raise RuntimeError("GROQ_API_KEY not set — cannot translate via Groq")
+
+    last_err: Exception | None = None
+    for attempt in range(max_retries):
+        try:
+            response = groq_client.chat.completions.create(
+                model=config.GROQ_TRANSLATION_MODEL,
+                messages=[
+                    {"role": "system", "content": SYSTEM_PROMPT},
+                    {"role": "user", "content": stripped},
+                ],
+                temperature=0.0,
+                max_tokens=2000,
+            )
+            return response.choices[0].message.content
+        except RateLimitError as e:
+            last_err = e
+            wait = _extract_retry_after(e)
+            print(f"  [groq rate-limit] waiting {wait:.1f}s (attempt {attempt + 1}/{max_retries})")
+            time.sleep(wait)
+        except APIConnectionError as e:
+            last_err = e
+            wait = 2 ** attempt
+            print(f"  [groq net-error] {e} — retrying in {wait}s (attempt {attempt + 1}/{max_retries})")
+            time.sleep(wait)
+
+    raise RuntimeError(f"Groq translate failed after {max_retries} retries: {last_err}")
+
+
+def _translate_via_gemini(stripped: str, max_retries: int) -> str:
+    model = _get_gemini_model()
+    if model is None:
+        raise RuntimeError("GOOGLE_API_KEY not set — cannot translate via Gemini")
+
+    # Gemini SDK raises google.api_core.exceptions.ResourceExhausted on 429 and
+    # google.api_core.exceptions.ServiceUnavailable / DeadlineExceeded on network.
+    from google.api_core import exceptions as gexc  # lazy
+
+    last_err: Exception | None = None
+    for attempt in range(max_retries):
+        try:
+            response = model.generate_content(stripped)
+            # When the model refuses or returns no candidates, .text raises.
+            return response.text
+        except gexc.ResourceExhausted as e:
+            last_err = e
+            wait = 2 ** attempt * 5  # 5, 10, 20, 40, 80s
+            print(f"  [gemini rate-limit] waiting {wait}s (attempt {attempt + 1}/{max_retries})")
+            time.sleep(wait)
+        except (gexc.ServiceUnavailable, gexc.DeadlineExceeded, gexc.InternalServerError) as e:
+            last_err = e
+            wait = 2 ** attempt
+            print(f"  [gemini net-error] {e} — retrying in {wait}s (attempt {attempt + 1}/{max_retries})")
+            time.sleep(wait)
+
+    raise RuntimeError(f"Gemini translate failed after {max_retries} retries: {last_err}")
+
+
+def translate(text: str, max_retries: int = 5, provider: str | None = None) -> str:
+    """Translate a single passage EN → PT, preserving code blocks and glossary terms.
+
+    Provider is chosen by config.TRANSLATION_PROVIDER ("gemini" or "groq"), or
+    overridden per-call. Retries on rate limits and transient network errors.
+    """
+    provider = (provider or config.TRANSLATION_PROVIDER).lower()
     stripped, blocks = extract_code_blocks(text)
 
-    response = groq_client.chat.completions.create(
-        model=config.GROQ_TRANSLATION_MODEL,
-        messages=[
-            {"role": "system", "content": SYSTEM_PROMPT},
-            {"role": "user", "content": stripped},
-        ],
-        temperature=0.0,
-        max_tokens=2000,
-    )
-    pt = response.choices[0].message.content
-    pt = _strip_preamble(pt)
+    if provider == "gemini":
+        pt = _translate_via_gemini(stripped, max_retries)
+    elif provider == "groq":
+        pt = _translate_via_groq(stripped, max_retries)
+    else:
+        raise ValueError(f"Unknown TRANSLATION_PROVIDER: {provider!r}")
 
+    pt = _strip_preamble(pt)
     return restore_code_blocks(pt, blocks)
 
 

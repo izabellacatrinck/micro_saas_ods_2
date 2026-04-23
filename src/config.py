@@ -29,7 +29,7 @@ RERANKER_MODEL = os.environ.get("RAG_RERANKER", "cross-encoder/mmarco-mMiniLMv2-
 BASELINE_EMBEDDER = "sentence-transformers/all-MiniLM-L6-v2"
 BASELINE_RERANKER = "cross-encoder/ms-marco-MiniLM-L-6-v2"
 
-# --- Groq ---
+# --- Groq (RAG answer generation + optional translation fallback) ---
 GROQ_API_KEY = os.environ.get("GROQ_API_KEY")
 GROQ_LLM_MODEL = os.environ.get("GROQ_LLM_MODEL", "llama-3.3-70b-versatile")
 GROQ_LLM_FAST = "llama-3.1-8b-instant"
@@ -37,6 +37,18 @@ GROQ_LLM_FAST = "llama-3.1-8b-instant"
 # 8b-instant vs 70b, and translation on a glossary-constrained task is already
 # very high with 8b. The 70b stays as the default for RAG answer generation.
 GROQ_TRANSLATION_MODEL = os.environ.get("GROQ_TRANSLATION_MODEL", GROQ_LLM_FAST)
+
+# --- Gemini (Google AI Studio, free tier) — default translation provider ---
+GOOGLE_API_KEY = os.environ.get("GOOGLE_API_KEY")
+# gemini-2.0-flash: 1M TPD / 1.5k RPD / 15 RPM free, excellent PT-BR quality.
+GEMINI_TRANSLATION_MODEL = os.environ.get("GEMINI_TRANSLATION_MODEL", "gemini-2.0-flash")
+
+# Translation provider: "gemini" or "groq". Defaults to gemini when GOOGLE_API_KEY
+# is available (better quality + higher free quota), falls back to groq otherwise.
+TRANSLATION_PROVIDER = os.environ.get(
+    "TRANSLATION_PROVIDER",
+    "gemini" if GOOGLE_API_KEY else "groq",
+).lower()
 
 # --- Ingestion: libraries that skip the EN→PT path ---
 # pandas has 47 Google-translated PT docs (full topical coverage); translating

@@ -104,7 +104,7 @@ def test_translate_sends_glossary_and_code_preserved(mock_client):
     )
 
     english = "This is a DataFrame.\n>>> df.head()"
-    result = translate(english)
+    result = translate(english, provider="groq")
 
     # result should have original code block restored
     assert ">>> df.head()" in result
@@ -124,7 +124,7 @@ def test_translate_strips_preamble(mock_client):
     mock_client.chat.completions.create.return_value = MagicMock(
         choices=[MagicMock(message=MagicMock(content="Tradução:\nTexto traduzido."))]
     )
-    result = translate("Some text.")
+    result = translate("Some text.", provider="groq")
     assert result == "Texto traduzido."
 
 
