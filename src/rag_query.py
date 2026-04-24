@@ -1,4 +1,12 @@
-"""Query orchestrator: retrieve → rerank → Groq generation in PT-BR."""
+"""Query orchestrator: retrieve → rerank → Groq generation in PT-BR.
+
+Exposes:
+  - ``answer(question) -> {"answer", "citations", "retrieved_chunks"}``
+    for programmatic use.
+  - CLI: ``python -m src.rag_query "question"``
+
+Baseline EN variant is added by Task 4 in the Wave 1 plan.
+"""
 from __future__ import annotations
 
 import argparse
@@ -65,15 +73,6 @@ def rerank(question: str, chunks: list[dict],
 
 
 _PT_SYSTEM = (
-    "Voce e um assistente em PT-BR especializado em analise de dados com Python "
-    "(pandas, numpy, matplotlib, seaborn). Responda apenas com base no CONTEXTO "
-    "fornecido. Se a resposta nao estiver no contexto, diga 'Nao encontrei essa "
-    "informacao na documentacao indexada.' Nao invente APIs, parametros nem erros. "
-    "Seja conciso e direto - tom didatico para iniciantes. Quando citar metodo/classe, "
-    "mantenha o nome em ingles (ex.: DataFrame.merge, np.array)."
-)
-
-_PT_SYSTEM_REAL = (
     "Você é um assistente em PT-BR especializado em análise de dados com Python "
     "(pandas, numpy, matplotlib, seaborn). Responda apenas com base no CONTEXTO "
     "fornecido. Se a resposta não estiver no contexto, diga 'Não encontrei essa "
@@ -91,7 +90,7 @@ def build_pt_prompt(question: str, chunks: list[dict]) -> str:
         blocks.append(f"{header}\n{c['content']}")
     contexto = "\n\n".join(blocks)
     return (
-        f"{_PT_SYSTEM_REAL}\n\n"
+        f"{_PT_SYSTEM}\n\n"
         f"=== CONTEXTO ===\n{contexto}\n\n"
         f"=== PERGUNTA ===\n{question}\n\n"
         f"=== RESPOSTA (em português) ==="
@@ -158,9 +157,9 @@ def _main(argv: list[str]) -> int:
     )
     print("\n=== RESPOSTA ===")
     print(result["answer"])
-    print("\n=== CITACOES ===")
+    print("\n=== CITAÇÕES ===")
     for c in result["citations"]:
-        print(f"  - {c['library']} . {c['section']} ({c['source']})")
+        print(f"  - {c['library']} · {c['section']} ({c['source']})")
     return 0
 
 
