@@ -51,11 +51,15 @@ TRANSLATION_PROVIDER = os.environ.get(
 ).lower()
 
 # --- Ingestion: libraries that skip the EN→PT path ---
-# pandas has 47 Google-translated PT docs (full topical coverage); translating
-# its 10 EN docs would duplicate content and burn the daily token budget.
+# Every lib now has rich PT Google-translated coverage (pandas 47, numpy 31,
+# matplotlib 38, seaborn 14), and the glossary_repair module fixes API-term
+# mistranslations post-extraction. Translating the /en subset would only add
+# duplicated content and burn LLM tokens. Skip them all by default.
 SKIP_EN_FOR_LIBRARIES = tuple(
     x.strip()
-    for x in os.environ.get("RAG_SKIP_EN_LIBS", "pandas").split(",")
+    for x in os.environ.get(
+        "RAG_SKIP_EN_LIBS", "pandas,numpy,matplotlib,seaborn"
+    ).split(",")
     if x.strip()
 )
 
