@@ -42,6 +42,20 @@ def index_chunks(
     if not rows:
         return 0
 
+    # Deduplicate: if the same chunk_id appears more than once (can happen when
+    # different source files share identical section headings), keep only the
+    # first occurrence so Chroma does not raise DuplicateIDError.
+    seen_ids: set[str] = set()
+    unique_rows = []
+    for r in rows:
+        if r["chunk_id"] not in seen_ids:
+            seen_ids.add(r["chunk_id"])
+            unique_rows.append(r)
+    dropped = len(rows) - len(unique_rows)
+    if dropped:
+        print(f"[index] deduplicated {dropped} chunks with duplicate IDs")
+    rows = unique_rows
+
     texts = [
         (f"passage: {r['content']}" if e5_style_prefix else r["content"])
         for r in rows
