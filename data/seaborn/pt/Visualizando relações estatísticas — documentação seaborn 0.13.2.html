@@ -1,0 +1,984 @@
+<!DOCTYPE html>
+<!-- saved from url=(0051)https://seaborn.pydata.org/tutorial/relational.html -->
+<html lang="pt" data-mode="light" data-theme="light"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"><meta name="generator" content="Docutils 0.19: https://docutils.sourceforge.io/">
+
+    <title _msttexthash="6985849" _msthash="0">Visualizando relações estatísticas — documentação seaborn 0.13.2</title>
+  <script>
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "light";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "light";
+  </script>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="./Visualizando relações estatísticas — documentação seaborn 0.13.2_files/theme.css" rel="stylesheet">
+<link href="./Visualizando relações estatísticas — documentação seaborn 0.13.2_files/pydata-sphinx-theme.css" rel="stylesheet">
+
+  
+  <link rel="stylesheet" href="./Visualizando relações estatísticas — documentação seaborn 0.13.2_files/all.min.css">
+  <link rel="preload" as="font" type="font/woff2" crossorigin="" href="https://seaborn.pydata.org/_static/vendor/fontawesome/5.13.0/webfonts/fa-solid-900.woff2">
+  <link rel="preload" as="font" type="font/woff2" crossorigin="" href="https://seaborn.pydata.org/_static/vendor/fontawesome/5.13.0/webfonts/fa-brands-400.woff2">
+
+    <link rel="stylesheet" type="text/css" href="./Visualizando relações estatísticas — documentação seaborn 0.13.2_files/pygments.css">
+    <link rel="stylesheet" type="text/css" href="./Visualizando relações estatísticas — documentação seaborn 0.13.2_files/plot_directive.css">
+    <link rel="stylesheet" type="text/css" href="./Visualizando relações estatísticas — documentação seaborn 0.13.2_files/copybutton.css">
+    <link rel="stylesheet" type="text/css" href="./Visualizando relações estatísticas — documentação seaborn 0.13.2_files/design-style.1e8bd061cd6da7fc9cf755528e8ffc24.min.css">
+    <link rel="stylesheet" type="text/css" href="./Visualizando relações estatísticas — documentação seaborn 0.13.2_files/custom.css">
+  
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="./Visualizando relações estatísticas — documentação seaborn 0.13.2_files/pydata-sphinx-theme.js.baixados">
+
+    <script data-url_root="../" id="documentation_options" src="./Visualizando relações estatísticas — documentação seaborn 0.13.2_files/documentation_options.js.baixados"></script>
+    <script src="./Visualizando relações estatísticas — documentação seaborn 0.13.2_files/jquery.js.baixados"></script>
+    <script src="./Visualizando relações estatísticas — documentação seaborn 0.13.2_files/underscore.js.baixados"></script>
+    <script src="./Visualizando relações estatísticas — documentação seaborn 0.13.2_files/_sphinx_javascript_frameworks_compat.js.baixados"></script>
+    <script src="./Visualizando relações estatísticas — documentação seaborn 0.13.2_files/doctools.js.baixados"></script>
+    <script src="./Visualizando relações estatísticas — documentação seaborn 0.13.2_files/sphinx_highlight.js.baixados"></script>
+    <script src="./Visualizando relações estatísticas — documentação seaborn 0.13.2_files/clipboard.min.js.baixados"></script>
+    <script src="./Visualizando relações estatísticas — documentação seaborn 0.13.2_files/copybutton.js.baixados"></script>
+    <script src="./Visualizando relações estatísticas — documentação seaborn 0.13.2_files/design-tabs.js.baixados"></script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'tutorial/relational';</script>
+    <link rel="shortcut icon" href="https://seaborn.pydata.org/_static/favicon.ico">
+    <link rel="index" title="Index" href="https://seaborn.pydata.org/genindex.html">
+    <link rel="search" title="Search" href="https://seaborn.pydata.org/search.html">
+    <link rel="next" title="Visualizing distributions of data" href="https://seaborn.pydata.org/tutorial/distributions.html">
+    <link rel="prev" title="Properties of Mark objects" href="https://seaborn.pydata.org/tutorial/properties.html">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="docsearch:language" content="en">
+  </head>
+  
+  
+  <body data-spy="scroll" data-target="#bd-toc-nav" data-offset="180" data-default-mode="light">
+
+  
+  <input type="checkbox" class="sidebar-toggle" name="__primary" id="__primary">
+  <label class="overlay overlay-primary" for="__primary"></label>
+
+  
+  <input type="checkbox" class="sidebar-toggle" name="__secondary" id="__secondary">
+  <label class="overlay overlay-secondary" for="__secondary"></label>
+
+  
+  <div class="search-button__wrapper" _msthidden="1">
+    <div class="search-button__overlay"></div>
+    <div class="search-button__search-container" _msthidden="1">
+      
+<form class="bd-search d-flex align-items-center" action="https://seaborn.pydata.org/search.html" method="get" _msthidden="1">
+  <i class="icon fas fa-search"></i>
+  <input type="search" class="form-control" name="q" id="search-input" placeholder="Search the docs ..." aria-label="Search the docs ..." autocomplete="off" _msthidden="A" _mstplaceholder="267410" _msthash="1" _mstaria-label="267410">
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form>
+    </div>
+  </div>
+
+  
+  <nav class="bd-header navbar navbar-expand-lg bd-navbar" id="navbar-main"><div class="bd-header__inner container-xl">
+  <label class="sidebar-toggle primary-toggle" for="__primary">
+      <span class="fas fa-bars"></span>
+  </label>
+  <div id="navbar-start">
+    
+    
+  
+
+
+<a class="navbar-brand logo" href="https://seaborn.pydata.org/index.html">
+  
+  
+  
+  
+  
+  
+    <img src="./Visualizando relações estatísticas — documentação seaborn 0.13.2_files/logo-wide-lightbg.svg" class="logo__image only-light" alt="Imagem do logo" _mstalt="131794" _msthash="2">
+    <img src="./Visualizando relações estatísticas — documentação seaborn 0.13.2_files/logo-wide-lightbg.svg" class="logo__image only-dark" alt="Logo image" _msthidden="A" _mstalt="131794" _msthash="3">
+  
+  
+</a>
+    
+  </div>
+
+  
+  <div class="col-lg-9 navbar-header-items">
+    <div id="navbar-center" class="mr-auto">
+      
+      <div class="navbar-center-item">
+        <ul id="navbar-main-elements" class="navbar-nav">
+    <li class="toctree-l1 nav-item">
+ <a class="reference internal nav-link" href="https://seaborn.pydata.org/installing.html" _msttexthash="203125" _msthash="4"> Instalação </a>
+</li>
+
+<li class="toctree-l1 nav-item">
+ <a class="reference internal nav-link" href="https://seaborn.pydata.org/examples/index.html" _msttexthash="91390" _msthash="5"> Galeria </a>
+</li>
+
+<li class="toctree-l1 current active nav-item">
+ <a class="reference internal nav-link" href="https://seaborn.pydata.org/tutorial.html" _msttexthash="116545" _msthash="6">
+  Tutorial
+ </a>
+</li>
+
+<li class="toctree-l1 nav-item">
+ <a class="reference internal nav-link" href="https://seaborn.pydata.org/api.html" _msttexthash="22776" _msthash="7">
+  API
+ </a>
+</li>
+
+<li class="toctree-l1 nav-item">
+ <a class="reference internal nav-link" href="https://seaborn.pydata.org/whatsnew/index.html" _msttexthash="198991" _msthash="8"> Lançamentos </a>
+</li>
+
+<li class="toctree-l1 nav-item">
+ <a class="reference internal nav-link" href="https://seaborn.pydata.org/citing.html" _msttexthash="130403" _msthash="9"> Citação </a>
+</li>
+
+<li class="toctree-l1 nav-item">
+ <a class="reference internal nav-link" href="https://seaborn.pydata.org/faq.html" _msttexthash="22607" _msthash="10">
+  FAQ
+ </a>
+</li>
+
+</ul>
+      </div>
+      
+    </div>
+
+    <div id="navbar-end">
+      <div class="navbar-end-item navbar-end__search-button-container">
+        
+<button class="btn btn-sm navbar-btn search-button search-button__button" title="Search">
+  <i class="fas fa-search"></i>
+</button>
+      </div>
+      
+      <div class="navbar-end-item">
+        <ul id="navbar-icon-links" class="navbar-nav" aria-label="Links de Ícones" _mstaria-label="131963" _msthash="11">
+        <li class="nav-item">
+          
+          
+          
+          
+          
+          
+          <a href="https://github.com/mwaskom/seaborn" title="GitHub" class="nav-link" rel="noopener" target="_blank"><span><i class="fab fa-github"></i></span>
+            <label class="sr-only" _msttexthash="72332" _msthash="12">GitHub</label></a>
+        </li>
+        <li class="nav-item">
+          
+          
+          
+          
+          
+          
+          <a href="https://stackoverflow.com/tags/seaborn" title="StackOverflow" class="nav-link" rel="noopener" target="_blank"><span><i class="fab fa-stack-overflow"></i></span>
+            <label class="sr-only" _msttexthash="232466" _msthash="13">StackOverflow</label></a>
+        </li>
+        <li class="nav-item">
+          
+          
+          
+          
+          
+          
+          <a href="https://twitter.com/michaelwaskom" title="Twitter" class="nav-link" rel="noopener" target="_blank"><span><i class="fab fa-twitter"></i></span>
+            <label class="sr-only" _msttexthash="98995" _msthash="14">Twitter</label></a>
+        </li>
+      </ul>
+      </div>
+      
+    </div>
+  </div>
+
+
+  
+  <div class="search-button-container--mobile">
+<button class="btn btn-sm navbar-btn search-button search-button__button" title="Search">
+  <i class="fas fa-search"></i>
+</button>
+  </div>
+
+  
+  <label class="sidebar-toggle secondary-toggle" for="__secondary">
+      <span class="fas fa-outdent"></span>
+  </label>
+  
+
+</div>
+  </nav>
+  
+
+  <div class="bd-container container-xl">
+    <div class="bd-container__inner row">
+      
+      <div class="bd-sidebar-primary bd-sidebar">
+        
+  
+  <div class="sidebar-header-items sidebar-primary__section" _msthidden="13">
+    <p class="sidebar-header-items__title" role="heading" aria-level="1" aria-label="Navigation" _msthidden="1" _mstaria-label="157742" _msthash="15" _msttexthash="256997">
+      Site Navigation
+    </p>
+    
+    
+      <div class="sidebar-header-items__center" _msthidden="7">
+      
+      <div class="navbar-center-item" _msthidden="7">
+        <ul id="navbar-main-elements" class="navbar-nav" _msthidden="7">
+    <li class="toctree-l1 nav-item" _msthidden="1">
+ <a class="reference internal nav-link" href="https://seaborn.pydata.org/installing.html" _msttexthash="157573" _msthidden="1" _msthash="16">
+  Installing
+ </a>
+</li>
+
+<li class="toctree-l1 nav-item" _msthidden="1">
+ <a class="reference internal nav-link" href="https://seaborn.pydata.org/examples/index.html" _msttexthash="95901" _msthidden="1" _msthash="17">
+  Gallery
+ </a>
+</li>
+
+<li class="toctree-l1 current active nav-item" _msthidden="1">
+ <a class="reference internal nav-link" href="https://seaborn.pydata.org/tutorial.html" _msttexthash="116545" _msthidden="1" _msthash="18">
+  Tutorial
+ </a>
+</li>
+
+<li class="toctree-l1 nav-item" _msthidden="1">
+ <a class="reference internal nav-link" href="https://seaborn.pydata.org/api.html" _msttexthash="22776" _msthidden="1" _msthash="19">
+  API
+ </a>
+</li>
+
+<li class="toctree-l1 nav-item" _msthidden="1">
+ <a class="reference internal nav-link" href="https://seaborn.pydata.org/whatsnew/index.html" _msttexthash="113542" _msthidden="1" _msthash="20">
+  Releases
+ </a>
+</li>
+
+<li class="toctree-l1 nav-item" _msthidden="1">
+ <a class="reference internal nav-link" href="https://seaborn.pydata.org/citing.html" _msttexthash="76037" _msthidden="1" _msthash="21">
+  Citing
+ </a>
+</li>
+
+<li class="toctree-l1 nav-item" _msthidden="1">
+ <a class="reference internal nav-link" href="https://seaborn.pydata.org/faq.html" _msttexthash="22607" _msthidden="1" _msthash="22">
+  FAQ
+ </a>
+</li>
+
+</ul>
+      </div>
+      
+      </div>
+    
+
+    
+    
+    <div class="sidebar-header-items__end" _msthidden="4">
+      
+      <div class="navbar-end-item" _msthidden="4">
+        <ul id="navbar-icon-links" class="navbar-nav" aria-label="Icon Links" _msthidden="3" _mstaria-label="131963" _msthash="23">
+        <li class="nav-item" _msthidden="1">
+          
+          
+          
+          
+          
+          
+          <a href="https://github.com/mwaskom/seaborn" title="GitHub" class="nav-link" rel="noopener" target="_blank" _msthidden="1"><span><i class="fab fa-github"></i></span>
+            <label class="sr-only" _msttexthash="72332" _msthidden="1" _msthash="24">GitHub</label></a>
+        </li>
+        <li class="nav-item" _msthidden="1">
+          
+          
+          
+          
+          
+          
+          <a href="https://stackoverflow.com/tags/seaborn" title="StackOverflow" class="nav-link" rel="noopener" target="_blank" _msthidden="1"><span><i class="fab fa-stack-overflow"></i></span>
+            <label class="sr-only" _msttexthash="232466" _msthidden="1" _msthash="25">StackOverflow</label></a>
+        </li>
+        <li class="nav-item" _msthidden="1">
+          
+          
+          
+          
+          
+          
+          <a href="https://twitter.com/michaelwaskom" title="Twitter" class="nav-link" rel="noopener" target="_blank" _msthidden="1"><span><i class="fab fa-twitter"></i></span>
+            <label class="sr-only" _msttexthash="98995" _msthidden="1" _msthash="26">Twitter</label></a>
+        </li>
+      </ul>
+      </div>
+      
+    </div>
+    
+  </div>
+
+  
+  <div class="sidebar-start-items sidebar-primary__section">
+    <div class="sidebar-start-items__item"><nav class="bd-links" id="bd-docs-nav" aria-label="Navegação por seções" _mstaria-label="353847" _msthash="27">
+  <div class="bd-toc-item navbar-nav">
+    <ul class="nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="https://seaborn.pydata.org/tutorial/introduction.html" _msttexthash="591084" _msthash="28"> Uma introdução ao seaborn </a>
+ </li>
+</ul>
+<ul class="nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="https://seaborn.pydata.org/tutorial/function_overview.html" _msttexthash="1374724" _msthash="29"> Visão geral das funções de plotagem seaborn </a>
+ </li>
+</ul>
+<ul class="nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="https://seaborn.pydata.org/tutorial/data_structure.html" _msttexthash="1162369" _msthash="30"> Estruturas de dados aceitas pelo seaborn </a>
+ </li>
+</ul>
+<ul class="nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="https://seaborn.pydata.org/tutorial/objects_interface.html" _msttexthash="632931" _msthash="31"> A interface seaborn.objects </a>
+ </li>
+</ul>
+<ul class="nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="https://seaborn.pydata.org/tutorial/properties.html" _msttexthash="692822" _msthash="32"> Propriedades dos objetos Mark </a>
+ </li>
+</ul>
+<ul class="current nav bd-sidenav">
+ <li class="toctree-l1 current active">
+  <a class="current reference internal" href="https://seaborn.pydata.org/tutorial/relational.html#" _msttexthash="1139190" _msthash="33"> Visualizando relações estatísticas </a>
+ </li>
+</ul>
+<ul class="nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="https://seaborn.pydata.org/tutorial/distributions.html" _msttexthash="1386658" _msthash="34"> Visualização das distribuições dos dados </a>
+ </li>
+</ul>
+<ul class="nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="https://seaborn.pydata.org/tutorial/categorical.html" _msttexthash="995553" _msthash="35"> Visualização de dados categóricos </a>
+ </li>
+</ul>
+<ul class="nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="https://seaborn.pydata.org/tutorial/error_bars.html" _msttexthash="1143376" _msthash="36"> Estimativa estatística e barras de erro </a>
+ </li>
+</ul>
+<ul class="nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="https://seaborn.pydata.org/tutorial/regression.html" _msttexthash="1013727" _msthash="37"> Estimativa dos ajustes de regressão </a>
+ </li>
+</ul>
+<ul class="nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="https://seaborn.pydata.org/tutorial/axis_grids.html" _msttexthash="1925560" _msthash="38"> Construindo grades estruturadas de múltiplos plots </a>
+ </li>
+</ul>
+<ul class="nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="https://seaborn.pydata.org/tutorial/aesthetics.html" _msttexthash="711880" _msthash="39"> Estética de controle da figura </a>
+ </li>
+</ul>
+<ul class="nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="https://seaborn.pydata.org/tutorial/color_palettes.html" _msttexthash="608400" _msthash="40"> Escolha das paletas de cores </a>
+ </li>
+</ul>
+
+  </div>
+</nav>
+    </div>
+  </div>
+  
+
+  
+  <div class="sidebar-end-items sidebar-primary__section">
+    <div class="sidebar-end-items__item">
+    </div>
+  </div>
+
+      </div>
+
+      
+      
+      
+        <div class="bd-sidebar-secondary bd-toc">
+          
+<div class="toc-item">
+  
+<div class="tocsection onthispage">
+    <i class="fas fa-list"></i><font _mstmutation="1" _msttexthash="199043" _msthash="41"> Nesta página </font></div>
+<nav id="bd-toc-nav" class="page-toc">
+    <ul class="visible nav section-nav flex-column">
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="https://seaborn.pydata.org/tutorial/relational.html#relating-variables-with-scatter-plots" _msttexthash="1838005" _msthash="42"> Relacionando variáveis com gráficos de dispersão </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="https://seaborn.pydata.org/tutorial/relational.html#emphasizing-continuity-with-line-plots" _msttexthash="1636011" _msthash="43"> Enfatizando a continuidade com gráficos de linha </a>
+  <ul class="nav section-nav flex-column" _msthidden="3">
+   <li class="toc-h3 nav-item toc-entry" _msthidden="1">
+    <a class="reference internal nav-link" href="https://seaborn.pydata.org/tutorial/relational.html#aggregation-and-representing-uncertainty" _msttexthash="1300013" _msthidden="1" _msthash="44">
+     Aggregation and representing uncertainty
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry" _msthidden="1">
+    <a class="reference internal nav-link" href="https://seaborn.pydata.org/tutorial/relational.html#plotting-subsets-of-data-with-semantic-mappings" _msttexthash="1548222" _msthidden="1" _msthash="45">
+     Plotting subsets of data with semantic mappings
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry" _msthidden="1">
+    <a class="reference internal nav-link" href="https://seaborn.pydata.org/tutorial/relational.html#controlling-sorting-and-orientation" _msttexthash="1010815" _msthidden="1" _msthash="46">
+     Controlling sorting and orientation
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="https://seaborn.pydata.org/tutorial/relational.html#showing-multiple-relationships-with-facets" _msttexthash="1348477" _msthash="47"> Mostrando múltiplas relações com facetas </a>
+ </li>
+</ul>
+
+</nav>
+</div>
+
+<div class="toc-item">
+  
+</div>
+
+<div class="toc-item">
+  
+</div>
+
+        </div>
+      
+      
+
+      
+      
+      <div class="bd-content col">
+          
+          <div class="bd-header-article">
+              
+          </div>
+
+          
+          
+          <article class="bd-article" role="main">
+            
+  <section id="visualizing-statistical-relationships">
+<span id="relational-tutorial"></span><h1><font _mstmutation="1" _msttexthash="1139190" _msthash="48">Visualizando relações estatísticas</font><a class="headerlink" href="https://seaborn.pydata.org/tutorial/relational.html#visualizing-statistical-relationships" title="Permalink to this heading">#</a></h1>
+<p _msttexthash="68406767" _msthash="49">Análise estatística é um processo de entender como variáveis em um conjunto de dados se relacionam entre si e como essas relações dependem de outras variáveis. A visualização pode ser um componente central desse processo porque, quando os dados são visualizados corretamente, o sistema visual humano pode ver tendências e padrões que indicam uma relação.</p>
+<p _msttexthash="42649568" _msthash="50">Vamos discutir três funções do seaborn neste tutorial. A que mais usaremos é <a class="reference internal" href="https://seaborn.pydata.org/generated/seaborn.relplot.html#seaborn.relplot" title="seaborn.relplot" _istranslated="1"><code class="xref py py-func docutils literal notranslate" _istranslated="1"></code></a>. Esta é uma <a class="reference internal" href="https://seaborn.pydata.org/tutorial/function_overview.html" _istranslated="1"><span class="doc" _istranslated="1">função em nível de figura</span></a> para visualizar relações estatísticas usando duas abordagens comuns: gráficos de dispersão e gráficos de linhas. <a class="reference internal" href="https://seaborn.pydata.org/generated/seaborn.relplot.html#seaborn.relplot" title="seaborn.relplot" _istranslated="1"><code class="xref py py-func docutils literal notranslate" _istranslated="1"></code></a> combina a <a class="reference internal" href="https://seaborn.pydata.org/generated/seaborn.FacetGrid.html#seaborn.FacetGrid" title="seaborn.FacetGrid" _istranslated="1"><code class="xref py py-class docutils literal notranslate" _istranslated="1"></code></a> com uma de duas funções em nível de eixo:</p>
+<ul class="simple">
+<li><p><font _mstmutation="1" _msttexthash="232908" _msthash="51"><a class="reference internal" href="https://seaborn.pydata.org/generated/seaborn.scatterplot.html#seaborn.scatterplot" title="seaborn.scatterplot" _mstmutation="1" _istranslated="1"><code class="xref py py-func docutils literal notranslate" _istranslated="1"></code></a> (com ; o padrão)</font><code class="docutils literal notranslate"><span class="pre">kind="scatter"</span></code></p></li>
+<li><p><font _mstmutation="1" _msttexthash="41093" _msthash="52"><a class="reference internal" href="https://seaborn.pydata.org/generated/seaborn.lineplot.html#seaborn.lineplot" title="seaborn.lineplot" _mstmutation="1" _istranslated="1"><code class="xref py py-func docutils literal notranslate" _istranslated="1"></code></a> (com </font><code class="docutils literal notranslate"><span class="pre">kind="line"</span></code>)</p></li>
+</ul>
+<p _msttexthash="82588103" _msthash="53">Como veremos, essas funções podem ser bastante esclarecedoras porque usam representações simples e facilmente compreensíveis dos dados que, no entanto, podem representar estruturas complexas de conjuntos de dados. Eles podem fazer isso porque traçam gráficos bidimensionais que podem ser aprimorados mapeando até três variáveis adicionais usando a semântica de matiz, tamanho e estilo.</p>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre id="codecell0"><span></span><span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+<span class="kn">import</span> <span class="nn">pandas</span> <span class="k">as</span> <span class="nn">pd</span>
+<span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
+<span class="kn">import</span> <span class="nn">seaborn</span> <span class="k">as</span> <span class="nn">sns</span>
+<span class="n">sns</span><span class="o">.</span><span class="n">set_theme</span><span class="p">(</span><span class="n">style</span><span class="o">=</span><span class="s2">"darkgrid"</span><span class="p">)</span>
+</pre><button class="copybtn o-tooltip--left" data-tooltip="Copy" data-clipboard-target="#codecell0">
+      <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-copy" width="44" height="44" viewBox="0 0 24 24" stroke-width="1.5" stroke="#000000" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <title>Copy to clipboard</title>
+  <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
+  <rect x="8" y="8" width="12" height="12" rx="2"></rect>
+  <path d="M16 8v-2a2 2 0 0 0 -2 -2h-8a2 2 0 0 0 -2 2v8a2 2 0 0 0 2 2h2"></path>
+</svg>
+    </button></div>
+</div>
+<section id="relating-variables-with-scatter-plots">
+<span id="scatterplot-tutorial"></span><h2><font _mstmutation="1" _msttexthash="1838005" _msthash="54">Relacionando variáveis com gráficos de dispersão</font><a class="headerlink" href="https://seaborn.pydata.org/tutorial/relational.html#relating-variables-with-scatter-plots" title="Permalink to this heading">#</a></h2>
+<p _msttexthash="69783038" _msthash="55">O gráfico de dispersão é um pilar da visualização estatística. Ele representa a distribuição conjunta de duas variáveis usando uma nuvem de pontos, onde cada ponto representa uma observação no conjunto de dados. Essa representação permite que o olho infira uma quantidade substancial de informações sobre se existe alguma relação significativa entre eles.</p>
+<p><font _mstmutation="1" _msttexthash="68901144" _msthash="56">Existem várias maneiras de desenhar um gráfico de dispersão em Seaborn. A mais básica, que deve ser usada quando ambas as variáveis são numéricas, é a <a class="reference internal" href="https://seaborn.pydata.org/generated/seaborn.scatterplot.html#seaborn.scatterplot" title="seaborn.scatterplot" _mstmutation="1" _istranslated="1"><code class="xref py py-func docutils literal notranslate" _istranslated="1"></code></a> função. No tutorial de <a class="reference internal" href="https://seaborn.pydata.org/tutorial/categorical.html#categorical-tutorial" _mstmutation="1" _istranslated="1"><span class="std std-ref" _istranslated="1">visualização categórica</span></a>, veremos ferramentas especializadas para usar diagramas de dispersão para visualizar dados categóricos. O <a class="reference internal" href="https://seaborn.pydata.org/generated/seaborn.scatterplot.html#seaborn.scatterplot" title="seaborn.scatterplot" _mstmutation="1" _istranslated="1"><code class="xref py py-func docutils literal notranslate" _istranslated="1"></code></a> é o padrão em <a class="reference internal" href="https://seaborn.pydata.org/generated/seaborn.relplot.html#seaborn.relplot" title="seaborn.relplot" _mstmutation="1" _istranslated="1"><code class="xref py py-func docutils literal notranslate" _istranslated="1"></code></a> (também pode ser forçado ao definir ):</font><code class="docutils literal notranslate"><span class="pre">kind</span></code><code class="docutils literal notranslate"><span class="pre">kind="scatter"</span></code></p>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre id="codecell1"><span></span><span class="n">tips</span> <span class="o">=</span> <span class="n">sns</span><span class="o">.</span><span class="n">load_dataset</span><span class="p">(</span><span class="s2">"tips"</span><span class="p">)</span>
+<span class="n">sns</span><span class="o">.</span><span class="n">relplot</span><span class="p">(</span><span class="n">data</span><span class="o">=</span><span class="n">tips</span><span class="p">,</span> <span class="n">x</span><span class="o">=</span><span class="s2">"total_bill"</span><span class="p">,</span> <span class="n">y</span><span class="o">=</span><span class="s2">"tip"</span><span class="p">)</span>
+</pre><button class="copybtn o-tooltip--left" data-tooltip="Copy" data-clipboard-target="#codecell1">
+      <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-copy" width="44" height="44" viewBox="0 0 24 24" stroke-width="1.5" stroke="#000000" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <title>Copy to clipboard</title>
+  <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
+  <rect x="8" y="8" width="12" height="12" rx="2"></rect>
+  <path d="M16 8v-2a2 2 0 0 0 -2 -2h-8a2 2 0 0 0 -2 2v8a2 2 0 0 0 2 2h2"></path>
+</svg>
+    </button></div>
+</div>
+<img alt="../_images/relational_4_0.png" src="./Visualizando relações estatísticas — documentação seaborn 0.13.2_files/relational_4_0.png" _msthidden="A" _mstalt="733057" _msthash="57">
+<p _msttexthash="37188320" _msthash="58">Enquanto os pontos são representados em duas dimensões, outra dimensão pode ser adicionada ao gráfico colorindo os pontos de acordo com uma terceira variável. Em seaborn, isso é chamado de uso de uma "semântica de tonalidade", porque a cor do ponto ganha significado:</p>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre id="codecell2"><span></span><span class="n">sns</span><span class="o">.</span><span class="n">relplot</span><span class="p">(</span><span class="n">data</span><span class="o">=</span><span class="n">tips</span><span class="p">,</span> <span class="n">x</span><span class="o">=</span><span class="s2">"total_bill"</span><span class="p">,</span> <span class="n">y</span><span class="o">=</span><span class="s2">"tip"</span><span class="p">,</span> <span class="n">hue</span><span class="o">=</span><span class="s2">"smoker"</span><span class="p">)</span>
+</pre><button class="copybtn o-tooltip--left" data-tooltip="Copy" data-clipboard-target="#codecell2">
+      <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-copy" width="44" height="44" viewBox="0 0 24 24" stroke-width="1.5" stroke="#000000" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <title>Copy to clipboard</title>
+  <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
+  <rect x="8" y="8" width="12" height="12" rx="2"></rect>
+  <path d="M16 8v-2a2 2 0 0 0 -2 -2h-8a2 2 0 0 0 -2 2v8a2 2 0 0 0 2 2h2"></path>
+</svg>
+    </button></div>
+</div>
+<img alt="../_images/relational_6_0.png" src="./Visualizando relações estatísticas — documentação seaborn 0.13.2_files/relational_6_0.png" _msthidden="A" _mstalt="733811" _msthash="59">
+<p _msttexthash="10167365" _msthash="60">Para enfatizar a diferença entre as classes e melhorar a acessibilidade, você pode usar um estilo de marcador diferente para cada turma:</p>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre id="codecell3"><span></span><span class="n">sns</span><span class="o">.</span><span class="n">relplot</span><span class="p">(</span>
+    <span class="n">data</span><span class="o">=</span><span class="n">tips</span><span class="p">,</span>
+    <span class="n">x</span><span class="o">=</span><span class="s2">"total_bill"</span><span class="p">,</span> <span class="n">y</span><span class="o">=</span><span class="s2">"tip"</span><span class="p">,</span> <span class="n">hue</span><span class="o">=</span><span class="s2">"smoker"</span><span class="p">,</span> <span class="n">style</span><span class="o">=</span><span class="s2">"smoker"</span>
+<span class="p">)</span>
+</pre><button class="copybtn o-tooltip--left" data-tooltip="Copy" data-clipboard-target="#codecell3">
+      <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-copy" width="44" height="44" viewBox="0 0 24 24" stroke-width="1.5" stroke="#000000" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <title>Copy to clipboard</title>
+  <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
+  <rect x="8" y="8" width="12" height="12" rx="2"></rect>
+  <path d="M16 8v-2a2 2 0 0 0 -2 -2h-8a2 2 0 0 0 -2 2v8a2 2 0 0 0 2 2h2"></path>
+</svg>
+    </button></div>
+</div>
+<img alt="../_images/relational_8_0.png" src="./Visualizando relações estatísticas — documentação seaborn 0.13.2_files/relational_8_0.png" _msthidden="A" _mstalt="734565" _msthash="61">
+<p _msttexthash="21841248" _msthash="62">Também é possível representar quatro variáveis mudando o matiz e o estilo de cada ponto de forma independente. Mas isso deve ser feito com cuidado, pois o olho é muito menos sensível à forma do que à cor:</p>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre id="codecell4"><span></span><span class="n">sns</span><span class="o">.</span><span class="n">relplot</span><span class="p">(</span>
+    <span class="n">data</span><span class="o">=</span><span class="n">tips</span><span class="p">,</span>
+    <span class="n">x</span><span class="o">=</span><span class="s2">"total_bill"</span><span class="p">,</span> <span class="n">y</span><span class="o">=</span><span class="s2">"tip"</span><span class="p">,</span> <span class="n">hue</span><span class="o">=</span><span class="s2">"smoker"</span><span class="p">,</span> <span class="n">style</span><span class="o">=</span><span class="s2">"time"</span><span class="p">,</span>
+<span class="p">)</span>
+</pre><button class="copybtn o-tooltip--left" data-tooltip="Copy" data-clipboard-target="#codecell4">
+      <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-copy" width="44" height="44" viewBox="0 0 24 24" stroke-width="1.5" stroke="#000000" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <title>Copy to clipboard</title>
+  <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
+  <rect x="8" y="8" width="12" height="12" rx="2"></rect>
+  <path d="M16 8v-2a2 2 0 0 0 -2 -2h-8a2 2 0 0 0 -2 2v8a2 2 0 0 0 2 2h2"></path>
+</svg>
+    </button></div>
+</div>
+<img alt="../_images/relational_10_0.png" src="./Visualizando relações estatísticas — documentação seaborn 0.13.2_files/relational_10_0.png" _msthidden="A" _mstalt="757328" _msthash="63">
+<p _msttexthash="33702188" _msthash="64">Nos exemplos acima, a semântica do matiz era categórica, então a <a class="reference internal" href="https://seaborn.pydata.org/tutorial/color_palettes.html#palette-tutorial" _istranslated="1"><span class="std std-ref" _istranslated="1">paleta qualitativa</span></a> padrão era aplicada. Se a semântica do matiz for numérica (especificamente, se pode ser confundida para flutuar), a coloração padrão muda para uma paleta sequencial:</p>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre id="codecell5"><span></span><span class="n">sns</span><span class="o">.</span><span class="n">relplot</span><span class="p">(</span>
+    <span class="n">data</span><span class="o">=</span><span class="n">tips</span><span class="p">,</span> <span class="n">x</span><span class="o">=</span><span class="s2">"total_bill"</span><span class="p">,</span> <span class="n">y</span><span class="o">=</span><span class="s2">"tip"</span><span class="p">,</span> <span class="n">hue</span><span class="o">=</span><span class="s2">"size"</span><span class="p">,</span>
+<span class="p">)</span>
+</pre><button class="copybtn o-tooltip--left" data-tooltip="Copy" data-clipboard-target="#codecell5">
+      <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-copy" width="44" height="44" viewBox="0 0 24 24" stroke-width="1.5" stroke="#000000" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <title>Copy to clipboard</title>
+  <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
+  <rect x="8" y="8" width="12" height="12" rx="2"></rect>
+  <path d="M16 8v-2a2 2 0 0 0 -2 -2h-8a2 2 0 0 0 -2 2v8a2 2 0 0 0 2 2h2"></path>
+</svg>
+    </button></div>
+</div>
+<img alt="../_images/relational_12_0.png" src="./Visualizando relações estatísticas — documentação seaborn 0.13.2_files/relational_12_0.png" _msthidden="A" _mstalt="758108" _msthash="65">
+<p _msttexthash="16941834" _msthash="66">In both cases, you can customize the color palette. There are many options for doing so. Here, we customize a sequential palette using the string interface to <a class="reference internal" href="https://seaborn.pydata.org/generated/seaborn.cubehelix_palette.html#seaborn.cubehelix_palette" title="seaborn.cubehelix_palette"><code class="xref py py-func docutils literal notranslate"><span class="pre">cubehelix_palette()</span></code></a>:</p>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre id="codecell6"><span></span><span class="n">sns</span><span class="o">.</span><span class="n">relplot</span><span class="p">(</span>
+    <span class="n">data</span><span class="o">=</span><span class="n">tips</span><span class="p">,</span>
+    <span class="n">x</span><span class="o">=</span><span class="s2">"total_bill"</span><span class="p">,</span> <span class="n">y</span><span class="o">=</span><span class="s2">"tip"</span><span class="p">,</span>
+    <span class="n">hue</span><span class="o">=</span><span class="s2">"size"</span><span class="p">,</span> <span class="n">palette</span><span class="o">=</span><span class="s2">"ch:r=-.5,l=.75"</span>
+<span class="p">)</span>
+</pre><button class="copybtn o-tooltip--left" data-tooltip="Copy" data-clipboard-target="#codecell6">
+      <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-copy" width="44" height="44" viewBox="0 0 24 24" stroke-width="1.5" stroke="#000000" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <title>Copy to clipboard</title>
+  <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
+  <rect x="8" y="8" width="12" height="12" rx="2"></rect>
+  <path d="M16 8v-2a2 2 0 0 0 -2 -2h-8a2 2 0 0 0 -2 2v8a2 2 0 0 0 2 2h2"></path>
+</svg>
+    </button></div>
+</div>
+<img alt="../_images/relational_14_0.png" src="./Visualizando relações estatísticas — documentação seaborn 0.13.2_files/relational_14_0.png" _msthidden="A" _mstalt="758888" _msthash="67">
+<p _msttexthash="2627612" _msthash="68">The third kind of semantic variable changes the size of each point:</p>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre id="codecell7"><span></span><span class="n">sns</span><span class="o">.</span><span class="n">relplot</span><span class="p">(</span><span class="n">data</span><span class="o">=</span><span class="n">tips</span><span class="p">,</span> <span class="n">x</span><span class="o">=</span><span class="s2">"total_bill"</span><span class="p">,</span> <span class="n">y</span><span class="o">=</span><span class="s2">"tip"</span><span class="p">,</span> <span class="n">size</span><span class="o">=</span><span class="s2">"size"</span><span class="p">)</span>
+</pre><button class="copybtn o-tooltip--left" data-tooltip="Copy" data-clipboard-target="#codecell7">
+      <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-copy" width="44" height="44" viewBox="0 0 24 24" stroke-width="1.5" stroke="#000000" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <title>Copy to clipboard</title>
+  <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
+  <rect x="8" y="8" width="12" height="12" rx="2"></rect>
+  <path d="M16 8v-2a2 2 0 0 0 -2 -2h-8a2 2 0 0 0 -2 2v8a2 2 0 0 0 2 2h2"></path>
+</svg>
+    </button></div>
+</div>
+<img alt="../_images/relational_16_0.png" src="./Visualizando relações estatísticas — documentação seaborn 0.13.2_files/relational_16_0.png" _msthidden="A" _mstalt="759668" _msthash="69">
+<p _msttexthash="27025440" _msthash="70">Unlike with <a class="reference external" href="https://matplotlib.org/stable/api/_as_gen/matplotlib.pyplot.scatter.html#matplotlib.pyplot.scatter" title="(in Matplotlib v3.8.2)"><code class="xref py py-func docutils literal notranslate"><span class="pre">matplotlib.pyplot.scatter()</span></code></a>, the literal value of the variable is not used to pick the area of the point. Instead, the range of values in data units is normalized into a range in area units. This range can be customized:</p>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre id="codecell8"><span></span><span class="n">sns</span><span class="o">.</span><span class="n">relplot</span><span class="p">(</span>
+    <span class="n">data</span><span class="o">=</span><span class="n">tips</span><span class="p">,</span> <span class="n">x</span><span class="o">=</span><span class="s2">"total_bill"</span><span class="p">,</span> <span class="n">y</span><span class="o">=</span><span class="s2">"tip"</span><span class="p">,</span>
+    <span class="n">size</span><span class="o">=</span><span class="s2">"size"</span><span class="p">,</span> <span class="n">sizes</span><span class="o">=</span><span class="p">(</span><span class="mi">15</span><span class="p">,</span> <span class="mi">200</span><span class="p">)</span>
+<span class="p">)</span>
+</pre><button class="copybtn o-tooltip--left" data-tooltip="Copy" data-clipboard-target="#codecell8">
+      <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-copy" width="44" height="44" viewBox="0 0 24 24" stroke-width="1.5" stroke="#000000" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <title>Copy to clipboard</title>
+  <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
+  <rect x="8" y="8" width="12" height="12" rx="2"></rect>
+  <path d="M16 8v-2a2 2 0 0 0 -2 -2h-8a2 2 0 0 0 -2 2v8a2 2 0 0 0 2 2h2"></path>
+</svg>
+    </button></div>
+</div>
+<img alt="../_images/relational_18_0.png" src="./Visualizando relações estatísticas — documentação seaborn 0.13.2_files/relational_18_0.png" _msthidden="A" _mstalt="760448" _msthash="71">
+<p _msttexthash="11679408" _msthash="72">More examples for customizing how the different semantics are used to show statistical relationships are shown in the <a class="reference internal" href="https://seaborn.pydata.org/generated/seaborn.scatterplot.html#seaborn.scatterplot" title="seaborn.scatterplot"><code class="xref py py-func docutils literal notranslate"><span class="pre">scatterplot()</span></code></a> API examples.</p>
+</section>
+<section id="emphasizing-continuity-with-line-plots">
+<span id="lineplot-tutorial"></span><h2><font _mstmutation="1" _msttexthash="1140607" _msthash="73">Emphasizing continuity with line plots</font><a class="headerlink" href="https://seaborn.pydata.org/tutorial/relational.html#emphasizing-continuity-with-line-plots" title="Permalink to this heading">#</a></h2>
+<p _msttexthash="30235439" _msthash="74">Scatter plots are highly effective, but there is no universally optimal type of visualisation. Instead, the visual representation should be adapted for the specifics of the dataset and to the question you are trying to answer with the plot.</p>
+<p><font _mstmutation="1" _msttexthash="43232826" _msthash="75">With some datasets, you may want to understand changes in one variable as a function of time, or a similarly continuous variable. In this situation, a good choice is to draw a line plot. In seaborn, this can be accomplished by the <a class="reference internal" href="https://seaborn.pydata.org/generated/seaborn.lineplot.html#seaborn.lineplot" title="seaborn.lineplot" _mstmutation="1"><code class="xref py py-func docutils literal notranslate"><span class="pre">lineplot()</span></code></a> function, either directly or with <a class="reference internal" href="https://seaborn.pydata.org/generated/seaborn.relplot.html#seaborn.relplot" title="seaborn.relplot" _mstmutation="1"><code class="xref py py-func docutils literal notranslate"><span class="pre">relplot()</span></code></a> by setting :</font><code class="docutils literal notranslate"><span class="pre">kind="line"</span></code></p>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre id="codecell9"><span></span><span class="n">dowjones</span> <span class="o">=</span> <span class="n">sns</span><span class="o">.</span><span class="n">load_dataset</span><span class="p">(</span><span class="s2">"dowjones"</span><span class="p">)</span>
+<span class="n">sns</span><span class="o">.</span><span class="n">relplot</span><span class="p">(</span><span class="n">data</span><span class="o">=</span><span class="n">dowjones</span><span class="p">,</span> <span class="n">x</span><span class="o">=</span><span class="s2">"Date"</span><span class="p">,</span> <span class="n">y</span><span class="o">=</span><span class="s2">"Price"</span><span class="p">,</span> <span class="n">kind</span><span class="o">=</span><span class="s2">"line"</span><span class="p">)</span>
+</pre><button class="copybtn o-tooltip--left" data-tooltip="Copy" data-clipboard-target="#codecell9">
+      <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-copy" width="44" height="44" viewBox="0 0 24 24" stroke-width="1.5" stroke="#000000" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <title>Copy to clipboard</title>
+  <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
+  <rect x="8" y="8" width="12" height="12" rx="2"></rect>
+  <path d="M16 8v-2a2 2 0 0 0 -2 -2h-8a2 2 0 0 0 -2 2v8a2 2 0 0 0 2 2h2"></path>
+</svg>
+    </button></div>
+</div>
+<img alt="../_images/relational_21_0.png" src="./Visualizando relações estatísticas — documentação seaborn 0.13.2_files/relational_21_0.png" _msthidden="A" _mstalt="758095" _msthash="76">
+<section id="aggregation-and-representing-uncertainty">
+<h3><font _mstmutation="1" _msttexthash="1300013" _msthash="77">Aggregation and representing uncertainty</font><a class="headerlink" href="https://seaborn.pydata.org/tutorial/relational.html#aggregation-and-representing-uncertainty" title="Permalink to this heading">#</a></h3>
+<p><font _mstmutation="1" _msttexthash="31279040" _msthash="78">More complex datasets will have multiple measurements for the same value of the  variable. The default behavior in seaborn is to aggregate the multiple measurements at each  value by plotting the mean and the 95% confidence interval around the mean:</font><code class="docutils literal notranslate"><span class="pre">x</span></code><code class="docutils literal notranslate"><span class="pre">x</span></code></p>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre id="codecell10"><span></span><span class="n">fmri</span> <span class="o">=</span> <span class="n">sns</span><span class="o">.</span><span class="n">load_dataset</span><span class="p">(</span><span class="s2">"fmri"</span><span class="p">)</span>
+<span class="n">sns</span><span class="o">.</span><span class="n">relplot</span><span class="p">(</span><span class="n">data</span><span class="o">=</span><span class="n">fmri</span><span class="p">,</span> <span class="n">x</span><span class="o">=</span><span class="s2">"timepoint"</span><span class="p">,</span> <span class="n">y</span><span class="o">=</span><span class="s2">"signal"</span><span class="p">,</span> <span class="n">kind</span><span class="o">=</span><span class="s2">"line"</span><span class="p">)</span>
+</pre><button class="copybtn o-tooltip--left" data-tooltip="Copy" data-clipboard-target="#codecell10">
+      <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-copy" width="44" height="44" viewBox="0 0 24 24" stroke-width="1.5" stroke="#000000" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <title>Copy to clipboard</title>
+  <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
+  <rect x="8" y="8" width="12" height="12" rx="2"></rect>
+  <path d="M16 8v-2a2 2 0 0 0 -2 -2h-8a2 2 0 0 0 -2 2v8a2 2 0 0 0 2 2h2"></path>
+</svg>
+    </button></div>
+</div>
+<img alt="../_images/relational_23_0.png" src="./Visualizando relações estatísticas — documentação seaborn 0.13.2_files/relational_23_0.png" _msthidden="A" _mstalt="758875" _msthash="79">
+<p _msttexthash="23321558" _msthash="80">The confidence intervals are computed using bootstrapping, which can be time-intensive for larger datasets. It’s therefore possible to disable them:</p>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre id="codecell11"><span></span><span class="n">sns</span><span class="o">.</span><span class="n">relplot</span><span class="p">(</span>
+    <span class="n">data</span><span class="o">=</span><span class="n">fmri</span><span class="p">,</span> <span class="n">kind</span><span class="o">=</span><span class="s2">"line"</span><span class="p">,</span>
+    <span class="n">x</span><span class="o">=</span><span class="s2">"timepoint"</span><span class="p">,</span> <span class="n">y</span><span class="o">=</span><span class="s2">"signal"</span><span class="p">,</span> <span class="n">errorbar</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
+<span class="p">)</span>
+</pre><button class="copybtn o-tooltip--left" data-tooltip="Copy" data-clipboard-target="#codecell11">
+      <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-copy" width="44" height="44" viewBox="0 0 24 24" stroke-width="1.5" stroke="#000000" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <title>Copy to clipboard</title>
+  <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
+  <rect x="8" y="8" width="12" height="12" rx="2"></rect>
+  <path d="M16 8v-2a2 2 0 0 0 -2 -2h-8a2 2 0 0 0 -2 2v8a2 2 0 0 0 2 2h2"></path>
+</svg>
+    </button></div>
+</div>
+<img alt="../_images/relational_25_0.png" src="./Visualizando relações estatísticas — documentação seaborn 0.13.2_files/relational_25_0.png" _msthidden="A" _mstalt="759655" _msthash="81">
+<p _msttexthash="18184647" _msthash="82">Another good option, especially with larger data, is to represent the spread of the distribution at each timepoint by plotting the standard deviation instead of a confidence interval:</p>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre id="codecell12"><span></span><span class="n">sns</span><span class="o">.</span><span class="n">relplot</span><span class="p">(</span>
+    <span class="n">data</span><span class="o">=</span><span class="n">fmri</span><span class="p">,</span> <span class="n">kind</span><span class="o">=</span><span class="s2">"line"</span><span class="p">,</span>
+    <span class="n">x</span><span class="o">=</span><span class="s2">"timepoint"</span><span class="p">,</span> <span class="n">y</span><span class="o">=</span><span class="s2">"signal"</span><span class="p">,</span> <span class="n">errorbar</span><span class="o">=</span><span class="s2">"sd"</span><span class="p">,</span>
+<span class="p">)</span>
+</pre><button class="copybtn o-tooltip--left" data-tooltip="Copy" data-clipboard-target="#codecell12">
+      <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-copy" width="44" height="44" viewBox="0 0 24 24" stroke-width="1.5" stroke="#000000" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <title>Copy to clipboard</title>
+  <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
+  <rect x="8" y="8" width="12" height="12" rx="2"></rect>
+  <path d="M16 8v-2a2 2 0 0 0 -2 -2h-8a2 2 0 0 0 -2 2v8a2 2 0 0 0 2 2h2"></path>
+</svg>
+    </button></div>
+</div>
+<img alt="../_images/relational_27_0.png" src="./Visualizando relações estatísticas — documentação seaborn 0.13.2_files/relational_27_0.png" _msthidden="A" _mstalt="760435" _msthash="83">
+<p><font _mstmutation="1" _msttexthash="11869650" _msthash="84">To turn off aggregation altogether, set the  parameter to  This might produce a strange effect when the data have multiple observations at each point.</font><code class="docutils literal notranslate"><span class="pre">estimator</span></code><code class="docutils literal notranslate"><span class="pre">None</span></code></p>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre id="codecell13"><span></span><span class="n">sns</span><span class="o">.</span><span class="n">relplot</span><span class="p">(</span>
+    <span class="n">data</span><span class="o">=</span><span class="n">fmri</span><span class="p">,</span> <span class="n">kind</span><span class="o">=</span><span class="s2">"line"</span><span class="p">,</span>
+    <span class="n">x</span><span class="o">=</span><span class="s2">"timepoint"</span><span class="p">,</span> <span class="n">y</span><span class="o">=</span><span class="s2">"signal"</span><span class="p">,</span>
+    <span class="n">estimator</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
+<span class="p">)</span>
+</pre><button class="copybtn o-tooltip--left" data-tooltip="Copy" data-clipboard-target="#codecell13">
+      <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-copy" width="44" height="44" viewBox="0 0 24 24" stroke-width="1.5" stroke="#000000" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <title>Copy to clipboard</title>
+  <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
+  <rect x="8" y="8" width="12" height="12" rx="2"></rect>
+  <path d="M16 8v-2a2 2 0 0 0 -2 -2h-8a2 2 0 0 0 -2 2v8a2 2 0 0 0 2 2h2"></path>
+</svg>
+    </button></div>
+</div>
+<img alt="../_images/relational_29_0.png" src="./Visualizando relações estatísticas — documentação seaborn 0.13.2_files/relational_29_0.png" _msthidden="A" _mstalt="761215" _msthash="85">
+</section>
+<section id="plotting-subsets-of-data-with-semantic-mappings">
+<h3><font _mstmutation="1" _msttexthash="1548222" _msthash="86">Plotting subsets of data with semantic mappings</font><a class="headerlink" href="https://seaborn.pydata.org/tutorial/relational.html#plotting-subsets-of-data-with-semantic-mappings" title="Permalink to this heading">#</a></h3>
+<p _msttexthash="79336049" _msthash="87">The <a class="reference internal" href="https://seaborn.pydata.org/generated/seaborn.lineplot.html#seaborn.lineplot" title="seaborn.lineplot"><code class="xref py py-func docutils literal notranslate"><span class="pre">lineplot()</span></code></a> function has the same flexibility as <a class="reference internal" href="https://seaborn.pydata.org/generated/seaborn.scatterplot.html#seaborn.scatterplot" title="seaborn.scatterplot"><code class="xref py py-func docutils literal notranslate"><span class="pre">scatterplot()</span></code></a>: it can show up to three additional variables by modifying the hue, size, and style of the plot elements. It does so using the same API as <a class="reference internal" href="https://seaborn.pydata.org/generated/seaborn.scatterplot.html#seaborn.scatterplot" title="seaborn.scatterplot"><code class="xref py py-func docutils literal notranslate"><span class="pre">scatterplot()</span></code></a>, meaning that we don’t need to stop and think about the parameters that control the look of lines vs. points in matplotlib.</p>
+<p _msttexthash="31336370" _msthash="88">Using semantics in <a class="reference internal" href="https://seaborn.pydata.org/generated/seaborn.lineplot.html#seaborn.lineplot" title="seaborn.lineplot"><code class="xref py py-func docutils literal notranslate"><span class="pre">lineplot()</span></code></a> will also determine how the data get aggregated. For example, adding a hue semantic with two levels splits the plot into two lines and error bands, coloring each to indicate which subset of the data they correspond to.</p>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre id="codecell14"><span></span><span class="n">sns</span><span class="o">.</span><span class="n">relplot</span><span class="p">(</span>
+    <span class="n">data</span><span class="o">=</span><span class="n">fmri</span><span class="p">,</span> <span class="n">kind</span><span class="o">=</span><span class="s2">"line"</span><span class="p">,</span>
+    <span class="n">x</span><span class="o">=</span><span class="s2">"timepoint"</span><span class="p">,</span> <span class="n">y</span><span class="o">=</span><span class="s2">"signal"</span><span class="p">,</span> <span class="n">hue</span><span class="o">=</span><span class="s2">"event"</span><span class="p">,</span>
+<span class="p">)</span>
+</pre><button class="copybtn o-tooltip--left" data-tooltip="Copy" data-clipboard-target="#codecell14">
+      <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-copy" width="44" height="44" viewBox="0 0 24 24" stroke-width="1.5" stroke="#000000" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <title>Copy to clipboard</title>
+  <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
+  <rect x="8" y="8" width="12" height="12" rx="2"></rect>
+  <path d="M16 8v-2a2 2 0 0 0 -2 -2h-8a2 2 0 0 0 -2 2v8a2 2 0 0 0 2 2h2"></path>
+</svg>
+    </button></div>
+</div>
+<img alt="../_images/relational_31_0.png" src="./Visualizando relações estatísticas — documentação seaborn 0.13.2_files/relational_31_0.png" _msthidden="A" _mstalt="758472" _msthash="89">
+<p _msttexthash="4530539" _msthash="90">Adding a style semantic to a line plot changes the pattern of dashes in the line by default:</p>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre id="codecell15"><span></span><span class="n">sns</span><span class="o">.</span><span class="n">relplot</span><span class="p">(</span>
+    <span class="n">data</span><span class="o">=</span><span class="n">fmri</span><span class="p">,</span> <span class="n">kind</span><span class="o">=</span><span class="s2">"line"</span><span class="p">,</span>
+    <span class="n">x</span><span class="o">=</span><span class="s2">"timepoint"</span><span class="p">,</span> <span class="n">y</span><span class="o">=</span><span class="s2">"signal"</span><span class="p">,</span>
+    <span class="n">hue</span><span class="o">=</span><span class="s2">"region"</span><span class="p">,</span> <span class="n">style</span><span class="o">=</span><span class="s2">"event"</span><span class="p">,</span>
+<span class="p">)</span>
+</pre><button class="copybtn o-tooltip--left" data-tooltip="Copy" data-clipboard-target="#codecell15">
+      <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-copy" width="44" height="44" viewBox="0 0 24 24" stroke-width="1.5" stroke="#000000" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <title>Copy to clipboard</title>
+  <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
+  <rect x="8" y="8" width="12" height="12" rx="2"></rect>
+  <path d="M16 8v-2a2 2 0 0 0 -2 -2h-8a2 2 0 0 0 -2 2v8a2 2 0 0 0 2 2h2"></path>
+</svg>
+    </button></div>
+</div>
+<img alt="../_images/relational_33_0.png" src="./Visualizando relações estatísticas — documentação seaborn 0.13.2_files/relational_33_0.png" _msthidden="A" _mstalt="759252" _msthash="91">
+<p _msttexthash="7926009" _msthash="92">But you can identify subsets by the markers used at each observation, either together with the dashes or instead of them:</p>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre id="codecell16"><span></span><span class="n">sns</span><span class="o">.</span><span class="n">relplot</span><span class="p">(</span>
+    <span class="n">data</span><span class="o">=</span><span class="n">fmri</span><span class="p">,</span> <span class="n">kind</span><span class="o">=</span><span class="s2">"line"</span><span class="p">,</span>
+    <span class="n">x</span><span class="o">=</span><span class="s2">"timepoint"</span><span class="p">,</span> <span class="n">y</span><span class="o">=</span><span class="s2">"signal"</span><span class="p">,</span> <span class="n">hue</span><span class="o">=</span><span class="s2">"region"</span><span class="p">,</span> <span class="n">style</span><span class="o">=</span><span class="s2">"event"</span><span class="p">,</span>
+    <span class="n">dashes</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">markers</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
+<span class="p">)</span>
+</pre><button class="copybtn o-tooltip--left" data-tooltip="Copy" data-clipboard-target="#codecell16">
+      <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-copy" width="44" height="44" viewBox="0 0 24 24" stroke-width="1.5" stroke="#000000" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <title>Copy to clipboard</title>
+  <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
+  <rect x="8" y="8" width="12" height="12" rx="2"></rect>
+  <path d="M16 8v-2a2 2 0 0 0 -2 -2h-8a2 2 0 0 0 -2 2v8a2 2 0 0 0 2 2h2"></path>
+</svg>
+    </button></div>
+</div>
+<img alt="../_images/relational_35_0.png" src="./Visualizando relações estatísticas — documentação seaborn 0.13.2_files/relational_35_0.png" _msthidden="A" _mstalt="760032" _msthash="93">
+<p _msttexthash="88087064" _msthash="94">As with scatter plots, be cautious about making line plots using multiple semantics. While sometimes informative, they can also be difficult to parse and interpret. But even when you are only examining changes across one additional variable, it can be useful to alter both the color and style of the lines. This can make the plot more accessible when printed to black-and-white or viewed by someone with color blindness:</p>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre id="codecell17"><span></span><span class="n">sns</span><span class="o">.</span><span class="n">relplot</span><span class="p">(</span>
+    <span class="n">data</span><span class="o">=</span><span class="n">fmri</span><span class="p">,</span> <span class="n">kind</span><span class="o">=</span><span class="s2">"line"</span><span class="p">,</span>
+    <span class="n">x</span><span class="o">=</span><span class="s2">"timepoint"</span><span class="p">,</span> <span class="n">y</span><span class="o">=</span><span class="s2">"signal"</span><span class="p">,</span> <span class="n">hue</span><span class="o">=</span><span class="s2">"event"</span><span class="p">,</span> <span class="n">style</span><span class="o">=</span><span class="s2">"event"</span><span class="p">,</span>
+<span class="p">)</span>
+</pre><button class="copybtn o-tooltip--left" data-tooltip="Copy" data-clipboard-target="#codecell17">
+      <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-copy" width="44" height="44" viewBox="0 0 24 24" stroke-width="1.5" stroke="#000000" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <title>Copy to clipboard</title>
+  <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
+  <rect x="8" y="8" width="12" height="12" rx="2"></rect>
+  <path d="M16 8v-2a2 2 0 0 0 -2 -2h-8a2 2 0 0 0 -2 2v8a2 2 0 0 0 2 2h2"></path>
+</svg>
+    </button></div>
+</div>
+<img alt="../_images/relational_37_0.png" src="./Visualizando relações estatísticas — documentação seaborn 0.13.2_files/relational_37_0.png" _msthidden="A" _mstalt="760812" _msthash="95">
+<p _msttexthash="30239729" _msthash="96">When you are working with repeated measures data (that is, you have units that were sampled multiple times), you can also plot each sampling unit separately without distinguishing them through semantics. This avoids cluttering the legend:</p>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre id="codecell18"><span></span><span class="n">sns</span><span class="o">.</span><span class="n">relplot</span><span class="p">(</span>
+    <span class="n">data</span><span class="o">=</span><span class="n">fmri</span><span class="o">.</span><span class="n">query</span><span class="p">(</span><span class="s2">"event == 'stim'"</span><span class="p">),</span> <span class="n">kind</span><span class="o">=</span><span class="s2">"line"</span><span class="p">,</span>
+    <span class="n">x</span><span class="o">=</span><span class="s2">"timepoint"</span><span class="p">,</span> <span class="n">y</span><span class="o">=</span><span class="s2">"signal"</span><span class="p">,</span> <span class="n">hue</span><span class="o">=</span><span class="s2">"region"</span><span class="p">,</span>
+    <span class="n">units</span><span class="o">=</span><span class="s2">"subject"</span><span class="p">,</span> <span class="n">estimator</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
+<span class="p">)</span>
+</pre><button class="copybtn o-tooltip--left" data-tooltip="Copy" data-clipboard-target="#codecell18">
+      <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-copy" width="44" height="44" viewBox="0 0 24 24" stroke-width="1.5" stroke="#000000" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <title>Copy to clipboard</title>
+  <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
+  <rect x="8" y="8" width="12" height="12" rx="2"></rect>
+  <path d="M16 8v-2a2 2 0 0 0 -2 -2h-8a2 2 0 0 0 -2 2v8a2 2 0 0 0 2 2h2"></path>
+</svg>
+    </button></div>
+</div>
+<img alt="../_images/relational_39_0.png" src="./Visualizando relações estatísticas — documentação seaborn 0.13.2_files/relational_39_0.png" _msthidden="A" _mstalt="761592" _msthash="97">
+<p _msttexthash="9063990" _msthash="98">The default colormap and handling of the legend in <a class="reference internal" href="https://seaborn.pydata.org/generated/seaborn.lineplot.html#seaborn.lineplot" title="seaborn.lineplot"><code class="xref py py-func docutils literal notranslate"><span class="pre">lineplot()</span></code></a> also depends on whether the hue semantic is categorical or numeric:</p>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre id="codecell19"><span></span><span class="n">dots</span> <span class="o">=</span> <span class="n">sns</span><span class="o">.</span><span class="n">load_dataset</span><span class="p">(</span><span class="s2">"dots"</span><span class="p">)</span><span class="o">.</span><span class="n">query</span><span class="p">(</span><span class="s2">"align == 'dots'"</span><span class="p">)</span>
+<span class="n">sns</span><span class="o">.</span><span class="n">relplot</span><span class="p">(</span>
+    <span class="n">data</span><span class="o">=</span><span class="n">dots</span><span class="p">,</span> <span class="n">kind</span><span class="o">=</span><span class="s2">"line"</span><span class="p">,</span>
+    <span class="n">x</span><span class="o">=</span><span class="s2">"time"</span><span class="p">,</span> <span class="n">y</span><span class="o">=</span><span class="s2">"firing_rate"</span><span class="p">,</span>
+    <span class="n">hue</span><span class="o">=</span><span class="s2">"coherence"</span><span class="p">,</span> <span class="n">style</span><span class="o">=</span><span class="s2">"choice"</span><span class="p">,</span>
+<span class="p">)</span>
+</pre><button class="copybtn o-tooltip--left" data-tooltip="Copy" data-clipboard-target="#codecell19">
+      <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-copy" width="44" height="44" viewBox="0 0 24 24" stroke-width="1.5" stroke="#000000" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <title>Copy to clipboard</title>
+  <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
+  <rect x="8" y="8" width="12" height="12" rx="2"></rect>
+  <path d="M16 8v-2a2 2 0 0 0 -2 -2h-8a2 2 0 0 0 -2 2v8a2 2 0 0 0 2 2h2"></path>
+</svg>
+    </button></div>
+</div>
+<img alt="../_images/relational_41_0.png" src="./Visualizando relações estatísticas — documentação seaborn 0.13.2_files/relational_41_0.png" _msthidden="A" _mstalt="758849" _msthash="99">
+<p><font _mstmutation="1" _msttexthash="48079707" _msthash="100">It may happen that, even though the  variable is numeric, it is poorly represented by a linear color scale. That’s the case here, where the levels of the  variable are logarithmically scaled. You can provide specific color values for each line by passing a list or dictionary:</font><code class="docutils literal notranslate"><span class="pre">hue</span></code><code class="docutils literal notranslate"><span class="pre">hue</span></code></p>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre id="codecell20"><span></span><span class="n">palette</span> <span class="o">=</span> <span class="n">sns</span><span class="o">.</span><span class="n">cubehelix_palette</span><span class="p">(</span><span class="n">light</span><span class="o">=</span><span class="mf">.8</span><span class="p">,</span> <span class="n">n_colors</span><span class="o">=</span><span class="mi">6</span><span class="p">)</span>
+<span class="n">sns</span><span class="o">.</span><span class="n">relplot</span><span class="p">(</span>
+    <span class="n">data</span><span class="o">=</span><span class="n">dots</span><span class="p">,</span> <span class="n">kind</span><span class="o">=</span><span class="s2">"line"</span><span class="p">,</span>
+    <span class="n">x</span><span class="o">=</span><span class="s2">"time"</span><span class="p">,</span> <span class="n">y</span><span class="o">=</span><span class="s2">"firing_rate"</span><span class="p">,</span>
+    <span class="n">hue</span><span class="o">=</span><span class="s2">"coherence"</span><span class="p">,</span> <span class="n">style</span><span class="o">=</span><span class="s2">"choice"</span><span class="p">,</span> <span class="n">palette</span><span class="o">=</span><span class="n">palette</span><span class="p">,</span>
+<span class="p">)</span>
+</pre><button class="copybtn o-tooltip--left" data-tooltip="Copy" data-clipboard-target="#codecell20">
+      <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-copy" width="44" height="44" viewBox="0 0 24 24" stroke-width="1.5" stroke="#000000" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <title>Copy to clipboard</title>
+  <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
+  <rect x="8" y="8" width="12" height="12" rx="2"></rect>
+  <path d="M16 8v-2a2 2 0 0 0 -2 -2h-8a2 2 0 0 0 -2 2v8a2 2 0 0 0 2 2h2"></path>
+</svg>
+    </button></div>
+</div>
+<img alt="../_images/relational_43_0.png" src="./Visualizando relações estatísticas — documentação seaborn 0.13.2_files/relational_43_0.png" _msthidden="A" _mstalt="759629" _msthash="101">
+<p _msttexthash="1456403" _msthash="102">Or you can alter how the colormap is normalized:</p>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre id="codecell21"><span></span><span class="kn">from</span> <span class="nn">matplotlib.colors</span> <span class="kn">import</span> <span class="n">LogNorm</span>
+<span class="n">palette</span> <span class="o">=</span> <span class="n">sns</span><span class="o">.</span><span class="n">cubehelix_palette</span><span class="p">(</span><span class="n">light</span><span class="o">=</span><span class="mf">.7</span><span class="p">,</span> <span class="n">n_colors</span><span class="o">=</span><span class="mi">6</span><span class="p">)</span>
+<span class="n">sns</span><span class="o">.</span><span class="n">relplot</span><span class="p">(</span>
+    <span class="n">data</span><span class="o">=</span><span class="n">dots</span><span class="o">.</span><span class="n">query</span><span class="p">(</span><span class="s2">"coherence &gt; 0"</span><span class="p">),</span> <span class="n">kind</span><span class="o">=</span><span class="s2">"line"</span><span class="p">,</span>
+    <span class="n">x</span><span class="o">=</span><span class="s2">"time"</span><span class="p">,</span> <span class="n">y</span><span class="o">=</span><span class="s2">"firing_rate"</span><span class="p">,</span>
+    <span class="n">hue</span><span class="o">=</span><span class="s2">"coherence"</span><span class="p">,</span> <span class="n">style</span><span class="o">=</span><span class="s2">"choice"</span><span class="p">,</span>
+    <span class="n">hue_norm</span><span class="o">=</span><span class="n">LogNorm</span><span class="p">(),</span>
+<span class="p">)</span>
+</pre><button class="copybtn o-tooltip--left" data-tooltip="Copy" data-clipboard-target="#codecell21">
+      <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-copy" width="44" height="44" viewBox="0 0 24 24" stroke-width="1.5" stroke="#000000" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <title>Copy to clipboard</title>
+  <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
+  <rect x="8" y="8" width="12" height="12" rx="2"></rect>
+  <path d="M16 8v-2a2 2 0 0 0 -2 -2h-8a2 2 0 0 0 -2 2v8a2 2 0 0 0 2 2h2"></path>
+</svg>
+    </button></div>
+</div>
+<img alt="../_images/relational_45_0.png" src="./Visualizando relações estatísticas — documentação seaborn 0.13.2_files/relational_45_0.png" _msthidden="A" _mstalt="760409" _msthash="103">
+<p _msttexthash="1959568" _msthash="104">The third semantic, size, changes the width of the lines:</p>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre id="codecell22"><span></span><span class="n">sns</span><span class="o">.</span><span class="n">relplot</span><span class="p">(</span>
+    <span class="n">data</span><span class="o">=</span><span class="n">dots</span><span class="p">,</span> <span class="n">kind</span><span class="o">=</span><span class="s2">"line"</span><span class="p">,</span>
+    <span class="n">x</span><span class="o">=</span><span class="s2">"time"</span><span class="p">,</span> <span class="n">y</span><span class="o">=</span><span class="s2">"firing_rate"</span><span class="p">,</span>
+    <span class="n">size</span><span class="o">=</span><span class="s2">"coherence"</span><span class="p">,</span> <span class="n">style</span><span class="o">=</span><span class="s2">"choice"</span><span class="p">,</span>
+<span class="p">)</span>
+</pre><button class="copybtn o-tooltip--left" data-tooltip="Copy" data-clipboard-target="#codecell22">
+      <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-copy" width="44" height="44" viewBox="0 0 24 24" stroke-width="1.5" stroke="#000000" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <title>Copy to clipboard</title>
+  <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
+  <rect x="8" y="8" width="12" height="12" rx="2"></rect>
+  <path d="M16 8v-2a2 2 0 0 0 -2 -2h-8a2 2 0 0 0 -2 2v8a2 2 0 0 0 2 2h2"></path>
+</svg>
+    </button></div>
+</div>
+<img alt="../_images/relational_47_0.png" src="./Visualizando relações estatísticas — documentação seaborn 0.13.2_files/relational_47_0.png" _msthidden="A" _mstalt="761189" _msthash="105">
+<p><font _mstmutation="1" _msttexthash="156463710" _msthash="106">While the  variable will typically be numeric, it’s also possible to map a categorical variable with the width of the lines. Be cautious when doing so, because it will be difficult to distinguish much more than “thick” vs “thin” lines. However, dashes can be hard to perceive when lines have high-frequency variability, so using different widths may be more effective in that case:</font><code class="docutils literal notranslate"><span class="pre">size</span></code></p>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre id="codecell23"><span></span><span class="n">sns</span><span class="o">.</span><span class="n">relplot</span><span class="p">(</span>
+    <span class="n">data</span><span class="o">=</span><span class="n">dots</span><span class="p">,</span> <span class="n">kind</span><span class="o">=</span><span class="s2">"line"</span><span class="p">,</span>
+    <span class="n">x</span><span class="o">=</span><span class="s2">"time"</span><span class="p">,</span> <span class="n">y</span><span class="o">=</span><span class="s2">"firing_rate"</span><span class="p">,</span>
+    <span class="n">hue</span><span class="o">=</span><span class="s2">"coherence"</span><span class="p">,</span> <span class="n">size</span><span class="o">=</span><span class="s2">"choice"</span><span class="p">,</span> <span class="n">palette</span><span class="o">=</span><span class="n">palette</span><span class="p">,</span>
+<span class="p">)</span>
+</pre><button class="copybtn o-tooltip--left" data-tooltip="Copy" data-clipboard-target="#codecell23">
+      <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-copy" width="44" height="44" viewBox="0 0 24 24" stroke-width="1.5" stroke="#000000" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <title>Copy to clipboard</title>
+  <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
+  <rect x="8" y="8" width="12" height="12" rx="2"></rect>
+  <path d="M16 8v-2a2 2 0 0 0 -2 -2h-8a2 2 0 0 0 -2 2v8a2 2 0 0 0 2 2h2"></path>
+</svg>
+    </button></div>
+</div>
+<img alt="../_images/relational_49_0.png" src="./Visualizando relações estatísticas — documentação seaborn 0.13.2_files/relational_49_0.png" _msthidden="A" _mstalt="761969" _msthash="107">
+</section>
+<section id="controlling-sorting-and-orientation">
+<h3><font _mstmutation="1" _msttexthash="1010815" _msthash="108">Controlling sorting and orientation</font><a class="headerlink" href="https://seaborn.pydata.org/tutorial/relational.html#controlling-sorting-and-orientation" title="Permalink to this heading">#</a></h3>
+<p><font _mstmutation="1" _msttexthash="17469010" _msthash="109">Because <a class="reference internal" href="https://seaborn.pydata.org/generated/seaborn.lineplot.html#seaborn.lineplot" title="seaborn.lineplot" _mstmutation="1"><code class="xref py py-func docutils literal notranslate"><span class="pre">lineplot()</span></code></a> assumes that you are most often trying to draw  as a function of , the default behavior is to sort the data by the  values before plotting. However, this can be disabled:</font><code class="docutils literal notranslate"><span class="pre">y</span></code><code class="docutils literal notranslate"><span class="pre">x</span></code><code class="docutils literal notranslate"><span class="pre">x</span></code></p>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre id="codecell24"><span></span><span class="n">healthexp</span> <span class="o">=</span> <span class="n">sns</span><span class="o">.</span><span class="n">load_dataset</span><span class="p">(</span><span class="s2">"healthexp"</span><span class="p">)</span><span class="o">.</span><span class="n">sort_values</span><span class="p">(</span><span class="s2">"Year"</span><span class="p">)</span>
+<span class="n">sns</span><span class="o">.</span><span class="n">relplot</span><span class="p">(</span>
+    <span class="n">data</span><span class="o">=</span><span class="n">healthexp</span><span class="p">,</span> <span class="n">kind</span><span class="o">=</span><span class="s2">"line"</span><span class="p">,</span>
+    <span class="n">x</span><span class="o">=</span><span class="s2">"Spending_USD"</span><span class="p">,</span> <span class="n">y</span><span class="o">=</span><span class="s2">"Life_Expectancy"</span><span class="p">,</span> <span class="n">hue</span><span class="o">=</span><span class="s2">"Country"</span><span class="p">,</span>
+    <span class="n">sort</span><span class="o">=</span><span class="kc">False</span>
+<span class="p">)</span>
+</pre><button class="copybtn o-tooltip--left" data-tooltip="Copy" data-clipboard-target="#codecell24">
+      <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-copy" width="44" height="44" viewBox="0 0 24 24" stroke-width="1.5" stroke="#000000" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <title>Copy to clipboard</title>
+  <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
+  <rect x="8" y="8" width="12" height="12" rx="2"></rect>
+  <path d="M16 8v-2a2 2 0 0 0 -2 -2h-8a2 2 0 0 0 -2 2v8a2 2 0 0 0 2 2h2"></path>
+</svg>
+    </button></div>
+</div>
+<img alt="../_images/relational_51_0.png" src="./Visualizando relações estatísticas — documentação seaborn 0.13.2_files/relational_51_0.png" _msthidden="A" _mstalt="759226" _msthash="110">
+<p _msttexthash="3050827" _msthash="111">It’s also possible to sort (and aggregate) along the y axis:</p>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre id="codecell25"><span></span><span class="n">sns</span><span class="o">.</span><span class="n">relplot</span><span class="p">(</span>
+    <span class="n">data</span><span class="o">=</span><span class="n">fmri</span><span class="p">,</span> <span class="n">kind</span><span class="o">=</span><span class="s2">"line"</span><span class="p">,</span>
+     <span class="n">x</span><span class="o">=</span><span class="s2">"signal"</span><span class="p">,</span> <span class="n">y</span><span class="o">=</span><span class="s2">"timepoint"</span><span class="p">,</span> <span class="n">hue</span><span class="o">=</span><span class="s2">"event"</span><span class="p">,</span>
+    <span class="n">orient</span><span class="o">=</span><span class="s2">"y"</span><span class="p">,</span>
+<span class="p">)</span>
+</pre><button class="copybtn o-tooltip--left" data-tooltip="Copy" data-clipboard-target="#codecell25">
+      <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-copy" width="44" height="44" viewBox="0 0 24 24" stroke-width="1.5" stroke="#000000" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <title>Copy to clipboard</title>
+  <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
+  <rect x="8" y="8" width="12" height="12" rx="2"></rect>
+  <path d="M16 8v-2a2 2 0 0 0 -2 -2h-8a2 2 0 0 0 -2 2v8a2 2 0 0 0 2 2h2"></path>
+</svg>
+    </button></div>
+</div>
+<img alt="../_images/relational_53_0.png" src="./Visualizando relações estatísticas — documentação seaborn 0.13.2_files/relational_53_0.png" _msthidden="A" _mstalt="760006" _msthash="112">
+</section>
+</section>
+<section id="showing-multiple-relationships-with-facets">
+<h2><font _mstmutation="1" _msttexthash="1361477" _msthash="113">Showing multiple relationships with facets</font><a class="headerlink" href="https://seaborn.pydata.org/tutorial/relational.html#showing-multiple-relationships-with-facets" title="Permalink to this heading">#</a></h2>
+<p _msttexthash="48973990" _msthash="114">We’ve emphasized in this tutorial that, while these functions <em>can</em> show several semantic variables at once, it’s not always effective to do so. But what about when you do want to understand how a relationship between two variables depends on more than one other variable?</p>
+<p _msttexthash="102920961" _msthash="115">The best approach may be to make more than one plot. Because <a class="reference internal" href="https://seaborn.pydata.org/generated/seaborn.relplot.html#seaborn.relplot" title="seaborn.relplot"><code class="xref py py-func docutils literal notranslate"><span class="pre">relplot()</span></code></a> is based on the <a class="reference internal" href="https://seaborn.pydata.org/generated/seaborn.FacetGrid.html#seaborn.FacetGrid" title="seaborn.FacetGrid"><code class="xref py py-class docutils literal notranslate"><span class="pre">FacetGrid</span></code></a>, this is easy to do. To show the influence of an additional variable, instead of assigning it to one of the semantic roles in the plot, use it to “facet” the visualization. This means that you make multiple axes and plot subsets of the data on each of them:</p>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre id="codecell26"><span></span><span class="n">sns</span><span class="o">.</span><span class="n">relplot</span><span class="p">(</span>
+    <span class="n">data</span><span class="o">=</span><span class="n">tips</span><span class="p">,</span>
+    <span class="n">x</span><span class="o">=</span><span class="s2">"total_bill"</span><span class="p">,</span> <span class="n">y</span><span class="o">=</span><span class="s2">"tip"</span><span class="p">,</span> <span class="n">hue</span><span class="o">=</span><span class="s2">"smoker"</span><span class="p">,</span> <span class="n">col</span><span class="o">=</span><span class="s2">"time"</span><span class="p">,</span>
+<span class="p">)</span>
+</pre><button class="copybtn o-tooltip--left" data-tooltip="Copy" data-clipboard-target="#codecell26">
+      <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-copy" width="44" height="44" viewBox="0 0 24 24" stroke-width="1.5" stroke="#000000" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <title>Copy to clipboard</title>
+  <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
+  <rect x="8" y="8" width="12" height="12" rx="2"></rect>
+  <path d="M16 8v-2a2 2 0 0 0 -2 -2h-8a2 2 0 0 0 -2 2v8a2 2 0 0 0 2 2h2"></path>
+</svg>
+    </button></div>
+</div>
+<img alt="../_images/relational_55_0.png" src="./Visualizando relações estatísticas — documentação seaborn 0.13.2_files/relational_55_0.png" _msthidden="A" _mstalt="760786" _msthash="116">
+<p _msttexthash="45579989" _msthash="117">You can also show the influence of two variables this way: one by faceting on the columns and one by faceting on the rows. As you start adding more variables to the grid, you may want to decrease the figure size. Remember that the size <a class="reference internal" href="https://seaborn.pydata.org/generated/seaborn.FacetGrid.html#seaborn.FacetGrid" title="seaborn.FacetGrid"><code class="xref py py-class docutils literal notranslate"><span class="pre">FacetGrid</span></code></a> is parameterized by the height and aspect ratio of <em>each facet</em>:</p>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre id="codecell27"><span></span><span class="n">sns</span><span class="o">.</span><span class="n">relplot</span><span class="p">(</span>
+    <span class="n">data</span><span class="o">=</span><span class="n">fmri</span><span class="p">,</span> <span class="n">kind</span><span class="o">=</span><span class="s2">"line"</span><span class="p">,</span>
+    <span class="n">x</span><span class="o">=</span><span class="s2">"timepoint"</span><span class="p">,</span> <span class="n">y</span><span class="o">=</span><span class="s2">"signal"</span><span class="p">,</span> <span class="n">hue</span><span class="o">=</span><span class="s2">"subject"</span><span class="p">,</span>
+    <span class="n">col</span><span class="o">=</span><span class="s2">"region"</span><span class="p">,</span> <span class="n">row</span><span class="o">=</span><span class="s2">"event"</span><span class="p">,</span> <span class="n">height</span><span class="o">=</span><span class="mi">3</span><span class="p">,</span>
+    <span class="n">estimator</span><span class="o">=</span><span class="kc">None</span>
+<span class="p">)</span>
+</pre><button class="copybtn o-tooltip--left" data-tooltip="Copy" data-clipboard-target="#codecell27">
+      <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-copy" width="44" height="44" viewBox="0 0 24 24" stroke-width="1.5" stroke="#000000" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <title>Copy to clipboard</title>
+  <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
+  <rect x="8" y="8" width="12" height="12" rx="2"></rect>
+  <path d="M16 8v-2a2 2 0 0 0 -2 -2h-8a2 2 0 0 0 -2 2v8a2 2 0 0 0 2 2h2"></path>
+</svg>
+    </button></div>
+</div>
+<img alt="../_images/relational_57_0.png" src="./Visualizando relações estatísticas — documentação seaborn 0.13.2_files/relational_57_0.png" _msthidden="A" _mstalt="761566" _msthash="118">
+<p _msttexthash="38969489" _msthash="119">When you want to examine effects across many levels of a variable, it can be a good idea to facet that variable on the columns and then “wrap” the facets into the rows:</p>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre id="codecell28"><span></span><span class="n">sns</span><span class="o">.</span><span class="n">relplot</span><span class="p">(</span>
+    <span class="n">data</span><span class="o">=</span><span class="n">fmri</span><span class="o">.</span><span class="n">query</span><span class="p">(</span><span class="s2">"region == 'frontal'"</span><span class="p">),</span> <span class="n">kind</span><span class="o">=</span><span class="s2">"line"</span><span class="p">,</span>
+    <span class="n">x</span><span class="o">=</span><span class="s2">"timepoint"</span><span class="p">,</span> <span class="n">y</span><span class="o">=</span><span class="s2">"signal"</span><span class="p">,</span> <span class="n">hue</span><span class="o">=</span><span class="s2">"event"</span><span class="p">,</span> <span class="n">style</span><span class="o">=</span><span class="s2">"event"</span><span class="p">,</span>
+    <span class="n">col</span><span class="o">=</span><span class="s2">"subject"</span><span class="p">,</span> <span class="n">col_wrap</span><span class="o">=</span><span class="mi">5</span><span class="p">,</span>
+    <span class="n">height</span><span class="o">=</span><span class="mi">3</span><span class="p">,</span> <span class="n">aspect</span><span class="o">=</span><span class="mf">.75</span><span class="p">,</span> <span class="n">linewidth</span><span class="o">=</span><span class="mf">2.5</span><span class="p">,</span>
+<span class="p">)</span>
+</pre><button class="copybtn o-tooltip--left" data-tooltip="Copy" data-clipboard-target="#codecell28">
+      <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-copy" width="44" height="44" viewBox="0 0 24 24" stroke-width="1.5" stroke="#000000" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <title>Copy to clipboard</title>
+  <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
+  <rect x="8" y="8" width="12" height="12" rx="2"></rect>
+  <path d="M16 8v-2a2 2 0 0 0 -2 -2h-8a2 2 0 0 0 -2 2v8a2 2 0 0 0 2 2h2"></path>
+</svg>
+    </button></div>
+</div>
+<img alt="../_images/relational_59_0.png" src="./Visualizando relações estatísticas — documentação seaborn 0.13.2_files/relational_59_0.png" _msthidden="A" _mstalt="762346" _msthash="120">
+<p _msttexthash="123137846" _msthash="121">These visualizations, which are sometimes called “lattice” plots or “small-multiples”, are very effective because they present the data in a format that makes it easy for the eye to detect both overall patterns and deviations from those patterns. While you should make use of the flexibility afforded by <a class="reference internal" href="https://seaborn.pydata.org/generated/seaborn.scatterplot.html#seaborn.scatterplot" title="seaborn.scatterplot"><code class="xref py py-func docutils literal notranslate"><span class="pre">scatterplot()</span></code></a> and <a class="reference internal" href="https://seaborn.pydata.org/generated/seaborn.relplot.html#seaborn.relplot" title="seaborn.relplot"><code class="xref py py-func docutils literal notranslate"><span class="pre">relplot()</span></code></a>, always try to keep in mind that several simple plots are usually more effective than one complex plot.</p>
+</section>
+</section>
+
+
+          </article>
+          
+
+          
+          
+      </div>
+      
+    </div>
+  </div>
+
+  
+    
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script src="./Visualizando relações estatísticas — documentação seaborn 0.13.2_files/pydata-sphinx-theme.js.baixados"></script>
+
+<footer class="footer" style="border-top: 1px solid #ccc; padding-top: 10px">
+  <div class="container">
+    <div id="credits" style="width: 50%; float: left">
+      <p><font _mstmutation="1" _msttexthash="3639389" _msthash="122">
+      © Copyright 2012-2024, <a href="https://mwaskom.github.io/" _mstmutation="1">Michael Waskom</a>.<br _mstmutation="1">
+      Created using <a href="https://www.sphinx-doc.org/" _mstmutation="1">Sphinx</a> and the <a href="https://pydata-sphinx-theme.readthedocs.io/en/stable/" _mstmutation="1">PyData Theme</a>.</font><br>
+      </p>
+    </div>
+    <div class="dropup show" style="float: right; margin: 10px">
+        <a class="btn btn-secondary dropdown-toggle" href="https://seaborn.pydata.org/tutorial/relational.html#" role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" _msttexthash="93366" _msthash="123">
+            Archive
+        </a>
+        <div class="dropdown-menu dropdown-menu-right" aria-labelledby="dropdownMenuLink" _msthidden="4">
+          <a class="dropdown-item" href="https://seaborn.pydata.org/archive/0.12/index.html" _msttexthash="34632" _msthidden="1" _msthash="124">v0.12</a>
+          <a class="dropdown-item" href="https://seaborn.pydata.org/archive/0.11/index.html" _msttexthash="34489" _msthidden="1" _msthash="125">v0.11</a>
+          <a class="dropdown-item" href="https://seaborn.pydata.org/archive/0.10/index.html" _msttexthash="34346" _msthidden="1" _msthash="126">v0.10</a>
+          <a class="dropdown-item" href="https://seaborn.pydata.org/archive/0.9/index.html" _msttexthash="28522" _msthidden="1" _msthash="127">v0.9</a>
+        </div>
+    </div>
+    <div id="version" style="color: #999; float: right; margin: 15px" _msttexthash="50401" _msthash="128">v0.13.2</div>
+    </div>
+  
+</footer>
+  
+</body></html>

@@ -1,0 +1,1307 @@
+<!DOCTYPE html>
+<!-- saved from url=(0058)https://seaborn.pydata.org/tutorial/objects_interface.html -->
+<html lang="pt" data-mode="light" data-theme="light"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"><meta name="generator" content="Docutils 0.19: https://docutils.sourceforge.io/">
+
+    <title _msttexthash="5650697" _msthash="0">A interface seaborn.objects — documentação do seaborn 0.13.2</title>
+  <script>
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "light";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "light";
+  </script>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="./A interface seaborn.objects — documentação do seaborn 0.13.2_files/theme.css" rel="stylesheet">
+<link href="./A interface seaborn.objects — documentação do seaborn 0.13.2_files/pydata-sphinx-theme.css" rel="stylesheet">
+
+  
+  <link rel="stylesheet" href="./A interface seaborn.objects — documentação do seaborn 0.13.2_files/all.min.css">
+  <link rel="preload" as="font" type="font/woff2" crossorigin="" href="https://seaborn.pydata.org/_static/vendor/fontawesome/5.13.0/webfonts/fa-solid-900.woff2">
+  <link rel="preload" as="font" type="font/woff2" crossorigin="" href="https://seaborn.pydata.org/_static/vendor/fontawesome/5.13.0/webfonts/fa-brands-400.woff2">
+
+    <link rel="stylesheet" type="text/css" href="./A interface seaborn.objects — documentação do seaborn 0.13.2_files/pygments.css">
+    <link rel="stylesheet" type="text/css" href="./A interface seaborn.objects — documentação do seaborn 0.13.2_files/plot_directive.css">
+    <link rel="stylesheet" type="text/css" href="./A interface seaborn.objects — documentação do seaborn 0.13.2_files/copybutton.css">
+    <link rel="stylesheet" type="text/css" href="./A interface seaborn.objects — documentação do seaborn 0.13.2_files/design-style.1e8bd061cd6da7fc9cf755528e8ffc24.min.css">
+    <link rel="stylesheet" type="text/css" href="./A interface seaborn.objects — documentação do seaborn 0.13.2_files/custom.css">
+  
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="./A interface seaborn.objects — documentação do seaborn 0.13.2_files/pydata-sphinx-theme.js.baixados">
+
+    <script data-url_root="../" id="documentation_options" src="./A interface seaborn.objects — documentação do seaborn 0.13.2_files/documentation_options.js.baixados"></script>
+    <script src="./A interface seaborn.objects — documentação do seaborn 0.13.2_files/jquery.js.baixados"></script>
+    <script src="./A interface seaborn.objects — documentação do seaborn 0.13.2_files/underscore.js.baixados"></script>
+    <script src="./A interface seaborn.objects — documentação do seaborn 0.13.2_files/_sphinx_javascript_frameworks_compat.js.baixados"></script>
+    <script src="./A interface seaborn.objects — documentação do seaborn 0.13.2_files/doctools.js.baixados"></script>
+    <script src="./A interface seaborn.objects — documentação do seaborn 0.13.2_files/sphinx_highlight.js.baixados"></script>
+    <script src="./A interface seaborn.objects — documentação do seaborn 0.13.2_files/clipboard.min.js.baixados"></script>
+    <script src="./A interface seaborn.objects — documentação do seaborn 0.13.2_files/copybutton.js.baixados"></script>
+    <script src="./A interface seaborn.objects — documentação do seaborn 0.13.2_files/design-tabs.js.baixados"></script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'tutorial/objects_interface';</script>
+    <link rel="shortcut icon" href="https://seaborn.pydata.org/_static/favicon.ico">
+    <link rel="index" title="Index" href="https://seaborn.pydata.org/genindex.html">
+    <link rel="search" title="Search" href="https://seaborn.pydata.org/search.html">
+    <link rel="next" title="Properties of Mark objects" href="https://seaborn.pydata.org/tutorial/properties.html">
+    <link rel="prev" title="Data structures accepted by seaborn" href="https://seaborn.pydata.org/tutorial/data_structure.html">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="docsearch:language" content="en">
+  </head>
+  
+  
+  <body data-spy="scroll" data-target="#bd-toc-nav" data-offset="180" data-default-mode="light">
+
+  
+  <input type="checkbox" class="sidebar-toggle" name="__primary" id="__primary">
+  <label class="overlay overlay-primary" for="__primary"></label>
+
+  
+  <input type="checkbox" class="sidebar-toggle" name="__secondary" id="__secondary">
+  <label class="overlay overlay-secondary" for="__secondary"></label>
+
+  
+  <div class="search-button__wrapper" _msthidden="1">
+    <div class="search-button__overlay"></div>
+    <div class="search-button__search-container" _msthidden="1">
+      
+<form class="bd-search d-flex align-items-center" action="https://seaborn.pydata.org/search.html" method="get" _msthidden="1">
+  <i class="icon fas fa-search"></i>
+  <input type="search" class="form-control" name="q" id="search-input" placeholder="Search the docs ..." aria-label="Search the docs ..." autocomplete="off" _msthidden="A" _mstplaceholder="267410" _msthash="1" _mstaria-label="267410">
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form>
+    </div>
+  </div>
+
+  
+  <nav class="bd-header navbar navbar-expand-lg bd-navbar" id="navbar-main"><div class="bd-header__inner container-xl">
+  <label class="sidebar-toggle primary-toggle" for="__primary">
+      <span class="fas fa-bars"></span>
+  </label>
+  <div id="navbar-start">
+    
+    
+  
+
+
+<a class="navbar-brand logo" href="https://seaborn.pydata.org/index.html">
+  
+  
+  
+  
+  
+  
+    <img src="./A interface seaborn.objects — documentação do seaborn 0.13.2_files/logo-wide-lightbg.svg" class="logo__image only-light" alt="Imagem do logo" _mstalt="131794" _msthash="2">
+    <img src="./A interface seaborn.objects — documentação do seaborn 0.13.2_files/logo-wide-lightbg.svg" class="logo__image only-dark" alt="Logo image" _msthidden="A" _mstalt="131794" _msthash="3">
+  
+  
+</a>
+    
+  </div>
+
+  
+  <div class="col-lg-9 navbar-header-items">
+    <div id="navbar-center" class="mr-auto">
+      
+      <div class="navbar-center-item">
+        <ul id="navbar-main-elements" class="navbar-nav">
+    <li class="toctree-l1 nav-item">
+ <a class="reference internal nav-link" href="https://seaborn.pydata.org/installing.html" _msttexthash="203125" _msthash="4"> Instalação </a>
+</li>
+
+<li class="toctree-l1 nav-item">
+ <a class="reference internal nav-link" href="https://seaborn.pydata.org/examples/index.html" _msttexthash="91390" _msthash="5"> Galeria </a>
+</li>
+
+<li class="toctree-l1 current active nav-item">
+ <a class="reference internal nav-link" href="https://seaborn.pydata.org/tutorial.html" _msttexthash="116545" _msthash="6">
+  Tutorial
+ </a>
+</li>
+
+<li class="toctree-l1 nav-item">
+ <a class="reference internal nav-link" href="https://seaborn.pydata.org/api.html" _msttexthash="22776" _msthash="7">
+  API
+ </a>
+</li>
+
+<li class="toctree-l1 nav-item">
+ <a class="reference internal nav-link" href="https://seaborn.pydata.org/whatsnew/index.html" _msttexthash="198991" _msthash="8"> Lançamentos </a>
+</li>
+
+<li class="toctree-l1 nav-item">
+ <a class="reference internal nav-link" href="https://seaborn.pydata.org/citing.html" _msttexthash="130403" _msthash="9"> Citação </a>
+</li>
+
+<li class="toctree-l1 nav-item">
+ <a class="reference internal nav-link" href="https://seaborn.pydata.org/faq.html" _msttexthash="22607" _msthash="10">
+  FAQ
+ </a>
+</li>
+
+</ul>
+      </div>
+      
+    </div>
+
+    <div id="navbar-end">
+      <div class="navbar-end-item navbar-end__search-button-container">
+        
+<button class="btn btn-sm navbar-btn search-button search-button__button" title="Search">
+  <i class="fas fa-search"></i>
+</button>
+      </div>
+      
+      <div class="navbar-end-item">
+        <ul id="navbar-icon-links" class="navbar-nav" aria-label="Links de Ícones" _mstaria-label="131963" _msthash="11">
+        <li class="nav-item">
+          
+          
+          
+          
+          
+          
+          <a href="https://github.com/mwaskom/seaborn" title="GitHub" class="nav-link" rel="noopener" target="_blank"><span><i class="fab fa-github"></i></span>
+            <label class="sr-only" _msttexthash="72332" _msthash="12">GitHub</label></a>
+        </li>
+        <li class="nav-item">
+          
+          
+          
+          
+          
+          
+          <a href="https://stackoverflow.com/tags/seaborn" title="StackOverflow" class="nav-link" rel="noopener" target="_blank"><span><i class="fab fa-stack-overflow"></i></span>
+            <label class="sr-only" _msttexthash="232466" _msthash="13">StackOverflow</label></a>
+        </li>
+        <li class="nav-item">
+          
+          
+          
+          
+          
+          
+          <a href="https://twitter.com/michaelwaskom" title="Twitter" class="nav-link" rel="noopener" target="_blank"><span><i class="fab fa-twitter"></i></span>
+            <label class="sr-only" _msttexthash="98995" _msthash="14">Twitter</label></a>
+        </li>
+      </ul>
+      </div>
+      
+    </div>
+  </div>
+
+
+  
+  <div class="search-button-container--mobile">
+<button class="btn btn-sm navbar-btn search-button search-button__button" title="Search">
+  <i class="fas fa-search"></i>
+</button>
+  </div>
+
+  
+  <label class="sidebar-toggle secondary-toggle" for="__secondary">
+      <span class="fas fa-outdent"></span>
+  </label>
+  
+
+</div>
+  </nav>
+  
+
+  <div class="bd-container container-xl">
+    <div class="bd-container__inner row">
+      
+      <div class="bd-sidebar-primary bd-sidebar">
+        
+  
+  <div class="sidebar-header-items sidebar-primary__section" _msthidden="13">
+    <p class="sidebar-header-items__title" role="heading" aria-level="1" aria-label="Navigation" _msthidden="1" _mstaria-label="157742" _msthash="15" _msttexthash="256997">
+      Site Navigation
+    </p>
+    
+    
+      <div class="sidebar-header-items__center" _msthidden="7">
+      
+      <div class="navbar-center-item" _msthidden="7">
+        <ul id="navbar-main-elements" class="navbar-nav" _msthidden="7">
+    <li class="toctree-l1 nav-item" _msthidden="1">
+ <a class="reference internal nav-link" href="https://seaborn.pydata.org/installing.html" _msttexthash="157573" _msthidden="1" _msthash="16">
+  Installing
+ </a>
+</li>
+
+<li class="toctree-l1 nav-item" _msthidden="1">
+ <a class="reference internal nav-link" href="https://seaborn.pydata.org/examples/index.html" _msttexthash="95901" _msthidden="1" _msthash="17">
+  Gallery
+ </a>
+</li>
+
+<li class="toctree-l1 current active nav-item" _msthidden="1">
+ <a class="reference internal nav-link" href="https://seaborn.pydata.org/tutorial.html" _msttexthash="116545" _msthidden="1" _msthash="18">
+  Tutorial
+ </a>
+</li>
+
+<li class="toctree-l1 nav-item" _msthidden="1">
+ <a class="reference internal nav-link" href="https://seaborn.pydata.org/api.html" _msttexthash="22776" _msthidden="1" _msthash="19">
+  API
+ </a>
+</li>
+
+<li class="toctree-l1 nav-item" _msthidden="1">
+ <a class="reference internal nav-link" href="https://seaborn.pydata.org/whatsnew/index.html" _msttexthash="113542" _msthidden="1" _msthash="20">
+  Releases
+ </a>
+</li>
+
+<li class="toctree-l1 nav-item" _msthidden="1">
+ <a class="reference internal nav-link" href="https://seaborn.pydata.org/citing.html" _msttexthash="76037" _msthidden="1" _msthash="21">
+  Citing
+ </a>
+</li>
+
+<li class="toctree-l1 nav-item" _msthidden="1">
+ <a class="reference internal nav-link" href="https://seaborn.pydata.org/faq.html" _msttexthash="22607" _msthidden="1" _msthash="22">
+  FAQ
+ </a>
+</li>
+
+</ul>
+      </div>
+      
+      </div>
+    
+
+    
+    
+    <div class="sidebar-header-items__end" _msthidden="4">
+      
+      <div class="navbar-end-item" _msthidden="4">
+        <ul id="navbar-icon-links" class="navbar-nav" aria-label="Icon Links" _msthidden="3" _mstaria-label="131963" _msthash="23">
+        <li class="nav-item" _msthidden="1">
+          
+          
+          
+          
+          
+          
+          <a href="https://github.com/mwaskom/seaborn" title="GitHub" class="nav-link" rel="noopener" target="_blank" _msthidden="1"><span><i class="fab fa-github"></i></span>
+            <label class="sr-only" _msttexthash="72332" _msthidden="1" _msthash="24">GitHub</label></a>
+        </li>
+        <li class="nav-item" _msthidden="1">
+          
+          
+          
+          
+          
+          
+          <a href="https://stackoverflow.com/tags/seaborn" title="StackOverflow" class="nav-link" rel="noopener" target="_blank" _msthidden="1"><span><i class="fab fa-stack-overflow"></i></span>
+            <label class="sr-only" _msttexthash="232466" _msthidden="1" _msthash="25">StackOverflow</label></a>
+        </li>
+        <li class="nav-item" _msthidden="1">
+          
+          
+          
+          
+          
+          
+          <a href="https://twitter.com/michaelwaskom" title="Twitter" class="nav-link" rel="noopener" target="_blank" _msthidden="1"><span><i class="fab fa-twitter"></i></span>
+            <label class="sr-only" _msttexthash="98995" _msthidden="1" _msthash="26">Twitter</label></a>
+        </li>
+      </ul>
+      </div>
+      
+    </div>
+    
+  </div>
+
+  
+  <div class="sidebar-start-items sidebar-primary__section">
+    <div class="sidebar-start-items__item"><nav class="bd-links" id="bd-docs-nav" aria-label="Navegação por seções" _mstaria-label="353847" _msthash="27">
+  <div class="bd-toc-item navbar-nav">
+    <ul class="nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="https://seaborn.pydata.org/tutorial/introduction.html" _msttexthash="591084" _msthash="28"> Uma introdução ao seaborn </a>
+ </li>
+</ul>
+<ul class="nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="https://seaborn.pydata.org/tutorial/function_overview.html" _msttexthash="1374724" _msthash="29"> Visão geral das funções de plotagem seaborn </a>
+ </li>
+</ul>
+<ul class="nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="https://seaborn.pydata.org/tutorial/data_structure.html" _msttexthash="1162369" _msthash="30"> Estruturas de dados aceitas pelo seaborn </a>
+ </li>
+</ul>
+<ul class="current nav bd-sidenav">
+ <li class="toctree-l1 current active">
+  <a class="current reference internal" href="https://seaborn.pydata.org/tutorial/objects_interface.html#" _msttexthash="632931" _msthash="31"> A interface seaborn.objects </a>
+ </li>
+</ul>
+<ul class="nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="https://seaborn.pydata.org/tutorial/properties.html" _msttexthash="692822" _msthash="32"> Propriedades dos objetos Mark </a>
+ </li>
+</ul>
+<ul class="nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="https://seaborn.pydata.org/tutorial/relational.html" _msttexthash="1139190" _msthash="33"> Visualizando relações estatísticas </a>
+ </li>
+</ul>
+<ul class="nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="https://seaborn.pydata.org/tutorial/distributions.html" _msttexthash="1386658" _msthash="34"> Visualização das distribuições dos dados </a>
+ </li>
+</ul>
+<ul class="nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="https://seaborn.pydata.org/tutorial/categorical.html" _msttexthash="995553" _msthash="35"> Visualização de dados categóricos </a>
+ </li>
+</ul>
+<ul class="nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="https://seaborn.pydata.org/tutorial/error_bars.html" _msttexthash="1143376" _msthash="36"> Estimativa estatística e barras de erro </a>
+ </li>
+</ul>
+<ul class="nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="https://seaborn.pydata.org/tutorial/regression.html" _msttexthash="1013727" _msthash="37"> Estimativa dos ajustes de regressão </a>
+ </li>
+</ul>
+<ul class="nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="https://seaborn.pydata.org/tutorial/axis_grids.html" _msttexthash="1925560" _msthash="38"> Construindo grades estruturadas de múltiplos plots </a>
+ </li>
+</ul>
+<ul class="nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="https://seaborn.pydata.org/tutorial/aesthetics.html" _msttexthash="711880" _msthash="39"> Estética de controle da figura </a>
+ </li>
+</ul>
+<ul class="nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="https://seaborn.pydata.org/tutorial/color_palettes.html" _msttexthash="608400" _msthash="40"> Escolha das paletas de cores </a>
+ </li>
+</ul>
+
+  </div>
+</nav>
+    </div>
+  </div>
+  
+
+  
+  <div class="sidebar-end-items sidebar-primary__section">
+    <div class="sidebar-end-items__item">
+    </div>
+  </div>
+
+      </div>
+
+      
+      
+      
+        <div class="bd-sidebar-secondary bd-toc">
+          
+<div class="toc-item">
+  
+<div class="tocsection onthispage">
+    <i class="fas fa-list"></i><font _mstmutation="1" _msttexthash="199043" _msthash="41"> Nesta página </font></div>
+<nav id="bd-toc-nav" class="page-toc">
+    <ul class="visible nav section-nav flex-column">
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="https://seaborn.pydata.org/tutorial/objects_interface.html#specifying-a-plot-and-mapping-data" _msttexthash="1750567" _msthash="42"> Especificação de um gráfico e mapeamento dos dados </a>
+  <ul class="nav section-nav flex-column" _msthidden="3">
+   <li class="toc-h3 nav-item toc-entry" _msthidden="1">
+    <a class="reference internal nav-link" href="https://seaborn.pydata.org/tutorial/objects_interface.html#setting-properties" _msttexthash="360633" _msthidden="1" _msthash="43">
+     Setting properties
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry" _msthidden="1">
+    <a class="reference internal nav-link" href="https://seaborn.pydata.org/tutorial/objects_interface.html#mapping-properties" _msttexthash="358683" _msthidden="1" _msthash="44">
+     Mapping properties
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry" _msthidden="1">
+    <a class="reference internal nav-link" href="https://seaborn.pydata.org/tutorial/objects_interface.html#defining-groups" _msttexthash="264992" _msthidden="1" _msthash="45">
+     Defining groups
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="https://seaborn.pydata.org/tutorial/objects_interface.html#transforming-data-before-plotting" _msttexthash="947960" _msthash="46"> Transformando dados antes de plotar </a>
+  <ul class="nav section-nav flex-column" _msthidden="4">
+   <li class="toc-h3 nav-item toc-entry" _msthidden="1">
+    <a class="reference internal nav-link" href="https://seaborn.pydata.org/tutorial/objects_interface.html#statistical-transformation" _msttexthash="667004" _msthidden="1" _msthash="47">
+     Statistical transformation
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry" _msthidden="1">
+    <a class="reference internal nav-link" href="https://seaborn.pydata.org/tutorial/objects_interface.html#resolving-overplotting" _msttexthash="507195" _msthidden="1" _msthash="48">
+     Resolving overplotting
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry" _msthidden="1">
+    <a class="reference internal nav-link" href="https://seaborn.pydata.org/tutorial/objects_interface.html#creating-variables-through-transformation" _msttexthash="1361295" _msthidden="1" _msthash="49">
+     Creating variables through transformation
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry" _msthidden="1">
+    <a class="reference internal nav-link" href="https://seaborn.pydata.org/tutorial/objects_interface.html#orienting-marks-and-transforms" _msttexthash="759954" _msthidden="1" _msthash="50">
+     Orienting marks and transforms
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="https://seaborn.pydata.org/tutorial/objects_interface.html#building-and-displaying-the-plot" _msttexthash="926380" _msthash="51"> Construção e exibição do terreno </a>
+  <ul class="nav section-nav flex-column" _msthidden="5">
+   <li class="toc-h3 nav-item toc-entry" _msthidden="1">
+    <a class="reference internal nav-link" href="https://seaborn.pydata.org/tutorial/objects_interface.html#adding-multiple-layers" _msttexthash="461552" _msthidden="1" _msthash="52">
+     Adding multiple layers
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry" _msthidden="1">
+    <a class="reference internal nav-link" href="https://seaborn.pydata.org/tutorial/objects_interface.html#layer-specific-mappings" _msttexthash="521716" _msthidden="1" _msthash="53">
+     Layer-specific mappings
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry" _msthidden="1">
+    <a class="reference internal nav-link" href="https://seaborn.pydata.org/tutorial/objects_interface.html#faceting-and-pairing-subplots" _msttexthash="709696" _msthidden="1" _msthash="54">
+     Faceting and pairing subplots
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry" _msthidden="1">
+    <a class="reference internal nav-link" href="https://seaborn.pydata.org/tutorial/objects_interface.html#integrating-with-matplotlib" _msttexthash="664872" _msthidden="1" _msthash="55">
+     Integrating with matplotlib
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry" _msthidden="1">
+    <a class="reference internal nav-link" href="https://seaborn.pydata.org/tutorial/objects_interface.html#id1" _msttexthash="801099" _msthidden="1" _msthash="56">
+     Building and displaying the plot
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="https://seaborn.pydata.org/tutorial/objects_interface.html#customizing-the-appearance" _msttexthash="750009" _msthash="57"> Personalização da aparência </a>
+  <ul class="nav section-nav flex-column" _msthidden="4">
+   <li class="toc-h3 nav-item toc-entry" _msthidden="1">
+    <a class="reference internal nav-link" href="https://seaborn.pydata.org/tutorial/objects_interface.html#parameterizing-scales" _msttexthash="456300" _msthidden="1" _msthash="58">
+     Parameterizing scales
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry" _msthidden="1">
+    <a class="reference internal nav-link" href="https://seaborn.pydata.org/tutorial/objects_interface.html#customizing-legends-and-ticks" _msttexthash="702741" _msthidden="1" _msthash="59">
+     Customizing legends and ticks
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry" _msthidden="1">
+    <a class="reference internal nav-link" href="https://seaborn.pydata.org/tutorial/objects_interface.html#customizing-limits-labels-and-titles" _msttexthash="1071408" _msthidden="1" _msthash="60">
+     Customizing limits, labels, and titles
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry" _msthidden="1">
+    <a class="reference internal nav-link" href="https://seaborn.pydata.org/tutorial/objects_interface.html#theme-customization" _msttexthash="393965" _msthidden="1" _msthash="61">
+     Theme customization
+    </a>
+   </li>
+  </ul>
+ </li>
+</ul>
+
+</nav>
+</div>
+
+<div class="toc-item">
+  
+</div>
+
+<div class="toc-item">
+  
+</div>
+
+        </div>
+      
+      
+
+      
+      
+      <div class="bd-content col">
+          
+          <div class="bd-header-article">
+              
+          </div>
+
+          
+          
+          <article class="bd-article" role="main">
+            
+  <section id="the-seaborn-objects-interface">
+<span id="objects-tutorial"></span><h1><font _mstmutation="1" _msttexthash="632931" _msthash="62">A interface seaborn.objects</font><a class="headerlink" href="https://seaborn.pydata.org/tutorial/objects_interface.html#the-seaborn-objects-interface" title="Permalink to this heading">#</a></h1>
+<p><font _mstmutation="1" _msttexthash="109468372" _msthash="63">O namespace foi introduzido na versão 0.12 como uma interface completamente nova para criar plots seaborn. Ela oferece uma API mais consistente e flexível, compreendendo uma coleção de classes componíveis para transformar e plotar dados. Em contraste com as funções existentes, a nova interface visa suportar especificação e personalização de plots de ponta a ponta sem precisar recorrer ao matplotlib (embora isso ainda seja possível se necessário).</font><code class="docutils literal notranslate"><span class="pre">seaborn.objects</span></code><code class="docutils literal notranslate"><span class="pre">seaborn</span></code></p>
+<div class="admonition note">
+<p class="admonition-title" _msttexthash="44824" _msthash="64">Nota</p>
+<p _msttexthash="14310959" _msthash="65">A interface do objeto está atualmente experimental e incompleta. É estável o suficiente para uso sério, mas certamente há algumas arestas e recursos ausentes.</p>
+</div>
+<section id="specifying-a-plot-and-mapping-data">
+<h2><font _mstmutation="1" _msttexthash="1750567" _msthash="66">Especificação de um gráfico e mapeamento dos dados</font><a class="headerlink" href="https://seaborn.pydata.org/tutorial/objects_interface.html#specifying-a-plot-and-mapping-data" title="Permalink to this heading">#</a></h2>
+<p _msttexthash="3023618" _msthash="67">A interface dos objetos deve ser importada com a seguinte convenção:</p>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre id="codecell0"><span></span><span class="kn">import</span> <span class="nn">seaborn.objects</span> <span class="k">as</span> <span class="nn">so</span>
+</pre><button class="copybtn o-tooltip--left" data-tooltip="Copy" data-clipboard-target="#codecell0">
+      <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-copy" width="44" height="44" viewBox="0 0 24 24" stroke-width="1.5" stroke="#000000" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <title>Copy to clipboard</title>
+  <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
+  <rect x="8" y="8" width="12" height="12" rx="2"></rect>
+  <path d="M16 8v-2a2 2 0 0 0 -2 -2h-8a2 2 0 0 0 -2 2v8a2 2 0 0 0 2 2h2"></path>
+</svg>
+    </button></div>
+</div>
+<p><font _mstmutation="1" _msttexthash="17903119" _msthash="68">O namespace fornecerá acesso a todas as classes relevantes. O mais importante é <a class="reference internal" href="https://seaborn.pydata.org/generated/seaborn.objects.Plot.html#seaborn.objects.Plot" title="seaborn.objects.Plot" _mstmutation="1" _istranslated="1"><code class="xref py py-class docutils literal notranslate" _istranslated="1"></code></a>. Você especifica plots instanciando um <a class="reference internal" href="https://seaborn.pydata.org/generated/seaborn.objects.Plot.html#seaborn.objects.Plot" title="seaborn.objects.Plot" _mstmutation="1" _istranslated="1"><code class="xref py py-class docutils literal notranslate" _istranslated="1"></code></a> objeto e chamando seus métodos. Vamos ver um exemplo simples:</font><code class="docutils literal notranslate"><span class="pre">seaborn.objects</span></code></p>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre id="codecell1"><span></span><span class="p">(</span>
+    <span class="n">so</span><span class="o">.</span><span class="n">Plot</span><span class="p">(</span><span class="n">penguins</span><span class="p">,</span> <span class="n">x</span><span class="o">=</span><span class="s2">"bill_length_mm"</span><span class="p">,</span> <span class="n">y</span><span class="o">=</span><span class="s2">"bill_depth_mm"</span><span class="p">)</span>
+    <span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="n">so</span><span class="o">.</span><span class="n">Dot</span><span class="p">())</span>
+<span class="p">)</span>
+</pre><button class="copybtn o-tooltip--left" data-tooltip="Copy" data-clipboard-target="#codecell1">
+      <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-copy" width="44" height="44" viewBox="0 0 24 24" stroke-width="1.5" stroke="#000000" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <title>Copy to clipboard</title>
+  <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
+  <rect x="8" y="8" width="12" height="12" rx="2"></rect>
+  <path d="M16 8v-2a2 2 0 0 0 -2 -2h-8a2 2 0 0 0 -2 2v8a2 2 0 0 0 2 2h2"></path>
+</svg>
+    </button></div>
+</div>
+<a class="reference internal image-reference" href="./A interface seaborn.objects — documentação do seaborn 0.13.2_files/objects_interface_4_0.png"><img alt=".. /_images/objects_interface_4_0.png" src="./A interface seaborn.objects — documentação do seaborn 0.13.2_files/objects_interface_4_0.png" style="width: 509.15px; height: 378.25px;" _mstalt="1083875" _msthash="69"></a>
+<p><font _mstmutation="1" _msttexthash="75309169" _msthash="70">Esse código, que produz um gráfico de dispersão, deve parecer razoavelmente familiar. Assim como ao usar <a class="reference internal" href="https://seaborn.pydata.org/generated/seaborn.scatterplot.html#seaborn.scatterplot" title="seaborn.scatterplot" _mstmutation="1" _istranslated="1"><code class="xref py py-func docutils literal notranslate" _istranslated="1"></code></a>, passamos um dataframe limpo () e atribuímos duas de suas colunas às coordenadas e do gráfico. Mas, em vez de começar com o tipo de gráfico e depois adicionar algumas atribuições de dados, aqui começamos com as atribuições de dados e depois adicionamos um elemento gráfico.</font><code class="docutils literal notranslate"><span class="pre">penguins</span></code><code class="docutils literal notranslate"><span class="pre">x</span></code><code class="docutils literal notranslate"><span class="pre">y</span></code></p>
+<section id="setting-properties">
+<h3><font _mstmutation="1" _msttexthash="793845" _msthash="71">Propriedades de configuração</font><a class="headerlink" href="https://seaborn.pydata.org/tutorial/objects_interface.html#setting-properties" title="Permalink to this heading">#</a></h3>
+<p _msttexthash="17066660" _msthash="72">A <a class="reference internal" href="https://seaborn.pydata.org/generated/seaborn.objects.Dot.html#seaborn.objects.Dot" title="seaborn.objects.Dot" _istranslated="1"><code class="xref py py-class docutils literal notranslate" _istranslated="1"></code></a> classe é um exemplo de <a class="reference internal" href="https://seaborn.pydata.org/generated/seaborn.objects.Mark.html#seaborn.objects.Mark" title="seaborn.objects.Mark" _istranslated="1"><code class="xref py py-class docutils literal notranslate" _istranslated="1"></code></a>um : um objeto que representa graficamente os valores dos dados. Cada marca terá várias propriedades que podem ser configuradas para mudar sua aparência:</p>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre id="codecell2"><span></span><span class="p">(</span>
+    <span class="n">so</span><span class="o">.</span><span class="n">Plot</span><span class="p">(</span><span class="n">penguins</span><span class="p">,</span> <span class="n">x</span><span class="o">=</span><span class="s2">"bill_length_mm"</span><span class="p">,</span> <span class="n">y</span><span class="o">=</span><span class="s2">"bill_depth_mm"</span><span class="p">)</span>
+    <span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="n">so</span><span class="o">.</span><span class="n">Dot</span><span class="p">(</span><span class="n">color</span><span class="o">=</span><span class="s2">"g"</span><span class="p">,</span> <span class="n">pointsize</span><span class="o">=</span><span class="mi">4</span><span class="p">))</span>
+<span class="p">)</span>
+</pre><button class="copybtn o-tooltip--left" data-tooltip="Copy" data-clipboard-target="#codecell2">
+      <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-copy" width="44" height="44" viewBox="0 0 24 24" stroke-width="1.5" stroke="#000000" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <title>Copy to clipboard</title>
+  <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
+  <rect x="8" y="8" width="12" height="12" rx="2"></rect>
+  <path d="M16 8v-2a2 2 0 0 0 -2 -2h-8a2 2 0 0 0 -2 2v8a2 2 0 0 0 2 2h2"></path>
+</svg>
+    </button></div>
+</div>
+<a class="reference internal image-reference" href="./A interface seaborn.objects — documentação do seaborn 0.13.2_files/objects_interface_6_0.png"><img alt=".. /_images/objects_interface_6_0.png" src="./A interface seaborn.objects — documentação do seaborn 0.13.2_files/objects_interface_6_0.png" style="width: 509.15px; height: 378.25px;" _mstalt="1084811" _msthash="73"></a>
+</section>
+<section id="mapping-properties">
+<h3><font _mstmutation="1" _msttexthash="358683" _msthash="74">Mapping properties</font><a class="headerlink" href="https://seaborn.pydata.org/tutorial/objects_interface.html#mapping-properties" title="Permalink to this heading">#</a></h3>
+<p _msttexthash="7889284" _msthash="75">As with seaborn’s functions, it is also possible to <em>map</em> data values to various graphical properties:</p>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre id="codecell3"><span></span><span class="p">(</span>
+    <span class="n">so</span><span class="o">.</span><span class="n">Plot</span><span class="p">(</span>
+        <span class="n">penguins</span><span class="p">,</span> <span class="n">x</span><span class="o">=</span><span class="s2">"bill_length_mm"</span><span class="p">,</span> <span class="n">y</span><span class="o">=</span><span class="s2">"bill_depth_mm"</span><span class="p">,</span>
+        <span class="n">color</span><span class="o">=</span><span class="s2">"species"</span><span class="p">,</span> <span class="n">pointsize</span><span class="o">=</span><span class="s2">"body_mass_g"</span><span class="p">,</span>
+    <span class="p">)</span>
+    <span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="n">so</span><span class="o">.</span><span class="n">Dot</span><span class="p">())</span>
+<span class="p">)</span>
+</pre><button class="copybtn o-tooltip--left" data-tooltip="Copy" data-clipboard-target="#codecell3">
+      <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-copy" width="44" height="44" viewBox="0 0 24 24" stroke-width="1.5" stroke="#000000" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <title>Copy to clipboard</title>
+  <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
+  <rect x="8" y="8" width="12" height="12" rx="2"></rect>
+  <path d="M16 8v-2a2 2 0 0 0 -2 -2h-8a2 2 0 0 0 -2 2v8a2 2 0 0 0 2 2h2"></path>
+</svg>
+    </button></div>
+</div>
+<a class="reference internal image-reference" href="./A interface seaborn.objects — documentação do seaborn 0.13.2_files/objects_interface_8_0.png"><img alt="../_images/objects_interface_8_0.png" src="./A interface seaborn.objects — documentação do seaborn 0.13.2_files/objects_interface_8_0.png" style="width: 617.9499999999999px; height: 378.25px;" _mstalt="1085747" _msthash="76"></a>
+<p><font _mstmutation="1" _msttexthash="82313426" _msthash="77">While this basic functionality is not novel, an important difference from the function API is that properties are mapped using the same parameter names that would set them directly (instead of having  vs. , etc.). What matters is <em _mstmutation="1">where</em> the property is defined: passing a value when you initialize <a class="reference internal" href="https://seaborn.pydata.org/generated/seaborn.objects.Dot.html#seaborn.objects.Dot" title="seaborn.objects.Dot" _mstmutation="1"><code class="xref py py-class docutils literal notranslate"><span class="pre">Dot</span></code></a> will set it directly, whereas assigning a variable when you set up the <a class="reference internal" href="https://seaborn.pydata.org/generated/seaborn.objects.Plot.html#seaborn.objects.Plot" title="seaborn.objects.Plot" _mstmutation="1"><code class="xref py py-class docutils literal notranslate"><span class="pre">Plot</span></code></a> will <em _mstmutation="1">map</em> the corresponding data.</font><code class="docutils literal notranslate"><span class="pre">hue</span></code><code class="docutils literal notranslate"><span class="pre">color</span></code></p>
+<p _msttexthash="6627452" _msthash="78">Beyond this difference, the objects interface also allows a much wider range of mark properties to be mapped:</p>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre id="codecell4"><span></span><span class="p">(</span>
+    <span class="n">so</span><span class="o">.</span><span class="n">Plot</span><span class="p">(</span>
+        <span class="n">penguins</span><span class="p">,</span> <span class="n">x</span><span class="o">=</span><span class="s2">"bill_length_mm"</span><span class="p">,</span> <span class="n">y</span><span class="o">=</span><span class="s2">"bill_depth_mm"</span><span class="p">,</span>
+        <span class="n">edgecolor</span><span class="o">=</span><span class="s2">"sex"</span><span class="p">,</span> <span class="n">edgewidth</span><span class="o">=</span><span class="s2">"body_mass_g"</span><span class="p">,</span>
+    <span class="p">)</span>
+    <span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="n">so</span><span class="o">.</span><span class="n">Dot</span><span class="p">(</span><span class="n">color</span><span class="o">=</span><span class="s2">".8"</span><span class="p">))</span>
+<span class="p">)</span>
+</pre><button class="copybtn o-tooltip--left" data-tooltip="Copy" data-clipboard-target="#codecell4">
+      <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-copy" width="44" height="44" viewBox="0 0 24 24" stroke-width="1.5" stroke="#000000" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <title>Copy to clipboard</title>
+  <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
+  <rect x="8" y="8" width="12" height="12" rx="2"></rect>
+  <path d="M16 8v-2a2 2 0 0 0 -2 -2h-8a2 2 0 0 0 -2 2v8a2 2 0 0 0 2 2h2"></path>
+</svg>
+    </button></div>
+</div>
+<a class="reference internal image-reference" href="./A interface seaborn.objects — documentação do seaborn 0.13.2_files/objects_interface_10_0.png"><img alt="../_images/objects_interface_10_0.png" src="./A interface seaborn.objects — documentação do seaborn 0.13.2_files/objects_interface_10_0.png" style="width: 614.125px; height: 378.25px;" _mstalt="1112241" _msthash="79"></a>
+</section>
+<section id="defining-groups">
+<h3><font _mstmutation="1" _msttexthash="264992" _msthash="80">Defining groups</font><a class="headerlink" href="https://seaborn.pydata.org/tutorial/objects_interface.html#defining-groups" title="Permalink to this heading">#</a></h3>
+<p _msttexthash="52307918" _msthash="81">The <a class="reference internal" href="https://seaborn.pydata.org/generated/seaborn.objects.Dot.html#seaborn.objects.Dot" title="seaborn.objects.Dot"><code class="xref py py-class docutils literal notranslate"><span class="pre">Dot</span></code></a> mark represents each data point independently, so the assignment of a variable to a property only has the effect of changing each dot’s appearance. For marks that group or connect observations, such as <a class="reference internal" href="https://seaborn.pydata.org/generated/seaborn.objects.Line.html#seaborn.objects.Line" title="seaborn.objects.Line"><code class="xref py py-class docutils literal notranslate"><span class="pre">Line</span></code></a>, it also determines the number of distinct graphical elements:</p>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre id="codecell5"><span></span><span class="p">(</span>
+    <span class="n">so</span><span class="o">.</span><span class="n">Plot</span><span class="p">(</span><span class="n">healthexp</span><span class="p">,</span> <span class="n">x</span><span class="o">=</span><span class="s2">"Year"</span><span class="p">,</span> <span class="n">y</span><span class="o">=</span><span class="s2">"Life_Expectancy"</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s2">"Country"</span><span class="p">)</span>
+    <span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="n">so</span><span class="o">.</span><span class="n">Line</span><span class="p">())</span>
+<span class="p">)</span>
+</pre><button class="copybtn o-tooltip--left" data-tooltip="Copy" data-clipboard-target="#codecell5">
+      <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-copy" width="44" height="44" viewBox="0 0 24 24" stroke-width="1.5" stroke="#000000" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <title>Copy to clipboard</title>
+  <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
+  <rect x="8" y="8" width="12" height="12" rx="2"></rect>
+  <path d="M16 8v-2a2 2 0 0 0 -2 -2h-8a2 2 0 0 0 -2 2v8a2 2 0 0 0 2 2h2"></path>
+</svg>
+    </button></div>
+</div>
+<a class="reference internal image-reference" href="./A interface seaborn.objects — documentação do seaborn 0.13.2_files/objects_interface_12_0.png"><img alt="../_images/objects_interface_12_0.png" src="./A interface seaborn.objects — documentação do seaborn 0.13.2_files/objects_interface_12_0.png" style="width: 634.525px; height: 378.25px;" _mstalt="1113203" _msthash="82"></a>
+<p><font _mstmutation="1" _msttexthash="4664842" _msthash="83">It is also possible to define a grouping without changing any visual properties, by using :</font><code class="docutils literal notranslate"><span class="pre">group</span></code></p>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre id="codecell6"><span></span><span class="p">(</span>
+    <span class="n">so</span><span class="o">.</span><span class="n">Plot</span><span class="p">(</span><span class="n">healthexp</span><span class="p">,</span> <span class="n">x</span><span class="o">=</span><span class="s2">"Year"</span><span class="p">,</span> <span class="n">y</span><span class="o">=</span><span class="s2">"Life_Expectancy"</span><span class="p">,</span> <span class="n">group</span><span class="o">=</span><span class="s2">"Country"</span><span class="p">)</span>
+    <span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="n">so</span><span class="o">.</span><span class="n">Line</span><span class="p">())</span>
+<span class="p">)</span>
+</pre><button class="copybtn o-tooltip--left" data-tooltip="Copy" data-clipboard-target="#codecell6">
+      <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-copy" width="44" height="44" viewBox="0 0 24 24" stroke-width="1.5" stroke="#000000" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <title>Copy to clipboard</title>
+  <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
+  <rect x="8" y="8" width="12" height="12" rx="2"></rect>
+  <path d="M16 8v-2a2 2 0 0 0 -2 -2h-8a2 2 0 0 0 -2 2v8a2 2 0 0 0 2 2h2"></path>
+</svg>
+    </button></div>
+</div>
+<a class="reference internal image-reference" href="./A interface seaborn.objects — documentação do seaborn 0.13.2_files/objects_interface_14_0.png"><img alt="../_images/objects_interface_14_0.png" src="./A interface seaborn.objects — documentação do seaborn 0.13.2_files/objects_interface_14_0.png" style="width: 509.15px; height: 378.25px;" _mstalt="1114165" _msthash="84"></a>
+</section>
+</section>
+<section id="transforming-data-before-plotting">
+<h2><font _mstmutation="1" _msttexthash="897871" _msthash="85">Transforming data before plotting</font><a class="headerlink" href="https://seaborn.pydata.org/tutorial/objects_interface.html#transforming-data-before-plotting" title="Permalink to this heading">#</a></h2>
+<section id="statistical-transformation">
+<h3><font _mstmutation="1" _msttexthash="667004" _msthash="86">Statistical transformation</font><a class="headerlink" href="https://seaborn.pydata.org/tutorial/objects_interface.html#statistical-transformation" title="Permalink to this heading">#</a></h3>
+<p _msttexthash="11126635" _msthash="87">As with many seaborn functions, the objects interface supports statistical transformations. These are performed by <a class="reference internal" href="https://seaborn.pydata.org/generated/seaborn.objects.Stat.html#seaborn.objects.Stat" title="seaborn.objects.Stat"><code class="xref py py-class docutils literal notranslate"><span class="pre">Stat</span></code></a> objects, such as <a class="reference internal" href="https://seaborn.pydata.org/generated/seaborn.objects.Agg.html#seaborn.objects.Agg" title="seaborn.objects.Agg"><code class="xref py py-class docutils literal notranslate"><span class="pre">Agg</span></code></a>:</p>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre id="codecell7"><span></span><span class="p">(</span>
+    <span class="n">so</span><span class="o">.</span><span class="n">Plot</span><span class="p">(</span><span class="n">penguins</span><span class="p">,</span> <span class="n">x</span><span class="o">=</span><span class="s2">"species"</span><span class="p">,</span> <span class="n">y</span><span class="o">=</span><span class="s2">"body_mass_g"</span><span class="p">)</span>
+    <span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="n">so</span><span class="o">.</span><span class="n">Bar</span><span class="p">(),</span> <span class="n">so</span><span class="o">.</span><span class="n">Agg</span><span class="p">())</span>
+<span class="p">)</span>
+</pre><button class="copybtn o-tooltip--left" data-tooltip="Copy" data-clipboard-target="#codecell7">
+      <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-copy" width="44" height="44" viewBox="0 0 24 24" stroke-width="1.5" stroke="#000000" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <title>Copy to clipboard</title>
+  <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
+  <rect x="8" y="8" width="12" height="12" rx="2"></rect>
+  <path d="M16 8v-2a2 2 0 0 0 -2 -2h-8a2 2 0 0 0 -2 2v8a2 2 0 0 0 2 2h2"></path>
+</svg>
+    </button></div>
+</div>
+<a class="reference internal image-reference" href="./A interface seaborn.objects — documentação do seaborn 0.13.2_files/objects_interface_16_0.png"><img alt="../_images/objects_interface_16_0.png" src="./A interface seaborn.objects — documentação do seaborn 0.13.2_files/objects_interface_16_0.png" style="width: 509.15px; height: 378.25px;" _mstalt="1115127" _msthash="88"></a>
+<p _msttexthash="48299472" _msthash="89">In the function interface, statistical transformations are possible with some visual representations (e.g. <a class="reference internal" href="https://seaborn.pydata.org/generated/seaborn.barplot.html#seaborn.barplot" title="seaborn.barplot"><code class="xref py py-func docutils literal notranslate"><span class="pre">seaborn.barplot()</span></code></a>) but not others (e.g. <a class="reference internal" href="https://seaborn.pydata.org/generated/seaborn.scatterplot.html#seaborn.scatterplot" title="seaborn.scatterplot"><code class="xref py py-func docutils literal notranslate"><span class="pre">seaborn.scatterplot()</span></code></a>). The objects interface more cleanly separates representation and transformation, allowing you to compose <a class="reference internal" href="https://seaborn.pydata.org/generated/seaborn.objects.Mark.html#seaborn.objects.Mark" title="seaborn.objects.Mark"><code class="xref py py-class docutils literal notranslate"><span class="pre">Mark</span></code></a> and <a class="reference internal" href="https://seaborn.pydata.org/generated/seaborn.objects.Stat.html#seaborn.objects.Stat" title="seaborn.objects.Stat"><code class="xref py py-class docutils literal notranslate"><span class="pre">Stat</span></code></a> objects:</p>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre id="codecell8"><span></span><span class="p">(</span>
+    <span class="n">so</span><span class="o">.</span><span class="n">Plot</span><span class="p">(</span><span class="n">penguins</span><span class="p">,</span> <span class="n">x</span><span class="o">=</span><span class="s2">"species"</span><span class="p">,</span> <span class="n">y</span><span class="o">=</span><span class="s2">"body_mass_g"</span><span class="p">)</span>
+    <span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="n">so</span><span class="o">.</span><span class="n">Dot</span><span class="p">(</span><span class="n">pointsize</span><span class="o">=</span><span class="mi">10</span><span class="p">),</span> <span class="n">so</span><span class="o">.</span><span class="n">Agg</span><span class="p">())</span>
+<span class="p">)</span>
+</pre><button class="copybtn o-tooltip--left" data-tooltip="Copy" data-clipboard-target="#codecell8">
+      <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-copy" width="44" height="44" viewBox="0 0 24 24" stroke-width="1.5" stroke="#000000" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <title>Copy to clipboard</title>
+  <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
+  <rect x="8" y="8" width="12" height="12" rx="2"></rect>
+  <path d="M16 8v-2a2 2 0 0 0 -2 -2h-8a2 2 0 0 0 -2 2v8a2 2 0 0 0 2 2h2"></path>
+</svg>
+    </button></div>
+</div>
+<a class="reference internal image-reference" href="./A interface seaborn.objects — documentação do seaborn 0.13.2_files/objects_interface_18_0.png"><img alt="../_images/objects_interface_18_0.png" src="./A interface seaborn.objects — documentação do seaborn 0.13.2_files/objects_interface_18_0.png" style="width: 509.15px; height: 378.25px;" _mstalt="1116089" _msthash="90"></a>
+<p _msttexthash="6268171" _msthash="91">When forming groups by mapping properties, the <a class="reference internal" href="https://seaborn.pydata.org/generated/seaborn.objects.Stat.html#seaborn.objects.Stat" title="seaborn.objects.Stat"><code class="xref py py-class docutils literal notranslate"><span class="pre">Stat</span></code></a> transformation is applied to each group separately:</p>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre id="codecell9"><span></span><span class="p">(</span>
+    <span class="n">so</span><span class="o">.</span><span class="n">Plot</span><span class="p">(</span><span class="n">penguins</span><span class="p">,</span> <span class="n">x</span><span class="o">=</span><span class="s2">"species"</span><span class="p">,</span> <span class="n">y</span><span class="o">=</span><span class="s2">"body_mass_g"</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s2">"sex"</span><span class="p">)</span>
+    <span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="n">so</span><span class="o">.</span><span class="n">Dot</span><span class="p">(</span><span class="n">pointsize</span><span class="o">=</span><span class="mi">10</span><span class="p">),</span> <span class="n">so</span><span class="o">.</span><span class="n">Agg</span><span class="p">())</span>
+<span class="p">)</span>
+</pre><button class="copybtn o-tooltip--left" data-tooltip="Copy" data-clipboard-target="#codecell9">
+      <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-copy" width="44" height="44" viewBox="0 0 24 24" stroke-width="1.5" stroke="#000000" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <title>Copy to clipboard</title>
+  <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
+  <rect x="8" y="8" width="12" height="12" rx="2"></rect>
+  <path d="M16 8v-2a2 2 0 0 0 -2 -2h-8a2 2 0 0 0 -2 2v8a2 2 0 0 0 2 2h2"></path>
+</svg>
+    </button></div>
+</div>
+<a class="reference internal image-reference" href="./A interface seaborn.objects — documentação do seaborn 0.13.2_files/objects_interface_20_0.png"><img alt="../_images/objects_interface_20_0.png" src="./A interface seaborn.objects — documentação do seaborn 0.13.2_files/objects_interface_20_0.png" style="width: 606.05px; height: 378.25px;" _mstalt="1112709" _msthash="92"></a>
+</section>
+<section id="resolving-overplotting">
+<h3><font _mstmutation="1" _msttexthash="507195" _msthash="93">Resolving overplotting</font><a class="headerlink" href="https://seaborn.pydata.org/tutorial/objects_interface.html#resolving-overplotting" title="Permalink to this heading">#</a></h3>
+<p><font _mstmutation="1" _msttexthash="59513129" _msthash="94">Some seaborn functions also have mechanisms that automatically resolve overplotting, as when <a class="reference internal" href="https://seaborn.pydata.org/generated/seaborn.barplot.html#seaborn.barplot" title="seaborn.barplot" _mstmutation="1"><code class="xref py py-func docutils literal notranslate"><span class="pre">seaborn.barplot()</span></code></a> “dodges” bars once  is assigned. The objects interface has less complex default behavior. Bars representing multiple groups will overlap by default:</font><code class="docutils literal notranslate"><span class="pre">hue</span></code></p>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre id="codecell10"><span></span><span class="p">(</span>
+    <span class="n">so</span><span class="o">.</span><span class="n">Plot</span><span class="p">(</span><span class="n">penguins</span><span class="p">,</span> <span class="n">x</span><span class="o">=</span><span class="s2">"species"</span><span class="p">,</span> <span class="n">y</span><span class="o">=</span><span class="s2">"body_mass_g"</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s2">"sex"</span><span class="p">)</span>
+    <span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="n">so</span><span class="o">.</span><span class="n">Bar</span><span class="p">(),</span> <span class="n">so</span><span class="o">.</span><span class="n">Agg</span><span class="p">())</span>
+<span class="p">)</span>
+</pre><button class="copybtn o-tooltip--left" data-tooltip="Copy" data-clipboard-target="#codecell10">
+      <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-copy" width="44" height="44" viewBox="0 0 24 24" stroke-width="1.5" stroke="#000000" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <title>Copy to clipboard</title>
+  <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
+  <rect x="8" y="8" width="12" height="12" rx="2"></rect>
+  <path d="M16 8v-2a2 2 0 0 0 -2 -2h-8a2 2 0 0 0 -2 2v8a2 2 0 0 0 2 2h2"></path>
+</svg>
+    </button></div>
+</div>
+<a class="reference internal image-reference" href="./A interface seaborn.objects — documentação do seaborn 0.13.2_files/objects_interface_22_0.png"><img alt="../_images/objects_interface_22_0.png" src="./A interface seaborn.objects — documentação do seaborn 0.13.2_files/objects_interface_22_0.png" style="width: 606.05px; height: 378.25px;" _mstalt="1113671" _msthash="95"></a>
+<p _msttexthash="7910760" _msthash="96">Nevertheless, it is possible to compose the <a class="reference internal" href="https://seaborn.pydata.org/generated/seaborn.objects.Bar.html#seaborn.objects.Bar" title="seaborn.objects.Bar"><code class="xref py py-class docutils literal notranslate"><span class="pre">Bar</span></code></a> mark with the <a class="reference internal" href="https://seaborn.pydata.org/generated/seaborn.objects.Agg.html#seaborn.objects.Agg" title="seaborn.objects.Agg"><code class="xref py py-class docutils literal notranslate"><span class="pre">Agg</span></code></a> stat and a second transformation, implemented by <a class="reference internal" href="https://seaborn.pydata.org/generated/seaborn.objects.Dodge.html#seaborn.objects.Dodge" title="seaborn.objects.Dodge"><code class="xref py py-class docutils literal notranslate"><span class="pre">Dodge</span></code></a>:</p>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre id="codecell11"><span></span><span class="p">(</span>
+    <span class="n">so</span><span class="o">.</span><span class="n">Plot</span><span class="p">(</span><span class="n">penguins</span><span class="p">,</span> <span class="n">x</span><span class="o">=</span><span class="s2">"species"</span><span class="p">,</span> <span class="n">y</span><span class="o">=</span><span class="s2">"body_mass_g"</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s2">"sex"</span><span class="p">)</span>
+    <span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="n">so</span><span class="o">.</span><span class="n">Bar</span><span class="p">(),</span> <span class="n">so</span><span class="o">.</span><span class="n">Agg</span><span class="p">(),</span> <span class="n">so</span><span class="o">.</span><span class="n">Dodge</span><span class="p">())</span>
+<span class="p">)</span>
+</pre><button class="copybtn o-tooltip--left" data-tooltip="Copy" data-clipboard-target="#codecell11">
+      <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-copy" width="44" height="44" viewBox="0 0 24 24" stroke-width="1.5" stroke="#000000" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <title>Copy to clipboard</title>
+  <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
+  <rect x="8" y="8" width="12" height="12" rx="2"></rect>
+  <path d="M16 8v-2a2 2 0 0 0 -2 -2h-8a2 2 0 0 0 -2 2v8a2 2 0 0 0 2 2h2"></path>
+</svg>
+    </button></div>
+</div>
+<a class="reference internal image-reference" href="./A interface seaborn.objects — documentação do seaborn 0.13.2_files/objects_interface_24_0.png"><img alt="../_images/objects_interface_24_0.png" src="./A interface seaborn.objects — documentação do seaborn 0.13.2_files/objects_interface_24_0.png" style="width: 606.05px; height: 378.25px;" _mstalt="1114633" _msthash="97"></a>
+<p><font _mstmutation="1" _msttexthash="34709259" _msthash="98">The <a class="reference internal" href="https://seaborn.pydata.org/generated/seaborn.objects.Dodge.html#seaborn.objects.Dodge" title="seaborn.objects.Dodge" _mstmutation="1"><code class="xref py py-class docutils literal notranslate"><span class="pre">Dodge</span></code></a> class is an example of a <a class="reference internal" href="https://seaborn.pydata.org/generated/seaborn.objects.Move.html#seaborn.objects.Move" title="seaborn.objects.Move" _mstmutation="1"><code class="xref py py-class docutils literal notranslate"><span class="pre">Move</span></code></a> transformation, which is like a <a class="reference internal" href="https://seaborn.pydata.org/generated/seaborn.objects.Stat.html#seaborn.objects.Stat" title="seaborn.objects.Stat" _mstmutation="1"><code class="xref py py-class docutils literal notranslate"><span class="pre">Stat</span></code></a> but only adjusts  and  coordinates. The <a class="reference internal" href="https://seaborn.pydata.org/generated/seaborn.objects.Move.html#seaborn.objects.Move" title="seaborn.objects.Move" _mstmutation="1"><code class="xref py py-class docutils literal notranslate"><span class="pre">Move</span></code></a> classes can be applied with any mark, and it’s not necessary to use a <a class="reference internal" href="https://seaborn.pydata.org/generated/seaborn.objects.Stat.html#seaborn.objects.Stat" title="seaborn.objects.Stat" _mstmutation="1"><code class="xref py py-class docutils literal notranslate"><span class="pre">Stat</span></code></a> first:</font><code class="docutils literal notranslate"><span class="pre">x</span></code><code class="docutils literal notranslate"><span class="pre">y</span></code></p>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre id="codecell12"><span></span><span class="p">(</span>
+    <span class="n">so</span><span class="o">.</span><span class="n">Plot</span><span class="p">(</span><span class="n">penguins</span><span class="p">,</span> <span class="n">x</span><span class="o">=</span><span class="s2">"species"</span><span class="p">,</span> <span class="n">y</span><span class="o">=</span><span class="s2">"body_mass_g"</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s2">"sex"</span><span class="p">)</span>
+    <span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="n">so</span><span class="o">.</span><span class="n">Dot</span><span class="p">(),</span> <span class="n">so</span><span class="o">.</span><span class="n">Dodge</span><span class="p">())</span>
+<span class="p">)</span>
+</pre><button class="copybtn o-tooltip--left" data-tooltip="Copy" data-clipboard-target="#codecell12">
+      <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-copy" width="44" height="44" viewBox="0 0 24 24" stroke-width="1.5" stroke="#000000" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <title>Copy to clipboard</title>
+  <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
+  <rect x="8" y="8" width="12" height="12" rx="2"></rect>
+  <path d="M16 8v-2a2 2 0 0 0 -2 -2h-8a2 2 0 0 0 -2 2v8a2 2 0 0 0 2 2h2"></path>
+</svg>
+    </button></div>
+</div>
+<a class="reference internal image-reference" href="./A interface seaborn.objects — documentação do seaborn 0.13.2_files/objects_interface_26_0.png"><img alt="../_images/objects_interface_26_0.png" src="./A interface seaborn.objects — documentação do seaborn 0.13.2_files/objects_interface_26_0.png" style="width: 606.05px; height: 378.25px;" _mstalt="1115595" _msthash="99"></a>
+<p _msttexthash="3619525" _msthash="100">It’s also possible to apply multiple <a class="reference internal" href="https://seaborn.pydata.org/generated/seaborn.objects.Move.html#seaborn.objects.Move" title="seaborn.objects.Move"><code class="xref py py-class docutils literal notranslate"><span class="pre">Move</span></code></a> operations in sequence:</p>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre id="codecell13"><span></span><span class="p">(</span>
+    <span class="n">so</span><span class="o">.</span><span class="n">Plot</span><span class="p">(</span><span class="n">penguins</span><span class="p">,</span> <span class="n">x</span><span class="o">=</span><span class="s2">"species"</span><span class="p">,</span> <span class="n">y</span><span class="o">=</span><span class="s2">"body_mass_g"</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s2">"sex"</span><span class="p">)</span>
+    <span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="n">so</span><span class="o">.</span><span class="n">Dot</span><span class="p">(),</span> <span class="n">so</span><span class="o">.</span><span class="n">Dodge</span><span class="p">(),</span> <span class="n">so</span><span class="o">.</span><span class="n">Jitter</span><span class="p">(</span><span class="mf">.3</span><span class="p">))</span>
+<span class="p">)</span>
+</pre><button class="copybtn o-tooltip--left" data-tooltip="Copy" data-clipboard-target="#codecell13">
+      <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-copy" width="44" height="44" viewBox="0 0 24 24" stroke-width="1.5" stroke="#000000" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <title>Copy to clipboard</title>
+  <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
+  <rect x="8" y="8" width="12" height="12" rx="2"></rect>
+  <path d="M16 8v-2a2 2 0 0 0 -2 -2h-8a2 2 0 0 0 -2 2v8a2 2 0 0 0 2 2h2"></path>
+</svg>
+    </button></div>
+</div>
+<a class="reference internal image-reference" href="./A interface seaborn.objects — documentação do seaborn 0.13.2_files/objects_interface_28_0.png"><img alt="../_images/objects_interface_28_0.png" src="./A interface seaborn.objects — documentação do seaborn 0.13.2_files/objects_interface_28_0.png" style="width: 606.05px; height: 378.25px;" _mstalt="1116557" _msthash="101"></a>
+</section>
+<section id="creating-variables-through-transformation">
+<h3><font _mstmutation="1" _msttexthash="1361295" _msthash="102">Creating variables through transformation</font><a class="headerlink" href="https://seaborn.pydata.org/tutorial/objects_interface.html#creating-variables-through-transformation" title="Permalink to this heading">#</a></h3>
+<p><font _mstmutation="1" _msttexthash="30411147" _msthash="103">The <a class="reference internal" href="https://seaborn.pydata.org/generated/seaborn.objects.Agg.html#seaborn.objects.Agg" title="seaborn.objects.Agg" _mstmutation="1"><code class="xref py py-class docutils literal notranslate"><span class="pre">Agg</span></code></a> stat requires both  and  to already be defined, but variables can also be <em _mstmutation="1">created</em> through statistical transformation. For example, the <a class="reference internal" href="https://seaborn.pydata.org/generated/seaborn.objects.Hist.html#seaborn.objects.Hist" title="seaborn.objects.Hist" _mstmutation="1"><code class="xref py py-class docutils literal notranslate"><span class="pre">Hist</span></code></a> stat requires only one of  <em _mstmutation="1">or</em>  to be defined, and it will create the other by counting observations:</font><code class="docutils literal notranslate"><span class="pre">x</span></code><code class="docutils literal notranslate"><span class="pre">y</span></code><code class="docutils literal notranslate"><span class="pre">x</span></code><code class="docutils literal notranslate"><span class="pre">y</span></code></p>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre id="codecell14"><span></span><span class="p">(</span>
+    <span class="n">so</span><span class="o">.</span><span class="n">Plot</span><span class="p">(</span><span class="n">penguins</span><span class="p">,</span> <span class="n">x</span><span class="o">=</span><span class="s2">"species"</span><span class="p">)</span>
+    <span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="n">so</span><span class="o">.</span><span class="n">Bar</span><span class="p">(),</span> <span class="n">so</span><span class="o">.</span><span class="n">Hist</span><span class="p">())</span>
+<span class="p">)</span>
+</pre><button class="copybtn o-tooltip--left" data-tooltip="Copy" data-clipboard-target="#codecell14">
+      <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-copy" width="44" height="44" viewBox="0 0 24 24" stroke-width="1.5" stroke="#000000" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <title>Copy to clipboard</title>
+  <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
+  <rect x="8" y="8" width="12" height="12" rx="2"></rect>
+  <path d="M16 8v-2a2 2 0 0 0 -2 -2h-8a2 2 0 0 0 -2 2v8a2 2 0 0 0 2 2h2"></path>
+</svg>
+    </button></div>
+</div>
+<a class="reference internal image-reference" href="./A interface seaborn.objects — documentação do seaborn 0.13.2_files/objects_interface_30_0.png"><img alt="../_images/objects_interface_30_0.png" src="./A interface seaborn.objects — documentação do seaborn 0.13.2_files/objects_interface_30_0.png" style="width: 509.15px; height: 378.25px;" _mstalt="1113177" _msthash="104"></a>
+<p><font _mstmutation="1" _msttexthash="3500783" _msthash="105">The <a class="reference internal" href="https://seaborn.pydata.org/generated/seaborn.objects.Hist.html#seaborn.objects.Hist" title="seaborn.objects.Hist" _mstmutation="1"><code class="xref py py-class docutils literal notranslate"><span class="pre">Hist</span></code></a> stat will also create new  values (by binning) when given numeric data:</font><code class="docutils literal notranslate"><span class="pre">x</span></code></p>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre id="codecell15"><span></span><span class="p">(</span>
+    <span class="n">so</span><span class="o">.</span><span class="n">Plot</span><span class="p">(</span><span class="n">penguins</span><span class="p">,</span> <span class="n">x</span><span class="o">=</span><span class="s2">"flipper_length_mm"</span><span class="p">)</span>
+    <span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="n">so</span><span class="o">.</span><span class="n">Bars</span><span class="p">(),</span> <span class="n">so</span><span class="o">.</span><span class="n">Hist</span><span class="p">())</span>
+<span class="p">)</span>
+</pre><button class="copybtn o-tooltip--left" data-tooltip="Copy" data-clipboard-target="#codecell15">
+      <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-copy" width="44" height="44" viewBox="0 0 24 24" stroke-width="1.5" stroke="#000000" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <title>Copy to clipboard</title>
+  <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
+  <rect x="8" y="8" width="12" height="12" rx="2"></rect>
+  <path d="M16 8v-2a2 2 0 0 0 -2 -2h-8a2 2 0 0 0 -2 2v8a2 2 0 0 0 2 2h2"></path>
+</svg>
+    </button></div>
+</div>
+<a class="reference internal image-reference" href="./A interface seaborn.objects — documentação do seaborn 0.13.2_files/objects_interface_32_0.png"><img alt="../_images/objects_interface_32_0.png" src="./A interface seaborn.objects — documentação do seaborn 0.13.2_files/objects_interface_32_0.png" style="width: 509.15px; height: 378.25px;" _mstalt="1114139" _msthash="106"></a>
+<p><font _mstmutation="1" _msttexthash="78513864" _msthash="107">Notice how we used <a class="reference internal" href="https://seaborn.pydata.org/generated/seaborn.objects.Bars.html#seaborn.objects.Bars" title="seaborn.objects.Bars" _mstmutation="1"><code class="xref py py-class docutils literal notranslate"><span class="pre">Bars</span></code></a>, rather than <a class="reference internal" href="https://seaborn.pydata.org/generated/seaborn.objects.Bar.html#seaborn.objects.Bar" title="seaborn.objects.Bar" _mstmutation="1"><code class="xref py py-class docutils literal notranslate"><span class="pre">Bar</span></code></a> for the plot with the continuous  axis. These two marks are related, but <a class="reference internal" href="https://seaborn.pydata.org/generated/seaborn.objects.Bars.html#seaborn.objects.Bars" title="seaborn.objects.Bars" _mstmutation="1"><code class="xref py py-class docutils literal notranslate"><span class="pre">Bars</span></code></a> has different defaults and works better for continuous histograms. It also produces a different, more efficient matplotlib artist. You will find the pattern of singular/plural marks elsewhere. The plural version is typically optimized for cases with larger numbers of marks.</font><code class="docutils literal notranslate"><span class="pre">x</span></code></p>
+<p><font _mstmutation="1" _msttexthash="12200617" _msthash="108">Some transforms accept both  and , but add <em _mstmutation="1">interval</em> data for each coordinate. This is particularly relevant for plotting error bars after aggregating:</font><code class="docutils literal notranslate"><span class="pre">x</span></code><code class="docutils literal notranslate"><span class="pre">y</span></code></p>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre id="codecell16"><span></span><span class="p">(</span>
+    <span class="n">so</span><span class="o">.</span><span class="n">Plot</span><span class="p">(</span><span class="n">penguins</span><span class="p">,</span> <span class="n">x</span><span class="o">=</span><span class="s2">"body_mass_g"</span><span class="p">,</span> <span class="n">y</span><span class="o">=</span><span class="s2">"species"</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s2">"sex"</span><span class="p">)</span>
+    <span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="n">so</span><span class="o">.</span><span class="n">Range</span><span class="p">(),</span> <span class="n">so</span><span class="o">.</span><span class="n">Est</span><span class="p">(</span><span class="n">errorbar</span><span class="o">=</span><span class="s2">"sd"</span><span class="p">),</span> <span class="n">so</span><span class="o">.</span><span class="n">Dodge</span><span class="p">())</span>
+    <span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="n">so</span><span class="o">.</span><span class="n">Dot</span><span class="p">(),</span> <span class="n">so</span><span class="o">.</span><span class="n">Agg</span><span class="p">(),</span> <span class="n">so</span><span class="o">.</span><span class="n">Dodge</span><span class="p">())</span>
+<span class="p">)</span>
+</pre><button class="copybtn o-tooltip--left" data-tooltip="Copy" data-clipboard-target="#codecell16">
+      <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-copy" width="44" height="44" viewBox="0 0 24 24" stroke-width="1.5" stroke="#000000" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <title>Copy to clipboard</title>
+  <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
+  <rect x="8" y="8" width="12" height="12" rx="2"></rect>
+  <path d="M16 8v-2a2 2 0 0 0 -2 -2h-8a2 2 0 0 0 -2 2v8a2 2 0 0 0 2 2h2"></path>
+</svg>
+    </button></div>
+</div>
+<a class="reference internal image-reference" href="./A interface seaborn.objects — documentação do seaborn 0.13.2_files/objects_interface_34_0.png"><img alt="../_images/objects_interface_34_0.png" src="./A interface seaborn.objects — documentação do seaborn 0.13.2_files/objects_interface_34_0.png" style="width: 606.05px; height: 378.25px;" _mstalt="1115101" _msthash="109"></a>
+</section>
+<section id="orienting-marks-and-transforms">
+<h3><font _mstmutation="1" _msttexthash="759954" _msthash="110">Orienting marks and transforms</font><a class="headerlink" href="https://seaborn.pydata.org/tutorial/objects_interface.html#orienting-marks-and-transforms" title="Permalink to this heading">#</a></h3>
+<p><font _mstmutation="1" _msttexthash="84300580" _msthash="111">When aggregating, dodging, and drawing a bar, the  and  variables are treated differently. Each operation has the concept of an <em _mstmutation="1">orientation</em>. The <a class="reference internal" href="https://seaborn.pydata.org/generated/seaborn.objects.Plot.html#seaborn.objects.Plot" title="seaborn.objects.Plot" _mstmutation="1"><code class="xref py py-class docutils literal notranslate"><span class="pre">Plot</span></code></a> tries to determine the orientation automatically based on the data types of the variables. For instance, if we flip the assignment of  and , we’ll get the same plot, but oriented horizontally:</font><code class="docutils literal notranslate"><span class="pre">x</span></code><code class="docutils literal notranslate"><span class="pre">y</span></code><code class="docutils literal notranslate"><span class="pre">species</span></code><code class="docutils literal notranslate"><span class="pre">body_mass_g</span></code></p>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre id="codecell17"><span></span><span class="p">(</span>
+    <span class="n">so</span><span class="o">.</span><span class="n">Plot</span><span class="p">(</span><span class="n">penguins</span><span class="p">,</span> <span class="n">x</span><span class="o">=</span><span class="s2">"body_mass_g"</span><span class="p">,</span> <span class="n">y</span><span class="o">=</span><span class="s2">"species"</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s2">"sex"</span><span class="p">)</span>
+    <span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="n">so</span><span class="o">.</span><span class="n">Bar</span><span class="p">(),</span> <span class="n">so</span><span class="o">.</span><span class="n">Agg</span><span class="p">(),</span> <span class="n">so</span><span class="o">.</span><span class="n">Dodge</span><span class="p">())</span>
+<span class="p">)</span>
+</pre><button class="copybtn o-tooltip--left" data-tooltip="Copy" data-clipboard-target="#codecell17">
+      <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-copy" width="44" height="44" viewBox="0 0 24 24" stroke-width="1.5" stroke="#000000" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <title>Copy to clipboard</title>
+  <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
+  <rect x="8" y="8" width="12" height="12" rx="2"></rect>
+  <path d="M16 8v-2a2 2 0 0 0 -2 -2h-8a2 2 0 0 0 -2 2v8a2 2 0 0 0 2 2h2"></path>
+</svg>
+    </button></div>
+</div>
+<a class="reference internal image-reference" href="./A interface seaborn.objects — documentação do seaborn 0.13.2_files/objects_interface_36_0.png"><img alt="../_images/objects_interface_36_0.png" src="./A interface seaborn.objects — documentação do seaborn 0.13.2_files/objects_interface_36_0.png" style="width: 606.05px; height: 378.25px;" _mstalt="1116063" _msthash="112"></a>
+<p><font _mstmutation="1" _msttexthash="14585272" _msthash="113">Sometimes, the correct orientation is ambiguous, as when both the  and  variables are numeric. In these cases, you can be explicit by passing the  parameter to <a class="reference internal" href="https://seaborn.pydata.org/generated/seaborn.objects.Plot.add.html#seaborn.objects.Plot.add" title="seaborn.objects.Plot.add" _mstmutation="1"><code class="xref py py-meth docutils literal notranslate"><span class="pre">Plot.add()</span></code></a>:</font><code class="docutils literal notranslate"><span class="pre">x</span></code><code class="docutils literal notranslate"><span class="pre">y</span></code><code class="docutils literal notranslate"><span class="pre">orient</span></code></p>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre id="codecell18"><span></span><span class="p">(</span>
+    <span class="n">so</span><span class="o">.</span><span class="n">Plot</span><span class="p">(</span><span class="n">tips</span><span class="p">,</span> <span class="n">x</span><span class="o">=</span><span class="s2">"total_bill"</span><span class="p">,</span> <span class="n">y</span><span class="o">=</span><span class="s2">"size"</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s2">"time"</span><span class="p">)</span>
+    <span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="n">so</span><span class="o">.</span><span class="n">Bar</span><span class="p">(),</span> <span class="n">so</span><span class="o">.</span><span class="n">Agg</span><span class="p">(),</span> <span class="n">so</span><span class="o">.</span><span class="n">Dodge</span><span class="p">(),</span> <span class="n">orient</span><span class="o">=</span><span class="s2">"y"</span><span class="p">)</span>
+<span class="p">)</span>
+</pre><button class="copybtn o-tooltip--left" data-tooltip="Copy" data-clipboard-target="#codecell18">
+      <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-copy" width="44" height="44" viewBox="0 0 24 24" stroke-width="1.5" stroke="#000000" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <title>Copy to clipboard</title>
+  <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
+  <rect x="8" y="8" width="12" height="12" rx="2"></rect>
+  <path d="M16 8v-2a2 2 0 0 0 -2 -2h-8a2 2 0 0 0 -2 2v8a2 2 0 0 0 2 2h2"></path>
+</svg>
+    </button></div>
+</div>
+<a class="reference internal image-reference" href="./A interface seaborn.objects — documentação do seaborn 0.13.2_files/objects_interface_38_0.png"><img alt="../_images/objects_interface_38_0.png" src="./A interface seaborn.objects — documentação do seaborn 0.13.2_files/objects_interface_38_0.png" style="width: 600.9499999999999px; height: 378.25px;" _mstalt="1117025" _msthash="114"></a>
+</section>
+</section>
+<section id="building-and-displaying-the-plot">
+<h2><font _mstmutation="1" _msttexthash="801099" _msthash="115">Building and displaying the plot</font><a class="headerlink" href="https://seaborn.pydata.org/tutorial/objects_interface.html#building-and-displaying-the-plot" title="Permalink to this heading">#</a></h2>
+<p _msttexthash="7822919" _msthash="116">Most examples this far have produced a single subplot with just one kind of mark on it. But <a class="reference internal" href="https://seaborn.pydata.org/generated/seaborn.objects.Plot.html#seaborn.objects.Plot" title="seaborn.objects.Plot"><code class="xref py py-class docutils literal notranslate"><span class="pre">Plot</span></code></a> does not limit you to this.</p>
+<section id="adding-multiple-layers">
+<h3><font _mstmutation="1" _msttexthash="461552" _msthash="117">Adding multiple layers</font><a class="headerlink" href="https://seaborn.pydata.org/tutorial/objects_interface.html#adding-multiple-layers" title="Permalink to this heading">#</a></h3>
+<p _msttexthash="26338390" _msthash="118">More complex single-subplot graphics can be created by calling <a class="reference internal" href="https://seaborn.pydata.org/generated/seaborn.objects.Plot.add.html#seaborn.objects.Plot.add" title="seaborn.objects.Plot.add"><code class="xref py py-meth docutils literal notranslate"><span class="pre">Plot.add()</span></code></a> repeatedly. Each time it is called, it defines a <em>layer</em> in the plot. For example, we may want to add a scatterplot (now using <a class="reference internal" href="https://seaborn.pydata.org/generated/seaborn.objects.Dots.html#seaborn.objects.Dots" title="seaborn.objects.Dots"><code class="xref py py-class docutils literal notranslate"><span class="pre">Dots</span></code></a>) and then a regression fit:</p>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre id="codecell19"><span></span><span class="p">(</span>
+    <span class="n">so</span><span class="o">.</span><span class="n">Plot</span><span class="p">(</span><span class="n">tips</span><span class="p">,</span> <span class="n">x</span><span class="o">=</span><span class="s2">"total_bill"</span><span class="p">,</span> <span class="n">y</span><span class="o">=</span><span class="s2">"tip"</span><span class="p">)</span>
+    <span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="n">so</span><span class="o">.</span><span class="n">Dots</span><span class="p">())</span>
+    <span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="n">so</span><span class="o">.</span><span class="n">Line</span><span class="p">(),</span> <span class="n">so</span><span class="o">.</span><span class="n">PolyFit</span><span class="p">())</span>
+<span class="p">)</span>
+</pre><button class="copybtn o-tooltip--left" data-tooltip="Copy" data-clipboard-target="#codecell19">
+      <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-copy" width="44" height="44" viewBox="0 0 24 24" stroke-width="1.5" stroke="#000000" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <title>Copy to clipboard</title>
+  <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
+  <rect x="8" y="8" width="12" height="12" rx="2"></rect>
+  <path d="M16 8v-2a2 2 0 0 0 -2 -2h-8a2 2 0 0 0 -2 2v8a2 2 0 0 0 2 2h2"></path>
+</svg>
+    </button></div>
+</div>
+<a class="reference internal image-reference" href="./A interface seaborn.objects — documentação do seaborn 0.13.2_files/objects_interface_40_0.png"><img alt="../_images/objects_interface_40_0.png" src="./A interface seaborn.objects — documentação do seaborn 0.13.2_files/objects_interface_40_0.png" style="width: 509.15px; height: 378.25px;" _mstalt="1113645" _msthash="119"></a>
+<p _msttexthash="4334954" _msthash="120">Variable mappings that are defined in the <a class="reference internal" href="https://seaborn.pydata.org/generated/seaborn.objects.Plot.html#seaborn.objects.Plot" title="seaborn.objects.Plot"><code class="xref py py-class docutils literal notranslate"><span class="pre">Plot</span></code></a> constructor will be used for all layers:</p>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre id="codecell20"><span></span><span class="p">(</span>
+    <span class="n">so</span><span class="o">.</span><span class="n">Plot</span><span class="p">(</span><span class="n">tips</span><span class="p">,</span> <span class="n">x</span><span class="o">=</span><span class="s2">"total_bill"</span><span class="p">,</span> <span class="n">y</span><span class="o">=</span><span class="s2">"tip"</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s2">"time"</span><span class="p">)</span>
+    <span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="n">so</span><span class="o">.</span><span class="n">Dots</span><span class="p">())</span>
+    <span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="n">so</span><span class="o">.</span><span class="n">Line</span><span class="p">(),</span> <span class="n">so</span><span class="o">.</span><span class="n">PolyFit</span><span class="p">())</span>
+<span class="p">)</span>
+</pre><button class="copybtn o-tooltip--left" data-tooltip="Copy" data-clipboard-target="#codecell20">
+      <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-copy" width="44" height="44" viewBox="0 0 24 24" stroke-width="1.5" stroke="#000000" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <title>Copy to clipboard</title>
+  <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
+  <rect x="8" y="8" width="12" height="12" rx="2"></rect>
+  <path d="M16 8v-2a2 2 0 0 0 -2 -2h-8a2 2 0 0 0 -2 2v8a2 2 0 0 0 2 2h2"></path>
+</svg>
+    </button></div>
+</div>
+<a class="reference internal image-reference" href="./A interface seaborn.objects — documentação do seaborn 0.13.2_files/objects_interface_42_0.png"><img alt="../_images/objects_interface_42_0.png" src="./A interface seaborn.objects — documentação do seaborn 0.13.2_files/objects_interface_42_0.png" style="width: 600.9499999999999px; height: 378.25px;" _mstalt="1114607" _msthash="121"></a>
+</section>
+<section id="layer-specific-mappings">
+<h3><font _mstmutation="1" _msttexthash="521716" _msthash="122">Layer-specific mappings</font><a class="headerlink" href="https://seaborn.pydata.org/tutorial/objects_interface.html#layer-specific-mappings" title="Permalink to this heading">#</a></h3>
+<p _msttexthash="15007590" _msthash="123">You can also define a mapping such that it is used only in a specific layer. This is accomplished by defining the mapping within the call to <a class="reference internal" href="https://seaborn.pydata.org/generated/seaborn.objects.Plot.add.html#seaborn.objects.Plot.add" title="seaborn.objects.Plot.add"><code class="xref py py-class docutils literal notranslate"><span class="pre">Plot.add</span></code></a> for the relevant layer:</p>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre id="codecell21"><span></span><span class="p">(</span>
+    <span class="n">so</span><span class="o">.</span><span class="n">Plot</span><span class="p">(</span><span class="n">tips</span><span class="p">,</span> <span class="n">x</span><span class="o">=</span><span class="s2">"total_bill"</span><span class="p">,</span> <span class="n">y</span><span class="o">=</span><span class="s2">"tip"</span><span class="p">)</span>
+    <span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="n">so</span><span class="o">.</span><span class="n">Dots</span><span class="p">(),</span> <span class="n">color</span><span class="o">=</span><span class="s2">"time"</span><span class="p">)</span>
+    <span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="n">so</span><span class="o">.</span><span class="n">Line</span><span class="p">(</span><span class="n">color</span><span class="o">=</span><span class="s2">".2"</span><span class="p">),</span> <span class="n">so</span><span class="o">.</span><span class="n">PolyFit</span><span class="p">())</span>
+<span class="p">)</span>
+</pre><button class="copybtn o-tooltip--left" data-tooltip="Copy" data-clipboard-target="#codecell21">
+      <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-copy" width="44" height="44" viewBox="0 0 24 24" stroke-width="1.5" stroke="#000000" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <title>Copy to clipboard</title>
+  <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
+  <rect x="8" y="8" width="12" height="12" rx="2"></rect>
+  <path d="M16 8v-2a2 2 0 0 0 -2 -2h-8a2 2 0 0 0 -2 2v8a2 2 0 0 0 2 2h2"></path>
+</svg>
+    </button></div>
+</div>
+<a class="reference internal image-reference" href="./A interface seaborn.objects — documentação do seaborn 0.13.2_files/objects_interface_44_0.png"><img alt="../_images/objects_interface_44_0.png" src="./A interface seaborn.objects — documentação do seaborn 0.13.2_files/objects_interface_44_0.png" style="width: 600.9499999999999px; height: 378.25px;" _mstalt="1115569" _msthash="124"></a>
+<p><font _mstmutation="1" _msttexthash="7338955" _msthash="125">Alternatively, define the layer for the entire plot, but <em _mstmutation="1">remove</em> it from a specific layer by setting the variable to :</font><code class="docutils literal notranslate"><span class="pre">None</span></code></p>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre id="codecell22"><span></span><span class="p">(</span>
+    <span class="n">so</span><span class="o">.</span><span class="n">Plot</span><span class="p">(</span><span class="n">tips</span><span class="p">,</span> <span class="n">x</span><span class="o">=</span><span class="s2">"total_bill"</span><span class="p">,</span> <span class="n">y</span><span class="o">=</span><span class="s2">"tip"</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s2">"time"</span><span class="p">)</span>
+    <span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="n">so</span><span class="o">.</span><span class="n">Dots</span><span class="p">())</span>
+    <span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="n">so</span><span class="o">.</span><span class="n">Line</span><span class="p">(</span><span class="n">color</span><span class="o">=</span><span class="s2">".2"</span><span class="p">),</span> <span class="n">so</span><span class="o">.</span><span class="n">PolyFit</span><span class="p">(),</span> <span class="n">color</span><span class="o">=</span><span class="kc">None</span><span class="p">)</span>
+<span class="p">)</span>
+</pre><button class="copybtn o-tooltip--left" data-tooltip="Copy" data-clipboard-target="#codecell22">
+      <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-copy" width="44" height="44" viewBox="0 0 24 24" stroke-width="1.5" stroke="#000000" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <title>Copy to clipboard</title>
+  <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
+  <rect x="8" y="8" width="12" height="12" rx="2"></rect>
+  <path d="M16 8v-2a2 2 0 0 0 -2 -2h-8a2 2 0 0 0 -2 2v8a2 2 0 0 0 2 2h2"></path>
+</svg>
+    </button></div>
+</div>
+<a class="reference internal image-reference" href="./A interface seaborn.objects — documentação do seaborn 0.13.2_files/objects_interface_46_0.png"><img alt="../_images/objects_interface_46_0.png" src="./A interface seaborn.objects — documentação do seaborn 0.13.2_files/objects_interface_46_0.png" style="width: 600.9499999999999px; height: 378.25px;" _mstalt="1116531" _msthash="126"></a>
+<p _msttexthash="19168448" _msthash="127">To recap, there are three ways to specify the value of a mark property: (1) by mapping a variable in all layers, (2) by mapping a variable in a specific layer, and (3) by setting the property directly:</p>
+<img alt="../_images/objects_interface_48_0.svg" src="./A interface seaborn.objects — documentação do seaborn 0.13.2_files/objects_interface_48_0.svg" _msthidden="A" _mstalt="1123460" _msthash="128"></section>
+<section id="faceting-and-pairing-subplots">
+<h3><font _mstmutation="1" _msttexthash="709696" _msthash="129">Faceting and pairing subplots</font><a class="headerlink" href="https://seaborn.pydata.org/tutorial/objects_interface.html#faceting-and-pairing-subplots" title="Permalink to this heading">#</a></h3>
+<p _msttexthash="63764064" _msthash="130">As with seaborn’s figure-level functions (<a class="reference internal" href="https://seaborn.pydata.org/generated/seaborn.displot.html#seaborn.displot" title="seaborn.displot"><code class="xref py py-func docutils literal notranslate"><span class="pre">seaborn.displot()</span></code></a>, <a class="reference internal" href="https://seaborn.pydata.org/generated/seaborn.catplot.html#seaborn.catplot" title="seaborn.catplot"><code class="xref py py-func docutils literal notranslate"><span class="pre">seaborn.catplot()</span></code></a>, etc.), the <a class="reference internal" href="https://seaborn.pydata.org/generated/seaborn.objects.Plot.html#seaborn.objects.Plot" title="seaborn.objects.Plot"><code class="xref py py-class docutils literal notranslate"><span class="pre">Plot</span></code></a> interface can also produce figures with multiple “facets”, or subplots containing subsets of data. This is accomplished with the <a class="reference internal" href="https://seaborn.pydata.org/generated/seaborn.objects.Plot.facet.html#seaborn.objects.Plot.facet" title="seaborn.objects.Plot.facet"><code class="xref py py-meth docutils literal notranslate"><span class="pre">Plot.facet()</span></code></a> method:</p>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre id="codecell23"><span></span><span class="p">(</span>
+    <span class="n">so</span><span class="o">.</span><span class="n">Plot</span><span class="p">(</span><span class="n">penguins</span><span class="p">,</span> <span class="n">x</span><span class="o">=</span><span class="s2">"flipper_length_mm"</span><span class="p">)</span>
+    <span class="o">.</span><span class="n">facet</span><span class="p">(</span><span class="s2">"species"</span><span class="p">)</span>
+    <span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="n">so</span><span class="o">.</span><span class="n">Bars</span><span class="p">(),</span> <span class="n">so</span><span class="o">.</span><span class="n">Hist</span><span class="p">())</span>
+<span class="p">)</span>
+</pre><button class="copybtn o-tooltip--left" data-tooltip="Copy" data-clipboard-target="#codecell23">
+      <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-copy" width="44" height="44" viewBox="0 0 24 24" stroke-width="1.5" stroke="#000000" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <title>Copy to clipboard</title>
+  <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
+  <rect x="8" y="8" width="12" height="12" rx="2"></rect>
+  <path d="M16 8v-2a2 2 0 0 0 -2 -2h-8a2 2 0 0 0 -2 2v8a2 2 0 0 0 2 2h2"></path>
+</svg>
+    </button></div>
+</div>
+<a class="reference internal image-reference" href="./A interface seaborn.objects — documentação do seaborn 0.13.2_files/objects_interface_50_0.png"><img alt="../_images/objects_interface_50_0.png" src="./A interface seaborn.objects — documentação do seaborn 0.13.2_files/objects_interface_50_0.png" style="width: 509.15px; height: 378.25px;" _mstalt="1114113" _msthash="131"></a>
+<p _msttexthash="5808920" _msthash="132">Call <a class="reference internal" href="https://seaborn.pydata.org/generated/seaborn.objects.Plot.facet.html#seaborn.objects.Plot.facet" title="seaborn.objects.Plot.facet"><code class="xref py py-meth docutils literal notranslate"><span class="pre">Plot.facet()</span></code></a> with the variables that should be used to define the columns and/or rows of the plot:</p>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre id="codecell24"><span></span><span class="p">(</span>
+    <span class="n">so</span><span class="o">.</span><span class="n">Plot</span><span class="p">(</span><span class="n">penguins</span><span class="p">,</span> <span class="n">x</span><span class="o">=</span><span class="s2">"flipper_length_mm"</span><span class="p">)</span>
+    <span class="o">.</span><span class="n">facet</span><span class="p">(</span><span class="n">col</span><span class="o">=</span><span class="s2">"species"</span><span class="p">,</span> <span class="n">row</span><span class="o">=</span><span class="s2">"sex"</span><span class="p">)</span>
+    <span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="n">so</span><span class="o">.</span><span class="n">Bars</span><span class="p">(),</span> <span class="n">so</span><span class="o">.</span><span class="n">Hist</span><span class="p">())</span>
+<span class="p">)</span>
+</pre><button class="copybtn o-tooltip--left" data-tooltip="Copy" data-clipboard-target="#codecell24">
+      <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-copy" width="44" height="44" viewBox="0 0 24 24" stroke-width="1.5" stroke="#000000" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <title>Copy to clipboard</title>
+  <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
+  <rect x="8" y="8" width="12" height="12" rx="2"></rect>
+  <path d="M16 8v-2a2 2 0 0 0 -2 -2h-8a2 2 0 0 0 -2 2v8a2 2 0 0 0 2 2h2"></path>
+</svg>
+    </button></div>
+</div>
+<a class="reference internal image-reference" href="./A interface seaborn.objects — documentação do seaborn 0.13.2_files/objects_interface_52_0.png"><img alt="../_images/objects_interface_52_0.png" src="./A interface seaborn.objects — documentação do seaborn 0.13.2_files/objects_interface_52_0.png" style="width: 509.15px; height: 378.25px;" _mstalt="1115075" _msthash="133"></a>
+<p _msttexthash="19296446" _msthash="134">You can facet using a variable with a larger number of levels by “wrapping” across the other dimension:</p>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre id="codecell25"><span></span><span class="p">(</span>
+    <span class="n">so</span><span class="o">.</span><span class="n">Plot</span><span class="p">(</span><span class="n">healthexp</span><span class="p">,</span> <span class="n">x</span><span class="o">=</span><span class="s2">"Year"</span><span class="p">,</span> <span class="n">y</span><span class="o">=</span><span class="s2">"Life_Expectancy"</span><span class="p">)</span>
+    <span class="o">.</span><span class="n">facet</span><span class="p">(</span><span class="n">col</span><span class="o">=</span><span class="s2">"Country"</span><span class="p">,</span> <span class="n">wrap</span><span class="o">=</span><span class="mi">3</span><span class="p">)</span>
+    <span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="n">so</span><span class="o">.</span><span class="n">Line</span><span class="p">())</span>
+<span class="p">)</span>
+</pre><button class="copybtn o-tooltip--left" data-tooltip="Copy" data-clipboard-target="#codecell25">
+      <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-copy" width="44" height="44" viewBox="0 0 24 24" stroke-width="1.5" stroke="#000000" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <title>Copy to clipboard</title>
+  <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
+  <rect x="8" y="8" width="12" height="12" rx="2"></rect>
+  <path d="M16 8v-2a2 2 0 0 0 -2 -2h-8a2 2 0 0 0 -2 2v8a2 2 0 0 0 2 2h2"></path>
+</svg>
+    </button></div>
+</div>
+<a class="reference internal image-reference" href="./A interface seaborn.objects — documentação do seaborn 0.13.2_files/objects_interface_54_0.png"><img alt="../_images/objects_interface_54_0.png" src="./A interface seaborn.objects — documentação do seaborn 0.13.2_files/objects_interface_54_0.png" style="width: 508.3px; height: 378.25px;" _mstalt="1116037" _msthash="135"></a>
+<p _msttexthash="9666384" _msthash="136">All layers will be faceted unless you explicitly exclude them, which can
+be useful for providing additional context on each subplot:</p>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre id="codecell26"><span></span><span class="p">(</span>
+    <span class="n">so</span><span class="o">.</span><span class="n">Plot</span><span class="p">(</span><span class="n">healthexp</span><span class="p">,</span> <span class="n">x</span><span class="o">=</span><span class="s2">"Year"</span><span class="p">,</span> <span class="n">y</span><span class="o">=</span><span class="s2">"Life_Expectancy"</span><span class="p">)</span>
+    <span class="o">.</span><span class="n">facet</span><span class="p">(</span><span class="s2">"Country"</span><span class="p">,</span> <span class="n">wrap</span><span class="o">=</span><span class="mi">3</span><span class="p">)</span>
+    <span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="n">so</span><span class="o">.</span><span class="n">Line</span><span class="p">(</span><span class="n">alpha</span><span class="o">=</span><span class="mf">.3</span><span class="p">),</span> <span class="n">group</span><span class="o">=</span><span class="s2">"Country"</span><span class="p">,</span> <span class="n">col</span><span class="o">=</span><span class="kc">None</span><span class="p">)</span>
+    <span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="n">so</span><span class="o">.</span><span class="n">Line</span><span class="p">(</span><span class="n">linewidth</span><span class="o">=</span><span class="mi">3</span><span class="p">))</span>
+<span class="p">)</span>
+</pre><button class="copybtn o-tooltip--left" data-tooltip="Copy" data-clipboard-target="#codecell26">
+      <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-copy" width="44" height="44" viewBox="0 0 24 24" stroke-width="1.5" stroke="#000000" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <title>Copy to clipboard</title>
+  <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
+  <rect x="8" y="8" width="12" height="12" rx="2"></rect>
+  <path d="M16 8v-2a2 2 0 0 0 -2 -2h-8a2 2 0 0 0 -2 2v8a2 2 0 0 0 2 2h2"></path>
+</svg>
+    </button></div>
+</div>
+<a class="reference internal image-reference" href="./A interface seaborn.objects — documentação do seaborn 0.13.2_files/objects_interface_56_0.png"><img alt="../_images/objects_interface_56_0.png" src="./A interface seaborn.objects — documentação do seaborn 0.13.2_files/objects_interface_56_0.png" style="width: 508.3px; height: 378.25px;" _mstalt="1116999" _msthash="137"></a>
+<p _msttexthash="16416023" _msthash="138">An alternate way to produce subplots is <a class="reference internal" href="https://seaborn.pydata.org/generated/seaborn.objects.Plot.pair.html#seaborn.objects.Plot.pair" title="seaborn.objects.Plot.pair"><code class="xref py py-meth docutils literal notranslate"><span class="pre">Plot.pair()</span></code></a>. Like <a class="reference internal" href="https://seaborn.pydata.org/generated/seaborn.PairGrid.html#seaborn.PairGrid" title="seaborn.PairGrid"><code class="xref py py-class docutils literal notranslate"><span class="pre">seaborn.PairGrid</span></code></a>, this draws all of the data on each subplot, using different variables for the x and/or y coordinates:</p>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre id="codecell27"><span></span><span class="p">(</span>
+    <span class="n">so</span><span class="o">.</span><span class="n">Plot</span><span class="p">(</span><span class="n">penguins</span><span class="p">,</span> <span class="n">y</span><span class="o">=</span><span class="s2">"body_mass_g"</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s2">"species"</span><span class="p">)</span>
+    <span class="o">.</span><span class="n">pair</span><span class="p">(</span><span class="n">x</span><span class="o">=</span><span class="p">[</span><span class="s2">"bill_length_mm"</span><span class="p">,</span> <span class="s2">"bill_depth_mm"</span><span class="p">])</span>
+    <span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="n">so</span><span class="o">.</span><span class="n">Dots</span><span class="p">())</span>
+<span class="p">)</span>
+</pre><button class="copybtn o-tooltip--left" data-tooltip="Copy" data-clipboard-target="#codecell27">
+      <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-copy" width="44" height="44" viewBox="0 0 24 24" stroke-width="1.5" stroke="#000000" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <title>Copy to clipboard</title>
+  <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
+  <rect x="8" y="8" width="12" height="12" rx="2"></rect>
+  <path d="M16 8v-2a2 2 0 0 0 -2 -2h-8a2 2 0 0 0 -2 2v8a2 2 0 0 0 2 2h2"></path>
+</svg>
+    </button></div>
+</div>
+<a class="reference internal image-reference" href="./A interface seaborn.objects — documentação do seaborn 0.13.2_files/objects_interface_58_0.png"><img alt="../_images/objects_interface_58_0.png" src="./A interface seaborn.objects — documentação do seaborn 0.13.2_files/objects_interface_58_0.png" style="width: 617.9499999999999px; height: 378.25px;" _mstalt="1117961" _msthash="139"></a>
+<p _msttexthash="5671822" _msthash="140">You can combine faceting and pairing so long as the operations add subplots on opposite dimensions:</p>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre id="codecell28"><span></span><span class="p">(</span>
+    <span class="n">so</span><span class="o">.</span><span class="n">Plot</span><span class="p">(</span><span class="n">penguins</span><span class="p">,</span> <span class="n">y</span><span class="o">=</span><span class="s2">"body_mass_g"</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s2">"species"</span><span class="p">)</span>
+    <span class="o">.</span><span class="n">pair</span><span class="p">(</span><span class="n">x</span><span class="o">=</span><span class="p">[</span><span class="s2">"bill_length_mm"</span><span class="p">,</span> <span class="s2">"bill_depth_mm"</span><span class="p">])</span>
+    <span class="o">.</span><span class="n">facet</span><span class="p">(</span><span class="n">row</span><span class="o">=</span><span class="s2">"sex"</span><span class="p">)</span>
+    <span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="n">so</span><span class="o">.</span><span class="n">Dots</span><span class="p">())</span>
+<span class="p">)</span>
+</pre><button class="copybtn o-tooltip--left" data-tooltip="Copy" data-clipboard-target="#codecell28">
+      <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-copy" width="44" height="44" viewBox="0 0 24 24" stroke-width="1.5" stroke="#000000" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <title>Copy to clipboard</title>
+  <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
+  <rect x="8" y="8" width="12" height="12" rx="2"></rect>
+  <path d="M16 8v-2a2 2 0 0 0 -2 -2h-8a2 2 0 0 0 -2 2v8a2 2 0 0 0 2 2h2"></path>
+</svg>
+    </button></div>
+</div>
+<a class="reference internal image-reference" href="./A interface seaborn.objects — documentação do seaborn 0.13.2_files/objects_interface_60_0.png"><img alt="../_images/objects_interface_60_0.png" src="./A interface seaborn.objects — documentação do seaborn 0.13.2_files/objects_interface_60_0.png" style="width: 617.9499999999999px; height: 378.25px;" _mstalt="1114581" _msthash="141"></a>
+</section>
+<section id="integrating-with-matplotlib">
+<h3><font _mstmutation="1" _msttexthash="664872" _msthash="142">Integrating with matplotlib</font><a class="headerlink" href="https://seaborn.pydata.org/tutorial/objects_interface.html#integrating-with-matplotlib" title="Permalink to this heading">#</a></h3>
+<p _msttexthash="116059710" _msthash="143">There may be cases where you want multiple subplots to appear in a figure with a more complex structure than what <a class="reference internal" href="https://seaborn.pydata.org/generated/seaborn.objects.Plot.facet.html#seaborn.objects.Plot.facet" title="seaborn.objects.Plot.facet"><code class="xref py py-meth docutils literal notranslate"><span class="pre">Plot.facet()</span></code></a> or <a class="reference internal" href="https://seaborn.pydata.org/generated/seaborn.objects.Plot.pair.html#seaborn.objects.Plot.pair" title="seaborn.objects.Plot.pair"><code class="xref py py-meth docutils literal notranslate"><span class="pre">Plot.pair()</span></code></a> can provide. The current solution is to delegate figure setup to matplotlib and to supply the matplotlib object that <a class="reference internal" href="https://seaborn.pydata.org/generated/seaborn.objects.Plot.html#seaborn.objects.Plot" title="seaborn.objects.Plot"><code class="xref py py-class docutils literal notranslate"><span class="pre">Plot</span></code></a> should use with the <a class="reference internal" href="https://seaborn.pydata.org/generated/seaborn.objects.Plot.on.html#seaborn.objects.Plot.on" title="seaborn.objects.Plot.on"><code class="xref py py-meth docutils literal notranslate"><span class="pre">Plot.on()</span></code></a> method. This object can be either a <a class="reference external" href="https://matplotlib.org/stable/api/_as_gen/matplotlib.axes.Axes.html#matplotlib.axes.Axes" title="(in Matplotlib v3.8.2)"><code class="xref py py-class docutils literal notranslate"><span class="pre">matplotlib.axes.Axes</span></code></a>, <a class="reference external" href="https://matplotlib.org/stable/api/figure_api.html#matplotlib.figure.Figure" title="(in Matplotlib v3.8.2)"><code class="xref py py-class docutils literal notranslate"><span class="pre">matplotlib.figure.Figure</span></code></a>, or <a class="reference external" href="https://matplotlib.org/stable/api/figure_api.html#matplotlib.figure.SubFigure" title="(in Matplotlib v3.8.2)"><code class="xref py py-class docutils literal notranslate"><span class="pre">matplotlib.figure.SubFigure</span></code></a>; the latter is most useful for constructing bespoke subplot layouts:</p>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre id="codecell29"><span></span><span class="n">f</span> <span class="o">=</span> <span class="n">mpl</span><span class="o">.</span><span class="n">figure</span><span class="o">.</span><span class="n">Figure</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">8</span><span class="p">,</span> <span class="mi">4</span><span class="p">))</span>
+<span class="n">sf1</span><span class="p">,</span> <span class="n">sf2</span> <span class="o">=</span> <span class="n">f</span><span class="o">.</span><span class="n">subfigures</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">)</span>
+<span class="p">(</span>
+    <span class="n">so</span><span class="o">.</span><span class="n">Plot</span><span class="p">(</span><span class="n">penguins</span><span class="p">,</span> <span class="n">x</span><span class="o">=</span><span class="s2">"body_mass_g"</span><span class="p">,</span> <span class="n">y</span><span class="o">=</span><span class="s2">"flipper_length_mm"</span><span class="p">)</span>
+    <span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="n">so</span><span class="o">.</span><span class="n">Dots</span><span class="p">())</span>
+    <span class="o">.</span><span class="n">on</span><span class="p">(</span><span class="n">sf1</span><span class="p">)</span>
+    <span class="o">.</span><span class="n">plot</span><span class="p">()</span>
+<span class="p">)</span>
+<span class="p">(</span>
+    <span class="n">so</span><span class="o">.</span><span class="n">Plot</span><span class="p">(</span><span class="n">penguins</span><span class="p">,</span> <span class="n">x</span><span class="o">=</span><span class="s2">"body_mass_g"</span><span class="p">)</span>
+    <span class="o">.</span><span class="n">facet</span><span class="p">(</span><span class="n">row</span><span class="o">=</span><span class="s2">"sex"</span><span class="p">)</span>
+    <span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="n">so</span><span class="o">.</span><span class="n">Bars</span><span class="p">(),</span> <span class="n">so</span><span class="o">.</span><span class="n">Hist</span><span class="p">())</span>
+    <span class="o">.</span><span class="n">on</span><span class="p">(</span><span class="n">sf2</span><span class="p">)</span>
+    <span class="o">.</span><span class="n">plot</span><span class="p">()</span>
+<span class="p">)</span>
+</pre><button class="copybtn o-tooltip--left" data-tooltip="Copy" data-clipboard-target="#codecell29">
+      <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-copy" width="44" height="44" viewBox="0 0 24 24" stroke-width="1.5" stroke="#000000" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <title>Copy to clipboard</title>
+  <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
+  <rect x="8" y="8" width="12" height="12" rx="2"></rect>
+  <path d="M16 8v-2a2 2 0 0 0 -2 -2h-8a2 2 0 0 0 -2 2v8a2 2 0 0 0 2 2h2"></path>
+</svg>
+    </button></div>
+</div>
+<a class="reference internal image-reference" href="./A interface seaborn.objects — documentação do seaborn 0.13.2_files/objects_interface_62_0.png"><img alt="../_images/objects_interface_62_0.png" src="./A interface seaborn.objects — documentação do seaborn 0.13.2_files/objects_interface_62_0.png" style="width: 643.875px; height: 323.425px;" _mstalt="1115543" _msthash="144"></a>
+</section>
+<section id="id1">
+<h3><font _mstmutation="1" _msttexthash="801099" _msthash="145">Building and displaying the plot</font><a class="headerlink" href="https://seaborn.pydata.org/tutorial/objects_interface.html#id1" title="Permalink to this heading">#</a></h3>
+<p _msttexthash="28249715" _msthash="146">An important thing to know is that <a class="reference internal" href="https://seaborn.pydata.org/generated/seaborn.objects.Plot.html#seaborn.objects.Plot" title="seaborn.objects.Plot"><code class="xref py py-class docutils literal notranslate"><span class="pre">Plot</span></code></a> methods clone the object they are called on and return that clone instead of updating the object in place. This means that you can define a common plot spec and then produce several variations on it.</p>
+<p _msttexthash="855816" _msthash="147">So, take this basic specification:</p>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre id="codecell30"><span></span><span class="n">p</span> <span class="o">=</span> <span class="n">so</span><span class="o">.</span><span class="n">Plot</span><span class="p">(</span><span class="n">healthexp</span><span class="p">,</span> <span class="s2">"Year"</span><span class="p">,</span> <span class="s2">"Spending_USD"</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s2">"Country"</span><span class="p">)</span>
+</pre><button class="copybtn o-tooltip--left" data-tooltip="Copy" data-clipboard-target="#codecell30">
+      <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-copy" width="44" height="44" viewBox="0 0 24 24" stroke-width="1.5" stroke="#000000" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <title>Copy to clipboard</title>
+  <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
+  <rect x="8" y="8" width="12" height="12" rx="2"></rect>
+  <path d="M16 8v-2a2 2 0 0 0 -2 -2h-8a2 2 0 0 0 -2 2v8a2 2 0 0 0 2 2h2"></path>
+</svg>
+    </button></div>
+</div>
+<p _msttexthash="785317" _msthash="148">We could use it to draw a line plot:</p>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre id="codecell31"><span></span><span class="n">p</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="n">so</span><span class="o">.</span><span class="n">Line</span><span class="p">())</span>
+</pre><button class="copybtn o-tooltip--left" data-tooltip="Copy" data-clipboard-target="#codecell31">
+      <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-copy" width="44" height="44" viewBox="0 0 24 24" stroke-width="1.5" stroke="#000000" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <title>Copy to clipboard</title>
+  <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
+  <rect x="8" y="8" width="12" height="12" rx="2"></rect>
+  <path d="M16 8v-2a2 2 0 0 0 -2 -2h-8a2 2 0 0 0 -2 2v8a2 2 0 0 0 2 2h2"></path>
+</svg>
+    </button></div>
+</div>
+<a class="reference internal image-reference" href="./A interface seaborn.objects — documentação do seaborn 0.13.2_files/objects_interface_66_0.png"><img alt="../_images/objects_interface_66_0.png" src="./A interface seaborn.objects — documentação do seaborn 0.13.2_files/objects_interface_66_0.png" style="width: 634.525px; height: 378.25px;" _mstalt="1117467" _msthash="149"></a>
+<p _msttexthash="678587" _msthash="150">Or perhaps a stacked area plot:</p>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre id="codecell32"><span></span><span class="n">p</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="n">so</span><span class="o">.</span><span class="n">Area</span><span class="p">(),</span> <span class="n">so</span><span class="o">.</span><span class="n">Stack</span><span class="p">())</span>
+</pre><button class="copybtn o-tooltip--left" data-tooltip="Copy" data-clipboard-target="#codecell32">
+      <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-copy" width="44" height="44" viewBox="0 0 24 24" stroke-width="1.5" stroke="#000000" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <title>Copy to clipboard</title>
+  <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
+  <rect x="8" y="8" width="12" height="12" rx="2"></rect>
+  <path d="M16 8v-2a2 2 0 0 0 -2 -2h-8a2 2 0 0 0 -2 2v8a2 2 0 0 0 2 2h2"></path>
+</svg>
+    </button></div>
+</div>
+<a class="reference internal image-reference" href="./A interface seaborn.objects — documentação do seaborn 0.13.2_files/objects_interface_68_0.png"><img alt="../_images/objects_interface_68_0.png" src="./A interface seaborn.objects — documentação do seaborn 0.13.2_files/objects_interface_68_0.png" style="width: 634.525px; height: 378.25px;" _mstalt="1118429" _msthash="151"></a>
+<p _msttexthash="35098388" _msthash="152">The <a class="reference internal" href="https://seaborn.pydata.org/generated/seaborn.objects.Plot.html#seaborn.objects.Plot" title="seaborn.objects.Plot"><code class="xref py py-class docutils literal notranslate"><span class="pre">Plot</span></code></a> methods are fully declarative. Calling them updates the plot spec, but it doesn’t actually do any plotting. One consequence of this is that methods can be called in any order, and many of them can be called multiple times.</p>
+<p><font _mstmutation="1" _msttexthash="90047230" _msthash="153">When does the plot actually get rendered? <a class="reference internal" href="https://seaborn.pydata.org/generated/seaborn.objects.Plot.html#seaborn.objects.Plot" title="seaborn.objects.Plot" _mstmutation="1"><code class="xref py py-class docutils literal notranslate"><span class="pre">Plot</span></code></a> is optimized for use in notebook environments. The rendering is automatically triggered when the <a class="reference internal" href="https://seaborn.pydata.org/generated/seaborn.objects.Plot.html#seaborn.objects.Plot" title="seaborn.objects.Plot" _mstmutation="1"><code class="xref py py-class docutils literal notranslate"><span class="pre">Plot</span></code></a> gets displayed in the Jupyter REPL. That’s why we didn’t see anything in the example above, where we defined a <a class="reference internal" href="https://seaborn.pydata.org/generated/seaborn.objects.Plot.html#seaborn.objects.Plot" title="seaborn.objects.Plot" _mstmutation="1"><code class="xref py py-class docutils literal notranslate"><span class="pre">Plot</span></code></a> but assigned it to  rather than letting it return out to the REPL.</font><code class="docutils literal notranslate"><span class="pre">p</span></code></p>
+<p><font _mstmutation="1" _msttexthash="46915037" _msthash="154">To see a plot in a notebook, either return it from the final line of a cell or call Jupyter’s built-in  function on the object. The notebook integration bypasses <a class="reference external" href="https://matplotlib.org/stable/api/pyplot_summary.html#module-matplotlib.pyplot" title="(in Matplotlib v3.8.2)" _mstmutation="1"><code class="xref py py-mod docutils literal notranslate"><span class="pre">matplotlib.pyplot</span></code></a> entirely, but you can use its figure-display machinery in other contexts by calling <a class="reference internal" href="https://seaborn.pydata.org/generated/seaborn.objects.Plot.show.html#seaborn.objects.Plot.show" title="seaborn.objects.Plot.show" _mstmutation="1"><code class="xref py py-meth docutils literal notranslate"><span class="pre">Plot.show()</span></code></a>.</font><code class="docutils literal notranslate"><span class="pre">display</span></code></p>
+<p _msttexthash="2666365" _msthash="155">You can also save the plot to a file (or buffer) by calling <a class="reference internal" href="https://seaborn.pydata.org/generated/seaborn.objects.Plot.save.html#seaborn.objects.Plot.save" title="seaborn.objects.Plot.save"><code class="xref py py-meth docutils literal notranslate"><span class="pre">Plot.save()</span></code></a>.</p>
+</section>
+</section>
+<section id="customizing-the-appearance">
+<h2><font _mstmutation="1" _msttexthash="609206" _msthash="156">Customizing the appearance</font><a class="headerlink" href="https://seaborn.pydata.org/tutorial/objects_interface.html#customizing-the-appearance" title="Permalink to this heading">#</a></h2>
+<p _msttexthash="33216560" _msthash="157">The new interface aims to support a deep amount of customization through <a class="reference internal" href="https://seaborn.pydata.org/generated/seaborn.objects.Plot.html#seaborn.objects.Plot" title="seaborn.objects.Plot"><code class="xref py py-class docutils literal notranslate"><span class="pre">Plot</span></code></a>, reducing the need to switch gears and use matplotlib functionality directly. (But please be patient; not all of the features needed to achieve this goal have been implemented!)</p>
+<section id="parameterizing-scales">
+<h3><font _mstmutation="1" _msttexthash="456300" _msthash="158">Parameterizing scales</font><a class="headerlink" href="https://seaborn.pydata.org/tutorial/objects_interface.html#parameterizing-scales" title="Permalink to this heading">#</a></h3>
+<p _msttexthash="46161505" _msthash="159">All of the data-dependent properties are controlled by the concept of a <a class="reference internal" href="https://seaborn.pydata.org/generated/seaborn.objects.Scale.html#seaborn.objects.Scale" title="seaborn.objects.Scale"><code class="xref py py-class docutils literal notranslate"><span class="pre">Scale</span></code></a> and the <a class="reference internal" href="https://seaborn.pydata.org/generated/seaborn.objects.Plot.scale.html#seaborn.objects.Plot.scale" title="seaborn.objects.Plot.scale"><code class="xref py py-meth docutils literal notranslate"><span class="pre">Plot.scale()</span></code></a> method. This method accepts several different types of arguments. One possibility, which is closest to the use of scales in matplotlib, is to pass the name of a function that transforms the coordinates:</p>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre id="codecell33"><span></span><span class="p">(</span>
+    <span class="n">so</span><span class="o">.</span><span class="n">Plot</span><span class="p">(</span><span class="n">diamonds</span><span class="p">,</span> <span class="n">x</span><span class="o">=</span><span class="s2">"carat"</span><span class="p">,</span> <span class="n">y</span><span class="o">=</span><span class="s2">"price"</span><span class="p">)</span>
+    <span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="n">so</span><span class="o">.</span><span class="n">Dots</span><span class="p">())</span>
+    <span class="o">.</span><span class="n">scale</span><span class="p">(</span><span class="n">y</span><span class="o">=</span><span class="s2">"log"</span><span class="p">)</span>
+<span class="p">)</span>
+</pre><button class="copybtn o-tooltip--left" data-tooltip="Copy" data-clipboard-target="#codecell33">
+      <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-copy" width="44" height="44" viewBox="0 0 24 24" stroke-width="1.5" stroke="#000000" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <title>Copy to clipboard</title>
+  <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
+  <rect x="8" y="8" width="12" height="12" rx="2"></rect>
+  <path d="M16 8v-2a2 2 0 0 0 -2 -2h-8a2 2 0 0 0 -2 2v8a2 2 0 0 0 2 2h2"></path>
+</svg>
+    </button></div>
+</div>
+<a class="reference internal image-reference" href="./A interface seaborn.objects — documentação do seaborn 0.13.2_files/objects_interface_71_0.png"><img alt="../_images/objects_interface_71_0.png" src="./A interface seaborn.objects — documentação do seaborn 0.13.2_files/objects_interface_71_0.png" style="width: 509.15px; height: 378.25px;" _mstalt="1115530" _msthash="160"></a>
+<p><font _mstmutation="1" _msttexthash="32395779" _msthash="161"><a class="reference internal" href="https://seaborn.pydata.org/generated/seaborn.objects.Plot.scale.html#seaborn.objects.Plot.scale" title="seaborn.objects.Plot.scale" _mstmutation="1"><code class="xref py py-meth docutils literal notranslate"><span class="pre">Plot.scale()</span></code></a> can also control the mappings for semantic properties like . You can directly pass it any argument that you would pass to the  parameter in seaborn’s function interface:</font><code class="docutils literal notranslate"><span class="pre">color</span></code><code class="docutils literal notranslate"><span class="pre">palette</span></code></p>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre id="codecell34"><span></span><span class="p">(</span>
+    <span class="n">so</span><span class="o">.</span><span class="n">Plot</span><span class="p">(</span><span class="n">diamonds</span><span class="p">,</span> <span class="n">x</span><span class="o">=</span><span class="s2">"carat"</span><span class="p">,</span> <span class="n">y</span><span class="o">=</span><span class="s2">"price"</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s2">"clarity"</span><span class="p">)</span>
+    <span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="n">so</span><span class="o">.</span><span class="n">Dots</span><span class="p">())</span>
+    <span class="o">.</span><span class="n">scale</span><span class="p">(</span><span class="n">color</span><span class="o">=</span><span class="s2">"flare"</span><span class="p">)</span>
+<span class="p">)</span>
+</pre><button class="copybtn o-tooltip--left" data-tooltip="Copy" data-clipboard-target="#codecell34">
+      <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-copy" width="44" height="44" viewBox="0 0 24 24" stroke-width="1.5" stroke="#000000" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <title>Copy to clipboard</title>
+  <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
+  <rect x="8" y="8" width="12" height="12" rx="2"></rect>
+  <path d="M16 8v-2a2 2 0 0 0 -2 -2h-8a2 2 0 0 0 -2 2v8a2 2 0 0 0 2 2h2"></path>
+</svg>
+    </button></div>
+</div>
+<a class="reference internal image-reference" href="./A interface seaborn.objects — documentação do seaborn 0.13.2_files/objects_interface_73_0.png"><img alt="../_images/objects_interface_73_0.png" src="./A interface seaborn.objects — documentação do seaborn 0.13.2_files/objects_interface_73_0.png" style="width: 596.275px; height: 378.25px;" _mstalt="1116492" _msthash="162"></a>
+<p><font _mstmutation="1" _msttexthash="12871495" _msthash="163">Another option is to provide a tuple of  values, controlling the range that the scale should map into. This works both for numeric properties and for colors:</font><code class="docutils literal notranslate"><span class="pre">(min,</span> <span class="pre">max)</span></code></p>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre id="codecell35"><span></span><span class="p">(</span>
+    <span class="n">so</span><span class="o">.</span><span class="n">Plot</span><span class="p">(</span><span class="n">diamonds</span><span class="p">,</span> <span class="n">x</span><span class="o">=</span><span class="s2">"carat"</span><span class="p">,</span> <span class="n">y</span><span class="o">=</span><span class="s2">"price"</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s2">"clarity"</span><span class="p">,</span> <span class="n">pointsize</span><span class="o">=</span><span class="s2">"carat"</span><span class="p">)</span>
+    <span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="n">so</span><span class="o">.</span><span class="n">Dots</span><span class="p">())</span>
+    <span class="o">.</span><span class="n">scale</span><span class="p">(</span><span class="n">color</span><span class="o">=</span><span class="p">(</span><span class="s2">"#88c"</span><span class="p">,</span> <span class="s2">"#555"</span><span class="p">),</span> <span class="n">pointsize</span><span class="o">=</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="mi">10</span><span class="p">))</span>
+<span class="p">)</span>
+</pre><button class="copybtn o-tooltip--left" data-tooltip="Copy" data-clipboard-target="#codecell35">
+      <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-copy" width="44" height="44" viewBox="0 0 24 24" stroke-width="1.5" stroke="#000000" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <title>Copy to clipboard</title>
+  <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
+  <rect x="8" y="8" width="12" height="12" rx="2"></rect>
+  <path d="M16 8v-2a2 2 0 0 0 -2 -2h-8a2 2 0 0 0 -2 2v8a2 2 0 0 0 2 2h2"></path>
+</svg>
+    </button></div>
+</div>
+<a class="reference internal image-reference" href="./A interface seaborn.objects — documentação do seaborn 0.13.2_files/objects_interface_75_0.png"><img alt="../_images/objects_interface_75_0.png" src="./A interface seaborn.objects — documentação do seaborn 0.13.2_files/objects_interface_75_0.png" style="width: 596.275px; height: 378.25px;" _mstalt="1117454" _msthash="164"></a>
+<p><font _mstmutation="1" _msttexthash="46119164" _msthash="165">For additional control, you can pass a <a class="reference internal" href="https://seaborn.pydata.org/generated/seaborn.objects.Scale.html#seaborn.objects.Scale" title="seaborn.objects.Scale" _mstmutation="1"><code class="xref py py-class docutils literal notranslate"><span class="pre">Scale</span></code></a> object. There are several different types of <a class="reference internal" href="https://seaborn.pydata.org/generated/seaborn.objects.Scale.html#seaborn.objects.Scale" title="seaborn.objects.Scale" _mstmutation="1"><code class="xref py py-class docutils literal notranslate"><span class="pre">Scale</span></code></a>, each with appropriate parameters. For example, <a class="reference internal" href="https://seaborn.pydata.org/generated/seaborn.objects.Continuous.html#seaborn.objects.Continuous" title="seaborn.objects.Continuous" _mstmutation="1"><code class="xref py py-class docutils literal notranslate"><span class="pre">Continuous</span></code></a> lets you define the input domain (), the output range (), and the function that maps between them (), while <a class="reference internal" href="https://seaborn.pydata.org/generated/seaborn.objects.Nominal.html#seaborn.objects.Nominal" title="seaborn.objects.Nominal" _mstmutation="1"><code class="xref py py-class docutils literal notranslate"><span class="pre">Nominal</span></code></a> allows you to specify an ordering:</font><code class="docutils literal notranslate"><span class="pre">norm</span></code><code class="docutils literal notranslate"><span class="pre">values</span></code><code class="docutils literal notranslate"><span class="pre">trans</span></code></p>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre id="codecell36"><span></span><span class="p">(</span>
+    <span class="n">so</span><span class="o">.</span><span class="n">Plot</span><span class="p">(</span><span class="n">diamonds</span><span class="p">,</span> <span class="n">x</span><span class="o">=</span><span class="s2">"carat"</span><span class="p">,</span> <span class="n">y</span><span class="o">=</span><span class="s2">"price"</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s2">"carat"</span><span class="p">,</span> <span class="n">marker</span><span class="o">=</span><span class="s2">"cut"</span><span class="p">)</span>
+    <span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="n">so</span><span class="o">.</span><span class="n">Dots</span><span class="p">())</span>
+    <span class="o">.</span><span class="n">scale</span><span class="p">(</span>
+        <span class="n">color</span><span class="o">=</span><span class="n">so</span><span class="o">.</span><span class="n">Continuous</span><span class="p">(</span><span class="s2">"crest"</span><span class="p">,</span> <span class="n">norm</span><span class="o">=</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">3</span><span class="p">),</span> <span class="n">trans</span><span class="o">=</span><span class="s2">"sqrt"</span><span class="p">),</span>
+        <span class="n">marker</span><span class="o">=</span><span class="n">so</span><span class="o">.</span><span class="n">Nominal</span><span class="p">([</span><span class="s2">"o"</span><span class="p">,</span> <span class="s2">"+"</span><span class="p">,</span> <span class="s2">"x"</span><span class="p">],</span> <span class="n">order</span><span class="o">=</span><span class="p">[</span><span class="s2">"Ideal"</span><span class="p">,</span> <span class="s2">"Premium"</span><span class="p">,</span> <span class="s2">"Good"</span><span class="p">]),</span>
+    <span class="p">)</span>
+<span class="p">)</span>
+</pre><button class="copybtn o-tooltip--left" data-tooltip="Copy" data-clipboard-target="#codecell36">
+      <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-copy" width="44" height="44" viewBox="0 0 24 24" stroke-width="1.5" stroke="#000000" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <title>Copy to clipboard</title>
+  <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
+  <rect x="8" y="8" width="12" height="12" rx="2"></rect>
+  <path d="M16 8v-2a2 2 0 0 0 -2 -2h-8a2 2 0 0 0 -2 2v8a2 2 0 0 0 2 2h2"></path>
+</svg>
+    </button></div>
+</div>
+<a class="reference internal image-reference" href="./A interface seaborn.objects — documentação do seaborn 0.13.2_files/objects_interface_77_0.png"><img alt="../_images/objects_interface_77_0.png" src="./A interface seaborn.objects — documentação do seaborn 0.13.2_files/objects_interface_77_0.png" style="width: 614.125px; height: 378.25px;" _mstalt="1118416" _msthash="166"></a>
+</section>
+<section id="customizing-legends-and-ticks">
+<h3><font _mstmutation="1" _msttexthash="702741" _msthash="167">Customizing legends and ticks</font><a class="headerlink" href="https://seaborn.pydata.org/tutorial/objects_interface.html#customizing-legends-and-ticks" title="Permalink to this heading">#</a></h3>
+<p _msttexthash="41680834" _msthash="168">The <a class="reference internal" href="https://seaborn.pydata.org/generated/seaborn.objects.Scale.html#seaborn.objects.Scale" title="seaborn.objects.Scale"><code class="xref py py-class docutils literal notranslate"><span class="pre">Scale</span></code></a> objects are also how you specify which values should appear as tick labels / in the legend, along with how they appear. For example, the <a class="reference internal" href="https://seaborn.pydata.org/generated/seaborn.objects.Continuous.html#seaborn.objects.Continuous.tick" title="seaborn.objects.Continuous.tick"><code class="xref py py-meth docutils literal notranslate"><span class="pre">Continuous.tick()</span></code></a> method lets you control the density or locations of the ticks, and the <a class="reference internal" href="https://seaborn.pydata.org/generated/seaborn.objects.Continuous.html#seaborn.objects.Continuous.label" title="seaborn.objects.Continuous.label"><code class="xref py py-meth docutils literal notranslate"><span class="pre">Continuous.label()</span></code></a> method lets you modify the format:</p>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre id="codecell37"><span></span><span class="p">(</span>
+    <span class="n">so</span><span class="o">.</span><span class="n">Plot</span><span class="p">(</span><span class="n">diamonds</span><span class="p">,</span> <span class="n">x</span><span class="o">=</span><span class="s2">"carat"</span><span class="p">,</span> <span class="n">y</span><span class="o">=</span><span class="s2">"price"</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s2">"carat"</span><span class="p">)</span>
+    <span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="n">so</span><span class="o">.</span><span class="n">Dots</span><span class="p">())</span>
+    <span class="o">.</span><span class="n">scale</span><span class="p">(</span>
+        <span class="n">x</span><span class="o">=</span><span class="n">so</span><span class="o">.</span><span class="n">Continuous</span><span class="p">()</span><span class="o">.</span><span class="n">tick</span><span class="p">(</span><span class="n">every</span><span class="o">=</span><span class="mf">0.5</span><span class="p">),</span>
+        <span class="n">y</span><span class="o">=</span><span class="n">so</span><span class="o">.</span><span class="n">Continuous</span><span class="p">()</span><span class="o">.</span><span class="n">label</span><span class="p">(</span><span class="n">like</span><span class="o">=</span><span class="s2">"$</span><span class="si">{x:.0f}</span><span class="s2">"</span><span class="p">),</span>
+        <span class="n">color</span><span class="o">=</span><span class="n">so</span><span class="o">.</span><span class="n">Continuous</span><span class="p">()</span><span class="o">.</span><span class="n">tick</span><span class="p">(</span><span class="n">at</span><span class="o">=</span><span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">4</span><span class="p">]),</span>
+    <span class="p">)</span>
+<span class="p">)</span>
+</pre><button class="copybtn o-tooltip--left" data-tooltip="Copy" data-clipboard-target="#codecell37">
+      <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-copy" width="44" height="44" viewBox="0 0 24 24" stroke-width="1.5" stroke="#000000" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <title>Copy to clipboard</title>
+  <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
+  <rect x="8" y="8" width="12" height="12" rx="2"></rect>
+  <path d="M16 8v-2a2 2 0 0 0 -2 -2h-8a2 2 0 0 0 -2 2v8a2 2 0 0 0 2 2h2"></path>
+</svg>
+    </button></div>
+</div>
+<a class="reference internal image-reference" href="./A interface seaborn.objects — documentação do seaborn 0.13.2_files/objects_interface_79_0.png"><img alt="../_images/objects_interface_79_0.png" src="./A interface seaborn.objects — documentação do seaborn 0.13.2_files/objects_interface_79_0.png" style="width: 571.1999999999999px; height: 378.25px;" _mstalt="1119378" _msthash="169"></a>
+</section>
+<section id="customizing-limits-labels-and-titles">
+<h3><font _mstmutation="1" _msttexthash="1071408" _msthash="170">Customizing limits, labels, and titles</font><a class="headerlink" href="https://seaborn.pydata.org/tutorial/objects_interface.html#customizing-limits-labels-and-titles" title="Permalink to this heading">#</a></h3>
+<p _msttexthash="6497543" _msthash="171"><a class="reference internal" href="https://seaborn.pydata.org/generated/seaborn.objects.Plot.html#seaborn.objects.Plot" title="seaborn.objects.Plot"><code class="xref py py-class docutils literal notranslate"><span class="pre">Plot</span></code></a> has a number of methods for simple customization, including <a class="reference internal" href="https://seaborn.pydata.org/generated/seaborn.objects.Plot.label.html#seaborn.objects.Plot.label" title="seaborn.objects.Plot.label"><code class="xref py py-meth docutils literal notranslate"><span class="pre">Plot.label()</span></code></a>, <a class="reference internal" href="https://seaborn.pydata.org/generated/seaborn.objects.Plot.limit.html#seaborn.objects.Plot.limit" title="seaborn.objects.Plot.limit"><code class="xref py py-meth docutils literal notranslate"><span class="pre">Plot.limit()</span></code></a>, and <a class="reference internal" href="https://seaborn.pydata.org/generated/seaborn.objects.Plot.share.html#seaborn.objects.Plot.share" title="seaborn.objects.Plot.share"><code class="xref py py-meth docutils literal notranslate"><span class="pre">Plot.share()</span></code></a>:</p>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre id="codecell38"><span></span><span class="p">(</span>
+    <span class="n">so</span><span class="o">.</span><span class="n">Plot</span><span class="p">(</span><span class="n">penguins</span><span class="p">,</span> <span class="n">x</span><span class="o">=</span><span class="s2">"body_mass_g"</span><span class="p">,</span> <span class="n">y</span><span class="o">=</span><span class="s2">"species"</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s2">"island"</span><span class="p">)</span>
+    <span class="o">.</span><span class="n">facet</span><span class="p">(</span><span class="n">col</span><span class="o">=</span><span class="s2">"sex"</span><span class="p">)</span>
+    <span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="n">so</span><span class="o">.</span><span class="n">Dot</span><span class="p">(),</span> <span class="n">so</span><span class="o">.</span><span class="n">Jitter</span><span class="p">(</span><span class="mf">.5</span><span class="p">))</span>
+    <span class="o">.</span><span class="n">share</span><span class="p">(</span><span class="n">x</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+    <span class="o">.</span><span class="n">limit</span><span class="p">(</span><span class="n">y</span><span class="o">=</span><span class="p">(</span><span class="mf">2.5</span><span class="p">,</span> <span class="o">-</span><span class="mf">.5</span><span class="p">))</span>
+    <span class="o">.</span><span class="n">label</span><span class="p">(</span>
+        <span class="n">x</span><span class="o">=</span><span class="s2">"Body mass (g)"</span><span class="p">,</span> <span class="n">y</span><span class="o">=</span><span class="s2">""</span><span class="p">,</span>
+        <span class="n">color</span><span class="o">=</span><span class="nb">str</span><span class="o">.</span><span class="n">capitalize</span><span class="p">,</span>
+        <span class="n">title</span><span class="o">=</span><span class="s2">"</span><span class="si">{}</span><span class="s2"> penguins"</span><span class="o">.</span><span class="n">format</span><span class="p">,</span>
+    <span class="p">)</span>
+<span class="p">)</span>
+</pre><button class="copybtn o-tooltip--left" data-tooltip="Copy" data-clipboard-target="#codecell38">
+      <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-copy" width="44" height="44" viewBox="0 0 24 24" stroke-width="1.5" stroke="#000000" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <title>Copy to clipboard</title>
+  <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
+  <rect x="8" y="8" width="12" height="12" rx="2"></rect>
+  <path d="M16 8v-2a2 2 0 0 0 -2 -2h-8a2 2 0 0 0 -2 2v8a2 2 0 0 0 2 2h2"></path>
+</svg>
+    </button></div>
+</div>
+<a class="reference internal image-reference" href="./A interface seaborn.objects — documentação do seaborn 0.13.2_files/objects_interface_81_0.png"><img alt="../_images/objects_interface_81_0.png" src="./A interface seaborn.objects — documentação do seaborn 0.13.2_files/objects_interface_81_0.png" style="width: 620.0749999999999px; height: 378.25px;" _mstalt="1115998" _msthash="172"></a>
+</section>
+<section id="theme-customization">
+<h3><font _mstmutation="1" _msttexthash="393965" _msthash="173">Theme customization</font><a class="headerlink" href="https://seaborn.pydata.org/tutorial/objects_interface.html#theme-customization" title="Permalink to this heading">#</a></h3>
+<p _msttexthash="54550587" _msthash="174">Finally, <a class="reference internal" href="https://seaborn.pydata.org/generated/seaborn.objects.Plot.html#seaborn.objects.Plot" title="seaborn.objects.Plot"><code class="xref py py-class docutils literal notranslate"><span class="pre">Plot</span></code></a> supports data-independent theming through the <a class="reference internal" href="https://seaborn.pydata.org/generated/seaborn.objects.Plot.theme.html#seaborn.objects.Plot.theme" title="seaborn.objects.Plot.theme"><code class="xref py py-class docutils literal notranslate"><span class="pre">Plot.theme</span></code></a> method. Currently, this method accepts a dictionary of matplotlib rc parameters. You can set them directly and/or pass a package of parameters from seaborn’s theming functions:</p>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre id="codecell39"><span></span><span class="kn">from</span> <span class="nn">seaborn</span> <span class="kn">import</span> <span class="n">axes_style</span>
+<span class="n">theme_dict</span> <span class="o">=</span> <span class="p">{</span><span class="o">**</span><span class="n">axes_style</span><span class="p">(</span><span class="s2">"whitegrid"</span><span class="p">),</span> <span class="s2">"grid.linestyle"</span><span class="p">:</span> <span class="s2">":"</span><span class="p">}</span>
+<span class="n">so</span><span class="o">.</span><span class="n">Plot</span><span class="p">()</span><span class="o">.</span><span class="n">theme</span><span class="p">(</span><span class="n">theme_dict</span><span class="p">)</span>
+</pre><button class="copybtn o-tooltip--left" data-tooltip="Copy" data-clipboard-target="#codecell39">
+      <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-copy" width="44" height="44" viewBox="0 0 24 24" stroke-width="1.5" stroke="#000000" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <title>Copy to clipboard</title>
+  <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
+  <rect x="8" y="8" width="12" height="12" rx="2"></rect>
+  <path d="M16 8v-2a2 2 0 0 0 -2 -2h-8a2 2 0 0 0 -2 2v8a2 2 0 0 0 2 2h2"></path>
+</svg>
+    </button></div>
+</div>
+<a class="reference internal image-reference" href="./A interface seaborn.objects — documentação do seaborn 0.13.2_files/objects_interface_83_0.png"><img alt="../_images/objects_interface_83_0.png" src="./A interface seaborn.objects — documentação do seaborn 0.13.2_files/objects_interface_83_0.png" style="width: 509.15px; height: 378.25px;" _mstalt="1116960" _msthash="175"></a>
+<p><font _mstmutation="1" _msttexthash="2621905" _msthash="176">To change the theme for all <a class="reference internal" href="https://seaborn.pydata.org/generated/seaborn.objects.Plot.html#seaborn.objects.Plot" title="seaborn.objects.Plot" _mstmutation="1"><code class="xref py py-class docutils literal notranslate"><span class="pre">Plot</span></code></a> instances, update the settings in :</font><code class="xref py py-attr docutils literal notranslate"><span class="pre">Plot.config</span></code></p>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre id="codecell40"><span></span><span class="n">so</span><span class="o">.</span><span class="n">Plot</span><span class="o">.</span><span class="n">config</span><span class="o">.</span><span class="n">theme</span><span class="o">.</span><span class="n">update</span><span class="p">(</span><span class="n">theme_dict</span><span class="p">)</span>
+</pre><button class="copybtn o-tooltip--left" data-tooltip="Copy" data-clipboard-target="#codecell40">
+      <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-copy" width="44" height="44" viewBox="0 0 24 24" stroke-width="1.5" stroke="#000000" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <title>Copy to clipboard</title>
+  <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
+  <rect x="8" y="8" width="12" height="12" rx="2"></rect>
+  <path d="M16 8v-2a2 2 0 0 0 -2 -2h-8a2 2 0 0 0 -2 2v8a2 2 0 0 0 2 2h2"></path>
+</svg>
+    </button></div>
+</div>
+</section>
+</section>
+</section>
+
+
+          </article>
+          
+
+          
+          
+      </div>
+      
+    </div>
+  </div>
+
+  
+    
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script src="./A interface seaborn.objects — documentação do seaborn 0.13.2_files/pydata-sphinx-theme.js.baixados"></script>
+
+<footer class="footer" style="border-top: 1px solid #ccc; padding-top: 10px">
+  <div class="container">
+    <div id="credits" style="width: 50%; float: left">
+      <p><font _mstmutation="1" _msttexthash="3639389" _msthash="177">
+      © Copyright 2012-2024, <a href="https://mwaskom.github.io/" _mstmutation="1">Michael Waskom</a>.<br _mstmutation="1">
+      Created using <a href="https://www.sphinx-doc.org/" _mstmutation="1">Sphinx</a> and the <a href="https://pydata-sphinx-theme.readthedocs.io/en/stable/" _mstmutation="1">PyData Theme</a>.</font><br>
+      </p>
+    </div>
+    <div class="dropup show" style="float: right; margin: 10px">
+        <a class="btn btn-secondary dropdown-toggle" href="https://seaborn.pydata.org/tutorial/objects_interface.html#" role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" _msttexthash="93366" _msthash="178">
+            Archive
+        </a>
+        <div class="dropdown-menu dropdown-menu-right" aria-labelledby="dropdownMenuLink" _msthidden="4">
+          <a class="dropdown-item" href="https://seaborn.pydata.org/archive/0.12/index.html" _msttexthash="34632" _msthidden="1" _msthash="179">v0.12</a>
+          <a class="dropdown-item" href="https://seaborn.pydata.org/archive/0.11/index.html" _msttexthash="34489" _msthidden="1" _msthash="180">v0.11</a>
+          <a class="dropdown-item" href="https://seaborn.pydata.org/archive/0.10/index.html" _msttexthash="34346" _msthidden="1" _msthash="181">v0.10</a>
+          <a class="dropdown-item" href="https://seaborn.pydata.org/archive/0.9/index.html" _msttexthash="28522" _msthidden="1" _msthash="182">v0.9</a>
+        </div>
+    </div>
+    <div id="version" style="color: #999; float: right; margin: 15px" _msttexthash="50401" _msthash="183">v0.13.2</div>
+    </div>
+  
+</footer>
+  
+</body></html>

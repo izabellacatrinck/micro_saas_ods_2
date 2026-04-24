@@ -1,0 +1,781 @@
+<!DOCTYPE html>
+<!-- saved from url=(0058)https://seaborn.pydata.org/tutorial/function_overview.html -->
+<html lang="pt" data-mode="light" data-theme="light"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"><meta name="generator" content="Docutils 0.19: https://docutils.sourceforge.io/">
+
+    <title _msttexthash="8938956" _msthash="0">Visão geral das funções de plotamento do seaborn — documentação do seaborn 0.13.2</title>
+  <script>
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "light";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "light";
+  </script>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="./Visão geral das funções de plotamento do seaborn — documentação do seaborn 0.13.2_files/theme.css" rel="stylesheet">
+<link href="./Visão geral das funções de plotamento do seaborn — documentação do seaborn 0.13.2_files/pydata-sphinx-theme.css" rel="stylesheet">
+
+  
+  <link rel="stylesheet" href="./Visão geral das funções de plotamento do seaborn — documentação do seaborn 0.13.2_files/all.min.css">
+  <link rel="preload" as="font" type="font/woff2" crossorigin="" href="https://seaborn.pydata.org/_static/vendor/fontawesome/5.13.0/webfonts/fa-solid-900.woff2">
+  <link rel="preload" as="font" type="font/woff2" crossorigin="" href="https://seaborn.pydata.org/_static/vendor/fontawesome/5.13.0/webfonts/fa-brands-400.woff2">
+
+    <link rel="stylesheet" type="text/css" href="./Visão geral das funções de plotamento do seaborn — documentação do seaborn 0.13.2_files/pygments.css">
+    <link rel="stylesheet" type="text/css" href="./Visão geral das funções de plotamento do seaborn — documentação do seaborn 0.13.2_files/plot_directive.css">
+    <link rel="stylesheet" type="text/css" href="./Visão geral das funções de plotamento do seaborn — documentação do seaborn 0.13.2_files/copybutton.css">
+    <link rel="stylesheet" type="text/css" href="./Visão geral das funções de plotamento do seaborn — documentação do seaborn 0.13.2_files/design-style.1e8bd061cd6da7fc9cf755528e8ffc24.min.css">
+    <link rel="stylesheet" type="text/css" href="./Visão geral das funções de plotamento do seaborn — documentação do seaborn 0.13.2_files/custom.css">
+  
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="./Visão geral das funções de plotamento do seaborn — documentação do seaborn 0.13.2_files/pydata-sphinx-theme.js.baixados">
+
+    <script data-url_root="../" id="documentation_options" src="./Visão geral das funções de plotamento do seaborn — documentação do seaborn 0.13.2_files/documentation_options.js.baixados"></script>
+    <script src="./Visão geral das funções de plotamento do seaborn — documentação do seaborn 0.13.2_files/jquery.js.baixados"></script>
+    <script src="./Visão geral das funções de plotamento do seaborn — documentação do seaborn 0.13.2_files/underscore.js.baixados"></script>
+    <script src="./Visão geral das funções de plotamento do seaborn — documentação do seaborn 0.13.2_files/_sphinx_javascript_frameworks_compat.js.baixados"></script>
+    <script src="./Visão geral das funções de plotamento do seaborn — documentação do seaborn 0.13.2_files/doctools.js.baixados"></script>
+    <script src="./Visão geral das funções de plotamento do seaborn — documentação do seaborn 0.13.2_files/sphinx_highlight.js.baixados"></script>
+    <script src="./Visão geral das funções de plotamento do seaborn — documentação do seaborn 0.13.2_files/clipboard.min.js.baixados"></script>
+    <script src="./Visão geral das funções de plotamento do seaborn — documentação do seaborn 0.13.2_files/copybutton.js.baixados"></script>
+    <script src="./Visão geral das funções de plotamento do seaborn — documentação do seaborn 0.13.2_files/design-tabs.js.baixados"></script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'tutorial/function_overview';</script>
+    <link rel="shortcut icon" href="https://seaborn.pydata.org/_static/favicon.ico">
+    <link rel="index" title="Index" href="https://seaborn.pydata.org/genindex.html">
+    <link rel="search" title="Search" href="https://seaborn.pydata.org/search.html">
+    <link rel="next" title="Data structures accepted by seaborn" href="https://seaborn.pydata.org/tutorial/data_structure.html">
+    <link rel="prev" title="An introduction to seaborn" href="https://seaborn.pydata.org/tutorial/introduction.html">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="docsearch:language" content="en">
+  </head>
+  
+  
+  <body data-spy="scroll" data-target="#bd-toc-nav" data-offset="180" data-default-mode="light">
+
+  
+  <input type="checkbox" class="sidebar-toggle" name="__primary" id="__primary">
+  <label class="overlay overlay-primary" for="__primary"></label>
+
+  
+  <input type="checkbox" class="sidebar-toggle" name="__secondary" id="__secondary">
+  <label class="overlay overlay-secondary" for="__secondary"></label>
+
+  
+  <div class="search-button__wrapper" _msthidden="1">
+    <div class="search-button__overlay"></div>
+    <div class="search-button__search-container" _msthidden="1">
+      
+<form class="bd-search d-flex align-items-center" action="https://seaborn.pydata.org/search.html" method="get" _msthidden="1">
+  <i class="icon fas fa-search"></i>
+  <input type="search" class="form-control" name="q" id="search-input" placeholder="Search the docs ..." aria-label="Search the docs ..." autocomplete="off" _msthidden="A" _mstplaceholder="267410" _msthash="1" _mstaria-label="267410">
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form>
+    </div>
+  </div>
+
+  
+  <nav class="bd-header navbar navbar-expand-lg bd-navbar" id="navbar-main"><div class="bd-header__inner container-xl">
+  <label class="sidebar-toggle primary-toggle" for="__primary">
+      <span class="fas fa-bars"></span>
+  </label>
+  <div id="navbar-start">
+    
+    
+  
+
+
+<a class="navbar-brand logo" href="https://seaborn.pydata.org/index.html">
+  
+  
+  
+  
+  
+  
+    <img src="./Visão geral das funções de plotamento do seaborn — documentação do seaborn 0.13.2_files/logo-wide-lightbg.svg" class="logo__image only-light" alt="Imagem do logo" _mstalt="131794" _msthash="2">
+    <img src="./Visão geral das funções de plotamento do seaborn — documentação do seaborn 0.13.2_files/logo-wide-lightbg.svg" class="logo__image only-dark" alt="Logo image" _msthidden="A" _mstalt="131794" _msthash="3">
+  
+  
+</a>
+    
+  </div>
+
+  
+  <div class="col-lg-9 navbar-header-items">
+    <div id="navbar-center" class="mr-auto">
+      
+      <div class="navbar-center-item">
+        <ul id="navbar-main-elements" class="navbar-nav">
+    <li class="toctree-l1 nav-item">
+ <a class="reference internal nav-link" href="https://seaborn.pydata.org/installing.html" _msttexthash="203125" _msthash="4"> Instalação </a>
+</li>
+
+<li class="toctree-l1 nav-item">
+ <a class="reference internal nav-link" href="https://seaborn.pydata.org/examples/index.html" _msttexthash="91390" _msthash="5"> Galeria </a>
+</li>
+
+<li class="toctree-l1 current active nav-item">
+ <a class="reference internal nav-link" href="https://seaborn.pydata.org/tutorial.html" _msttexthash="116545" _msthash="6">
+  Tutorial
+ </a>
+</li>
+
+<li class="toctree-l1 nav-item">
+ <a class="reference internal nav-link" href="https://seaborn.pydata.org/api.html" _msttexthash="22776" _msthash="7">
+  API
+ </a>
+</li>
+
+<li class="toctree-l1 nav-item">
+ <a class="reference internal nav-link" href="https://seaborn.pydata.org/whatsnew/index.html" _msttexthash="198991" _msthash="8"> Lançamentos </a>
+</li>
+
+<li class="toctree-l1 nav-item">
+ <a class="reference internal nav-link" href="https://seaborn.pydata.org/citing.html" _msttexthash="130403" _msthash="9"> Citação </a>
+</li>
+
+<li class="toctree-l1 nav-item">
+ <a class="reference internal nav-link" href="https://seaborn.pydata.org/faq.html" _msttexthash="22607" _msthash="10">
+  FAQ
+ </a>
+</li>
+
+</ul>
+      </div>
+      
+    </div>
+
+    <div id="navbar-end">
+      <div class="navbar-end-item navbar-end__search-button-container">
+        
+<button class="btn btn-sm navbar-btn search-button search-button__button" title="Search">
+  <i class="fas fa-search"></i>
+</button>
+      </div>
+      
+      <div class="navbar-end-item">
+        <ul id="navbar-icon-links" class="navbar-nav" aria-label="Links de Ícones" _mstaria-label="131963" _msthash="11">
+        <li class="nav-item">
+          
+          
+          
+          
+          
+          
+          <a href="https://github.com/mwaskom/seaborn" title="GitHub" class="nav-link" rel="noopener" target="_blank"><span><i class="fab fa-github"></i></span>
+            <label class="sr-only" _msttexthash="72332" _msthash="12">GitHub</label></a>
+        </li>
+        <li class="nav-item">
+          
+          
+          
+          
+          
+          
+          <a href="https://stackoverflow.com/tags/seaborn" title="StackOverflow" class="nav-link" rel="noopener" target="_blank"><span><i class="fab fa-stack-overflow"></i></span>
+            <label class="sr-only" _msttexthash="232466" _msthash="13">StackOverflow</label></a>
+        </li>
+        <li class="nav-item">
+          
+          
+          
+          
+          
+          
+          <a href="https://twitter.com/michaelwaskom" title="Twitter" class="nav-link" rel="noopener" target="_blank"><span><i class="fab fa-twitter"></i></span>
+            <label class="sr-only" _msttexthash="98995" _msthash="14">Twitter</label></a>
+        </li>
+      </ul>
+      </div>
+      
+    </div>
+  </div>
+
+
+  
+  <div class="search-button-container--mobile">
+<button class="btn btn-sm navbar-btn search-button search-button__button" title="Search">
+  <i class="fas fa-search"></i>
+</button>
+  </div>
+
+  
+  <label class="sidebar-toggle secondary-toggle" for="__secondary">
+      <span class="fas fa-outdent"></span>
+  </label>
+  
+
+</div>
+  </nav>
+  
+
+  <div class="bd-container container-xl">
+    <div class="bd-container__inner row">
+      
+      <div class="bd-sidebar-primary bd-sidebar">
+        
+  
+  <div class="sidebar-header-items sidebar-primary__section" _msthidden="13">
+    <p class="sidebar-header-items__title" role="heading" aria-level="1" aria-label="Navigation" _msthidden="1" _mstaria-label="157742" _msthash="15" _msttexthash="256997">
+      Site Navigation
+    </p>
+    
+    
+      <div class="sidebar-header-items__center" _msthidden="7">
+      
+      <div class="navbar-center-item" _msthidden="7">
+        <ul id="navbar-main-elements" class="navbar-nav" _msthidden="7">
+    <li class="toctree-l1 nav-item" _msthidden="1">
+ <a class="reference internal nav-link" href="https://seaborn.pydata.org/installing.html" _msttexthash="157573" _msthidden="1" _msthash="16">
+  Installing
+ </a>
+</li>
+
+<li class="toctree-l1 nav-item" _msthidden="1">
+ <a class="reference internal nav-link" href="https://seaborn.pydata.org/examples/index.html" _msttexthash="95901" _msthidden="1" _msthash="17">
+  Gallery
+ </a>
+</li>
+
+<li class="toctree-l1 current active nav-item" _msthidden="1">
+ <a class="reference internal nav-link" href="https://seaborn.pydata.org/tutorial.html" _msttexthash="116545" _msthidden="1" _msthash="18">
+  Tutorial
+ </a>
+</li>
+
+<li class="toctree-l1 nav-item" _msthidden="1">
+ <a class="reference internal nav-link" href="https://seaborn.pydata.org/api.html" _msttexthash="22776" _msthidden="1" _msthash="19">
+  API
+ </a>
+</li>
+
+<li class="toctree-l1 nav-item" _msthidden="1">
+ <a class="reference internal nav-link" href="https://seaborn.pydata.org/whatsnew/index.html" _msttexthash="113542" _msthidden="1" _msthash="20">
+  Releases
+ </a>
+</li>
+
+<li class="toctree-l1 nav-item" _msthidden="1">
+ <a class="reference internal nav-link" href="https://seaborn.pydata.org/citing.html" _msttexthash="76037" _msthidden="1" _msthash="21">
+  Citing
+ </a>
+</li>
+
+<li class="toctree-l1 nav-item" _msthidden="1">
+ <a class="reference internal nav-link" href="https://seaborn.pydata.org/faq.html" _msttexthash="22607" _msthidden="1" _msthash="22">
+  FAQ
+ </a>
+</li>
+
+</ul>
+      </div>
+      
+      </div>
+    
+
+    
+    
+    <div class="sidebar-header-items__end" _msthidden="4">
+      
+      <div class="navbar-end-item" _msthidden="4">
+        <ul id="navbar-icon-links" class="navbar-nav" aria-label="Icon Links" _msthidden="3" _mstaria-label="131963" _msthash="23">
+        <li class="nav-item" _msthidden="1">
+          
+          
+          
+          
+          
+          
+          <a href="https://github.com/mwaskom/seaborn" title="GitHub" class="nav-link" rel="noopener" target="_blank" _msthidden="1"><span><i class="fab fa-github"></i></span>
+            <label class="sr-only" _msttexthash="72332" _msthidden="1" _msthash="24">GitHub</label></a>
+        </li>
+        <li class="nav-item" _msthidden="1">
+          
+          
+          
+          
+          
+          
+          <a href="https://stackoverflow.com/tags/seaborn" title="StackOverflow" class="nav-link" rel="noopener" target="_blank" _msthidden="1"><span><i class="fab fa-stack-overflow"></i></span>
+            <label class="sr-only" _msttexthash="232466" _msthidden="1" _msthash="25">StackOverflow</label></a>
+        </li>
+        <li class="nav-item" _msthidden="1">
+          
+          
+          
+          
+          
+          
+          <a href="https://twitter.com/michaelwaskom" title="Twitter" class="nav-link" rel="noopener" target="_blank" _msthidden="1"><span><i class="fab fa-twitter"></i></span>
+            <label class="sr-only" _msttexthash="98995" _msthidden="1" _msthash="26">Twitter</label></a>
+        </li>
+      </ul>
+      </div>
+      
+    </div>
+    
+  </div>
+
+  
+  <div class="sidebar-start-items sidebar-primary__section">
+    <div class="sidebar-start-items__item"><nav class="bd-links" id="bd-docs-nav" aria-label="Navegação por seções" _mstaria-label="353847" _msthash="27">
+  <div class="bd-toc-item navbar-nav">
+    <ul class="nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="https://seaborn.pydata.org/tutorial/introduction.html" _msttexthash="591084" _msthash="28"> Uma introdução ao seaborn </a>
+ </li>
+</ul>
+<ul class="current nav bd-sidenav">
+ <li class="toctree-l1 current active">
+  <a class="current reference internal" href="https://seaborn.pydata.org/tutorial/function_overview.html#" _msttexthash="1374724" _msthash="29"> Visão geral das funções de plotagem seaborn </a>
+ </li>
+</ul>
+<ul class="nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="https://seaborn.pydata.org/tutorial/data_structure.html" _msttexthash="1162369" _msthash="30"> Estruturas de dados aceitas pelo seaborn </a>
+ </li>
+</ul>
+<ul class="nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="https://seaborn.pydata.org/tutorial/objects_interface.html" _msttexthash="632931" _msthash="31"> A interface seaborn.objects </a>
+ </li>
+</ul>
+<ul class="nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="https://seaborn.pydata.org/tutorial/properties.html" _msttexthash="692822" _msthash="32"> Propriedades dos objetos Mark </a>
+ </li>
+</ul>
+<ul class="nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="https://seaborn.pydata.org/tutorial/relational.html" _msttexthash="1139190" _msthash="33"> Visualizando relações estatísticas </a>
+ </li>
+</ul>
+<ul class="nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="https://seaborn.pydata.org/tutorial/distributions.html" _msttexthash="1386658" _msthash="34"> Visualização das distribuições dos dados </a>
+ </li>
+</ul>
+<ul class="nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="https://seaborn.pydata.org/tutorial/categorical.html" _msttexthash="995553" _msthash="35"> Visualização de dados categóricos </a>
+ </li>
+</ul>
+<ul class="nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="https://seaborn.pydata.org/tutorial/error_bars.html" _msttexthash="1143376" _msthash="36"> Estimativa estatística e barras de erro </a>
+ </li>
+</ul>
+<ul class="nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="https://seaborn.pydata.org/tutorial/regression.html" _msttexthash="1013727" _msthash="37"> Estimativa dos ajustes de regressão </a>
+ </li>
+</ul>
+<ul class="nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="https://seaborn.pydata.org/tutorial/axis_grids.html" _msttexthash="1925560" _msthash="38"> Construindo grades estruturadas de múltiplos plots </a>
+ </li>
+</ul>
+<ul class="nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="https://seaborn.pydata.org/tutorial/aesthetics.html" _msttexthash="711880" _msthash="39"> Estética de controle da figura </a>
+ </li>
+</ul>
+<ul class="nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="https://seaborn.pydata.org/tutorial/color_palettes.html" _msttexthash="608400" _msthash="40"> Escolha das paletas de cores </a>
+ </li>
+</ul>
+
+  </div>
+</nav>
+    </div>
+  </div>
+  
+
+  
+  <div class="sidebar-end-items sidebar-primary__section">
+    <div class="sidebar-end-items__item">
+    </div>
+  </div>
+
+      </div>
+
+      
+      
+      
+        <div class="bd-sidebar-secondary bd-toc">
+          
+<div class="toc-item">
+  
+<div class="tocsection onthispage">
+    <i class="fas fa-list"></i><font _mstmutation="1" _msttexthash="199043" _msthash="41"> Nesta página </font></div>
+<nav id="bd-toc-nav" class="page-toc">
+    <ul class="visible nav section-nav flex-column">
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="https://seaborn.pydata.org/tutorial/function_overview.html#similar-functions-for-similar-tasks" _msttexthash="1503437" _msthash="42"> Funções semelhantes para tarefas semelhantes </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="https://seaborn.pydata.org/tutorial/function_overview.html#figure-level-vs-axes-level-functions" _msttexthash="1517477" _msthash="43"> Funções em nível de figura vs. em nível de eixos </a>
+  <ul class="nav section-nav flex-column" _msthidden="5">
+   <li class="toc-h3 nav-item toc-entry" _msthidden="1">
+    <a class="reference internal nav-link" href="https://seaborn.pydata.org/tutorial/function_overview.html#axes-level-functions-make-self-contained-plots" _msttexthash="1577524" _msthidden="1" _msthash="44">
+     Axes-level functions make self-contained plots
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry" _msthidden="1">
+    <a class="reference internal nav-link" href="https://seaborn.pydata.org/tutorial/function_overview.html#figure-level-functions-own-their-figure" _msttexthash="1172067" _msthidden="1" _msthash="45">
+     Figure-level functions own their figure
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry" _msthidden="1">
+    <a class="reference internal nav-link" href="https://seaborn.pydata.org/tutorial/function_overview.html#customizing-plots-from-a-figure-level-function" _msttexthash="1529736" _msthidden="1" _msthash="46">
+     Customizing plots from a figure-level function
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry" _msthidden="1">
+    <a class="reference internal nav-link" href="https://seaborn.pydata.org/tutorial/function_overview.html#specifying-figure-sizes" _msttexthash="501527" _msthidden="1" _msthash="47">
+     Specifying figure sizes
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry" _msthidden="1">
+    <a class="reference internal nav-link" href="https://seaborn.pydata.org/tutorial/function_overview.html#relative-merits-of-figure-level-functions" _msttexthash="1277458" _msthidden="1" _msthash="48">
+     Relative merits of figure-level functions
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="https://seaborn.pydata.org/tutorial/function_overview.html#combining-multiple-views-on-the-data" _msttexthash="1378507" _msthash="49"> Combinando múltiplas visões sobre os dados </a>
+ </li>
+</ul>
+
+</nav>
+</div>
+
+<div class="toc-item">
+  
+</div>
+
+<div class="toc-item">
+  
+</div>
+
+        </div>
+      
+      
+
+      
+      
+      <div class="bd-content col">
+          
+          <div class="bd-header-article">
+              
+          </div>
+
+          
+          
+          <article class="bd-article" role="main">
+            
+  <section id="overview-of-seaborn-plotting-functions">
+<span id="function-tutorial"></span><h1><font _mstmutation="1" _msttexthash="1374724" _msthash="50">Visão geral das funções de plotagem seaborn</font><a class="headerlink" href="https://seaborn.pydata.org/tutorial/function_overview.html#overview-of-seaborn-plotting-functions" title="Permalink to this heading">#</a></h1>
+<p _msttexthash="53970007" _msthash="51">A maioria das suas interações com os seaborn acontecerá por meio de um conjunto de funções de plotagem. Capítulos posteriores do tutorial explorarão as características específicas oferecidas por cada função. Este capítulo irá apresentar, de forma geral, os diferentes tipos de funções que você irá encontrar.</p>
+<section id="similar-functions-for-similar-tasks">
+<h2><font _mstmutation="1" _msttexthash="1503437" _msthash="52">Funções semelhantes para tarefas semelhantes</font><a class="headerlink" href="https://seaborn.pydata.org/tutorial/function_overview.html#similar-functions-for-similar-tasks" title="Permalink to this heading">#</a></h2>
+<p _msttexthash="80435966" _msthash="53">O espaço de nome seaborn é plano; Todas as funcionalidades estão acessíveis no nível mais alto. Mas o próprio código é estruturado hierarquicamente, com módulos de funções que alcançam objetivos de visualização semelhantes por meios diferentes. A maioria dos documentos é estruturada em torno desses módulos: você encontrará nomes como "relacional", "distribucional" e "categórico".</p>
+<p _msttexthash="17212429" _msthash="54">Por exemplo, o <a class="reference internal" href="https://seaborn.pydata.org/api.html#distribution-api" _istranslated="1"><span class="std std-ref" _istranslated="1">módulo de distribuições</span></a> define funções que se especializam em representar a distribuição de pontos de dados. Isso inclui métodos familiares como o histograma:</p>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre id="codecell0"><span></span><span class="n">penguins</span> <span class="o">=</span> <span class="n">sns</span><span class="o">.</span><span class="n">load_dataset</span><span class="p">(</span><span class="s2">"penguins"</span><span class="p">)</span>
+<span class="n">sns</span><span class="o">.</span><span class="n">histplot</span><span class="p">(</span><span class="n">data</span><span class="o">=</span><span class="n">penguins</span><span class="p">,</span> <span class="n">x</span><span class="o">=</span><span class="s2">"flipper_length_mm"</span><span class="p">,</span> <span class="n">hue</span><span class="o">=</span><span class="s2">"species"</span><span class="p">,</span> <span class="n">multiple</span><span class="o">=</span><span class="s2">"stack"</span><span class="p">)</span>
+</pre><button class="copybtn o-tooltip--left" data-tooltip="Copy" data-clipboard-target="#codecell0">
+      <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-copy" width="44" height="44" viewBox="0 0 24 24" stroke-width="1.5" stroke="#000000" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <title>Copy to clipboard</title>
+  <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
+  <rect x="8" y="8" width="12" height="12" rx="2"></rect>
+  <path d="M16 8v-2a2 2 0 0 0 -2 -2h-8a2 2 0 0 0 -2 2v8a2 2 0 0 0 2 2h2"></path>
+</svg>
+    </button></div>
+</div>
+<img alt="../_images/function_overview_3_0.png" src="./Visão geral das funções de plotamento do seaborn — documentação do seaborn 0.13.2_files/function_overview_3_0.png" _msthidden="A" _mstalt="1107977" _msthash="55">
+<p _msttexthash="5911841" _msthash="56">Junto com opções semelhantes, mas talvez menos familiares, como a estimação da densidade de grãos:</p>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre id="codecell1"><span></span><span class="n">sns</span><span class="o">.</span><span class="n">kdeplot</span><span class="p">(</span><span class="n">data</span><span class="o">=</span><span class="n">penguins</span><span class="p">,</span> <span class="n">x</span><span class="o">=</span><span class="s2">"flipper_length_mm"</span><span class="p">,</span> <span class="n">hue</span><span class="o">=</span><span class="s2">"species"</span><span class="p">,</span> <span class="n">multiple</span><span class="o">=</span><span class="s2">"stack"</span><span class="p">)</span>
+</pre><button class="copybtn o-tooltip--left" data-tooltip="Copy" data-clipboard-target="#codecell1">
+      <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-copy" width="44" height="44" viewBox="0 0 24 24" stroke-width="1.5" stroke="#000000" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <title>Copy to clipboard</title>
+  <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
+  <rect x="8" y="8" width="12" height="12" rx="2"></rect>
+  <path d="M16 8v-2a2 2 0 0 0 -2 -2h-8a2 2 0 0 0 -2 2v8a2 2 0 0 0 2 2h2"></path>
+</svg>
+    </button></div>
+</div>
+<img alt="../_images/function_overview_5_0.png" src="./Visão geral das funções de plotamento do seaborn — documentação do seaborn 0.13.2_files/function_overview_5_0.png" _msthidden="A" _mstalt="1108913" _msthash="57">
+<p><font _mstmutation="1" _msttexthash="95559347" _msthash="58">Funções dentro de um módulo compartilham muito código subjacente e oferecem características semelhantes que podem não estar presentes em outros componentes da biblioteca (como nos exemplos acima). Elas são projetadas para facilitar a troca entre diferentes representações visuais enquanto você explora um conjunto de dados, pois representações diferentes frequentemente têm pontos fortes e fracos complementares.</font><code class="docutils literal notranslate"><span class="pre">multiple="stack"</span></code></p>
+</section>
+<section id="figure-level-vs-axes-level-functions">
+<h2><font _mstmutation="1" _msttexthash="1517477" _msthash="59">Funções em nível de figura vs. em nível de eixos</font><a class="headerlink" href="https://seaborn.pydata.org/tutorial/function_overview.html#figure-level-vs-axes-level-functions" title="Permalink to this heading">#</a></h2>
+<p><font _mstmutation="1" _msttexthash="34754005" _msthash="60">Além dos diferentes módulos, existe uma classificação transversal das funções seaborn como "nível de eixos" ou "nível de figura". Os exemplos acima são funções em nível de eixos. Eles plotam dados em um único objeto, que é o valor de retorno da função.</font><code class="xref py py-class docutils literal notranslate"><span class="pre">matplotlib.pyplot.Axes</span></code></p>
+<p _msttexthash="52122083" _msthash="61">Em contraste, funções em nível de figura interagem com matplotlib através de um objeto seaborn, geralmente um <a class="reference internal" href="https://seaborn.pydata.org/generated/seaborn.FacetGrid.html#seaborn.FacetGrid" title="seaborn.FacetGrid" _istranslated="1"><code class="xref py py-class docutils literal notranslate" _istranslated="1"></code></a>, que gerencia a figura. Cada módulo possui uma única função em nível de figura, que oferece uma interface unitária para suas várias funções em nível de eixo. A organização se parece um pouco com isto:</p>
+<img alt="../_images/function_overview_8_0.png" src="./Visão geral das funções de plotamento do seaborn — documentação do seaborn 0.13.2_files/function_overview_8_0.png" _msthidden="A" _mstalt="1110317" _msthash="62">
+<p _msttexthash="15030444" _msthash="63">Por exemplo, <a class="reference internal" href="https://seaborn.pydata.org/generated/seaborn.displot.html#seaborn.displot" title="seaborn.displot" _istranslated="1"><code class="xref py py-func docutils literal notranslate" _istranslated="1"></code></a> é a função em nível de figura para o módulo de distribuições. Seu comportamento padrão é desenhar um histograma, usando o mesmo código dos <a class="reference internal" href="https://seaborn.pydata.org/generated/seaborn.histplot.html#seaborn.histplot" title="seaborn.histplot" _istranslated="1"><code class="xref py py-func docutils literal notranslate" _istranslated="1"></code></a> bastidores:</p>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre id="codecell2"><span></span><span class="n">sns</span><span class="o">.</span><span class="n">displot</span><span class="p">(</span><span class="n">data</span><span class="o">=</span><span class="n">penguins</span><span class="p">,</span> <span class="n">x</span><span class="o">=</span><span class="s2">"flipper_length_mm"</span><span class="p">,</span> <span class="n">hue</span><span class="o">=</span><span class="s2">"species"</span><span class="p">,</span> <span class="n">multiple</span><span class="o">=</span><span class="s2">"stack"</span><span class="p">)</span>
+</pre><button class="copybtn o-tooltip--left" data-tooltip="Copy" data-clipboard-target="#codecell2">
+      <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-copy" width="44" height="44" viewBox="0 0 24 24" stroke-width="1.5" stroke="#000000" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <title>Copy to clipboard</title>
+  <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
+  <rect x="8" y="8" width="12" height="12" rx="2"></rect>
+  <path d="M16 8v-2a2 2 0 0 0 -2 -2h-8a2 2 0 0 0 -2 2v8a2 2 0 0 0 2 2h2"></path>
+</svg>
+    </button></div>
+</div>
+<img alt="../_images/function_overview_10_0.png" src="./Visão geral das funções de plotamento do seaborn — documentação do seaborn 0.13.2_files/function_overview_10_0.png" _msthidden="A" _mstalt="1136811" _msthash="64">
+<p><font _mstmutation="1" _msttexthash="6495502" _msthash="65">Para desenhar um gráfico de densidade de kernel, usando o mesmo código de <a class="reference internal" href="https://seaborn.pydata.org/generated/seaborn.kdeplot.html#seaborn.kdeplot" title="seaborn.kdeplot" _mstmutation="1" _istranslated="1"><code class="xref py py-func docutils literal notranslate" _istranslated="1"></code></a>, selecione-o usando o parâmetro:</font><code class="docutils literal notranslate"><span class="pre">kind</span></code></p>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre id="codecell3"><span></span><span class="n">sns</span><span class="o">.</span><span class="n">displot</span><span class="p">(</span><span class="n">data</span><span class="o">=</span><span class="n">penguins</span><span class="p">,</span> <span class="n">x</span><span class="o">=</span><span class="s2">"flipper_length_mm"</span><span class="p">,</span> <span class="n">hue</span><span class="o">=</span><span class="s2">"species"</span><span class="p">,</span> <span class="n">multiple</span><span class="o">=</span><span class="s2">"stack"</span><span class="p">,</span> <span class="n">kind</span><span class="o">=</span><span class="s2">"kde"</span><span class="p">)</span>
+</pre><button class="copybtn o-tooltip--left" data-tooltip="Copy" data-clipboard-target="#codecell3">
+      <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-copy" width="44" height="44" viewBox="0 0 24 24" stroke-width="1.5" stroke="#000000" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <title>Copy to clipboard</title>
+  <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
+  <rect x="8" y="8" width="12" height="12" rx="2"></rect>
+  <path d="M16 8v-2a2 2 0 0 0 -2 -2h-8a2 2 0 0 0 -2 2v8a2 2 0 0 0 2 2h2"></path>
+</svg>
+    </button></div>
+</div>
+<img alt="../_images/function_overview_12_0.png" src="./Visão geral das funções de plotamento do seaborn — documentação do seaborn 0.13.2_files/function_overview_12_0.png" _msthidden="A" _mstalt="1137773" _msthash="66">
+<p _msttexthash="36586329" _msthash="67">Você vai notar que os gráficos em nível de figura parecem em grande parte seus equivalentes em nível de machados, mas há algumas diferenças. Notavelmente, a lenda está fora da trama. Eles também têm um formato um pouco diferente (falaremos mais sobre isso em breve).</p>
+<p _msttexthash="51130430" _msthash="68">A característica mais útil oferecida pelas funções em nível de figura é que elas podem facilmente criar figuras com múltiplos subplots. Por exemplo, em vez de empilhar as três distribuições de cada espécie de pinguins nos mesmos eixos, podemos "facetê-las" plotando cada distribuição nas colunas da figura:</p>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre id="codecell4"><span></span><span class="n">sns</span><span class="o">.</span><span class="n">displot</span><span class="p">(</span><span class="n">data</span><span class="o">=</span><span class="n">penguins</span><span class="p">,</span> <span class="n">x</span><span class="o">=</span><span class="s2">"flipper_length_mm"</span><span class="p">,</span> <span class="n">hue</span><span class="o">=</span><span class="s2">"species"</span><span class="p">,</span> <span class="n">col</span><span class="o">=</span><span class="s2">"species"</span><span class="p">)</span>
+</pre><button class="copybtn o-tooltip--left" data-tooltip="Copy" data-clipboard-target="#codecell4">
+      <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-copy" width="44" height="44" viewBox="0 0 24 24" stroke-width="1.5" stroke="#000000" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <title>Copy to clipboard</title>
+  <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
+  <rect x="8" y="8" width="12" height="12" rx="2"></rect>
+  <path d="M16 8v-2a2 2 0 0 0 -2 -2h-8a2 2 0 0 0 -2 2v8a2 2 0 0 0 2 2h2"></path>
+</svg>
+    </button></div>
+</div>
+<img alt="../_images/function_overview_14_0.png" src="./Visão geral das funções de plotamento do seaborn — documentação do seaborn 0.13.2_files/function_overview_14_0.png" _msthidden="A" _mstalt="1138735" _msthash="69">
+<p _msttexthash="157329315" _msthash="70">As funções em nível de figura envolvem suas contrapartes em nível de eixo e passam os argumentos específicos de palavras-chave do tipo (como o tamanho do bin de um histograma) para a função subjacente. Isso significa que eles não são menos flexíveis, mas há um lado negativo: os parâmetros específicos de tipo não aparecem na assinatura da função ou nos docstrings. Alguns dos recursos deles podem ser menos detectáveis, e talvez você precise olhar duas páginas diferentes da documentação antes de entender como alcançar um objetivo específico.</p>
+<section id="axes-level-functions-make-self-contained-plots">
+<h3><font _mstmutation="1" _msttexthash="1577524" _msthash="71">Axes-level functions make self-contained plots</font><a class="headerlink" href="https://seaborn.pydata.org/tutorial/function_overview.html#axes-level-functions-make-self-contained-plots" title="Permalink to this heading">#</a></h3>
+<p _msttexthash="69649463" _msthash="72">The axes-level functions are written to act like drop-in replacements for matplotlib functions. While they add axis labels and legends automatically, they don’t modify anything beyond the axes that they are drawn into. That means they can be composed into arbitrarily-complex matplotlib figures with predictable results.</p>
+<p><font _mstmutation="1" _msttexthash="92280357" _msthash="73">The axes-level functions call <a class="reference external" href="https://matplotlib.org/stable/api/_as_gen/matplotlib.pyplot.gca.html#matplotlib.pyplot.gca" title="(in Matplotlib v3.8.2)" _mstmutation="1"><code class="xref py py-func docutils literal notranslate"><span class="pre">matplotlib.pyplot.gca()</span></code></a> internally, which hooks into the matplotlib state-machine interface so that they draw their plots on the “currently-active” axes. But they additionally accept an  argument, which integrates with the object-oriented interface and lets you specify exactly where each plot should go:</font><code class="docutils literal notranslate"><span class="pre">ax=</span></code></p>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre id="codecell5"><span></span><span class="n">f</span><span class="p">,</span> <span class="n">axs</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">8</span><span class="p">,</span> <span class="mi">4</span><span class="p">),</span> <span class="n">gridspec_kw</span><span class="o">=</span><span class="nb">dict</span><span class="p">(</span><span class="n">width_ratios</span><span class="o">=</span><span class="p">[</span><span class="mi">4</span><span class="p">,</span> <span class="mi">3</span><span class="p">]))</span>
+<span class="n">sns</span><span class="o">.</span><span class="n">scatterplot</span><span class="p">(</span><span class="n">data</span><span class="o">=</span><span class="n">penguins</span><span class="p">,</span> <span class="n">x</span><span class="o">=</span><span class="s2">"flipper_length_mm"</span><span class="p">,</span> <span class="n">y</span><span class="o">=</span><span class="s2">"bill_length_mm"</span><span class="p">,</span> <span class="n">hue</span><span class="o">=</span><span class="s2">"species"</span><span class="p">,</span> <span class="n">ax</span><span class="o">=</span><span class="n">axs</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span>
+<span class="n">sns</span><span class="o">.</span><span class="n">histplot</span><span class="p">(</span><span class="n">data</span><span class="o">=</span><span class="n">penguins</span><span class="p">,</span> <span class="n">x</span><span class="o">=</span><span class="s2">"species"</span><span class="p">,</span> <span class="n">hue</span><span class="o">=</span><span class="s2">"species"</span><span class="p">,</span> <span class="n">shrink</span><span class="o">=</span><span class="mf">.8</span><span class="p">,</span> <span class="n">alpha</span><span class="o">=</span><span class="mf">.8</span><span class="p">,</span> <span class="n">legend</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">ax</span><span class="o">=</span><span class="n">axs</span><span class="p">[</span><span class="mi">1</span><span class="p">])</span>
+<span class="n">f</span><span class="o">.</span><span class="n">tight_layout</span><span class="p">()</span>
+</pre><button class="copybtn o-tooltip--left" data-tooltip="Copy" data-clipboard-target="#codecell5">
+      <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-copy" width="44" height="44" viewBox="0 0 24 24" stroke-width="1.5" stroke="#000000" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <title>Copy to clipboard</title>
+  <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
+  <rect x="8" y="8" width="12" height="12" rx="2"></rect>
+  <path d="M16 8v-2a2 2 0 0 0 -2 -2h-8a2 2 0 0 0 -2 2v8a2 2 0 0 0 2 2h2"></path>
+</svg>
+    </button></div>
+</div>
+<img alt="../_images/function_overview_17_0.png" src="./Visão geral das funções de plotamento do seaborn — documentação do seaborn 0.13.2_files/function_overview_17_0.png" _msthidden="A" _mstalt="1140178" _msthash="74">
+</section>
+<section id="figure-level-functions-own-their-figure">
+<h3><font _mstmutation="1" _msttexthash="1172067" _msthash="75">Figure-level functions own their figure</font><a class="headerlink" href="https://seaborn.pydata.org/tutorial/function_overview.html#figure-level-functions-own-their-figure" title="Permalink to this heading">#</a></h3>
+<p _msttexthash="103314874" _msthash="76">In contrast, figure-level functions cannot (easily) be composed with other plots. By design, they “own” their own figure, including its initialization, so there’s no notion of using a figure-level function to draw a plot onto an existing axes. This constraint allows the figure-level functions to implement features such as putting the legend outside of the plot.</p>
+<p _msttexthash="19262100" _msthash="77">Nevertheless, it is possible to go beyond what the figure-level functions offer by accessing the matplotlib axes on the object that they return and adding other elements to the plot that way:</p>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre id="codecell6"><span></span><span class="n">tips</span> <span class="o">=</span> <span class="n">sns</span><span class="o">.</span><span class="n">load_dataset</span><span class="p">(</span><span class="s2">"tips"</span><span class="p">)</span>
+<span class="n">g</span> <span class="o">=</span> <span class="n">sns</span><span class="o">.</span><span class="n">relplot</span><span class="p">(</span><span class="n">data</span><span class="o">=</span><span class="n">tips</span><span class="p">,</span> <span class="n">x</span><span class="o">=</span><span class="s2">"total_bill"</span><span class="p">,</span> <span class="n">y</span><span class="o">=</span><span class="s2">"tip"</span><span class="p">)</span>
+<span class="n">g</span><span class="o">.</span><span class="n">ax</span><span class="o">.</span><span class="n">axline</span><span class="p">(</span><span class="n">xy1</span><span class="o">=</span><span class="p">(</span><span class="mi">10</span><span class="p">,</span> <span class="mi">2</span><span class="p">),</span> <span class="n">slope</span><span class="o">=</span><span class="mf">.2</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s2">"b"</span><span class="p">,</span> <span class="n">dashes</span><span class="o">=</span><span class="p">(</span><span class="mi">5</span><span class="p">,</span> <span class="mi">2</span><span class="p">))</span>
+</pre><button class="copybtn o-tooltip--left" data-tooltip="Copy" data-clipboard-target="#codecell6">
+      <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-copy" width="44" height="44" viewBox="0 0 24 24" stroke-width="1.5" stroke="#000000" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <title>Copy to clipboard</title>
+  <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
+  <rect x="8" y="8" width="12" height="12" rx="2"></rect>
+  <path d="M16 8v-2a2 2 0 0 0 -2 -2h-8a2 2 0 0 0 -2 2v8a2 2 0 0 0 2 2h2"></path>
+</svg>
+    </button></div>
+</div>
+<img alt="../_images/function_overview_19_0.png" src="./Visão geral das funções de plotamento do seaborn — documentação do seaborn 0.13.2_files/function_overview_19_0.png" _msthidden="A" _mstalt="1141140" _msthash="78">
+</section>
+<section id="customizing-plots-from-a-figure-level-function">
+<h3><font _mstmutation="1" _msttexthash="1529736" _msthash="79">Customizing plots from a figure-level function</font><a class="headerlink" href="https://seaborn.pydata.org/tutorial/function_overview.html#customizing-plots-from-a-figure-level-function" title="Permalink to this heading">#</a></h3>
+<p _msttexthash="61217533" _msthash="80">The figure-level functions return a <a class="reference internal" href="https://seaborn.pydata.org/generated/seaborn.FacetGrid.html#seaborn.FacetGrid" title="seaborn.FacetGrid"><code class="xref py py-class docutils literal notranslate"><span class="pre">FacetGrid</span></code></a> instance, which has a few methods for customizing attributes of the plot in a way that is “smart” about the subplot organization. For example, you can change the labels on the external axes using a single line of code:</p>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre id="codecell7"><span></span><span class="n">g</span> <span class="o">=</span> <span class="n">sns</span><span class="o">.</span><span class="n">relplot</span><span class="p">(</span><span class="n">data</span><span class="o">=</span><span class="n">penguins</span><span class="p">,</span> <span class="n">x</span><span class="o">=</span><span class="s2">"flipper_length_mm"</span><span class="p">,</span> <span class="n">y</span><span class="o">=</span><span class="s2">"bill_length_mm"</span><span class="p">,</span> <span class="n">col</span><span class="o">=</span><span class="s2">"sex"</span><span class="p">)</span>
+<span class="n">g</span><span class="o">.</span><span class="n">set_axis_labels</span><span class="p">(</span><span class="s2">"Flipper length (mm)"</span><span class="p">,</span> <span class="s2">"Bill length (mm)"</span><span class="p">)</span>
+</pre><button class="copybtn o-tooltip--left" data-tooltip="Copy" data-clipboard-target="#codecell7">
+      <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-copy" width="44" height="44" viewBox="0 0 24 24" stroke-width="1.5" stroke="#000000" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <title>Copy to clipboard</title>
+  <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
+  <rect x="8" y="8" width="12" height="12" rx="2"></rect>
+  <path d="M16 8v-2a2 2 0 0 0 -2 -2h-8a2 2 0 0 0 -2 2v8a2 2 0 0 0 2 2h2"></path>
+</svg>
+    </button></div>
+</div>
+<img alt="../_images/function_overview_21_0.png" src="./Visão geral das funções de plotamento do seaborn — documentação do seaborn 0.13.2_files/function_overview_21_0.png" _msthidden="A" _mstalt="1137760" _msthash="81">
+<p _msttexthash="17411641" _msthash="82">While convenient, this does add a bit of extra complexity, as you need to remember that this method is not part of the matplotlib API and exists only when using a figure-level function.</p>
+</section>
+<section id="specifying-figure-sizes">
+<span id="figure-size-tutorial"></span><h3><font _mstmutation="1" _msttexthash="501527" _msthash="83">Specifying figure sizes</font><a class="headerlink" href="https://seaborn.pydata.org/tutorial/function_overview.html#specifying-figure-sizes" title="Permalink to this heading">#</a></h3>
+<p><font _mstmutation="1" _msttexthash="96942976" _msthash="84">To increase or decrease the size of a matplotlib plot, you set the width and height of the entire figure, either in the <a class="reference external" href="https://matplotlib.org/tutorials/introductory/customizing.html" _mstmutation="1">global rcParams</a>, while setting up the plot (e.g. with the  parameter of <a class="reference external" href="https://matplotlib.org/stable/api/_as_gen/matplotlib.pyplot.subplots.html#matplotlib.pyplot.subplots" title="(in Matplotlib v3.8.2)" _mstmutation="1"><code class="xref py py-func docutils literal notranslate"><span class="pre">matplotlib.pyplot.subplots()</span></code></a>), or by calling a method on the figure object (e.g. ). When using an axes-level function in seaborn, the same rules apply: the size of the plot is determined by the size of the figure it is part of and the axes layout in that figure.</font><code class="docutils literal notranslate"><span class="pre">figsize</span></code><code class="xref py py-meth docutils literal notranslate"><span class="pre">matplotlib.Figure.set_size_inches()</span></code></p>
+<p><font _mstmutation="1" _msttexthash="132074371" _msthash="85">When using a figure-level function, there are several key differences. First, the functions themselves have parameters to control the figure size (although these are actually parameters of the underlying <a class="reference internal" href="https://seaborn.pydata.org/generated/seaborn.FacetGrid.html#seaborn.FacetGrid" title="seaborn.FacetGrid" _mstmutation="1"><code class="xref py py-class docutils literal notranslate"><span class="pre">FacetGrid</span></code></a> that manages the figure). Second, these parameters,  and , parameterize the size slightly differently than the ,  parameterization in matplotlib (using the seaborn parameters, ). Most importantly, the parameters correspond to the size of each <em _mstmutation="1">subplot</em>, rather than the size of the overall figure.</font><code class="docutils literal notranslate"><span class="pre">height</span></code><code class="docutils literal notranslate"><span class="pre">aspect</span></code><code class="docutils literal notranslate"><span class="pre">width</span></code><code class="docutils literal notranslate"><span class="pre">height</span></code><code class="docutils literal notranslate"><span class="pre">width</span> <span class="pre">=</span> <span class="pre">height</span> <span class="pre">*</span> <span class="pre">aspect</span></code></p>
+<p _msttexthash="9978774" _msthash="86">To illustrate the difference between these approaches, here is the default output of <a class="reference external" href="https://matplotlib.org/stable/api/_as_gen/matplotlib.pyplot.subplots.html#matplotlib.pyplot.subplots" title="(in Matplotlib v3.8.2)"><code class="xref py py-func docutils literal notranslate"><span class="pre">matplotlib.pyplot.subplots()</span></code></a> with one subplot:</p>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre id="codecell8"><span></span><span class="n">f</span><span class="p">,</span> <span class="n">ax</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">()</span>
+</pre><button class="copybtn o-tooltip--left" data-tooltip="Copy" data-clipboard-target="#codecell8">
+      <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-copy" width="44" height="44" viewBox="0 0 24 24" stroke-width="1.5" stroke="#000000" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <title>Copy to clipboard</title>
+  <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
+  <rect x="8" y="8" width="12" height="12" rx="2"></rect>
+  <path d="M16 8v-2a2 2 0 0 0 -2 -2h-8a2 2 0 0 0 -2 2v8a2 2 0 0 0 2 2h2"></path>
+</svg>
+    </button></div>
+</div>
+<img alt="../_images/function_overview_24_0.png" src="./Visão geral das funções de plotamento do seaborn — documentação do seaborn 0.13.2_files/function_overview_24_0.png" _msthidden="A" _mstalt="1139203" _msthash="87">
+<p _msttexthash="8600930" _msthash="88">A figure with multiple columns will have the same overall size, but the axes will be squeezed horizontally to fit in the space:</p>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre id="codecell9"><span></span><span class="n">f</span><span class="p">,</span> <span class="n">ax</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="n">sharey</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+</pre><button class="copybtn o-tooltip--left" data-tooltip="Copy" data-clipboard-target="#codecell9">
+      <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-copy" width="44" height="44" viewBox="0 0 24 24" stroke-width="1.5" stroke="#000000" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <title>Copy to clipboard</title>
+  <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
+  <rect x="8" y="8" width="12" height="12" rx="2"></rect>
+  <path d="M16 8v-2a2 2 0 0 0 -2 -2h-8a2 2 0 0 0 -2 2v8a2 2 0 0 0 2 2h2"></path>
+</svg>
+    </button></div>
+</div>
+<img alt="../_images/function_overview_26_0.png" src="./Visão geral das funções de plotamento do seaborn — documentação do seaborn 0.13.2_files/function_overview_26_0.png" _msthidden="A" _mstalt="1140165" _msthash="89">
+<p _msttexthash="36101468" _msthash="90">In contrast, a plot created by a figure-level function will be square. To demonstrate that, let’s set up an empty plot by using <a class="reference internal" href="https://seaborn.pydata.org/generated/seaborn.FacetGrid.html#seaborn.FacetGrid" title="seaborn.FacetGrid"><code class="xref py py-class docutils literal notranslate"><span class="pre">FacetGrid</span></code></a> directly. This happens behind the scenes in functions like <a class="reference internal" href="https://seaborn.pydata.org/generated/seaborn.relplot.html#seaborn.relplot" title="seaborn.relplot"><code class="xref py py-func docutils literal notranslate"><span class="pre">relplot()</span></code></a>, <a class="reference internal" href="https://seaborn.pydata.org/generated/seaborn.displot.html#seaborn.displot" title="seaborn.displot"><code class="xref py py-func docutils literal notranslate"><span class="pre">displot()</span></code></a>, or <a class="reference internal" href="https://seaborn.pydata.org/generated/seaborn.catplot.html#seaborn.catplot" title="seaborn.catplot"><code class="xref py py-func docutils literal notranslate"><span class="pre">catplot()</span></code></a>:</p>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre id="codecell10"><span></span><span class="n">g</span> <span class="o">=</span> <span class="n">sns</span><span class="o">.</span><span class="n">FacetGrid</span><span class="p">(</span><span class="n">penguins</span><span class="p">)</span>
+</pre><button class="copybtn o-tooltip--left" data-tooltip="Copy" data-clipboard-target="#codecell10">
+      <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-copy" width="44" height="44" viewBox="0 0 24 24" stroke-width="1.5" stroke="#000000" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <title>Copy to clipboard</title>
+  <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
+  <rect x="8" y="8" width="12" height="12" rx="2"></rect>
+  <path d="M16 8v-2a2 2 0 0 0 -2 -2h-8a2 2 0 0 0 -2 2v8a2 2 0 0 0 2 2h2"></path>
+</svg>
+    </button></div>
+</div>
+<img alt="../_images/function_overview_28_0.png" src="./Visão geral das funções de plotamento do seaborn — documentação do seaborn 0.13.2_files/function_overview_28_0.png" _msthidden="A" _mstalt="1141127" _msthash="91">
+<p _msttexthash="8027318" _msthash="92">When additional columns are added, the figure itself will become wider, so that its subplots have the same size and shape:</p>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre id="codecell11"><span></span><span class="n">g</span> <span class="o">=</span> <span class="n">sns</span><span class="o">.</span><span class="n">FacetGrid</span><span class="p">(</span><span class="n">penguins</span><span class="p">,</span> <span class="n">col</span><span class="o">=</span><span class="s2">"sex"</span><span class="p">)</span>
+</pre><button class="copybtn o-tooltip--left" data-tooltip="Copy" data-clipboard-target="#codecell11">
+      <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-copy" width="44" height="44" viewBox="0 0 24 24" stroke-width="1.5" stroke="#000000" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <title>Copy to clipboard</title>
+  <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
+  <rect x="8" y="8" width="12" height="12" rx="2"></rect>
+  <path d="M16 8v-2a2 2 0 0 0 -2 -2h-8a2 2 0 0 0 -2 2v8a2 2 0 0 0 2 2h2"></path>
+</svg>
+    </button></div>
+</div>
+<img alt="../_images/function_overview_30_0.png" src="./Visão geral das funções de plotamento do seaborn — documentação do seaborn 0.13.2_files/function_overview_30_0.png" _msthidden="A" _mstalt="1137747" _msthash="93">
+<p _msttexthash="8640190" _msthash="94">And you can adjust the size and shape of each subplot without accounting for the total number of rows and columns in the figure:</p>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre id="codecell12"><span></span><span class="n">g</span> <span class="o">=</span> <span class="n">sns</span><span class="o">.</span><span class="n">FacetGrid</span><span class="p">(</span><span class="n">penguins</span><span class="p">,</span> <span class="n">col</span><span class="o">=</span><span class="s2">"sex"</span><span class="p">,</span> <span class="n">height</span><span class="o">=</span><span class="mf">3.5</span><span class="p">,</span> <span class="n">aspect</span><span class="o">=</span><span class="mf">.75</span><span class="p">)</span>
+</pre><button class="copybtn o-tooltip--left" data-tooltip="Copy" data-clipboard-target="#codecell12">
+      <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-copy" width="44" height="44" viewBox="0 0 24 24" stroke-width="1.5" stroke="#000000" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <title>Copy to clipboard</title>
+  <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
+  <rect x="8" y="8" width="12" height="12" rx="2"></rect>
+  <path d="M16 8v-2a2 2 0 0 0 -2 -2h-8a2 2 0 0 0 -2 2v8a2 2 0 0 0 2 2h2"></path>
+</svg>
+    </button></div>
+</div>
+<img alt="../_images/function_overview_32_0.png" src="./Visão geral das funções de plotamento do seaborn — documentação do seaborn 0.13.2_files/function_overview_32_0.png" _msthidden="A" _mstalt="1138709" _msthash="95">
+<p _msttexthash="67040987" _msthash="96">The upshot is that you can assign faceting variables without stopping to think about how you’ll need to adjust the total figure size. A downside is that, when you do want to change the figure size, you’ll need to remember that things work a bit differently than they do in matplotlib.</p>
+</section>
+<section id="relative-merits-of-figure-level-functions">
+<h3><font _mstmutation="1" _msttexthash="1277458" _msthash="97">Relative merits of figure-level functions</font><a class="headerlink" href="https://seaborn.pydata.org/tutorial/function_overview.html#relative-merits-of-figure-level-functions" title="Permalink to this heading">#</a></h3>
+<p _msttexthash="2567591" _msthash="98">Here is a summary of the pros and cons that we have discussed above:</p>
+<table class="table">
+<thead>
+<tr class="row-odd"><th class="head"><p _msttexthash="155311" _msthash="99">Advantages</p></th>
+<th class="head"><p _msttexthash="132639" _msthash="100">Drawbacks</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p _msttexthash="737945" _msthash="101">Easy faceting by data variables</p></td>
+<td><p _msttexthash="1245348" _msthash="102">Many parameters not in function signature</p></td>
+</tr>
+<tr class="row-odd"><td><p _msttexthash="800657" _msthash="103">Legend outside of plot by default</p></td>
+<td><p _msttexthash="1284231" _msthash="104">Cannot be part of a larger matplotlib figure</p></td>
+</tr>
+<tr class="row-even"><td><p _msttexthash="847756" _msthash="105">Easy figure-level customization</p></td>
+<td><p _msttexthash="684489" _msthash="106">Different API from matplotlib</p></td>
+</tr>
+<tr class="row-odd"><td><p _msttexthash="1177618" _msthash="107">Different figure size parameterization</p></td>
+<td><p _msttexthash="1177618" _msthash="108">Different figure size parameterization</p></td>
+</tr>
+</tbody>
+</table>
+<p _msttexthash="261068873" _msthash="109">On balance, the figure-level functions add some additional complexity that can make things more confusing for beginners, but their distinct features give them additional power. The tutorial documentation mostly uses the figure-level functions, because they produce slightly cleaner plots, and we generally recommend their use for most applications. The one situation where they are not a good choice is when you need to make a complex, standalone figure that composes multiple different plot kinds. At this point, it’s recommended to set up the figure using matplotlib directly and to fill in the individual components using axes-level functions.</p>
+</section>
+</section>
+<section id="combining-multiple-views-on-the-data">
+<h2><font _mstmutation="1" _msttexthash="950651" _msthash="110">Combining multiple views on the data</font><a class="headerlink" href="https://seaborn.pydata.org/tutorial/function_overview.html#combining-multiple-views-on-the-data" title="Permalink to this heading">#</a></h2>
+<p _msttexthash="111998068" _msthash="111">Two important plotting functions in seaborn don’t fit cleanly into the classification scheme discussed above. These functions, <a class="reference internal" href="https://seaborn.pydata.org/generated/seaborn.jointplot.html#seaborn.jointplot" title="seaborn.jointplot"><code class="xref py py-func docutils literal notranslate"><span class="pre">jointplot()</span></code></a> and <a class="reference internal" href="https://seaborn.pydata.org/generated/seaborn.pairplot.html#seaborn.pairplot" title="seaborn.pairplot"><code class="xref py py-func docutils literal notranslate"><span class="pre">pairplot()</span></code></a>, employ multiple kinds of plots from different modules to represent multiple aspects of a dataset in a single figure. Both plots are figure-level functions and create figures with multiple subplots by default. But they use different objects to manage the figure: <a class="reference internal" href="https://seaborn.pydata.org/generated/seaborn.JointGrid.html#seaborn.JointGrid" title="seaborn.JointGrid"><code class="xref py py-class docutils literal notranslate"><span class="pre">JointGrid</span></code></a> and <a class="reference internal" href="https://seaborn.pydata.org/generated/seaborn.PairGrid.html#seaborn.PairGrid" title="seaborn.PairGrid"><code class="xref py py-class docutils literal notranslate"><span class="pre">PairGrid</span></code></a>, respectively.</p>
+<p _msttexthash="14869647" _msthash="112"><a class="reference internal" href="https://seaborn.pydata.org/generated/seaborn.jointplot.html#seaborn.jointplot" title="seaborn.jointplot"><code class="xref py py-func docutils literal notranslate"><span class="pre">jointplot()</span></code></a> plots the relationship or joint distribution of two variables while adding marginal axes that show the univariate distribution of each one separately:</p>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre id="codecell13"><span></span><span class="n">sns</span><span class="o">.</span><span class="n">jointplot</span><span class="p">(</span><span class="n">data</span><span class="o">=</span><span class="n">penguins</span><span class="p">,</span> <span class="n">x</span><span class="o">=</span><span class="s2">"flipper_length_mm"</span><span class="p">,</span> <span class="n">y</span><span class="o">=</span><span class="s2">"bill_length_mm"</span><span class="p">,</span> <span class="n">hue</span><span class="o">=</span><span class="s2">"species"</span><span class="p">)</span>
+</pre><button class="copybtn o-tooltip--left" data-tooltip="Copy" data-clipboard-target="#codecell13">
+      <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-copy" width="44" height="44" viewBox="0 0 24 24" stroke-width="1.5" stroke="#000000" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <title>Copy to clipboard</title>
+  <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
+  <rect x="8" y="8" width="12" height="12" rx="2"></rect>
+  <path d="M16 8v-2a2 2 0 0 0 -2 -2h-8a2 2 0 0 0 -2 2v8a2 2 0 0 0 2 2h2"></path>
+</svg>
+    </button></div>
+</div>
+<img alt="../_images/function_overview_36_0.png" src="./Visão geral das funções de plotamento do seaborn — documentação do seaborn 0.13.2_files/function_overview_36_0.png" _mstalt="1140633" _msthash="113">
+<p _msttexthash="27424306" _msthash="114"><a class="reference internal" href="https://seaborn.pydata.org/generated/seaborn.pairplot.html#seaborn.pairplot" title="seaborn.pairplot"><code class="xref py py-func docutils literal notranslate"><span class="pre">pairplot()</span></code></a> is similar — it combines joint and marginal views — but rather than focusing on a single relationship, it visualizes every pairwise combination of variables simultaneously:</p>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre id="codecell14"><span></span><span class="n">sns</span><span class="o">.</span><span class="n">pairplot</span><span class="p">(</span><span class="n">data</span><span class="o">=</span><span class="n">penguins</span><span class="p">,</span> <span class="n">hue</span><span class="o">=</span><span class="s2">"species"</span><span class="p">)</span>
+</pre><button class="copybtn o-tooltip--left" data-tooltip="Copy" data-clipboard-target="#codecell14">
+      <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-copy" width="44" height="44" viewBox="0 0 24 24" stroke-width="1.5" stroke="#000000" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <title>Copy to clipboard</title>
+  <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
+  <rect x="8" y="8" width="12" height="12" rx="2"></rect>
+  <path d="M16 8v-2a2 2 0 0 0 -2 -2h-8a2 2 0 0 0 -2 2v8a2 2 0 0 0 2 2h2"></path>
+</svg>
+    </button></div>
+</div>
+<img alt="../_images/function_overview_38_0.png" src="./Visão geral das funções de plotamento do seaborn — documentação do seaborn 0.13.2_files/function_overview_38_0.png" _mstalt="1141595" _msthash="115">
+<p><font _mstmutation="1" _msttexthash="23581571" _msthash="116">Behind the scenes, these functions are using axes-level functions that you have already met (<a class="reference internal" href="https://seaborn.pydata.org/generated/seaborn.scatterplot.html#seaborn.scatterplot" title="seaborn.scatterplot" _mstmutation="1"><code class="xref py py-func docutils literal notranslate"><span class="pre">scatterplot()</span></code></a> and <a class="reference internal" href="https://seaborn.pydata.org/generated/seaborn.kdeplot.html#seaborn.kdeplot" title="seaborn.kdeplot" _mstmutation="1"><code class="xref py py-func docutils literal notranslate"><span class="pre">kdeplot()</span></code></a>), and they also have a  parameter that lets you quickly swap in a different representation:</font><code class="docutils literal notranslate"><span class="pre">kind</span></code></p>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre id="codecell15"><span></span><span class="n">sns</span><span class="o">.</span><span class="n">jointplot</span><span class="p">(</span><span class="n">data</span><span class="o">=</span><span class="n">penguins</span><span class="p">,</span> <span class="n">x</span><span class="o">=</span><span class="s2">"flipper_length_mm"</span><span class="p">,</span> <span class="n">y</span><span class="o">=</span><span class="s2">"bill_length_mm"</span><span class="p">,</span> <span class="n">hue</span><span class="o">=</span><span class="s2">"species"</span><span class="p">,</span> <span class="n">kind</span><span class="o">=</span><span class="s2">"hist"</span><span class="p">)</span>
+</pre><button class="copybtn o-tooltip--left" data-tooltip="Copy" data-clipboard-target="#codecell15">
+      <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-copy" width="44" height="44" viewBox="0 0 24 24" stroke-width="1.5" stroke="#000000" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <title>Copy to clipboard</title>
+  <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
+  <rect x="8" y="8" width="12" height="12" rx="2"></rect>
+  <path d="M16 8v-2a2 2 0 0 0 -2 -2h-8a2 2 0 0 0 -2 2v8a2 2 0 0 0 2 2h2"></path>
+</svg>
+    </button></div>
+</div>
+<img alt="../_images/function_overview_40_0.png" src="./Visão geral das funções de plotamento do seaborn — documentação do seaborn 0.13.2_files/function_overview_40_0.png" _mstalt="1138215" _msthash="117">
+</section>
+</section>
+
+
+          </article>
+          
+
+          
+          
+      </div>
+      
+    </div>
+  </div>
+
+  
+    
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script src="./Visão geral das funções de plotamento do seaborn — documentação do seaborn 0.13.2_files/pydata-sphinx-theme.js.baixados"></script>
+
+<footer class="footer" style="border-top: 1px solid #ccc; padding-top: 10px">
+  <div class="container">
+    <div id="credits" style="width: 50%; float: left">
+      <p><font _mstmutation="1" _msttexthash="3639389" _msthash="118">
+      © Copyright 2012-2024, <a href="https://mwaskom.github.io/" _mstmutation="1">Michael Waskom</a>.<br _mstmutation="1">
+      Created using <a href="https://www.sphinx-doc.org/" _mstmutation="1">Sphinx</a> and the <a href="https://pydata-sphinx-theme.readthedocs.io/en/stable/" _mstmutation="1">PyData Theme</a>.</font><br>
+      </p>
+    </div>
+    <div class="dropup show" style="float: right; margin: 10px">
+        <a class="btn btn-secondary dropdown-toggle" href="https://seaborn.pydata.org/tutorial/function_overview.html#" role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" _msttexthash="93366" _msthash="119">
+            Archive
+        </a>
+        <div class="dropdown-menu dropdown-menu-right" aria-labelledby="dropdownMenuLink" _msthidden="4">
+          <a class="dropdown-item" href="https://seaborn.pydata.org/archive/0.12/index.html" _msttexthash="34632" _msthidden="1" _msthash="120">v0.12</a>
+          <a class="dropdown-item" href="https://seaborn.pydata.org/archive/0.11/index.html" _msttexthash="34489" _msthidden="1" _msthash="121">v0.11</a>
+          <a class="dropdown-item" href="https://seaborn.pydata.org/archive/0.10/index.html" _msttexthash="34346" _msthidden="1" _msthash="122">v0.10</a>
+          <a class="dropdown-item" href="https://seaborn.pydata.org/archive/0.9/index.html" _msttexthash="28522" _msthidden="1" _msthash="123">v0.9</a>
+        </div>
+    </div>
+    <div id="version" style="color: #999; float: right; margin: 15px" _msttexthash="50401" _msthash="124">v0.13.2</div>
+    </div>
+  
+</footer>
+  
+</body></html>

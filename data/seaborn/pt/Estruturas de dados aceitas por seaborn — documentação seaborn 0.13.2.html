@@ -1,0 +1,1230 @@
+<!DOCTYPE html>
+<!-- saved from url=(0055)https://seaborn.pydata.org/tutorial/data_structure.html -->
+<html lang="pt" data-mode="light" data-theme="light"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"><meta name="generator" content="Docutils 0.19: https://docutils.sourceforge.io/">
+
+    <title _msttexthash="7237204" _msthash="0">Estruturas de dados aceitas por seaborn — documentação seaborn 0.13.2</title>
+  <script>
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "light";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "light";
+  </script>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="./Estruturas de dados aceitas por seaborn — documentação seaborn 0.13.2_files/theme.css" rel="stylesheet">
+<link href="./Estruturas de dados aceitas por seaborn — documentação seaborn 0.13.2_files/pydata-sphinx-theme.css" rel="stylesheet">
+
+  
+  <link rel="stylesheet" href="./Estruturas de dados aceitas por seaborn — documentação seaborn 0.13.2_files/all.min.css">
+  <link rel="preload" as="font" type="font/woff2" crossorigin="" href="https://seaborn.pydata.org/_static/vendor/fontawesome/5.13.0/webfonts/fa-solid-900.woff2">
+  <link rel="preload" as="font" type="font/woff2" crossorigin="" href="https://seaborn.pydata.org/_static/vendor/fontawesome/5.13.0/webfonts/fa-brands-400.woff2">
+
+    <link rel="stylesheet" type="text/css" href="./Estruturas de dados aceitas por seaborn — documentação seaborn 0.13.2_files/pygments.css">
+    <link rel="stylesheet" type="text/css" href="./Estruturas de dados aceitas por seaborn — documentação seaborn 0.13.2_files/plot_directive.css">
+    <link rel="stylesheet" type="text/css" href="./Estruturas de dados aceitas por seaborn — documentação seaborn 0.13.2_files/copybutton.css">
+    <link rel="stylesheet" type="text/css" href="./Estruturas de dados aceitas por seaborn — documentação seaborn 0.13.2_files/design-style.1e8bd061cd6da7fc9cf755528e8ffc24.min.css">
+    <link rel="stylesheet" type="text/css" href="./Estruturas de dados aceitas por seaborn — documentação seaborn 0.13.2_files/custom.css">
+  
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="./Estruturas de dados aceitas por seaborn — documentação seaborn 0.13.2_files/pydata-sphinx-theme.js.baixados">
+
+    <script data-url_root="../" id="documentation_options" src="./Estruturas de dados aceitas por seaborn — documentação seaborn 0.13.2_files/documentation_options.js.baixados"></script>
+    <script src="./Estruturas de dados aceitas por seaborn — documentação seaborn 0.13.2_files/jquery.js.baixados"></script>
+    <script src="./Estruturas de dados aceitas por seaborn — documentação seaborn 0.13.2_files/underscore.js.baixados"></script>
+    <script src="./Estruturas de dados aceitas por seaborn — documentação seaborn 0.13.2_files/_sphinx_javascript_frameworks_compat.js.baixados"></script>
+    <script src="./Estruturas de dados aceitas por seaborn — documentação seaborn 0.13.2_files/doctools.js.baixados"></script>
+    <script src="./Estruturas de dados aceitas por seaborn — documentação seaborn 0.13.2_files/sphinx_highlight.js.baixados"></script>
+    <script src="./Estruturas de dados aceitas por seaborn — documentação seaborn 0.13.2_files/clipboard.min.js.baixados"></script>
+    <script src="./Estruturas de dados aceitas por seaborn — documentação seaborn 0.13.2_files/copybutton.js.baixados"></script>
+    <script src="./Estruturas de dados aceitas por seaborn — documentação seaborn 0.13.2_files/design-tabs.js.baixados"></script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'tutorial/data_structure';</script>
+    <link rel="shortcut icon" href="https://seaborn.pydata.org/_static/favicon.ico">
+    <link rel="index" title="Index" href="https://seaborn.pydata.org/genindex.html">
+    <link rel="search" title="Search" href="https://seaborn.pydata.org/search.html">
+    <link rel="next" title="The seaborn.objects interface" href="https://seaborn.pydata.org/tutorial/objects_interface.html">
+    <link rel="prev" title="Overview of seaborn plotting functions" href="https://seaborn.pydata.org/tutorial/function_overview.html">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="docsearch:language" content="en">
+  </head>
+  
+  
+  <body data-spy="scroll" data-target="#bd-toc-nav" data-offset="180" data-default-mode="light">
+
+  
+  <input type="checkbox" class="sidebar-toggle" name="__primary" id="__primary">
+  <label class="overlay overlay-primary" for="__primary"></label>
+
+  
+  <input type="checkbox" class="sidebar-toggle" name="__secondary" id="__secondary">
+  <label class="overlay overlay-secondary" for="__secondary"></label>
+
+  
+  <div class="search-button__wrapper" _msthidden="1">
+    <div class="search-button__overlay"></div>
+    <div class="search-button__search-container" _msthidden="1">
+      
+<form class="bd-search d-flex align-items-center" action="https://seaborn.pydata.org/search.html" method="get" _msthidden="1">
+  <i class="icon fas fa-search"></i>
+  <input type="search" class="form-control" name="q" id="search-input" placeholder="Search the docs ..." aria-label="Search the docs ..." autocomplete="off" _msthidden="A" _mstplaceholder="267410" _msthash="1" _mstaria-label="267410">
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form>
+    </div>
+  </div>
+
+  
+  <nav class="bd-header navbar navbar-expand-lg bd-navbar" id="navbar-main"><div class="bd-header__inner container-xl">
+  <label class="sidebar-toggle primary-toggle" for="__primary">
+      <span class="fas fa-bars"></span>
+  </label>
+  <div id="navbar-start">
+    
+    
+  
+
+
+<a class="navbar-brand logo" href="https://seaborn.pydata.org/index.html">
+  
+  
+  
+  
+  
+  
+    <img src="./Estruturas de dados aceitas por seaborn — documentação seaborn 0.13.2_files/logo-wide-lightbg.svg" class="logo__image only-light" alt="Imagem do logo" _mstalt="131794" _msthash="2">
+    <img src="./Estruturas de dados aceitas por seaborn — documentação seaborn 0.13.2_files/logo-wide-lightbg.svg" class="logo__image only-dark" alt="Logo image" _msthidden="A" _mstalt="131794" _msthash="3">
+  
+  
+</a>
+    
+  </div>
+
+  
+  <div class="col-lg-9 navbar-header-items">
+    <div id="navbar-center" class="mr-auto">
+      
+      <div class="navbar-center-item">
+        <ul id="navbar-main-elements" class="navbar-nav">
+    <li class="toctree-l1 nav-item">
+ <a class="reference internal nav-link" href="https://seaborn.pydata.org/installing.html" _msttexthash="203125" _msthash="4"> Instalação </a>
+</li>
+
+<li class="toctree-l1 nav-item">
+ <a class="reference internal nav-link" href="https://seaborn.pydata.org/examples/index.html" _msttexthash="91390" _msthash="5"> Galeria </a>
+</li>
+
+<li class="toctree-l1 current active nav-item">
+ <a class="reference internal nav-link" href="https://seaborn.pydata.org/tutorial.html" _msttexthash="116545" _msthash="6">
+  Tutorial
+ </a>
+</li>
+
+<li class="toctree-l1 nav-item">
+ <a class="reference internal nav-link" href="https://seaborn.pydata.org/api.html" _msttexthash="22776" _msthash="7">
+  API
+ </a>
+</li>
+
+<li class="toctree-l1 nav-item">
+ <a class="reference internal nav-link" href="https://seaborn.pydata.org/whatsnew/index.html" _msttexthash="198991" _msthash="8"> Lançamentos </a>
+</li>
+
+<li class="toctree-l1 nav-item">
+ <a class="reference internal nav-link" href="https://seaborn.pydata.org/citing.html" _msttexthash="130403" _msthash="9"> Citação </a>
+</li>
+
+<li class="toctree-l1 nav-item">
+ <a class="reference internal nav-link" href="https://seaborn.pydata.org/faq.html" _msttexthash="22607" _msthash="10">
+  FAQ
+ </a>
+</li>
+
+</ul>
+      </div>
+      
+    </div>
+
+    <div id="navbar-end">
+      <div class="navbar-end-item navbar-end__search-button-container">
+        
+<button class="btn btn-sm navbar-btn search-button search-button__button" title="Search">
+  <i class="fas fa-search"></i>
+</button>
+      </div>
+      
+      <div class="navbar-end-item">
+        <ul id="navbar-icon-links" class="navbar-nav" aria-label="Links de Ícones" _mstaria-label="131963" _msthash="11">
+        <li class="nav-item">
+          
+          
+          
+          
+          
+          
+          <a href="https://github.com/mwaskom/seaborn" title="GitHub" class="nav-link" rel="noopener" target="_blank"><span><i class="fab fa-github"></i></span>
+            <label class="sr-only" _msttexthash="72332" _msthash="12">GitHub</label></a>
+        </li>
+        <li class="nav-item">
+          
+          
+          
+          
+          
+          
+          <a href="https://stackoverflow.com/tags/seaborn" title="StackOverflow" class="nav-link" rel="noopener" target="_blank"><span><i class="fab fa-stack-overflow"></i></span>
+            <label class="sr-only" _msttexthash="232466" _msthash="13">StackOverflow</label></a>
+        </li>
+        <li class="nav-item">
+          
+          
+          
+          
+          
+          
+          <a href="https://twitter.com/michaelwaskom" title="Twitter" class="nav-link" rel="noopener" target="_blank"><span><i class="fab fa-twitter"></i></span>
+            <label class="sr-only" _msttexthash="98995" _msthash="14">Twitter</label></a>
+        </li>
+      </ul>
+      </div>
+      
+    </div>
+  </div>
+
+
+  
+  <div class="search-button-container--mobile">
+<button class="btn btn-sm navbar-btn search-button search-button__button" title="Search">
+  <i class="fas fa-search"></i>
+</button>
+  </div>
+
+  
+  <label class="sidebar-toggle secondary-toggle" for="__secondary">
+      <span class="fas fa-outdent"></span>
+  </label>
+  
+
+</div>
+  </nav>
+  
+
+  <div class="bd-container container-xl">
+    <div class="bd-container__inner row">
+      
+      <div class="bd-sidebar-primary bd-sidebar">
+        
+  
+  <div class="sidebar-header-items sidebar-primary__section" _msthidden="13">
+    <p class="sidebar-header-items__title" role="heading" aria-level="1" aria-label="Navigation" _msthidden="1" _mstaria-label="157742" _msthash="15" _msttexthash="256997">
+      Site Navigation
+    </p>
+    
+    
+      <div class="sidebar-header-items__center" _msthidden="7">
+      
+      <div class="navbar-center-item" _msthidden="7">
+        <ul id="navbar-main-elements" class="navbar-nav" _msthidden="7">
+    <li class="toctree-l1 nav-item" _msthidden="1">
+ <a class="reference internal nav-link" href="https://seaborn.pydata.org/installing.html" _msttexthash="157573" _msthidden="1" _msthash="16">
+  Installing
+ </a>
+</li>
+
+<li class="toctree-l1 nav-item" _msthidden="1">
+ <a class="reference internal nav-link" href="https://seaborn.pydata.org/examples/index.html" _msttexthash="95901" _msthidden="1" _msthash="17">
+  Gallery
+ </a>
+</li>
+
+<li class="toctree-l1 current active nav-item" _msthidden="1">
+ <a class="reference internal nav-link" href="https://seaborn.pydata.org/tutorial.html" _msttexthash="116545" _msthidden="1" _msthash="18">
+  Tutorial
+ </a>
+</li>
+
+<li class="toctree-l1 nav-item" _msthidden="1">
+ <a class="reference internal nav-link" href="https://seaborn.pydata.org/api.html" _msttexthash="22776" _msthidden="1" _msthash="19">
+  API
+ </a>
+</li>
+
+<li class="toctree-l1 nav-item" _msthidden="1">
+ <a class="reference internal nav-link" href="https://seaborn.pydata.org/whatsnew/index.html" _msttexthash="113542" _msthidden="1" _msthash="20">
+  Releases
+ </a>
+</li>
+
+<li class="toctree-l1 nav-item" _msthidden="1">
+ <a class="reference internal nav-link" href="https://seaborn.pydata.org/citing.html" _msttexthash="76037" _msthidden="1" _msthash="21">
+  Citing
+ </a>
+</li>
+
+<li class="toctree-l1 nav-item" _msthidden="1">
+ <a class="reference internal nav-link" href="https://seaborn.pydata.org/faq.html" _msttexthash="22607" _msthidden="1" _msthash="22">
+  FAQ
+ </a>
+</li>
+
+</ul>
+      </div>
+      
+      </div>
+    
+
+    
+    
+    <div class="sidebar-header-items__end" _msthidden="4">
+      
+      <div class="navbar-end-item" _msthidden="4">
+        <ul id="navbar-icon-links" class="navbar-nav" aria-label="Icon Links" _msthidden="3" _mstaria-label="131963" _msthash="23">
+        <li class="nav-item" _msthidden="1">
+          
+          
+          
+          
+          
+          
+          <a href="https://github.com/mwaskom/seaborn" title="GitHub" class="nav-link" rel="noopener" target="_blank" _msthidden="1"><span><i class="fab fa-github"></i></span>
+            <label class="sr-only" _msttexthash="72332" _msthidden="1" _msthash="24">GitHub</label></a>
+        </li>
+        <li class="nav-item" _msthidden="1">
+          
+          
+          
+          
+          
+          
+          <a href="https://stackoverflow.com/tags/seaborn" title="StackOverflow" class="nav-link" rel="noopener" target="_blank" _msthidden="1"><span><i class="fab fa-stack-overflow"></i></span>
+            <label class="sr-only" _msttexthash="232466" _msthidden="1" _msthash="25">StackOverflow</label></a>
+        </li>
+        <li class="nav-item" _msthidden="1">
+          
+          
+          
+          
+          
+          
+          <a href="https://twitter.com/michaelwaskom" title="Twitter" class="nav-link" rel="noopener" target="_blank" _msthidden="1"><span><i class="fab fa-twitter"></i></span>
+            <label class="sr-only" _msttexthash="98995" _msthidden="1" _msthash="26">Twitter</label></a>
+        </li>
+      </ul>
+      </div>
+      
+    </div>
+    
+  </div>
+
+  
+  <div class="sidebar-start-items sidebar-primary__section">
+    <div class="sidebar-start-items__item"><nav class="bd-links" id="bd-docs-nav" aria-label="Navegação por seções" _mstaria-label="353847" _msthash="27">
+  <div class="bd-toc-item navbar-nav">
+    <ul class="nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="https://seaborn.pydata.org/tutorial/introduction.html" _msttexthash="591084" _msthash="28"> Uma introdução ao seaborn </a>
+ </li>
+</ul>
+<ul class="nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="https://seaborn.pydata.org/tutorial/function_overview.html" _msttexthash="1374724" _msthash="29"> Visão geral das funções de plotagem seaborn </a>
+ </li>
+</ul>
+<ul class="current nav bd-sidenav">
+ <li class="toctree-l1 current active">
+  <a class="current reference internal" href="https://seaborn.pydata.org/tutorial/data_structure.html#" _msttexthash="1162369" _msthash="30"> Estruturas de dados aceitas pelo seaborn </a>
+ </li>
+</ul>
+<ul class="nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="https://seaborn.pydata.org/tutorial/objects_interface.html" _msttexthash="632931" _msthash="31"> A interface seaborn.objects </a>
+ </li>
+</ul>
+<ul class="nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="https://seaborn.pydata.org/tutorial/properties.html" _msttexthash="692822" _msthash="32"> Propriedades dos objetos Mark </a>
+ </li>
+</ul>
+<ul class="nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="https://seaborn.pydata.org/tutorial/relational.html" _msttexthash="1139190" _msthash="33"> Visualizando relações estatísticas </a>
+ </li>
+</ul>
+<ul class="nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="https://seaborn.pydata.org/tutorial/distributions.html" _msttexthash="1386658" _msthash="34"> Visualização das distribuições dos dados </a>
+ </li>
+</ul>
+<ul class="nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="https://seaborn.pydata.org/tutorial/categorical.html" _msttexthash="995553" _msthash="35"> Visualização de dados categóricos </a>
+ </li>
+</ul>
+<ul class="nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="https://seaborn.pydata.org/tutorial/error_bars.html" _msttexthash="1143376" _msthash="36"> Estimativa estatística e barras de erro </a>
+ </li>
+</ul>
+<ul class="nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="https://seaborn.pydata.org/tutorial/regression.html" _msttexthash="1013727" _msthash="37"> Estimativa dos ajustes de regressão </a>
+ </li>
+</ul>
+<ul class="nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="https://seaborn.pydata.org/tutorial/axis_grids.html" _msttexthash="1925560" _msthash="38"> Construindo grades estruturadas de múltiplos plots </a>
+ </li>
+</ul>
+<ul class="nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="https://seaborn.pydata.org/tutorial/aesthetics.html" _msttexthash="711880" _msthash="39"> Estética de controle da figura </a>
+ </li>
+</ul>
+<ul class="nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="https://seaborn.pydata.org/tutorial/color_palettes.html" _msttexthash="608400" _msthash="40"> Escolha das paletas de cores </a>
+ </li>
+</ul>
+
+  </div>
+</nav>
+    </div>
+  </div>
+  
+
+  
+  <div class="sidebar-end-items sidebar-primary__section">
+    <div class="sidebar-end-items__item">
+    </div>
+  </div>
+
+      </div>
+
+      
+      
+      
+        <div class="bd-sidebar-secondary bd-toc">
+          
+<div class="toc-item">
+  
+<div class="tocsection onthispage">
+    <i class="fas fa-list"></i><font _mstmutation="1" _msttexthash="199043" _msthash="41"> Nesta página </font></div>
+<nav id="bd-toc-nav" class="page-toc">
+    <ul class="visible nav section-nav flex-column">
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="https://seaborn.pydata.org/tutorial/data_structure.html#long-form-vs-wide-form-data" _msttexthash="1211925" _msthash="42"> Dados de formato longo vs. de formato amplo </a>
+  <ul class="nav section-nav flex-column" _msthidden="4">
+   <li class="toc-h3 nav-item toc-entry" _msthidden="1">
+    <a class="reference internal nav-link" href="https://seaborn.pydata.org/tutorial/data_structure.html#long-form-data" _msttexthash="221169" _msthidden="1" _msthash="43">
+     Long-form data
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry" _msthidden="1">
+    <a class="reference internal nav-link" href="https://seaborn.pydata.org/tutorial/data_structure.html#wide-form-data" _msttexthash="220116" _msthidden="1" _msthash="44">
+     Wide-form data
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry" _msthidden="1">
+    <a class="reference internal nav-link" href="https://seaborn.pydata.org/tutorial/data_structure.html#messy-data" _msttexthash="135239" _msthidden="1" _msthash="45">
+     Messy data
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry" _msthidden="1">
+    <a class="reference internal nav-link" href="https://seaborn.pydata.org/tutorial/data_structure.html#further-reading-and-take-home-points" _msttexthash="979056" _msthidden="1" _msthash="46">
+     Further reading and take-home points
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="https://seaborn.pydata.org/tutorial/data_structure.html#options-for-visualizing-long-form-data" _msttexthash="1447446" _msthash="47"> Opções para visualizar dados de formato longo </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="https://seaborn.pydata.org/tutorial/data_structure.html#options-for-visualizing-wide-form-data" _msttexthash="1444469" _msthash="48"> Opções para visualizar dados de formato amplo </a>
+ </li>
+</ul>
+
+</nav>
+</div>
+
+<div class="toc-item">
+  
+</div>
+
+<div class="toc-item">
+  
+</div>
+
+        </div>
+      
+      
+
+      
+      
+      <div class="bd-content col">
+          
+          <div class="bd-header-article">
+              
+          </div>
+
+          
+          
+          <article class="bd-article" role="main">
+            
+  <section id="data-structures-accepted-by-seaborn">
+<span id="data-tutorial"></span><h1><font _mstmutation="1" _msttexthash="1162369" _msthash="49">Estruturas de dados aceitas pelo seaborn</font><a class="headerlink" href="https://seaborn.pydata.org/tutorial/data_structure.html#data-structures-accepted-by-seaborn" title="Permalink to this heading">#</a></h1>
+<p _msttexthash="155408422" _msthash="50">Como biblioteca de visualização de dados, a Seaborn exige que você forneça dados a ela. Este capítulo explica as várias formas de realizar essa tarefa. O Seaborn suporta vários formatos diferentes de conjunto de dados, e a maioria das funções aceita dados representados com objetos das bibliotecas <a class="reference external" href="https://pandas.pydata.org/" _istranslated="1">pandas</a> ou <a class="reference external" href="https://numpy.org/" _istranslated="1">numpy</a>, assim como tipos integrados em Python, como listas e dicionários. Compreender os padrões de uso associados a essas diferentes opções ajudará você a criar rapidamente visualizações úteis para quase qualquer conjunto de dados.</p>
+<div class="admonition note">
+<p class="admonition-title" _msttexthash="44824" _msthash="51">Nota</p>
+<p _msttexthash="32070389" _msthash="52">No momento em que escrevo atualmente (v0.13.0), toda a variedade de opções abordadas aqui é suportada pela maioria, mas não por todas, as funções do seaborn. Ou seja, algumas funções mais antigas (por exemplo, <a class="reference internal" href="https://seaborn.pydata.org/generated/seaborn.lmplot.html#seaborn.lmplot" title="seaborn.lmplot" _istranslated="1"><code class="xref py py-func docutils literal notranslate" _istranslated="1"></code></a> e <a class="reference internal" href="https://seaborn.pydata.org/generated/seaborn.regplot.html#seaborn.regplot" title="seaborn.regplot" _istranslated="1"><code class="xref py py-func docutils literal notranslate" _istranslated="1"></code></a>) são mais limitadas no que aceitam.</p>
+</div>
+<section id="long-form-vs-wide-form-data">
+<h2><font _mstmutation="1" _msttexthash="1211925" _msthash="53">Dados de formato longo vs. de formato amplo</font><a class="headerlink" href="https://seaborn.pydata.org/tutorial/data_structure.html#long-form-vs-wide-form-data" title="Permalink to this heading">#</a></h2>
+<p><font _mstmutation="1" _msttexthash="62263123" _msthash="54">A maioria das funções de plotamento em seaborn é orientada para <em _mstmutation="1" _istranslated="1">vetores</em> de dados. Ao plotar contra , cada variável deve ser um vetor. Seaborn aceita <em _mstmutation="1" _istranslated="1">conjuntos</em> de dados que possuem mais de um vetor organizado de forma tabular. Existe uma distinção fundamental entre tabelas de dados "longas" e "wide-form", e os seaborn tratam cada uma de forma diferente.</font><code class="docutils literal notranslate"><span class="pre">x</span></code><code class="docutils literal notranslate"><span class="pre">y</span></code></p>
+<section id="long-form-data">
+<h3><font _mstmutation="1" _msttexthash="422071" _msthash="55">Dados de formato longo</font><a class="headerlink" href="https://seaborn.pydata.org/tutorial/data_structure.html#long-form-data" title="Permalink to this heading">#</a></h3>
+<p _msttexthash="3401268" _msthash="56">Uma tabela de dados de formato longo possui as seguintes características:</p>
+<ul class="simple">
+<li><p _msttexthash="585156" _msthash="57">Cada variável é uma coluna</p></li>
+<li><p _msttexthash="660218" _msthash="58">Cada observação é uma linha</p></li>
+</ul>
+<p _msttexthash="29739112" _msthash="59">Como exemplo simples, considere o conjunto de dados de "voos", que registra o número de passageiros de companhias aéreas que voaram em cada mês de 1949 a 1960. Este conjunto de dados possui três variáveis (<em _istranslated="1">ano</em>, <em _istranslated="1">mês</em> e número de <em _istranslated="1">passageiros</em>):</p>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre id="codecell0"><span></span><span class="n">flights</span> <span class="o">=</span> <span class="n">sns</span><span class="o">.</span><span class="n">load_dataset</span><span class="p">(</span><span class="s2">"flights"</span><span class="p">)</span>
+<span class="n">flights</span><span class="o">.</span><span class="n">head</span><span class="p">()</span>
+</pre><button class="copybtn o-tooltip--left" data-tooltip="Copy" data-clipboard-target="#codecell0">
+      <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-copy" width="44" height="44" viewBox="0 0 24 24" stroke-width="1.5" stroke="#000000" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <title>Copy to clipboard</title>
+  <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
+  <rect x="8" y="8" width="12" height="12" rx="2"></rect>
+  <path d="M16 8v-2a2 2 0 0 0 -2 -2h-8a2 2 0 0 0 -2 2v8a2 2 0 0 0 2 2h2"></path>
+</svg>
+    </button></div>
+</div>
+<div>
+<style scoped="">
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th _msttexthash="30342" _msthash="60">Ano</th>
+      <th _msttexthash="47710" _msthash="61">mês</th>
+      <th _msttexthash="182624" _msthash="62">Passageiros</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th _msttexthash="4368" _msthash="63">0</th>
+      <td _msttexthash="23881" _msthash="64">1949</td>
+      <td _msttexthash="29692" _msthash="65">Jan</td>
+      <td _msttexthash="15405" _msthash="66">112</td>
+    </tr>
+    <tr>
+      <th _msttexthash="4459" _msthash="67">1</th>
+      <td _msttexthash="23881" _msthash="68">1949</td>
+      <td _msttexthash="30680" _msthash="69">Fev</td>
+      <td _msttexthash="16107" _msthash="70">118</td>
+    </tr>
+    <tr>
+      <th _msttexthash="4550" _msthash="71">2</th>
+      <td _msttexthash="23881" _msthash="72">1949</td>
+      <td _msttexthash="30433" _msthash="73">Mar</td>
+      <td _msttexthash="15613" _msthash="74">132</td>
+    </tr>
+    <tr>
+      <th _msttexthash="4641" _msthash="75">3</th>
+      <td _msttexthash="23881" _msthash="76">1949</td>
+      <td _msttexthash="35425" _msthash="77">Abr.</td>
+      <td _msttexthash="16328" _msthash="78">129</td>
+    </tr>
+    <tr>
+      <th _msttexthash="4732" _msthash="79">4</th>
+      <td _msttexthash="23881" _msthash="80">1949</td>
+      <td _msttexthash="43810" _msthash="81">Maio</td>
+      <td _msttexthash="15392" _msthash="82">121</td>
+    </tr>
+  </tbody>
+</table>
+</div><p _msttexthash="23772307" _msthash="83">Com dados de formato longo, as colunas da tabela recebem papéis no gráfico ao atribuí-las explicitamente a uma das variáveis. Por exemplo, fazer um gráfico mensal do número de passageiros por ano é o seguinte:</p>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre id="codecell1"><span></span><span class="n">sns</span><span class="o">.</span><span class="n">relplot</span><span class="p">(</span><span class="n">data</span><span class="o">=</span><span class="n">flights</span><span class="p">,</span> <span class="n">x</span><span class="o">=</span><span class="s2">"year"</span><span class="p">,</span> <span class="n">y</span><span class="o">=</span><span class="s2">"passengers"</span><span class="p">,</span> <span class="n">hue</span><span class="o">=</span><span class="s2">"month"</span><span class="p">,</span> <span class="n">kind</span><span class="o">=</span><span class="s2">"line"</span><span class="p">)</span>
+</pre><button class="copybtn o-tooltip--left" data-tooltip="Copy" data-clipboard-target="#codecell1">
+      <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-copy" width="44" height="44" viewBox="0 0 24 24" stroke-width="1.5" stroke="#000000" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <title>Copy to clipboard</title>
+  <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
+  <rect x="8" y="8" width="12" height="12" rx="2"></rect>
+  <path d="M16 8v-2a2 2 0 0 0 -2 -2h-8a2 2 0 0 0 -2 2v8a2 2 0 0 0 2 2h2"></path>
+</svg>
+    </button></div>
+</div>
+<img alt="../_images/data_structure_6_0.png" src="./Estruturas de dados aceitas por seaborn — documentação seaborn 0.13.2_files/data_structure_6_0.png" _msthidden="A" _mstalt="941044" _msthash="84">
+<p _msttexthash="66375439" _msthash="85">A vantagem dos dados de formato longo é que eles se encaixam bem nessa especificação explícita do gráfico. Ele pode acomodar conjuntos de dados de complexidade arbitrária, desde que as variáveis e observações possam ser claramente definidas. Mas esse formato exige um tempo de adaptação, porque muitas vezes não é o modelo dos dados que se tem na cabeça.</p>
+</section>
+<section id="wide-form-data">
+<h3><font _mstmutation="1" _msttexthash="420654" _msthash="86">Dados de formato amplo</font><a class="headerlink" href="https://seaborn.pydata.org/tutorial/data_structure.html#wide-form-data" title="Permalink to this heading">#</a></h3>
+<p _msttexthash="72427069" _msthash="87">Para conjuntos de dados simples, geralmente é mais intuitivo pensar nos dados da forma como eles podem ser vistos em uma planilha, onde as colunas e linhas contêm <em _istranslated="1">níveis</em> de variáveis diferentes. Por exemplo, podemos converter o conjunto de dados de voos em uma organização de formato amplo "pivotando" para que cada coluna tenha a série temporal de cada mês ao longo dos anos:</p>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre id="codecell2"><span></span><span class="n">flights_wide</span> <span class="o">=</span> <span class="n">flights</span><span class="o">.</span><span class="n">pivot</span><span class="p">(</span><span class="n">index</span><span class="o">=</span><span class="s2">"year"</span><span class="p">,</span> <span class="n">columns</span><span class="o">=</span><span class="s2">"month"</span><span class="p">,</span> <span class="n">values</span><span class="o">=</span><span class="s2">"passengers"</span><span class="p">)</span>
+<span class="n">flights_wide</span><span class="o">.</span><span class="n">head</span><span class="p">()</span>
+</pre><button class="copybtn o-tooltip--left" data-tooltip="Copy" data-clipboard-target="#codecell2">
+      <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-copy" width="44" height="44" viewBox="0 0 24 24" stroke-width="1.5" stroke="#000000" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <title>Copy to clipboard</title>
+  <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
+  <rect x="8" y="8" width="12" height="12" rx="2"></rect>
+  <path d="M16 8v-2a2 2 0 0 0 -2 -2h-8a2 2 0 0 0 -2 2v8a2 2 0 0 0 2 2h2"></path>
+</svg>
+    </button></div>
+</div>
+<div>
+<style scoped="">
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th _msttexthash="47710" _msthash="88">mês</th>
+      <th _msttexthash="29692" _msthash="89">Jan</th>
+      <th _msttexthash="30680" _msthash="90">Fev</th>
+      <th _msttexthash="30433" _msthash="91">Mar</th>
+      <th _msttexthash="35425" _msthash="92">Abr.</th>
+      <th _msttexthash="43810" _msthash="93">Maio</th>
+      <th _msttexthash="31772" _msthash="94">Jun</th>
+      <th _msttexthash="31538" _msthash="95">Jul</th>
+      <th _msttexthash="29614" _msthash="96">Ago</th>
+      <th _msttexthash="31161" _msthash="97">Sep</th>
+      <th _msttexthash="32929" _msthash="98">Out</th>
+      <th _msttexthash="32448" _msthash="99">Nov</th>
+      <th _msttexthash="30966" _msthash="100">Dez</th>
+    </tr>
+    <tr>
+      <th _msttexthash="30342" _msthash="101">Ano</th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th _msttexthash="23881" _msthash="102">1949</th>
+      <td _msttexthash="15405" _msthash="103">112</td>
+      <td _msttexthash="16107" _msthash="104">118</td>
+      <td _msttexthash="15613" _msthash="105">132</td>
+      <td _msttexthash="16328" _msthash="106">129</td>
+      <td _msttexthash="15392" _msthash="107">121</td>
+      <td _msttexthash="15964" _msthash="108">135</td>
+      <td _msttexthash="16419" _msthash="109">148</td>
+      <td _msttexthash="16419" _msthash="110">148</td>
+      <td _msttexthash="16081" _msthash="111">136</td>
+      <td _msttexthash="16224" _msthash="112">119</td>
+      <td _msttexthash="15535" _msthash="113">104</td>
+      <td _msttexthash="16107" _msthash="114">118</td>
+    </tr>
+    <tr>
+      <th _msttexthash="22828" _msthash="115">1950</th>
+      <td _msttexthash="15756" _msthash="116">115</td>
+      <td _msttexthash="15977" _msthash="117">126</td>
+      <td _msttexthash="15600" _msthash="118">141</td>
+      <td _msttexthash="15964" _msthash="119">135</td>
+      <td _msttexthash="15860" _msthash="120">125</td>
+      <td _msttexthash="16536" _msthash="121">149</td>
+      <td _msttexthash="15795" _msthash="122">170</td>
+      <td _msttexthash="15795" _msthash="123">170</td>
+      <td _msttexthash="16523" _msthash="124">158</td>
+      <td _msttexthash="15730" _msthash="125">133</td>
+      <td _msttexthash="15639" _msthash="126">114</td>
+      <td _msttexthash="15483" _msthash="127">140</td>
+    </tr>
+    <tr>
+      <th _msttexthash="22958" _msthash="128">1951</th>
+      <td _msttexthash="16068" _msthash="129">145</td>
+      <td _msttexthash="15587" _msthash="130">150</td>
+      <td _msttexthash="16731" _msthash="131">178</td>
+      <td _msttexthash="16042" _msthash="132">163</td>
+      <td _msttexthash="16029" _msthash="133">172</td>
+      <td _msttexthash="16731" _msthash="134">178</td>
+      <td _msttexthash="17056" _msthash="135">199</td>
+      <td _msttexthash="17056" _msthash="136">199</td>
+      <td _msttexthash="16367" _msthash="137">184</td>
+      <td _msttexthash="15925" _msthash="138">162</td>
+      <td _msttexthash="16185" _msthash="139">146</td>
+      <td _msttexthash="16393" _msthash="140">166</td>
+    </tr>
+    <tr>
+      <th _msttexthash="23088" _msthash="141">1952</th>
+      <td _msttexthash="15912" _msthash="142">171</td>
+      <td _msttexthash="15899" _msthash="143">180</td>
+      <td _msttexthash="16354" _msthash="144">193</td>
+      <td _msttexthash="16016" _msthash="145">181</td>
+      <td _msttexthash="16250" _msthash="146">183</td>
+      <td _msttexthash="16198" _msthash="147">218</td>
+      <td _msttexthash="15470" _msthash="148">230</td>
+      <td _msttexthash="15808" _msthash="149">242</td>
+      <td _msttexthash="16211" _msthash="150">209</td>
+      <td _msttexthash="16120" _msthash="151">191</td>
+      <td _msttexthash="16029" _msthash="152">172</td>
+      <td _msttexthash="16471" _msthash="153">194</td>
+    </tr>
+    <tr>
+      <th _msttexthash="23218" _msthash="154">1953</th>
+      <td _msttexthash="16705" _msthash="155">196</td>
+      <td _msttexthash="16705" _msthash="156">196</td>
+      <td _msttexthash="16172" _msthash="157">236</td>
+      <td _msttexthash="16055" _msthash="158">235</td>
+      <td _msttexthash="16419" _msthash="159">229</td>
+      <td _msttexthash="15925" _msthash="160">243</td>
+      <td _msttexthash="16250" _msthash="161">264</td>
+      <td _msttexthash="16120" _msthash="162">272</td>
+      <td _msttexthash="16289" _msthash="163">237</td>
+      <td _msttexthash="15379" _msthash="164">211</td>
+      <td _msttexthash="15899" _msthash="165">180</td>
+      <td _msttexthash="15275" _msthash="166">201</td>
+    </tr>
+  </tbody>
+</table>
+</div><p _msttexthash="50518728" _msthash="167">Here we have the same three variables, but they are organized differently. The variables in this dataset are linked to the <em>dimensions</em> of the table, rather than to named fields. Each observation is defined by both the value at a cell in the table and the coordinates of that cell with respect to the row and column indices.</p>
+<p _msttexthash="43839016" _msthash="168">With long-form data, we can access variables in the dataset by their name. That is not the case with wide-form data. Nevertheless, because there is a clear association between the dimensions of the table and the variable in the dataset, seaborn is able to assign those variables roles in the plot.</p>
+<div class="admonition note">
+<p class="admonition-title" _msttexthash="45344" _msthash="169">Note</p>
+<p><font _mstmutation="1" _msttexthash="3191500" _msthash="170">Seaborn treats the argument to  as wide form when neither  nor  are assigned.</font><code class="docutils literal notranslate"><span class="pre">data</span></code><code class="docutils literal notranslate"><span class="pre">x</span></code><code class="docutils literal notranslate"><span class="pre">y</span></code></p>
+</div>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre id="codecell3"><span></span><span class="n">sns</span><span class="o">.</span><span class="n">relplot</span><span class="p">(</span><span class="n">data</span><span class="o">=</span><span class="n">flights_wide</span><span class="p">,</span> <span class="n">kind</span><span class="o">=</span><span class="s2">"line"</span><span class="p">)</span>
+</pre><button class="copybtn o-tooltip--left" data-tooltip="Copy" data-clipboard-target="#codecell3">
+      <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-copy" width="44" height="44" viewBox="0 0 24 24" stroke-width="1.5" stroke="#000000" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <title>Copy to clipboard</title>
+  <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
+  <rect x="8" y="8" width="12" height="12" rx="2"></rect>
+  <path d="M16 8v-2a2 2 0 0 0 -2 -2h-8a2 2 0 0 0 -2 2v8a2 2 0 0 0 2 2h2"></path>
+</svg>
+    </button></div>
+</div>
+<img alt="../_images/data_structure_11_0.png" src="./Estruturas de dados aceitas por seaborn — documentação seaborn 0.13.2_files/data_structure_11_0.png" _msthidden="A" _mstalt="967239" _msthash="171">
+<p><font _mstmutation="1" _msttexthash="300174667" _msthash="172">This plot looks very  similar to the one before. Seaborn has assigned the index of the dataframe to , the values of the dataframe to , and it has drawn a separate line for each month. There is a notable difference between the two plots, however. When the dataset went through the “pivot” operation that converted it from long-form to wide-form, the information about what the values mean was lost. As a result, there is no y axis label. (The lines also have dashes here, because <a class="reference internal" href="https://seaborn.pydata.org/generated/seaborn.relplot.html#seaborn.relplot" title="seaborn.relplot" _mstmutation="1"><code class="xref py py-func docutils literal notranslate"><span class="pre">relplot()</span></code></a> has mapped the column variable to both the  and  semantic so that the plot is more accessible. We didn’t do that in the long-form case, but we could have by setting ).</font><code class="docutils literal notranslate"><span class="pre">x</span></code><code class="docutils literal notranslate"><span class="pre">y</span></code><code class="docutils literal notranslate"><span class="pre">hue</span></code><code class="docutils literal notranslate"><span class="pre">style</span></code><code class="docutils literal notranslate"><span class="pre">style="month"</span></code></p>
+<p _msttexthash="97534528" _msthash="173">Thus far, we did much less typing while using wide-form data and made nearly the same plot. This seems easier! But a big advantage of long-form data is that, once you have the data in the correct format, you no longer need to think about its <em>structure</em>. You can design your plots by thinking only about the variables contained within it. For example, to draw lines that represent the monthly time series for each year, simply reassign the variables:</p>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre id="codecell4"><span></span><span class="n">sns</span><span class="o">.</span><span class="n">relplot</span><span class="p">(</span><span class="n">data</span><span class="o">=</span><span class="n">flights</span><span class="p">,</span> <span class="n">x</span><span class="o">=</span><span class="s2">"month"</span><span class="p">,</span> <span class="n">y</span><span class="o">=</span><span class="s2">"passengers"</span><span class="p">,</span> <span class="n">hue</span><span class="o">=</span><span class="s2">"year"</span><span class="p">,</span> <span class="n">kind</span><span class="o">=</span><span class="s2">"line"</span><span class="p">)</span>
+</pre><button class="copybtn o-tooltip--left" data-tooltip="Copy" data-clipboard-target="#codecell4">
+      <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-copy" width="44" height="44" viewBox="0 0 24 24" stroke-width="1.5" stroke="#000000" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <title>Copy to clipboard</title>
+  <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
+  <rect x="8" y="8" width="12" height="12" rx="2"></rect>
+  <path d="M16 8v-2a2 2 0 0 0 -2 -2h-8a2 2 0 0 0 -2 2v8a2 2 0 0 0 2 2h2"></path>
+</svg>
+    </button></div>
+</div>
+<img alt="../_images/data_structure_13_0.png" src="./Estruturas de dados aceitas por seaborn — documentação seaborn 0.13.2_files/data_structure_13_0.png" _msthidden="A" _mstalt="968123" _msthash="174">
+<p _msttexthash="5065372" _msthash="175">To achieve the same remapping with the wide-form dataset, we would need to transpose the table:</p>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre id="codecell5"><span></span><span class="n">sns</span><span class="o">.</span><span class="n">relplot</span><span class="p">(</span><span class="n">data</span><span class="o">=</span><span class="n">flights_wide</span><span class="o">.</span><span class="n">transpose</span><span class="p">(),</span> <span class="n">kind</span><span class="o">=</span><span class="s2">"line"</span><span class="p">)</span>
+</pre><button class="copybtn o-tooltip--left" data-tooltip="Copy" data-clipboard-target="#codecell5">
+      <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-copy" width="44" height="44" viewBox="0 0 24 24" stroke-width="1.5" stroke="#000000" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <title>Copy to clipboard</title>
+  <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
+  <rect x="8" y="8" width="12" height="12" rx="2"></rect>
+  <path d="M16 8v-2a2 2 0 0 0 -2 -2h-8a2 2 0 0 0 -2 2v8a2 2 0 0 0 2 2h2"></path>
+</svg>
+    </button></div>
+</div>
+<img alt="../_images/data_structure_15_0.png" src="./Estruturas de dados aceitas por seaborn — documentação seaborn 0.13.2_files/data_structure_15_0.png" _msthidden="A" _mstalt="969007" _msthash="176">
+<p _msttexthash="52091052" _msthash="177">(This example also illustrates another wrinkle, which is that seaborn currently considers the column variable in a wide-form dataset to be categorical regardless of its datatype, whereas, because the long-form variable is numeric, it is assigned a quantitative color palette and legend. This may change in the future).</p>
+<p><font _mstmutation="1" _msttexthash="92779934" _msthash="178">The absence of explicit variable assignments also means that each plot type needs to define a fixed mapping between the dimensions of the wide-form data and the roles in the plot. Because this natural mapping may vary across plot types, the results are less predictable when using wide-form data. For example, the <a class="reference internal" href="https://seaborn.pydata.org/api.html#categorical-api" _mstmutation="1"><span class="std std-ref">categorical</span></a> plots assign the <em _mstmutation="1">column</em> dimension of the table to  and then aggregate across the rows (ignoring the index):</font><code class="docutils literal notranslate"><span class="pre">x</span></code></p>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre id="codecell6"><span></span><span class="n">sns</span><span class="o">.</span><span class="n">catplot</span><span class="p">(</span><span class="n">data</span><span class="o">=</span><span class="n">flights_wide</span><span class="p">,</span> <span class="n">kind</span><span class="o">=</span><span class="s2">"box"</span><span class="p">)</span>
+</pre><button class="copybtn o-tooltip--left" data-tooltip="Copy" data-clipboard-target="#codecell6">
+      <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-copy" width="44" height="44" viewBox="0 0 24 24" stroke-width="1.5" stroke="#000000" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <title>Copy to clipboard</title>
+  <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
+  <rect x="8" y="8" width="12" height="12" rx="2"></rect>
+  <path d="M16 8v-2a2 2 0 0 0 -2 -2h-8a2 2 0 0 0 -2 2v8a2 2 0 0 0 2 2h2"></path>
+</svg>
+    </button></div>
+</div>
+<img alt="../_images/data_structure_17_0.png" src="./Estruturas de dados aceitas por seaborn — documentação seaborn 0.13.2_files/data_structure_17_0.png" _msthidden="A" _mstalt="969891" _msthash="179">
+<p><font _mstmutation="1" _msttexthash="177853507" _msthash="180">When using pandas to represent wide-form data, you are limited to just a few variables (no more than three). This is because seaborn does not make use of multi-index information, which is how pandas represents additional variables in a tabular format. The <a class="reference external" href="http://xarray.pydata.org/en/stable/" _mstmutation="1">xarray</a> project offers labeled N-dimensional array objects, which can be considered a generalization of wide-form data to higher dimensions. At present, seaborn does not directly support objects from , but they can be transformed into a long-form <a class="reference external" href="https://pandas.pydata.org/pandas-docs/stable/reference/api/pandas.DataFrame.html#pandas.DataFrame" title="(in pandas v2.2.0)" _mstmutation="1"><code class="xref py py-class docutils literal notranslate"><span class="pre">pandas.DataFrame</span></code></a> using the  method and then plotted in seaborn like any other long-form data set.</font><code class="docutils literal notranslate"><span class="pre">xarray</span></code><code class="docutils literal notranslate"><span class="pre">to_pandas</span></code></p>
+<p _msttexthash="4829955" _msthash="181">In summary, we can think of long-form and wide-form datasets as looking something like this:</p>
+<img alt="../_images/data_structure_19_0.png" src="./Estruturas de dados aceitas por seaborn — documentação seaborn 0.13.2_files/data_structure_19_0.png" _msthidden="A" _mstalt="970775" _msthash="182">
+</section>
+<section id="messy-data">
+<h3><font _mstmutation="1" _msttexthash="135239" _msthash="183">Messy data</font><a class="headerlink" href="https://seaborn.pydata.org/tutorial/data_structure.html#messy-data" title="Permalink to this heading">#</a></h3>
+<p _msttexthash="285313275" _msthash="184">Many datasets cannot be clearly interpreted using either long-form or wide-form rules. If datasets that are clearly long-form or wide-form are <a class="reference external" href="https://vita.had.co.nz/papers/tidy-data.pdf">“tidy”</a>, we might say that these more ambiguous datasets are “messy”. In a messy dataset, the variables are neither uniquely defined by the keys nor by the dimensions of the table. This often occurs with <em>repeated-measures</em> data, where it is natural to organize a table such that each row corresponds to the <em>unit</em> of data collection. Consider this simple dataset from a psychology experiment in which twenty subjects performed a memory task where they studied anagrams while their attention was either divided or focused:</p>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre id="codecell7"><span></span><span class="n">anagrams</span> <span class="o">=</span> <span class="n">sns</span><span class="o">.</span><span class="n">load_dataset</span><span class="p">(</span><span class="s2">"anagrams"</span><span class="p">)</span>
+<span class="n">anagrams</span>
+</pre><button class="copybtn o-tooltip--left" data-tooltip="Copy" data-clipboard-target="#codecell7">
+      <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-copy" width="44" height="44" viewBox="0 0 24 24" stroke-width="1.5" stroke="#000000" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <title>Copy to clipboard</title>
+  <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
+  <rect x="8" y="8" width="12" height="12" rx="2"></rect>
+  <path d="M16 8v-2a2 2 0 0 0 -2 -2h-8a2 2 0 0 0 -2 2v8a2 2 0 0 0 2 2h2"></path>
+</svg>
+    </button></div>
+</div>
+<div>
+<style scoped="">
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th _msttexthash="79833" _msthash="185">subidr</th>
+      <th _msttexthash="65065" _msthash="186">attnr</th>
+      <th _msttexthash="41301" _msthash="187">num1</th>
+      <th _msttexthash="41431" _msthash="188">num2</th>
+      <th _msttexthash="41561" _msthash="189">num3</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th _msttexthash="4368" _msthash="190">0</th>
+      <td _msttexthash="4459" _msthash="191">1</td>
+      <td _msttexthash="94432" _msthash="192">divided</td>
+      <td _msttexthash="4550" _msthash="193">2</td>
+      <td _msttexthash="15132" _msthash="194">4.0</td>
+      <td _msttexthash="5005" _msthash="195">7</td>
+    </tr>
+    <tr>
+      <th _msttexthash="4459" _msthash="196">1</th>
+      <td _msttexthash="4550" _msthash="197">2</td>
+      <td _msttexthash="94432" _msthash="198">divided</td>
+      <td _msttexthash="4641" _msthash="199">3</td>
+      <td _msttexthash="15132" _msthash="200">4.0</td>
+      <td _msttexthash="4823" _msthash="201">5</td>
+    </tr>
+    <tr>
+      <th _msttexthash="4550" _msthash="202">2</th>
+      <td _msttexthash="4641" _msthash="203">3</td>
+      <td _msttexthash="94432" _msthash="204">divided</td>
+      <td _msttexthash="4641" _msthash="205">3</td>
+      <td _msttexthash="15223" _msthash="206">5.0</td>
+      <td _msttexthash="4914" _msthash="207">6</td>
+    </tr>
+    <tr>
+      <th _msttexthash="4641" _msthash="208">3</th>
+      <td _msttexthash="4732" _msthash="209">4</td>
+      <td _msttexthash="94432" _msthash="210">divided</td>
+      <td _msttexthash="4823" _msthash="211">5</td>
+      <td _msttexthash="15405" _msthash="212">7.0</td>
+      <td _msttexthash="4823" _msthash="213">5</td>
+    </tr>
+    <tr>
+      <th _msttexthash="4732" _msthash="214">4</th>
+      <td _msttexthash="4823" _msthash="215">5</td>
+      <td _msttexthash="94432" _msthash="216">divided</td>
+      <td _msttexthash="4732" _msthash="217">4</td>
+      <td _msttexthash="15223" _msthash="218">5.0</td>
+      <td _msttexthash="5096" _msthash="219">8</td>
+    </tr>
+    <tr>
+      <th _msttexthash="4823" _msthash="220">5</th>
+      <td _msttexthash="4914" _msthash="221">6</td>
+      <td _msttexthash="94432" _msthash="222">divided</td>
+      <td _msttexthash="4823" _msthash="223">5</td>
+      <td _msttexthash="15223" _msthash="224">5.0</td>
+      <td _msttexthash="4914" _msthash="225">6</td>
+    </tr>
+    <tr>
+      <th _msttexthash="4914" _msthash="226">6</th>
+      <td _msttexthash="5005" _msthash="227">7</td>
+      <td _msttexthash="94432" _msthash="228">divided</td>
+      <td _msttexthash="4823" _msthash="229">5</td>
+      <td _msttexthash="15717" _msthash="230">4.5</td>
+      <td _msttexthash="4914" _msthash="231">6</td>
+    </tr>
+    <tr>
+      <th _msttexthash="5005" _msthash="232">7</th>
+      <td _msttexthash="5096" _msthash="233">8</td>
+      <td _msttexthash="94432" _msthash="234">divided</td>
+      <td _msttexthash="4823" _msthash="235">5</td>
+      <td _msttexthash="15405" _msthash="236">7.0</td>
+      <td _msttexthash="5096" _msthash="237">8</td>
+    </tr>
+    <tr>
+      <th _msttexthash="5096" _msthash="238">8</th>
+      <td _msttexthash="5187" _msthash="239">9</td>
+      <td _msttexthash="94432" _msthash="240">divided</td>
+      <td _msttexthash="4550" _msthash="241">2</td>
+      <td _msttexthash="15041" _msthash="242">3.0</td>
+      <td _msttexthash="5005" _msthash="243">7</td>
+    </tr>
+    <tr>
+      <th _msttexthash="5187" _msthash="244">9</th>
+      <td _msttexthash="9451" _msthash="245">10</td>
+      <td _msttexthash="94432" _msthash="246">divided</td>
+      <td _msttexthash="4914" _msthash="247">6</td>
+      <td _msttexthash="15223" _msthash="248">5.0</td>
+      <td _msttexthash="4914" _msthash="249">6</td>
+    </tr>
+    <tr>
+      <th _msttexthash="9451" _msthash="250">10</th>
+      <td _msttexthash="9555" _msthash="251">11</td>
+      <td _msttexthash="96720" _msthash="252">focused</td>
+      <td _msttexthash="4914" _msthash="253">6</td>
+      <td _msttexthash="15223" _msthash="254">5.0</td>
+      <td _msttexthash="4914" _msthash="255">6</td>
+    </tr>
+    <tr>
+      <th _msttexthash="9555" _msthash="256">11</th>
+      <td _msttexthash="9659" _msthash="257">12</td>
+      <td _msttexthash="96720" _msthash="258">focused</td>
+      <td _msttexthash="5096" _msthash="259">8</td>
+      <td _msttexthash="15587" _msthash="260">9.0</td>
+      <td _msttexthash="5096" _msthash="261">8</td>
+    </tr>
+    <tr>
+      <th _msttexthash="9659" _msthash="262">12</th>
+      <td _msttexthash="9763" _msthash="263">13</td>
+      <td _msttexthash="96720" _msthash="264">focused</td>
+      <td _msttexthash="4914" _msthash="265">6</td>
+      <td _msttexthash="15223" _msthash="266">5.0</td>
+      <td _msttexthash="5187" _msthash="267">9</td>
+    </tr>
+    <tr>
+      <th _msttexthash="9763" _msthash="268">13</th>
+      <td _msttexthash="9867" _msthash="269">14</td>
+      <td _msttexthash="96720" _msthash="270">focused</td>
+      <td _msttexthash="5096" _msthash="271">8</td>
+      <td _msttexthash="15496" _msthash="272">8.0</td>
+      <td _msttexthash="5005" _msthash="273">7</td>
+    </tr>
+    <tr>
+      <th _msttexthash="9867" _msthash="274">14</th>
+      <td _msttexthash="9971" _msthash="275">15</td>
+      <td _msttexthash="96720" _msthash="276">focused</td>
+      <td _msttexthash="5096" _msthash="277">8</td>
+      <td _msttexthash="15496" _msthash="278">8.0</td>
+      <td _msttexthash="5005" _msthash="279">7</td>
+    </tr>
+    <tr>
+      <th _msttexthash="9971" _msthash="280">15</th>
+      <td _msttexthash="10075" _msthash="281">16</td>
+      <td _msttexthash="96720" _msthash="282">focused</td>
+      <td _msttexthash="4914" _msthash="283">6</td>
+      <td _msttexthash="15496" _msthash="284">8.0</td>
+      <td _msttexthash="5005" _msthash="285">7</td>
+    </tr>
+    <tr>
+      <th _msttexthash="10075" _msthash="286">16</th>
+      <td _msttexthash="10179" _msthash="287">17</td>
+      <td _msttexthash="96720" _msthash="288">focused</td>
+      <td _msttexthash="5005" _msthash="289">7</td>
+      <td _msttexthash="15405" _msthash="290">7.0</td>
+      <td _msttexthash="4914" _msthash="291">6</td>
+    </tr>
+    <tr>
+      <th _msttexthash="10179" _msthash="292">17</th>
+      <td _msttexthash="10283" _msthash="293">18</td>
+      <td _msttexthash="96720" _msthash="294">focused</td>
+      <td _msttexthash="5005" _msthash="295">7</td>
+      <td _msttexthash="15496" _msthash="296">8.0</td>
+      <td _msttexthash="4914" _msthash="297">6</td>
+    </tr>
+    <tr>
+      <th _msttexthash="10283" _msthash="298">18</th>
+      <td _msttexthash="10387" _msthash="299">19</td>
+      <td _msttexthash="96720" _msthash="300">focused</td>
+      <td _msttexthash="4823" _msthash="301">5</td>
+      <td _msttexthash="15314" _msthash="302">6.0</td>
+      <td _msttexthash="4914" _msthash="303">6</td>
+    </tr>
+    <tr>
+      <th _msttexthash="10387" _msthash="304">19</th>
+      <td _msttexthash="9542" _msthash="305">20</td>
+      <td _msttexthash="96720" _msthash="306">focused</td>
+      <td _msttexthash="4914" _msthash="307">6</td>
+      <td _msttexthash="15314" _msthash="308">6.0</td>
+      <td _msttexthash="4823" _msthash="309">5</td>
+    </tr>
+  </tbody>
+</table>
+</div><p _msttexthash="75661573" _msthash="310">The attention variable is <em>between-subjects</em>, but there is also a <em>within-subjects</em> variable: the number of possible solutions to the anagrams, which varied from 1 to 3. The dependent measure is a score of memory performance. These two variables (number and score) are jointly encoded across several columns. As a result, the whole dataset is neither clearly long-form nor clearly wide-form.</p>
+<p _msttexthash="86074365" _msthash="311">How might we tell seaborn to plot the average score as a function of attention and number of solutions? We’d first need to coerce the data into one of our two structures. Let’s transform it to a tidy long-form table, such that each variable is a column and each row is an observation. We can use the method <a class="reference external" href="https://pandas.pydata.org/pandas-docs/stable/reference/api/pandas.DataFrame.melt.html#pandas.DataFrame.melt" title="(in pandas v2.2.0)"><code class="xref py py-meth docutils literal notranslate"><span class="pre">pandas.DataFrame.melt()</span></code></a> to accomplish this task:</p>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre id="codecell8"><span></span><span class="n">anagrams_long</span> <span class="o">=</span> <span class="n">anagrams</span><span class="o">.</span><span class="n">melt</span><span class="p">(</span><span class="n">id_vars</span><span class="o">=</span><span class="p">[</span><span class="s2">"subidr"</span><span class="p">,</span> <span class="s2">"attnr"</span><span class="p">],</span> <span class="n">var_name</span><span class="o">=</span><span class="s2">"solutions"</span><span class="p">,</span> <span class="n">value_name</span><span class="o">=</span><span class="s2">"score"</span><span class="p">)</span>
+<span class="n">anagrams_long</span><span class="o">.</span><span class="n">head</span><span class="p">()</span>
+</pre><button class="copybtn o-tooltip--left" data-tooltip="Copy" data-clipboard-target="#codecell8">
+      <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-copy" width="44" height="44" viewBox="0 0 24 24" stroke-width="1.5" stroke="#000000" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <title>Copy to clipboard</title>
+  <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
+  <rect x="8" y="8" width="12" height="12" rx="2"></rect>
+  <path d="M16 8v-2a2 2 0 0 0 -2 -2h-8a2 2 0 0 0 -2 2v8a2 2 0 0 0 2 2h2"></path>
+</svg>
+    </button></div>
+</div>
+<div>
+<style scoped="">
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th _msttexthash="79833" _msthash="312">subidr</th>
+      <th _msttexthash="65065" _msthash="313">attnr</th>
+      <th _msttexthash="144027" _msthash="314">solutions</th>
+      <th _msttexthash="63011" _msthash="315">score</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th _msttexthash="4368" _msthash="316">0</th>
+      <td _msttexthash="4459" _msthash="317">1</td>
+      <td _msttexthash="94432" _msthash="318">divided</td>
+      <td _msttexthash="41301" _msthash="319">num1</td>
+      <td _msttexthash="14950" _msthash="320">2.0</td>
+    </tr>
+    <tr>
+      <th _msttexthash="4459" _msthash="321">1</th>
+      <td _msttexthash="4550" _msthash="322">2</td>
+      <td _msttexthash="94432" _msthash="323">divided</td>
+      <td _msttexthash="41301" _msthash="324">num1</td>
+      <td _msttexthash="15041" _msthash="325">3.0</td>
+    </tr>
+    <tr>
+      <th _msttexthash="4550" _msthash="326">2</th>
+      <td _msttexthash="4641" _msthash="327">3</td>
+      <td _msttexthash="94432" _msthash="328">divided</td>
+      <td _msttexthash="41301" _msthash="329">num1</td>
+      <td _msttexthash="15041" _msthash="330">3.0</td>
+    </tr>
+    <tr>
+      <th _msttexthash="4641" _msthash="331">3</th>
+      <td _msttexthash="4732" _msthash="332">4</td>
+      <td _msttexthash="94432" _msthash="333">divided</td>
+      <td _msttexthash="41301" _msthash="334">num1</td>
+      <td _msttexthash="15223" _msthash="335">5.0</td>
+    </tr>
+    <tr>
+      <th _msttexthash="4732" _msthash="336">4</th>
+      <td _msttexthash="4823" _msthash="337">5</td>
+      <td _msttexthash="94432" _msthash="338">divided</td>
+      <td _msttexthash="41301" _msthash="339">num1</td>
+      <td _msttexthash="15132" _msthash="340">4.0</td>
+    </tr>
+  </tbody>
+</table>
+</div><p _msttexthash="884494" _msthash="341">Now we can make the plot that we want:</p>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre id="codecell9"><span></span><span class="n">sns</span><span class="o">.</span><span class="n">catplot</span><span class="p">(</span><span class="n">data</span><span class="o">=</span><span class="n">anagrams_long</span><span class="p">,</span> <span class="n">x</span><span class="o">=</span><span class="s2">"solutions"</span><span class="p">,</span> <span class="n">y</span><span class="o">=</span><span class="s2">"score"</span><span class="p">,</span> <span class="n">hue</span><span class="o">=</span><span class="s2">"attnr"</span><span class="p">,</span> <span class="n">kind</span><span class="o">=</span><span class="s2">"point"</span><span class="p">)</span>
+</pre><button class="copybtn o-tooltip--left" data-tooltip="Copy" data-clipboard-target="#codecell9">
+      <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-copy" width="44" height="44" viewBox="0 0 24 24" stroke-width="1.5" stroke="#000000" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <title>Copy to clipboard</title>
+  <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
+  <rect x="8" y="8" width="12" height="12" rx="2"></rect>
+  <path d="M16 8v-2a2 2 0 0 0 -2 -2h-8a2 2 0 0 0 -2 2v8a2 2 0 0 0 2 2h2"></path>
+</svg>
+    </button></div>
+</div>
+<img alt="../_images/data_structure_25_0.png" src="./Estruturas de dados aceitas por seaborn — documentação seaborn 0.13.2_files/data_structure_25_0.png" _msthidden="A" _mstalt="969436" _msthash="342">
+</section>
+<section id="further-reading-and-take-home-points">
+<h3><font _mstmutation="1" _msttexthash="979056" _msthash="343">Further reading and take-home points</font><a class="headerlink" href="https://seaborn.pydata.org/tutorial/data_structure.html#further-reading-and-take-home-points" title="Permalink to this heading">#</a></h3>
+<p _msttexthash="258505143" _msthash="344">For a longer discussion about tabular data structures, you could read the <a class="reference external" href="https://vita.had.co.nz/papers/tidy-data.pdf">“Tidy Data”</a> paper by Hadley Whickham. Note that seaborn uses a slightly different set of concepts than are defined in the paper. While the paper associates tidyness with long-form structure, we have drawn a distinction between “tidy wide-form” data, where there is a clear mapping between variables in the dataset and the dimensions of the table, and “messy data”, where no such mapping exists.</p>
+<p _msttexthash="113609509" _msthash="345">The long-form structure has clear advantages. It allows you to create figures by explicitly assigning variables in the dataset to roles in plot, and you can do so with more than three variables. When possible, try to represent your data with a long-form structure when embarking on serious analysis. Most of the examples in the seaborn documentation will use long-form data. But in cases where it is more natural to keep the dataset wide, remember that seaborn can remain useful.</p>
+</section>
+</section>
+<section id="options-for-visualizing-long-form-data">
+<h2><font _mstmutation="1" _msttexthash="1091467" _msthash="346">Options for visualizing long-form data</font><a class="headerlink" href="https://seaborn.pydata.org/tutorial/data_structure.html#options-for-visualizing-long-form-data" title="Permalink to this heading">#</a></h2>
+<p _msttexthash="100233302" _msthash="347">While long-form data has a precise definition, seaborn is fairly flexible in terms of how it is actually organized across the data structures in memory. The examples in the rest of the documentation will typically use <a class="reference external" href="https://pandas.pydata.org/pandas-docs/stable/reference/api/pandas.DataFrame.html#pandas.DataFrame" title="(in pandas v2.2.0)"><code class="xref py py-class docutils literal notranslate"><span class="pre">pandas.DataFrame</span></code></a> objects and reference variables in them by assigning names of their columns to the variables in the plot. But it is also possible to store vectors in a Python dictionary or a class that implements that interface:</p>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre id="codecell10"><span></span><span class="n">flights_dict</span> <span class="o">=</span> <span class="n">flights</span><span class="o">.</span><span class="n">to_dict</span><span class="p">()</span>
+<span class="n">sns</span><span class="o">.</span><span class="n">relplot</span><span class="p">(</span><span class="n">data</span><span class="o">=</span><span class="n">flights_dict</span><span class="p">,</span> <span class="n">x</span><span class="o">=</span><span class="s2">"year"</span><span class="p">,</span> <span class="n">y</span><span class="o">=</span><span class="s2">"passengers"</span><span class="p">,</span> <span class="n">hue</span><span class="o">=</span><span class="s2">"month"</span><span class="p">,</span> <span class="n">kind</span><span class="o">=</span><span class="s2">"line"</span><span class="p">)</span>
+</pre><button class="copybtn o-tooltip--left" data-tooltip="Copy" data-clipboard-target="#codecell10">
+      <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-copy" width="44" height="44" viewBox="0 0 24 24" stroke-width="1.5" stroke="#000000" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <title>Copy to clipboard</title>
+  <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
+  <rect x="8" y="8" width="12" height="12" rx="2"></rect>
+  <path d="M16 8v-2a2 2 0 0 0 -2 -2h-8a2 2 0 0 0 -2 2v8a2 2 0 0 0 2 2h2"></path>
+</svg>
+    </button></div>
+</div>
+<img alt="../_images/data_structure_28_0.png" src="./Estruturas de dados aceitas por seaborn — documentação seaborn 0.13.2_files/data_structure_28_0.png" _msthidden="A" _mstalt="970762" _msthash="348">
+<p _msttexthash="39292942" _msthash="349">Many pandas operations, such as the split-apply-combine operations of a group-by, will produce a dataframe where information has moved from the columns of the input dataframe to the index of the output. So long as the name is retained, you can still reference the data as normal:</p>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre id="codecell11"><span></span><span class="n">flights_avg</span> <span class="o">=</span> <span class="n">flights</span><span class="o">.</span><span class="n">groupby</span><span class="p">(</span><span class="s2">"year"</span><span class="p">)</span><span class="o">.</span><span class="n">mean</span><span class="p">(</span><span class="n">numeric_only</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+<span class="n">sns</span><span class="o">.</span><span class="n">relplot</span><span class="p">(</span><span class="n">data</span><span class="o">=</span><span class="n">flights_avg</span><span class="p">,</span> <span class="n">x</span><span class="o">=</span><span class="s2">"year"</span><span class="p">,</span> <span class="n">y</span><span class="o">=</span><span class="s2">"passengers"</span><span class="p">,</span> <span class="n">kind</span><span class="o">=</span><span class="s2">"line"</span><span class="p">)</span>
+</pre><button class="copybtn o-tooltip--left" data-tooltip="Copy" data-clipboard-target="#codecell11">
+      <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-copy" width="44" height="44" viewBox="0 0 24 24" stroke-width="1.5" stroke="#000000" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <title>Copy to clipboard</title>
+  <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
+  <rect x="8" y="8" width="12" height="12" rx="2"></rect>
+  <path d="M16 8v-2a2 2 0 0 0 -2 -2h-8a2 2 0 0 0 -2 2v8a2 2 0 0 0 2 2h2"></path>
+</svg>
+    </button></div>
+</div>
+<img alt="../_images/data_structure_30_0.png" src="./Estruturas de dados aceitas por seaborn — documentação seaborn 0.13.2_files/data_structure_30_0.png" _msthidden="A" _mstalt="967655" _msthash="350">
+<p><font _mstmutation="1" _msttexthash="21447374" _msthash="351">Additionally, it’s possible to pass vectors of data directly as arguments to , , and other plotting variables. If these vectors are pandas objects, the  attribute will be used to label the plot:</font><code class="docutils literal notranslate"><span class="pre">x</span></code><code class="docutils literal notranslate"><span class="pre">y</span></code><code class="docutils literal notranslate"><span class="pre">name</span></code></p>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre id="codecell12"><span></span><span class="n">year</span> <span class="o">=</span> <span class="n">flights_avg</span><span class="o">.</span><span class="n">index</span>
+<span class="n">passengers</span> <span class="o">=</span> <span class="n">flights_avg</span><span class="p">[</span><span class="s2">"passengers"</span><span class="p">]</span>
+<span class="n">sns</span><span class="o">.</span><span class="n">relplot</span><span class="p">(</span><span class="n">x</span><span class="o">=</span><span class="n">year</span><span class="p">,</span> <span class="n">y</span><span class="o">=</span><span class="n">passengers</span><span class="p">,</span> <span class="n">kind</span><span class="o">=</span><span class="s2">"line"</span><span class="p">)</span>
+</pre><button class="copybtn o-tooltip--left" data-tooltip="Copy" data-clipboard-target="#codecell12">
+      <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-copy" width="44" height="44" viewBox="0 0 24 24" stroke-width="1.5" stroke="#000000" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <title>Copy to clipboard</title>
+  <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
+  <rect x="8" y="8" width="12" height="12" rx="2"></rect>
+  <path d="M16 8v-2a2 2 0 0 0 -2 -2h-8a2 2 0 0 0 -2 2v8a2 2 0 0 0 2 2h2"></path>
+</svg>
+    </button></div>
+</div>
+<img alt="../_images/data_structure_32_0.png" src="./Estruturas de dados aceitas por seaborn — documentação seaborn 0.13.2_files/data_structure_32_0.png" _msthidden="A" _mstalt="968539" _msthash="352">
+<p _msttexthash="26457340" _msthash="353">Numpy arrays and other objects that implement the Python sequence interface work too, but if they don’t have names, the plot will not be as informative without further tweaking:</p>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre id="codecell13"><span></span><span class="n">sns</span><span class="o">.</span><span class="n">relplot</span><span class="p">(</span><span class="n">x</span><span class="o">=</span><span class="n">year</span><span class="o">.</span><span class="n">to_numpy</span><span class="p">(),</span> <span class="n">y</span><span class="o">=</span><span class="n">passengers</span><span class="o">.</span><span class="n">to_list</span><span class="p">(),</span> <span class="n">kind</span><span class="o">=</span><span class="s2">"line"</span><span class="p">)</span>
+</pre><button class="copybtn o-tooltip--left" data-tooltip="Copy" data-clipboard-target="#codecell13">
+      <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-copy" width="44" height="44" viewBox="0 0 24 24" stroke-width="1.5" stroke="#000000" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <title>Copy to clipboard</title>
+  <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
+  <rect x="8" y="8" width="12" height="12" rx="2"></rect>
+  <path d="M16 8v-2a2 2 0 0 0 -2 -2h-8a2 2 0 0 0 -2 2v8a2 2 0 0 0 2 2h2"></path>
+</svg>
+    </button></div>
+</div>
+<img alt="../_images/data_structure_34_0.png" src="./Estruturas de dados aceitas por seaborn — documentação seaborn 0.13.2_files/data_structure_34_0.png" _msthidden="A" _mstalt="969423" _msthash="354">
+</section>
+<section id="options-for-visualizing-wide-form-data">
+<h2><font _mstmutation="1" _msttexthash="1088503" _msthash="355">Options for visualizing wide-form data</font><a class="headerlink" href="https://seaborn.pydata.org/tutorial/data_structure.html#options-for-visualizing-wide-form-data" title="Permalink to this heading">#</a></h2>
+<p><font _mstmutation="1" _msttexthash="56339296" _msthash="356">The options for passing wide-form data are even more flexible. As with long-form data, pandas objects are preferable because the name (and, in some cases, index) information can be used. But in essence, any format that can be viewed as a single vector or a collection of vectors can be passed to , and a valid plot can usually be constructed.</font><code class="docutils literal notranslate"><span class="pre">data</span></code></p>
+<p _msttexthash="35262851" _msthash="357">The example we saw above used a rectangular <a class="reference external" href="https://pandas.pydata.org/pandas-docs/stable/reference/api/pandas.DataFrame.html#pandas.DataFrame" title="(in pandas v2.2.0)"><code class="xref py py-class docutils literal notranslate"><span class="pre">pandas.DataFrame</span></code></a>, which can be thought of as a collection of its columns. A dict or list of pandas objects will also work, but we’ll lose the axis labels:</p>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre id="codecell14"><span></span><span class="n">flights_wide_list</span> <span class="o">=</span> <span class="p">[</span><span class="n">col</span> <span class="k">for</span> <span class="n">_</span><span class="p">,</span> <span class="n">col</span> <span class="ow">in</span> <span class="n">flights_wide</span><span class="o">.</span><span class="n">items</span><span class="p">()]</span>
+<span class="n">sns</span><span class="o">.</span><span class="n">relplot</span><span class="p">(</span><span class="n">data</span><span class="o">=</span><span class="n">flights_wide_list</span><span class="p">,</span> <span class="n">kind</span><span class="o">=</span><span class="s2">"line"</span><span class="p">)</span>
+</pre><button class="copybtn o-tooltip--left" data-tooltip="Copy" data-clipboard-target="#codecell14">
+      <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-copy" width="44" height="44" viewBox="0 0 24 24" stroke-width="1.5" stroke="#000000" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <title>Copy to clipboard</title>
+  <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
+  <rect x="8" y="8" width="12" height="12" rx="2"></rect>
+  <path d="M16 8v-2a2 2 0 0 0 -2 -2h-8a2 2 0 0 0 -2 2v8a2 2 0 0 0 2 2h2"></path>
+</svg>
+    </button></div>
+</div>
+<img alt="../_images/data_structure_36_0.png" src="./Estruturas de dados aceitas por seaborn — documentação seaborn 0.13.2_files/data_structure_36_0.png" _msthidden="A" _mstalt="970307" _msthash="358">
+<p><font _mstmutation="1" _msttexthash="6123910" _msthash="359">The vectors in a collection do not need to have the same length. If they have an , it will be used to align them:</font><code class="docutils literal notranslate"><span class="pre">index</span></code></p>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre id="codecell15"><span></span><span class="n">two_series</span> <span class="o">=</span> <span class="p">[</span><span class="n">flights_wide</span><span class="o">.</span><span class="n">loc</span><span class="p">[:</span><span class="mi">1955</span><span class="p">,</span> <span class="s2">"Jan"</span><span class="p">],</span> <span class="n">flights_wide</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="mi">1952</span><span class="p">:,</span> <span class="s2">"Aug"</span><span class="p">]]</span>
+<span class="n">sns</span><span class="o">.</span><span class="n">relplot</span><span class="p">(</span><span class="n">data</span><span class="o">=</span><span class="n">two_series</span><span class="p">,</span> <span class="n">kind</span><span class="o">=</span><span class="s2">"line"</span><span class="p">)</span>
+</pre><button class="copybtn o-tooltip--left" data-tooltip="Copy" data-clipboard-target="#codecell15">
+      <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-copy" width="44" height="44" viewBox="0 0 24 24" stroke-width="1.5" stroke="#000000" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <title>Copy to clipboard</title>
+  <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
+  <rect x="8" y="8" width="12" height="12" rx="2"></rect>
+  <path d="M16 8v-2a2 2 0 0 0 -2 -2h-8a2 2 0 0 0 -2 2v8a2 2 0 0 0 2 2h2"></path>
+</svg>
+    </button></div>
+</div>
+<img alt="../_images/data_structure_38_0.png" src="./Estruturas de dados aceitas por seaborn — documentação seaborn 0.13.2_files/data_structure_38_0.png" _msthidden="A" _mstalt="971191" _msthash="360">
+<p _msttexthash="3936881" _msthash="361">Whereas an ordinal index will be used for numpy arrays or simple Python sequences:</p>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre id="codecell16"><span></span><span class="n">two_arrays</span> <span class="o">=</span> <span class="p">[</span><span class="n">s</span><span class="o">.</span><span class="n">to_numpy</span><span class="p">()</span> <span class="k">for</span> <span class="n">s</span> <span class="ow">in</span> <span class="n">two_series</span><span class="p">]</span>
+<span class="n">sns</span><span class="o">.</span><span class="n">relplot</span><span class="p">(</span><span class="n">data</span><span class="o">=</span><span class="n">two_arrays</span><span class="p">,</span> <span class="n">kind</span><span class="o">=</span><span class="s2">"line"</span><span class="p">)</span>
+</pre><button class="copybtn o-tooltip--left" data-tooltip="Copy" data-clipboard-target="#codecell16">
+      <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-copy" width="44" height="44" viewBox="0 0 24 24" stroke-width="1.5" stroke="#000000" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <title>Copy to clipboard</title>
+  <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
+  <rect x="8" y="8" width="12" height="12" rx="2"></rect>
+  <path d="M16 8v-2a2 2 0 0 0 -2 -2h-8a2 2 0 0 0 -2 2v8a2 2 0 0 0 2 2h2"></path>
+</svg>
+    </button></div>
+</div>
+<img alt="../_images/data_structure_40_0.png" src="./Estruturas de dados aceitas por seaborn — documentação seaborn 0.13.2_files/data_structure_40_0.png" _msthidden="A" _mstalt="968084" _msthash="362">
+<p _msttexthash="2114177" _msthash="363">But a dictionary of such vectors will at least use the keys:</p>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre id="codecell17"><span></span><span class="n">two_arrays_dict</span> <span class="o">=</span> <span class="p">{</span><span class="n">s</span><span class="o">.</span><span class="n">name</span><span class="p">:</span> <span class="n">s</span><span class="o">.</span><span class="n">to_numpy</span><span class="p">()</span> <span class="k">for</span> <span class="n">s</span> <span class="ow">in</span> <span class="n">two_series</span><span class="p">}</span>
+<span class="n">sns</span><span class="o">.</span><span class="n">relplot</span><span class="p">(</span><span class="n">data</span><span class="o">=</span><span class="n">two_arrays_dict</span><span class="p">,</span> <span class="n">kind</span><span class="o">=</span><span class="s2">"line"</span><span class="p">)</span>
+</pre><button class="copybtn o-tooltip--left" data-tooltip="Copy" data-clipboard-target="#codecell17">
+      <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-copy" width="44" height="44" viewBox="0 0 24 24" stroke-width="1.5" stroke="#000000" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <title>Copy to clipboard</title>
+  <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
+  <rect x="8" y="8" width="12" height="12" rx="2"></rect>
+  <path d="M16 8v-2a2 2 0 0 0 -2 -2h-8a2 2 0 0 0 -2 2v8a2 2 0 0 0 2 2h2"></path>
+</svg>
+    </button></div>
+</div>
+<img alt="../_images/data_structure_42_0.png" src="./Estruturas de dados aceitas por seaborn — documentação seaborn 0.13.2_files/data_structure_42_0.png" _msthidden="A" _mstalt="968968" _msthash="364">
+<p _msttexthash="64592879" _msthash="365">Rectangular numpy arrays are treated just like a dataframe without index information, so they are viewed as a collection of column vectors. Note that this is different from how numpy indexing operations work, where a single indexer will access a row. But it is consistent with how pandas would turn the array into a dataframe or how matplotlib would plot it:</p>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre id="codecell18"><span></span><span class="n">flights_array</span> <span class="o">=</span> <span class="n">flights_wide</span><span class="o">.</span><span class="n">to_numpy</span><span class="p">()</span>
+<span class="n">sns</span><span class="o">.</span><span class="n">relplot</span><span class="p">(</span><span class="n">data</span><span class="o">=</span><span class="n">flights_array</span><span class="p">,</span> <span class="n">kind</span><span class="o">=</span><span class="s2">"line"</span><span class="p">)</span>
+</pre><button class="copybtn o-tooltip--left" data-tooltip="Copy" data-clipboard-target="#codecell18">
+      <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-copy" width="44" height="44" viewBox="0 0 24 24" stroke-width="1.5" stroke="#000000" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <title>Copy to clipboard</title>
+  <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
+  <rect x="8" y="8" width="12" height="12" rx="2"></rect>
+  <path d="M16 8v-2a2 2 0 0 0 -2 -2h-8a2 2 0 0 0 -2 2v8a2 2 0 0 0 2 2h2"></path>
+</svg>
+    </button></div>
+</div>
+<img alt="../_images/data_structure_44_0.png" src="./Estruturas de dados aceitas por seaborn — documentação seaborn 0.13.2_files/data_structure_44_0.png" _msthidden="A" _mstalt="969852" _msthash="366">
+</section>
+</section>
+
+
+          </article>
+          
+
+          
+          
+      </div>
+      
+    </div>
+  </div>
+
+  
+    
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script src="./Estruturas de dados aceitas por seaborn — documentação seaborn 0.13.2_files/pydata-sphinx-theme.js.baixados"></script>
+
+<footer class="footer" style="border-top: 1px solid #ccc; padding-top: 10px">
+  <div class="container">
+    <div id="credits" style="width: 50%; float: left">
+      <p><font _mstmutation="1" _msttexthash="3639389" _msthash="367">
+      © Copyright 2012-2024, <a href="https://mwaskom.github.io/" _mstmutation="1">Michael Waskom</a>.<br _mstmutation="1">
+      Created using <a href="https://www.sphinx-doc.org/" _mstmutation="1">Sphinx</a> and the <a href="https://pydata-sphinx-theme.readthedocs.io/en/stable/" _mstmutation="1">PyData Theme</a>.</font><br>
+      </p>
+    </div>
+    <div class="dropup show" style="float: right; margin: 10px">
+        <a class="btn btn-secondary dropdown-toggle" href="https://seaborn.pydata.org/tutorial/data_structure.html#" role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" _msttexthash="93366" _msthash="368">
+            Archive
+        </a>
+        <div class="dropdown-menu dropdown-menu-right" aria-labelledby="dropdownMenuLink" _msthidden="4">
+          <a class="dropdown-item" href="https://seaborn.pydata.org/archive/0.12/index.html" _msttexthash="34632" _msthidden="1" _msthash="369">v0.12</a>
+          <a class="dropdown-item" href="https://seaborn.pydata.org/archive/0.11/index.html" _msttexthash="34489" _msthidden="1" _msthash="370">v0.11</a>
+          <a class="dropdown-item" href="https://seaborn.pydata.org/archive/0.10/index.html" _msttexthash="34346" _msthidden="1" _msthash="371">v0.10</a>
+          <a class="dropdown-item" href="https://seaborn.pydata.org/archive/0.9/index.html" _msttexthash="28522" _msthidden="1" _msthash="372">v0.9</a>
+        </div>
+    </div>
+    <div id="version" style="color: #999; float: right; margin: 15px" _msttexthash="50401" _msthash="373">v0.13.2</div>
+    </div>
+  
+</footer>
+  
+</body></html>

@@ -1,9 +1,28 @@
-import pdfplumber
 from pathlib import Path
 import re
 import unicodedata
 from typing import List, Dict
 import json
+import sys
+from pathlib import Path as _Path
+
+# Allow `from src.*` when running this file directly.
+sys.path.insert(0, str(_Path(__file__).resolve().parent.parent))
+
+# Windows consoles default to cp1252 and can't encode the unicode arrows /
+# checkmarks we print below. Reconfigure stdout/stderr to UTF-8 so the
+# pipeline log is readable regardless of OS locale.
+try:
+    sys.stdout.reconfigure(encoding="utf-8")
+    sys.stderr.reconfigure(encoding="utf-8")
+except (AttributeError, OSError):
+    pass
+
+from src.translator import translate_many
+from src.medium_extractor import extract_medium_article
+from src.html_extractor import extract_official_html
+from src.glossary_repair import repair_pt_text
+from src import config
 
 
 # =========================
@@ -67,63 +86,54 @@ class SentenceSplitter:
 
 
 # =========================
-# PDF EXTRACTOR
-# =========================
-
-class PDFExtractor:
-
-    @staticmethod
-    def extract(pdf_path, save_debug_dir=None):
-
-        full_text = []
-
-        if save_debug_dir:
-            save_debug_dir = Path(save_debug_dir)
-            save_debug_dir.mkdir(parents=True, exist_ok=True)
-
-        with pdfplumber.open(pdf_path) as pdf:
-
-            for i, page in enumerate(pdf.pages):
-
-                text = page.extract_text() or ""
-                text = TextNormalizer.normalize(text)
-
-                if len(text) < 40:
-                    continue
-
-                full_text.append(text)
-
-                if save_debug_dir:
-                    with open(save_debug_dir / f"page_{i:04d}.txt", "w", encoding="utf-8") as f:
-                        f.write(text)
-
-                print(f"[OK] {pdf_path.name} - página {i+1}/{len(pdf.pages)}")
-
-        return "\n".join(full_text)
-
-
-# =========================
 # THEME SEGMENTER
 # =========================
 
 class ThematicSegmenter:
 
+    # Markdown heading: one-or-more `#` followed by a space and content.
+    _MD_HEADING = re.compile(r"^#+\s+\S")
+    # Code-output markers that can terminate in `:` but are never headings.
+    _CODE_MARKER = re.compile(r"^(?:In \[|Out\[)\d+\]:")
+
     @staticmethod
     def is_heading(line: str) -> bool:
+        """A heading must be visually marked as one.
 
-        return (
-            len(line) < 80
-            and (
-                line.isupper()
-                or line.endswith(":")
-                or len(line.split()) <= 6
-            )
-        )
+        Three signals (in priority order):
+        - Markdown heading (`#`/`##`/...): recognized regardless of length.
+        - All-caps line (PDF heading convention). Length-capped at 80.
+        - Line ending with a colon. Length-capped at 80.
+
+        Code output markers (`In [N]:`, `Out[N]:`) are explicitly excluded.
+        """
+        if not line:
+            return False
+        if ThematicSegmenter._MD_HEADING.match(line):
+            return True
+        if ThematicSegmenter._CODE_MARKER.match(line):
+            return False
+        if len(line) >= 80:
+            return False
+        return line.isupper() or line.endswith(":")
 
     @staticmethod
     def segment(text: str) -> List[Dict]:
+        """Split text into (title, content) segments on heading lines.
 
+        When the input contains markdown headings, only markdown headings are
+        treated as segment boundaries — the colon/all-caps heuristics are
+        suppressed to avoid false positives in prose that ends with `:`.
+        Otherwise (no `#` headings detected) the heuristics are used, which
+        matches the PDF-extracted and Medium-extracted text paths.
+        """
         lines = text.split("\n")
+        has_markdown = any(ThematicSegmenter._MD_HEADING.match(ln) for ln in lines)
+
+        def line_is_heading(line: str) -> bool:
+            if has_markdown:
+                return bool(ThematicSegmenter._MD_HEADING.match(line))
+            return ThematicSegmenter.is_heading(line)
 
         segments = []
         current_title = "Introduction"
@@ -133,14 +143,14 @@ class ThematicSegmenter:
             if buffer:
                 segments.append({
                     "title": current_title.strip(),
-                    "content": " ".join(buffer).strip()
+                    # Preserve line structure — downstream regexes (e.g. the
+                    # translator's ``` code fence detection) need line anchors.
+                    "content": "\n".join(buffer).strip()
                 })
 
         for line in lines:
-
             line = line.strip()
-
-            if ThematicSegmenter.is_heading(line):
+            if line_is_heading(line):
                 flush()
                 current_title = line
                 buffer = []
@@ -149,6 +159,25 @@ class ThematicSegmenter:
 
         flush()
         return segments
+
+
+# =========================
+# LIBRARY INFERENCE
+# =========================
+
+def infer_library(source: str) -> str:
+    """Return 'pandas' | 'numpy' | 'matplotlib' | 'seaborn' | 'unknown'
+    based on the source filename/path."""
+    s = source.lower()
+    if "pandas" in s:
+        return "pandas"
+    if "numpy" in s:
+        return "numpy"
+    if "matplotlib" in s:
+        return "matplotlib"
+    if "seaborn" in s:
+        return "seaborn"
+    return "unknown"
 
 
 # =========================
@@ -162,53 +191,72 @@ class SmartChunker:
         self.overlap = overlap
 
     def chunk(self, text: str) -> List[str]:
-
         sentences = SentenceSplitter.split(text)
 
-        chunks = []
+        # First pass: pack sentences into base chunks without overlap.
+        # Sentences that exceed max_tokens on their own are split by word count.
+        base_chunks = []
         current = []
         current_len = 0
 
-        def flush():
-            nonlocal current, current_len
-            if current:
-                chunks.append(" ".join(current).strip())
-                current = []
-                current_len = 0
+        def flush(buffer):
+            if buffer:
+                base_chunks.append(" ".join(buffer).strip())
 
         for sent in sentences:
+            words = sent.split()
+            sent_len = len(words)
 
-            sent_len = len(sent.split())
-
-            if current_len + sent_len <= self.max_tokens:
+            # If a single sentence is too long, split it into word-level sub-chunks.
+            if sent_len > self.max_tokens:
+                flush(current)
+                current = []
+                current_len = 0
+                for j in range(0, sent_len, self.max_tokens):
+                    sub = " ".join(words[j: j + self.max_tokens])
+                    base_chunks.append(sub)
+            elif current_len + sent_len <= self.max_tokens:
                 current.append(sent)
                 current_len += sent_len
             else:
-                flush()
+                flush(current)
                 current = [sent]
                 current_len = sent_len
 
-        flush()
+        flush(current)
 
-        # =========================
-        # OVERLAP SEMÂNTICO REAL
-        # =========================
-        final = []
+        # Second pass: apply sliding-window overlap (last `overlap` words of prev
+        # chunk prepended to next). Deterministic and free of duplication risk.
+        if self.overlap <= 0 or len(base_chunks) <= 1:
+            return base_chunks
 
-        for i, chunk in enumerate(chunks):
-
-            if i == 0:
-                final.append(chunk)
-                continue
-
-            prev_sentences = SentenceSplitter.split(chunks[i - 1])
-            context = " ".join(prev_sentences[-2:]) if prev_sentences else ""
-
-            final.append((context + " " + chunk).strip())
+        final = [base_chunks[0]]
+        for i in range(1, len(base_chunks)):
+            prev_words = base_chunks[i - 1].split()
+            overlap_prefix = " ".join(prev_words[-self.overlap:])
+            final.append(f"{overlap_prefix} {base_chunks[i]}".strip())
 
         return final
 
-    def chunk_with_metadata(self, text: str, source: str, section: str):
+    def chunk_with_metadata(
+        self,
+        text: str,
+        source: str,
+        section: str,
+        language: str = "pt",
+        original_lang: str = "en",
+        source_type: str = "official_docs",
+        translation_source: str = "groq",
+    ):
+        """Split text into chunks with metadata.
+
+        ``translation_source`` records how the PT text was obtained:
+          - ``"groq"``: translated from EN by our glossary-aware Groq pipeline.
+          - ``"google_translate"``: page was saved from Google Translate —
+            lower MT quality, may have empty inline-code artifacts.
+          - ``"native"``: content was originally authored in PT (e.g. Medium
+            articles). No translation step at all.
+        """
 
         chunks = self.chunk(text)
 
@@ -221,13 +269,14 @@ class SmartChunker:
                 "position": i,
                 "char_count": len(c),
                 "token_estimate": len(c.split()),
-
-                # =========================
-                # QUALIDADE PARA RAG
-                # =========================
+                "language": language,
+                "original_lang": original_lang,
+                "source_type": source_type,
+                "translation_source": translation_source,
+                "library": infer_library(source),
                 "quality_flags": {
-                    "has_code": "In [" in c,
-                    "has_plot": any(x in c.lower() for x in ["plot", "chart", "graph"]),
+                    "has_code": "In [" in c or ">>>" in c,
+                    "has_plot": any(x in c.lower() for x in ["plot", "chart", "graph", "gráfico"]),
                     "noise_score": self.noise_score(c)
                 }
             }
@@ -274,6 +323,18 @@ def deduplicate_chunks(chunks: List[dict]):
 
 
 # =========================
+# QUALITY FILTER
+# =========================
+
+def filter_by_quality(chunks: List[dict], threshold: float = 0.5) -> List[dict]:
+    """Drop chunks whose noise_score is >= threshold."""
+    return [
+        c for c in chunks
+        if c.get("quality_flags", {}).get("noise_score", 0.0) < threshold
+    ]
+
+
+# =========================
 # SAVE
 # =========================
 
@@ -285,139 +346,197 @@ def save_chunks(chunks, path="chunks.jsonl"):
 
 
 # =========================
+# DOCUMENT PROCESSORS
+# =========================
+
+def process_en_official_html(
+    html_file: Path,
+    segmenter: "ThematicSegmenter",
+    chunker: "SmartChunker",
+) -> List[dict]:
+    """Extract markdown from an EN official-docs HTML, segment, translate, chunk.
+
+    The trafilatura output keeps markdown structure (headings, ``` fences),
+    which the segmenter and translator guardrails rely on. We deliberately
+    do NOT run TextNormalizer here — it was designed for PDF noise and
+    would flatten newlines and strip code markers.
+    """
+    print(f"\n[EN→PT via groq] {html_file.name}")
+    try:
+        raw = extract_official_html(html_file)
+    except ValueError as e:
+        print(f"  skipped: {e}")
+        return []
+    if not raw.strip():
+        return []
+
+    segments = segmenter.segment(raw)
+    # Translate at segment level (smaller than full doc, larger than chunk → good API granularity)
+    pt_segments = translate_many([s["content"] for s in segments])
+
+    doc_chunks = []
+    for seg, pt_content in zip(segments, pt_segments):
+        doc_chunks.extend(
+            chunker.chunk_with_metadata(
+                text=pt_content,
+                source=html_file.name,
+                section=seg["title"],
+                language="pt",
+                original_lang="en",
+                source_type="official_docs",
+                translation_source="groq",
+            )
+        )
+    return doc_chunks
+
+
+def process_pt_official_html(
+    html_file: Path,
+    segmenter: "ThematicSegmenter",
+    chunker: "SmartChunker",
+) -> List[dict]:
+    """Extract markdown from a PT official-docs HTML (Google-translated), chunk.
+
+    These pages were saved from Google Translate in the browser — the
+    structural HTML (headings, ``` pre blocks, REPL cells) is preserved,
+    but the MT quality is lower than Groq's and a small fraction of inline
+    ``<code>`` tags may be empty. We tag ``translation_source="google_translate"``
+    so downstream evaluation can weight them accordingly.
+
+    Like ``process_en_official_html``, we skip TextNormalizer to keep the
+    markdown line structure intact for code-fence detection.
+    """
+    print(f"\n[PT native-MT] {html_file.name}")
+    try:
+        raw = extract_official_html(html_file)
+    except ValueError as e:
+        print(f"  skipped: {e}")
+        return []
+    if not raw.strip():
+        return []
+
+    # Repair Google Translate's over-translation of Python API terms
+    # (matriz→array, transmissão→broadcasting, série→Series, etc.). This
+    # is deterministic and idempotent — safe to run unconditionally.
+    raw = repair_pt_text(raw)
+
+    segments = segmenter.segment(raw)
+
+    doc_chunks = []
+    for seg in segments:
+        doc_chunks.extend(
+            chunker.chunk_with_metadata(
+                text=seg["content"],
+                source=html_file.name,
+                section=seg["title"],
+                language="pt",
+                original_lang="pt",
+                source_type="official_docs",
+                translation_source="google_translate",
+            )
+        )
+    return doc_chunks
+
+
+def process_pt_medium_article(
+    html_file: Path,
+    segmenter: "ThematicSegmenter",
+    chunker: "SmartChunker",
+) -> List[dict]:
+    """Extract a PT Medium article (native PT, author-written) and chunk.
+
+    Unlike official docs, Medium HTML has a lot of boilerplate that
+    TextNormalizer was designed to strip, so we keep that step here.
+    """
+    print(f"\n[PT medium] {html_file.name}")
+    text = extract_medium_article(html_file)
+    text = TextNormalizer.normalize(text)
+    segments = segmenter.segment(text)
+
+    doc_chunks = []
+    for seg in segments:
+        doc_chunks.extend(
+            chunker.chunk_with_metadata(
+                text=seg["content"],
+                source=html_file.name,
+                section=seg["title"],
+                language="pt",
+                original_lang="pt",
+                source_type="medium_article",
+                translation_source="native",
+            )
+        )
+    return doc_chunks
+
+
+# =========================
 # PIPELINE
 # =========================
 
+# Per-library directory layout for official docs:
+#   data/<library>/en/*.html  →  process_en_official_html (Groq translation)
+#   data/<library>/pt/*.html  →  process_pt_official_html (Google Translate, no retranslation)
+LIBRARY_DIRS = ["pandas", "numpy", "matplotlib", "seaborn"]
+
+
 def run_pipeline():
+    base = Path(__file__).resolve().parent  # data/
 
-    base = Path(".")
+    medium_dir = base / "medium" / "raw"
 
-    pandas_path = base / "pandas"
-    seaborn_path = base / "seaborn"
-    numpy_pdf = base / "numpy_docs.pdf"
-    matplotlib_pdf = base / "matplotlib_tutorial.pdf"
-
-    extractor = PDFExtractor()
     segmenter = ThematicSegmenter()
     chunker = SmartChunker()
 
     all_chunks = []
 
     print("=" * 60)
-    print("RAG PIPELINE - PRODUCTION GRADE")
+    print("RAG PIPELINE PT-BR - INGESTION")
     print("=" * 60)
 
-    # =========================
-    # PANDAS
-    # =========================
-    if pandas_path.exists():
+    # --- Official docs: EN (translated via Groq) ---
+    for library in LIBRARY_DIRS:
+        if library in config.SKIP_EN_FOR_LIBRARIES:
+            print(f"[skip] {library}/en: skipped per config.SKIP_EN_FOR_LIBRARIES "
+                  f"(PT coverage is the source of truth for this library)")
+            continue
+        en_dir = base / library / "en"
+        if not en_dir.exists():
+            print(f"[skip] {library}/en: not found")
+            continue
+        for html_file in sorted(en_dir.glob("*.html")):
+            all_chunks.extend(process_en_official_html(html_file, segmenter, chunker))
 
-        for pdf_file in pandas_path.glob("*.pdf"):
+    # --- Official docs: PT (Google-translated, no retranslation) ---
+    for library in LIBRARY_DIRS:
+        pt_dir = base / library / "pt"
+        if not pt_dir.exists():
+            continue
+        for html_file in sorted(pt_dir.glob("*.html")):
+            all_chunks.extend(process_pt_official_html(html_file, segmenter, chunker))
 
-            print(f"\n📄 {pdf_file.name}")
+    # --- Medium articles (native PT, no translation) ---
+    if medium_dir.exists():
+        for html_file in sorted(medium_dir.glob("*.html")):
+            all_chunks.extend(process_pt_medium_article(html_file, segmenter, chunker))
 
-            text = extractor.extract(
-                pdf_file,
-                save_debug_dir="output_texts/pandas"
-            )
-
-            segments = segmenter.segment(text)
-
-            for seg in segments:
-
-                chunks = chunker.chunk_with_metadata(
-                    text=seg["content"],
-                    source=pdf_file.name,
-                    section=seg["title"]
-                )
-
-                all_chunks.extend(chunks)
-
-    # =========================
-    # SEABORN
-    # =========================
-    if seaborn_path.exists():
-
-        for pdf_file in seaborn_path.rglob("*.pdf"):
-
-            print(f"\n📄 {pdf_file.name}")
-
-            text = extractor.extract(
-                pdf_file,
-                save_debug_dir="output_texts/seaborn"
-            )
-
-            segments = segmenter.segment(text)
-
-            for seg in segments:
-
-                chunks = chunker.chunk_with_metadata(
-                    text=seg["content"],
-                    source=pdf_file.name,
-                    section=seg["title"]
-                )
-
-                all_chunks.extend(chunks)
-
-    # =========================
-    # NUMPY
-    # =========================
-    if numpy_pdf.exists():
-
-        print(f"\n📄 numpy_docs.pdf")
-
-        text = extractor.extract(
-            numpy_pdf,
-            save_debug_dir="output_texts/numpy"
-        )
-
-        segments = segmenter.segment(text)
-
-        for seg in segments:
-
-            chunks = chunker.chunk_with_metadata(
-                text=seg["content"],
-                source="numpy_docs.pdf",
-                section=seg["title"]
-            )
-
-            all_chunks.extend(chunks)
-
-    # =========================
-    # MATPLOTLIB
-    # =========================
-    if matplotlib_pdf.exists():
-
-        print(f"\n📄 matplotlib_tutorial.pdf")
-
-        text = extractor.extract(
-            matplotlib_pdf,
-            save_debug_dir="output_texts/matplotlib"
-        )
-
-        segments = segmenter.segment(text)
-
-        for seg in segments:
-
-            chunks = chunker.chunk_with_metadata(
-                text=seg["content"],
-                source="matplotlib_tutorial.pdf",
-                section=seg["title"]
-            )
-
-            all_chunks.extend(chunks)
-
-    # =========================
-    # FINAL CLEANING
-    # =========================
+    # --- Final cleaning ---
     all_chunks = deduplicate_chunks(all_chunks)
-    save_chunks(all_chunks)
+    before = len(all_chunks)
+    all_chunks = filter_by_quality(all_chunks, threshold=config.NOISE_THRESHOLD)
+    print(f"[quality] dropped {before - len(all_chunks)} noisy chunks")
+
+    save_chunks(all_chunks, path=str(config.CHUNKS_PATH))
 
     print("\n" + "=" * 60)
-    print("✔ PIPELINE FINALIZADO")
-    print(f"✔ Chunks finais: {len(all_chunks)}")
-    print("✔ Qualidade: alta (RAG otimizado)")
+    print(f"✔ INGESTÃO FINALIZADA — {len(all_chunks)} chunks em PT")
     print("=" * 60)
+
+    from src.indexer import index_chunks
+    index_chunks(
+        chunks_path=config.CHUNKS_PATH,
+        collection_name=config.COLLECTION_NEW_PT,
+        embedder_model=config.EMBEDDER_MODEL,
+    )
 
     return all_chunks
 

@@ -1,0 +1,771 @@
+<!DOCTYPE html>
+<!-- saved from url=(0053)https://numpy.org/doc/stable/reference/constants.html -->
+<html lang="pt" data-content_root="../" data-theme="light" data-mode="light" class="fontawesome-i2svg-active fontawesome-i2svg-complete"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"><meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <title _msttexthash="2278302" _msthash="0">Constants — NumPy v2.4 Manual</title>
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "light";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "light";
+  </script>
+  <!--
+    this give us a css class that will be invisible only if js is disabled
+  -->
+  <noscript>
+    <style>
+      .pst-js-only { display: none !important; }
+
+    </style>
+  </noscript>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <style type="text/css">:host,:root{--fa-font-solid:normal 900 1em/1 "Font Awesome 6 Solid";--fa-font-regular:normal 400 1em/1 "Font Awesome 6 Regular";--fa-font-light:normal 300 1em/1 "Font Awesome 6 Light";--fa-font-thin:normal 100 1em/1 "Font Awesome 6 Thin";--fa-font-duotone:normal 900 1em/1 "Font Awesome 6 Duotone";--fa-font-sharp-solid:normal 900 1em/1 "Font Awesome 6 Sharp";--fa-font-sharp-regular:normal 400 1em/1 "Font Awesome 6 Sharp";--fa-font-sharp-light:normal 300 1em/1 "Font Awesome 6 Sharp";--fa-font-sharp-thin:normal 100 1em/1 "Font Awesome 6 Sharp";--fa-font-brands:normal 400 1em/1 "Font Awesome 6 Brands"}svg:not(:host).svg-inline--fa,svg:not(:root).svg-inline--fa{overflow:visible;box-sizing:content-box}.svg-inline--fa{display:var(--fa-display,inline-block);height:1em;overflow:visible;vertical-align:-.125em}.svg-inline--fa.fa-2xs{vertical-align:.1em}.svg-inline--fa.fa-xs{vertical-align:0}.svg-inline--fa.fa-sm{vertical-align:-.0714285705em}.svg-inline--fa.fa-lg{vertical-align:-.2em}.svg-inline--fa.fa-xl{vertical-align:-.25em}.svg-inline--fa.fa-2xl{vertical-align:-.3125em}.svg-inline--fa.fa-pull-left{margin-right:var(--fa-pull-margin,.3em);width:auto}.svg-inline--fa.fa-pull-right{margin-left:var(--fa-pull-margin,.3em);width:auto}.svg-inline--fa.fa-li{width:var(--fa-li-width,2em);top:.25em}.svg-inline--fa.fa-fw{width:var(--fa-fw-width,1.25em)}.fa-layers svg.svg-inline--fa{bottom:0;left:0;margin:auto;position:absolute;right:0;top:0}.fa-layers-counter,.fa-layers-text{display:inline-block;position:absolute;text-align:center}.fa-layers{display:inline-block;height:1em;position:relative;text-align:center;vertical-align:-.125em;width:1em}.fa-layers svg.svg-inline--fa{-webkit-transform-origin:center center;transform-origin:center center}.fa-layers-text{left:50%;top:50%;-webkit-transform:translate(-50%,-50%);transform:translate(-50%,-50%);-webkit-transform-origin:center center;transform-origin:center center}.fa-layers-counter{background-color:var(--fa-counter-background-color,#ff253a);border-radius:var(--fa-counter-border-radius,1em);box-sizing:border-box;color:var(--fa-inverse,#fff);line-height:var(--fa-counter-line-height,1);max-width:var(--fa-counter-max-width,5em);min-width:var(--fa-counter-min-width,1.5em);overflow:hidden;padding:var(--fa-counter-padding,.25em .5em);right:var(--fa-right,0);text-overflow:ellipsis;top:var(--fa-top,0);-webkit-transform:scale(var(--fa-counter-scale,.25));transform:scale(var(--fa-counter-scale,.25));-webkit-transform-origin:top right;transform-origin:top right}.fa-layers-bottom-right{bottom:var(--fa-bottom,0);right:var(--fa-right,0);top:auto;-webkit-transform:scale(var(--fa-layers-scale,.25));transform:scale(var(--fa-layers-scale,.25));-webkit-transform-origin:bottom right;transform-origin:bottom right}.fa-layers-bottom-left{bottom:var(--fa-bottom,0);left:var(--fa-left,0);right:auto;top:auto;-webkit-transform:scale(var(--fa-layers-scale,.25));transform:scale(var(--fa-layers-scale,.25));-webkit-transform-origin:bottom left;transform-origin:bottom left}.fa-layers-top-right{top:var(--fa-top,0);right:var(--fa-right,0);-webkit-transform:scale(var(--fa-layers-scale,.25));transform:scale(var(--fa-layers-scale,.25));-webkit-transform-origin:top right;transform-origin:top right}.fa-layers-top-left{left:var(--fa-left,0);right:auto;top:var(--fa-top,0);-webkit-transform:scale(var(--fa-layers-scale,.25));transform:scale(var(--fa-layers-scale,.25));-webkit-transform-origin:top left;transform-origin:top left}.fa-1x{font-size:1em}.fa-2x{font-size:2em}.fa-3x{font-size:3em}.fa-4x{font-size:4em}.fa-5x{font-size:5em}.fa-6x{font-size:6em}.fa-7x{font-size:7em}.fa-8x{font-size:8em}.fa-9x{font-size:9em}.fa-10x{font-size:10em}.fa-2xs{font-size:.625em;line-height:.1em;vertical-align:.225em}.fa-xs{font-size:.75em;line-height:.0833333337em;vertical-align:.125em}.fa-sm{font-size:.875em;line-height:.0714285718em;vertical-align:.0535714295em}.fa-lg{font-size:1.25em;line-height:.05em;vertical-align:-.075em}.fa-xl{font-size:1.5em;line-height:.0416666682em;vertical-align:-.125em}.fa-2xl{font-size:2em;line-height:.03125em;vertical-align:-.1875em}.fa-fw{text-align:center;width:1.25em}.fa-ul{list-style-type:none;margin-left:var(--fa-li-margin,2.5em);padding-left:0}.fa-ul>li{position:relative}.fa-li{left:calc(var(--fa-li-width,2em) * -1);position:absolute;text-align:center;width:var(--fa-li-width,2em);line-height:inherit}.fa-border{border-color:var(--fa-border-color,#eee);border-radius:var(--fa-border-radius,.1em);border-style:var(--fa-border-style,solid);border-width:var(--fa-border-width,.08em);padding:var(--fa-border-padding,.2em .25em .15em)}.fa-pull-left{float:left;margin-right:var(--fa-pull-margin,.3em)}.fa-pull-right{float:right;margin-left:var(--fa-pull-margin,.3em)}.fa-beat{-webkit-animation-name:fa-beat;animation-name:fa-beat;-webkit-animation-delay:var(--fa-animation-delay,0s);animation-delay:var(--fa-animation-delay,0s);-webkit-animation-direction:var(--fa-animation-direction,normal);animation-direction:var(--fa-animation-direction,normal);-webkit-animation-duration:var(--fa-animation-duration,1s);animation-duration:var(--fa-animation-duration,1s);-webkit-animation-iteration-count:var(--fa-animation-iteration-count,infinite);animation-iteration-count:var(--fa-animation-iteration-count,infinite);-webkit-animation-timing-function:var(--fa-animation-timing,ease-in-out);animation-timing-function:var(--fa-animation-timing,ease-in-out)}.fa-bounce{-webkit-animation-name:fa-bounce;animation-name:fa-bounce;-webkit-animation-delay:var(--fa-animation-delay,0s);animation-delay:var(--fa-animation-delay,0s);-webkit-animation-direction:var(--fa-animation-direction,normal);animation-direction:var(--fa-animation-direction,normal);-webkit-animation-duration:var(--fa-animation-duration,1s);animation-duration:var(--fa-animation-duration,1s);-webkit-animation-iteration-count:var(--fa-animation-iteration-count,infinite);animation-iteration-count:var(--fa-animation-iteration-count,infinite);-webkit-animation-timing-function:var(--fa-animation-timing,cubic-bezier(.28,.84,.42,1));animation-timing-function:var(--fa-animation-timing,cubic-bezier(.28,.84,.42,1))}.fa-fade{-webkit-animation-name:fa-fade;animation-name:fa-fade;-webkit-animation-delay:var(--fa-animation-delay,0s);animation-delay:var(--fa-animation-delay,0s);-webkit-animation-direction:var(--fa-animation-direction,normal);animation-direction:var(--fa-animation-direction,normal);-webkit-animation-duration:var(--fa-animation-duration,1s);animation-duration:var(--fa-animation-duration,1s);-webkit-animation-iteration-count:var(--fa-animation-iteration-count,infinite);animation-iteration-count:var(--fa-animation-iteration-count,infinite);-webkit-animation-timing-function:var(--fa-animation-timing,cubic-bezier(.4,0,.6,1));animation-timing-function:var(--fa-animation-timing,cubic-bezier(.4,0,.6,1))}.fa-beat-fade{-webkit-animation-name:fa-beat-fade;animation-name:fa-beat-fade;-webkit-animation-delay:var(--fa-animation-delay,0s);animation-delay:var(--fa-animation-delay,0s);-webkit-animation-direction:var(--fa-animation-direction,normal);animation-direction:var(--fa-animation-direction,normal);-webkit-animation-duration:var(--fa-animation-duration,1s);animation-duration:var(--fa-animation-duration,1s);-webkit-animation-iteration-count:var(--fa-animation-iteration-count,infinite);animation-iteration-count:var(--fa-animation-iteration-count,infinite);-webkit-animation-timing-function:var(--fa-animation-timing,cubic-bezier(.4,0,.6,1));animation-timing-function:var(--fa-animation-timing,cubic-bezier(.4,0,.6,1))}.fa-flip{-webkit-animation-name:fa-flip;animation-name:fa-flip;-webkit-animation-delay:var(--fa-animation-delay,0s);animation-delay:var(--fa-animation-delay,0s);-webkit-animation-direction:var(--fa-animation-direction,normal);animation-direction:var(--fa-animation-direction,normal);-webkit-animation-duration:var(--fa-animation-duration,1s);animation-duration:var(--fa-animation-duration,1s);-webkit-animation-iteration-count:var(--fa-animation-iteration-count,infinite);animation-iteration-count:var(--fa-animation-iteration-count,infinite);-webkit-animation-timing-function:var(--fa-animation-timing,ease-in-out);animation-timing-function:var(--fa-animation-timing,ease-in-out)}.fa-shake{-webkit-animation-name:fa-shake;animation-name:fa-shake;-webkit-animation-delay:var(--fa-animation-delay,0s);animation-delay:var(--fa-animation-delay,0s);-webkit-animation-direction:var(--fa-animation-direction,normal);animation-direction:var(--fa-animation-direction,normal);-webkit-animation-duration:var(--fa-animation-duration,1s);animation-duration:var(--fa-animation-duration,1s);-webkit-animation-iteration-count:var(--fa-animation-iteration-count,infinite);animation-iteration-count:var(--fa-animation-iteration-count,infinite);-webkit-animation-timing-function:var(--fa-animation-timing,linear);animation-timing-function:var(--fa-animation-timing,linear)}.fa-spin{-webkit-animation-name:fa-spin;animation-name:fa-spin;-webkit-animation-delay:var(--fa-animation-delay,0s);animation-delay:var(--fa-animation-delay,0s);-webkit-animation-direction:var(--fa-animation-direction,normal);animation-direction:var(--fa-animation-direction,normal);-webkit-animation-duration:var(--fa-animation-duration,2s);animation-duration:var(--fa-animation-duration,2s);-webkit-animation-iteration-count:var(--fa-animation-iteration-count,infinite);animation-iteration-count:var(--fa-animation-iteration-count,infinite);-webkit-animation-timing-function:var(--fa-animation-timing,linear);animation-timing-function:var(--fa-animation-timing,linear)}.fa-spin-reverse{--fa-animation-direction:reverse}.fa-pulse,.fa-spin-pulse{-webkit-animation-name:fa-spin;animation-name:fa-spin;-webkit-animation-direction:var(--fa-animation-direction,normal);animation-direction:var(--fa-animation-direction,normal);-webkit-animation-duration:var(--fa-animation-duration,1s);animation-duration:var(--fa-animation-duration,1s);-webkit-animation-iteration-count:var(--fa-animation-iteration-count,infinite);animation-iteration-count:var(--fa-animation-iteration-count,infinite);-webkit-animation-timing-function:var(--fa-animation-timing,steps(8));animation-timing-function:var(--fa-animation-timing,steps(8))}@media (prefers-reduced-motion:reduce){.fa-beat,.fa-beat-fade,.fa-bounce,.fa-fade,.fa-flip,.fa-pulse,.fa-shake,.fa-spin,.fa-spin-pulse{-webkit-animation-delay:-1ms;animation-delay:-1ms;-webkit-animation-duration:1ms;animation-duration:1ms;-webkit-animation-iteration-count:1;animation-iteration-count:1;-webkit-transition-delay:0s;transition-delay:0s;-webkit-transition-duration:0s;transition-duration:0s}}@-webkit-keyframes fa-beat{0%,90%{-webkit-transform:scale(1);transform:scale(1)}45%{-webkit-transform:scale(var(--fa-beat-scale,1.25));transform:scale(var(--fa-beat-scale,1.25))}}@keyframes fa-beat{0%,90%{-webkit-transform:scale(1);transform:scale(1)}45%{-webkit-transform:scale(var(--fa-beat-scale,1.25));transform:scale(var(--fa-beat-scale,1.25))}}@-webkit-keyframes fa-bounce{0%{-webkit-transform:scale(1,1) translateY(0);transform:scale(1,1) translateY(0)}10%{-webkit-transform:scale(var(--fa-bounce-start-scale-x,1.1),var(--fa-bounce-start-scale-y,.9)) translateY(0);transform:scale(var(--fa-bounce-start-scale-x,1.1),var(--fa-bounce-start-scale-y,.9)) translateY(0)}30%{-webkit-transform:scale(var(--fa-bounce-jump-scale-x,.9),var(--fa-bounce-jump-scale-y,1.1)) translateY(var(--fa-bounce-height,-.5em));transform:scale(var(--fa-bounce-jump-scale-x,.9),var(--fa-bounce-jump-scale-y,1.1)) translateY(var(--fa-bounce-height,-.5em))}50%{-webkit-transform:scale(var(--fa-bounce-land-scale-x,1.05),var(--fa-bounce-land-scale-y,.95)) translateY(0);transform:scale(var(--fa-bounce-land-scale-x,1.05),var(--fa-bounce-land-scale-y,.95)) translateY(0)}57%{-webkit-transform:scale(1,1) translateY(var(--fa-bounce-rebound,-.125em));transform:scale(1,1) translateY(var(--fa-bounce-rebound,-.125em))}64%{-webkit-transform:scale(1,1) translateY(0);transform:scale(1,1) translateY(0)}100%{-webkit-transform:scale(1,1) translateY(0);transform:scale(1,1) translateY(0)}}@keyframes fa-bounce{0%{-webkit-transform:scale(1,1) translateY(0);transform:scale(1,1) translateY(0)}10%{-webkit-transform:scale(var(--fa-bounce-start-scale-x,1.1),var(--fa-bounce-start-scale-y,.9)) translateY(0);transform:scale(var(--fa-bounce-start-scale-x,1.1),var(--fa-bounce-start-scale-y,.9)) translateY(0)}30%{-webkit-transform:scale(var(--fa-bounce-jump-scale-x,.9),var(--fa-bounce-jump-scale-y,1.1)) translateY(var(--fa-bounce-height,-.5em));transform:scale(var(--fa-bounce-jump-scale-x,.9),var(--fa-bounce-jump-scale-y,1.1)) translateY(var(--fa-bounce-height,-.5em))}50%{-webkit-transform:scale(var(--fa-bounce-land-scale-x,1.05),var(--fa-bounce-land-scale-y,.95)) translateY(0);transform:scale(var(--fa-bounce-land-scale-x,1.05),var(--fa-bounce-land-scale-y,.95)) translateY(0)}57%{-webkit-transform:scale(1,1) translateY(var(--fa-bounce-rebound,-.125em));transform:scale(1,1) translateY(var(--fa-bounce-rebound,-.125em))}64%{-webkit-transform:scale(1,1) translateY(0);transform:scale(1,1) translateY(0)}100%{-webkit-transform:scale(1,1) translateY(0);transform:scale(1,1) translateY(0)}}@-webkit-keyframes fa-fade{50%{opacity:var(--fa-fade-opacity,.4)}}@keyframes fa-fade{50%{opacity:var(--fa-fade-opacity,.4)}}@-webkit-keyframes fa-beat-fade{0%,100%{opacity:var(--fa-beat-fade-opacity,.4);-webkit-transform:scale(1);transform:scale(1)}50%{opacity:1;-webkit-transform:scale(var(--fa-beat-fade-scale,1.125));transform:scale(var(--fa-beat-fade-scale,1.125))}}@keyframes fa-beat-fade{0%,100%{opacity:var(--fa-beat-fade-opacity,.4);-webkit-transform:scale(1);transform:scale(1)}50%{opacity:1;-webkit-transform:scale(var(--fa-beat-fade-scale,1.125));transform:scale(var(--fa-beat-fade-scale,1.125))}}@-webkit-keyframes fa-flip{50%{-webkit-transform:rotate3d(var(--fa-flip-x,0),var(--fa-flip-y,1),var(--fa-flip-z,0),var(--fa-flip-angle,-180deg));transform:rotate3d(var(--fa-flip-x,0),var(--fa-flip-y,1),var(--fa-flip-z,0),var(--fa-flip-angle,-180deg))}}@keyframes fa-flip{50%{-webkit-transform:rotate3d(var(--fa-flip-x,0),var(--fa-flip-y,1),var(--fa-flip-z,0),var(--fa-flip-angle,-180deg));transform:rotate3d(var(--fa-flip-x,0),var(--fa-flip-y,1),var(--fa-flip-z,0),var(--fa-flip-angle,-180deg))}}@-webkit-keyframes fa-shake{0%{-webkit-transform:rotate(-15deg);transform:rotate(-15deg)}4%{-webkit-transform:rotate(15deg);transform:rotate(15deg)}24%,8%{-webkit-transform:rotate(-18deg);transform:rotate(-18deg)}12%,28%{-webkit-transform:rotate(18deg);transform:rotate(18deg)}16%{-webkit-transform:rotate(-22deg);transform:rotate(-22deg)}20%{-webkit-transform:rotate(22deg);transform:rotate(22deg)}32%{-webkit-transform:rotate(-12deg);transform:rotate(-12deg)}36%{-webkit-transform:rotate(12deg);transform:rotate(12deg)}100%,40%{-webkit-transform:rotate(0);transform:rotate(0)}}@keyframes fa-shake{0%{-webkit-transform:rotate(-15deg);transform:rotate(-15deg)}4%{-webkit-transform:rotate(15deg);transform:rotate(15deg)}24%,8%{-webkit-transform:rotate(-18deg);transform:rotate(-18deg)}12%,28%{-webkit-transform:rotate(18deg);transform:rotate(18deg)}16%{-webkit-transform:rotate(-22deg);transform:rotate(-22deg)}20%{-webkit-transform:rotate(22deg);transform:rotate(22deg)}32%{-webkit-transform:rotate(-12deg);transform:rotate(-12deg)}36%{-webkit-transform:rotate(12deg);transform:rotate(12deg)}100%,40%{-webkit-transform:rotate(0);transform:rotate(0)}}@-webkit-keyframes fa-spin{0%{-webkit-transform:rotate(0);transform:rotate(0)}100%{-webkit-transform:rotate(360deg);transform:rotate(360deg)}}@keyframes fa-spin{0%{-webkit-transform:rotate(0);transform:rotate(0)}100%{-webkit-transform:rotate(360deg);transform:rotate(360deg)}}.fa-rotate-90{-webkit-transform:rotate(90deg);transform:rotate(90deg)}.fa-rotate-180{-webkit-transform:rotate(180deg);transform:rotate(180deg)}.fa-rotate-270{-webkit-transform:rotate(270deg);transform:rotate(270deg)}.fa-flip-horizontal{-webkit-transform:scale(-1,1);transform:scale(-1,1)}.fa-flip-vertical{-webkit-transform:scale(1,-1);transform:scale(1,-1)}.fa-flip-both,.fa-flip-horizontal.fa-flip-vertical{-webkit-transform:scale(-1,-1);transform:scale(-1,-1)}.fa-rotate-by{-webkit-transform:rotate(var(--fa-rotate-angle,0));transform:rotate(var(--fa-rotate-angle,0))}.fa-stack{display:inline-block;vertical-align:middle;height:2em;position:relative;width:2.5em}.fa-stack-1x,.fa-stack-2x{bottom:0;left:0;margin:auto;position:absolute;right:0;top:0;z-index:var(--fa-stack-z-index,auto)}.svg-inline--fa.fa-stack-1x{height:1em;width:1.25em}.svg-inline--fa.fa-stack-2x{height:2em;width:2.5em}.fa-inverse{color:var(--fa-inverse,#fff)}.fa-sr-only,.sr-only{position:absolute;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0,0,0,0);white-space:nowrap;border-width:0}.fa-sr-only-focusable:not(:focus),.sr-only-focusable:not(:focus){position:absolute;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0,0,0,0);white-space:nowrap;border-width:0}.svg-inline--fa .fa-primary{fill:var(--fa-primary-color,currentColor);opacity:var(--fa-primary-opacity,1)}.svg-inline--fa .fa-secondary{fill:var(--fa-secondary-color,currentColor);opacity:var(--fa-secondary-opacity,.4)}.svg-inline--fa.fa-swap-opacity .fa-primary{opacity:var(--fa-secondary-opacity,.4)}.svg-inline--fa.fa-swap-opacity .fa-secondary{opacity:var(--fa-primary-opacity,1)}.svg-inline--fa mask .fa-primary,.svg-inline--fa mask .fa-secondary{fill:#000}.fa-duotone.fa-inverse,.fad.fa-inverse{color:var(--fa-inverse,#fff)}</style><link href="./Constants — NumPy v2.4 Manual_files/theme.css" rel="stylesheet">
+<link href="./Constants — NumPy v2.4 Manual_files/pydata-sphinx-theme.css" rel="stylesheet">
+
+    <link rel="stylesheet" type="text/css" href="./Constants — NumPy v2.4 Manual_files/pygments.css">
+    <link rel="stylesheet" type="text/css" href="./Constants — NumPy v2.4 Manual_files/graphviz.css">
+    <link rel="stylesheet" type="text/css" href="./Constants — NumPy v2.4 Manual_files/plot_directive.css">
+    <link rel="stylesheet" type="text/css" href="./Constants — NumPy v2.4 Manual_files/copybutton.css">
+    <link rel="stylesheet" type="text/css" href="./Constants — NumPy v2.4 Manual_files/css">
+    <link rel="stylesheet" type="text/css" href="./Constants — NumPy v2.4 Manual_files/jupyterlite_sphinx.css">
+    <link rel="stylesheet" type="text/css" href="./Constants — NumPy v2.4 Manual_files/sphinx-design.min.css">
+    <link rel="stylesheet" type="text/css" href="./Constants — NumPy v2.4 Manual_files/numpy.css">
+  
+  <!-- So that users can add custom icons -->
+  <script src="./Constants — NumPy v2.4 Manual_files/fontawesome.js.baixados"></script>
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="./Constants — NumPy v2.4 Manual_files/bootstrap.js.baixados">
+<link rel="preload" as="script" href="./Constants — NumPy v2.4 Manual_files/pydata-sphinx-theme.js.baixados">
+
+    <script src="./Constants — NumPy v2.4 Manual_files/documentation_options.js.baixados"></script>
+    <script src="./Constants — NumPy v2.4 Manual_files/doctools.js.baixados"></script><script type="text/javascript" src="./Constants — NumPy v2.4 Manual_files/versionwarning.js.baixados"></script>
+    <script src="./Constants — NumPy v2.4 Manual_files/sphinx_highlight.js.baixados"></script>
+    <script src="./Constants — NumPy v2.4 Manual_files/clipboard.min.js.baixados"></script>
+    <script src="./Constants — NumPy v2.4 Manual_files/copybutton.js.baixados"></script>
+    <script src="./Constants — NumPy v2.4 Manual_files/jupyterlite_sphinx.js.baixados"></script>
+    <script src="./Constants — NumPy v2.4 Manual_files/design-tabs.js.baixados"></script>
+    <script data-domain="numpy.org/doc/stable/" defer="defer" src="./Constants — NumPy v2.4 Manual_files/script.js.baixados"></script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'reference/constants';</script>
+    <script>
+        DOCUMENTATION_OPTIONS.theme_version = '0.16.1';
+        DOCUMENTATION_OPTIONS.theme_switcher_json_url = 'https://numpy.org/doc/_static/versions.json';
+        DOCUMENTATION_OPTIONS.theme_switcher_version_match = '2.4';
+        DOCUMENTATION_OPTIONS.show_version_warning_banner =
+            true;
+        </script>
+    <link rel="icon" href="https://numpy.org/doc/stable/_static/favicon.ico">
+    <link rel="index" title="Index" href="https://numpy.org/doc/stable/genindex.html">
+    <link rel="search" title="Search" href="https://numpy.org/doc/stable/search.html">
+    <link rel="next" title="Array creation routines" href="https://numpy.org/doc/stable/reference/routines.array-creation.html">
+    <link rel="prev" title="Routines and objects by topic" href="https://numpy.org/doc/stable/reference/routines.html">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="docsearch:language" content="en">
+  <meta name="docsearch:version" content="2.4">
+    <meta name="docbuild:last-update" content="Dec 21, 2025">
+  </head>
+  
+  
+  <body data-bs-spy="scroll" data-bs-target=".bd-toc-nav" data-offset="180" data-bs-root-margin="0px 0px -60%" data-default-mode="light">
+
+  
+  
+  <div id="pst-skip-link" class="skip-link d-print-none"><a href="https://numpy.org/doc/stable/reference/constants.html#main-content" _msttexthash="357760" _msthash="1">Skip to main content</a></div>
+  
+  <div id="pst-scroll-pixel-helper"></div>
+  
+  <button type="button" class="btn rounded-pill" id="pst-back-to-top" style="display: none;" _mstvisible="0">
+    <svg class="svg-inline--fa fa-arrow-up" aria-hidden="true" focusable="false" data-prefix="fas" data-icon="arrow-up" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 384 512" data-fa-i2svg="" _mstVisible="1"><path fill="currentColor" d="M214.6 41.4c-12.5-12.5-32.8-12.5-45.3 0l-160 160c-12.5 12.5-12.5 32.8 0 45.3s32.8 12.5 45.3 0L160 141.2V448c0 17.7 14.3 32 32 32s32-14.3 32-32V141.2L329.4 246.6c12.5 12.5 32.8 12.5 45.3 0s12.5-32.8 0-45.3l-160-160z" _mstVisible="2"></path></svg><!-- <i class="fa-solid fa-arrow-up"></i> Font Awesome fontawesome.com --><font _mstmutation="1" _msttexthash="211770" _msthash="2" _mstvisible="1">Voltar ao topo</font></button>
+
+  
+  <dialog id="pst-search-dialog" _msthidden="1">
+    
+<form class="bd-search d-flex align-items-center" action="https://numpy.org/doc/stable/search.html" method="get" _msthidden="1">
+  <svg class="svg-inline--fa fa-magnifying-glass" aria-hidden="true" focusable="false" data-prefix="fas" data-icon="magnifying-glass" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" data-fa-i2svg=""><path fill="currentColor" d="M416 208c0 45.9-14.9 88.3-40 122.7L502.6 457.4c12.5 12.5 12.5 32.8 0 45.3s-32.8 12.5-45.3 0L330.7 376c-34.4 25.2-76.8 40-122.7 40C93.1 416 0 322.9 0 208S93.1 0 208 0S416 93.1 416 208zM208 352a144 144 0 1 0 0-288 144 144 0 1 0 0 288z"></path></svg><!-- <i class="fa-solid fa-magnifying-glass"></i> Font Awesome fontawesome.com -->
+  <input type="search" class="form-control" name="q" placeholder="Search the docs ..." aria-label="Search the docs ..." autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false" _msthidden="A" _mstplaceholder="267410" _msthash="3" _mstaria-label="267410">
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form>
+  </dialog>
+
+  <div class="pst-async-banner-revealer" style="height: auto;" _msthidden="1">
+  <aside id="bd-header-version-warning" class="d-none d-print-none" aria-label="Version warning" _msthidden="A" _mstaria-label="264654" _msthash="4"></aside>
+</div>
+
+  
+    <header class="bd-header navbar navbar-expand-lg bd-navbar d-print-none">
+<div class="bd-header__inner bd-page-width">
+  <button class="pst-navbar-icon sidebar-toggle primary-toggle" aria-label="Site navigation" _msthidden="A" _mstaria-label="261573" _msthash="5">
+    <svg class="svg-inline--fa fa-bars" aria-hidden="true" focusable="false" data-prefix="fas" data-icon="bars" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512" data-fa-i2svg=""><path fill="currentColor" d="M0 96C0 78.3 14.3 64 32 64H416c17.7 0 32 14.3 32 32s-14.3 32-32 32H32C14.3 128 0 113.7 0 96zM0 256c0-17.7 14.3-32 32-32H416c17.7 0 32 14.3 32 32s-14.3 32-32 32H32c-17.7 0-32-14.3-32-32zM448 416c0 17.7-14.3 32-32 32H32c-17.7 0-32-14.3-32-32s14.3-32 32-32H416c17.7 0 32 14.3 32 32z"></path></svg><!-- <span class="fa-solid fa-bars"></span> Font Awesome fontawesome.com -->
+  </button>
+  
+  
+  <div class="col-lg-3 navbar-header-items__start">
+    
+      <div class="navbar-item">
+
+  
+    
+  
+
+<a class="navbar-brand logo" href="https://numpy.org/doc/stable/index.html">
+  
+  
+  
+  
+  
+    
+    
+    
+    <img src="./Constants — NumPy v2.4 Manual_files/numpylogo.svg" class="logo__image only-light" alt="Manual do NumPy v2.4 - Início" _mstalt="390481" _msthash="6">
+    <img src="./Constants — NumPy v2.4 Manual_files/numpylogo_dark.svg" class="logo__image only-dark pst-js-only" alt="NumPy v2.4 Manual - Home" _msthidden="A" _mstalt="390481" _msthash="7">
+  
+  
+</a></div>
+    
+  </div>
+  
+  <div class="col-lg-9 navbar-header-items">
+    
+    <div class="me-auto navbar-header-items__center">
+      
+        <div class="navbar-item">
+<nav>
+  <ul class="bd-navbar-elements navbar-nav">
+    
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="https://numpy.org/doc/stable/user/index.html" _msttexthash="257231" _msthash="8"> Guia do Usuário </a>
+</li>
+
+
+<li class="nav-item current active">
+  <a class="nav-link nav-internal" href="https://numpy.org/doc/stable/reference/index.html" _msttexthash="275613" _msthash="9"> Referência de API </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="https://numpy.org/doc/stable/building/index.html" _msttexthash="661245" _msthash="10"> Construindo a partir da fonte </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="https://numpy.org/doc/stable/dev/index.html" _msttexthash="296036" _msthash="11"> Desenvolvimento </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="https://numpy.org/doc/stable/release.html" _msttexthash="378716" _msthash="12"> Notas de lançamento </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-external" href="https://numpy.org/numpy-tutorials/" _msttexthash="91754" _msthash="13"> Aprenda </a>
+</li>
+
+            <li class="nav-item dropdown">
+                <button class="btn dropdown-toggle nav-item" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-controls="pst-nav-more-links" _msttexthash="44330" _msthash="14"> Mais </button>
+                <ul id="pst-nav-more-links" class="dropdown-menu" _msthidden="1">
+                    
+<li class=" " _msthidden="1">
+  <a class="nav-link dropdown-item nav-external" href="https://numpy.org/neps" _msttexthash="38584" _msthidden="1" _msthash="15">
+    NEPs
+  </a>
+</li>
+
+                </ul>
+            </li>
+            
+  </ul>
+</nav></div>
+      
+    </div>
+    
+    
+    <div class="navbar-header-items__end">
+      
+      
+        <div class="navbar-item">
+
+<button class="btn btn-sm pst-navbar-icon search-button search-button__button pst-js-only" aria-label="Busca" data-bs-placement="bottom" data-bs-toggle="tooltip" data-bs-original-title="Search" _mstaria-label="74607" _msthash="16">
+    <svg class="svg-inline--fa fa-magnifying-glass fa-lg" aria-hidden="true" focusable="false" data-prefix="fas" data-icon="magnifying-glass" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" data-fa-i2svg=""><path fill="currentColor" d="M416 208c0 45.9-14.9 88.3-40 122.7L502.6 457.4c12.5 12.5 12.5 32.8 0 45.3s-32.8 12.5-45.3 0L330.7 376c-34.4 25.2-76.8 40-122.7 40C93.1 416 0 322.9 0 208S93.1 0 208 0S416 93.1 416 208zM208 352a144 144 0 1 0 0-288 144 144 0 1 0 0 288z"></path></svg><!-- <i class="fa-solid fa-magnifying-glass fa-lg"></i> Font Awesome fontawesome.com -->
+</button></div>
+      
+        <div class="navbar-item">
+
+<button class="btn btn-sm nav-link pst-navbar-icon theme-switch-button pst-js-only" aria-label="Modo de cor" data-bs-title="Color mode" data-bs-placement="bottom" data-bs-toggle="tooltip" _mstaria-label="134667" _msthash="17">
+  <svg class="svg-inline--fa fa-sun theme-switch fa-lg" data-mode="light" aria-labelledby="svg-inline--fa-title-x9zrCrng0AwM" data-prefix="fas" data-icon="sun" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" data-fa-i2svg=""><title id="svg-inline--fa-title-x9zrCrng0AwM" _mstTextHash="33358" _mstHash="18">Luz</title><path fill="currentColor" d="M361.5 1.2c5 2.1 8.6 6.6 9.6 11.9L391 121l107.9 19.8c5.3 1 9.8 4.6 11.9 9.6s1.5 10.7-1.6 15.2L446.9 256l62.3 90.3c3.1 4.5 3.7 10.2 1.6 15.2s-6.6 8.6-11.9 9.6L391 391 371.1 498.9c-1 5.3-4.6 9.8-9.6 11.9s-10.7 1.5-15.2-1.6L256 446.9l-90.3 62.3c-4.5 3.1-10.2 3.7-15.2 1.6s-8.6-6.6-9.6-11.9L121 391 13.1 371.1c-5.3-1-9.8-4.6-11.9-9.6s-1.5-10.7 1.6-15.2L65.1 256 2.8 165.7c-3.1-4.5-3.7-10.2-1.6-15.2s6.6-8.6 11.9-9.6L121 121 140.9 13.1c1-5.3 4.6-9.8 9.6-11.9s10.7-1.5 15.2 1.6L256 65.1 346.3 2.8c4.5-3.1 10.2-3.7 15.2-1.6zM160 256a96 96 0 1 1 192 0 96 96 0 1 1 -192 0zm224 0a128 128 0 1 0 -256 0 128 128 0 1 0 256 0z"></path></svg><!-- <i class="theme-switch fa-solid fa-sun                fa-lg" data-mode="light" title="Light"></i> Font Awesome fontawesome.com -->
+  <svg class="svg-inline--fa fa-moon theme-switch fa-lg" data-mode="dark" aria-labelledby="svg-inline--fa-title-jAICfyt1It88" data-prefix="fas" data-icon="moon" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 384 512" data-fa-i2svg=""><title id="svg-inline--fa-title-jAICfyt1It88" _mstTextHash="78650" _mstHash="19">Escuro</title><path fill="currentColor" d="M223.5 32C100 32 0 132.3 0 256S100 480 223.5 480c60.6 0 115.5-24.2 155.8-63.4c5-4.9 6.3-12.5 3.1-18.7s-10.1-9.7-17-8.5c-9.8 1.7-19.8 2.6-30.1 2.6c-96.9 0-175.5-78.8-175.5-176c0-65.8 36-123.1 89.3-153.3c6.1-3.5 9.2-10.5 7.7-17.3s-7.3-11.9-14.3-12.5c-6.3-.5-12.6-.8-19-.8z"></path></svg><!-- <i class="theme-switch fa-solid fa-moon               fa-lg" data-mode="dark" title="Dark"></i> Font Awesome fontawesome.com -->
+  <svg class="svg-inline--fa fa-circle-half-stroke theme-switch fa-lg" data-mode="auto" aria-labelledby="svg-inline--fa-title-widiVaW5mSYd" data-prefix="fas" data-icon="circle-half-stroke" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" data-fa-i2svg=""><title id="svg-inline--fa-title-widiVaW5mSYd" _mstTextHash="581243" _mstHash="20">Configurações do Sistema</title><path fill="currentColor" d="M448 256c0-106-86-192-192-192V448c106 0 192-86 192-192zM0 256a256 256 0 1 1 512 0A256 256 0 1 1 0 256z"></path></svg><!-- <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg" data-mode="auto" title="System Settings"></i> Font Awesome fontawesome.com -->
+</button></div>
+      
+        <div class="navbar-item">
+<div class="version-switcher__container dropdown pst-js-only">
+  <button id="pst-version-switcher-button-2" type="button" class="version-switcher__button btn btn-sm dropdown-toggle" data-bs-toggle="dropdown" aria-haspopup="listbox" aria-controls="pst-version-switcher-list-2" aria-label="Lista de switchers de versões" data-active-version-name="2.4 (stable)" data-active-version="2.4" _mstaria-label="431249" _msthash="21" _msttexthash="191035">2.4 (estável)</button>
+  <div id="pst-version-switcher-list-2" class="version-switcher__menu dropdown-menu list-group-flush py-0" role="listbox" aria-labelledby="pst-version-switcher-button-2" _msthidden="20">
+    <!-- dropdown will be populated by javascript on page load -->
+  <a class="dropdown-item list-group-item list-group-item-action py-1" href="https://numpy.org/devdocs/reference/constants.html" role="option" data-version-name="dev" data-version="devdocs" _msthidden="1"><span _msttexthash="33410" _msthidden="1" _msthash="22">dev</span></a><a class="dropdown-item list-group-item list-group-item-action py-1 active" href="https://numpy.org/doc/stable/reference/constants.html" role="option" data-version-name="2.4 (stable)" data-version="2.4" _msthidden="1"><span _msttexthash="140517" _msthidden="1" _msthash="23">2.4 (stable)</span></a><a class="dropdown-item list-group-item list-group-item-action py-1" href="https://numpy.org/doc/2.3/reference/constants.html" role="option" data-version-name="2.3" data-version="2.3" _msthidden="1"><span _msttexthash="15301" _msthidden="1" _msthash="24">2.3</span></a><a class="dropdown-item list-group-item list-group-item-action py-1" href="https://numpy.org/doc/2.2/reference/constants.html" role="option" data-version-name="2.2" data-version="2.2" _msthidden="1"><span _msttexthash="15184" _msthidden="1" _msthash="25">2.2</span></a><a class="dropdown-item list-group-item list-group-item-action py-1" href="https://numpy.org/doc/2.1/reference/constants.html" role="option" data-version-name="2.1" data-version="2.1" _msthidden="1"><span _msttexthash="15067" _msthidden="1" _msthash="26">2.1</span></a><a class="dropdown-item list-group-item list-group-item-action py-1" href="https://numpy.org/doc/2.0/reference/constants.html" role="option" data-version-name="2.0" data-version="2.0" _msthidden="1"><span _msttexthash="14950" _msthidden="1" _msthash="27">2.0</span></a><a class="dropdown-item list-group-item list-group-item-action py-1" href="https://numpy.org/doc/1.26/reference/constants.html" role="option" data-version-name="1.26" data-version="doc/1.26" _msthidden="1"><span _msttexthash="22113" _msthidden="1" _msthash="28">1.26</span></a><a class="dropdown-item list-group-item list-group-item-action py-1" href="https://numpy.org/doc/1.25/reference/constants.html" role="option" data-version-name="1.25" data-version="doc/1.25" _msthidden="1"><span _msttexthash="21983" _msthidden="1" _msthash="29">1.25</span></a><a class="dropdown-item list-group-item list-group-item-action py-1" href="https://numpy.org/doc/1.24/reference/constants.html" role="option" data-version-name="1.24" data-version="doc/1.24" _msthidden="1"><span _msttexthash="21853" _msthidden="1" _msthash="30">1.24</span></a><a class="dropdown-item list-group-item list-group-item-action py-1" href="https://numpy.org/doc/1.23/reference/constants.html" role="option" data-version-name="1.23" data-version="doc/1.23" _msthidden="1"><span _msttexthash="21723" _msthidden="1" _msthash="31">1.23</span></a><a class="dropdown-item list-group-item list-group-item-action py-1" href="https://numpy.org/doc/1.22/reference/constants.html" role="option" data-version-name="1.22" data-version="1.22" _msthidden="1"><span _msttexthash="21593" _msthidden="1" _msthash="32">1.22</span></a><a class="dropdown-item list-group-item list-group-item-action py-1" href="https://numpy.org/doc/1.21/reference/constants.html" role="option" data-version-name="1.21" data-version="1.21" _msthidden="1"><span _msttexthash="21463" _msthidden="1" _msthash="33">1.21</span></a><a class="dropdown-item list-group-item list-group-item-action py-1" href="https://numpy.org/doc/1.20/reference/constants.html" role="option" data-version-name="1.20" data-version="1.20" _msthidden="1"><span _msttexthash="21333" _msthidden="1" _msthash="34">1.20</span></a><a class="dropdown-item list-group-item list-group-item-action py-1" href="https://numpy.org/doc/1.19/reference/constants.html" role="option" data-version-name="1.19" data-version="1.19" _msthidden="1"><span _msttexthash="22386" _msthidden="1" _msthash="35">1.19</span></a><a class="dropdown-item list-group-item list-group-item-action py-1" href="https://numpy.org/doc/1.18/reference/constants.html" role="option" data-version-name="1.18" data-version="1.18" _msthidden="1"><span _msttexthash="22256" _msthidden="1" _msthash="36">1.18</span></a><a class="dropdown-item list-group-item list-group-item-action py-1" href="https://numpy.org/doc/1.17/reference/constants.html" role="option" data-version-name="1.17" data-version="1.17" _msthidden="1"><span _msttexthash="22126" _msthidden="1" _msthash="37">1.17</span></a><a class="dropdown-item list-group-item list-group-item-action py-1" href="https://numpy.org/doc/1.16/reference/constants.html" role="option" data-version-name="1.16" data-version="1.16" _msthidden="1"><span _msttexthash="21996" _msthidden="1" _msthash="38">1.16</span></a><a class="dropdown-item list-group-item list-group-item-action py-1" href="https://numpy.org/doc/1.15/reference/constants.html" role="option" data-version-name="1.15" data-version="1.15" _msthidden="1"><span _msttexthash="21866" _msthidden="1" _msthash="39">1.15</span></a><a class="dropdown-item list-group-item list-group-item-action py-1" href="https://numpy.org/doc/1.14/reference/constants.html" role="option" data-version-name="1.14" data-version="1.14" _msthidden="1"><span _msttexthash="21736" _msthidden="1" _msthash="40">1.14</span></a><a class="dropdown-item list-group-item list-group-item-action py-1" href="https://numpy.org/doc/1.13/reference/constants.html" role="option" data-version-name="1.13" data-version="1.13" _msthidden="1"><span _msttexthash="21606" _msthidden="1" _msthash="41">1.13</span></a></div>
+</div></div>
+      
+        <div class="navbar-item"><ul class="navbar-icon-links" aria-label="Links de Ícones" _mstaria-label="131963" _msthash="42">
+        <li class="nav-item">
+          
+          
+          
+          
+          
+          
+          
+          
+          <a href="https://github.com/numpy/numpy" class="nav-link pst-navbar-icon" rel="noopener" target="_blank" data-bs-toggle="tooltip" data-bs-placement="bottom" data-bs-original-title="GitHub"><svg class="svg-inline--fa fa-square-github fa-lg" aria-hidden="true" focusable="false" data-prefix="fab" data-icon="square-github" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512" data-fa-i2svg=""><path fill="currentColor" d="M448 96c0-35.3-28.7-64-64-64H64C28.7 32 0 60.7 0 96V416c0 35.3 28.7 64 64 64H384c35.3 0 64-28.7 64-64V96zM265.8 407.7c0-1.8 0-6 .1-11.6c.1-11.4 .1-28.8 .1-43.7c0-15.6-5.2-25.5-11.3-30.7c37-4.1 76-9.2 76-73.1c0-18.2-6.5-27.3-17.1-39c1.7-4.3 7.4-22-1.7-45c-13.9-4.3-45.7 17.9-45.7 17.9c-13.2-3.7-27.5-5.6-41.6-5.6s-28.4 1.9-41.6 5.6c0 0-31.8-22.2-45.7-17.9c-9.1 22.9-3.5 40.6-1.7 45c-10.6 11.7-15.6 20.8-15.6 39c0 63.6 37.3 69 74.3 73.1c-4.8 4.3-9.1 11.7-10.6 22.3c-9.5 4.3-33.8 11.7-48.3-13.9c-9.1-15.8-25.5-17.1-25.5-17.1c-16.2-.2-1.1 10.2-1.1 10.2c10.8 5 18.4 24.2 18.4 24.2c9.7 29.7 56.1 19.7 56.1 19.7c0 9 .1 21.7 .1 30.6c0 4.8 .1 8.6 .1 10c0 4.3-3 9.5-11.5 8C106 393.6 59.8 330.8 59.8 257.4c0-91.8 70.2-161.5 162-161.5s166.2 69.7 166.2 161.5c.1 73.4-44.7 136.3-110.7 158.3c-8.4 1.5-11.5-3.7-11.5-8zm-90.5-54.8c-.2-1.5 1.1-2.8 3-3.2c1.9-.2 3.7 .6 3.9 1.9c.3 1.3-1 2.6-3 3c-1.9 .4-3.7-.4-3.9-1.7zm-9.1 3.2c-2.2 .2-3.7-.9-3.7-2.4c0-1.3 1.5-2.4 3.5-2.4c1.9-.2 3.7 .9 3.7 2.4c0 1.3-1.5 2.4-3.5 2.4zm-14.3-2.2c-1.9-.4-3.2-1.9-2.8-3.2s2.4-1.9 4.1-1.5c2 .6 3.3 2.1 2.8 3.4c-.4 1.3-2.4 1.9-4.1 1.3zm-12.5-7.3c-1.5-1.3-1.9-3.2-.9-4.1c.9-1.1 2.8-.9 4.3 .6c1.3 1.3 1.8 3.3 .9 4.1c-.9 1.1-2.8 .9-4.3-.6zm-8.5-10c-1.1-1.5-1.1-3.2 0-3.9c1.1-.9 2.8-.2 3.7 1.3c1.1 1.5 1.1 3.3 0 4.1c-.9 .6-2.6 0-3.7-1.5zm-6.3-8.8c-1.1-1.3-1.3-2.8-.4-3.5c.9-.9 2.4-.4 3.5 .6c1.1 1.3 1.3 2.8 .4 3.5c-.9 .9-2.4 .4-3.5-.6zm-6-6.4c-1.3-.6-1.9-1.7-1.5-2.6c.4-.6 1.5-.9 2.8-.4c1.3 .7 1.9 1.8 1.5 2.6c-.4 .9-1.7 1.1-2.8 .4z"></path></svg><!-- <i class="fa-brands fa-square-github fa-lg" aria-hidden="true"></i> Font Awesome fontawesome.com -->
+            <span class="sr-only" _msttexthash="72332" _msthash="43">GitHub</span></a>
+        </li>
+</ul></div>
+      
+    </div>
+    
+  </div>
+  
+  
+
+  
+    <button class="pst-navbar-icon sidebar-toggle secondary-toggle" aria-label="On this page" _msthidden="A" _mstaria-label="156351" _msthash="44">
+      <svg class="svg-inline--fa fa-outdent" aria-hidden="true" focusable="false" data-prefix="fas" data-icon="outdent" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512" data-fa-i2svg=""><path fill="currentColor" d="M0 64C0 46.3 14.3 32 32 32H416c17.7 0 32 14.3 32 32s-14.3 32-32 32H32C14.3 96 0 81.7 0 64zM192 192c0-17.7 14.3-32 32-32H416c17.7 0 32 14.3 32 32s-14.3 32-32 32H224c-17.7 0-32-14.3-32-32zm32 96H416c17.7 0 32 14.3 32 32s-14.3 32-32 32H224c-17.7 0-32-14.3-32-32s14.3-32 32-32zM0 448c0-17.7 14.3-32 32-32H416c17.7 0 32 14.3 32 32s-14.3 32-32 32H32c-17.7 0-32-14.3-32-32zM.2 268.6c-8.2-6.4-8.2-18.9 0-25.3l101.9-79.3c10.5-8.2 25.8-.7 25.8 12.6V335.3c0 13.3-15.3 20.8-25.8 12.6L.2 268.6z"></path></svg><!-- <span class="fa-solid fa-outdent"></span> Font Awesome fontawesome.com -->
+    </button>
+  
+</div>
+
+    </header>
+  
+
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      
+      
+      <dialog id="pst-primary-sidebar-modal"></dialog>
+      <div id="pst-primary-sidebar" class="bd-sidebar-primary bd-sidebar">
+        
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+      <div class="sidebar-header-items__center" _msthidden="7">
+        
+          
+          
+            <div class="navbar-item" _msthidden="7">
+<nav _msthidden="7">
+  <ul class="bd-navbar-elements navbar-nav" _msthidden="7">
+    
+<li class="nav-item " _msthidden="1">
+  <a class="nav-link nav-internal" href="https://numpy.org/doc/stable/user/index.html" _msttexthash="130377" _msthidden="1" _msthash="45">
+    User Guide
+  </a>
+</li>
+
+
+<li class="nav-item current active" _msthidden="1">
+  <a class="nav-link nav-internal" href="https://numpy.org/doc/stable/reference/index.html" _msttexthash="193856" _msthidden="1" _msthash="46">
+    API reference
+  </a>
+</li>
+
+
+<li class="nav-item " _msthidden="1">
+  <a class="nav-link nav-internal" href="https://numpy.org/doc/stable/building/index.html" _msttexthash="389077" _msthidden="1" _msthash="47">
+    Building from source
+  </a>
+</li>
+
+
+<li class="nav-item " _msthidden="1">
+  <a class="nav-link nav-internal" href="https://numpy.org/doc/stable/dev/index.html" _msttexthash="183365" _msthidden="1" _msthash="48">
+    Development
+  </a>
+</li>
+
+
+<li class="nav-item " _msthidden="1">
+  <a class="nav-link nav-internal" href="https://numpy.org/doc/stable/release.html" _msttexthash="207636" _msthidden="1" _msthash="49">
+    Release notes
+  </a>
+</li>
+
+
+<li class="nav-item " _msthidden="1">
+  <a class="nav-link nav-external" href="https://numpy.org/numpy-tutorials/" _msttexthash="59319" _msthidden="1" _msthash="50">
+    Learn
+  </a>
+</li>
+
+
+<li class="nav-item " _msthidden="1">
+  <a class="nav-link nav-external" href="https://numpy.org/neps" _msttexthash="38584" _msthidden="1" _msthash="51">
+    NEPs
+  </a>
+</li>
+
+  </ul>
+</nav></div>
+          
+        
+      </div>
+    
+    
+    
+      <div class="sidebar-header-items__end">
+        
+          <div class="navbar-item" _msthidden="1">
+
+<button class="btn btn-sm pst-navbar-icon search-button search-button__button pst-js-only" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip" data-bs-original-title="Search" _msthidden="A" _mstaria-label="74607" _msthash="52">
+    <svg class="svg-inline--fa fa-magnifying-glass fa-lg" aria-hidden="true" focusable="false" data-prefix="fas" data-icon="magnifying-glass" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" data-fa-i2svg=""><path fill="currentColor" d="M416 208c0 45.9-14.9 88.3-40 122.7L502.6 457.4c12.5 12.5 12.5 32.8 0 45.3s-32.8 12.5-45.3 0L330.7 376c-34.4 25.2-76.8 40-122.7 40C93.1 416 0 322.9 0 208S93.1 0 208 0S416 93.1 416 208zM208 352a144 144 0 1 0 0-288 144 144 0 1 0 0 288z"></path></svg><!-- <i class="fa-solid fa-magnifying-glass fa-lg"></i> Font Awesome fontawesome.com -->
+</button></div>
+        
+          <div class="navbar-item">
+
+<button class="btn btn-sm nav-link pst-navbar-icon theme-switch-button pst-js-only" aria-label="Color mode" data-bs-title="Color mode" data-bs-placement="bottom" data-bs-toggle="tooltip" _msthidden="A" _mstaria-label="134667" _msthash="53">
+  <svg class="svg-inline--fa fa-sun theme-switch fa-lg" data-mode="light" aria-labelledby="svg-inline--fa-title-oKHHwS73rYsB" data-prefix="fas" data-icon="sun" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" data-fa-i2svg=""><title id="svg-inline--fa-title-oKHHwS73rYsB" _mstTextHash="33358" _mstHash="54">Luz</title><path fill="currentColor" d="M361.5 1.2c5 2.1 8.6 6.6 9.6 11.9L391 121l107.9 19.8c5.3 1 9.8 4.6 11.9 9.6s1.5 10.7-1.6 15.2L446.9 256l62.3 90.3c3.1 4.5 3.7 10.2 1.6 15.2s-6.6 8.6-11.9 9.6L391 391 371.1 498.9c-1 5.3-4.6 9.8-9.6 11.9s-10.7 1.5-15.2-1.6L256 446.9l-90.3 62.3c-4.5 3.1-10.2 3.7-15.2 1.6s-8.6-6.6-9.6-11.9L121 391 13.1 371.1c-5.3-1-9.8-4.6-11.9-9.6s-1.5-10.7 1.6-15.2L65.1 256 2.8 165.7c-3.1-4.5-3.7-10.2-1.6-15.2s6.6-8.6 11.9-9.6L121 121 140.9 13.1c1-5.3 4.6-9.8 9.6-11.9s10.7-1.5 15.2 1.6L256 65.1 346.3 2.8c4.5-3.1 10.2-3.7 15.2-1.6zM160 256a96 96 0 1 1 192 0 96 96 0 1 1 -192 0zm224 0a128 128 0 1 0 -256 0 128 128 0 1 0 256 0z"></path></svg><!-- <i class="theme-switch fa-solid fa-sun                fa-lg" data-mode="light" title="Light"></i> Font Awesome fontawesome.com -->
+  <svg class="svg-inline--fa fa-moon theme-switch fa-lg" data-mode="dark" aria-labelledby="svg-inline--fa-title-us49XAPRit95" data-prefix="fas" data-icon="moon" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 384 512" data-fa-i2svg=""><title id="svg-inline--fa-title-us49XAPRit95" _mstTextHash="78650" _mstHash="55">Escuro</title><path fill="currentColor" d="M223.5 32C100 32 0 132.3 0 256S100 480 223.5 480c60.6 0 115.5-24.2 155.8-63.4c5-4.9 6.3-12.5 3.1-18.7s-10.1-9.7-17-8.5c-9.8 1.7-19.8 2.6-30.1 2.6c-96.9 0-175.5-78.8-175.5-176c0-65.8 36-123.1 89.3-153.3c6.1-3.5 9.2-10.5 7.7-17.3s-7.3-11.9-14.3-12.5c-6.3-.5-12.6-.8-19-.8z"></path></svg><!-- <i class="theme-switch fa-solid fa-moon               fa-lg" data-mode="dark" title="Dark"></i> Font Awesome fontawesome.com -->
+  <svg class="svg-inline--fa fa-circle-half-stroke theme-switch fa-lg" data-mode="auto" aria-labelledby="svg-inline--fa-title-ghg9xRRXJasL" data-prefix="fas" data-icon="circle-half-stroke" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" data-fa-i2svg=""><title id="svg-inline--fa-title-ghg9xRRXJasL" _mstTextHash="581243" _mstHash="56">Configurações do Sistema</title><path fill="currentColor" d="M448 256c0-106-86-192-192-192V448c106 0 192-86 192-192zM0 256a256 256 0 1 1 512 0A256 256 0 1 1 0 256z"></path></svg><!-- <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg" data-mode="auto" title="System Settings"></i> Font Awesome fontawesome.com -->
+</button></div>
+        
+          <div class="navbar-item" _msthidden="22">
+<div class="version-switcher__container dropdown pst-js-only" _msthidden="22">
+  <button id="pst-version-switcher-button-3" type="button" class="version-switcher__button btn btn-sm dropdown-toggle" data-bs-toggle="dropdown" aria-haspopup="listbox" aria-controls="pst-version-switcher-list-3" aria-label="Version switcher list" data-active-version-name="2.4 (stable)" data-active-version="2.4" _msthidden="1" _mstaria-label="431249" _msthash="57" _msttexthash="140517">2.4 (stable)</button>
+  <div id="pst-version-switcher-list-3" class="version-switcher__menu dropdown-menu list-group-flush py-0" role="listbox" aria-labelledby="pst-version-switcher-button-3" _msthidden="20">
+    <!-- dropdown will be populated by javascript on page load -->
+  <a class="dropdown-item list-group-item list-group-item-action py-1" href="https://numpy.org/devdocs/reference/constants.html" role="option" data-version-name="dev" data-version="devdocs" _msthidden="1"><span _msttexthash="33410" _msthidden="1" _msthash="58">dev</span></a><a class="dropdown-item list-group-item list-group-item-action py-1 active" href="https://numpy.org/doc/stable/reference/constants.html" role="option" data-version-name="2.4 (stable)" data-version="2.4" _msthidden="1"><span _msttexthash="140517" _msthidden="1" _msthash="59">2.4 (stable)</span></a><a class="dropdown-item list-group-item list-group-item-action py-1" href="https://numpy.org/doc/2.3/reference/constants.html" role="option" data-version-name="2.3" data-version="2.3" _msthidden="1"><span _msttexthash="15301" _msthidden="1" _msthash="60">2.3</span></a><a class="dropdown-item list-group-item list-group-item-action py-1" href="https://numpy.org/doc/2.2/reference/constants.html" role="option" data-version-name="2.2" data-version="2.2" _msthidden="1"><span _msttexthash="15184" _msthidden="1" _msthash="61">2.2</span></a><a class="dropdown-item list-group-item list-group-item-action py-1" href="https://numpy.org/doc/2.1/reference/constants.html" role="option" data-version-name="2.1" data-version="2.1" _msthidden="1"><span _msttexthash="15067" _msthidden="1" _msthash="62">2.1</span></a><a class="dropdown-item list-group-item list-group-item-action py-1" href="https://numpy.org/doc/2.0/reference/constants.html" role="option" data-version-name="2.0" data-version="2.0" _msthidden="1"><span _msttexthash="14950" _msthidden="1" _msthash="63">2.0</span></a><a class="dropdown-item list-group-item list-group-item-action py-1" href="https://numpy.org/doc/1.26/reference/constants.html" role="option" data-version-name="1.26" data-version="doc/1.26" _msthidden="1"><span _msttexthash="22113" _msthidden="1" _msthash="64">1.26</span></a><a class="dropdown-item list-group-item list-group-item-action py-1" href="https://numpy.org/doc/1.25/reference/constants.html" role="option" data-version-name="1.25" data-version="doc/1.25" _msthidden="1"><span _msttexthash="21983" _msthidden="1" _msthash="65">1.25</span></a><a class="dropdown-item list-group-item list-group-item-action py-1" href="https://numpy.org/doc/1.24/reference/constants.html" role="option" data-version-name="1.24" data-version="doc/1.24" _msthidden="1"><span _msttexthash="21853" _msthidden="1" _msthash="66">1.24</span></a><a class="dropdown-item list-group-item list-group-item-action py-1" href="https://numpy.org/doc/1.23/reference/constants.html" role="option" data-version-name="1.23" data-version="doc/1.23" _msthidden="1"><span _msttexthash="21723" _msthidden="1" _msthash="67">1.23</span></a><a class="dropdown-item list-group-item list-group-item-action py-1" href="https://numpy.org/doc/1.22/reference/constants.html" role="option" data-version-name="1.22" data-version="1.22" _msthidden="1"><span _msttexthash="21593" _msthidden="1" _msthash="68">1.22</span></a><a class="dropdown-item list-group-item list-group-item-action py-1" href="https://numpy.org/doc/1.21/reference/constants.html" role="option" data-version-name="1.21" data-version="1.21" _msthidden="1"><span _msttexthash="21463" _msthidden="1" _msthash="69">1.21</span></a><a class="dropdown-item list-group-item list-group-item-action py-1" href="https://numpy.org/doc/1.20/reference/constants.html" role="option" data-version-name="1.20" data-version="1.20" _msthidden="1"><span _msttexthash="21333" _msthidden="1" _msthash="70">1.20</span></a><a class="dropdown-item list-group-item list-group-item-action py-1" href="https://numpy.org/doc/1.19/reference/constants.html" role="option" data-version-name="1.19" data-version="1.19" _msthidden="1"><span _msttexthash="22386" _msthidden="1" _msthash="71">1.19</span></a><a class="dropdown-item list-group-item list-group-item-action py-1" href="https://numpy.org/doc/1.18/reference/constants.html" role="option" data-version-name="1.18" data-version="1.18" _msthidden="1"><span _msttexthash="22256" _msthidden="1" _msthash="72">1.18</span></a><a class="dropdown-item list-group-item list-group-item-action py-1" href="https://numpy.org/doc/1.17/reference/constants.html" role="option" data-version-name="1.17" data-version="1.17" _msthidden="1"><span _msttexthash="22126" _msthidden="1" _msthash="73">1.17</span></a><a class="dropdown-item list-group-item list-group-item-action py-1" href="https://numpy.org/doc/1.16/reference/constants.html" role="option" data-version-name="1.16" data-version="1.16" _msthidden="1"><span _msttexthash="21996" _msthidden="1" _msthash="74">1.16</span></a><a class="dropdown-item list-group-item list-group-item-action py-1" href="https://numpy.org/doc/1.15/reference/constants.html" role="option" data-version-name="1.15" data-version="1.15" _msthidden="1"><span _msttexthash="21866" _msthidden="1" _msthash="75">1.15</span></a><a class="dropdown-item list-group-item list-group-item-action py-1" href="https://numpy.org/doc/1.14/reference/constants.html" role="option" data-version-name="1.14" data-version="1.14" _msthidden="1"><span _msttexthash="21736" _msthidden="1" _msthash="76">1.14</span></a><a class="dropdown-item list-group-item list-group-item-action py-1" href="https://numpy.org/doc/1.13/reference/constants.html" role="option" data-version-name="1.13" data-version="1.13" _msthidden="1"><span _msttexthash="21606" _msthidden="1" _msthash="77">1.13</span></a></div>
+</div></div>
+        
+          <div class="navbar-item" _msthidden="2"><ul class="navbar-icon-links" aria-label="Icon Links" _msthidden="1" _mstaria-label="131963" _msthash="78">
+        <li class="nav-item" _msthidden="1">
+          
+          
+          
+          
+          
+          
+          
+          
+          <a href="https://github.com/numpy/numpy" class="nav-link pst-navbar-icon" rel="noopener" target="_blank" data-bs-toggle="tooltip" data-bs-placement="bottom" data-bs-original-title="GitHub" _msthidden="1"><svg class="svg-inline--fa fa-square-github fa-lg" aria-hidden="true" focusable="false" data-prefix="fab" data-icon="square-github" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512" data-fa-i2svg=""><path fill="currentColor" d="M448 96c0-35.3-28.7-64-64-64H64C28.7 32 0 60.7 0 96V416c0 35.3 28.7 64 64 64H384c35.3 0 64-28.7 64-64V96zM265.8 407.7c0-1.8 0-6 .1-11.6c.1-11.4 .1-28.8 .1-43.7c0-15.6-5.2-25.5-11.3-30.7c37-4.1 76-9.2 76-73.1c0-18.2-6.5-27.3-17.1-39c1.7-4.3 7.4-22-1.7-45c-13.9-4.3-45.7 17.9-45.7 17.9c-13.2-3.7-27.5-5.6-41.6-5.6s-28.4 1.9-41.6 5.6c0 0-31.8-22.2-45.7-17.9c-9.1 22.9-3.5 40.6-1.7 45c-10.6 11.7-15.6 20.8-15.6 39c0 63.6 37.3 69 74.3 73.1c-4.8 4.3-9.1 11.7-10.6 22.3c-9.5 4.3-33.8 11.7-48.3-13.9c-9.1-15.8-25.5-17.1-25.5-17.1c-16.2-.2-1.1 10.2-1.1 10.2c10.8 5 18.4 24.2 18.4 24.2c9.7 29.7 56.1 19.7 56.1 19.7c0 9 .1 21.7 .1 30.6c0 4.8 .1 8.6 .1 10c0 4.3-3 9.5-11.5 8C106 393.6 59.8 330.8 59.8 257.4c0-91.8 70.2-161.5 162-161.5s166.2 69.7 166.2 161.5c.1 73.4-44.7 136.3-110.7 158.3c-8.4 1.5-11.5-3.7-11.5-8zm-90.5-54.8c-.2-1.5 1.1-2.8 3-3.2c1.9-.2 3.7 .6 3.9 1.9c.3 1.3-1 2.6-3 3c-1.9 .4-3.7-.4-3.9-1.7zm-9.1 3.2c-2.2 .2-3.7-.9-3.7-2.4c0-1.3 1.5-2.4 3.5-2.4c1.9-.2 3.7 .9 3.7 2.4c0 1.3-1.5 2.4-3.5 2.4zm-14.3-2.2c-1.9-.4-3.2-1.9-2.8-3.2s2.4-1.9 4.1-1.5c2 .6 3.3 2.1 2.8 3.4c-.4 1.3-2.4 1.9-4.1 1.3zm-12.5-7.3c-1.5-1.3-1.9-3.2-.9-4.1c.9-1.1 2.8-.9 4.3 .6c1.3 1.3 1.8 3.3 .9 4.1c-.9 1.1-2.8 .9-4.3-.6zm-8.5-10c-1.1-1.5-1.1-3.2 0-3.9c1.1-.9 2.8-.2 3.7 1.3c1.1 1.5 1.1 3.3 0 4.1c-.9 .6-2.6 0-3.7-1.5zm-6.3-8.8c-1.1-1.3-1.3-2.8-.4-3.5c.9-.9 2.4-.4 3.5 .6c1.1 1.3 1.3 2.8 .4 3.5c-.9 .9-2.4 .4-3.5-.6zm-6-6.4c-1.3-.6-1.9-1.7-1.5-2.6c.4-.6 1.5-.9 2.8-.4c1.3 .7 1.9 1.8 1.5 2.6c-.4 .9-1.7 1.1-2.8 .4z"></path></svg><!-- <i class="fa-brands fa-square-github fa-lg" aria-hidden="true"></i> Font Awesome fontawesome.com -->
+            <span class="sr-only" _msttexthash="72332" _msthidden="1" _msthash="79">GitHub</span></a>
+        </li>
+</ul></div>
+        
+      </div>
+    
+  </div>
+  
+    <div class="sidebar-primary-items__start sidebar-primary__section">
+        <div class="sidebar-primary-item">
+<nav class="bd-docs-nav bd-links" aria-label="Navegação por Seção" _mstaria-label="348023" _msthash="80">
+  <p class="bd-links__title" role="heading" aria-level="1" _msttexthash="458419" _msthash="81">Navegação por Seção</p>
+  <div class="bd-toc-item navbar-nav"><ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="https://numpy.org/doc/stable/reference/module_structure.html" _msttexthash="688480" _msthash="82">Estrutura de módulos do NumPy</a></li>
+</ul>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="https://numpy.org/doc/stable/reference/arrays.html" _msttexthash="263562" _msthash="83">Objetos do array</a></li>
+</ul>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="https://numpy.org/doc/stable/reference/ufuncs.html"><font _mstmutation="1" _msttexthash="407394" _msthash="84">Funções universais (</font><code class="xref py py-class docutils literal notranslate"><span class="pre">ufunc</span></code>)</a></li>
+</ul>
+<ul class="current nav bd-sidenav">
+<li class="toctree-l1 current active has-children"><a class="reference internal" href="https://numpy.org/doc/stable/reference/routines.html" _msttexthash="539097" _msthash="85">Rotinas e objetos por tema</a><details open="open"><summary><span class="toctree-toggle" role="presentation"><svg class="svg-inline--fa fa-chevron-down" aria-hidden="true" focusable="false" data-prefix="fas" data-icon="chevron-down" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" data-fa-i2svg=""><path fill="currentColor" d="M233.4 406.6c12.5 12.5 32.8 12.5 45.3 0l192-192c12.5-12.5 12.5-32.8 0-45.3s-32.8-12.5-45.3 0L256 338.7 86.6 169.4c-12.5-12.5-32.8-12.5-45.3 0s-12.5 32.8 0 45.3l192 192z"></path></svg><!-- <i class="fa-solid fa-chevron-down"></i> Font Awesome fontawesome.com --></span></summary><ul class="current">
+<li class="toctree-l2 current active"><a class="current reference internal" href="https://numpy.org/doc/stable/reference/constants.html#" _msttexthash="160498" _msthash="86">Constantes</a></li>
+<li class="toctree-l2"><a class="reference internal" href="https://numpy.org/doc/stable/reference/routines.array-creation.html" _msttexthash="634920" _msthash="87">Rotinas de criação de array</a></li>
+<li class="toctree-l2"><a class="reference internal" href="https://numpy.org/doc/stable/reference/routines.array-manipulation.html" _msttexthash="825617" _msthash="88">Rotinas de manipulação de array</a></li>
+<li class="toctree-l2"><a class="reference internal" href="https://numpy.org/doc/stable/reference/routines.bitwise.html" _msttexthash="359606" _msthash="89">Operações bit a bit</a></li>
+<li class="toctree-l2"><a class="reference internal" href="https://numpy.org/doc/stable/reference/routines.strings.html" _msttexthash="560196" _msthash="90">Funcionalidade das cordas</a></li>
+<li class="toctree-l2"><a class="reference internal" href="https://numpy.org/doc/stable/reference/routines.datetime.html" _msttexthash="612027" _msthash="91">Funções de suporte em datas</a></li>
+<li class="toctree-l2"><a class="reference internal" href="https://numpy.org/doc/stable/reference/routines.dtype.html" _msttexthash="452699" _msthash="92">Rotinas de tipo de dados</a></li>
+<li class="toctree-l2"><a class="reference internal" href="https://numpy.org/doc/stable/reference/routines.emath.html" _msttexthash="1533831" _msthash="93">Funções matemáticas com domínio automático</a></li>
+<li class="toctree-l2"><a class="reference internal" href="https://numpy.org/doc/stable/reference/routines.err.html" _msttexthash="1075542" _msthash="94">Tratamento de erros em ponto flutuante</a></li>
+<li class="toctree-l2"><a class="reference internal" href="https://numpy.org/doc/stable/reference/routines.exceptions.html" _msttexthash="325247" _msthash="95">Exceções e Avisos</a></li>
+<li class="toctree-l2"><a class="reference internal" href="https://numpy.org/doc/stable/reference/routines.fft.html" _msttexthash="828711" _msthash="96">Transformada discreta de Fourier</a></li>
+<li class="toctree-l2"><a class="reference internal" href="https://numpy.org/doc/stable/reference/routines.functional.html" _msttexthash="503776" _msthash="97">Programação funcional</a></li>
+<li class="toctree-l2"><a class="reference internal" href="https://numpy.org/doc/stable/reference/routines.io.html" _msttexthash="252694" _msthash="98">Entrada e saída</a></li>
+<li class="toctree-l2"><a class="reference internal" href="https://numpy.org/doc/stable/reference/routines.indexing.html" _msttexthash="455169" _msthash="99">Rotinas de indexação</a></li>
+<li class="toctree-l2"><a class="reference internal" href="https://numpy.org/doc/stable/reference/routines.linalg.html" _msttexthash="238355" _msthash="100">Álgebra linear</a></li>
+<li class="toctree-l2"><a class="reference internal" href="https://numpy.org/doc/stable/reference/routines.logic.html" _msttexthash="320359" _msthash="101">Funções lógicas</a></li>
+<li class="toctree-l2"><a class="reference internal" href="https://numpy.org/doc/stable/reference/routines.ma.html" _msttexthash="733889" _msthash="102">Operações de matriz mascarada</a></li>
+<li class="toctree-l2"><a class="reference internal" href="https://numpy.org/doc/stable/reference/routines.math.html" _msttexthash="449969" _msthash="103">Funções matemáticas</a></li>
+<li class="toctree-l2"><a class="reference internal" href="https://numpy.org/doc/stable/reference/routines.other.html" _msttexthash="293761" _msthash="104">Rotinas diversas</a></li>
+<li class="toctree-l2"><a class="reference internal" href="https://numpy.org/doc/stable/reference/routines.polynomials.html" _msttexthash="182000" _msthash="105">Polinômios</a></li>
+<li class="toctree-l2"><a class="reference internal" href="https://numpy.org/doc/stable/reference/random/index.html" _msttexthash="453479" _msthash="106">Amostragem aleatória</a></li>
+<li class="toctree-l2"><a class="reference internal" href="https://numpy.org/doc/stable/reference/routines.set.html" _msttexthash="315887" _msthash="107">Rotinas definidas</a></li>
+<li class="toctree-l2"><a class="reference internal" href="https://numpy.org/doc/stable/reference/routines.sort.html" _msttexthash="824070" _msthash="108">Organizando, buscando e contando</a></li>
+<li class="toctree-l2"><a class="reference internal" href="https://numpy.org/doc/stable/reference/routines.statistics.html" _msttexthash="227942" _msthash="109">Estatísticas</a></li>
+<li class="toctree-l2"><a class="reference internal" href="https://numpy.org/doc/stable/reference/routines.testing.html" _msttexthash="267410" _msthash="110">Suporte a testes</a></li>
+<li class="toctree-l2"><a class="reference internal" href="https://numpy.org/doc/stable/reference/routines.window.html" _msttexthash="318292" _msthash="111">Funções de janela</a></li>
+</ul>
+</details></li>
+</ul>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="https://numpy.org/doc/stable/reference/typing.html"><font _mstmutation="1" _msttexthash="100464" _msthash="112">Tipagem (</font><code class="xref py py-mod docutils literal notranslate"><span class="pre">numpy.typing</span></code>)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="https://numpy.org/doc/stable/reference/distutils.html" _msttexthash="129311" _msthash="113">Embalagem</a></li>
+</ul>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="https://numpy.org/doc/stable/reference/c-api/index.html" _msttexthash="120393" _msthash="114">NumPy C-API</a></li>
+</ul>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="https://numpy.org/doc/stable/reference/array_api.html" _msttexthash="1270971" _msthash="115">Compatibilidade com o padrão da API do array</a></li>
+<li class="toctree-l1"><a class="reference internal" href="https://numpy.org/doc/stable/reference/simd/index.html" _msttexthash="394446" _msthash="116">Otimizações CPU/SIMD</a></li>
+<li class="toctree-l1"><a class="reference internal" href="https://numpy.org/doc/stable/reference/thread_safety.html" _msttexthash="337298" _msthash="117">Segurança da rosca</a></li>
+<li class="toctree-l1"><a class="reference internal" href="https://numpy.org/doc/stable/reference/global_state.html" _msttexthash="835744" _msthash="118">Opções de Configuração Globais</a></li>
+<li class="toctree-l1"><a class="reference internal" href="https://numpy.org/doc/stable/reference/security.html" _msttexthash="275106" _msthash="119">Segurança NumPy</a></li>
+<li class="toctree-l1"><a class="reference internal" href="https://numpy.org/doc/stable/reference/testing.html" _msttexthash="356928" _msthash="120">Diretrizes de teste</a></li>
+<li class="toctree-l1"><a class="reference internal" href="https://numpy.org/doc/stable/reference/distutils_status_migration.html"><font _mstmutation="1" _msttexthash="1136252" _msthash="121">Status e orientações sobre migração</font><code class="docutils literal notranslate"><span class="pre">numpy.distutils</span></code></a></li>
+<li class="toctree-l1"><a class="reference internal" href="https://numpy.org/doc/stable/reference/distutils_guide.html"><code class="docutils literal notranslate"><span class="pre">numpy.distutils</span></code><font _mstmutation="1" _msttexthash="262639" _msthash="122"> Guia do usuário</font></a></li>
+<li class="toctree-l1"><a class="reference internal" href="https://numpy.org/doc/stable/reference/swig.html" _msttexthash="134342" _msthash="123">NumPy e SWIG</a></li>
+</ul>
+</div>
+</nav></div>
+    </div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+      <div class="sidebar-primary-item">
+<div id="ethical-ad-placement" class="flat" data-ea-publisher="readthedocs" data-ea-type="readthedocs-sidebar" data-ea-manual="true">
+</div></div>
+  </div>
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main" role="main">
+        
+        
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article d-print-none">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item">
+
+<nav aria-label="Breadcrumb" class="d-print-none" _mstaria-label="154232" _msthash="124">
+  <ul class="bd-breadcrumbs">
+    
+    <li class="breadcrumb-item breadcrumb-home">
+      <a href="https://numpy.org/doc/stable/index.html" class="nav-link" aria-label="Casa" _mstaria-label="43979" _msthash="125">
+        <svg class="svg-inline--fa fa-house" aria-hidden="true" focusable="false" data-prefix="fas" data-icon="house" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 576 512" data-fa-i2svg=""><path fill="currentColor" d="M575.8 255.5c0 18-15 32.1-32 32.1h-32l.7 160.2c0 2.7-.2 5.4-.5 8.1V472c0 22.1-17.9 40-40 40H456c-1.1 0-2.2 0-3.3-.1c-1.4 .1-2.8 .1-4.2 .1H416 392c-22.1 0-40-17.9-40-40V448 384c0-17.7-14.3-32-32-32H256c-17.7 0-32 14.3-32 32v64 24c0 22.1-17.9 40-40 40H160 128.1c-1.5 0-3-.1-4.5-.2c-1.2 .1-2.4 .2-3.6 .2H104c-22.1 0-40-17.9-40-40V360c0-.9 0-1.9 .1-2.8V287.6H32c-18 0-32-14-32-32.1c0-9 3-17 10-24L266.4 8c7-7 15-8 22-8s15 2 21 7L564.8 231.5c8 7 12 15 11 24z"></path></svg><!-- <i class="fa-solid fa-home"></i> Font Awesome fontawesome.com -->
+      </a>
+    </li>
+    
+    <li class="breadcrumb-item"><a href="https://numpy.org/doc/stable/reference/index.html" class="nav-link" _msttexthash="359008" _msthash="126">Referência ao NumPy</a></li>
+    
+    
+    <li class="breadcrumb-item"><a href="https://numpy.org/doc/stable/reference/routines.html" class="nav-link" _msttexthash="539097" _msthash="127">Rotinas e objetos por tema</a></li>
+    
+    <li class="breadcrumb-item active" aria-current="page"><span class="ellipsis" _msttexthash="160498" _msthash="128">Constantes</span></li>
+  </ul>
+</nav>
+</div>
+      
+    </div>
+  
+  
+</div>
+</div>
+              
+              
+              
+                
+<div id="searchbox"></div>
+                <article class="bd-article">
+                  
+  <section id="constants">
+<h1><font _mstmutation="1" _msttexthash="160498" _msthash="129">Constantes</font><a class="headerlink" href="https://numpy.org/doc/stable/reference/constants.html#constants" title="Link to this heading">#</a></h1>
+<p _msttexthash="861978" _msthash="130">O NumPy inclui várias constantes:</p>
+<dl class="py data">
+<dt class="sig sig-object py" id="numpy.e">
+<font _mstmutation="1" _msttexthash="219011" _msthash="131"><span class="sig-prename descclassname" _mstmutation="1" _istranslated="1"><span class="pre" _istranslated="1">entorpecido.</span></span><span class="sig-name descname" _mstmutation="1" _istranslated="1"><span class="pre" _istranslated="1">e</span></span></font><a class="headerlink" href="https://numpy.org/doc/stable/reference/constants.html#numpy.e" title="Link to this definition">#</a></dt>
+<dd><p _msttexthash="2905058" _msthash="132">Constante de Euler, base de logaritmos naturais, constante de Napier.</p>
+<p><code class="docutils literal notranslate"><span class="pre">e</span> <span class="pre">=</span> <span class="pre">2.71828182845904523536028747135266249775724709369995...</span></code></p>
+<p class="rubric" _msttexthash="179426" _msthash="133">Veja também</p>
+<p _msttexthash="2189239" _msthash="134">exp : Função exponencial
+logarígrafo: logaritmo natural</p>
+<p class="rubric" _msttexthash="198510" _msthash="135">Referências</p>
+<p><a class="reference external" href="https://en.wikipedia.org/wiki/E_%28mathematical_constant%29" _msttexthash="2568124" _msthash="136">https://en.wikipedia.org/wiki/E_%28mathematical_constant%29</a></p>
+</dd></dl>
+
+<dl class="py data">
+<dt class="sig sig-object py" id="numpy.euler_gamma">
+<font _mstmutation="1" _msttexthash="552292" _msthash="137"><span class="sig-prename descclassname" _mstmutation="1" _istranslated="1"><span class="pre" _istranslated="1">entorpecido.</span></span><span class="sig-name descname" _mstmutation="1" _istranslated="1"><span class="pre" _istranslated="1">euler_gamma</span></span></font><a class="headerlink" href="https://numpy.org/doc/stable/reference/constants.html#numpy.euler_gamma" title="Link to this definition">#</a></dt>
+<dd><p><code class="docutils literal notranslate"><span class="pre">γ</span> <span class="pre">=</span> <span class="pre">0.5772156649015328606065120900824024310421...</span></code></p>
+<p class="rubric" _msttexthash="198510" _msthash="138">Referências</p>
+<p><a class="reference external" href="https://en.wikipedia.org/wiki/Euler%27s_constant" _msttexthash="1822249" _msthash="139">https://en.wikipedia.org/wiki/Euler%27s_constant</a></p>
+</dd></dl>
+
+<dl class="py data">
+<dt class="sig sig-object py" id="numpy.inf">
+<font _mstmutation="1" _msttexthash="276445" _msthash="140"><span class="sig-prename descclassname" _mstmutation="1" _istranslated="1"><span class="pre" _istranslated="1">entorpecido.</span></span><span class="sig-name descname" _mstmutation="1" _istranslated="1"><span class="pre" _istranslated="1">inf</span></span></font><a class="headerlink" href="https://numpy.org/doc/stable/reference/constants.html#numpy.inf" title="Link to this definition">#</a></dt>
+<dd><p _msttexthash="2664753" _msthash="141">Representação em ponto flutuante do infinito (positivo) do IEEE 754.</p>
+<p class="rubric" _msttexthash="119119" _msthash="142">Retornos</p>
+<dl class="simple">
+<dt><font _mstmutation="1" _msttexthash="11011" _msthash="143">y</font><span class="classifier" _msttexthash="137566" _msthash="144">Flutuador</span></dt><dd><p _msttexthash="2335411" _msthash="145">Uma representação em ponto flutuante do infinito positivo.</p>
+</dd>
+</dl>
+<p class="rubric" _msttexthash="179426" _msthash="146">Veja também</p>
+<p _msttexthash="2695615" _msthash="147">isinf : Mostra quais elementos são positivo ou negativo infinito</p>
+<p _msttexthash="2290366" _msthash="148">isposinf : Mostra quais elementos são positivos infinitos</p>
+<p _msttexthash="2270138" _msthash="149">isneginf: Mostra quais elementos são negativos infinitos</p>
+<p _msttexthash="1682486" _msthash="150">isnan : Mostra quais elementos não são um número</p>
+<p _msttexthash="6769204" _msthash="151">isfinite : Mostra quais elementos são finitos (não um de Não Número,
+infinito positivo e infinito negativo)</p>
+<p class="rubric" _msttexthash="61269" _msthash="152">Notas</p>
+<p _msttexthash="39752856" _msthash="153">O NumPy usa o padrão IEEE para ponto flutuante binário para aritmética
+(IEEE 754). Isso significa que Não é um Número não é equivalente ao infinito.
+Além disso, que o infinito positivo não é equivalente ao infinito negativo. Mas
+infinito é equivalente ao infinito positivo.</p>
+<p class="rubric" _msttexthash="117299" _msthash="154">Exemplos</p>
+</dd></dl>
+
+<div class="try_examples_outer_container docutils container" id="ac78a6e4-df0e-482d-885a-1609509be21b">
+<div class="try_examples_button_container"><button class="try_examples_button" onclick="window.tryExamplesShowIframe(&#39;ac78a6e4-df0e-482d-885a-1609509be21b&#39;,&#39;eea8d92f-f22d-47a9-9719-887104bd9521&#39;,&#39;396ba4f7-270c-4d86-81cb-77016e74b4b8&#39;,&#39;../lite/tree/../notebooks/index.html?path=b93df83a_79c0_43a1_968d_8189a8ab18be.ipynb&#39;,&#39;None&#39;)" _msttexthash="674232" _msthash="155">Experimente no seu navegador!</button></div><div class="try_examples_content docutils container">
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre id="codecell0" tabindex="-1"><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">import</span><span class="w"> </span><span class="nn">numpy</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">np</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">np</span><span class="o">.</span><span class="n">inf</span>
+<span class="go">inf</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="mi">1</span><span class="p">])</span> <span class="o">/</span> <span class="mf">0.</span>
+<span class="go">array([inf])</span>
+</pre><button class="copybtn o-tooltip--left" data-tooltip="Copy" data-clipboard-target="#codecell0">
+      <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-copy" width="44" height="44" viewBox="0 0 24 24" stroke-width="1.5" stroke="#000000" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <title>Copy to clipboard</title>
+  <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
+  <rect x="8" y="8" width="12" height="12" rx="2"></rect>
+  <path d="M16 8v-2a2 2 0 0 0 -2 -2h-8a2 2 0 0 0 -2 2v8a2 2 0 0 0 2 2h2"></path>
+</svg>
+    </button></div>
+</div>
+</div>
+</div>
+<div id="396ba4f7-270c-4d86-81cb-77016e74b4b8" class="try_examples_outer_iframe  hidden" _msthidden="2"><div class="try_examples_button_container" _msthidden="2"><button class="try_examples_button" onclick="window.tryExamplesHideIframe(&#39;ac78a6e4-df0e-482d-885a-1609509be21b&#39;,&#39;396ba4f7-270c-4d86-81cb-77016e74b4b8&#39;)" _msttexthash="69186" _msthidden="1" _msthash="156">Go Back</button><button class="try_examples_button" onclick="window.openInNewTab(&#39;ac78a6e4-df0e-482d-885a-1609509be21b&#39;,&#39;396ba4f7-270c-4d86-81cb-77016e74b4b8&#39;)" _msttexthash="123513" _msthidden="1" _msthash="157">Open In Tab</button></div><div id="eea8d92f-f22d-47a9-9719-887104bd9521" class="jupyterlite_sphinx_iframe_container"></div></div><script>document.addEventListener("DOMContentLoaded", function() {window.loadTryExamplesConfig("../try_examples.json");});</script><dl class="py data">
+<dt class="sig sig-object py" id="numpy.nan">
+<font _mstmutation="1" _msttexthash="268580" _msthash="158"><span class="sig-prename descclassname" _mstmutation="1" _istranslated="1"><span class="pre" _istranslated="1">entorpecido.</span></span><span class="sig-name descname" _mstmutation="1" _istranslated="1"><span class="pre" _istranslated="1">Nan</span></span></font><a class="headerlink" href="https://numpy.org/doc/stable/reference/constants.html#numpy.nan" title="Link to this definition">#</a></dt>
+<dd><p _msttexthash="2192918" _msthash="159">Representação em ponto flutuante IEEE 754 de Not a Number (NaN).</p>
+<p class="rubric" _msttexthash="119119" _msthash="160">Retornos</p>
+<p _msttexthash="2363855" _msthash="161">y: Uma representação em ponto flutuante de Não é um Número.</p>
+<p class="rubric" _msttexthash="179426" _msthash="162">Veja também</p>
+<p _msttexthash="1710592" _msthash="163">isnan: Mostra quais elementos não são um número.</p>
+<p _msttexthash="7055113" _msthash="164">isfinito : Mostra quais elementos são finitos (não um de
+Não um Número, infinito positivo e infinito negativo)</p>
+<p class="rubric" _msttexthash="61269" _msthash="165">Notas</p>
+<p _msttexthash="12015991" _msthash="166">O NumPy usa o padrão IEEE para ponto flutuante binário para aritmética
+(IEEE 754). Isso significa que Não é um Número não é equivalente ao infinito.</p>
+<p class="rubric" _msttexthash="117299" _msthash="167">Exemplos</p>
+</dd></dl>
+
+<div class="try_examples_outer_container docutils container" id="4d4bf14e-31b9-4794-9c76-1fce5e5ace0d">
+<div class="try_examples_button_container"><button class="try_examples_button" onclick="window.tryExamplesShowIframe(&#39;4d4bf14e-31b9-4794-9c76-1fce5e5ace0d&#39;,&#39;0897209c-80bd-4303-b1f3-513d751c256c&#39;,&#39;6857ad7c-853e-4758-879d-8425af658b86&#39;,&#39;../lite/tree/../notebooks/index.html?path=455e5efc_dbd8_40be_a9ab_fda929941343.ipynb&#39;,&#39;None&#39;)" _msttexthash="674232" _msthash="168">Experimente no seu navegador!</button></div><div class="try_examples_content docutils container">
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre id="codecell1" tabindex="-1"><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">import</span><span class="w"> </span><span class="nn">numpy</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">np</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">np</span><span class="o">.</span><span class="n">nan</span>
+<span class="go">nan</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">np</span><span class="o">.</span><span class="n">log</span><span class="p">(</span><span class="o">-</span><span class="mi">1</span><span class="p">)</span>
+<span class="go">np.float64(nan)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">np</span><span class="o">.</span><span class="n">log</span><span class="p">([</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">])</span>
+<span class="go">array([       nan, 0.        , 0.69314718])</span>
+</pre><button class="copybtn o-tooltip--left" data-tooltip="Copy" data-clipboard-target="#codecell1">
+      <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-copy" width="44" height="44" viewBox="0 0 24 24" stroke-width="1.5" stroke="#000000" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <title>Copy to clipboard</title>
+  <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
+  <rect x="8" y="8" width="12" height="12" rx="2"></rect>
+  <path d="M16 8v-2a2 2 0 0 0 -2 -2h-8a2 2 0 0 0 -2 2v8a2 2 0 0 0 2 2h2"></path>
+</svg>
+    </button></div>
+</div>
+</div>
+</div>
+<div id="6857ad7c-853e-4758-879d-8425af658b86" class="try_examples_outer_iframe  hidden" _msthidden="2"><div class="try_examples_button_container" _msthidden="2"><button class="try_examples_button" onclick="window.tryExamplesHideIframe(&#39;4d4bf14e-31b9-4794-9c76-1fce5e5ace0d&#39;,&#39;6857ad7c-853e-4758-879d-8425af658b86&#39;)" _msttexthash="69186" _msthidden="1" _msthash="169">Go Back</button><button class="try_examples_button" onclick="window.openInNewTab(&#39;4d4bf14e-31b9-4794-9c76-1fce5e5ace0d&#39;,&#39;6857ad7c-853e-4758-879d-8425af658b86&#39;)" _msttexthash="123513" _msthidden="1" _msthash="170">Open In Tab</button></div><div id="0897209c-80bd-4303-b1f3-513d751c256c" class="jupyterlite_sphinx_iframe_container"></div></div><script>document.addEventListener("DOMContentLoaded", function() {window.loadTryExamplesConfig("../try_examples.json");});</script><dl class="py data">
+<dt class="sig sig-object py" id="numpy.newaxis">
+<font _mstmutation="1" _msttexthash="413738" _msthash="171"><span class="sig-prename descclassname" _mstmutation="1" _istranslated="1"><span class="pre" _istranslated="1">entorpecido.</span></span><span class="sig-name descname" _mstmutation="1" _istranslated="1"><span class="pre" _istranslated="1">newaxis</span></span></font><a class="headerlink" href="https://numpy.org/doc/stable/reference/constants.html#numpy.newaxis" title="Link to this definition">#</a></dt>
+<dd><p _msttexthash="2260141" _msthash="172">Um alias conveniente para Nenhum, útil para indexar arrays.</p>
+<p class="rubric" _msttexthash="117299" _msthash="173">Exemplos</p>
+</dd></dl>
+
+<div class="try_examples_outer_container docutils container" id="6e0f295b-ff77-4626-be53-5ed988c6248b">
+<div class="try_examples_button_container"><button class="try_examples_button" onclick="window.tryExamplesShowIframe(&#39;6e0f295b-ff77-4626-be53-5ed988c6248b&#39;,&#39;63cef166-65f2-45ce-95f7-1532c9663c6e&#39;,&#39;27a7323f-3207-4734-8283-10b76ae3f7b2&#39;,&#39;../lite/tree/../notebooks/index.html?path=0008e088_b680_403e_a683_8f72fbc2c3ea.ipynb&#39;,&#39;None&#39;)" _msttexthash="674232" _msthash="174">Experimente no seu navegador!</button></div><div class="try_examples_content docutils container">
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre id="codecell2" tabindex="-1"><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">import</span><span class="w"> </span><span class="nn">numpy</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">np</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">np</span><span class="o">.</span><span class="n">newaxis</span> <span class="ow">is</span> <span class="kc">None</span>
+<span class="go">True</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">x</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="mi">3</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">x</span>
+<span class="go">array([0, 1, 2])</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">x</span><span class="p">[:,</span> <span class="n">np</span><span class="o">.</span><span class="n">newaxis</span><span class="p">]</span>
+<span class="go">array([[0],</span>
+<span class="go">[1],</span>
+<span class="go">[2]])</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">x</span><span class="p">[:,</span> <span class="n">np</span><span class="o">.</span><span class="n">newaxis</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">newaxis</span><span class="p">]</span>
+<span class="go">array([[[0]],</span>
+<span class="go">[[1]],</span>
+<span class="go">[[2]]])</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">x</span><span class="p">[:,</span> <span class="n">np</span><span class="o">.</span><span class="n">newaxis</span><span class="p">]</span> <span class="o">*</span> <span class="n">x</span>
+<span class="go">array([[0, 0, 0],</span>
+<span class="go">    [0, 1, 2],</span>
+<span class="go">    [0, 2, 4]])</span>
+</pre><button class="copybtn o-tooltip--left" data-tooltip="Copy" data-clipboard-target="#codecell2">
+      <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-copy" width="44" height="44" viewBox="0 0 24 24" stroke-width="1.5" stroke="#000000" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <title>Copy to clipboard</title>
+  <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
+  <rect x="8" y="8" width="12" height="12" rx="2"></rect>
+  <path d="M16 8v-2a2 2 0 0 0 -2 -2h-8a2 2 0 0 0 -2 2v8a2 2 0 0 0 2 2h2"></path>
+</svg>
+    </button></div>
+</div>
+<p><font _mstmutation="1" _msttexthash="502177" _msthash="175">Produto externo, igual a:</font><code class="docutils literal notranslate"><span class="pre">outer(x,</span> <span class="pre">y)</span></code></p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre id="codecell3" tabindex="-1"><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">y</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="mi">3</span><span class="p">,</span> <span class="mi">6</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">x</span><span class="p">[:,</span> <span class="n">np</span><span class="o">.</span><span class="n">newaxis</span><span class="p">]</span> <span class="o">*</span> <span class="n">y</span>
+<span class="go">array([[ 0,  0,  0],</span>
+<span class="go">    [ 3,  4,  5],</span>
+<span class="go">    [ 6,  8, 10]])</span>
+</pre><button class="copybtn o-tooltip--left" data-tooltip="Copy" data-clipboard-target="#codecell3">
+      <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-copy" width="44" height="44" viewBox="0 0 24 24" stroke-width="1.5" stroke="#000000" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <title>Copy to clipboard</title>
+  <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
+  <rect x="8" y="8" width="12" height="12" rx="2"></rect>
+  <path d="M16 8v-2a2 2 0 0 0 -2 -2h-8a2 2 0 0 0 -2 2v8a2 2 0 0 0 2 2h2"></path>
+</svg>
+    </button></div>
+</div>
+<p><code class="docutils literal notranslate"><span class="pre">x[np.newaxis,</span> <span class="pre">:]</span></code><font _mstmutation="1" _msttexthash="287508" _msthash="176"> é equivalente a e :</font><code class="docutils literal notranslate"><span class="pre">x[np.newaxis]</span></code><code class="docutils literal notranslate"><span class="pre">x[None]</span></code></p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre id="codecell4" tabindex="-1"><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">x</span><span class="p">[</span><span class="n">np</span><span class="o">.</span><span class="n">newaxis</span><span class="p">,</span> <span class="p">:]</span><span class="o">.</span><span class="n">shape</span>
+<span class="go">(1, 3)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">x</span><span class="p">[</span><span class="n">np</span><span class="o">.</span><span class="n">newaxis</span><span class="p">]</span><span class="o">.</span><span class="n">shape</span>
+<span class="go">(1, 3)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">x</span><span class="p">[</span><span class="kc">None</span><span class="p">]</span><span class="o">.</span><span class="n">shape</span>
+<span class="go">(1, 3)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">x</span><span class="p">[:,</span> <span class="n">np</span><span class="o">.</span><span class="n">newaxis</span><span class="p">]</span><span class="o">.</span><span class="n">shape</span>
+<span class="go">(3, 1)</span>
+</pre><button class="copybtn o-tooltip--left" data-tooltip="Copy" data-clipboard-target="#codecell4">
+      <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-copy" width="44" height="44" viewBox="0 0 24 24" stroke-width="1.5" stroke="#000000" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <title>Copy to clipboard</title>
+  <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
+  <rect x="8" y="8" width="12" height="12" rx="2"></rect>
+  <path d="M16 8v-2a2 2 0 0 0 -2 -2h-8a2 2 0 0 0 -2 2v8a2 2 0 0 0 2 2h2"></path>
+</svg>
+    </button></div>
+</div>
+</div>
+</div>
+<div id="27a7323f-3207-4734-8283-10b76ae3f7b2" class="try_examples_outer_iframe  hidden" _msthidden="2"><div class="try_examples_button_container" _msthidden="2"><button class="try_examples_button" onclick="window.tryExamplesHideIframe(&#39;6e0f295b-ff77-4626-be53-5ed988c6248b&#39;,&#39;27a7323f-3207-4734-8283-10b76ae3f7b2&#39;)" _msttexthash="69186" _msthidden="1" _msthash="177">Go Back</button><button class="try_examples_button" onclick="window.openInNewTab(&#39;6e0f295b-ff77-4626-be53-5ed988c6248b&#39;,&#39;27a7323f-3207-4734-8283-10b76ae3f7b2&#39;)" _msttexthash="123513" _msthidden="1" _msthash="178">Open In Tab</button></div><div id="63cef166-65f2-45ce-95f7-1532c9663c6e" class="jupyterlite_sphinx_iframe_container"></div></div><script>document.addEventListener("DOMContentLoaded", function() {window.loadTryExamplesConfig("../try_examples.json");});</script><dl class="py data">
+<dt class="sig sig-object py" id="numpy.pi">
+<font _mstmutation="1" _msttexthash="112008" _msthash="179"><span class="sig-prename descclassname" _mstmutation="1"><span class="pre">numpy.</span></span><span class="sig-name descname" _mstmutation="1"><span class="pre">pi</span></span></font><a class="headerlink" href="https://numpy.org/doc/stable/reference/constants.html#numpy.pi" title="Link to this definition">#</a></dt>
+<dd><p><code class="docutils literal notranslate"><span class="pre">pi</span> <span class="pre">=</span> <span class="pre">3.1415926535897932384626433...</span></code></p>
+<p class="rubric" _msttexthash="155311" _msthash="180">References</p>
+<p><a class="reference external" href="https://en.wikipedia.org/wiki/Pi" _msttexthash="875602" _msthash="181">https://en.wikipedia.org/wiki/Pi</a></p>
+</dd></dl>
+
+</section>
+
+
+                </article>
+              
+              
+              
+              
+              
+                <footer class="prev-next-footer d-print-none">
+                  
+<div class="prev-next-area">
+    <a class="left-prev" href="https://numpy.org/doc/stable/reference/routines.html" title="previous page">
+      <svg class="svg-inline--fa fa-angle-left" aria-hidden="true" focusable="false" data-prefix="fas" data-icon="angle-left" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 512" data-fa-i2svg=""><path fill="currentColor" d="M41.4 233.4c-12.5 12.5-12.5 32.8 0 45.3l160 160c12.5 12.5 32.8 12.5 45.3 0s12.5-32.8 0-45.3L109.3 256 246.6 118.6c12.5-12.5 12.5-32.8 0-45.3s-32.8-12.5-45.3 0l-160 160z"></path></svg><!-- <i class="fa-solid fa-angle-left"></i> Font Awesome fontawesome.com -->
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle" _msttexthash="122239" _msthash="182">previous</p>
+        <p class="prev-next-title" _msttexthash="662974" _msthash="183">Routines and objects by topic</p>
+      </div>
+    </a>
+    <a class="right-next" href="https://numpy.org/doc/stable/reference/routines.array-creation.html" title="next page">
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle" _msttexthash="49634" _msthash="184">next</p>
+        <p class="prev-next-title" _msttexthash="504608" _msthash="185">Array creation routines</p>
+      </div>
+      <svg class="svg-inline--fa fa-angle-right" aria-hidden="true" focusable="false" data-prefix="fas" data-icon="angle-right" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 512" data-fa-i2svg=""><path fill="currentColor" d="M278.6 233.4c12.5 12.5 12.5 32.8 0 45.3l-160 160c-12.5 12.5-32.8 12.5-45.3 0s-12.5-32.8 0-45.3L210.7 256 73.4 118.6c-12.5-12.5-12.5-32.8 0-45.3s32.8-12.5 45.3 0l160 160z"></path></svg><!-- <i class="fa-solid fa-angle-right"></i> Font Awesome fontawesome.com -->
+    </a>
+</div>
+                </footer>
+              
+            </div>
+            
+            
+              
+                <dialog id="pst-secondary-sidebar-modal"></dialog>
+                <div id="pst-secondary-sidebar" class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+
+  <div class="sidebar-secondary-item">
+<div id="pst-page-navigation-heading-2" class="page-toc tocsection onthispage">
+    <svg class="svg-inline--fa fa-list" aria-hidden="true" focusable="false" data-prefix="fas" data-icon="list" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" data-fa-i2svg=""><path fill="currentColor" d="M40 48C26.7 48 16 58.7 16 72v48c0 13.3 10.7 24 24 24H88c13.3 0 24-10.7 24-24V72c0-13.3-10.7-24-24-24H40zM192 64c-17.7 0-32 14.3-32 32s14.3 32 32 32H480c17.7 0 32-14.3 32-32s-14.3-32-32-32H192zm0 160c-17.7 0-32 14.3-32 32s14.3 32 32 32H480c17.7 0 32-14.3 32-32s-14.3-32-32-32H192zm0 160c-17.7 0-32 14.3-32 32s14.3 32 32 32H480c17.7 0 32-14.3 32-32s-14.3-32-32-32H192zM16 232v48c0 13.3 10.7 24 24 24H88c13.3 0 24-10.7 24-24V232c0-13.3-10.7-24-24-24H40c-13.3 0-24 10.7-24 24zM40 368c-13.3 0-24 10.7-24 24v48c0 13.3 10.7 24 24 24H88c13.3 0 24-10.7 24-24V392c0-13.3-10.7-24-24-24H40z"></path></svg><!-- <i class="fa-solid fa-list"></i> Font Awesome fontawesome.com --><font _mstmutation="1" _msttexthash="199043" _msthash="186"> Nesta página </font></div>
+  <nav class="bd-toc-nav page-toc" aria-labelledby="pst-page-navigation-heading-2">
+    <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="https://numpy.org/doc/stable/reference/constants.html#numpy.e"><code class="docutils literal notranslate"><span class="pre">e</span></code></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="https://numpy.org/doc/stable/reference/constants.html#numpy.euler_gamma"><code class="docutils literal notranslate"><span class="pre">euler_gamma</span></code></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="https://numpy.org/doc/stable/reference/constants.html#numpy.inf"><code class="docutils literal notranslate"><span class="pre">inf</span></code></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="https://numpy.org/doc/stable/reference/constants.html#numpy.nan"><code class="docutils literal notranslate"><span class="pre">nan</span></code></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="https://numpy.org/doc/stable/reference/constants.html#numpy.newaxis"><code class="docutils literal notranslate"><span class="pre">newaxis</span></code></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="https://numpy.org/doc/stable/reference/constants.html#numpy.pi"><code class="docutils literal notranslate"><span class="pre">pi</span></code></a></li>
+</ul>
+  </nav></div>
+
+</div></div>
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+          </footer>
+        
+      </main>
+    </div>
+  </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script defer="" src="./Constants — NumPy v2.4 Manual_files/bootstrap.js.baixados"></script>
+<script defer="" src="./Constants — NumPy v2.4 Manual_files/pydata-sphinx-theme.js.baixados"></script>
+
+  <footer class="bd-footer">
+<div class="bd-footer__inner bd-page-width">
+  
+    <div class="footer-items__start">
+      
+        <div class="footer-item">
+
+  <p class="copyright"><font _mstmutation="1" _msttexthash="1020123" _msthash="187">
+    
+      © Copyright 2008-2025, NumPy Developers.
+      </font><br>
+    
+  </p>
+</div>
+      
+        <div class="footer-item">
+
+  <p class="sphinx-version"><font _mstmutation="1" _msttexthash="489983" _msthash="188">
+    Created using <a href="https://www.sphinx-doc.org/" _mstmutation="1">Sphinx</a> 7.2.6.
+    </font><br>
+  </p>
+</div>
+      
+    </div>
+  
+  
+  
+    <div class="footer-items__end">
+      
+        <div class="footer-item">
+<p class="theme-version">
+  <!-- # L10n: Setting the PST URL as an argument as this does not need to be localized --><font _mstmutation="1" _msttexthash="985738" _msthash="189">
+  Built with the <a href="https://pydata-sphinx-theme.readthedocs.io/en/stable/index.html" _mstmutation="1">PyData Sphinx Theme</a> 0.16.1.
+</font></p></div>
+      
+    </div>
+  
+</div>
+
+  </footer>
+  <script defer="" src="./Constants — NumPy v2.4 Manual_files/v8c78df7c7c0f484497ecbca7046644da1771523124516" integrity="sha512-8DS7rgIrAmghBFwoOTujcf6D9rXvH8xm8JQ1Ja01h9QX8EzXldiszufYa4IFfKdLUKTTrnSFXLDkUEOTrZQ8Qg==" data-cf-beacon="{&quot;version&quot;:&quot;2024.11.0&quot;,&quot;token&quot;:&quot;f02b77b6fbcf4229aa0f4247afbdad50&quot;,&quot;r&quot;:1,&quot;server_timing&quot;:{&quot;name&quot;:{&quot;cfCacheStatus&quot;:true,&quot;cfEdge&quot;:true,&quot;cfExtPri&quot;:true,&quot;cfL4&quot;:true,&quot;cfOrigin&quot;:true,&quot;cfSpeedBrain&quot;:true},&quot;location_startswith&quot;:null}}" crossorigin="anonymous"></script>
+
+</body></html>
