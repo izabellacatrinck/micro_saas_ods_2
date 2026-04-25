@@ -207,3 +207,76 @@ def test_chunk_with_metadata_accepts_translation_source():
     assert c["original_lang"] == "pt"
     assert c["source_type"] == "official_docs"
     assert c["translation_source"] == "google_translate"
+
+
+def test_segmenter_splits_on_markdown_headings():
+    """ThematicSegmenter should split on '# Title' markers, producing
+    one segment per heading with clean title text."""
+    md = (
+        "# First\n"
+        "Intro line.\n"
+        "\n"
+        "## Second\n"
+        "Body of second.\n"
+        "\n"
+        "### Third\n"
+        "Body of third.\n"
+    )
+
+    segments = ThematicSegmenter.segment(md)
+
+    titles = [s["title"] for s in segments]
+    assert "# First" in titles
+    assert "## Second" in titles
+    assert "### Third" in titles
+    # Bodies stay attached to their own heading
+    second = next(s for s in segments if s["title"] == "## Second")
+    assert "Body of second" in second["content"]
+    assert "Body of third" not in second["content"]
+
+
+def test_chunker_respects_section_boundaries_via_pipeline():
+    """Chunks should not bleed content across sections — the public pipeline
+    (segment → chunk_with_metadata) must keep each section's chunks isolated."""
+    md = (
+        "# Intro\n"
+        + ("alpha " * 200)
+        + "\n\n"
+        + "# Details\n"
+        + ("beta " * 200)
+    )
+
+    segments = ThematicSegmenter.segment(md)
+    chunker = SmartChunker(max_tokens=100, overlap=10)
+
+    intro_chunks = chunker.chunk_with_metadata(
+        text=next(s for s in segments if s["title"] == "# Intro")["content"],
+        source="test.html", section="# Intro",
+    )
+    details_chunks = chunker.chunk_with_metadata(
+        text=next(s for s in segments if s["title"] == "# Details")["content"],
+        source="test.html", section="# Details",
+    )
+
+    for c in intro_chunks:
+        assert "beta" not in c["content"], "Intro leaked into beta content"
+        assert c["section"] == "# Intro"
+    for c in details_chunks:
+        assert "alpha" not in c["content"], "Details leaked into alpha content"
+        assert c["section"] == "# Details"
+
+
+def test_chunker_applies_overlap_within_long_section():
+    """When a single section exceeds max_tokens, the sliding-window overlap
+    must kick in BUT only inside that section (tested in isolation)."""
+    long_section = " ".join(f"tok{i}" for i in range(500))  # 500 tokens
+    chunker = SmartChunker(max_tokens=100, overlap=20)
+
+    chunks = chunker.chunk(long_section)
+
+    assert len(chunks) >= 5
+    for i in range(1, len(chunks)):
+        prev_tail = " ".join(chunks[i - 1].split()[-20:])
+        assert chunks[i].startswith(prev_tail), (
+            f"Chunk {i} missing overlap prefix from chunk {i-1}"
+        )
