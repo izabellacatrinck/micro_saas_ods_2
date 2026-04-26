@@ -169,3 +169,21 @@ def test_generate_answer_with_fallback_returns_groq_when_ok(monkeypatch):
     result = rq.generate_answer_with_fallback("test prompt")
     assert result == "groq answer"
     assert cerebras_called["called"] is False
+
+
+def test_generate_answer_with_fallback_uses_cerebras_on_internal_server_error(monkeypatch):
+    """When Groq raises InternalServerError, fallback calls _generate_cerebras."""
+    from src import rag_query as rq
+
+    def raise_internal_error(prompt, model=config.GROQ_LLM_MODEL):
+        from groq import InternalServerError
+        import httpx
+        mock_req = httpx.Request("POST", "https://api.groq.com")
+        mock_resp = httpx.Response(500, request=mock_req)
+        raise InternalServerError("internal server error", response=mock_resp, body=None)
+
+    monkeypatch.setattr(rq, "generate_answer", raise_internal_error)
+    monkeypatch.setattr(rq, "_generate_cerebras", lambda prompt, model=None: "cerebras fallback on 500")
+
+    result = rq.generate_answer_with_fallback("test prompt")
+    assert result == "cerebras fallback on 500"

@@ -185,7 +185,11 @@ def _generate_cerebras(prompt: str, model: str = config.CEREBRAS_LLM_MODEL) -> s
 
 
 def generate_answer_with_fallback(prompt: str) -> str:
-    """Try Groq first; on RateLimitError or InternalServerError, retry with Cerebras."""
+    """Try Groq first; on RateLimitError or InternalServerError, retry with Cerebras.
+
+    Used by ``backend/app.py`` (HTTP API). The CLI entrypoint ``answer()`` calls
+    ``generate_answer()`` directly and does not use this fallback by design.
+    """
     from groq import RateLimitError, InternalServerError
     try:
         return generate_answer(prompt)
