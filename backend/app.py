@@ -10,14 +10,13 @@ from __future__ import annotations
 
 from contextlib import asynccontextmanager
 
-import chromadb
 from fastapi import FastAPI, HTTPException
 from fastapi.middleware.cors import CORSMiddleware
 from pydantic import BaseModel
 
 from src import config
 from src.rag_query import (
-    _ensure_loaded,
+    _ensure_loaded,  # private, but no public warm-up API exists; coupling is intentional
     build_pt_prompt,
     format_citations,
     generate_answer_with_fallback,
@@ -31,6 +30,7 @@ _state: dict = {"ready": False, "chroma_count": 0}
 
 def _load_models() -> None:
     """Load embedder, reranker, and open Chroma. Blocks until done."""
+    import chromadb
     _ensure_loaded("new")
     client = chromadb.PersistentClient(path=str(config.CHROMA_DIR))
     _state["chroma_count"] = client.get_collection(config.COLLECTION_NEW_PT).count()
@@ -55,7 +55,7 @@ app.add_middleware(
 
 class AskRequest(BaseModel):
     question: str
-    top_k: int = 5
+    top_n: int = 5
 
 
 @app.get("/health")
@@ -77,7 +77,7 @@ def ask(req: AskRequest):
         raise HTTPException(status_code=422, detail="question must not be empty")
 
     chunks = retrieve(req.question, top_k=config.TOP_K_RETRIEVE)
-    reranked = rerank(req.question, chunks, top_n=req.top_k)
+    reranked = rerank(req.question, chunks, top_n=req.top_n)
 
     if not reranked:
         return {
