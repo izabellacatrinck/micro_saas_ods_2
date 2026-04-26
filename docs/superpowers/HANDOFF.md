@@ -111,7 +111,6 @@ data/medium/raw/    13 HTMLs (artigos nativos em PT curados manualmente)
 
 ### O que NÃO existe ainda
 
-- `backend/` — FastAPI (Onda 2)
 - `app/` (Next.js) — frontend (Onda 3)
 - `data/eval/golden.jsonl` — golden set (Onda 3)
 - `data/eval/report.md` — relatório RAGAS (Onda 3)

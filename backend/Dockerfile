@@ -1,7 +1,9 @@
 FROM python:3.12-slim
 
 # Install uv for fast dependency resolution
-COPY --from=ghcr.io/astral-sh/uv:0.8.0 /uv /usr/local/bin/uv
+# Pin to a specific tag for reproducibility once the target version is known;
+# for now, `latest` is used to avoid a non-existent tag breaking the build.
+COPY --from=ghcr.io/astral-sh/uv:latest /uv /usr/local/bin/uv
 
 WORKDIR /app
 
