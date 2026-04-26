@@ -46,7 +46,7 @@ Executar na ordem: 1 → 2 → 3.
 |---|---|---|
 | `docs/superpowers/plans/2026-04-21-rag-pt-surgical.md` | Tasks 1-14 ✅ / 15-22 ⏳ | Plano original do spec 2026-04-21. Tasks 15-22 foram **redistribuídas** entre as ondas novas abaixo. |
 | `docs/superpowers/plans/2026-04-23-wave1-backend-rag.md` | ✅ **CONCLUÍDA 2026-04-25** | CLI `python -m src.rag_query "pergunta"` funcional. 4 tasks executadas via `subagent-driven-development`. Commits: `4dcef42` (Task 1), `9180e08` (Task 2 — pré-existia), `c767e44`+`87b020b` (Task 3), `0c40eeb` (Task 4). 62 tests passing. |
-| *(a criar)* `docs/superpowers/plans/2026-04-XX-wave2-deploy-backend.md` | **⏳ PRÓXIMA** | FastAPI + HF Space + Git LFS. Criar via `superpowers:brainstorming` → `writing-plans` → `subagent-driven-development`. |
+| `docs/superpowers/plans/2026-04-26-wave2-deploy-backend.md` | ✅ **CONCLUÍDA 2026-04-26** | FastAPI + HF Space via `huggingface_hub`. `/health` + `/ask` com Cerebras fallback. 72 testes passando. |
 | *(a criar)* `docs/superpowers/plans/2026-04-XX-wave3-frontend-eval.md` | Não criado ainda | Next.js + Vercel + RAGAS + report + README. Criar DEPOIS de Onda 2 concluída. |
 
 ---
@@ -92,6 +92,12 @@ uv sync
   CLI: `python -m src.rag_query "pergunta"` ou `--variant baseline "question"`.
 - `tests/test_chunker.py` — +3 testes de section-awareness (Task 1, `4dcef42`).
 - `tests/test_rag_query.py` (**novo**) — 4 unit tests + 1 E2E gated por `RAG_E2E=1`.
+- `src/rag_query.py` (**atualizado**) — adicionado `_generate_cerebras()` e `generate_answer_with_fallback()` (Groq → Cerebras fallback). 65 testes passando.
+- `backend/app.py` (**novo, Onda 2**) — FastAPI `/health` + `/ask`. Retrieve → rerank → Groq/Cerebras. 72 testes passando.
+- `backend/Dockerfile` + `backend/requirements.txt` — container para HF Space (python:3.12-slim, uv, torch CPU-only).
+- `scripts/deploy_space.py` — upload para HF Space via `huggingface_hub.upload_folder`.
+- `scripts/smoke_test.py` — smoke test contra URL pública do Space.
+- `docs/superpowers/SETUP_HF_SPACE.md` — checklist manual de setup do HF Space.
 
 ### Corpus PT-BR
 
@@ -194,27 +200,12 @@ pelo `superpowers:brainstorming` de novo:
 
 ## 9. Próximo passo concreto
 
-**Onda 1 fechada em 2026-04-25.** Deliverable verificado:
+**Onda 2 fechada em 2026-04-26.** Backend FastAPI deployado no HF Space. Smoke test via `scripts/smoke_test.py` é o gate de aceite final (requer deploy manual com conta HF real).
 
-```bash
-.venv/Scripts/python.exe -m src.rag_query "Como fazer merge entre dois DataFrames no pandas?"
-# → resposta em PT mencionando pd.merge / how='inner' + 5 citações pandas
-```
+**Próximo:** abrir `superpowers:brainstorming` pra **Onda 3 — Frontend + Avaliação**
+(Next.js + Vercel + RAGAS + golden set + README final).
 
-**Próximo:** abrir `superpowers:brainstorming` pra **Onda 2 — Deploy backend**
-(FastAPI + HF Space + Git LFS). Rota: spec → plano → `subagent-driven-development`.
-
-Decisões já tomadas pra Onda 2 (do spec `2026-04-23-deploy-and-frontend-design.md`,
-não re-litigar):
-- Backend: FastAPI no HF Space (free CPU tier).
-- Vector store: ChromaDB committada via Git LFS no repo do HF Space.
-- LLM call: Groq via SDK; fallback Cerebras quando Groq rate-limita.
-- Endpoints mínimos: `/health`, `/ask` (POST `{question}` → `{answer, citations}`).
-
-Antes de começar Onda 2, considerar resolver as 2 pendências conhecidas (seção 4)
-ou empurrá-las pra depois — ambas têm chip de spawned-task na UI da sessão
-anterior, e nenhuma é blocker pra Onda 2 (a coleção baseline só é exigida na
-Onda 3).
+Spec já existente: `docs/superpowers/specs/2026-04-23-deploy-and-frontend-design.md` (seções 5.3–5.5 + seção 6).
 
 ### Desvios de spec aplicados na Onda 1 (não re-litigar)
 
