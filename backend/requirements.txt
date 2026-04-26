@@ -2,7 +2,6 @@ fastapi>=0.115.0
 uvicorn[standard]>=0.32.0
 chromadb>=0.5.0
 sentence-transformers>=3.0.0
-torch --index-url https://download.pytorch.org/whl/cpu
 huggingface_hub>=0.24.0
 groq>=0.13.0
 cerebras-cloud-sdk>=1.0.0
