@@ -33,6 +33,10 @@ BASELINE_RERANKER = "cross-encoder/ms-marco-MiniLM-L-6-v2"
 GROQ_API_KEY = os.environ.get("GROQ_API_KEY")
 GROQ_LLM_MODEL = os.environ.get("GROQ_LLM_MODEL", "llama-3.3-70b-versatile")
 GROQ_LLM_FAST = "llama-3.1-8b-instant"
+
+# --- Cerebras (fallback LLM when Groq rate-limits) ---
+CEREBRAS_API_KEY = os.environ.get("CEREBRAS_API_KEY")
+CEREBRAS_LLM_MODEL = os.environ.get("CEREBRAS_LLM_MODEL", "llama-3.3-70b")
 # Translation uses the fast/cheap model — Groq free tier has ~5x more TPD on
 # 8b-instant vs 70b, and translation on a glossary-constrained task is already
 # very high with 8b. The 70b stays as the default for RAG answer generation.

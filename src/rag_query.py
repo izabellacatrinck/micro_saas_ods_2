@@ -170,6 +170,29 @@ def generate_answer(prompt: str, model: str = config.GROQ_LLM_MODEL) -> str:
     return resp.choices[0].message.content.strip()
 
 
+def _generate_cerebras(prompt: str, model: str = config.CEREBRAS_LLM_MODEL) -> str:
+    from cerebras.cloud.sdk import Cerebras
+    if not config.CEREBRAS_API_KEY:
+        raise RuntimeError("CEREBRAS_API_KEY not set")
+    client = Cerebras(api_key=config.CEREBRAS_API_KEY)
+    resp = client.chat.completions.create(
+        model=model,
+        messages=[{"role": "user", "content": prompt}],
+        temperature=0.2,
+        max_tokens=800,
+    )
+    return resp.choices[0].message.content.strip()
+
+
+def generate_answer_with_fallback(prompt: str) -> str:
+    """Try Groq first; on RateLimitError or InternalServerError, retry with Cerebras."""
+    from groq import RateLimitError, InternalServerError
+    try:
+        return generate_answer(prompt)
+    except (RateLimitError, InternalServerError):
+        return _generate_cerebras(prompt)
+
+
 def answer(question: str,
            variant: str = "new",
            top_k: int = config.TOP_K_RETRIEVE,

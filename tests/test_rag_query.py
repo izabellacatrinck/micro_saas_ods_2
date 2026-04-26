@@ -8,6 +8,7 @@ from __future__ import annotations
 
 import os
 import pytest
+from src import config
 
 
 def test_build_pt_prompt_format():
@@ -137,3 +138,34 @@ def test_variant_baseline_uses_en_stack(monkeypatch):
     assert captured["collection"] == config.COLLECTION_BASELINE_EN
     assert "english" in captured["prompt"].lower()
     assert result["answer"] == "stubbed answer"
+
+
+def test_generate_answer_with_fallback_uses_cerebras_on_rate_limit(monkeypatch):
+    """When Groq raises RateLimitError, fallback calls _generate_cerebras."""
+    from src import rag_query as rq
+
+    def raise_rate_limit(prompt, model=config.GROQ_LLM_MODEL):
+        from groq import RateLimitError
+        import httpx
+        mock_req = httpx.Request("POST", "https://api.groq.com")
+        mock_resp = httpx.Response(429, request=mock_req)
+        raise RateLimitError("rate limited", response=mock_resp, body=None)
+
+    monkeypatch.setattr(rq, "generate_answer", raise_rate_limit)
+    monkeypatch.setattr(rq, "_generate_cerebras", lambda prompt, model=None: "cerebras fallback answer")
+
+    result = rq.generate_answer_with_fallback("test prompt")
+    assert result == "cerebras fallback answer"
+
+
+def test_generate_answer_with_fallback_returns_groq_when_ok(monkeypatch):
+    """When Groq succeeds, returns its answer without calling Cerebras."""
+    from src import rag_query as rq
+
+    monkeypatch.setattr(rq, "generate_answer", lambda prompt, model=None: "groq answer")
+    cerebras_called = {"called": False}
+    monkeypatch.setattr(rq, "_generate_cerebras", lambda *a, **kw: cerebras_called.update({"called": True}) or "cerebras")
+
+    result = rq.generate_answer_with_fallback("test prompt")
+    assert result == "groq answer"
+    assert cerebras_called["called"] is False
