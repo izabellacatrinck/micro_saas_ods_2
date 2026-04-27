@@ -132,7 +132,7 @@ function CodeBlock({ lang, code }: { lang: string; code: string }) {
 // ─── Assistant message ────────────────────────────────────────────────────────
 function AssistantMsg({ msg }: { msg: Message }) {
   const [open, setOpen] = useState(false)
-  const libs = [...new Set(msg.citations?.map(c => c.library).filter(Boolean))] as string[]
+  const libs = Array.from(new Set(msg.citations?.map(c => c.library).filter(Boolean) ?? [])) as string[]
   const primary = libs[0]
   const lc = primary ? LIB_COLORS[primary] : null
 
