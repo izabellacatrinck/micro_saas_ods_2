@@ -1,31 +1,40 @@
 import type { Metadata } from 'next'
-import { IBM_Plex_Mono, Space_Grotesk } from 'next/font/google'
+import { Sora, Lora, Fira_Code } from 'next/font/google'
 import './globals.css'
 
-const display = Space_Grotesk({
+const sora = Sora({
   subsets: ['latin'],
-  variable: '--font-display',
+  weight: ['400', '500', '600', '700'],
+  variable: '--font-ui',
 })
 
-const mono = IBM_Plex_Mono({
+const lora = Lora({
   subsets: ['latin'],
   weight: ['400', '500'],
-  variable: '--font-mono',
+  style: ['normal', 'italic'],
+  variable: '--font-prose',
+})
+
+const firaCode = Fira_Code({
+  subsets: ['latin'],
+  weight: ['400', '500'],
+  variable: '--font-code',
 })
 
 export const metadata: Metadata = {
-  title: 'Data Analyst Assistant',
-  description: 'Assistente de código para análise de dados em Python com respostas fundamentadas em documentação indexada.',
+  title: 'data. — assistente RAG PT-BR',
+  description:
+    'Assistente em português para análise de dados com Python — pandas, NumPy, Matplotlib e Seaborn.',
 }
 
 export default function RootLayout({
   children,
-}: Readonly<{
-  children: React.ReactNode
-}>) {
+}: Readonly<{ children: React.ReactNode }>) {
   return (
     <html lang="pt-BR">
-      <body className={`${display.variable} ${mono.variable}`}>{children}</body>
+      <body className={`${sora.variable} ${lora.variable} ${firaCode.variable}`}>
+        {children}
+      </body>
     </html>
   )
 }
