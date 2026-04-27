@@ -72,7 +72,6 @@ type Message = {
   role: 'user' | 'assistant'
   content: string
   citations?: Citation[]
-  outIndex?: number
 }
 
 // ─── Content renderer (bold + code blocks) ───────────────────────────────────
@@ -141,12 +140,6 @@ function AssistantMsg({ msg }: { msg: Message }) {
     <div className="msg-ai-row">
       <div className="msg-ai-label">
         <DogMascot size={18} className="msg-dog" />
-        <span
-          className="out-label"
-          style={lc ? { '--lib-text': lc.text } as React.CSSProperties : {}}
-        >
-          Out[{msg.outIndex}]
-        </span>
       </div>
       <div
         className="msg-ai"
@@ -194,7 +187,6 @@ function TypingIndicator() {
     <div className="typing-wrap">
       <div className="msg-ai-label">
         <DogMascot size={18} className="msg-dog" />
-        <span className="out-label" style={{ color: 'var(--text-dim)' }}>…</span>
       </div>
       <div className="typing-dots">
         <span /><span /><span />
@@ -218,7 +210,6 @@ export default function Home() {
   const [messages, setMessages] = useState<Message[]>([])
   const [input, setInput] = useState('')
   const [loading, setLoading] = useState(false)
-  const [outIdx, setOutIdx] = useState(1)
   const [serverStatus, setServerStatus] = useState<'unknown' | 'waking' | 'ready'>('unknown')
 
   const textareaRef = useRef<HTMLTextAreaElement>(null)
@@ -277,8 +268,6 @@ export default function Home() {
       const data = await res.json()
       setServerStatus('ready')
 
-      const idx = outIdx
-      setOutIdx(n => n + 1)
       setMessages(prev => [
         ...prev,
         {
@@ -286,19 +275,15 @@ export default function Home() {
           role: 'assistant',
           content: data.answer ?? 'Sem resposta.',
           citations: data.citations ?? [],
-          outIndex: idx,
         },
       ])
     } catch (err: any) {
-      const idx = outIdx
-      setOutIdx(n => n + 1)
       setMessages(prev => [
         ...prev,
         {
           id: (Date.now() + 1).toString(),
           role: 'assistant',
           content: `Erro ao conectar com o backend.\n\n\`\`\`\n${err?.message ?? err}\n\`\`\`\n\nVerifique se o HF Space está no ar: ${BACKEND_URL}`,
-          outIndex: idx,
         },
       ])
     } finally {
@@ -328,7 +313,7 @@ export default function Home() {
         <div className="header-brand">
           <DogMascot size={28} className="header-dog" />
           <span className="logo">data<span className="logo-dot">.</span></span>
-          <span className="logo-tag">assistente PT‑BR</span>
+          <span className="logo-tag">assistente rag PT‑BR</span>
         </div>
 
         <div className="header-libs">

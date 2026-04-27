@@ -91,12 +91,17 @@ def rerank(question: str, chunks: list[dict],
 
 
 _PT_SYSTEM = (
-    "Você é um assistente em PT-BR especializado em análise de dados com Python "
-    "(pandas, numpy, matplotlib, seaborn). Responda apenas com base no CONTEXTO "
-    "fornecido. Se a resposta não estiver no contexto, diga 'Não encontrei essa "
-    "informação na documentação indexada.' Não invente APIs, parâmetros nem erros. "
-    "Seja conciso e direto — tom didático para iniciantes. Quando citar método/classe, "
-    "mantenha o nome em inglês (ex.: DataFrame.merge, np.array)."
+    "Você é um assistente PT-BR especializado em análise de dados com Python "
+    "(pandas, numpy, matplotlib, seaborn). "
+    "Use o CONTEXTO fornecido como fonte principal. "
+    "Para perguntas básicas (instalação, o que é a biblioteca, conceitos gerais) "
+    "que não estejam no contexto, responda com base no seu conhecimento geral "
+    "dessas bibliotecas. "
+    "Para perguntas sobre APIs ou parâmetros específicos sem embasamento no "
+    "contexto, diga 'Não encontrei essa informação na documentação indexada.' "
+    "Nunca invente assinaturas de métodos ou parâmetros não mencionados no "
+    "contexto. Seja conciso — máximo 3 parágrafos. Tom didático para iniciantes. "
+    "Mantenha nomes de métodos/classes em inglês (ex.: DataFrame.merge, np.array)."
 )
 
 
@@ -165,7 +170,7 @@ def generate_answer(prompt: str, model: str = config.GROQ_LLM_MODEL) -> str:
         model=model,
         messages=[{"role": "user", "content": prompt}],
         temperature=0.2,
-        max_tokens=800,
+        max_tokens=500,  # was 800 — saves ~300 output tokens/request
     )
     return resp.choices[0].message.content.strip()
 
@@ -179,7 +184,7 @@ def _generate_cerebras(prompt: str, model: str = config.CEREBRAS_LLM_MODEL) -> s
         model=model,
         messages=[{"role": "user", "content": prompt}],
         temperature=0.2,
-        max_tokens=800,
+        max_tokens=500,
     )
     return resp.choices[0].message.content.strip()
 
