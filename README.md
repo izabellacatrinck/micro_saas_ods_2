@@ -1,3 +1,9 @@
+---
+title: RAG PT-BR Backend
+sdk: docker
+app_port: 7860
+---
+
 # Assistente RAG para análise de dados em Python com foco em debugging e documentação de bibliotecas como Pandas e NumPy.
 
 ### Problema:

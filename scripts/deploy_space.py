@@ -29,7 +29,7 @@ def main() -> None:
         repo_id=space_id,
         repo_type="space",
         token=token,
-        allow_patterns=["backend/**", "src/**", "data/chroma_db/**"],
+        allow_patterns=["Dockerfile", "README.md", "backend/**", "src/**", "data/chroma_db/**"],
         ignore_patterns=[
             "**/__pycache__/**",
             "**/*.pyc",

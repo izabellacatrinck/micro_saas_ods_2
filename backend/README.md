@@ -1,10 +1,6 @@
----
-title: RAG PT-BR Backend
-sdk: docker
-app_port: 7860
----
-
 Backend FastAPI para o assistente RAG PT-BR.
+
+> Frontmatter do HF Space (`sdk: docker`, `app_port: 7860`) está no `README.md` da raiz, que é o que o HF lê.
 
 ## Endpoints
 
