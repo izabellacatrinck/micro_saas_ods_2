@@ -3,6 +3,45 @@
 import { useState, useRef, useEffect, Fragment } from 'react'
 import { Send, Loader2, Sparkles, BookOpen, ChevronDown, ChevronUp, Copy, Check } from 'lucide-react'
 
+// ─── Dog mascot SVG ───────────────────────────────────────────────────────────
+function DogMascot({ size = 22, className = '' }: { size?: number; className?: string }) {
+  return (
+    <svg
+      width={size}
+      height={size}
+      viewBox="0 0 32 32"
+      fill="none"
+      xmlns="http://www.w3.org/2000/svg"
+      className={className}
+      aria-hidden="true"
+    >
+      {/* floppy ears */}
+      <ellipse cx="8.5"  cy="11" rx="4.5" ry="6" fill="#c87820" transform="rotate(-12 8.5 11)" />
+      <ellipse cx="23.5" cy="11" rx="4.5" ry="6" fill="#c87820" transform="rotate(12 23.5 11)" />
+      {/* head */}
+      <circle cx="16" cy="16" r="9" fill="#f0a030" />
+      {/* snout */}
+      <ellipse cx="16" cy="19.5" rx="4.5" ry="3" fill="#e8932a" />
+      {/* nose */}
+      <ellipse cx="16" cy="17.5" rx="2.2" ry="1.5" fill="#6b3800" />
+      {/* nostrils */}
+      <circle cx="14.8" cy="17.6" r="0.55" fill="#3a1e00" />
+      <circle cx="17.2" cy="17.6" r="0.55" fill="#3a1e00" />
+      {/* mouth */}
+      <path d="M13.5 20.5 Q16 22.2 18.5 20.5" stroke="#6b3800" strokeWidth="1.1" fill="none" strokeLinecap="round" />
+      {/* eyes */}
+      <circle cx="11.5" cy="14" r="2.2" fill="#1a0f00" />
+      <circle cx="20.5" cy="14" r="2.2" fill="#1a0f00" />
+      {/* eye shine */}
+      <circle cx="12.2" cy="13.2" r="0.75" fill="white" />
+      <circle cx="21.2" cy="13.2" r="0.75" fill="white" />
+      {/* eyebrow arcs (expressive) */}
+      <path d="M9.5 11.5 Q11.5 10.2 13.5 11.5" stroke="#8a5c18" strokeWidth="1" fill="none" strokeLinecap="round" />
+      <path d="M18.5 11.5 Q20.5 10.2 22.5 11.5" stroke="#8a5c18" strokeWidth="1" fill="none" strokeLinecap="round" />
+    </svg>
+  )
+}
+
 // ─── Config ───────────────────────────────────────────────────────────────────
 const BACKEND_URL =
   process.env.NEXT_PUBLIC_BACKEND_URL?.replace(/\/$/, '') ?? 'http://127.0.0.1:7860'
@@ -101,6 +140,7 @@ function AssistantMsg({ msg }: { msg: Message }) {
   return (
     <div className="msg-ai-row">
       <div className="msg-ai-label">
+        <DogMascot size={18} className="msg-dog" />
         <span
           className="out-label"
           style={lc ? { '--lib-text': lc.text } as React.CSSProperties : {}}
@@ -153,11 +193,22 @@ function TypingIndicator() {
   return (
     <div className="typing-wrap">
       <div className="msg-ai-label">
+        <DogMascot size={18} className="msg-dog" />
         <span className="out-label" style={{ color: 'var(--text-dim)' }}>…</span>
       </div>
       <div className="typing-dots">
         <span /><span /><span />
       </div>
+    </div>
+  )
+}
+
+// ─── Cold-start banner ────────────────────────────────────────────────────────
+function WakingBanner() {
+  return (
+    <div className="waking-banner">
+      <Loader2 size={12} className="spin" />
+      <span>O servidor está acordando (HF Space em modo gratuito). Pode levar ~30s…</span>
     </div>
   )
 }
@@ -168,9 +219,31 @@ export default function Home() {
   const [input, setInput] = useState('')
   const [loading, setLoading] = useState(false)
   const [outIdx, setOutIdx] = useState(1)
+  const [serverStatus, setServerStatus] = useState<'unknown' | 'waking' | 'ready'>('unknown')
 
   const textareaRef = useRef<HTMLTextAreaElement>(null)
   const bottomRef = useRef<HTMLDivElement>(null)
+
+  // Warm-up: hit /health on mount so the HF Space starts loading models immediately
+  useEffect(() => {
+    let cancelled = false
+    async function warmUp() {
+      try {
+        const r = await fetch(`${BACKEND_URL}/health`, { method: 'GET' })
+        if (cancelled) return
+        if (r.ok) {
+          const d = await r.json()
+          setServerStatus(d.models_loaded ? 'ready' : 'waking')
+        } else {
+          setServerStatus('waking')
+        }
+      } catch {
+        if (!cancelled) setServerStatus('waking')
+      }
+    }
+    warmUp()
+    return () => { cancelled = true }
+  }, [])
 
   // auto-scroll to latest message
   useEffect(() => {
@@ -202,6 +275,7 @@ export default function Home() {
 
       if (!res.ok) throw new Error(`HTTP ${res.status}: ${res.statusText}`)
       const data = await res.json()
+      setServerStatus('ready')
 
       const idx = outIdx
       setOutIdx(n => n + 1)
@@ -252,6 +326,7 @@ export default function Home() {
       {/* ── Header ── */}
       <header className="app-header">
         <div className="header-brand">
+          <DogMascot size={28} className="header-dog" />
           <span className="logo">data<span className="logo-dot">.</span></span>
           <span className="logo-tag">assistente PT‑BR</span>
         </div>
@@ -271,6 +346,7 @@ export default function Home() {
 
       {/* ── Chat ── */}
       <main className="chat-main">
+        {serverStatus === 'waking' && <WakingBanner />}
         <div className="chat-inner">
           {isEmpty ? (
             <div className="empty-state">

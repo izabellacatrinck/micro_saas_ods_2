@@ -84,7 +84,34 @@ body {
   z-index: 20;
 }
 
-.header-brand { display: flex; align-items: baseline; gap: 8px; }
+.header-brand { display: flex; align-items: center; gap: 8px; }
+
+/* ─── Dog mascot ─── */
+.header-dog {
+  flex-shrink: 0;
+  filter: drop-shadow(0 0 6px rgba(240,160,48,0.3));
+  transition: transform 0.25s cubic-bezier(0.34,1.56,0.64,1);
+}
+.header-dog:hover { transform: rotate(-8deg) scale(1.12); }
+
+.msg-dog {
+  flex-shrink: 0;
+  opacity: 0.85;
+}
+
+/* ─── Waking banner ─── */
+.waking-banner {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 8px 28px;
+  background: color-mix(in srgb, var(--amber) 8%, var(--surface));
+  border-bottom: 1px solid color-mix(in srgb, var(--amber) 20%, transparent);
+  font-size: 11.5px;
+  color: var(--text-muted);
+  flex-shrink: 0;
+}
+.waking-banner .spin { color: var(--amber); flex-shrink: 0; }
 
 .logo {
   font-size: 18px;
@@ -248,10 +275,10 @@ body {
 }
 
 .msg-ai-label {
-  padding-left: 4px;
+  padding-left: 2px;
   display: flex;
   align-items: center;
-  gap: 6px;
+  gap: 5px;
 }
 
 .out-label {
