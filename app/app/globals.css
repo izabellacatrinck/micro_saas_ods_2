@@ -1,0 +1,88 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    --background: 218 41% 11%;
+    --foreground: 210 40% 96%;
+    --card: 220 35% 14%;
+    --card-foreground: 210 40% 96%;
+    --popover: 220 35% 14%;
+    --popover-foreground: 210 40% 96%;
+    --primary: 205 88% 62%;
+    --primary-foreground: 222 47% 11%;
+    --secondary: 217 33% 20%;
+    --secondary-foreground: 210 40% 96%;
+    --muted: 217 28% 18%;
+    --muted-foreground: 214 20% 71%;
+    --accent: 205 88% 62%;
+    --accent-foreground: 222 47% 11%;
+    --destructive: 0 72% 56%;
+    --destructive-foreground: 0 0% 98%;
+    --border: 217 25% 26%;
+    --input: 217 25% 26%;
+    --ring: 205 88% 62%;
+    --radius: 0.75rem;
+
+    --surface: #09111f;
+    --surface-strong: #0d1830;
+    --panel: rgba(12, 22, 42, 0.84);
+    --panel-strong: rgba(15, 28, 54, 0.96);
+    --line: rgba(125, 167, 255, 0.12);
+    --line-strong: rgba(125, 167, 255, 0.24);
+    --text-primary: #e5eefc;
+    --text-secondary: #bbcae4;
+    --text-muted: #8ea3c5;
+    --accent: #56a8ff;
+    --accent-strong: #2f8ff6;
+    --accent-foreground: #07101e;
+    --grid: rgba(125, 167, 255, 0.08);
+  }
+
+  * {
+    @apply border-border;
+    box-sizing: border-box;
+  }
+
+  html {
+    scroll-behavior: smooth;
+  }
+
+  body {
+    @apply bg-background text-foreground antialiased;
+    background:
+      radial-gradient(circle at top left, rgba(86, 168, 255, 0.18), transparent 28%),
+      radial-gradient(circle at top right, rgba(55, 116, 214, 0.18), transparent 24%),
+      linear-gradient(180deg, #0a1220 0%, #0d1729 52%, #101b31 100%);
+    color: var(--text-primary);
+    font-family: var(--font-display), sans-serif;
+    min-height: 100vh;
+  }
+
+  code,
+  pre,
+  textarea,
+  input {
+    font-family: var(--font-mono), monospace;
+  }
+
+  button,
+  input,
+  textarea {
+    font: inherit;
+  }
+
+  ::selection {
+    background: rgba(86, 168, 255, 0.26);
+  }
+}
+
+@layer utilities {
+  .hero-grid {
+    background-image:
+      linear-gradient(to right, var(--grid) 1px, transparent 1px),
+      linear-gradient(to bottom, var(--grid) 1px, transparent 1px);
+    background-size: 40px 40px;
+  }
+}
