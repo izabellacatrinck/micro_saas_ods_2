@@ -73,8 +73,8 @@ export function useChatHistory() {
    * If no active chat and msg is from the user, creates a new Chat automatically.
    * Uses activeChatIdRef so it is safe to call from async callbacks.
    */
-  function saveMessage(msg: StoredMessage) {
-    const cid = activeChatIdRef.current
+  function saveMessage(msg: StoredMessage, targetChatId?: string | null): string | null {
+    const cid = targetChatId !== undefined ? targetChatId : activeChatIdRef.current
     if (cid) {
       setChats(prev =>
         prev.map(c =>
@@ -83,9 +83,10 @@ export function useChatHistory() {
             : c
         )
       )
+      return cid
     } else {
       // Only user messages can start a new chat
-      if (msg.role !== 'user') return
+      if (msg.role !== 'user') return null
       const newId = crypto.randomUUID()
       _setActive(newId)
       const newChatObj: Chat = {
@@ -96,6 +97,7 @@ export function useChatHistory() {
         updatedAt: Date.now(),
       }
       setChats(prev => [newChatObj, ...prev])
+      return newId
     }
   }
 

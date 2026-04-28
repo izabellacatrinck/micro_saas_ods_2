@@ -157,6 +157,11 @@ function ChatItem({
   const [draft, setDraft] = useState(chat.title)
   const inputRef = useRef<HTMLInputElement>(null)
 
+  // Keep draft in sync when title changes externally
+  useEffect(() => {
+    if (!editing) setDraft(chat.title)
+  }, [chat.title, editing])
+
   function startEdit(e: React.MouseEvent) {
     e.stopPropagation()
     setDraft(chat.title)
@@ -377,7 +382,7 @@ export default function Home() {
     if (!q || loading) return
 
     const userMsg: Message = { id: crypto.randomUUID(), role: 'user', content: q }
-    saveMessage(userMsg)
+    const chatId = saveMessage(userMsg)  // capture now, before any await
     setInput('')
     setLoading(true)
 
@@ -397,14 +402,14 @@ export default function Home() {
         role: 'assistant',
         content: data.answer ?? 'Sem resposta.',
         citations: data.citations ?? [],
-      })
+      }, chatId)   // pin to the originating chat
     } catch (err: unknown) {
       const msg = err instanceof Error ? err.message : String(err)
       saveMessage({
         id: crypto.randomUUID(),
         role: 'assistant',
         content: `Erro ao conectar com o backend.\n\n\`\`\`\n${msg}\n\`\`\`\n\nVerifique se o HF Space está no ar: ${BACKEND_URL}`,
-      })
+      }, chatId)   // pin to the originating chat
     } finally {
       setLoading(false)
       textareaRef.current?.focus()
