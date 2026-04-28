@@ -119,10 +119,14 @@ function MsgContent({ text }: { text: string }) {
 function CodeBlock({ lang, code }: { lang: string; code: string }) {
   const [copied, setCopied] = useState(false)
 
-  function copy() {
-    navigator.clipboard.writeText(code.trim())
-    setCopied(true)
-    setTimeout(() => setCopied(false), 1800)
+  async function copy() {
+    try {
+      await navigator.clipboard.writeText(code.trim())
+      setCopied(true)
+      setTimeout(() => setCopied(false), 1800)
+    } catch {
+      // clipboard write failed silently — don't show "copiado"
+    }
   }
 
   return (
@@ -372,7 +376,7 @@ export default function Home() {
     const q = question.trim()
     if (!q || loading) return
 
-    const userMsg: Message = { id: Date.now().toString(), role: 'user', content: q }
+    const userMsg: Message = { id: crypto.randomUUID(), role: 'user', content: q }
     saveMessage(userMsg)
     setInput('')
     setLoading(true)
@@ -389,7 +393,7 @@ export default function Home() {
       setServerStatus('ready')
 
       saveMessage({
-        id: (Date.now() + 1).toString(),
+        id: crypto.randomUUID(),
         role: 'assistant',
         content: data.answer ?? 'Sem resposta.',
         citations: data.citations ?? [],
@@ -397,7 +401,7 @@ export default function Home() {
     } catch (err: unknown) {
       const msg = err instanceof Error ? err.message : String(err)
       saveMessage({
-        id: (Date.now() + 1).toString(),
+        id: crypto.randomUUID(),
         role: 'assistant',
         content: `Erro ao conectar com o backend.\n\n\`\`\`\n${msg}\n\`\`\`\n\nVerifique se o HF Space está no ar: ${BACKEND_URL}`,
       })
