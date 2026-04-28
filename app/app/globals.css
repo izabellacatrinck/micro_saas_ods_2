@@ -601,6 +601,7 @@ body {
   padding: 8px 10px;
   border-radius: var(--radius-sm);
   border: 1px solid transparent;
+  border-left-width: 2px;
   cursor: pointer;
   transition: background 0.12s, border-color 0.12s;
   min-width: 0;
@@ -649,7 +650,7 @@ body {
 
 .chat-item-meta {
   font-size: 10px;
-  color: var(--text-dim);
+  color: var(--text-muted);
   line-height: 1;
 }
 
