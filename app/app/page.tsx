@@ -1,7 +1,8 @@
 'use client'
 
 import { useState, useRef, useEffect, Fragment } from 'react'
-import { Send, Loader2, Sparkles, BookOpen, ChevronDown, ChevronUp, Copy, Check } from 'lucide-react'
+import { Send, Loader2, Sparkles, BookOpen, ChevronDown, ChevronUp, Copy, Check, Plus, Trash2 } from 'lucide-react'
+import { useChatHistory, type Chat, type StoredMessage } from '../hooks/useChatHistory'
 
 // ─── Dog mascot SVG ───────────────────────────────────────────────────────────
 function DogMascot({ size = 22, className = '' }: { size?: number; className?: string }) {
@@ -67,11 +68,21 @@ type Citation = {
   source?: string
 }
 
-type Message = {
-  id: string
-  role: 'user' | 'assistant'
-  content: string
-  citations?: Citation[]
+// Message is the same shape as StoredMessage from the hook
+type Message = StoredMessage
+
+// ─── Relative time helper ─────────────────────────────────────────────────────
+function relativeTime(ts: number): string {
+  const diff = Date.now() - ts
+  const mins = Math.floor(diff / 60000)
+  if (mins < 1) return 'agora'
+  if (mins < 60) return `há ${mins} min`
+  const hours = Math.floor(mins / 60)
+  if (hours < 24) return `há ${hours}h`
+  const days = Math.floor(hours / 24)
+  if (days === 1) return 'ontem'
+  if (days < 7) return `há ${days} dias`
+  return new Date(ts).toLocaleDateString('pt-BR', { day: '2-digit', month: '2-digit' })
 }
 
 // ─── Content renderer (bold + code blocks) ───────────────────────────────────
@@ -88,7 +99,6 @@ function MsgContent({ text }: { text: string }) {
           return <CodeBlock key={i} lang={lang} code={code} />
         }
 
-        // Handle **bold** and `inline code`
         const segments = part.split(/(\*\*[^*]+\*\*|`[^`]+`)/g)
         return (
           <Fragment key={i}>
@@ -129,10 +139,112 @@ function CodeBlock({ lang, code }: { lang: string; code: string }) {
   )
 }
 
+// ─── Chat item (sidebar) ──────────────────────────────────────────────────────
+function ChatItem({
+  chat, isActive, onSelect, onRename, onDelete,
+}: {
+  chat: Chat
+  isActive: boolean
+  onSelect: () => void
+  onRename: (title: string) => void
+  onDelete: () => void
+}) {
+  const [editing, setEditing] = useState(false)
+  const [draft, setDraft] = useState(chat.title)
+  const inputRef = useRef<HTMLInputElement>(null)
+
+  function startEdit(e: React.MouseEvent) {
+    e.stopPropagation()
+    setDraft(chat.title)
+    setEditing(true)
+    setTimeout(() => inputRef.current?.focus(), 0)
+  }
+
+  function commitEdit() {
+    const trimmed = draft.trim()
+    if (trimmed) onRename(trimmed)
+    setEditing(false)
+  }
+
+  function handleKeyDown(e: React.KeyboardEvent) {
+    if (e.key === 'Enter') commitEdit()
+    if (e.key === 'Escape') { setEditing(false); setDraft(chat.title) }
+  }
+
+  return (
+    <div
+      className={`chat-item${isActive ? ' active' : ''}`}
+      onClick={onSelect}
+    >
+      <div className="chat-item-body">
+        {editing ? (
+          <input
+            ref={inputRef}
+            className="chat-item-input"
+            value={draft}
+            onChange={e => setDraft(e.target.value)}
+            onBlur={commitEdit}
+            onKeyDown={handleKeyDown}
+            onClick={e => e.stopPropagation()}
+          />
+        ) : (
+          <span className="chat-item-title" onDoubleClick={startEdit}>
+            {chat.title}
+          </span>
+        )}
+        <span className="chat-item-meta">{relativeTime(chat.updatedAt)}</span>
+      </div>
+      <button
+        className="chat-item-delete"
+        onClick={e => { e.stopPropagation(); onDelete() }}
+        aria-label="Deletar conversa"
+      >
+        <Trash2 size={13} />
+      </button>
+    </div>
+  )
+}
+
+// ─── Sidebar ──────────────────────────────────────────────────────────────────
+function Sidebar({
+  chats, activeChatId, onNew, onSelect, onRename, onDelete,
+}: {
+  chats: Chat[]
+  activeChatId: string | null
+  onNew: () => void
+  onSelect: (id: string) => void
+  onRename: (id: string, title: string) => void
+  onDelete: (id: string) => void
+}) {
+  const sorted = [...chats].sort((a, b) => b.updatedAt - a.updatedAt)
+  return (
+    <aside className="sidebar">
+      <div className="sidebar-header">
+        <button className="new-chat-btn" onClick={onNew}>
+          <Plus size={14} />
+          Novo chat
+        </button>
+      </div>
+      <div className="chat-list">
+        {sorted.map(chat => (
+          <ChatItem
+            key={chat.id}
+            chat={chat}
+            isActive={chat.id === activeChatId}
+            onSelect={() => onSelect(chat.id)}
+            onRename={title => onRename(chat.id, title)}
+            onDelete={() => onDelete(chat.id)}
+          />
+        ))}
+      </div>
+    </aside>
+  )
+}
+
 // ─── Assistant message ────────────────────────────────────────────────────────
 function AssistantMsg({ msg }: { msg: Message }) {
   const [open, setOpen] = useState(false)
-  const libs = Array.from(new Set(msg.citations?.map(c => c.library).filter(Boolean) ?? [])) as string[]
+  const libs = Array.from(new Set(msg.citations?.map(c => (c as Citation).library).filter(Boolean) ?? [])) as string[]
   const primary = libs[0]
   const lc = primary ? LIB_COLORS[primary] : null
 
@@ -158,7 +270,8 @@ function AssistantMsg({ msg }: { msg: Message }) {
             {open && (
               <div className="cit-list">
                 {msg.citations!.map((c, i) => {
-                  const cl = c.library ? LIB_COLORS[c.library] : null
+                  const citation = c as Citation
+                  const cl = citation.library ? LIB_COLORS[citation.library] : null
                   return (
                     <span
                       key={i}
@@ -167,8 +280,8 @@ function AssistantMsg({ msg }: { msg: Message }) {
                         ? { '--lib-accent': cl.accent, '--lib-text': cl.text } as React.CSSProperties
                         : {}}
                     >
-                      {c.library && <span className="cit-lib">{c.library}</span>}
-                      {c.section && <span className="cit-sec">{c.section}</span>}
+                      {citation.library && <span className="cit-lib">{citation.library}</span>}
+                      {citation.section && <span className="cit-sec">{citation.section}</span>}
                     </span>
                   )
                 })}
@@ -207,7 +320,13 @@ function WakingBanner() {
 
 // ─── Main page ────────────────────────────────────────────────────────────────
 export default function Home() {
-  const [messages, setMessages] = useState<Message[]>([])
+  const {
+    chats, activeChat, activeChatId,
+    newChat, selectChat, saveMessage, setTitle, deleteChat,
+  } = useChatHistory()
+
+  const messages: Message[] = activeChat?.messages ?? []
+
   const [input, setInput] = useState('')
   const [loading, setLoading] = useState(false)
   const [serverStatus, setServerStatus] = useState<'unknown' | 'waking' | 'ready'>('unknown')
@@ -253,7 +372,8 @@ export default function Home() {
     const q = question.trim()
     if (!q || loading) return
 
-    setMessages(prev => [...prev, { id: Date.now().toString(), role: 'user', content: q }])
+    const userMsg: Message = { id: Date.now().toString(), role: 'user', content: q }
+    saveMessage(userMsg)
     setInput('')
     setLoading(true)
 
@@ -268,24 +388,19 @@ export default function Home() {
       const data = await res.json()
       setServerStatus('ready')
 
-      setMessages(prev => [
-        ...prev,
-        {
-          id: (Date.now() + 1).toString(),
-          role: 'assistant',
-          content: data.answer ?? 'Sem resposta.',
-          citations: data.citations ?? [],
-        },
-      ])
-    } catch (err: any) {
-      setMessages(prev => [
-        ...prev,
-        {
-          id: (Date.now() + 1).toString(),
-          role: 'assistant',
-          content: `Erro ao conectar com o backend.\n\n\`\`\`\n${err?.message ?? err}\n\`\`\`\n\nVerifique se o HF Space está no ar: ${BACKEND_URL}`,
-        },
-      ])
+      saveMessage({
+        id: (Date.now() + 1).toString(),
+        role: 'assistant',
+        content: data.answer ?? 'Sem resposta.',
+        citations: data.citations ?? [],
+      })
+    } catch (err: unknown) {
+      const msg = err instanceof Error ? err.message : String(err)
+      saveMessage({
+        id: (Date.now() + 1).toString(),
+        role: 'assistant',
+        content: `Erro ao conectar com o backend.\n\n\`\`\`\n${msg}\n\`\`\`\n\nVerifique se o HF Space está no ar: ${BACKEND_URL}`,
+      })
     } finally {
       setLoading(false)
       textareaRef.current?.focus()
@@ -308,96 +423,107 @@ export default function Home() {
 
   return (
     <div className="app-shell">
-      {/* ── Header ── */}
-      <header className="app-header">
-        <div className="header-brand">
-          <DogMascot size={28} className="header-dog" />
-          <span className="logo">data<span className="logo-dot">.</span></span>
-          <span className="logo-tag">assistente rag PT‑BR</span>
-        </div>
+      <Sidebar
+        chats={chats}
+        activeChatId={activeChatId}
+        onNew={newChat}
+        onSelect={selectChat}
+        onRename={setTitle}
+        onDelete={deleteChat}
+      />
 
-        <div className="header-libs">
-          {Object.entries(LIB_COLORS).map(([lib, { accent, text, bg }]) => (
-            <span
-              key={lib}
-              className="lib-pill"
-              style={{ '--lib-accent': accent, '--lib-text': text, '--lib-bg': bg } as React.CSSProperties}
-            >
-              {lib}
-            </span>
-          ))}
-        </div>
-      </header>
-
-      {/* ── Chat ── */}
-      <main className="chat-main">
-        {serverStatus === 'waking' && <WakingBanner />}
-        <div className="chat-inner">
-          {isEmpty ? (
-            <div className="empty-state">
-              <div className="empty-orb">
-                <Sparkles size={24} />
-              </div>
-              <h2 className="empty-title">O que você quer aprender hoje?</h2>
-              <p className="empty-sub">
-                Pergunte sobre pandas, NumPy, Matplotlib ou Seaborn em português.
-                As respostas são geradas com base na documentação oficial.
-              </p>
-              <div className="quick-grid">
-                {QUICK_PROMPTS.map(q => (
-                  <button key={q.tag} className="quick-btn" onClick={() => send(q.text)}>
-                    <span className="quick-tag">{q.tag}</span>
-                    <span className="quick-text">{q.text}</span>
-                  </button>
-                ))}
-              </div>
-            </div>
-          ) : (
-            <div className="messages">
-              {messages.map(msg =>
-                msg.role === 'user' ? (
-                  <div key={msg.id} className="msg-user-row">
-                    <div className="msg-user">{msg.content}</div>
-                  </div>
-                ) : (
-                  <AssistantMsg key={msg.id} msg={msg} />
-                )
-              )}
-              {loading && <TypingIndicator />}
-              <div ref={bottomRef} />
-            </div>
-          )}
-        </div>
-      </main>
-
-      {/* ── Input ── */}
-      <footer className="input-bar">
-        <form className="input-inner" onSubmit={handleSubmit}>
-          <div className="input-box">
-            <textarea
-              ref={textareaRef}
-              className="input-ta"
-              value={input}
-              onChange={e => setInput(e.target.value)}
-              onKeyDown={handleKey}
-              placeholder="Faça uma pergunta sobre análise de dados em Python…"
-              rows={1}
-              disabled={loading}
-            />
-            <button
-              type="submit"
-              className="send-btn"
-              disabled={loading || !input.trim()}
-              aria-label="Enviar"
-            >
-              {loading
-                ? <Loader2 size={15} className="spin" />
-                : <Send size={15} />}
-            </button>
+      <div className="main-area">
+        {/* ── Header ── */}
+        <header className="app-header">
+          <div className="header-brand">
+            <DogMascot size={28} className="header-dog" />
+            <span className="logo">data<span className="logo-dot">.</span></span>
+            <span className="logo-tag">assistente rag PT‑BR</span>
           </div>
-          <p className="input-hint">Enter para enviar · Shift+Enter para nova linha</p>
-        </form>
-      </footer>
+
+          <div className="header-libs">
+            {Object.entries(LIB_COLORS).map(([lib, { accent, text, bg }]) => (
+              <span
+                key={lib}
+                className="lib-pill"
+                style={{ '--lib-accent': accent, '--lib-text': text, '--lib-bg': bg } as React.CSSProperties}
+              >
+                {lib}
+              </span>
+            ))}
+          </div>
+        </header>
+
+        {/* ── Chat ── */}
+        <main className="chat-main">
+          {serverStatus === 'waking' && <WakingBanner />}
+          <div className="chat-inner">
+            {isEmpty ? (
+              <div className="empty-state">
+                <div className="empty-orb">
+                  <Sparkles size={24} />
+                </div>
+                <h2 className="empty-title">O que você quer aprender hoje?</h2>
+                <p className="empty-sub">
+                  Pergunte sobre pandas, NumPy, Matplotlib ou Seaborn em português.
+                  As respostas são geradas com base na documentação oficial.
+                </p>
+                <div className="quick-grid">
+                  {QUICK_PROMPTS.map(q => (
+                    <button key={q.tag} className="quick-btn" onClick={() => send(q.text)}>
+                      <span className="quick-tag">{q.tag}</span>
+                      <span className="quick-text">{q.text}</span>
+                    </button>
+                  ))}
+                </div>
+              </div>
+            ) : (
+              <div className="messages">
+                {messages.map(msg =>
+                  msg.role === 'user' ? (
+                    <div key={msg.id} className="msg-user-row">
+                      <div className="msg-user">{msg.content}</div>
+                    </div>
+                  ) : (
+                    <AssistantMsg key={msg.id} msg={msg} />
+                  )
+                )}
+                {loading && <TypingIndicator />}
+                <div ref={bottomRef} />
+              </div>
+            )}
+          </div>
+        </main>
+
+        {/* ── Input ── */}
+        <footer className="input-bar">
+          <form className="input-inner" onSubmit={handleSubmit}>
+            <div className="input-box">
+              <textarea
+                ref={textareaRef}
+                className="input-ta"
+                value={input}
+                onChange={e => setInput(e.target.value)}
+                onKeyDown={handleKey}
+                placeholder="Faça uma pergunta sobre análise de dados em Python…"
+                rows={1}
+                disabled={loading}
+              />
+              <button
+                type="submit"
+                className="send-btn"
+                disabled={loading || !input.trim()}
+                aria-label="Enviar"
+              >
+                {loading
+                  ? <Loader2 size={15} className="spin" />
+                  : <Send size={15} />}
+              </button>
+            </div>
+            <p className="input-hint">Enter para enviar · Shift+Enter para nova linha</p>
+          </form>
+        </footer>
+      </div>
     </div>
   )
 }
