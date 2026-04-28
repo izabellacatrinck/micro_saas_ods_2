@@ -1,0 +1,48 @@
+{
+  "metadata": {
+    "total_samples": 3,
+    "variant": "new",
+    "mode": "optimized_local_metrics"
+  },
+  "samples": [
+    {
+      "question": "Como fazer um merge de dois DataFrames em pandas?",
+      "ground_truth": "Use o método DataFrame.merge() passando o outro DataFrame e a coluna de chave. Exemplo: df1.merge(df2, on='chave'). Você também pode usar left, right ou inner como parâmetro how.",
+      "answer": "Para fazer um merge de dois DataFrames em pandas, você pode usar o método `merge()`. Esse método permite realizar operações de junção semelhantes às realizadas em bancos de dados relacionais, como SQL.\n\nO método `merge()` aceita vários parâmetros, incluindo `how`, que especifica o tipo de junção a ser realizada. Os valores possíveis para `how` são:\n- `inner`: retorna apenas as linhas que têm um valor em comum nos dois DataFrames.\n- `left`: retorna todas as linhas do DataFrame da esquerda e as linhas correspondentes do DataFrame da direita, se existirem.\n- `right`: retorna todas as linhas do DataFrame da direita e as linhas correspondentes do DataFrame da esquerda, se existirem.\n- `outer`: retorna todas as linhas de ambos os DataFrames.\n\nAqui está um exemplo básico de como usar o método `merge()`:\n```python\nimport pandas as pd\n\n# Crie dois DataFrames\ndf1 = pd.DataFrame({'key': ['A', 'B', 'C'], 'value': [1, 2, 3]})\ndf2 = pd.DataFrame({'key': ['B', 'C', 'D'], 'value': [4, 5, 6]})\n\n# Realize um merge inner\ndf_merge = pd.merge(df1, df2, on='key', how='inner')\n\nprint(df_merge)\n```\nNesse exemplo, o resultado do merge será um DataFrame com as linhas que têm um valor em comum na coluna `key` dos dois DataFrames originais.\n\nLembre-se de que o método `merge()` também pode ser usado com outros parâmetros, como `left_on` e `right_on`, para especificar as colunas a serem usadas para a junção em cada DataFrame. Além disso, o parâmetro `suffixes` pode ser usado para especificar sufixos para as colunas resultantes em caso de conflito de nomes.",
+      "contexts": [
+        "The following tables will be used in the merge examples: ``` Out[46]: key value 0 A 0.469112 1 B -0.282863 2 C -1.509059 3 D -1.135632 Out[48]: key value 0 B 1.212112 1 D -0.173215 2 D 0.119209 3 E -1.044236 ``` In Stata, to perform a merge, one data set must be in memory and the other must be referenced as a file name on disk. In contrast, Python ",
+        "# If you have a `Series` that you want to append as a single row to a `DataFrame` , you can convert the row into a `DataFrame` and use `concat()` . ``` Out[43]: A B C D 0 A0 B0 C0 D0 1 A1 B1 C1 D1 2 A2 B2 C2 D2 3 A3 B3 C3 D3 4 X0 X1 X2 X3 ``` ``` ``` `merge()` # `merge()` performs join operations similar to relational databases like SQL. Users who ",
+        "Quero combinar as medidas de e , duas tabelas com estrutura semelhante, em uma única tabela. A `função realiza operações de concatenação de múltiplos tabelas ao longo de um dos eixos (linha a fila ou a coluna).` By default concatenation is along axis 0, so the resulting table combines the rows of the input tables. Let’s check the shape of the origi"
+      ],
+      "answer_semantic_similarity": 0.931975781917572,
+      "context_recall": 0.13333333333333333,
+      "context_precision": 0.8501744866371155
+    },
+    {
+      "question": "Qual é a diferença entre merge, join e concat no pandas?",
+      "ground_truth": "merge() junta baseado em colunas/índices, join() junta baseado em índices, concat() concatena ao longo de eixos. Use merge para joins relacionais, join para índices, concat para empilhar.",
+      "answer": "A diferença entre `merge`, `join` e `concat` no pandas está relacionada à forma como eles combinam dados de diferentes DataFrames.\n\n- `merge`: Realiza operações de junção semelhantes às encontradas em bancos de dados relacionais, como SQL. Ele combina dois DataFrames com base em uma coluna em comum, permitindo diferentes tipos de junções (inner, left, right, outer).\n\n- `join`: Similar ao `merge`, mas é mais conveniente quando você está trabalhando com DataFrames que têm um índice em comum. Ele também permite diferentes tipos de junções.\n\n- `concat`: Concatena objetos pandas ao longo de um eixo específico (0 para linhas e 1 para colunas). Ele não requer que os DataFrames tenham uma coluna em comum, apenas que sejam concatenados ao longo do eixo especificado. É útil para combinar dados que não necessariamente têm uma chave em comum.\n\nEm resumo, `merge` e `join` são usados para combinar DataFrames com base em uma coluna ou índice em comum, enquanto `concat` é usado para combinar DataFrames ao longo de um eixo, sem a necessidade de uma coluna ou índice em comum.",
+      "contexts": [
+        "Pandas fornece vários métodos para combinar e comparar ` ou ` `.` `: Merge múltiplos` `ou` `objetos ao longo de um índice ou coluna compartilhada` `: Atualize valores ausentes com valores não ausentes no mesmo local` `: Combine dois` `ou` `objetos por chaves próximas em vez de exatamente correspondentes` `concat()` # A ` função concatena uma quanti",
+        "# If you have a `Series` that you want to append as a single row to a `DataFrame` , you can convert the row into a `DataFrame` and use `concat()` . ``` Out[43]: A B C D 0 A0 B0 C0 D0 1 A1 B1 C1 D1 2 A2 B2 C2 D2 3 A3 B3 C3 D3 4 X0 X1 X2 X3 ``` ``` ``` `merge()` # `merge()` performs join operations similar to relational databases like SQL. Users who ",
+        "Quero combinar as medidas de e , duas tabelas com estrutura semelhante, em uma única tabela. A `função realiza operações de concatenação de múltiplos tabelas ao longo de um dos eixos (linha a fila ou a coluna).` By default concatenation is along axis 0, so the resulting table combines the rows of the input tables. Let’s check the shape of the origi"
+      ],
+      "answer_semantic_similarity": 0.9289708733558655,
+      "context_recall": 0.4,
+      "context_precision": 0.8662616610527039
+    },
+    {
+      "question": "Como criar um array NumPy com zeros?",
+      "ground_truth": "Use np.zeros(shape) para criar um array preenchido com zeros. Exemplo: np.zeros((3, 4)) cria uma matriz 3x4. Você pode especificar dtype para o tipo de dados.",
+      "answer": "Para criar um array NumPy com zeros, você pode usar a função `numpy.zeros()`. Essa função cria um array preenchido com zeros, com o formato especificado. Por exemplo, para criar um array 2D com 2 linhas e 3 colunas, você pode usar o seguinte código:\n\n```python\nimport numpy as np\narray_zeros = np.zeros((2, 3))\n```\n\nIsso criará um array com zeros, com a seguinte estrutura:\n```\narray([[0., 0., 0.],\n       [0., 0., 0.]])\n```\n\nO tipo de dado padrão para essa função é `float64`, mas você pode especificar um tipo de dado diferente se necessário. Além disso, você pode criar arrays com mais dimensões, especificando o formato desejado na tupla passada para a função `np.zeros()`. Por exemplo, para criar um array 3D com 2 linhas, 3 colunas e 2 profundidades, você pode usar:\n\n```python\narray_zeros_3d = np.zeros((2, 3, 2))\n```\n\nIsso criará um array com zeros, com a seguinte estrutura:\n```\narray([[[0., 0.],\n        [0., 0.],\n        [0., 0.]],\n\n       [[0., 0.],\n        [0., 0.],\n        [0., 0.]]])\n```",
+      "contexts": [
+        "The ndarray creation functions e.g. `numpy.ones` , `numpy.zeros` , and `random` define arrays based upon the desired shape. The ndarray creation functions can create arrays with any dimension by specifying how many dimensions and length along that dimension in a tuple or list. `numpy.zeros` will create an array filled with 0 values with the specifi",
+        "Arrays NumPy podem ser definidos usando sequências em Python, como listas e Tuplas. Listas e tuplas são definidas usando e , respectivamente. Listas e tuplas podem definir a criação de ndarrays:`[...]` `(...)` uma lista de números criará um arranjo 1D, uma lista de listas criará um array 2D, listas aninhadas adicionais criarão arrays de dimensão su",
+        "Existem 6 mecanismos gerais para criar arrays: Conversão de outras estruturas em Python (ou seja, listas e tuplas) Funções intrínsecas de criação de arrays NumPy (por exemplo, arange, uns, zeros, etc.) Replicando, unindo ou mutando arrays existentes Leitura de arrays de disco, seja de formatos padrão ou personalizados Criação de arrays a partir de "
+      ],
+      "answer_semantic_similarity": 0.9416136145591736,
+      "context_recall": 0.18181818181818182,
+      "context_precision": 0.8818190693855286
+    }
+  ]
+}
