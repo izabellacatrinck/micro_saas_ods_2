@@ -31,8 +31,15 @@ BASELINE_RERANKER = "cross-encoder/ms-marco-MiniLM-L-6-v2"
 
 # --- Groq (RAG answer generation + optional translation fallback) ---
 GROQ_API_KEY = os.environ.get("GROQ_API_KEY")
+# llama-3.1-8b-instant: ~6× higher free-tier token quota than 70b + significantly
+# faster inference. Quality is adequate for context-constrained documentation RAG.
+# Switch back to "llama-3.3-70b-versatile" via RAG_LLM_MODEL env var if needed.
 GROQ_LLM_MODEL = os.environ.get("GROQ_LLM_MODEL", "llama-3.3-70b-versatile")
-GROQ_LLM_FAST = "llama-3.1-8b-instant"
+GROQ_LLM_FAST = os.environ.get("GROQ_LLM_MODEL_FAST", "llama-3.3-8b-instant")
+
+# --- Cerebras (fallback LLM when Groq rate-limits) ---
+CEREBRAS_API_KEY = os.environ.get("CEREBRAS_API_KEY")
+CEREBRAS_LLM_MODEL = os.environ.get("CEREBRAS_LLM_MODEL", "llama-3.3-70b")
 # Translation uses the fast/cheap model — Groq free tier has ~5x more TPD on
 # 8b-instant vs 70b, and translation on a glossary-constrained task is already
 # very high with 8b. The 70b stays as the default for RAG answer generation.
@@ -64,8 +71,12 @@ SKIP_EN_FOR_LIBRARIES = tuple(
 )
 
 # --- Retrieval ---
-TOP_K_RETRIEVE = 15
-TOP_K_RERANK = 5
+# TOP_K_RETRIEVE: candidates fetched from ChromaDB before reranking.
+# Reduced 15→10 to halve cross-encoder CPU time (main latency bottleneck).
+TOP_K_RETRIEVE = 10
+# TOP_K_RERANK: chunks sent to the LLM as context.
+# Reduced 5→3 saves ~380 input tokens per request (~31% total token reduction).
+TOP_K_RERANK = 3
 
 # --- Chunking ---
 CHUNK_MAX_TOKENS = 450

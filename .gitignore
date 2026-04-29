@@ -22,3 +22,10 @@ output_texts/
 .DS_Store
 Thumbs.db
 data/main_run.log
+
+#frontend
+app/.next/
+app/node_modules/
+app/devserver.log
+app/devserver.err.log
+app/tsconfig.tsbuildinfo
