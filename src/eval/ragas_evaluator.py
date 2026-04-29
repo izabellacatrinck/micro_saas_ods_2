@@ -3,6 +3,7 @@ from __future__ import annotations
 from datetime import datetime
 import json
 import argparse
+import re
 import sys
 from pathlib import Path
 from typing import Any
@@ -139,20 +140,11 @@ def load_eval_dataset(path: Path = None) -> list[dict]:
 # UTIL
 # =========================================================
 
-def compress_text(text: str, max_chars: int = 350) -> str:
-    """
-    Reduz tamanho dos contextos para economizar memória/tokens.
-    """
-
+def compress_text(text: str) -> str:
+    """Normaliza espaços. Truncamento removido para preservar contexto nas métricas."""
     if not text:
         return ""
-
-    text = " ".join(text.split())
-
-    if len(text) > max_chars:
-        text = text[:max_chars]
-
-    return text
+    return " ".join(text.split())
 
 
 # =========================================================
@@ -221,17 +213,20 @@ def calculate_context_recall(
     contexts: list[str],
 ) -> float:
     """
-    Recall simples baseado em palavras importantes.
+    Recall baseado em sobreposição de tokens significativos.
+
+    Usa regex para extrair apenas sequências alfanuméricas — isso resolve dois
+    problemas do split() original:
+      - "merge()" e "how." viravam tokens únicos que nunca batiam no contexto
+      - "np.zeros(shape)" virava um token gigante sem correspondência
     """
 
     if not contexts:
         return 0.0
 
-    gt_words = set(
-        w.lower()
-        for w in ground_truth.split()
-        if len(w) > 4
-    )
+    # Extrai tokens alfabéticos/numéricos puros (ignora pontuação)
+    gt_tokens = re.findall(r"[a-záàãâéèêíìîóòõôúùûçñü0-9]+", ground_truth.lower())
+    gt_words = set(w for w in gt_tokens if len(w) > 4)
 
     if not gt_words:
         return 1.0
