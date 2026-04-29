@@ -1,260 +1,133 @@
 # Data Analyst Assistant
 
-Assistente RAG para analise de dados em Python, focado em `pandas`, `numpy`, `matplotlib` e `seaborn`. O projeto combina um backend FastAPI com retrieval sobre documentacao indexada e um frontend Next.js que envia perguntas para a API e exibe a resposta.
+Assistente RAG em PT-BR para análise de dados com Python, focado em `pandas`, `numpy`, `matplotlib` e `seaborn`. O sistema combina um backend FastAPI com retrieval sobre documentação indexada e um frontend Next.js.
 
-## Visao Geral
+## Stack
 
-O sistema foi desenhado em duas camadas:
+| Camada | Tecnologia |
+|---|---|
+| Frontend | Next.js 13 + React 18 + Tailwind CSS |
+| Backend | FastAPI + ChromaDB |
+| Embedder | `intfloat/multilingual-e5-small` |
+| Reranker | `cross-encoder/mmarco-mMiniLMv2-L12-H384-v1` |
+| LLM | Groq (70b → 8b) → Cerebras (fallback) |
+| Ingestão | trafilatura + chunker customizado |
 
-- `backend/`: API FastAPI que carrega ChromaDB, embedder, reranker e LLM fallback.
-- `frontend/`: interface web em Next.js que conversa exclusivamente com o backend.
+## Estrutura
 
-Fluxo de uma pergunta:
-
-1. usuario abre o frontend em `localhost:3000`
-2. frontend envia `POST /backend/ask`
-3. Next.js faz rewrite dessa rota para o backend real
-4. backend executa retrieve -> rerank -> prompt -> geracao
-5. frontend recebe `answer` e `citations` e renderiza a conversa
-
-## Arquitetura
-
-### Backend
-
-O backend esta em [backend/app.py] e expoe:
-
-- `GET /health`: status da API e do indice vetorial
-- `POST /ask`: endpoint principal consumido pelo frontend
-- `POST /retrieve`: endpoint auxiliar de retrieval, hoje nao usado pelo frontend principal
-
-O pipeline principal usa:
-
-- `ChromaDB` como banco vetorial persistente
-- `intfloat/multilingual-e5-small` para embeddings
-- `cross-encoder/mmarco-mMiniLMv2-L12-H384-v1` para rerank
-- `Groq` como LLM principal
-- `Cerebras` como fallback
-
-Grande parte da logica compartilhada fica em `src/`, especialmente em:
-
-- `src/config.py`: caminhos, modelos e configuracoes
-- `src/rag_query.py`: retrieve, rerank, prompt e geracao
-- `src/device.py`: escolha de device
-
-### Frontend
-
-O frontend esta em `app/` e usa:
-
-- `Next.js 13`
-- `React 18`
-- `TypeScript`
-- `Tailwind CSS`
-- componentes utilitarios em `app/components/ui/`
-
-O rewrite que liga frontend e backend esta em [app/next.config.js]. Em ambiente local, se `HF_SPACE_URL` nao estiver definida, ele usa `http://127.0.0.1:7860`.
-
-## Estrutura do Projeto
-
-```text
+```
 micro_saas_ods_2/
-|-- app/                    # Frontend Next.js
-|   |-- app/                # App Router
-|   |   |-- globals.css     # Tema global
-|   |   |-- layout.tsx      # Metadata e shell base
-|   |   `-- page.tsx        # Tela principal do assistente
-|   |-- components/ui/      # Button, badge, collapsible, etc.
-|   |-- lib/                # Helpers do frontend
-|   |-- package.json
-|   `-- next.config.js      # Rewrite para o backend
-|
-|-- backend/                # API FastAPI
-|   |-- app.py              # Endpoints /health, /ask e /retrieve
-|   |-- requirements.txt
-|   `-- README.md
-|
-|-- src/                    # Logica Python compartilhada
-|   |-- config.py
-|   |-- device.py
-|   |-- glossary_repair.py
-|   |-- html_extractor.py
-|   |-- indexer.py
-|   |-- medium_extractor.py
-|   `-- rag_query.py
-|
-|-- data/                   # Dados, chunks e indice vetorial local
-|-- tests/                  # Testes Python
-|-- docs/                   # Documentacao de specs, handoff e planos
-|-- pyproject.toml          # Dependencias Python
-`-- .env                    # Variaveis de ambiente locais
+├── app/                    # Frontend Next.js
+│   ├── app/                # App Router (layout, page, globals.css)
+│   ├── components/ui/      # Button, Badge, Card, Collapsible, Input
+│   ├── hooks/              # useChatHistory
+│   ├── lib/                # Utilitários
+│   └── next.config.js      # Rewrite /backend/ask → backend:7860/ask
+│
+├── backend/
+│   └── app.py              # FastAPI: GET /health, POST /ask
+│
+├── src/
+│   ├── config.py           # Modelos, paths, hiperparâmetros
+│   ├── rag_query.py        # Pipeline: retrieve → rerank → prompt → LLM
+│   ├── device.py           # CPU/GPU detection
+│   ├── html_extractor.py   # Extração de HTML oficial (trafilatura)
+│   ├── medium_extractor.py # Extração de artigos Medium
+│   ├── translator.py       # Tradução EN→PT (Gemini/Groq)
+│   ├── glossary_repair.py  # Correção de termos Python mal traduzidos
+│   ├── indexer.py          # Indexação no ChromaDB
+│   └── eval/
+│       ├── ragas_evaluator.py  # Avaliação RAG (similaridade + recall + precision)
+│       └── ragas_dashboard.py  # Dashboard de resultados
+│
+├── data/
+│   ├── main.py             # Pipeline de ingestão
+│   ├── {pandas,numpy,matplotlib,seaborn}/pt/  # HTMLs traduzidos
+│   ├── chroma_db/          # Índice vetorial persistente
+│   └── eval/               # Dataset e resultados de avaliação
+│
+├── scripts/
+│   ├── smoke_test.py       # Teste rápido do backend
+│   └── deploy_space.py     # Deploy no Hugging Face Space
+│
+├── tests/                  # Testes pytest
+├── Dockerfile              # Deploy HF Space
+└── pyproject.toml          # Dependências Python (uv)
 ```
 
-## Variaveis de Ambiente
+## Variáveis de Ambiente
 
-O projeto usa um `.env` na raiz.
-
-Minimo necessario para rodar o backend:
+Crie um `.env` na raiz:
 
 ```env
+# Obrigatório
 GROQ_API_KEY=...
-```
 
-Opcional:
-
-```env
+# Opcional
 CEREBRAS_API_KEY=...
 HF_SPACE_URL=https://seu-space.hf.space
 ```
 
-Observacoes:
-
-- para rodar localmente, `HF_SPACE_URL` nao e obrigatoria se o backend estiver em `localhost:7860`
-- o frontend usa o rewrite do `next.config.js`, nao precisa de chamada direta ao modelo
-
-## Como Instalar
-
-### 1. Dependencias Python
-
-Na raiz do projeto:
+## Instalação
 
 ```bash
+# Dependências Python
 uv sync
+
+# Dependências do frontend
+cd app && npm install && cd ..
 ```
 
-### 2. Dependencias do frontend
+## Preparar o índice vetorial
 
-Na pasta `app/`:
-
-```bash
-cd app
-npm install
-cd ..
-```
-
-### 3. Preparar o indice vetorial
-
-Se `data/chroma_db/` ainda nao existir, rode a ingestao:
+Se `data/chroma_db/` não existir:
 
 ```bash
 uv run python data/main.py
 ```
 
-Esse passo pode demorar, porque ele processa o corpus e popula o ChromaDB.
+## Rodar localmente
 
-## Como Rodar Backend e Frontend Juntos
-
-Abra dois terminais.
-
-### Terminal 1: backend
-
-Na raiz do projeto:
+**Terminal 1 — backend:**
 
 ```bash
 uv run uvicorn backend.app:app --host 0.0.0.0 --port 7860 --reload
 ```
 
-URLs:
-
-- API: [http://localhost:7860](http://localhost:7860)
-- docs: [http://localhost:7860/docs](http://localhost:7860/docs)
-- health: [http://localhost:7860/health](http://localhost:7860/health)
-
-### Terminal 2: frontend
-
-Na pasta `app/`:
+**Terminal 2 — frontend:**
 
 ```bash
-cd app
-npm run dev
+cd app && npm run dev
 ```
 
-URL:
+Acesse: [http://localhost:3000](http://localhost:3000)
 
-- frontend: [http://localhost:3000](http://localhost:3000)
-
-### O que acontece quando voce testa
-
-1. o frontend abre em `localhost:3000`
-2. a pergunta enviada vai para `/backend/ask`
-3. o rewrite do Next.js encaminha para `http://127.0.0.1:7860/ask`
-4. o backend devolve a resposta e as citacoes
-
-## Como Testar Rapidamente
-
-### Backend
-
-Saude da API:
-
-```bash
-curl http://localhost:7860/health
-```
-
-Pergunta manual:
-
-```bash
-curl -X POST http://localhost:7860/ask ^
-  -H "Content-Type: application/json" ^
-  -d "{\"question\":\"Como fazer merge em pandas?\"}"
-```
-
-### Frontend
-
-Abra:
-
-- [http://localhost:3000](http://localhost:3000)
-
-Digite uma pergunta como:
-
-- `Explique quando usar merge, join e concat no pandas.`
+O frontend redireciona `/backend/ask` para `http://127.0.0.1:7860/ask` automaticamente.
 
 ## Testes
 
-### Backend / Python
-
-Na raiz:
-
 ```bash
+# Python
 uv run pytest
+
+# Frontend (type-check + build)
+cd app && npm run build
 ```
 
-### Frontend
-
-Na pasta `app/`:
+## Avaliação RAG
 
 ```bash
-npm run build
+uv run python -m src.eval.ragas_evaluator --sample 10
 ```
 
-`npm run lint` pode pedir inicializacao do ESLint do Next se isso ainda nao tiver sido configurado no projeto.
+Métricas calculadas localmente (sem chamar LLM externo):
+- `answer_semantic_similarity` — similaridade coseno entre resposta e ground truth
+- `context_recall` — cobertura de tokens do ground truth nos contextos recuperados
+- `context_precision` — similaridade semântica média entre contextos e pergunta
 
 ## Deploy
 
-### Backend
-
-O backend foi pensado para deploy em Hugging Face Space com Docker. Os arquivos principais para isso sao:
-
-- `backend/requirements.txt`
-- `Dockerfile`
-- `scripts/deploy_space.py`
-- `docs/superpowers/SETUP_HF_SPACE.md`
-
-### Frontend
-
-O frontend pode ser publicado na Vercel. Nesse caso, `HF_SPACE_URL` deve apontar para a URL publica do backend.
-
-## Observacoes Importantes
-
-- `run.bat` e `run.sh` nao sao necessarios para o projeto funcionar.
-- a API principal usada pelo frontend e `/ask`.
-- o endpoint `/retrieve` existe no backend, mas hoje nao e necessario para a tela principal.
-- artefatos locais como `.next/`, `node_modules/` e logs de dev nao fazem parte da arquitetura do projeto.
-
-## Estado Atual
-
-Hoje o projeto esta organizado para:
-
-- backend como unica camada que fala com o modelo
-- frontend como cliente da API
-- indice vetorial local para desenvolvimento
-- deploy separado entre interface e servico de inferencia
-
-Isso deixa a fronteira entre responsabilidade de frontend e backend mais simples e mais facil de manter.
+| Destino | Arquivo |
+|---|---|
+| Backend (HF Space) | `Dockerfile` + `backend/requirements.txt` |
+| Frontend (Vercel) | `app/vercel.json` — defina `HF_SPACE_URL` nas env vars da Vercel |
