@@ -1,5 +1,6 @@
 from __future__ import annotations
 
+from datetime import datetime
 import json
 import argparse
 import sys
@@ -428,11 +429,12 @@ def save_results(
 ) -> None:
 
     results = {
-        "metadata": {
-            "total_samples": len(samples),
-            "variant": "new",
-            "mode": "optimized_local_metrics",
-        },
+    "metadata": {
+        "total_samples": len(samples),
+        "variant": "new",
+        "mode": "optimized_local_metrics",
+        "timestamp": datetime.now().strftime("%d/%m/%Y às %H:%M"),
+    },
         "samples": [
             s.to_dict()
             for s in samples
